@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/xine-lib/xine-lib-1.0_rc3b.build,v 1.1 2004/03/20 11:38:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/xine-lib/xine-lib-1.0_rc3c.build,v 1.1 2004/04/09 09:57:30 tomby Exp $
 #
-# xine-lib-1.0_rc3b pkgbuilder script
+# xine-lib-1.0_rc7 pkgbuilder script
 #
 
 inherit configscript
@@ -10,12 +10,12 @@ inherit configscript
 PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-1-rc3b.$PKG_EXTENSION"
+PKG_FILE_NAME="$PKG_NAME-1-rc7.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/xine/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="arts esd nls dvd aalib oggvorbis alsa sdl divx win32codecs"
+PKG_USE="arts esd nls dvd aalib libcaca oggvorbis alsa sdl divx win32codecs"
 
 PKG_DEPENDS="x/x11
              >=l/flac-1.0.4
@@ -30,18 +30,22 @@ PKG_DEPENDS="x/x11
              `use_dep arts "kde/arts"`
              `use_dep alsa "l/alsa-lib"`
              `use_dep aalib "l/aalib"`
+             `use_dep libcaca "l/libcaca"`
              `use_dep sdl ">=l/sdl-1.1.5"`
              `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://xine.sourceforge.net/"
 
-PKG_SRC="$TMP/$PKG_NAME-1-rc3b"
+PKG_SRC="$TMP/$PKG_NAME-1-rc7"
 
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL TODO"
 
 PKG_CONFIGURE_OPTIONS="--with-included-dvdnav 
-                       --with-w32-path=/usr/lib/win32"
+                       `use_dep win32codecs "--with-w32-path=/usr/lib/win32"`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+
+CFLAGS="$CFLAGS -mno-sse2"
+CPPFLAGS="$CPPFLAGS -mno-sse2"
 
 MAKE_OPTIONS="-j1"
