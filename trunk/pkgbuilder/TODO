@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.42 2004/04/08 17:43:18 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.43 2004/04/19 18:01:53 tomby Exp $
 
 * New tasks:
 
@@ -105,7 +105,6 @@ d)
     binutils
     bison
     byacc
-    cvs
     flex
     gcc
     gdb
@@ -181,7 +180,6 @@ kde)
 
 gnome)
 
-    gdm
     ghex
     glade
     gnome2-user-docs
