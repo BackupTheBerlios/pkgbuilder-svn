@@ -1,0 +1,33 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# hydrogen-0.9.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/qt-3.3
+             >=l/audiofile-0.2.3
+             >=l/flac-1.0
+             >=l/libsndfile-1.0.0
+             d/pkgconfig
+             `use_dep alsa ">=l/alsa-lib-1.0"`"
+
+PKG_HOMESITE="http://hydrogen.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="`use_enable alsa alsa-seq`"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
