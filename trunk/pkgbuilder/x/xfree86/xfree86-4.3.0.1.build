@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.1 2003/11/30 18:05:39 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.2 2003/11/30 18:13:55 tomby Exp $
 #
 # xfree86-4.3.0.1 pkgbuilder script
 #
@@ -53,14 +53,13 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
 PKG_PREFIX="/usr/X11R6"
-PKG_BUILD_OPTIONS="World 2>&1 | tee xfree-compile.log"
+PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 include general
 
 include do_fetch
 
-include do_build
 include do_install
 include do_postinstall
 
@@ -221,4 +220,12 @@ $(FONTDIR)/TrueType,$(FONTDIR)/CID,$(FONTDIR)/Speedo
 /* End XFree86 host.def file */
 EOF
     
+}
+
+do_build() {
+    cd $PKG_SRC
+    
+    make World 2>&1 | tee $TMP/xfree-compile.log
+    
+    return $?
 }
