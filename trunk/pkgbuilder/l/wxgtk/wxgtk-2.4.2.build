@@ -19,10 +19,10 @@ PKG_USE="opengl unicode"
 
 PKG_DEPENDS="x/xfree86
             l/libpng
-            l/jpeg
-            l/tiff
+            l/libjpeg
+            l/libtiff
             d/pkgconfig
-            l/gtk
+            l/gtk+
             `use_dep gtk2 ">=l/gtk+2-2.0 >=l/glib2-2.0"`"
 
 PKG_HOMESITE="http://www.wxwindows.org/"
