@@ -58,9 +58,24 @@ PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        `use_with mng libmng` 
                        `use_with aalib aa`"
 
+do_patch() {
+    # missing file
+    cp $PKG_HOME/files/pygimp-logo.png $PKG_SRC/plug-ins/pygimp/
+}
+
 do_install() {
     mkdir -p $PKG_DEST$PKG_PREFIX/share/applications \
              $PKG_DEST$PKG_PREFIX/share/application-registry
              
     configscript_do_install
+}
+
+do_postinstall() {
+    configscript_do_postinstall
+
+    ( cd $PKG_DEST$PKG_PREFIX/man/man1
+      rm -f gimp-remote.1 ; ln -sf gimp-remote-2.2.1.gz gimp-remote.1.gz
+      rm -f gimp.1 ; ln -sf gimp-2.2.1.gz gimp.1.gz
+      rm -f gimptool.1 ; ln -sf gimptool-2.2.1.gz gimptool.1.gz
+    )
 }
