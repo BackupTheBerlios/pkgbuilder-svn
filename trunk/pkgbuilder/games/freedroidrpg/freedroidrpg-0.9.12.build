@@ -1,0 +1,30 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# freedroidrpg-0.9.12 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourcefoge.net/freedroid/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gtk"
+
+PKG_DEPENDS="l/sdl
+             l/libjpeg
+             l/libpng
+             l/sdl_image
+             l/sdl_net
+             l/sdl_mixer
+             x/x11
+             `use_dep gtk "l/gtk+"`"
+
+PKG_HOMESITE="http://freedroid.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog NEWS README TODO"
