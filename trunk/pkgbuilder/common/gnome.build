@@ -1,18 +1,38 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/gnome.build,v 1.2 2003/12/30 18:47:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/gnome.build,v 1.3 2004/01/02 12:38:52 tomby Exp $
 #
 # pkgbuilder script for gnome packages
 #
 
 include configscript
 
-PKG_EXTENSION="tar.bz2"
+gnome_init() {
+    configscript_init
+    
+    PKG_ARCH="$ARCH"
+    PKG_EXTENSION="tar.bz2"
+    PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+    GNOME_BASE_URL="http://ftp.gnome.org/pub/GNOME/sources"
+    PKG_URL="$GNOME_BASE_URL/$PKG_NAME/`gnome_mayor_version`/$PKG_FILE_NAME"
 
-PKG_LICENSE="GPLv2"
+    PKG_LICENSE="GPLv2"
 
-PKG_HOMESITE="http://www.gnome.org/"
+    PKG_HOMESITE="http://www.gnome.org/"
 
+    PKG_PREFIX="/usr"
+}
+
+#private functions
+gnome_mayor_version() {
+    expr match $PKG_VERSION '\([0-9]*\.[0-9]*\)\.'
+}
+
+gnome_minor_version() {
+    expr match $PKG_VERSION '[0-9]*\.[0-9]*\.\([0-9]*\)'
+}
+
+#public functions
 gnome_do_configure() {
     configscript_do_configure
 }
@@ -32,3 +52,5 @@ gnome_do_install() {
 gnome_do_postinstall() {
     configscript_do_postinstall
 }
+
+
