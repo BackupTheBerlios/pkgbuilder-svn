@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.7 2003/11/30 19:53:33 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.8 2003/11/30 21:39:43 tomby Exp $
 #
 # xfree86-4.3.0.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="xfree86"
 PKG_VERSION="4.3.0.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am3"
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="X430src-1.tgz
                X430src-2.tgz
@@ -243,10 +243,30 @@ do_postinstall() {
                   `find $PKG_DEST$PKG_PREFIX/lib/modules -type f -name '*.so'` ; do
         chmod 755 $module
     done
+    
+    rm -f $PKG_DEST$PKG_PREFIX/lib/X11/config/host.def
+
+    # TODO: improve the post install operation
+    #cat $PKG_HOME/files/README.Xmodmap > $PKG_DEST/etc/X11/xinit/README.Xmodmap
+    #cat $PKG_HOME/files/.Xmodmap > $PKG_DEST/etc/X11/xinit/.Xmodmap
+    
+    #cp -a $PKG_DEST/etc/X11/xdm/Xsession $PKG_DEST/etc/X11/xdm/Xsession.orig
+    #cp -a $PKG_DEST/etc/X11/xdm/Xsetup_0 $PKG_DEST/etc/X11/xdm/Xsetup_0.orig
+    #cat $PKG_HOME/files/Xsession > $PKG_DEST/etc/X11/xdm/Xsession
+    #cat $PKG_HOME/files/Xsetup_0 > $PKG_DEST/etc/X11/xdm/Xsetup_0
+    #cat $PKG_HOME/files/Xsession.orig > $PKG_DEST/etc/X11/xdm/Xsession.orig
+    #cat $PKG_HOME/files/Xsetup_0.orig > $PKG_DEST/etc/X11/xdm/Xsetup_0.orig
+
+    #mv $PKG_DEST/etc/X11/xdm/Xsession $PKG_DEST/etc/X11/xdm/Xsession.new
+    #mv $PKG_DEST/etc/X11/xdm/xdm-config $PKG_DEST/etc/X11/xdm/xdm-config.new
+    #mv $PKG_DEST/etc/X11/xdm/Xservers $PKG_DEST/etc/X11/xdm/Xservers.new
+    
+    mv $PKG_DEST/etc/X11/xinit/xinitrc $PKG_DEST/etc/X11/xinit/xinitrc.twm
 
     gzip_man $PKG_DEST$PKG_PREFIX/man
     
     mkdir -p $PKG_DEST/install
 
     cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    cat $PKG_HOME/files/doinst.sh-$PKG_VERSION > $PKG_DEST/install/doinst.sh
 }
