@@ -29,7 +29,7 @@
 PKGBUILDER
 \layout Date
 
-Sábado, 15 de frebrero de 2004
+Sábado, 2 de Mayo de 2004
 \layout Author
 
 Antonio Gabriel Muñoz Conejo
@@ -209,8 +209,8 @@ PkgBuilder
 El sistema deberá tener tamaño libre suficiente para almacenar los ficheros
  de código fuente descargados, los paquetes binarios creados y también tamaño
  suficiente para la compilación de cada paquete.
- Los paquetes descargados se pueden eliminar sin problemas y los binarios
- también para liberar espacio en disco.
+ Los archivos descargados se pueden eliminar sin problemas y los paquetes
+ binarios generados también para liberar espacio en disco.
 \layout Subsection
 
 Paquetes basicos:
@@ -223,9 +223,16 @@ Esta es la lista de paquetes de
 Slackware 9.1
 \series medium 
  necesarios para el sistema base.
- Algunos de ellos son opcionales como jfsutils o xfsprogs, estos serán necesario
-s si el sistema se va instalar en una partición con el sistema de ficheros
- jfs o xfs, respectivamente.
+ Algunos de ellos son opcionales como 
+\shape italic 
+jfsutils
+\shape default 
+ o 
+\shape italic 
+xfsprogs
+\shape default 
+, estos serán necesarios si el sistema se va instalar en una partición con
+ el sistema de ficheros jfs o xfs, respectivamente.
 \layout Paragraph
 
 a)
@@ -573,7 +580,7 @@ PkgBuilder
 \series default 
 PkgBuilder
 \series medium 
- facilmente.
+ fácilmente.
 \layout Subsubsection
 
 Instalación desde tar ball:
@@ -942,6 +949,12 @@ distcc
 .
  El soporte de compilación paralela aún es experimental y es posible que
  la compilación de algunos paquetes falle.
+\layout Paragraph
+
+
+\series medium 
+También se puede utilizar la compilación paraléla en el caso tener varios
+ procesadores, sin necesidad de utilizar distcc.
 \layout Quotation
 
 
@@ -949,6 +962,12 @@ distcc
 \size footnotesize 
 #Parallel compilation.
  Use with care, some packages compilation fails.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+COMPILATION="parallel"
 \layout Quotation
 
 
@@ -966,18 +985,35 @@ CCACHE_PREFIX="distcc"
 
 \family typewriter 
 \size footnotesize 
-MAKE_OPTIONS="-j8"
+MAKE_OPTIONS="-j4"
+\layout Paragraph
+
+COMPILATION 
+\series medium 
+especifica la modalidad de compilación.
 \layout Paragraph
 
 DISTCC_HOST 
 \series medium 
 especifica el nombre de las diferentes maquina a usar para la compilación
- paralela.
+ paralela en el caso de utilizar 
+\series default 
+dictcc
+\series medium 
+.
 \layout Paragraph
 
 CCACHE_PREFIX 
 \series medium 
-es necesario configurarla si queremos utilizar distcc junto con ccache.
+es necesario configurarla si queremos utilizar 
+\series default 
+distcc
+\series medium 
+ junto con 
+\series default 
+ccache
+\series medium 
+.
 \layout Paragraph
 
 MAKE_OPTIONS 
@@ -1105,8 +1141,11 @@ $ ./install.sh xap/epiphany
 
 
 \series medium 
-Este comando instala el paquete epiphany resolviendo las dependencias de
- este paquete.
+Este comando instala el paquete 
+\series default 
+epiphany
+\series medium 
+ resolviendo las dependencias de este paquete.
 \layout Paragraph
 
 
@@ -1115,13 +1154,33 @@ Opciones del script:
 \layout List
 \labelwidthstring 00.00.0000
 
--d Ejecuta el script en modo dummy o tonto, resolviendo las dependencias
- pero sin instalar nada en el sistema.
+-d Ejecuta el script en modo 
+\begin_inset Quotes eld
+\end_inset 
+
+dummy
+\begin_inset Quotes erd
+\end_inset 
+
+ o tonto, resolviendo las dependencias pero sin instalar nada en el sistema.
 \layout List
 \labelwidthstring 00.00.0000
 
 -v Ejecuta el script incrementando los mensajes de salida utilizado para
  depurar la gestión de dependencias.
+\layout List
+\labelwidthstring 00.00.0000
+
+-p Ejecuta el script en modo 
+\begin_inset Quotes eld
+\end_inset 
+
+frompackage
+\begin_inset Quotes erd
+\end_inset 
+
+, en lugar de instalar el paquete compilandolo, lo instala a partir de un
+ paquete precompilado localizado en el directorio $TMP.
 \layout Subsection
 
 El script update.sh:
@@ -1129,12 +1188,56 @@ El script update.sh:
 
 El script update.sh actualiza todo el sistema buscando nuevas versiones de
  los paquetes en el arbol de ports.
+\layout List
+\labelwidthstring 00.00.0000
+
+-d Ejecuta el script en modo 
+\begin_inset Quotes eld
+\end_inset 
+
+dummy
+\begin_inset Quotes erd
+\end_inset 
+
+ o tonto, muestra los nuevos paquetes disponibles pero sin realizar sin
+ ninguna acción.
+\layout Paragraph
+
+
+\series medium 
+Previamente a utilizar el script 
+\begin_inset Quotes eld
+\end_inset 
+
+update.sh
+\begin_inset Quotes erd
+\end_inset 
+
+ es necesario ejecutar el script build_db.sh que genera el archivo 
+\series default 
+PACKAGES
+\series medium 
+ necesario para ejectuar el script 
+\begin_inset Quotes eld
+\end_inset 
+
+update.sh
+\begin_inset Quotes erd
+\end_inset 
+
+.
 \layout Section
 
-Creación de scripts:
+Creación de scripts build:
 \layout Subsection
 
-Anatomia de un script:
+Anatomia de un script build:
+\layout Paragraph
+
+
+\series medium 
+Un script build define una serie de variables y métodos que goviernan la
+ generación de un paquete.
 \layout Subsubsection
 
 Variables:
