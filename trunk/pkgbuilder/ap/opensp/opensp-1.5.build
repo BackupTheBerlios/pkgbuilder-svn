@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/opensp/Attic/opensp-1.5.build,v 1.1 2003/11/29 15:32:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/opensp/Attic/opensp-1.5.build,v 1.2 2003/11/29 15:38:38 tomby Exp $
 #
 # opensp-1.5 pkgbuilder script
 #
@@ -63,6 +63,8 @@ do_install_opensp() {
     ln -sf osx sgml2xml &&
     cd $PKG_DEST$PKG_PREFIX/lib &&
     ln -sf libosp.so libsp.so
+    
+    return $?
 }
 
 do_postinstall() {
