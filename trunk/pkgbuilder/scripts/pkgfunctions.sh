@@ -156,8 +156,7 @@ pkg_virtual() {
         
         cat >> $PKG_DEST/install/doinst.sh << "EOF"
 virtual() {
-  cd /var/log/package
-  
+  cd /var/log/packages
   ln -sf $1 $2-virtual-am1
 }
 EOF
