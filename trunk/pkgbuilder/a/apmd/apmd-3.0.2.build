@@ -1,21 +1,21 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/apmd/apmd-3.0.2.build,v 1.1 2004/01/04 16:51:10 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/apmd/apmd-3.0.2.build,v 1.2 2004/01/07 15:53:36 tomby Exp $
 #
 # apmd-3.0.2 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_URL="http://www.worldvisions.ca/~apenwarr/apmd/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE=""
+PKG_USE="X"
 
-PKG_DEPENDS=""
+PKG_DEPENDS="`use X && echo "x/xfree86"`"
 
 PKG_HOMESITE="http://www.worldvisions.ca/~apenwarr/apmd/"
 
@@ -31,6 +31,8 @@ do_patch() {
     cd $PKG_SRC
     
     patch -p0 -N < $PKG_HOME/files/apmsleep.c.diff
+    
+    use X || patch -p0 -N < $PKG_HOME/files/Makefile-without-X.diff
     
     return $?
 }
