@@ -1,0 +1,35 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebindings/kdebindings-3.2.0.build,v 1.1 2004/02/08 19:15:30 tomby Exp $
+#
+# kdebindings-3.2.0 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="java python ruby mozilla gtk"
+
+PKG_DEPENDS=">=l/qt-3.2 
+             >=kde/kdelibs-3.2.0 
+             >=kde/kdebase-3.2.0
+             >=kde/kdenetwork-3.2.0
+             l/glib
+             `use gtk && echo "l/gtk+"`
+	         `use python && echo "d/python"`
+             `use java && echo "d/j2sdk"`
+             `use ruby && echo "d/ruby"`
+             `use mozilla && echo "xap/mozilla"`"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL kdebindings.lsm NEWS README"
+
+do_postinstall() {
+    ( cd $PKG_DEST$PKG_PREFIX/lib/java
+      rm -rf org )
+    ( cd $PKG_DEST/usr
+      mv share/man .
+      rmdir share )
+    gzip_man $PKG_DEST/usr/man
+    kde_do_postinstall
+}
