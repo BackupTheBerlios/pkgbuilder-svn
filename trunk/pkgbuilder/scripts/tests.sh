@@ -127,9 +127,9 @@ is_installed lilo 22.5.7.2 4 ; do_assertFalse $?
 echo "=> latest_version tests"
 do_init
 do_assertEquals "`latest_version xap nedit`" "5.4"
-do_assertEquals "`latest_version xap gaim`" "0.75"
+do_assertEquals "`latest_version xap gaim`" "0.77"
 do_assertEquals "`latest_version l divx4linux`" "20030428"
-do_assertEquals "`latest_version xap mplayer`" "1.0pre3"
+do_assertEquals "`latest_version xap mplayer`" "1.0_pre4"
 do_assertEquals "`latest_version ap docbook-xml-dtd`" "4.1.2"
 
 echo "=> installed_version tests"
@@ -152,45 +152,28 @@ do_assertEquals "`extract_extra_version 2.3_p1`" "p1"
 do_assertEquals "`extract_extra_version 2.3`" ""
 
 echo "=> compare_versions test"
+do_init
 compare_versions aaa-2.4.1 aaa-2.4.1.1 ; do_assertGreater $?
-
 compare_versions aaa-2.4.1.1 aaa-2.4.1 ; do_assertLesser $?
-
 compare_versions aaa-2.4.2 aaa-2.4.10 ; do_assertGreater $?
-
 compare_versions aaa-2.4.10 aaa-2.4.2 ; do_assertLesser $?
-
 compare_versions aaa-2.4.1 aaa-2.4.0 ; do_assertLesser $?
-
 compare_versions aaa-2.4.1 aaa-2.4.1 ; do_assertTrue $?
-
 compare_versions aaa-2.00.1 aaa-2.00.1.2 ; do_assertGreater $?
-
 compare_versions aaa-6b aaa-6c ; do_assertGreater $?
-
 compare_versions aaa-6c aaa-6c ; do_assertTrue $?
-
 compare_versions aaa-6c aaa-6b ; do_assertLesser $?
-
 compare_versions aaa-20031014 aaa-20040112 ; do_assertGreater $?
-
 compare_versions aaa-20040112 aaa-20031014 ; do_assertLesser $?
-
 compare_versions aaa-0.9.8 aaa-0.9.8b ; do_assertGreater $?
-
 compare_versions aaa-0.9.8a aaa-0.9.8b ; do_assertGreater $?
-
 compare_versions aaa-0.9.8a aaa-0.9.7b ; do_assertLesser $?
-
 compare_versions a-3.2.0 a-3.2.1 ; do_assertGreater $?
-
 compare_versions a-3.8_p1 a-3.8.1_p1 ; do_assertGreater $?
-
+compare_versions a-3.8.1_p1 a-3.8.1_p1a ; do_assertGreater $?
 compare_versions a-3.8.1_p1 a-3.8_p1 ; do_assertLesser $?
-
 compare_versions a-3.8.1_p1 a-3.8.1_p2 ; do_assertGreater $?
-
 compare_versions a-3.8.1_p3 a-3.8.1_p1 ; do_assertLesser $?
-
 compare_versions a-3.8.1 a-3.8.1_rc1 ; do_assertLesser $?
+compare_versions a-034 a-035 ; do_assertGreater $?
 
