@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.16 2003/12/24 13:38:21 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.17 2003/12/24 17:50:27 tomby Exp $
 
 * New tasks:
 
@@ -23,9 +23,8 @@ ap)
     enscript        X
     psutils
 
-    iptables
+    iptables		X
     gnupg           X
-    tripwire
 
     sgml-common     X
     docbook-sgml3   X
@@ -43,7 +42,7 @@ ap)
 
     bc              X
 
-    tcsh
+    tcsh			X
     zsh             X
 
     mysql

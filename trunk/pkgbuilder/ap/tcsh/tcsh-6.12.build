@@ -1,0 +1,63 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/tcsh/tcsh-6.12.build,v 1.1 2003/12/24 17:49:31 tomby Exp $
+#
+# tcsh-6.12 pkgbuilder script
+#
+
+PKG_NAME="tcsh"
+PKG_VERSION="6.12"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.00.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.astron.com/pub/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="BSD"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc >=l/ncurses-5.1"
+
+PKG_HOMESITE="http://www.tcsh.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION.00"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="FAQ Fixes NewThings Ported README WishList Y2K"
+
+PKG_PREFIX=""
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST mandir=/usr/man"
+PKG_INSTALL_TARGET="install install.man"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+tcsh_postinstall() {
+	mkdir -p $PKG_DEST$PKG_PREFIX/etc
+	
+	( cd $PKG_DEST$PKG_PREFIX/bin
+		ln -sf tcsh csh )
+	
+	echo '.so man1/tcsh.1' > $PKG_DEST/usr/man/man1/csh.1
+}
+
+do_postinstall() {
+	cd $PKG_SRC
+	
+	tcsh_postinstall &&
+	pkg_installdoc &&
+	pkg_gzipmaninfo &&
+	pkg_configfiles &&
+	pkg_installfiles
+}
+
