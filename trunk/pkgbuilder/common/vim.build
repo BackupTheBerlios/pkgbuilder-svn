@@ -84,7 +84,7 @@ vim_do_patch() {
         patch -p0 --batch < $file
     done
     
-    return $?
+    return 0
 }
 
 vim_do_configure() {
