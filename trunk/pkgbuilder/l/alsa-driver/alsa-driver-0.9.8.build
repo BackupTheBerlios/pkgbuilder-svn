@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.2 2003/12/07 21:10:31 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.3 2003/12/14 21:05:09 tomby Exp $
 #
 # alsa-driver-0.9.8 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="alsa-driver"
 PKG_VERSION="0.9.8"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.alsa-project.org/pub/driver/$PKG_FILE_NAME"
@@ -35,6 +35,8 @@ PKG_CONFIGURE_OPTIONS="--with-isapnp=yes \
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
+PKG_CONFIG_FILES="etc/rc.d/rc.alsa"
+
 include general
 
 include do_fetch
@@ -43,11 +45,29 @@ include do_patch
 include do_configure
 include do_build
 
-include do_postinstall
 
 do_install() {
     mkdir -p $PKG_DEST$PKG_PREFIX/include/sound &&
     pkg_install
+    
+    return $?
+}
+
+alsa_postinstall() {
+    mkdir -p $PKG_DEST/etc/rc.d
+    cat $PKG_HOME/files/rc.alsa >  $PKG_DEST/etc/rc.d/rc.alsa &&
+    chmod 755 $PKG_DEST/etc/rc.d/rc.alsa
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    alsa_postinstall &&
+    pkg_installdoc &&
+    pkg_stripall &&
+    pkg_gzipmaninfo &&
+    pkg_configfiles &&
+    pkg_installfiles
     
     return $?
 }
