@@ -75,7 +75,9 @@ PKG_DEPENDS=">=l/glib2-2.4
              >=gnome/gnome-games-2.6
              >=gnome/gdm-2.6
              >=xap/gpdf-0.132
-             >=gnome/gucharmap-1.4.1"
+             >=gnome/gucharmap-1.4
+             >=gnome/ghex-2.6
+             >=gnome/libgail-gnome-1.0"
 
 PKG_HOMESITE="http://www.gnome.org/"
 
