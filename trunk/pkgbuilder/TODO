@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.9 2003/12/07 21:51:19 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.10 2003/12/08 22:48:59 tomby Exp $
 
 * New tasks:
 
@@ -10,6 +10,7 @@ $Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.9 2003/12/07 21:51:19 tomby Exp
 a)
     cups
     lprng
+    gpm             X
 
     reiserfs
     xfs
@@ -38,6 +39,8 @@ ap)
     emacs
     nano            X
     joe
+    
+    bc              X
 
     tcsh
     zsh
@@ -132,9 +135,9 @@ l)
     xvid
     xine-libs
 
-    db1
+    db1             X
     db2
-    db3
+    db3             X
     db4
 
 d)
@@ -144,10 +147,10 @@ d)
     umbrello        X
 
     pkgconfig       X
-    python
+    python          X
     ruby            X
-    tcl
-    tk
+    tcl             X
+    tk              X
 
 emu)
 
@@ -179,7 +182,7 @@ n)
     wvstreams
     gnet
 
-    links
+    links           X
     lynx
     w3m
 
@@ -370,7 +373,7 @@ gnome)
 
 t)
 
-    tex
+    tetex
 
 And more...
 

@@ -29,7 +29,7 @@ a)
     less                381
     lilo                22.5.7.2
     module-init-tools   0.9.14
-    openssl-solibs      0.9.7b
+    openssl-solibs      0.9.7c
     pci-utils           2.1.11
     pkgtools            9.1.0
     procps              2.0.16
