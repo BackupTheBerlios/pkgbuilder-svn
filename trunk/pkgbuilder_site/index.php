@@ -13,6 +13,29 @@
     <!--Content-->
     <div id="tmain">
         <div class="tbox">
+            <div class="ttitle">Nueva versión de PkgBuilder</div>
+            <div class="tleft"><b>Sábado, 10 de Enero de 2004</b></div>
+            <div class="tleft">
+                <p>Por fin ya hay una nueva versión de PkgBuilder 
+                <a href="http://download.berlios.de/pkgbuilder/pkgbuilder-20041001.tar.gz">disponible</a>.</p>
+                
+                <p>PkgBuilder ya es capaz de gestionar dependencias y verificar las
+                sumas de verificación de los paquetes, también
+                se han añadido una gran cantidad de paquetes nuevos, entre ellos montones
+                de librerías, Gnome 2.4.1, KDE 3.2beta2, Evolution 1.4.5, Mozilla 1.5 y
+                muchos <a href="packages.php">paquetes</a> más superando los 250 paquetes. De todas maneras,
+                aún queda mucho por trabajor por hacer.</p>
+                
+                <p>En estos últimos meses PkgBuilder ha ido evolucionando y ya se le podría
+                calificar como un arbol de ports más o menos completo. Aunque ahora mismo solo
+                soporta Slackware Linux 9.0 y posteriores, mi intención es que en un futuro
+                pueda instalarse en otras distribuciones y que cree paquetes de tipo rpm o
+                deb, además de tgz.</p>
+            </div>
+        </div>
+    </div>
+    <div id="tmain">
+        <div class="tbox">
             <div class="ttitle">PkgBuilder alojado en BerliOS</div>
             <div class="tleft"><b>Domingo, 21 de Octubre de 2003</b></div>
             <div class="tleft">
