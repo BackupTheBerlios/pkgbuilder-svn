@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_perl/sdl_perl-1.20.0.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_perl/sdl_perl-1.20.0.build,v 1.5 2004/01/01 18:39:55 tomby Exp $
 #
 # sdl_perl pkgbuilder script
 #
@@ -25,11 +25,11 @@ PKG_DEPENDS=">=d/perl-5.8.0
 	         >=l/sdl_image-1.0.0
              l/sdl_net
              l/sdl_console
-	         l/sdl-gfx
+	         l/sdl_gfx
 	         l/smpeg
-	         >=l/sdl-ttf-2.0.5"
+	         >=l/sdl_ttf-2.0.5"
 
-PKG_HOMESITE="http://www.libsdl.org/projects/SDL_net/index.html"
+PKG_HOMESITE="http://sdlperl.org/"
 
 PKG_SRC="$TMP/SDL_perl-$PKG_VERSION"
 PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
