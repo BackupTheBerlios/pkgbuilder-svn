@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.3 2003/12/14 21:05:09 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.4 2003/12/14 22:05:54 tomby Exp $
 #
 # alsa-driver-0.9.8 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="alsa-driver"
 PKG_VERSION="0.9.8"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.alsa-project.org/pub/driver/$PKG_FILE_NAME"
@@ -29,8 +29,9 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="CARDS-STATUS COPYING FAQ INSTALL README WARNING TODO doc/*"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--with-isapnp=yes \
-                       --with-sequencer=yes \
+PKG_CONFIGURE_OPTIONS="--with-isapnp=yes
+                       --with-sequencer=yes
+                       --with-cards=all
                        `use oss && echo "--with-oss=yes"`"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
@@ -59,10 +60,17 @@ alsa_postinstall() {
     chmod 755 $PKG_DEST/etc/rc.d/rc.alsa
 }
 
+alsa_gzipmods() {
+    for mod in `find $PKG_DEST/lib/modules -type f -name '*.o'` ; do
+        gzip -9 $mod
+    done
+}
+
 do_postinstall() {
     cd $PKG_SRC
     
     alsa_postinstall &&
+    alsa_gzipmods &&
     pkg_installdoc &&
     pkg_stripall &&
     pkg_gzipmaninfo &&
