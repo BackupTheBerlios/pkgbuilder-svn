@@ -1,0 +1,32 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# glib2-2.6.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="glib-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.gtk.org/pub/gtk/v2.6/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS=">=d/pkgconfig-0.14
+             >=d/gettext-0.11
+             `use_dep doc ">=gnome/gtk-doc-1"`"
+
+PKG_HOMESITE="http://www.gtk.org/"
+
+PKG_SRC="$TMP/glib-$PKG_VERSION"
+
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS* README*"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --with-threads=posix
+                       `use_enable doc gtk-doc`"
+
