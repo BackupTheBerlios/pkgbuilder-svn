@@ -158,7 +158,7 @@ pkg_virtual() {
 virtual() {
   cd /var/log/package
   
-  ln -sf $1 $2-0.0-virtual-1
+  ln -sf $1 $2-virtual-am1
 }
 EOF
 
