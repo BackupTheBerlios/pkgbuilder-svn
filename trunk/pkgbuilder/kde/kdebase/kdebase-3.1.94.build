@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebase/Attic/kdebase-3.1.94.build,v 1.5 2003/12/31 15:56:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebase/Attic/kdebase-3.1.94.build,v 1.6 2004/01/01 16:15:25 tomby Exp $
 #
 # kdebase-3.1.94 pkgbuilder script
 #
@@ -10,7 +10,7 @@ inherit kde
 PKG_NAME="kdebase"
 PKG_VERSION="3.1.94"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_FILE_NAME"
@@ -51,17 +51,16 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 do_postinstall() {
     cd $PKG_SRC
     
+    ( cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
+         mv kde-information.menu information.menu
+         mv kde-screensavers.menu screensavers.menu
+         mv kde-settings.menu settings.menu )
+         
     mkdir -p $PKG_DEST/etc/X11/xinit
     cp $PKG_HOME/files/xinitrc.kde32 $PKG_DEST/etc/X11/xinit/
     chmod +x $PKG_DEST/etc/X11/xinit/xinitrc.kde32
     
-    pkg_installdoc
-
-    pkg_stripall
-
-    pkg_gzipmaninfo
-
-    pkg_installfiles
+    pkg_postinstall
     
     return $?
 }
