@@ -1,0 +1,29 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/file-roller/file-roller-2.6.0.build,v 1.1 2004/04/10 17:06:24 tomby Exp $
+#
+# file-roller-2.6.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glib2
+             >=l/gtk+2-2.3.6
+             >=gnome/libgnome-2.1
+             >=gnome/libgnomeui-2.1
+             >=gnome/gnome-vfs-2.2
+             >=gnome/libglade-2
+             >=gnome/libbonobo-2
+             >=gnome/libbonoboui-2
+             d/pkgconfig
+             >=gnome/intltool-0.29
+             >=gnome/scrollkeeper-0.3.11"
+
+PKG_HOMESITE="http://fileroller.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL NEWS README TODO"
+
