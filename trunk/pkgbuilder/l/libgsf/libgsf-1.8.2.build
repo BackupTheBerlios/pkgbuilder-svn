@@ -1,26 +1,19 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libgsf/libgsf-1.8.2.build,v 1.2 2004/01/01 21:10:47 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libgsf/libgsf-1.8.2.build,v 1.3 2004/01/02 18:46:44 tomby Exp $
 #
 # libgsf-1.8.2 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_NAME="libgsf"
-PKG_VERSION="1.8.2"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
-PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.8/$PKG_FILE_NAME"
-
-PKG_LICENSE="GPLv2"
+PKG_BUILD="am2"
 
 PKG_USE="gnome"
 
 PKG_DEPENDS=">=l/libxml2-2.4.16
              l/glib2
+             l/libcroco
              >=l/zlib-1.1.4
              >=a/sed-4
              a/bzip2
@@ -28,20 +21,9 @@ PKG_DEPENDS=">=l/libxml2-2.4.16
              `use gnome && echo ">=gnome/libbonobo-2 >=gnome/gnome-vfs-2"`
              `use doc && echo ">=gnome/gtk-doc-0.9"`"
 
-PKG_HOMESITE="http://www.gnome.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS BUGS ChangeLog COPYING* HACKING INSTALL README TODO"
 
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
-                       --localstatedir=/var/lib
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --with-html-dir=/usr/doc/$PKG_NAME-$PKG_VERSION/html
                        `use gnome && echo "--with-gnome"`
                        `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
