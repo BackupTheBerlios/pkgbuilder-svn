@@ -7,7 +7,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -34,6 +34,8 @@ PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX
 do_patch() {
     cd $PKG_SRC
     
+    apply_patch libpng-$PKG_VERSION-security.diff -p1
+
     cd scripts
     cp makefile.linux makefile.linux.old
     sed -e "s:-O3:${CFLAGS}:g" makefile.linux.old > makefile.linux
