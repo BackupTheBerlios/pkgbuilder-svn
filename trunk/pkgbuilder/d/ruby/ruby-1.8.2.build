@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_URL="http://gd.tuwien.ac.at/languages/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_USE="tcltk ssl"
@@ -25,7 +25,14 @@ PKG_DOC_FILES="ChangeLog COPYING* GPL LEGAL LGPL README* ToDo"
 PKG_CONFIGURE_OPTIONS="--enable-shared
                        --enable-pthread"
 
-PKG_INSTALL_TARGET="install install-doc"
+do_install() {
+    configscript_do_install || return $?
+
+    cd $PKG_SRC
+    LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH" DESTDIR=$PKG_DEST ./ruby -I./lib -I./ext/syck ./bin/rdoc --all --ri-system ./
+
+    return $?
+}
 
 do_postinstall() {
     cd $PKG_SRC
@@ -35,3 +42,4 @@ do_postinstall() {
     
     pkg_postinstall
 }
+
