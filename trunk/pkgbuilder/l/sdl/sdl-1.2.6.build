@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl/Attic/sdl-1.2.6.build,v 1.1 2003/12/07 18:06:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl/Attic/sdl-1.2.6.build,v 1.2 2003/12/21 14:09:43 tomby Exp $
 #
 # sdl-1.2.6 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="sdl"
 PKG_VERSION="1.2.6"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="SDL-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.libsdl.org/release/$PKG_FILE_NAME"
@@ -45,5 +45,18 @@ include do_patch
 include do_configure
 include do_build
 include do_install
-include do_postinstall
+
+do_postinstall() {
+    ( cd $PKG_DEST$PKG_PREFIX/lib 
+        cp libSDL.la libSDL.la.orig
+        sed -e 's:-pthread::g' libSDL.la.orig > libSDL.la
+        rm libSDL.la.orig ) &&
+    pkg_installdoc &&
+    pkg_stripall &&
+    pkg_gzipmaninfo &&
+    pkg_configfiles &&
+    pkg_installfiles
+    
+    return $?
+}
 
