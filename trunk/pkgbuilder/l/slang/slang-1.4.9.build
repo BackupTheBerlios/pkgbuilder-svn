@@ -1,0 +1,72 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/slang/slang-1.4.9.build,v 1.1 2003/11/28 23:28:10 tomby Exp $
+#
+# example pkgbuilder script
+#
+
+PKG_NAME="slang"
+PKG_VERSION="1.4.9"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.plig.org/pub/$PKG_NAME/v1.4/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 ARTISTIC"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/ncurses-5.2"
+
+PKG_HOMESITE="http://space.mit.edu/~davis/slang/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="COPY* INSTALL.* NEWS README UPGRADE.txt changes.txt 
+               doc/*.txt doc/internal/*.txt doc/text/*.txt"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
+PKG_BUILD_OPTIONS="all elf"
+PKG_INSTALL_OPTIONS="install install-elf DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DOC
+    
+    rm -rf $PKG_DEST$PKG_PREFIX/doc/slang
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+    
+    cd $PKG_DEST$PKG_PREFIX/lib
+    chmod 755 libslang.so.*
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    gzip_info $PKG_DEST$PKG_PREFIX/info
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    
+    if [ -f $PKG_HOME/files/doinst.sh ] ; then
+        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
+    fi
+}
+
