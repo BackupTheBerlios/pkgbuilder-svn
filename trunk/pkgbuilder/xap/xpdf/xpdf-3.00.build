@@ -1,0 +1,73 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/xpdf/xpdf-2.03.build,v 1.4 2004/01/05 15:13:09 tomby Exp $
+#
+# xpdf-3.00 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_URL="ftp://ftp.foolabs.com/pub/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="motif"
+
+PKG_DEPENDS=">=l/freetype2-2.0.5
+             >=l/t1lib-1.3
+             ap/esp-gs
+             `use_dep motif "x/xfree86 l/lesstif"`"
+
+PKG_HOMESITE="http://www.foolabs.com/xpdf/xpdf.html"
+
+PKG_DOC_FILES="README ANNOUNCE CHANGES"
+
+PKG_PREFIX="/usr/X11R6"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --enable-freetype2
+                       --with-freetype2-library=/usr/lib
+                       --with-freetype2-includes=/usr/include/freetype2
+                       --x-includes=/usr/X11R6/include
+                       --with-Xm-library=/usr/X11R6/lib
+                       --with-Xm-includes=/usr/X11R6/include
+                       --with-gzip"
+
+do_patch() {
+    cd $PKG_SRC/splash
+
+    sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFont.h
+    sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFontFile.h
+    sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFontEngine.h
+}
+
+do_build() {
+    cd $PKG_SRC
+
+    echo "#define HAVE_FREETYPE_FREETYPE_H 1" >> aconf.h
+
+    ( cd splash
+      sed -i "s|CXXFLAGS = |CXXFLAGS = -I/usr/include/freetype2 |" Makefile )
+
+    ( cd xpdf
+      sed -i "s|FTLIBS = |FTLIBS = -lfreetype -lz |" Makefile )
+
+    pkg_build && cd xpdf && pkg_build
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    configscript_do_install
+
+    cp xpdf/xpdf $PKG_DEST$PKG_PREFIX/bin
+    cp xpdf/pdftoppm $PKG_DEST$PKG_PREFIX/bin
+    
+    cp doc/xpdf.1 $PKG_DEST$PKG_PREFIX/man/man1
+    cp doc/pdftoppm.1 $PKG_DEST$PKG_PREFIX/man/man1
+
+    return $?
+}
