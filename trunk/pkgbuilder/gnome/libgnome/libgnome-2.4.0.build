@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnome/libgnome-2.4.0.build,v 1.6 2004/01/04 01:43:45 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnome/libgnome-2.4.0.build,v 1.7 2004/01/04 13:35:44 tomby Exp $
 #
 # libgnome-2.4.0 pkgbuilder script
 #
@@ -25,6 +25,7 @@ PKG_DEPENDS=">=l/glib-2.0.3
 PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-schemas-install
                        `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
