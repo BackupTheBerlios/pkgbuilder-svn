@@ -2,15 +2,16 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/audiofile/audiofile-0.2.5.build,v 1.1 2004/02/07 14:29:22 tomby Exp $
 #
-# audiofile-0.2.5 pkgbuilder script
+# audiofile-0.2.6 pkgbuilder script
 #
 
 inherit configscript
 
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://www.68k.org/~michael/$PKG_NAME/$PKG_FILE_NAME"
+PKG_URL="http://ftp.gnome.org/pub/gnome/sources/$PKG_NAME/0.2/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
