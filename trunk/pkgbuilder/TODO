@@ -121,7 +121,6 @@ games)
 n)
 
     animail
-    apache
     bind
     courier
     dhcp
@@ -178,8 +177,6 @@ kde)
 
 gnome)
 
-    ghex
-    glade
     gnome2-user-docs
     gnome-extra-themes
     gnome-mag
@@ -187,8 +184,6 @@ gnome)
     gnome-vfs-extras
     gnopernicus
     gok
-    gpdf
-    gucharmap
     libgail-gnome
     libgda
     zenity
