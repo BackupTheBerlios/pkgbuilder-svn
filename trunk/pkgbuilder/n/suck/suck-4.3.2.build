@@ -1,0 +1,44 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# suck-4.3.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://home.comcast.net/~bobyetman/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="perl ssl"
+
+PKG_DEPENDS="l/gdbm
+            `use_dep perl "d/perl"`
+            `use_dep ssl  "l/openssl"`"
+
+PKG_HOMESITE="http://home.comcast.net/~bobyetman/"
+
+PKG_DOC_FILES="CHANGELOG CONTENTS README*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET="all lpost"
+PKG_INSTALL_OPTIONS="bindir=$PKG_DEST$PKG_PREFIX/bin mandir=$PKG_DEST$PKG_PREFIX/man/man1"
+PKG_INSTALL_TARGET="installall"
+
+do_configure() {
+    cd $PKG_SRC
+
+    use ssl || sed -i -e 's/^SSL_/#SSL_/' Makefile.in
+    use perl || sed -i -e 's/^PERL_/#PERL_/' Makefile.in
+
+    configscript_do_configure
+
+    return $?
+}
