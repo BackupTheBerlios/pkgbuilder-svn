@@ -1,0 +1,22 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/ccache/ccache-2.3.build,v 1.1 2004/01/04 18:24:51 tomby Exp $
+#
+# ccache-2.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://ccache.samba.org/ftp/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://ccache.samba.org/"
+
+PKG_DOC_FILES="COPYING README web/*.html"
