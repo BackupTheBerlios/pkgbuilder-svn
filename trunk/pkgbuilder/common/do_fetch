@@ -1,10 +1,20 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_fetch,v 1.1 2003/11/08 16:36:27 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_fetch,v 1.2 2003/11/30 15:25:36 tomby Exp $
 
 do_fetch() {
     for pkg in $PKG_URL ; do
-        fetch $pkg
+        local base="$FETCH_DIR/`basename "$pkg"`"
+
+        if [ -r $base ] ; then
+            if grep -q `md5sum $base` $PKG_HOME/files/md5sum-$PKG_VERSION ; then
+                echo "allready downloaded"
+            else
+                fetch $pkg
+            fi
+        else
+            fetch $pkg
+        fi
     done
     
     return $?
