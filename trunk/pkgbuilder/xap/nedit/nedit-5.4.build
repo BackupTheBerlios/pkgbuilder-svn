@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/nedit-5.4.build,v 1.1 2003/12/24 12:17:22 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/nedit-5.4.build,v 1.2 2003/12/24 12:20:07 tomby Exp $
 #
 # nedit-5.4 pkgbuilder script
 #
@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS="d/yacc l/lesstif"
+PKG_DEPENDS="d/byacc l/lesstif"
 
 PKG_HOMESITE="www.nedit.org"
 
