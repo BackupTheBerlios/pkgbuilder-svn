@@ -1,46 +1,49 @@
 PKGBUILDER Slackware base packages
 
 a)
-    aaa_base            9.1.0
+    aaa_base            9.1.0  *
     bash                2.05b
-    bin                 8.5.0
+    bin                 8.5.0  *
     bzip2               1.0.2
     coreutils           5.0
-    cxxlibs             5.1.0
+    cxxlibs             5.1.0  *
     dcron               2.3.3
     devfsd              1.3.25
     devs                2.3.1
     e2fsprogs           1.34
-    elflibs             9.1.0
+    elflibs             9.1.0  *
     elvis               2.1_4
-    etc                 5.1
+    etc                 5.1    *
     findutils           4.1.7
     gawk                3.1.3
     gettext             0.11.5
-    glibc-solibs        2.3.2
-    glibc-zoneinfo      2.3.2
+    glibc-solibs        2.3.2  *
+    glibc-zoneinfo      2.3.2  *
     grep                2.5
     gzip                1.3.3
     hdparm              5.3
     hotplug             2003_08_05
     infozip             5.50
+    jfsutils            1.1.3
     kdb                 1.08
-    kernel-modules      2.4.23
+    kernel-modules      2.4.23 *
     less                381
     lilo                22.5.7.2
     module-init-tools   0.9.14
-    openssl-solibs      0.9.7c
+    openssl-solibs      0.9.7c *
     pci-utils           2.1.11
     pkgtools            9.1.0
     procps              2.0.16
+    reiserfsprogs       3.6.11 (optional)
     sed                 3.02
     shadow              4.0.3
     sysklogd            1.4.1
-    sysvinit            2.06
+    sysvinit            2.06   *
     syslinux            2.84
     tar                 1.13.25
     usbutils            0.11
     util-linux          2.12
+    xfsprogs            2.5.6 (optional)
 
 ap)
     diffutils           2.8.1
@@ -70,12 +73,13 @@ d)
 
 l)
     glibc               2.3.2
-    glibc-i18n          2.3.2
+    glibc-i18n          2.3.2   *
+    libtermcap          1.2.3
     ncurses             5.3
     openssl             0.9.7c
     zlib                1.1.4
 
 n)
     openssh             3.7.1p2
-    tcpip               0.17
+    tcpip               0.17    *
     wget                1.8.2

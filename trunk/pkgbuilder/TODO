@@ -1,388 +1,475 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.21 2003/12/27 13:30:22 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.22 2003/12/27 16:20:44 tomby Exp $
 
 * New tasks:
 
     check pkg deps
-	create virtual pkgs support like virtual/mta in gentoo
-	use new 'use` variable values
+    create virtual pkgs support like 'virtual/mta' in gentoo
+    use new 'use` variable values
 
 * Packages:
 
 a)
-    cups            X
-    lprng
-    gpm             X
 
-    reiserfs
-    xfs
+    acpid
+    apmd
+    bash
+    bin
+    bzip2
+    coreutils
+    cpio
+    cups                   X
+    dcron
+    devfsd
+    devs
+    e2fsprogs
+    findutils
+    gawk
+    gettext
+    gpm                    X
+    grep
+    gzip
+    hdparm
+    hotplug
+    infozip
+    isapnptools
+    jfstools
+    kdb
+    less
+    lilo
+    logrotate
+    lprng
+    minicom
+    module-init-tools
+    pciutils
+    pcmcia-cs
+    procps
+    reiserfsprogs
+    sed
+    shadow
+    sysklogd
+    syslinux
+    tar
+    tcsh                   X
+    usb-utils
+    util-linux
+    xfsprogs
 
 ap)
 
-    esp-gs          X
-    gimp-print      X
     a2ps
-    enscript        X
-    psutils
-
-    iptables		X
-    gnupg           X
-
-    sgml-common     X
-    docbook-sgml3   X
-    docbook-sgml4   X
-    opensp          X
-    openjade        X
-    docbook-dsss    X
-    docbook-xml     X
-    docbook-xsl     X
-
-    vim
+    alsa-utils             X
+    apsfilter
+    ash
+    at
+    aumix
+    bash-completion
+    bc                     X
+    cdparanoia             X
+    cdrdao                 X
+    cdrtools               X
+    diffutils
+    docbook-dsss           X
+    docbook-sgml3          X
+    docbook-sgml4          X
+    docbook-xml            X
+    docbook-xsl            X
     emacs
-    nano            X
+    enscript               X
+    esp-gs                 X
+    foomatic-db            X
+    foomatic-db-engine     X
+    foomatic-filters       X
+    gimp-print             X
+    gnupg                  X
+    groff
+    iptables               X
+    ispell
+    jed
     joe
-
-    bc              X
-
-    tcsh			X
-    zsh             X
-	screen			X
-
+    lsof
+    lvm
+    madplay                X
+    man
+    man-pages
+    mc
+    mpg321                 X
     mysql
+    nano                   X
+    openjade               X
+    opensp                 X
+    pnm2ppa                X
     postgresql
-
+    psutils
+    quota
     sane
-
-    mpg321          X
-    cdparanoia      X
-    cdrtools		X
-    cdrdao			X
-    vorbis-tools	X
+    screen                 X
+    sgml-common            X
+    slocate
+    sudo
+    texinfo
+    vim
+    vorbis-tools           X
+    workbone
+    zsh                    X
 
 l)
-    cyrus-sasl      X
-    divx4linux      X
-    fribidi         X
-    libmusicbrainz  X
-    libzvf          X
-    lm_sensors      X
-    ruby-gnome2     X
-    sdl_console     X
-    sdl_gfx         X
-    sdl_image       X
-    sdl_mixer       X
-    sdl_net         X
-    sdl_perl        X
-    sdl_ttf         X
-    slang           X
-    smpeg           X
-    win32codecs     X
 
-    openssl
-    pcre            X
-    popt            X
-    slang           X
-    libxml          X
-    libxml2         X
-    libxslt         X
-    readline        X
-    gmp             X
-    gdbm            X
-    glib            X
-    glib2           X
-    expat           X
-
-    lcms            X
-    libjpeg         X
-    libpng          X
-    libtiff         X
-    libungif        X
-    libmng          X
-    imlib           X
-    imlib2          X
-    t1lib           X
-
-    freetype2       X
-    fontconfig      X
-    qt              X
-    gtk+            X
-    gtk+2           X
-    pango           X
-    atk             X
-    lesstif         X
-
-    libart_gpl      X
-
-    libsoup         X
-
-    alsa-libs       X
-    alsa-driver     X
-    alsa-utils		X
-    alsa-oss        X
-    audio-file      X
-    esound          X
-    sdl             X
-    libao           X
-    libogg          X
-    libvorbis       X
-    nas
-    libmpeg3		X
-    libmad          X
-    libfame         X
-    speex           X
-    lame            X
-    id3lib          X
-    flac            X
-    libdvdread
-    libdvdcss       X
-    libdv
-    liba52			X
-    xvid            X
-    xine-libs       X
-	libmikmod		X
-
-    db1             X
+    aalib                  X
+    alsa-driver            X
+    alsa-libs              X
+    alsa-oss               X
+    aspell
+    atk                    X
+    audio-file             X
+    cyrus-sasl             X
+    db1                    X
     db2
-    db3             X
+    db3                    X
     db4
-	
-	svgalib 		X
-	directfb		X
+    directfb               X
+    divx4linux             X
+    esound                 X
+    expat                  X
+    flac                   X
+    fontconfig             X
+    freetype2              X
+    fribidi                X
+    gdbm                   X
+    glib                   X
+    glib2                  X
+    glibc
+    glut
+    gmp                    X
+    gtk+                   X
+    gtk+2                  X
+    id3lib                 X
+    imlib                  X
+    imlib2                 X
+    lame                   X
+    lcms                   X
+    lesstif                X
+    liba52                 X
+    libao                  X
+    libart_gpl             X
+    libdv
+    libdvdcss              X
+    libdvdread
+    libfame                X
+    libgr
+    libieee1284
+    libjpeg                X
+    libmad                 X
+    libmikmod              X
+    libmng                 X
+    libmpeg3               X
+    libmusicbrainz         X
+    libogg                 X
+    libpng                 X
+    libsoup                X
+    libtermcap
+    libtiff                X
+    libungif               X
+    libusb
+    libvorbis              X
+    libxml2                X
+    libxml                 X
+    libxslt                X
+    libzvf                 X
+    lm_sensors             X
+    nas
+    ncurses
+    openssl
+    openslp                X
+    pango                  X
+    pcre                   X
+    popt                   X
+    qt                     X
+    readline               X
+    ruby-gnome2            X
+    sdl_console            X
+    sdl_gfx                X
+    sdl_image              X
+    sdl_mixer              X
+    sdl_net                X
+    sdl_perl               X
+    sdl_ttf                X
+    sdl                    X
+    slang                  X
+    smpeg                  X
+    speex                  X
+    svgalib                X
+    taglib                 X
+    t1lib                  X
+    utempter
+    win32codecs            X
+    xine-libs              X
+    xvid                   X
+    zlib
 
 d)
 
-    anjuta          X
-    lincvs          X
-    umbrello        X
-
-    pkgconfig       X
-    python          X
-    ruby            X
-    tcl             X
-    tk              X
-    nasm            X
-	perl
+    autoconf
+    automake
+    bin86
+    binutils
+    bison
+    byacc
+    cvs
+    distcc
+    flex
+    gcc
+    gdb
+    indent
+    j2sdk
+    libtool
+    m4
+    make
+    nasm                   X
+    perl
+    pkgconfig              X
+    pmake
+    python                 X
+    rcs
+    ruby                   X
+    tcl                    X
+    tk                     X
 
 emu)
 
-    dosbox          X
-    scummvm         X
-    wine            X
-    xmame           X
+    dosbox                 X
+    scummvm                X
+    wine                   X
+    xmame                  X
 
 games)
 
-    frozen-bubble   X
+    frozen-bubble          X
 
 n)
 
-    airtraf         X
-    ap-utils        X
-    etherape        X
-    ethereal        X
-    kismet          X
-    ntop            X
-
-    ppp
-    wvdial
+    airtraf                X
+    animail
+    apache
+    ap-utils               X
+    bind
+    bitchx
+    courier
+    curl                   X
     dhcp
     dhcpd
-    rp-pppoe
-
-    curl			X
-    wvstreams
-    gnet
-
-    links           X
-    lynx
-    w3m
-
-    ncftp
-    openssh
-    rsync           X
-    cvs
-    wget
-    tcpwrappers
-    portmap
-    ntp
-
-    tcpdump
-    nmap            X
-    whois
-    bind
-
-    nail
-    procmail
-    fetchmail
-    mutt			X
-    pine
-    slrn			X
-
-    postfix         X
-    qmail
-    sendmail
+    epic4
+    etherape               X
+    ethereal               X
     exim
-    qpopper
-    courier
-
-    openldap
-    samba           X
+    fetchmail
+    getmail
+    gnet
     inetd
-    xinitd
-
-    apache
+    iptraf
+    kismet                 X
+    lftp
+    links                  X
+    lynx
+    mutt                   X
+    nail
+    nc
+    ncftp
+    netwatch
+    nfs-utils
+    nmap                   X
+    nn
+    ntop                   X
+    ntp
+    openldap
+    openssh
     php
+    pine
+    portmap
+    postfix                X
+    ppp
+    procmail
     proftpd
     pure-ftpd
+    qmail
+    qpopper
+    rp-pppoe
+    rsync                  X
+    samba                  X
+    sendmail
+    slrn                   X
+    tcpdump
+    tcpip
+    tcpwrappers
+    tin
+    traceroute
+    trn
+    w3m
+    wget
+    whois
+    wireless-tools
+    wvdial
+    wvstreams
+    xinetd
 
 x)
+    nvidia-glx             X
+    nvidia-kernel          X
 
-    xfree           X (falta mucho por hacer)
-
-    nvidia-glx      X
-    nvidia-kernel   X
+    xfree                  X
 
 xap)
 
-    aterm           X
-    evolution       X
-    gaim            X
-    gkrellm         X
-    gqview          X
-    kopete          X
-    ksetispy        X
-    ksetiwatch      X
-    lyx             X
-    nedit           X
-
-    fluxbox         X
-    sawfish
-    metacity
-    xfce
-
-    gimp
     abiword
-    gnumeric
+    anjuta                 X
+    aterm                  X
+    evolution              X
+    fluxbox                X
+    fvwm
+    gaim                   X
+    gftp
+    gimp
+    gkrellm                X
     gnucash
-    evolution       X
-
+    gnuchess
+    gnuplog
+    gnumeric
+    gqview                 X
+    gv
+    imagemagick            X
+    kopete                 X
+    ksetispy               X
+    ksetiwatch             X
+    lincvs                 X
+    lyx                    X
+    metacity
     mozilla
-    galeon
-
+    mplayer                X
+    nedit                  X
     pan
-
+    rxvt
+    sawfish
+    umbrello               X
+    windowmaker
+    xchat                  X
+    xfce
     xine
-    xmms			X
-    mplayer 		X
-
+    xmms                   X
+    xpdf                   X
     xsane
-    imagemagick     X
+    xscreensaver
 
-    xpdf            X
-	
-	xchat			X
 
 kde)
 
-    arts            X
-    kdelibs         X
-    kdebase         X
-
-    kdemultimedia   X
-    kdenetwork      X
-    kdegraphics     X
-    kdepim          X
-    kdeadmin        X
-    kdegames        X
-    kdeutils        X
-    kdeedu          X
-    kdeartwork      X
-    kdetoys
-
-    kdeaddons       X
+    arts                   X
     kdeaccessibility
+    kdeaddons              X
+    kdeadmin               X
+    kdeartwork             X
+    kdebase                X
     kdebindings
-    kdesdk          X
-
-    kde-i18n        X
-
+    kdeedu                 X
+    kdegames               X
+    kdegraphics            X
+    kde-i18n               X
+    kdelibs                X
+    kdemultimedia          X
+    kdenetwork             X
+    kdepim                 X
+    kdesdk                 X
+    kdetoys
+    kdeutils               X
     koffice
     quanta
 
 gnome)
 
-	gtk-doc         X
-	linc
-	libIDL
-	ORBit2
-	intltool
-	bonobo-activation
-	libbonobo
-	gconf2
-	gnome-mime-data
-	gnome-vfs2
-	libgnome
-
-	libglade2
-	libgnomecanvas
-	libbonoboui
-	libwnck
-	gtk-engines
-	gtk-thinice-engine
-	gnome-themes
-	scrollkeeper
-	vte
-	libgtop
-	gail
-	at_spi
-	libgail-gnome
-	librsvg
-	eel
-	libgtkhtml2
-	libgsf
-	gal
-	libgnomeprint
-	libgnomeprintui
-	gtkhtml3
-
-	gnome-desktop
-	gnome-panel
-	gnome-session
-	control-center
-
-	gnome-terminal
-	gnome-system-monitor
-	gnome-applets
-	gnome-utilities
-	gnome-games
-	nautilus
-	yelp
-	bug-buddy
-	gedit
-	eog
-	gstreamer
-	gst-plugins
-	gnome-media
-	nautilus-media
-	gnome2-user-docs
-
-	gconf-editor
-	gdm
-
-	orbit
-	oaf
-	gnome-libraries
-	gdk-pixbuf
-	gnome-print
-	bonobo
-	gconf
-	gnome-vfs
-	libglade
-	gal
-	guppi
-	libcapplet
-	soup
-	gtkhtml
-	libghtml
+    acme
+    at-spi
+    bonobo
+    bonobo-activation
+    bug-buddy
+    control-center
+    eel
+    eog
+    epiphany
+    file-roller
+    gail
+    gal
+    gal2
+    galeon
+    gcalctool
+    gconf
+    gconf2
+    gconf-editor
+    gdk-pixbuf
+    gdm
+    gedit
+    ggv
+    ghex
+    glade
+    gnome2-user-docs
+    gnome-applets
+    gnome-audio
+    gnome-desktop
+    gnome-extra-themes
+    gnome-games
+    gnome-icon-theme
+    gnome-libraries
+    gnome-media
+    gnome-mime-data
+    gnome-panel
+    gnome-print
+    gnome-session
+    gnome-speech
+    gnome-system-monitor
+    gnome-terminal
+    gnome-themes
+    gnome-utils
+    gnome-vfs
+    gnome-vfs2
+    gnomeicu
+    gnopernicus
+    gst-plugins
+    gstreamer
+    gthumb
+    gtk-doc                X
+    gtk-engines
+    gtkhtml
+    gtk-thinice-engine
+    gucharmap
+    guppi
+    intltool
+    libbonobo
+    libbonoboui
+    libcapplet
+    libgail-gnome
+    libghtml
+    libglade
+    libglade2
+    libgnome
+    libgnomecanvas
+    libgnomeprint
+    libgnomeprintui
+    libgnomeui
+    libgsf
+    libgtkhtml
+    libgtop
+    libidl
+    librsvg
+    libwnck
+    linc
+    nautilus
+    nautilus-cd-burner
+    nautilus-media
+    oaf
+    orbit
+    orbit2
+    scrollkeeper
+    soup
+    startup-notification
+    vte
+    yelp
 
 t)
 
