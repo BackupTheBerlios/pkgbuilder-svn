@@ -22,12 +22,3 @@ PKG_DEPENDS=">=l/qt-3.3
              `use_dep tetex "ap/tetex"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL kdegraphics.lsm README"
-
-do_patch() {
-    cd $PKG_SRC
-
-    # security fix http://www.kde.org/info/security/advisory-20041021-1.txt
-    apply_patch post-$PKG_VERSION-$PKG_NAME.diff -Np0
-
-    return $?
-}

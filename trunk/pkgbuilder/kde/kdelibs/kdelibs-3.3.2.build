@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE="alsa cups fam"
 
@@ -38,6 +38,15 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_enable fam libfam`
                        `use_with alsa`
                        `use_with cups`"
+
+do_patch() {
+    ( cd $PKG_SRC
+      apply_patch post-$PKG_VERSION-$PKG_NAME-htmlframes2.patch -Np0 )
+    ( cd $PKG_SRC/kio/kio
+      apply_patch post-$PKG_VERSION-$PKG_NAME-kio.diff -Np0 )
+
+    return $?
+}
 
 do_postinstall() {
     cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
