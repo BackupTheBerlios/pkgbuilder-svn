@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/gtk-doc/Attic/gtk-doc-1.1.build,v 1.4 2003/12/06 12:20:51 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/gtk-doc/Attic/gtk-doc-1.1.build,v 1.5 2003/12/24 11:17:16 tomby Exp $
 #
 # gtk-doc-1.1 pkgbuilder script
 #
@@ -53,7 +53,5 @@ do_postinstall() {
     
     pkg_installdoc
 
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    pkg_installfiles
 }

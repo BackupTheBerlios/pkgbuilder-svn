@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/gpm/gpm-1.20.1.build,v 1.2 2003/12/08 22:18:19 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/gpm/gpm-1.20.1.build,v 1.3 2003/12/24 11:18:03 tomby Exp $
 #
 # gpm-1.20.1 pkgbuilder script
 #
@@ -18,7 +18,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/ncurses-5.2
-	         d/autoconf"
+             d/autoconf"
 
 PKG_HOMESITE="ftp://arcana.linux.it/pub/gpm/"
 
@@ -32,10 +32,10 @@ PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/gpm"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
 
-PKG_CONFIG_FILES="etc/rc.d/rc.gpm 
-                  etc/rc.d/rc.gpm.conf 
-                  etc/gpm/gpm-root.conf 
-                  etc/gpm/gpm-syn.conf 
+PKG_CONFIG_FILES="etc/rc.d/rc.gpm
+                  etc/rc.d/rc.gpm.conf
+                  etc/gpm/gpm-root.conf
+                  etc/gpm/gpm-syn.conf
                   etc/gpm/gpm-twiddler.conf"
 
 include general
@@ -49,47 +49,47 @@ include do_install
 
 do_patch() {
     cd $PKG_SRC
-    
+
     patch -p1 < $PKG_HOME/files/$PKG_NAME-$PKG_VERSION-segfault.patch &&
     patch -p1 < $PKG_HOME/files/$PKG_NAME-$PKG_VERSION-silent.patch
-    
+
     return $?
 }
 
 do_configure() {
     cd $PKG_SRC
-    
+
     pkg_configure
-    
+
     cp doc/Makefile doc/Makefile.orig
-	sed -e 's:all\: $(srcdir)/gpmdoc.ps:all\::' \
-		doc/Makefile.orig > doc/Makefile
-    
+    sed -e 's:all\: $(srcdir)/gpmdoc.ps:all\::' \
+        doc/Makefile.orig > doc/Makefile
+
     return $?
 }
 
 do_postinstall() {
     cd $PKG_SRC
-    
+
     mkdir -p $PKG_DEST/etc/{rc.d,gpm}
-    
+
     cat $PKG_HOME/files/rc.gpm > $PKG_DEST/etc/rc.d/rc.gpm
     cat $PKG_HOME/files/rc.gpm.conf > $PKG_DEST/etc/rc.d/rc.gpm.conf
-    
+
     chmod +x $PKG_DEST/etc/rc.d/rc.gpm
-    
+
     cd conf
     cat gpm-root.conf > $PKG_DEST/etc/gpm/gpm-root.conf
     cat gpm-syn.conf > $PKG_DEST/etc/gpm/gpm-syn.conf
     cat gpm-twiddler.conf > $PKG_DEST/etc/gpm/gpm-twiddler.conf
-       
+
     pkg_installdoc
-    
+
     pkg_gzipmaninfo
-    
+
     pkg_configfiles
-    
+
     pkg_installfiles
-    
+
     return $?
 }

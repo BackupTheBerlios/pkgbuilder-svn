@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/tk/tk-8.4.5.build,v 1.1 2003/12/08 17:14:05 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/tk/tk-8.4.5.build,v 1.2 2003/12/24 11:17:16 tomby Exp $
 #
 # tk-8.4.5 pkgbuilder script
 #
@@ -44,9 +44,7 @@ include do_patch
 do_configure() {
     cd $PKG_SRC/unix
     
-    CFLAGS=$CFLAGS \
-    CXXFLAGS=$CXXFLAGS \
-    ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+    pkg_configure
     
     return $?
 }
@@ -54,7 +52,7 @@ do_configure() {
 do_build() {
     cd $PKG_SRC/unix
     
-    make
+    pkg_build
     
     return $?
 }
@@ -62,7 +60,7 @@ do_build() {
 do_install() {
     cd $PKG_SRC/unix
     
-    make $PKG_INSTALL_OPTIONS install
+    pkg_install
     
     return $?
 }

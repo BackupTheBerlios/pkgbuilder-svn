@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/ruby/Attic/ruby-1.8.0.build,v 1.5 2003/12/06 12:39:03 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/ruby/Attic/ruby-1.8.0.build,v 1.6 2003/12/24 11:17:16 tomby Exp $
 
 PKG_NAME="ruby"
 PKG_VERSION="1.8.0"
@@ -52,7 +52,5 @@ do_postinstall() {
 
     gzip_man $PKG_DEST$PKG_PREFIX/man
 
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    pkg_installfiles
 }

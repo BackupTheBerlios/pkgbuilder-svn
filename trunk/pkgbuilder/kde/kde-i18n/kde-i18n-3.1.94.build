@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.6 2003/12/21 18:27:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.7 2003/12/24 11:16:42 tomby Exp $
 #
 # kde-i18n-3.1.94 pkgbuilder script
 #
@@ -62,9 +62,7 @@ do_configure() {
 
     for lang in $LANG ; do
         ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
-          CFLAGS=$CFLAGS \
-          CXXFLAGS=$CXXFLAGS \
-          ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS )
+          pkg_configure )
     done
 
     return $?
@@ -75,7 +73,7 @@ do_build() {
 
     for lang in $LANG ; do
         ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
-          make $PKG_BUILD_OPTIONS )
+          pkg_build )
     done
 
     return $?
@@ -86,7 +84,7 @@ do_install() {
 
     for lang in $LANG ; do
         ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
-          make $PKG_INSTALL_OPTIONS install )
+          pkg_install )
     done
 
     return $?

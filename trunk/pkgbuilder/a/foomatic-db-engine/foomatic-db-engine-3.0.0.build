@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/foomatic-db-engine/Attic/foomatic-db-engine-3.0.0.build,v 1.1 2003/12/21 22:59:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/foomatic-db-engine/Attic/foomatic-db-engine-3.0.0.build,v 1.2 2003/12/24 11:18:03 tomby Exp $
 #
 # foomatic-db-engine-3.0.0 pkgbuilder script
 #
@@ -71,6 +71,8 @@ do_install_perl_module() {
 }
 
 do_install() {
+    cd $PKG_SRC
+
     pkg_install &&
     do_install_perl_module
 

@@ -1,13 +1,15 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_postinstall,v 1.6 2003/12/05 22:01:08 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_postinstall,v 1.7 2003/12/24 11:17:28 tomby Exp $
 
 do_postinstall() {
+    cd $PKG_SRC
+
     pkg_installdoc &&
     pkg_stripall &&
     pkg_gzipmaninfo &&
     pkg_configfiles &&
     pkg_installfiles
-    
+
     return $?
 }
