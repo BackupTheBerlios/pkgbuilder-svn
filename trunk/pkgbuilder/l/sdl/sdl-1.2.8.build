@@ -1,0 +1,44 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# sdl-1.2.8 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.libsdl.org/release/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE="alsa arts esd opengl"
+
+PKG_DEPENDS="x/x11
+             >=l/audiofile-0.1.9
+            `use_dep alsa "l/alsa-lib"`
+            `use_dep arts "kde/arts"`
+            `use_dep esd ">=l/esound-0.2.19"`"
+
+PKG_HOMESITE="http://www.libsdl.org/"
+
+PKG_SRC="$TMP/SDL-$PKG_VERSION"
+PKG_DOC_FILES="BUGS COPYING CREDITS INSTALL README* TODO"
+
+PKG_CONFIGURE_OPTIONS="--disable-nasm
+                       --disable-debug
+                      `use opengl && echo "--enable-video-opengl"`"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    ( cd $PKG_DEST$PKG_PREFIX/lib 
+        cp libSDL.la libSDL.la.orig
+        sed -e 's:-pthread::g' libSDL.la.orig > libSDL.la
+        rm libSDL.la.orig ) &&
+    configscript_do_postinstall
+        
+    return $?
+}
