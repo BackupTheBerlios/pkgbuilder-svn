@@ -1,0 +1,29 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/ctags/ctags-5.5.build,v 1.1 2004/01/11 00:52:46 tomby Exp $
+#
+# ctags-5.5.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://ctags.sourceforge.net/"
+
+PKG_DOC_FILES="COPYING EXTENDING.html FAQ INSTALL* NEWS README"
+
+PKG_CONFIGURE_OPTIONS="--with-posix-regex
+                       --without-readlib
+                       --disable-etags
+                       --enable-tmpdir=/tmp"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"

@@ -1,0 +1,52 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/subversion/subversion-1.0.1.build,v 1.1 2004/04/19 17:42:10 tomby Exp $
+#
+# subversion-1.0.7 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://subversion.tigris.org/tarballs/$PKG_FILE_NAME"
+
+PKG_LICENSE="APLv1.1"
+
+PKG_USE="python perl server apache"
+
+PKG_DEPENDS=">=n/neon-0.24.4
+             `use_dep python ">=d/python-2.0 >=d/swig-1.3.21"`
+             `use_dep perl ">=d/perl-5.8 >=d/swig-1.3.21"`
+             `use_dep server "l/db4"`
+             `use_dep apache ">=n/apache2-2.0.48"`"
+
+PKG_HOMESITE="http://subversion.tigris.org/"
+
+PKG_DOC_FILES="BUGS ChangeLog.CVS CHANGES COMMITTERS COPYING HACKING INSTALL README STATUS"
+
+PKG_CONFIGURE_OPTIONS="--with-neon=/usr
+                       `use apache && echo "--with-apxs=/usr/sbin/apxs
+                                            --with-apr=/usr
+                                            --with-apr-util=/usr"`
+                       --disable-experimental-libtool
+                       --disable-mod-activation
+                       `use python && echo "--with-python=/usr/bin/python --with-swig" || echo "--without-python"`"
+
+do_patch() {
+    cd $PKG_SRC/ac-helpers
+
+    mv ltmain.sh ltmain.sh.orig &&
+    sed 's:relink=yes:relink=no:' ltmain.sh.orig > ltmain.sh
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_DEST$PKG_PREFIX
+    rmdir info
+
+    configscript_do_postinstall
+}
