@@ -1,16 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/opensp/Attic/opensp-1.5.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/opensp/opensp-1.5.1.build,v 1.1 2004/01/02 23:49:08 tomby Exp $
 #
-# opensp-1.5 pkgbuilder script
+# opensp-1.5.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="opensp"
-PKG_VERSION="1.5"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="OpenSP-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/openjade/$PKG_FILE_NAME"
@@ -24,8 +22,6 @@ PKG_DEPENDS="`use nls && echo "d/gettext"`"
 PKG_HOMESITE="http://openjade.sourceforge.net/"
 
 PKG_SRC="$TMP/OpenSP-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
 
 PKG_PREFIX="/usr"
@@ -35,18 +31,19 @@ PKG_CONFIGURE_OPTIONS="--disable-static --enable-http
                        --enable-default-search-path=/usr/share/sgml"
 PKG_BUILD_OPTIONS="pkgdatadir=$PKG_DATADIR"
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST pkgdatadir=$PKG_DATADIR 
-                        pkgdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
-
-do_install() {
+                     pkgdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+                     
+do_patch() {
     cd $PKG_SRC
     
-    make $PKG_INSTALL_OPTIONS install &&
-    do_install_opensp
+    #patch from blfs
+    patch -p1 -N < $PKG_HOME/files/$PKG_VERSION-LITLEN.patch
     
     return $?
 }
 
-do_install_opensp() {
+do_install() {
+    configscript_do_install &&
     cd $PKG_DEST$PKG_PREFIX/bin &&
     ln -sf onsgmls nsgmls &&
     ln -sf osgmlnorm sgmlnorm &&
@@ -59,23 +56,4 @@ do_install_opensp() {
     ln -sf libosp.so libsp.so
     
     return $?
-}
-
-do_postinstall() {
-    cd $PKG_SRC
-    
-    mkdir -p $PKG_DOC
-
-    cp $PKG_DOC_FILES $PKG_DOC
-    find $PKG_DOC -type f -exec chmod 644 {} \;
-    find $PKG_DOC -type d -exec chmod 755 {} \;
-
-    strip_all $PKG_DEST
-
-    gzip_man $PKG_DEST$PKG_PREFIX/man
-
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
-    cat $PKG_HOME/files/doinst.sh-$PKG_VERSION > $PKG_DEST/install/doinst.sh
 }
