@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am3"
 
 PKG_URL="http://download.sourceforge.net/wvware/$PKG_FILE_NAME"
 
@@ -25,7 +25,15 @@ PKG_HOMESITE="http://wvware.sourceforge.net/"
 
 PKG_DOC_FILES="COPYING INSTALL README"
 
-PKG_CONFIGURE_OPTIONS="--with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_CONFIGURE_OPTIONS="--with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION --with-libwmf=/usr"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch wv-configure.diff -Np0
+
+    return $?
+}
 
 do_install() {
     configscript_do_install

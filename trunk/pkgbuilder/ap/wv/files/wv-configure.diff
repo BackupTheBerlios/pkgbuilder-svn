@@ -1,0 +1,10 @@
+--- configure.orig	2004-11-27 12:04:34.000000000 +0100
++++ configure	2004-11-27 12:05:00.000000000 +0100
+@@ -20246,6 +20246,7 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ $ac_includes_default
++#include <zlib.h>
+ #include <pngconf.h>
+ _ACEOF
+ rm -f conftest.$ac_objext
