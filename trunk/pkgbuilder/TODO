@@ -50,6 +50,7 @@ a)
     sysklogd
     syslinux
     tar
+    udev
     usb-utils
     util-linux
     xfsprogs
@@ -70,21 +71,18 @@ ap)
     lvm
     man
     man-pages
-    mc
     mysql
     postgresql
     psutils
     quota
     sane
     slocate
-    sudo
     texinfo
     workbone
 
 l)
 
     db2
-    db4
     glibc
     glut
     libdv
