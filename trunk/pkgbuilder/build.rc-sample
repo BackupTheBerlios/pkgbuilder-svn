@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.3 2003/12/25 21:09:41 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.4 2003/12/25 21:36:48 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
@@ -26,7 +26,7 @@ USE_DEV="python tcltk perl java ruby"
 USE_MISC="nls doc gpm"
 
 USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
-     $USE_XLIBS $USE_CPU $USE_DEV $USE_MISC"
+     $USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
      
 LANG="es"
 LOCALE="es_ES"

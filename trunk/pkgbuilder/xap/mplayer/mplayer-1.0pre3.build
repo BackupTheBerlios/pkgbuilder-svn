@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.1 2003/12/12 19:51:48 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.2 2003/12/25 21:34:59 tomby Exp $
 #
 # mplayer-1.0pre3 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="mplayer"
 PKG_VERSION="1.0pre3"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="MPlayer-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
@@ -17,11 +17,27 @@ PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
          
 PKG_LICENSE="GPLv2"
 
-# TODO
-PKG_USE=""
+PKG_USE="divx win32codecs gtk gtk2 jpeg gif esd sdl alsa arts aalib svga lame oggvorbis nls samba"
 
-# TODO
-PKG_DEPENDS=""
+PKG_DEPENDS=">=media-libs/xvid-0.9.0
+			 >=l/freetype2-2.1
+			 ap/cdparanoia
+             `use divx && echo "l/divx4linux"`
+			 `use win32codecs && echo "l/win32codecs"`
+    		 `use gtk && echo "l/libpng x/xfree86"`
+			 `use gtk2 && echo ">=l/glib2-2.0.6 >=l/gtk+2-2.0.6"`
+			 `use gtk2 || echo ">=l/glib-1.2 >=l/gtk+-1-2"`
+    		 `use jpeg && echo "l/libjpeg"`
+    		 `use gif && echo "l/libungif"`
+    		 `use esd && echo "l/esound"`
+    		 `use sdl && echo "l/sdl"`
+    		 `use alsa && echo "l/alsa-lib"`
+			 `use arts && echo "kde/arts"`
+    		 `use aalib && echo "l/aalib"`
+    		 `use lame && echo "l/lame"`
+    		 `use oggvorbis && echo "l/libvorbis"`
+			 `use nls && echo "a/gettext d/gettext-tools"`
+    		 `use samba && echo ">=n/samba-2.2.8a"`"
 
 PKG_HOMESITE="http://www.mplayerhq.hu/"
 
