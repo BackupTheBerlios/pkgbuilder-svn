@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.1 2003/10/21 18:19:45 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.2 2003/10/24 19:42:11 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -60,43 +60,55 @@ if [ ! -d $PKG_DEST ]; then
   mkdir -p $PKG_DEST # directorio donde instalar el paquete
 fi
 
+RETVAL="0"
+
 #ahora ejecuto la acción correspondiente
 case "$ACTION" in
     'info')
         do_info
+        RETVAL="$?"
     ;;
     'fetch')
         do_fetch
     ;;
     'uncompress')
         do_uncompress
+        RETVAL="$?"
     ;;
     'patch')
         do_patch
     ;;
     'configure')
         do_configure
+        RETVAL="$?"
     ;;
     'build')
         do_build
+        RETVAL="$?"
     ;;
     'install')
         do_install
+        RETVAL="$?"
     ;;
     'postinstall')
         do_postinstall
+        RETVAL="$?"
     ;;
     'buildpkg')
         do_buildpkg
+        RETVAL="$?"
     ;;
     'installpkg')
         do_installpkg
+        RETVAL="$?"
     ;;
     'upgradepkg')
         do_upgradepkg
+        RETVAL="$?"
     ;;
     'clean')
         do_clean
+        RETVAL="$?"
     ;;
     'auto')
         do_fetch && 
@@ -107,12 +119,16 @@ case "$ACTION" in
         do_install &&  
         do_postinstall && 
         do_buildpkg
+        RETVAL="$?"
     ;;
     'help')
         usage
     ;;
     *)
-        echo "unrecognized action"
+        echo "pkgbuilder: unrecognized action"
+        exit 1
 esac
 
+echo
+echo "pkgbuilder: $ACTION for $1 result: $RETVAL"
 
