@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/ruby/1.8.0/Attic/build.sh,v 1.2 2003/10/22 21:22:28 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/ruby/1.8.0/Attic/build.sh,v 1.3 2003/10/22 21:24:39 tomby Exp $
 #
 # ruby pkgbuilder script
 #
@@ -19,7 +19,7 @@ include do_upgradepkg
 include do_clean
 
 do_postinstall() {
-    find $PKG_DEST -type d -exec chown root.root {} \;
+    find $PKG_DEST -exec chown root.root {} \;
     
     cd $PKG_SRC
     
