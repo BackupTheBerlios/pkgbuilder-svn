@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.14 2003/12/26 20:12:57 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.15 2003/12/30 12:33:43 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -175,11 +175,11 @@ done
 
 if is_installed "$PKG_NAME" ; then
     echo "pkgbuilder: upgrading $PKG"
-    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto upgradepkg cleanup )
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup upgradepkg )
     RETVAL="$?"
 else
     echo "pkgbuilder: installing $PKG"
-    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto installpkg cleanup )
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup installpkg )
     RETVAL="$?"
 fi
 
