@@ -1,17 +1,10 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.25 2003/12/28 19:17:32 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.26 2003/12/29 00:56:02 tomby Exp $
 
 * New tasks:
 
     check pkg deps
     create virtual pkgs support like 'virtual/mta' in gentoo
     use new 'use` variable values
-
-* Package tasks:
-
-    Fixes:
-
-        fix docbook stuff
-
 
 * Packages:
 
@@ -74,9 +67,9 @@ ap)
     cdrdao                 X
     cdrtools               X
     diffutils
-    docbook-dsss           X
-    docbook-sgml           ?
-    docbook-xml            ?
+    docbook-dsssl          X
+    docbook-sgml-dtd       X
+    docbook-xml-dtd        X
     docbook-xsl            X
     emacs
     enscript               X
@@ -220,8 +213,9 @@ d)
     binutils
     bison
     byacc
+    ccache
     cvs
-    distcc
+    distcc                 X
     flex
     gcc
     gdb
