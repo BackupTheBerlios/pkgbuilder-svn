@@ -1,11 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/lincvs/Attic/lincvs-1.2.0.build,v 1.5 2003/12/08 18:58:27 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/lincvs/Attic/lincvs-1.2.0.build,v 1.6 2003/12/22 20:31:18 tomby Exp $
 
 PKG_NAME="lincvs"
 PKG_VERSION="1.2.0"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-0-generic-src.$PKG_EXTENSION"
 PKG_URL="http://ppprs1.phy.tu-dresden.de/~trogisch/$PKG_NAME/download/20_LinCVS/in_$PKG_NAME-$PKG_VERSION/$PKG_FILE_NAME"
@@ -38,40 +38,41 @@ include do_build
 
 do_patch() {
     cd $PKG_SRC
-    
+
     patch -p0 < $PKG_HOME/files/$PKG_NAME-$PKG_VERSION-gentoo.diff
-    
+
     return $?
 }
 
 do_configure() {
     cd $PKG_SRC
-    
+
     QTDIR=$PKG_QTDIR qmake -o Makefile lincvs.pro
-    
+
     return $?
 }
 
 do_install() {
     cd $PKG_SRC
-    
+
     make install
-    
+
     return $?
 }
 
 do_postinstall() {
     cd $PKG_SRC
-    
+
     mkdir -p $PKG_DEST$PKG_PREFIX/share
     mkdir -p $PKG_DEST$PKG_PREFIX/bin
-    
+
     cp -pR LinCVS $PKG_DEST$PKG_PREFIX/share
     cp LinCVS/lincvs $PKG_DEST$PKG_PREFIX/bin
     rm -f $PKG_DEST$PKG_PREFIX/share/LinCVS/lincvs
-    
+    chown -R root.root $PKG_DEST$PKG_PREFIX/share
+
     pkg_installdoc
-    
+
     mkdir -p $PKG_DEST/install
 
     cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
