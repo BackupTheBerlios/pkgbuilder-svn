@@ -1,19 +1,19 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.94.build,v 1.6 2004/01/04 23:34:59 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/kdemultimedia-3.2.0.build,v 1.1 2004/02/05 21:18:13 tomby Exp $
 #
-# kdemultimedia-3.1.94 pkgbuilder script
+# kdemultimedia-3.2.0 pkgbuilder script
 #
 
 inherit kde
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_USE="nas esd tcltk oggvorbis alsa gstreamer"
 
 PKG_DEPENDS=">=l/qt-3.2 
-             >=kde/kdelibs-3.1.94 
-             >=kde/kdebase-3.1.94
+             >=kde/kdelibs-3.2.0
+             >=kde/kdebase-3.2.0
              ap/mpg321
              l/libmusicbrainz
              l/id3lib

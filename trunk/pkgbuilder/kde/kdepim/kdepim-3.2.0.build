@@ -1,0 +1,19 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdepim/kdepim-3.2.0.build,v 1.1 2004/02/05 21:21:08 tomby Exp $
+#
+# kdepim-3.2.0 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/qt-3.2 
+             >=kde/kdelibs-3.2.0
+             >=kde/kdebase-3.2.0
+             >=kde/kdenetwork-3.2.0"
+
+PKG_DOC_FILES="kdepim.lsm MAINTAINERS README*"

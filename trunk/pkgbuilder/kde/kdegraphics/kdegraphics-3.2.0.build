@@ -1,19 +1,19 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/Attic/kdegraphics-3.1.94.build,v 1.6 2004/01/04 23:34:59 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/kdegraphics-3.2.0.build,v 1.1 2004/02/05 21:16:12 tomby Exp $
 #
-# kdegraphics-3.1.94 pkgbuilder script
+# kdegraphics-3.2.0 pkgbuilder script
 #
 
 inherit kde
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_USE="sane tetex"
 
 PKG_DEPENDS=">=l/qt-3.2 
-             >=kde/kdelibs-3.1.94 
-             >=kde/kdebase-3.1.94 
+             >=kde/kdelibs-3.2.0
+             >=kde/kdebase-3.2.0
              >=xap/xpdf-2.02p1 
              >=l/lcms-1.11 
              >=l/imlib-1.9.14 
