@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.29 2003/12/26 20:13:20 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.30 2003/12/29 20:18:35 tomby Exp $
 
 #
 # Generic functions
@@ -38,7 +38,7 @@ use() {
         return 1  
     fi
     
-    echo $USE | grep $1 &> /dev/null
+    echo $USE | grep -o "\b$1\b" &> /dev/null
 
     return $?
 }
