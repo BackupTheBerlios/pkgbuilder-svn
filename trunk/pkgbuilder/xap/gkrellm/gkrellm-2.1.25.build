@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gkrellm/Attic/gkrellm-2.1.25.build,v 1.1 2004/01/21 19:38:22 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gkrellm/Attic/gkrellm-2.1.25.build,v 1.2 2004/02/14 20:01:57 tomby Exp $
 #
 # gkrellm-2.1.25 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://web.wt.net/~billw/$PKG_NAME/$PKG_FILE_NAME"
@@ -17,13 +17,14 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS="a/sed
-	         l/gtk+2
+             l/gtk+2
              d/pkgconfig"
 
 PKG_HOMESITE="http://www.gkrellm.net/"
 
 PKG_DOC_FILES="C* INSTALL README Themes.html"
 
+PKG_BUILD_OPTIONS="PREFIX=$PREFIX"
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST PREFIX=$PKG_PREFIX"
 
 do_patch() {
@@ -35,12 +36,3 @@ do_patch() {
     return $?
 }
 
-do_build() {
-    cd $PKG_SRC
-
-    CFLAGS=$CFLAGS \
-    CXXFLAGS=$CXXFLAGS \
-    make PREFIX=$PKG_PREFIX
-    
-    return $?
-}
