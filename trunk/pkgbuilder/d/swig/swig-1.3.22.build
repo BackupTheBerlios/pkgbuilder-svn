@@ -38,8 +38,6 @@ PKG_CONFIGURE_OPTIONS="`use_with python py`
                        `use ruby && echo "--with-ruby=/usr/bin/ruby" || echo "--without-ruby"`
                        `use java && echo "--with-java=$JAVA_HOME --with-javaincl=$JAVA_HOME/include" || echo "--without-java"`"
 
-PKG_BUILD_TARGET="source runtime"
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
-PKG_INSTALL_TARGET="install install-runtime"
 
 MAKE_OPTIONS="-j1"
