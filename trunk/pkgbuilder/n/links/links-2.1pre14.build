@@ -1,0 +1,53 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/links/links-2.1pre14.build,v 1.1 2003/12/08 21:38:09 tomby Exp $
+#
+# links-2.1pre14 pkgbuilder script
+#
+
+PKG_NAME="links"
+PKG_VERSION="2.1pre14"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://atrey.karlin.mff.cuni.cz/~clock/twibright/$PKG_NAME/download/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/openssl-0.9.6c
+             l/gpm
+             >=d/flex-2.5.4a
+	         >=l/libpng-1.2.1
+	         >=l/libjpeg-6b
+	         >=l/tiff-3.5.7
+             x/xfree86"
+
+PKG_HOMESITE="http://atrey.karlin.mff.cuni.cz/~clock/twibright/links/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS BUGS ChangeLog INSTALL NEWS README SITES TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --enable-javascript
+                       --enable-graphics
+                       --with-x
+                       --program-suffix=2"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
