@@ -21,6 +21,9 @@
                 &rsaquo; <a href="http://developer.berlios.de/projects/pkgbuilder/">Project</a>
             </div>
             <div class="tleft">
+                &rsaquo; <a href="http://developer.berlios.de/screenshots/?group_id=1114">Screenshots</a>
+            </div>
+            <div class="tleft">
                 &rsaquo; <a href="http://developer.berlios.de/project/showfiles.php?group_id=1114">Download</a>
             </div>
             <div class="tleft">
