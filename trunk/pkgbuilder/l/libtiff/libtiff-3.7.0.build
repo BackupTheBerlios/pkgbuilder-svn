@@ -23,24 +23,5 @@ PKG_DEPENDS=">=l/libjpeg-6b
 PKG_HOMESITE="http://www.libtiff.org/"
 
 PKG_SRC="$TMP/tiff-$PKG_VERSION"
-PKG_DOC_FILES="COPYRIGHT README TODO VERSION"
-
-PKG_CONFIGURE_OPTIONS="--prefix=$PKG_PREFIX --with-DIR_MAN=/usr/man"
-
-do_configure() {
-    cd $PKG_SRC
-
-    OPTIMIZER="$CFLAGS" ./configure $PKG_CONFIGURE_OPTIONS
-
-    return $?
-}
-
-do_install() {
-    cd $PKG_SRC
-    
-    mkdir -p $PKG_DEST$PKG_PREFIX/{include,lib,bin,man} &&
-    make ROOT="$PKG_DEST" INSTALL="/bin/sh $PKG_SRC/port/install.sh" install
-    
-    return $?   
-}
+PKG_DOC_FILES="ChangeLog COPYRIGHT HOWTO-RELEASE README RELEASE-DATE TODO VERSION"
 
