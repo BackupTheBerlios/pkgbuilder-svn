@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gtk-doc/gtk-doc-1.1.build,v 1.5 2004/01/03 00:33:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gtk-doc/gtk-doc-1.1.build,v 1.6 2004/02/28 23:10:35 tomby Exp $
 #
 # gtk-doc-1.1 pkgbuilder script
 #
@@ -8,7 +8,8 @@
 inherit gnome
 
 PKG_ARCH="noarch"
-PKG_BUILD="am2"
+
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="$GNOME_BASE_URL/$PKG_NAME/1.1/$PKG_FILE_NAME"
@@ -27,6 +28,15 @@ PKG_DEPENDS=">=d/pkgconfig-0.12.0
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README* NEWS doc/*.txt"
 
 PKG_CONFIGURE_OPTIONS="--enable-debug=no"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    cp gtk-doc.xsl gtk-doc.xsl.orig
+    sed \
+      -e "s|http://docbook.sourceforge.net/release/xsl/current/|file:///usr/share/xml/docbook/xsl-stylesheet-`installed_version docbook-xsl-stylesheets`/|g" \
+      gtk-doc.xsl.orig > gtk-doc.xsl
+}
 
 do_postinstall() {
     cd $PKG_SRC
