@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.36 2004/01/05 20:04:57 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.37 2004/01/11 15:08:55 tomby Exp $
 
 #
 # Generic functions
@@ -178,7 +178,8 @@ execute_action() {
 }
 
 #
-# Fetch a file using wget
+# Fetch a file using wget. Firt try in local mirror, if fail then try with 
+# the original URL
 #
 # @param $1 url
 #
@@ -192,11 +193,99 @@ fetch() {
     fi
     
     if [ `echo $1 | grep "^ftp"` ] ; then
-        FETCH_OPTIONS="--passive-ftp $FETCH_OPTIONS"
+        FETCH_OPTIONS="$FETCH_FTP_OPTIONS $FETCH_OPTIONS"
     fi
     
-    wget -c $FETCH_OPTIONS $1
+    if [ "$MIRROR_URL" != "" ] ; then
+        if [ `echo $MIRROR_URL | grep "^ftp"` ] ; then
+            MIRROR_FETCH_OPTIONS="$FETCH_FTP_OPTIONS $FETCH_OPTIONS"
+        fi
 
+        local base="`basename "$1"`"
+
+        wget -c $MIRROR_FETCH_OPTIONS $MIRROR_URL/$base || wget -c $FETCH_OPTIONS $1
+    else 
+        wget -c $FETCH_OPTIONS $1
+    fi
+
+    return $?
+}
+
+#
+# Unpack a file
+#
+# @param $1 file name
+#
+unpack() {
+    if [ "$1" == "" ] ; then
+        return 1  
+    fi
+    
+    local file
+    
+    if [ "$CDROM_DIR" != "" -a -r $CDROM_DIR/$1 ] ; then
+        file="$CDROM_DIR/$1"
+    else
+        file="$FETCH_DIR/$1"
+    fi
+    
+    if echo $1 | grep -q "tar.gz$" ; then
+        tar zxvf $file
+        RETVAL="$?"
+    elif echo $1 | grep -q "tgz$" ; then
+        tar jxvf $file
+        RETVAL="$?"
+    elif echo $1 | grep -q "tar.bz2$" ; then
+        tar jxvf $file
+        RETVAL="$?"
+    elif echo $1 | grep -q "tbz2$" ; then
+        tar jxvf $file
+        RETVAL="$?"
+    elif echo $1 | grep -q "zip$" ; then
+        unzip $file
+        RETVAL="$?"
+    else
+        tar zxvf $file
+        RETVAL="$?"
+    fi
+        
+    return $RETVAL
+}
+
+#
+# Apply a patch. First search the patch in CDROM_DIR, else in FETCH_DIR, and finally
+# in $PKG_HOME files directory.
+#
+# @param $1 patch file name
+# @param $@ patch options
+#
+apply_patch() {
+    if [ "$1" == "" ] ; then
+        return 1  
+    fi
+    
+    local file
+    
+    if [ "$CDROM_DIR" != "" -a -r "$CDROM_DIR/$1" ] ; then
+        file="$CDROM_DIR/$1"
+    elif [ -r "$FETCH_DIR/$1" ] ; then
+        file="$FETCH_DIR/$1"
+    elif [ -r "$PKG_HOME/files/$1" ] ; then
+        file="$PKG_HOME/files/$1"
+    else
+        file="$1"
+    fi
+    
+    shift
+    
+    if echo $file | grep -q ".gz$" ; then
+        zcat $file | patch "$@"
+    elif echo $file | grep -q ".bz2$" ; then
+        bzcat $file | patch "$@"
+    else
+        cat $file | patch "$@"
+    fi
+    
     return $?
 }
 
@@ -204,7 +293,7 @@ fetch() {
 # Verify a package file md5sum
 #
 # @param $1 package file name
-# @param $2 md5sum fila name
+# @param $2 md5sum file name
 #
 verify() {
     if [ "$1" == "" ] ; then
@@ -215,10 +304,14 @@ verify() {
         return 1  
     fi
     
-    local base="$FETCH_DIR/`basename "$1"`"
+    local base="`basename "$1"`"
     
-    if [ -r "$base" ] ; then
-        if ! grep -q "`md5sum $base | cut -d" " -f1`  `basename "$1"`" $2  ; then
+    if [ -r "$FETCH_DIR/$base" ] ; then
+        if ! grep -q "`md5sum $FETCH_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
+            return 1
+        fi
+    elif [ -r "$CDROM_DIR/$base" ] ; then
+        if ! grep -q "`md5sum $CDROM_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
             return 1
         fi
     else
