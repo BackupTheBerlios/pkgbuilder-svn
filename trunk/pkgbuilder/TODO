@@ -1,8 +1,8 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.1 2003/10/21 18:19:45 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.2 2003/10/30 21:55:40 tomby Exp $
 
 * New packages:
 
-evolution
+evolution       X
 squid
 SDL_image       X
 SDL_mixer       X
@@ -21,8 +21,13 @@ gnu-nano        X
 PyGTK2
 dia
 frozen-bubble   X
+pure-ftpd
+wx-windows
+anjuta
 
 * New features:
 
 checksum verification
 action dependency check
+packages dependency check
+
