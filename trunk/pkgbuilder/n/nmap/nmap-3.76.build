@@ -2,12 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/n/nmap/nmap-3.50.build,v 1.1 2004/01/22 22:05:16 tomby Exp $
 #
-# nmap-3.50 pkgbuilder script
+# nmap-3.75 pkgbuilder script
 #
 
 inherit configscript
 
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.insecure.org/$PKG_NAME/dist/$PKG_FILE_NAME"
