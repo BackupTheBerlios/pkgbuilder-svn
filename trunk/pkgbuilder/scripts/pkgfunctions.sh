@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.14 2004/02/14 22:23:44 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.15 2004/02/14 23:31:56 tomby Exp $
 
 #
 # Package specific functions
@@ -38,7 +38,7 @@ pkg_configfiles() {
             mv $PKG_DEST/$config $PKG_DEST/$config.new
         done
 
-        cat >> $PKG_DEST/install/doinst.sh << EOF
+        cat >> $PKG_DEST/install/doinst.sh << "EOF"
 #!/bin/sh
 config() {
   NEW="$1"
@@ -154,7 +154,7 @@ pkg_virtual() {
 	if [ "$PKG_VIRTUAL" != "" ] ; then
 		mkdir -p $PKG_DEST/install
 		
-		cat >> $PKG_DEST/install/doinst.sh << EOF
+		cat >> $PKG_DEST/install/doinst.sh << "EOF"
 virtual() {
   cd /var/log/package
   
