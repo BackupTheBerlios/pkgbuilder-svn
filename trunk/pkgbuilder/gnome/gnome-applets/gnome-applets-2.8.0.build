@@ -23,7 +23,7 @@ PKG_DEPENDS=">=l/gtk+2-2.1
              >=d/pkgconfig-0.12.0
              >=l/libxklavier-0.96
              >=gnome/scrollkeeper-0.3.11
-             `use_dep gstreamer "gnome/gstreamer-0.8"`
+             `use_dep gstreamer ">=gnome/gstreamer-0.8"`
              `use_dep apm "a/apmd"`
              `use_dep acpi "a/acpid"`
              `use_dep doc ">=gnome/gtk-doc-0.9"`"

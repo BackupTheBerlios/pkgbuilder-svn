@@ -16,7 +16,7 @@ PKG_LICENSE="LGPLv2"
 PKG_USE="aalib alsa arts dvd mpeg esd flac lame fame mad mikmod oggvorbis oss sdl
          png jpeg gnome"
 
-PKG_DEPENDS="=gnome/gstreamer-$PKG_VERSION
+PKG_DEPENDS=">=gnome/gstreamer-$PKG_VERSION
              >=gnome/gconf-1.2
              >=d/gettext-0.11.5
              >=d/pkgconfig-0.9
