@@ -8,6 +8,7 @@
 inherit main
 
 PKG_ARCH="noarch"
+
 PKG_BUILD="am3"
 PKG_EXTENSION="zip"
 PKG_FILE_NAME="docbkx412.$PKG_EXTENSION"
@@ -18,15 +19,13 @@ PKG_LICENSE="BSD"
 PKG_USE=""
 
 PKG_DEPENDS=">=a/infozip-5.41
-	         >=l/libxml2-2.4
-	         >=ap/docbook-xsl-stylesheets-1.45"
+             >=l/libxml2-2.4
+             >=ap/docbook-xsl-stylesheets-1.45"
 
 PKG_HOMESITE="http://www.oasis-open.org/docbook/"
 
 PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
 PKG_UNPACK_DIR="$PKG_SRC"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog readme.txt"
 
 PKG_PREFIX="/usr"

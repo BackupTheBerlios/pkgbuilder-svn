@@ -7,8 +7,8 @@
 
 inherit configscript
 
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="OpenSP-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/openjade/$PKG_FILE_NAME"
