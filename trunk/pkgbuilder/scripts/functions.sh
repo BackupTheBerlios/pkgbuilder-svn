@@ -315,6 +315,9 @@ unpack() {
     elif echo $1 | grep -q ".tar.bz2$" ; then
         tar jxvf $file
         RETVAL="$?"
+    elif echo $1 | grep -q ".tar$" ; then
+        tar xvf $file
+        RETVAL="$?"
     elif echo $1 | grep -q ".tbz2$" ; then
         tar jxvf $file
         RETVAL="$?"
@@ -650,7 +653,7 @@ installed_build() {
     fi
     
     if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then
-		local pkgbuild="`expr match "$pkgfile" '.*\-\([a-z]*[0-9]\+[a-z]*\)'`"
+        local pkgbuild="`expr match "$pkgfile" '.*\-\([a-z]*[0-9]\+[a-z]*\)'`"
         
         echo "$pkgbuild"
     else
