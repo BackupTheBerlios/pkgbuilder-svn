@@ -1,0 +1,71 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxslt/Attic/libxslt-1.0.33.build,v 1.1 2003/11/29 00:54:16 tomby Exp $
+#
+# libxslt pkgbuilder script
+#
+
+PKG_NAME="libxslt"
+PKG_VERSION="1.0.33"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://xmlsoft.org/$PKG_FILE_NAME"
+
+PKG_LICENSE="MIT"
+
+PKG_USE="python"
+
+PKG_DEPENDS=">=l/libxml2-2.5.6 `use python && echo ">=d/python-2.3"`"
+
+PKG_HOMESITE="http://xmlsoft.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS COPYING* ChangeLog README NEWS TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="`use python && echo "--with-python"`"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST BASEDIR=$PKG_PREFIX/doc"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+do_postinstall() {
+    cd $PKG_SRC
+      
+    mv $PKG_DEST$PKG_PREFIX/share/doc $PKG_DEST$PKG_PREFIX
+    if [ -d $PKG_DEST$PKG_PREFIX/doc/$PKG_NAME-python-$PKG_VERSION ] ; then
+        mv $PKG_DEST$PKG_PREFIX/doc/$PKG_NAME-python-$PKG_VERSION $PKG_DOC
+    fi
+    
+    mkdir -p $PKG_DOC
+    
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    gzip_info $PKG_DEST$PKG_PREFIX/info
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    
+    if [ -f $PKG_HOME/files/doinst.sh ] ; then
+        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
+    fi
+}
+
