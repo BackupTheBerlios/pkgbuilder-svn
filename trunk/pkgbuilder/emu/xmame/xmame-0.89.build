@@ -1,12 +1,12 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xmame-0.86 pkgbuilder script
+# xmame-0.89 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
