@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.5 2003/11/30 12:28:04 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.6 2003/11/30 23:20:03 tomby Exp $
 
 * New tasks:
 
@@ -95,8 +95,8 @@ l)
     imlib
     imlib2
 
-    freetype2
-    fontconfig
+    freetype2       X
+    fontconfig      X
     qt              X
     gtk+
     gtk+2
@@ -223,7 +223,7 @@ n)
 
 x)
 
-    xfree
+    xfree           X (falta mucho por hacer)
     
     nvidia-glx      X
     nvidia-kernel   X
