@@ -5,7 +5,7 @@
     <!--Footer-->
     <div class="tbox">
         <div class="tcenter">
-            Copyright &copy; 2003 Antonio G. Muñoz Conejo.
+            Copyright &copy; 2003,2004 Antonio G. Muñoz Conejo.
         </div>
     </div>
 </div>
