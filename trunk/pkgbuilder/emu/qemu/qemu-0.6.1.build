@@ -1,0 +1,60 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# qemu-0.6.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://fabrice.bellard.free.fr/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2.1"
+
+PKG_USE="sdl"
+
+PKG_DEPENDS="`use_dep sdl "l/sdl"`"
+
+PKG_HOMESITE="http://fabrice.bellard.free.fr/qemu/"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+PKG_INSTALL_OPTIONS="prefix=$PKG_DESTDIR/usr
+                     bindir=$PKG_DESTDIR/usr/bin
+                     datadir=$PKG_DESTDIR/usr/share/qemu
+                     docdir=$PKG_DESTDIR/usr/doc/$PKG_NAME-$PKG_DIR
+                     mandir=$PKG_DESTDIR/usr/man"
+PKG_INSTALL_TARGET="install"
+
+PKG_NOSTRIP="Y"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_NAME-$PKG_VERSION-20041126.patch -Np1
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    ./configure --prefix=$PKG_PREFIX \
+                --enable-slirp \
+                `use_enable sdl` \
+                --target-list="arm-user i386-user ppc-user sparc-user i386-softmmu ppc-softmmu"
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_DEST
+
+    chmod -x usr/share/man/*/*
+
+    return $?
+}
