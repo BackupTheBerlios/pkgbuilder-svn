@@ -1,0 +1,94 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# mysql-4.1.9 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://mysql.rediris.es/Downloads/MySQL-4.1/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl readline perl"
+
+PKG_DEPENDS="`use_dep readline ">=l/readline-4.1"`
+             `use_dep ssl ">=l/openssl-0.9.6d"`
+             `use_dep perl "d/perl"`
+              >=l/zlib-1.1.3"
+
+PKG_HOMESITE="http://www.mysql.com/"
+
+PKG_DOC_FILES="ChangeLog COPYING EXCEPTIONS-CLIENT INSTALL-SOURCE README 
+               Docs/*.html Docs/*.txt Docs/INSTALL-BINARY Docs/Flags"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-mysqld-user=mysql
+                       --with-unix-socket-path=/var/run/mysql/mysql.sock
+                       --localstatedir=/var/lib/mysql
+                       --enable-assembler
+                       --enable-shared 
+                       --enable-static
+                       --with-raid
+                       --without-debug
+                       --with-low-memory
+                       --enable-thread-safe-client
+                       --without-bench
+                       --with-extra-charsets=complex
+                       --with-client-ldflags=-lstdc++
+                       `use_dep ssl "--with-vio --with-openssl"`
+                       `use_with readline`
+                       `use_dep berkdb "--with-berkeley-db=./bdb"`"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES="etc/rc.d/rc.mysqld 
+                  etc/my-huge.cnf 
+                  etc/my-large.cnf 
+                  etc/my-medium.cnf 
+                  etc/my-small.cnf"
+
+do_install() {
+    configscript_do_install
+
+    mkdir -p $PKG_DEST/etc
+    ( cd $PKG_SRC/support-files
+      cp my-huge.cnf my-large.cnf my-medium.cnf my-small.cnf $PKG_DEST/etc )
+
+    mkdir -p $PKG_DEST/var/lib/mysql
+    chown mysql.mysql $PKG_DEST/var/lib/mysql
+    chmod 750 $PKG_DEST/var/lib/mysql
+
+    mkdir -p $PKG_DEST/var/run/mysql
+    chown mysql.mysql $PKG_DEST/var/run/mysql
+    chmod 755 $PKG_DEST/var/run/mysql
+
+    rm -r $PKG_DEST/usr/mysql-test
+
+    mkdir -p $PKG_DEST/etc/rc.d
+    cat $PKG_HOME/files/rc.mysqld > $PKG_DEST/etc/rc.d/rc.mysqld
+
+    if [ -r $PKG_DEST/usr/lib/mysql/libmysqlclient.so.14 ]; then
+        ( cd $PKG_DEST/usr/lib
+          rm -f libmysqlclient.so libmysqlclient.so.14
+          ln -sf mysql/libmysqlclient.so .
+          ln -sf mysql/libmysqlclient.so.14 .
+        )
+    fi
+
+    if [ -r $PKG_DEST/usr/lib/mysql/libmysqlclient_r.so.14 ]; then
+        ( cd $PKG_DEST/usr/lib
+          rm -f libmysqlclient_r.so libmysqlclient_r.so.14
+          ln -sf mysql/libmysqlclient_r.so .
+          ln -sf mysql/libmysqlclient_r.so.14 .
+        )
+    fi
+
+    return $?
+}
