@@ -1,0 +1,20 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libwnck/libwnck-2.6.0.1.build,v 1.1 2004/04/10 13:31:20 tomby Exp $
+#
+# libwnck-2.6.0.1 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/gtk+2-2.1
+             >=l/startup-notification-0.4
+             d/gettext
+             >=d/pkgconfig-0.12"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
+
