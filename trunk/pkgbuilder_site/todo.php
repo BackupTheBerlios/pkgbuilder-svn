@@ -19,7 +19,6 @@
                 
                 <p><b>Paquetes:</b></p>
                 <ul>
-                    <li>evolution</li>
                     <li>squid</li>
                     <li>apache2</li>
                     <li>xawdecode</li>

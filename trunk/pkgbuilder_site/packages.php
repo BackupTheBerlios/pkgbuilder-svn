@@ -26,6 +26,7 @@
                     </ul>
                     <p><b>d</b> (Aplicaciones de desarrollo)</p>
                     <ul>
+                        <li>Anjuta</li>
                         <li>LinCVS</li>
                         <li>Ruby</li>
                         <li>Umbrello</li>
@@ -55,6 +56,9 @@
                         <li>smpeg</li>
                         <li>Win32Codecs</li>
                         <li>Ruby-Gnome2</li>
+                        <li>GtkHtml</li>
+                        <li>LibSoup</li>
+                        <li>LibZvt</li>
                     </ul>
                     <p><b>n</b> (Aplicaciones de red)</p>
                     <ul>
@@ -73,6 +77,7 @@
                     </ul>
                     <p><b>xap</b> (Aplicaciones para XWindow)</p>
                     <ul>
+                        <li>Evolution</li>
                         <li>Aterm</li>
                         <li>Fluxbox</li>
                         <li>Gaim</li>
