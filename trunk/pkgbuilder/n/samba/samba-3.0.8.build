@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/n/samba/samba-3.0.2a.build,v 1.1 2004/02/22 10:38:10 tomby Exp $
 #
-# samba-3.0.4 pkgbuilder script
+# samba-3.0.8 pkgbuilder script
 #
 
 inherit configscript
@@ -31,7 +31,7 @@ MAKE_OPTIONS="-j1"
 
 PKG_DOC_FILES="COPYING Manifest README Read-Manifest-Now Roadmap WHATSNEW.txt"
 
-PKG_EXT_MODS="`use mysql && echo "mysql,"``use xml && echo "xml,"`"
+PKG_EXT_MODS="`use_dep mysql "mysql,"``use_dep xml "xml,"`"
 PKG_CONFIGURE_OPTIONS="--localstatedir=/var 
                        --bindir=/usr/bin 
                        --sbindir=/usr/sbin 
@@ -59,7 +59,7 @@ PKG_CONFIGURE_OPTIONS="--localstatedir=/var
                        --with-sslinc=/usr/include/openssl 
                        --with-ssllib=/usr 
                        --with-expsam=$PKG_EXT_MODS
-                       `use cups && echo "--enable-cups"`
+                       `use_enable cups`
                        `use python && echo "--with-python=yes"`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST MANDIR=$PKG_PREFIX/man"
