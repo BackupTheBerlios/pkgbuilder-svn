@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.29 2004/01/04 15:41:41 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.30 2004/01/04 23:03:13 tomby Exp $
 
 * New tasks:
 
@@ -13,7 +13,7 @@ $Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.29 2004/01/04 15:41:41 tomby Ex
 a)
 
     acpid
-    apmd
+    apmd                   X
     bash
     bin
     bzip2
@@ -221,13 +221,14 @@ d)
     binutils
     bison
     byacc
-    ccache
+    ccache                 X
     cvs
     distcc                 X
     flex
     gcc
     gdb
     gettext                X
+    guile                  X
     indent                 X
     j2sdk
     libtool
@@ -393,12 +394,12 @@ gnome)
 
     acme                   X
     at-spi                 X
-    bug-buddy
+    bug-buddy              X
     control-center         X
     eel                    X
-    eog
+    eog                    X
     epiphany
-    file-roller
+    file-roller            X
     gail                   X
     gal                    X
     galeon
@@ -406,27 +407,34 @@ gnome)
     gconf                  X
     gconf-editor
     gdm
-    gedit
+    gedit                  X
+    ggv
+    ghex
+    glade
     gnome2-user-docs
-    gnome-applets
+    gnome-applets          X
     gnome-audio
     gnome-desktop          X
     gnome-extra-themes
-    gnome-games
+    gnome-games            X
     gnome-icon-theme       X
-    gnome-media
+    gnome-mag
+    gnome-media            X
     gnome-mime-data        X
     gnome-panel            X
     gnome-print
     gnome-session          X
     gnome-speech
-    gnome-system-monitor
-    gnome-terminal
-    gnome-themes
-    gnome-utils
+    gnome-system-monitor   X
+    gnome-terminal         X
+    gnome-themes           X
+    gnome-utils            X
     gnome-vfs              X
+    gnome-vfs-extras
     gnomeicu
     gnopernicus
+    gok
+    gpdf
     gst-plugins            X
     gstreamer              X
     gthumb
@@ -437,6 +445,7 @@ gnome)
     intltool               X
     libbonobo              X
     libbonoboui            X
+    libgail-gnome
     libglade               X
     libgnome               X
     libgnomecanvas         X
@@ -451,11 +460,13 @@ gnome)
     linc                   X
     metacity               X
     nautilus               X
-    nautilus-media
+    nautilus-cd-burner     X
+    nautilus-media         X
     orbit2                 X
     scrollkeeper           X
     vte                    X
-    yelp
+    yelp                   X
+    zenity
 
 And more...
 
