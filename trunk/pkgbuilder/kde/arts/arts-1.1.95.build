@@ -1,0 +1,45 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/arts/Attic/arts-1.1.95.build,v 1.1 2004/01/23 22:43:54 tomby Exp $
+#
+# arts-1.1.95 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+PKG_URL="$KDE_BASE_URL/3.1.95/src/$PKG_FILE_NAME"
+
+PKG_USE="alsa oggvorbis mad"
+
+PKG_DEPENDS="l/audiofile
+	         l/glib2
+             l/qt
+	         d/pkgconfig
+             `use alsa && echo "l/alsa-lib"`
+             `use oggvorbis && echo "l/libvorbis l/libogg"`
+             `use mad && echo "l/libmad"`"
+
+PKG_DOC_FILES="COPYING COPYING.LIB INSTALL doc/NEWS doc/README doc/TODO"
+
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                      `use alsa && echo "--enable-alsa"`"
+
+do_postinstall() {    
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc/profile.d
+    cp $PKG_HOME/files/kde.sh $PKG_DEST/etc/profile.d/
+    cp $PKG_HOME/files/kde.csh $PKG_DEST/etc/profile.d/
+    chmod 755 $PKG_DEST/etc/profile.d/kde.*
+    
+    pkg_installdoc
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    pkg_installfiles
+}
+

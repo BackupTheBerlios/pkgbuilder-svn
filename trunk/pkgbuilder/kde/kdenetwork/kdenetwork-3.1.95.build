@@ -1,0 +1,20 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdenetwork/Attic/kdenetwork-3.1.95.build,v 1.1 2004/01/23 22:43:55 tomby Exp $
+#
+# kdenetwork-3.1.94 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="slp"
+
+PKG_DEPENDS="!xap/kopete
+             >=l/qt-3.2 
+             >=kde/kdelibs-3.1.95 
+             >=kde/kdebase-3.1.95
+             `use slp && echo "l/openslp"`"
+
+PKG_DOC_FILES="AUTHORS COPYING INSTALL kdenetwork.lsm README"

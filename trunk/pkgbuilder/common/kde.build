@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/kde.build,v 1.5 2004/01/04 23:40:16 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/kde.build,v 1.6 2004/01/23 22:44:22 tomby Exp $
 #
 # pkgbuilder script for kde packages
 #
@@ -12,7 +12,7 @@ kde_init() {
     
     PKG_EXTENSION="tar.bz2"
     PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-    KDE_BASE_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable"
+    KDE_BASE_URL="http://mirrors.isc.org/pub/kde/unstable"
     PKG_URL="$KDE_BASE_URL/$PKG_VERSION/src/$PKG_FILE_NAME"
     
     PKG_LICENSE="GPLv2 LGPLv2"

@@ -1,0 +1,54 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.95.build,v 1.1 2004/01/23 22:43:55 tomby Exp $
+#
+# kdemultimedia-3.1.94 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="nas esd tcltk oggvorbis alsa gstreamer"
+
+PKG_DEPENDS=">=l/qt-3.2 
+             >=kde/kdelibs-3.1.94 
+             >=kde/kdebase-3.1.94
+             ap/mpg321
+             l/libmusicbrainz
+             l/id3lib
+             l/taglib
+             l/audiofile
+             l/gtk+
+             l/xine-lib
+             l/slang
+             ap/cdparanoia
+             `use alsa && echo "l/alsa-lib"`
+             `use nas && echo "l/nas"`
+             `use esd && echo "l/esound"`
+             `use oggvorbis && echo "l/libvorbis"`
+             `use tcltk && echo "d/tcl d/tk"`
+             `use gstreamer && echo "l/gstreamer"`"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README*"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS 
+                       --disable-strict"
+
+do_patch_kscd_libwm() {
+    cd $PKG_SRC
+    
+    cp kscd/libwm/Makefile kscd/libwm/Makefile.orig
+    
+    sed "s/-ansi//g" kscd/libwm/Makefile.orig > kscd/libwm/Makefile
+    
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC
+    
+    do_patch_kscd_libwm && pkg_build
+    
+    return $?
+}
