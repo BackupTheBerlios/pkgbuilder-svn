@@ -29,7 +29,7 @@
 PKGBUILDER
 \layout Date
 
-Sábado, 1 de Noviembre de 2004
+Sábado, 14 de Noviembre de 2004
 \layout Author
 
 Antonio Gabriel Muñoz Conejo
@@ -52,22 +52,22 @@ ión de paquetes.
 \layout Section
 
 Motivos:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Los motivos por los que nace 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
  son varios pero el principal es la escasez de paquetes oficiales que existen
  en 
-\series default 
+\series bold 
 Slackware
 \series medium 
 , multitud de paquetes que no se incluyen en la distribución oficial de
  
-\series default 
+\series bold 
 Slackware
 \series medium 
 , tan básicos como pueden ser 
@@ -88,16 +88,16 @@ postfix
 \emph default 
 .
  Buscando solucionar esto intenté migrar a otras distribuciones de 
-\series default 
+\series bold 
 GNU/Linux
 \series medium 
  o incluso migrar a otros sistemas operativos libres como 
-\series default 
+\series bold 
 NetBSD
 \series medium 
  pero no encontré nada que se ajustara a lo que buscaba.
  Lo que buscaba era un sistema que me permitiera crear paquetes para 
-\series default 
+\series bold 
 Slackware
 \series medium 
  a partir de los fuentes sin tenerme que preocupar de nada salvo de ejecutar
@@ -107,27 +107,29 @@ Slackware
 \layout Section
 
 Descripción general:
-\layout Paragraph
+\layout Standard
 
 PkgBuilder
 \series medium 
  es un sistema para automatizar la creación de paquetes similar a los 
-\begin_inset Quotes eld
-\end_inset 
-
+\series default 
+\emph on 
 ports
-\begin_inset Quotes erd
-\end_inset 
-
- de los sistemas BSD.
+\series medium 
+\emph default 
+ de los sistemas 
+\series bold 
+BSD
+\series medium 
+.
  La intención inicial es que funcione en cualquier distribución y/o cualquier
  sistema de paquetes, pero por ahora solo soporta 
-\series default 
+\series bold 
 Slackware
 \series medium 
 , que es la distribución que uso.
  
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -136,7 +138,7 @@ Su funcionamiento es muy simple: se descarga el código fuente desde la web
  descargados, descomprime los archivos y les aplica los parches correspondientes
 , luego se realiza la compilación del paquete y la creación del tgz.
  
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -157,27 +159,27 @@ Prerrequisitos:
 \layout Subsection
 
 Sistema operativo:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 El sistema se basa sobre 
-\series default 
+\series bold 
 Slackware 10.0
 \series medium 
 , instalando sólo una serie de paquetes básicos sobre los que construir
  el resto del sistema.
  Para la mayoría de paquetes que contiene 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
  existe un paquete oficial compatible en 
-\series default 
+\series bold 
 Slackware
 \series medium 
 , asi que se puede optar por instalar el paquete oficial en lugar del paquete
  de 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
 , aunque no todos, de hecho, algunos son totalmente incompatibles, como
@@ -198,11 +200,11 @@ libogg
 libvorbis
 \shape default 
  de 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
 .
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -214,12 +216,12 @@ El sistema deberá tener tamaño libre suficiente para almacenar los archivos
 \layout Subsection
 
 Paquetes basicos:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Esta es la lista de paquetes de 
-\series default 
+\series bold 
 Slackware 10.0
 \series medium 
  necesarios para el sistema base.
@@ -233,7 +235,7 @@ xfsprogs
 \shape default 
 , estos serán necesarios si el sistema se va instalar en una partición con
  el sistema de ficheros jfs o xfs, respectivamente.
-\layout Paragraph
+\layout Itemize
 
 a)
 \layout List
@@ -418,7 +420,7 @@ utempter 1.1.1
 \labelwidthstring 00.00.0000
 
 xfsprogs 2.6.13 (opcional, necesario si utilizamos particiones xfs)
-\layout Paragraph
+\layout Itemize
 
 ap)
 \layout List
@@ -441,7 +443,7 @@ man-pages 1.64
 \labelwidthstring 00.00.0000
 
 texinfo 4.7
-\layout Paragraph
+\layout Itemize
 
 d)
 \layout List
@@ -504,7 +506,7 @@ make 3.80
 \labelwidthstring 00.00.0000
 
 perl 5.8.5
-\layout Paragraph
+\layout Itemize
 
 l)
 \layout List
@@ -523,7 +525,7 @@ ncurses 5.4
 \labelwidthstring 00.00.0000
 
 zlib 1.2.2
-\layout Paragraph
+\layout Itemize
 
 n)
 \layout List
@@ -543,7 +545,7 @@ wget 1.9.1
 
 wireless-tools 26 (opcional, necesario si queremos utilizar dispositivos
  inalambricos)
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -552,7 +554,7 @@ También se pueden utilizar paquetes equivalentes de la rama
 current
 \series medium 
  de 
-\series default 
+\series bold 
 Slackware
 \series medium 
 .
@@ -565,13 +567,13 @@ Instalación del sistema base:
 \layout Subsubsection
 
 Instalación desde el cdrom de Slackware:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 La instalación del sistema base es totalmente similar a una instalación
  usual de 
-\series default 
+\series bold 
 Slackware
 \series medium 
 .
@@ -579,35 +581,35 @@ Slackware
  en la lista de paquetes básicos.
 \layout Subsubsection
 
-Instalación desde una instalación Slackware previa:
+Instalación desde una instalación GNU/Linux previa:
 \layout Standard
 
 Para este tipo de instalación es necesario tener instalado previamente un
- sistema Slackware completo.
+ sistema GNU/Linux completo.
 \layout Itemize
 
 
 \series bold 
 Creación y formateo de las particiones: 
-\layout Subparagraph
+\layout Standard
 
 
 \series medium 
 Primero debemos crear las particiones donde vamos a instalar el sistema
  en el que vamos a utilizar 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
 .
  Podemos utilizar cualquier programa para ello como el clasico 
-\series default 
+\series bold 
 fdisk
 \series medium 
 .
  Luego debemos formatear las particiones utilizando el sistema de ficheros
  que más nos guste.
  Y por fin, las montamos bajo 
-\series default 
+\series bold 
 /mnt/pkgbuilder
 \series medium 
 , por ejemplo.
@@ -634,7 +636,7 @@ fdisk
 
 \series bold 
 Instalación de los paquetes: 
-\layout Subparagraph*
+\layout Standard
 
 
 \series medium 
@@ -646,13 +648,15 @@ Después ya podemos instalar los paquetes que previamente hemos debido descargar
 \family typewriter 
 \size small 
 # installpkg -root /mnt/pkgbuilder -menu *.tgz
-\layout Subparagraph
+\layout Standard
 
 
 \series medium 
 Esto hará que los paquetes se instalen bajo el directorio
 \series default 
- /mnt/pkgbuilder
+ 
+\series bold 
+/mnt/pkgbuilder
 \series medium 
  sobre las particiones que hemos montado allí.
  La opción 
@@ -665,7 +669,7 @@ Esto hará que los paquetes se instalen bajo el directorio
 
 \series bold 
 Hacer chroot:
-\layout Subparagraph
+\layout Standard
 
 
 \series medium 
@@ -706,7 +710,7 @@ chroot
 \size small 
 # .
  /etc/profile
-\layout Subparagraph
+\layout Standard
 
 
 \series medium 
@@ -715,8 +719,24 @@ Y ya estamos dentro.
 
 
 \series bold 
+Compilar el kernel:
+\layout Standard
+
+
+\series medium 
+Si necesitamos un kernel hecho a nuestra medida ahora es el momento de compilarl
+o.
+ Por supuesto, siempre podemos utilizar el que trae por defecto 
+\series bold 
+Slackware
+\series medium 
+.
+\layout Itemize
+
+
+\series bold 
 Configurar el sistema:
-\layout Subparagraph
+\layout Standard
 
 
 \series medium 
@@ -726,7 +746,7 @@ Ahora es el momento de configurar el sistema.
 chroot
 \series medium 
 , ejecutamos 
-\series default 
+\series bold 
 pkgtool
 \series medium 
  y seleccionamos la opción 
@@ -777,7 +797,16 @@ setconsolefont (opcional) si queremos cambiar la fuente de la consola.
 timeconfig (obligatorio) para configurar la zona horaria.
 \layout Itemize
 
-Crear el archivo fstab:
+
+\series bold 
+Crear el archivo fstab
+\series default 
+:
+\layout Standard
+
+
+\series medium 
+Esto no es mas que un ejemplo:
 \layout Quotation
 
 
@@ -844,42 +873,55 @@ usbfs /proc/bus/usb usbfs defaults 0 0
 \family typewriter 
 \size small 
 none /sys sysfs defaults 0 0
+\layout Standard
+
+
+\series medium 
+Y ya lo tenemos instalado.
+ Solo nos queda arrancar desde él e instalar 
+\series bold 
+PkgBuilder
+\series medium 
+.
 \layout Subsection
 
 Instalación de PkgBuilder:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Para instalar 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
  es necesario primero conseguir una copia del arbol de ports.
- Se puede descargar un tarball de la página oficial o se puede descargar
- directamente a traves de 
-\series default 
+ Se puede descargar un 
+\series bold 
+tarball
+\series medium 
+ de la página oficial o se puede descargar directamente a traves de 
+\series bold 
 Subversion
 \series medium 
 .
  Yo recomiendo instalarlo a traves de 
-\series default 
+\series bold 
 Subversion
 \series medium 
  ya que esto permitirá ir actualizando 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
  fácilmente.
 \layout Subsubsection
 
 Instalación desde tar ball:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Simplemente será necesario descomprimir el 
-\series default 
+\series bold 
 tarball
 \series medium 
  en el lugar elejido.
@@ -908,7 +950,7 @@ o también se pueden crear utilizando
 PkgBuilder
 \series default 
  desde el tar ball disponible en la web del proyecto.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -923,18 +965,18 @@ PkgBuilder
 \family typewriter 
 \size small 
 $ svn checkout svn://svn.berlios.de/pkgbuilder/trunk/pkgbuilder
-\layout Quotation
+\layout Standard
 
 Y ya tendremos nuestra copia del arbol de ports.
 \layout Subsubsection
 
 Configuración del archivo build.rc
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Después de obtener una copia de 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
  hay que configurar el archivo 
@@ -955,7 +997,7 @@ build.rc-sample
 \size small 
 \color blue
 # Copyright 2004 Antonio G.
- Muñoz, tomby (AT) tomby.homelinux.org
+ Muñoz, tomby (AT) users.berlios.de
 \layout Quotation
 
 
@@ -974,7 +1016,7 @@ PKGBUILDER_HOME="/var/pkgbuilder"
 
 \family typewriter 
 \size small 
-VERSION="20040111"
+VERSION="20041114"
 \layout Quotation
 
 
@@ -1020,7 +1062,7 @@ MIRROR_URL="ftp://localhost/pub/pkgbuilder"
 \family typewriter 
 \size small 
 \color blue
-# CDROM with source code
+# CDROM with source code files
 \layout Quotation
 
 
@@ -1045,7 +1087,7 @@ FETCH_TRIES="5"
 
 \family typewriter 
 \size small 
-FETCH_DIR="/var/tmp/distfiles"
+FETCH_DIR="/var/cache/pkgbuilder/sources"
 \layout Quotation
 
 
@@ -1058,6 +1100,26 @@ FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
 \family typewriter 
 \size small 
 FETCH_FTP_OPTIONS="--passive-ftp"
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+\color blue
+# Binary packages directory
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+BINARIES_DIR="/var/cache/pkgbuilder/binaries"
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+\color blue
+# Temporal directory
 \layout Quotation
 
 
@@ -1260,6 +1322,13 @@ FETCH_FTP_OPTIONS
 
 
 \series bold 
+BINARIES_DIR
+\series default 
+ permite indicar el directorio donde se van a generar los paquetes binarios.
+\layout Itemize
+
+
+\series bold 
 USE
 \series medium 
  permite configurar una serie de flags para activar o desactivar funcionalidades
@@ -1319,12 +1388,16 @@ distcc
 .
  El soporte de compilación paralela aún es experimental y es posible que
  la compilación de algunos paquetes falle.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 También se puede utilizar la compilación paraléla en el caso tener varios
- procesadores, sin necesidad de utilizar distcc.
+ procesadores, sin necesidad de utilizar 
+\series bold 
+distcc
+\series medium 
+.
 \layout Quotation
 
 
@@ -1439,13 +1512,13 @@ build.sh
 \family typewriter 
 \size footnotesize 
 # ./build.sh xap/aterm/aterm-0.4.2.build fetch patch configure
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Este ejemplo ejecutará las acciones fetch, patch y configure para el archivo
  build aterm-0.4.2.build del paquete aterm.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -1531,7 +1604,7 @@ install.sh
 \family typewriter 
 \size footnotesize 
 $ ./install.sh xap/epiphany
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -1540,7 +1613,7 @@ Este comando instala el paquete
 epiphany
 \series medium 
  resolviendo las dependencias de este paquete.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -1583,7 +1656,7 @@ dummy
 \emph default 
  o tonto, muestra los nuevos paquetes disponibles pero sin realizar sin
  ninguna acción.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -1596,7 +1669,7 @@ update.sh
 build_db.sh
 \emph default 
  que genera el archivo 
-\series default 
+\series bold 
 PACKAGES
 \series medium 
  necesario para ejectuar el script 
@@ -1610,18 +1683,18 @@ Creación de scripts build:
 \layout Subsection
 
 Anatomia de un script build:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Un script 
-\series default 
+\series bold 
 build
 \series medium 
  define una serie de variables y métodos que dirigen la generación de un
  paquete.
  Además un script 
-\series default 
+\series bold 
 build
 \series medium 
  puede heredar de otro ciertas caracteristicas que se repiten en múltiples
@@ -1629,7 +1702,7 @@ build
 \layout Subsubsection
 
 Variables:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -1847,18 +1920,18 @@ PKG_CONFIG_FILES
 \layout Subsubsection
 
 Acciones:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 Todos los scripts 
-\series default 
+\series bold 
 build
 \series medium 
  deben implementar todas las acciones, o sino ellos, sí alguno de los scripts
  de los que heredan.
  El nombre de las funciones que implementan las acciones es 
-\series default 
+\series bold 
 do_
 \emph on 
 <nombre_accion>
@@ -1908,7 +1981,7 @@ do_cleanup
 \layout Subsection
 
 Herencia de scripts:
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -1926,7 +1999,7 @@ build
  Esto haría al sistema inmantenible ya que si quisieramos modificar el comportam
 iento de una acción, o añadir una nueva, habría que modificar todos los
  scripts ya creados.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
@@ -1950,19 +2023,19 @@ base.build
 \series medium 
  que implementa una serie de acciones globales y del que heredan todos los
  scripts build.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 
 A la hora de ejecutar una acción primero se busca si se ha declarado la
  función 
-\series default 
+\series bold 
 do_<accion>
 \series medium 
 .
  Si esta no está definido se busca si el metodo está declarado en el padre
  a través de la función 
-\series default 
+\series bold 
 <padre>_do_<accion>
 \series medium 
 , así sucesivamente subiendo por la jerarquia.
@@ -1972,13 +2045,13 @@ do_<accion>
 base.build
 \emph default 
  con el nombre 
-\series default 
+\series bold 
 pkg_do_<accion>
 \series medium 
 .
  Si no se encuentra ninguna de estas funciones se asume que la acción no
  ha sido implementada porque no es necesaria, sin mas.
-\layout Paragraph
+\layout Standard
 
 
 \series medium 

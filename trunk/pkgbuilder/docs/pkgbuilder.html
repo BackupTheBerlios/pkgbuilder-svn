@@ -1,0 +1,1498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>PKGBUILDER</TITLE>
+<META NAME="description" CONTENT="PKGBUILDER">
+<META NAME="keywords" CONTENT="pkgbuilder">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="pkgbuilder.css">
+
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<IMG WIDTH="81" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next_inactive"
+ SRC="file:/usr/lib/latex2html/icons/nx_grp_g.png"> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev_g.png">   
+<BR>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<P>
+
+<P>
+
+<P>
+
+<P>
+<H1 ALIGN="CENTER">PKGBUILDER</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Antonio Gabriel Mu&#241;oz Conejo</STRONG></P>
+<P ALIGN="CENTER"><STRONG>S&#225;bado, 1 de Noviembre de 2004</STRONG></P>
+</DIV>
+
+<H3>Abstract:</H3>
+<DIV>
+Instalaci&#243;n de <B>PkgBuilder</B>, gesti&#243;n y administraci&#243;n del arbol
+de ports y creaci&#243;n de scripts de construcci&#243;n de paquetes.
+
+<P>
+</DIV>
+<P>
+<BR>
+
+<H2><A NAME="SECTION00010000000000000000">
+Contents</A>
+</H2>
+<!--Table of Contents-->
+
+<UL>
+<LI><A NAME="tex2html29"
+  HREF="pkgbuilder.html#SECTION00020000000000000000">1 Motivos:</A>
+<LI><A NAME="tex2html30"
+  HREF="pkgbuilder.html#SECTION00030000000000000000">2 Descripción general:</A>
+<LI><A NAME="tex2html31"
+  HREF="pkgbuilder.html#SECTION00040000000000000000">3 Prerrequisitos:</A>
+<UL>
+<LI><A NAME="tex2html32"
+  HREF="pkgbuilder.html#SECTION00041000000000000000">3.1 Sistema operativo:</A>
+<LI><A NAME="tex2html33"
+  HREF="pkgbuilder.html#SECTION00042000000000000000">3.2 Paquetes basicos:</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html34"
+  HREF="pkgbuilder.html#SECTION00050000000000000000">4 Instalación:</A>
+<UL>
+<LI><A NAME="tex2html35"
+  HREF="pkgbuilder.html#SECTION00051000000000000000">4.1 Instalación del sistema base:</A>
+<LI><A NAME="tex2html36"
+  HREF="pkgbuilder.html#SECTION00052000000000000000">4.2 Instalación de PkgBuilder:</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html37"
+  HREF="pkgbuilder.html#SECTION00060000000000000000">5 Empieza la fiesta:</A>
+<UL>
+<LI><A NAME="tex2html38"
+  HREF="pkgbuilder.html#SECTION00061000000000000000">5.1 El script build.sh:</A>
+<LI><A NAME="tex2html39"
+  HREF="pkgbuilder.html#SECTION00062000000000000000">5.2 El script install.sh:</A>
+<LI><A NAME="tex2html40"
+  HREF="pkgbuilder.html#SECTION00063000000000000000">5.3 El script update.sh:</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html41"
+  HREF="pkgbuilder.html#SECTION00070000000000000000">6 Creación de scripts build:</A>
+<UL>
+<LI><A NAME="tex2html42"
+  HREF="pkgbuilder.html#SECTION00071000000000000000">6.1 Anatomia de un script build:</A>
+<LI><A NAME="tex2html43"
+  HREF="pkgbuilder.html#SECTION00072000000000000000">6.2 Herencia de scripts:</A>
+<LI><A NAME="tex2html44"
+  HREF="pkgbuilder.html#SECTION00073000000000000000">6.3 Funciones genericas:</A>
+<LI><A NAME="tex2html45"
+  HREF="pkgbuilder.html#SECTION00074000000000000000">6.4 Funciones de paquetes:</A>
+<LI><A NAME="tex2html46"
+  HREF="pkgbuilder.html#SECTION00075000000000000000">6.5 Cómo escribir un script build:</A>
+</UL></UL>
+<!--End of Table of Contents-->
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+1 Motivos:</A>
+</H1>
+
+<P>
+Los motivos por los que nace <B>PkgBuilder</B> son varios pero el
+principal es la escasez de paquetes oficiales que existen en <B>Slackware</B>,
+multitud de paquetes que no se incluyen en la distribuci&#243;n oficial
+de <B>Slackware</B>, tan b&#225;sicos como pueden ser <I>gkrellm</I>,
+<I>wine</I>, o <I>postfix</I>. Buscando solucionar esto intent&#233;
+migrar a otras distribuciones de <B>GNU/Linux</B> o incluso migrar
+a otros sistemas operativos libres como <B>NetBSD</B> pero no encontr&#233;
+nada que se ajustara a lo que buscaba. Lo que buscaba era un sistema
+que me permitiera crear paquetes para <B>Slackware</B> a partir
+de los fuentes sin tenerme que preocupar de nada salvo de ejecutar
+unos sencillos comandos, que resolviera dependencias automaticamente
+y que compilara los paquetes optimizados para mi sistema. Asi que
+decid&#237; ponerme manos a la obra.
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+2 Descripci&#243;n general:</A>
+</H1>
+
+<P>
+PkgBuilder es un sistema para automatizar la creaci&#243;n de paquetes
+similar a los <I>ports</I> de los sistemas <B>BSD</B>. La intenci&#243;n
+inicial es que funcione en cualquier distribuci&#243;n y/o cualquier sistema
+de paquetes, pero por ahora solo soporta <B>Slackware</B>, que es
+la distribuci&#243;n que uso. 
+
+<P>
+Su funcionamiento es muy simple: se descarga el c&#243;digo fuente desde
+la web oficial del desarrollador, despu&#233;s verifica el checksum de
+los archivos descargados, descomprime los archivos y les aplica los
+parches correspondientes, luego se realiza la compilaci&#243;n del paquete
+y la creaci&#243;n del tgz. 
+
+<P>
+Todo esto est&#225; gobernado por una serie de sencillos scripts escritos
+en shell script. Por cada paquete existe un script para cada versi&#243;n
+del paquete y en &#233;l se configuran las variables necesarias para la
+compilaci&#243;n y creaci&#243;n del paquete y se implementan una serie de m&#233;todos,
+uno por cada acci&#243;n. Dentro de cada uno de esos m&#233;todos est&#225; la implementaci&#243;n
+de la acci&#243;n para ese paquete.
+
+<P>
+
+<H1><A NAME="SECTION00040000000000000000">
+3 Prerrequisitos:</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00041000000000000000">
+3.1 Sistema operativo:</A>
+</H2>
+
+<P>
+El sistema se basa sobre <B>Slackware 10.0</B>, instalando s&#243;lo
+una serie de paquetes b&#225;sicos sobre los que construir el resto del
+sistema. Para la mayor&#237;a de paquetes que contiene <B>PkgBuilder</B>
+existe un paquete oficial compatible en <B>Slackware</B>, asi que
+se puede optar por instalar el paquete oficial en lugar del paquete
+de <B>PkgBuilder</B>, aunque no todos, de hecho, algunos son totalmente
+incompatibles, como puede ser el paquete <I>oggutils</I> y los paquetes
+<I>libao</I>, <I>libogg</I> y <I>libvorbis</I> de <B>PkgBuilder</B>.
+
+<P>
+El sistema deber&#225; tener tama&#241;o libre suficiente para almacenar los
+archivos de c&#243;digo fuente descargados, los paquetes binarios creados
+y tambi&#233;n tama&#241;o suficiente para la compilaci&#243;n de cada paquete. Los
+archivos descargados se pueden eliminar sin problemas y los paquetes
+binarios generados tambi&#233;n para liberar espacio en disco.
+
+<P>
+
+<H2><A NAME="SECTION00042000000000000000">
+3.2 Paquetes basicos:</A>
+</H2>
+
+<P>
+Esta es la lista de paquetes de <B>Slackware 10.0</B> necesarios
+para el sistema base. Algunos de ellos son opcionales como <I>jfsutils</I>
+o <I>xfsprogs</I>, estos ser&#225;n necesarios si el sistema se va instalar
+en una partici&#243;n con el sistema de ficheros jfs o xfs, respectivamente.
+
+<P>
+
+<UL>
+<LI>a)
+</LI>
+</UL>
+
+<UL>
+<LI>[aaa_base]10.0.0
+</LI>
+<LI>[aaa_elflibs]9.2.0
+</LI>
+<LI>[bash]3.0
+</LI>
+<LI>[bin]9.2.0
+</LI>
+<LI>[bzip2]1.0.2
+</LI>
+<LI>[coreutils]5.2.1
+</LI>
+<LI>[cxxlibs]5.0.6
+</LI>
+<LI>[dcron]2.3.3
+</LI>
+<LI>[devs]2.3.1
+</LI>
+<LI>[e2fsprogs]1.35
+</LI>
+<LI>[elvis]2.2_0
+</LI>
+<LI>[etc]5.1
+</LI>
+<LI>[findutils]4.1.7
+</LI>
+<LI>[gawk]3.1.4
+</LI>
+<LI>[glibc-solibs]2.3.3
+</LI>
+<LI>[glibc-zoneinfo]2.3.3
+</LI>
+<LI>[grep]2.5
+</LI>
+<LI>[gzip]1.3.3
+</LI>
+<LI>[hdparm]5.7
+</LI>
+<LI>[hotplug]2004_09_23
+</LI>
+<LI>[infozip]5.51
+</LI>
+<LI>[jfsutils]1.1.6 (opcional, necesario si utilizamos particiones jfs)
+</LI>
+<LI>[kdb]1.12
+</LI>
+<LI>[kernel-ide]2.4.27
+</LI>
+<LI>[kernel-modules]2.4.27
+</LI>
+<LI>[less]382
+</LI>
+<LI>[lilo]22.5.9
+</LI>
+<LI>[module-init-tools]3.0
+</LI>
+<LI>[openssl-solibs]0.9.7d
+</LI>
+<LI>[pci-utils]2.1.11
+</LI>
+<LI>[pcmcia-cs]3.2.8 (opcional, necesario en portatiles y ordenadores
+con interfaz pcmcia)
+</LI>
+<LI>[pkgtools]10.1.0
+</LI>
+<LI>[procps]3.2.3
+</LI>
+<LI>[reiserfsprogs]3.6.18 (opcional, necesario si utilizamos particiones
+reiserfs)
+</LI>
+<LI>[sed]4.0.9
+</LI>
+<LI>[shadow]4.0.3
+</LI>
+<LI>[sysklogd]1.4.1
+</LI>
+<LI>[syslinux]2.11
+</LI>
+<LI>[sysvinit]2.84
+</LI>
+<LI>[tar]1.14
+</LI>
+<LI>[udev]042 (opcional, recomendable si se va a utilizar un kernel de
+la serie 2.6)
+</LI>
+<LI>[usbutils]0.11
+</LI>
+<LI>[util-linux]2.12h
+</LI>
+<LI>[utempter]1.1.1
+</LI>
+<LI>[xfsprogs]2.6.13 (opcional, necesario si utilizamos particiones xfs)
+</LI>
+</UL>
+<UL>
+<LI>ap)
+</LI>
+</UL>
+
+<UL>
+<LI>[diffutils]2.8.1
+</LI>
+<LI>[groff]1.17.2
+</LI>
+<LI>[man]1.5m2
+</LI>
+<LI>[man-pages]1.64
+</LI>
+<LI>[texinfo]4.7
+</LI>
+</UL>
+<UL>
+<LI>d)
+</LI>
+</UL>
+
+<UL>
+<LI>[autoconf]2.59
+</LI>
+<LI>[automake]1.9.2
+</LI>
+<LI>[bin86]0.16.15
+</LI>
+<LI>[binutils]2.15.92.0.2
+</LI>
+<LI>[bison]1.35
+</LI>
+<LI>[byacc]1.9
+</LI>
+<LI>[flex]2.5.4a
+</LI>
+<LI>[gcc]3.3.4
+</LI>
+<LI>[gcc-g++]3.3.4
+</LI>
+<LI>[gdb]6.2.1
+</LI>
+<LI>[kernel-headers]2.4.27
+</LI>
+<LI>[libtool]1.5.10
+</LI>
+<LI>[m4]1.4.2
+</LI>
+<LI>[make]3.80
+</LI>
+<LI>[perl]5.8.5
+</LI>
+</UL>
+<UL>
+<LI>l)
+</LI>
+</UL>
+
+<UL>
+<LI>[glibc]2.3.3
+</LI>
+<LI>[glibc-i18n]2.3.3 (opcional)
+</LI>
+<LI>[ncurses]5.4
+</LI>
+<LI>[zlib]1.2.2
+</LI>
+</UL>
+<UL>
+<LI>n)
+</LI>
+</UL>
+
+<UL>
+<LI>[openssl]0.9.7d
+</LI>
+<LI>[tcpip]0.17
+</LI>
+<LI>[wget]1.9.1
+</LI>
+<LI>[wireless-tools]26 (opcional, necesario si queremos utilizar dispositivos
+inalambricos)
+</LI>
+</UL>Tambi&#233;n se pueden utilizar paquetes equivalentes de la rama current
+de <B>Slackware</B>.
+
+<P>
+
+<H1><A NAME="SECTION00050000000000000000">
+4 Instalaci&#243;n:</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00051000000000000000">
+4.1 Instalaci&#243;n del sistema base:</A>
+</H2>
+
+<P>
+
+<H3><A NAME="SECTION00051100000000000000">
+4.1.1 Instalaci&#243;n desde el cdrom de Slackware:</A>
+</H3>
+
+<P>
+La instalaci&#243;n del sistema base es totalmente similar a una instalaci&#243;n
+usual de <B>Slackware</B>. Se seleccionar&#225;n para su instalaci&#243;n
+unicamente los paquetes indicados en la lista de paquetes b&#225;sicos.
+
+<P>
+
+<H3><A NAME="SECTION00051200000000000000">
+4.1.2 Instalaci&#243;n desde una instalaci&#243;n GNU/Linux previa:</A>
+</H3>
+
+<P>
+Para este tipo de instalaci&#243;n es necesario tener instalado previamente
+un sistema GNU/Linux completo.
+
+<P>
+
+<UL>
+<LI><B>Creaci&#243;n y formateo de las particiones: </B>
+</LI>
+</UL>
+Primero debemos crear las particiones donde vamos a instalar el sistema
+en el que vamos a utilizar <B>PkgBuilder</B>. Podemos utilizar cualquier
+programa para ello como el clasico <B>fdisk</B>. Luego debemos formatear
+las particiones utilizando el sistema de ficheros que m&#225;s nos guste.
+Y por fin, las montamos bajo <B>/mnt/pkgbuilder</B>, por ejemplo.
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT SIZE="-1"># mkdir /mnt/pkgbuilder</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1"># mkreiserfs /dev/sda7</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1"># mount /dev/sda7 /mnt/pkgbuilder</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+
+<UL>
+<LI><B>Instalaci&#243;n de los paquetes: </B>
+</LI>
+</UL>
+Despu&#233;s ya podemos instalar los paquetes que previamente hemos debido
+descargar y los instalamos con el comando:
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT SIZE="-1"># installpkg -root /mnt/pkgbuilder -menu *.tgz</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+Esto har&#225; que los paquetes se instalen bajo el directorio <B>/mnt/pkgbuilder</B>
+sobre las particiones que hemos montado all&#237;. La opci&#243;n <I>-menu</I>
+har&#225; que se muestre un dialogo preguntando si se quiere instalar ese
+paquete.
+
+<P>
+
+<UL>
+<LI><B>Hacer chroot:</B>
+</LI>
+</UL>
+Ahora para entrar dentro del nuevo sistema debemos hacer chroot sobre
+el directorio en el que hemos instalado los paquetes con esta secuencia
+de comandos:
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT SIZE="-1"># chroot /mnt/pkgbuilder ldconfig</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1"># mount -t proc proc /mnt/pkgbuilder/proc</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1"># mount -t devpts devpts /mnt/pkgbuilder/dev/pts</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1"># chroot /mnt/pkgbuilder</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1"># . /etc/profile</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+Y ya estamos dentro.
+
+<P>
+
+<UL>
+<LI><B>Compilar el kernel:</B>
+</LI>
+</UL>
+Si necesitamos un kernel hecho a nuestra medida ahora es el momento
+de compilarlo. Por supuesto, siempre podemos utilizar el que trae
+por defecto <B>Slackware</B>.
+
+<P>
+
+<UL>
+<LI><B>Configurar el sistema:</B>
+</LI>
+</UL>
+Ahora es el momento de configurar el sistema. Para ello, una vez dentro
+del sistema chroot, ejecutamos <B>pkgtool</B> y seleccionamos la
+opci&#243;n <I>Setup</I>. Nos aparecer&#225; una lista de scripts de configuraci&#243;n
+de los que seleccionaremos los que nos interesen. 
+
+<P>
+
+<UL>
+<LI>[install-kernel](opcional) si queremos instalar un kernel diferente
+al que viene de serie.
+</LI>
+<LI>[make-bootdisk](opcional) si queremos crear un disco de arranque.
+</LI>
+<LI>[modem-device](opcional) si tenemos un modem y queremos configurarlo.
+</LI>
+<LI>[hotplug](opcional) si queremos que hotplug se ejecute al inicio.
+</LI>
+<LI>[liloconfig](obligatorio) desde aqu&#237; configuraremos lilo para poder
+arrancar luego desde el nuevo sistema.
+</LI>
+<LI>[netconfig](obligatorio) configuramos la red.
+</LI>
+<LI>[services](opcional) para activar o desactivar servicios al inicio.
+</LI>
+<LI>[setconsolefont](opcional) si queremos cambiar la fuente de la consola.
+</LI>
+<LI>[timeconfig](obligatorio) para configurar la zona horaria.
+</LI>
+</UL>
+<UL>
+<LI><B>Crear el archivo fstab</B>:
+</LI>
+</UL>
+Esto no es mas que un ejemplo:
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT SIZE="-1">/dev/sda2 swap swap defaults 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">/dev/sda6 / reiserfs defaults 1 1</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">/dev/sda1 /tmp reiserfs defaults 1 2</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">/dev/sda8 /home reiserfs defaults 1 2</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">/dev/hdc /mnt/cdrw iso9660 noauto,ro,user 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">/dev/hdd /mnt/cdrom iso9660 noauto,ro,user 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">/dev/fd0 /mnt/floppy auto noauto,user 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">devpts /dev/pts devpts gid=5,mode=620 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">proc /proc proc defaults 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">usbfs /proc/bus/usb usbfs defaults 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">none /sys sysfs defaults 0 0</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+Y ya lo tenemos instalado. Solo nos queda arrancar desde &#233;l e instalar
+<B>PkgBuilder</B>.
+
+<P>
+
+<H2><A NAME="SECTION00052000000000000000">
+4.2 Instalaci&#243;n de PkgBuilder:</A>
+</H2>
+
+<P>
+Para instalar <B>PkgBuilder</B> es necesario primero conseguir una
+copia del arbol de ports. Se puede descargar un <B>tarball</B> de
+la p&#225;gina oficial o se puede descargar directamente a traves de <B>Subversion</B>.
+Yo recomiendo instalarlo a traves de <B>Subversion</B> ya que esto
+permitir&#225; ir actualizando <B>PkgBuilder</B> f&#225;cilmente.
+
+<P>
+
+<H3><A NAME="SECTION00052100000000000000">
+4.2.1 Instalaci&#243;n desde tar ball:</A>
+</H3>
+
+<P>
+Simplemente ser&#225; necesario descomprimir el <B>tarball</B> en el
+lugar elejido.
+
+<P>
+
+<H3><A NAME="SECTION00052200000000000000">
+4.2.2 Instalaci&#243;n desde Subversion:</A>
+</H3>
+
+<P>
+La instalaci&#243;n a traves de Subversion requiere instalar una serie
+de paquetes extra. Estos paquetes son <B>neon</B> y <B>subversion</B>.
+Se pueden encontrar estos paquetes precompilados en el ftp anonimo
+de <B>PkgBuilder</B> o tambi&#233;n se pueden crear utilizando <B>PkgBuilder</B>
+desde el tar ball disponible en la web del proyecto.
+
+<P>
+El comando que descargar la &#250;ltima version de PkgBuilder es muy sencillo:
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT SIZE="-1">$ svn checkout svn://svn.berlios.de/pkgbuilder/trunk/pkgbuilder</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+Y ya tendremos nuestra copia del arbol de ports.
+
+<P>
+
+<H3><A NAME="SECTION00052300000000000000">
+4.2.3 Configuraci&#243;n del archivo build.rc</A>
+</H3>
+
+<P>
+Despu&#233;s de obtener una copia de <B>PkgBuilder</B> hay que configurar
+el archivo <I>build.rc</I>. Existe un archivo con un ejemplo del
+archivo de configuraci&#243;n, se trata de <I>build.rc-sample</I>.
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Copyright 2004 Antonio G. Mu&#241;oz,
+tomby (AT) users.berlios.de</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Distributed under the terms of
+the GNU General Public License v2</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">PKGBUILDER_HOME=&#34;/var/pkgbuilder&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">VERSION=&#34;20041114&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Packages db directory</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">PACKAGES_LOGDIR=&#34;/var/log/packages&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># PkgBuilder mirror</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">PKGBUILDER_MIRROR=&#34;ftp://ftp.berlios.de/pub/pkgbuilder&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Local network source code mirror</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">MIRROR_URL=&#34;ftp://localhost/pub/pkgbuilder&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># CDROM with source code files</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">CDROM_DIR=&#34;/mnt/cdrom&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Fetch options</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">FETCH_TRIES=&#34;5&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">FETCH_DIR=&#34;/var/cache/pkgbuilder/sources&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">FETCH_OPTIONS=&#34;-tries=$FETCH_TRIES -directory-prefix=$FETCH_DIR&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">FETCH_FTP_OPTIONS=&#34;-passive-ftp&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Binary packages directory</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">BINARIES_DIR=&#34;/var/cache/pkgbuilder/binaries&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Temporal directory</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">TMP=&#34;/var/tmp&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># USE flags</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_AUDIO=&#34;alsa oss arts esd oggvorbis speex
+lame mad flac fame mikmod&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_VIDEO=&#34;X opengl divx mpeg win32codecs
+sdl aalib svga fbcon directfb&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_NET=&#34;samba ssl slp maildir&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_PRINT=&#34;cups pnm2ppa&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_XLIBS=&#34;motif gtk gtk2 qt kde gnome&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_LIBS=&#34;ncurses readline sasl bidi jpeg
+png tiff gif slang fam&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_CPU=&#34;mmx sse 3dnow&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_DEV=&#34;python tcltk perl java ruby scheme&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE_MISC=&#34;nls doc gpm javascript mysql xml
+sane&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">USE=&#34;$USE_AUDIO $USE_VIDEO $USE_NET
+$USE_PRINT</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">$USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># I18N configuration</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">I18N=&#34;es&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># CPU and ARCHITECTURE flags configuration</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">ARCH=&#34;i486&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">CPU=&#34;i686&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">CFLAGS=&#34;-O2 -march=$ARCH -mcpu=$CPU&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">CXXFLAGS=&#34;$CFLAGS&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">CPPFLAGS=&#34;$CFLAGS&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+
+<UL>
+<LI><B>PKGBUILDER_HOME</B> configura el directorio donde se ha instalado
+<B>PkgBuilder</B>.
+</LI>
+<LI><B>PACKAGES_LOGDIR</B> configura el directorio donde se encuentra
+la base de datos de paquetes instalados. Usualmente toma el valor
+de /var/log/packages.
+</LI>
+<LI><B>PKGBUILDER_MIRROR</B> configura la url del ftp oficial de <B>PkgBuilder</B>.
+</LI>
+<LI><B>MIRROR_URL</B> permite configurar un servidor local para que
+actue como cache.
+</LI>
+<LI><B>CDROM_DIR</B> permite configurar el directorio donde tomar los
+archivos con el codigo fuente desde una unidad de CDROM.
+</LI>
+<LI><B>FETCH_DIR</B> configura el directorio donde se almacenaran los
+archivos descargados.
+</LI>
+<LI><B>FETCH_OPTIONS</B> permite configurar los parametros a utilizar
+por wget a la hora de descargar archivos.
+</LI>
+<LI><B>FETCH_FTP_OPTIONS</B> permite configurar los parametros a utilizar
+por wget cuando la url se trata de un servidor FTP.
+</LI>
+<LI><B>BINARIES_DIR</B> permite indicar el directorio donde se van
+a generar los paquetes binarios.
+</LI>
+<LI><B>USE</B> permite configurar una serie de flags para activar o
+desactivar funcionalidades a la hora de compilar los paquetes. Es
+similimar a la variable USE de Gentoo GNU/Linux. Se ha dividido en
+varios grupos para facilitar la lectura de las opciones.
+</LI>
+<LI><B>I18N</B> permite configurar la opcion de internacionalizaci&#243;n
+indicando los lenguajes deseadoa.
+</LI>
+<LI><B>ARCH</B> permite configurar la arquitectura de la m&#225;quina actual.
+</LI>
+<LI><B>CPU</B> permite configurar el procesador de la m&#225;quina actual.
+</LI>
+<LI><B>CFLAGS</B> permite configurar los flags de compilaci&#243;n indicando
+las opciones de optimizaci&#243;n.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00052400000000000000">
+4.2.4 Configuraci&#243;n del soporte de compilaci&#243;n paralela con distcc:</A>
+</H3>
+
+<P>
+Por defecto el soporte de compilaci&#243;n paralela est&#225; deshabilitado
+y es necesario configurarlo explicitamente. Para ello existe una serie
+de variables que es necesario configurar. Tambi&#233;n es necesario instalar
+y configurar correctamente <B>distcc</B> y/o <B>ccache</B> para
+que funcione junto con <B>distcc</B>. El soporte de compilaci&#243;n
+paralela a&#250;n es experimental y es posible que la compilaci&#243;n de algunos
+paquetes falle.
+
+<P>
+Tambi&#233;n se puede utilizar la compilaci&#243;n paral&#233;la en el caso tener
+varios procesadores, sin necesidad de utilizar <B>distcc</B>.
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT COLOR="#0000ff"><FONT SIZE="-1"># Parallel compilation. Use with
+care, some packages compilation fails.</FONT></FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">COMPILATION=&#34;parallel&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">DISTCC_HOSTS=&#34;host1 host2 host3 hostn&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">CCACHE_PREFIX=&#34;distcc&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE><TT><FONT SIZE="-1">MAKE_OPTIONS=&#34;-j4&#34;</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+
+<UL>
+<LI><B>COMPILATION</B> especifica la modalidad de compilaci&#243;n.
+</LI>
+<LI><B>DISTCC_HOST</B> especifica el nombre de las diferentes m&#225;quina
+a usar para la compilaci&#243;n paralela en el caso de utilizar <B>dictcc</B>.
+</LI>
+<LI><B>CCACHE_PREFIX</B> es necesario configurarla si queremos utilizar
+<B>distcc</B> junto con <B>ccache</B>.
+</LI>
+<LI><B>MAKE_OPTIONS</B> especifica las opciones para <B>make</B>.
+Usualmente tomara el valor <B>-jn</B>, siendo <B>n</B> el n&#250;mero
+de procesos simultaneos que queremos que se ejecuten.
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION00060000000000000000">
+5 Empieza la fiesta:</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00061000000000000000">
+5.1 El script build.sh:</A>
+</H2>
+
+<P>
+El script <I>build.sh</I> permite ejecutar diversas acciones sobre
+los archivos build, entre ellas, descargar el codigo fuente compilarlo
+y generar el paquete tgz correspondiente.
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT SIZE="-1"># ./build.sh xap/aterm/aterm-0.4.2.build fetch
+patch configure</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+Este ejemplo ejecutar&#225; las acciones fetch, patch y configure para
+el archivo build aterm-0.4.2.build del paquete aterm.
+
+<P>
+Esta es la lista completa de acciones que podemos ejecutar:
+
+<P>
+
+<UL>
+<LI>[info:]muestra informaci&#243;n del paquete
+</LI>
+<LI>[fetch:]descarga los archivos necesarios para la compilaci&#243;n y creaci&#243;n
+del paquete.
+</LI>
+<LI>[unpack:]descomprime los archivos necesarios.
+</LI>
+<LI>[verify:]verifica el checksum de los paquetes descargados.
+</LI>
+<LI>[patch:]parchea los archivos necesarios para la compilaci&#243;n.
+</LI>
+<LI>[configure:]ejecuta el script configure del paquete.
+</LI>
+<LI>[build:]ejecuta make.
+</LI>
+<LI>[install:]ejecuta make install.
+</LI>
+<LI>[postinstall:]ejecuta todas la acciones necesarias despu&#233;s de la
+instalaci&#243;n del paquete.
+</LI>
+<LI>[buildpkg:]genera el paquete tgz correspondiente listo para su instalaci&#243;n
+en el sistema. El paquete s&#243;lo se generar&#225; si se ejecuta como superusuario.
+</LI>
+<LI>[installpkg:]instala el paquete previamente generado por la acci&#243;n
+buildpkg. Solo funciona cuando se ejecuta como superusuario.
+</LI>
+<LI>[upgradepkg:]actualiza el paquete previamente generado. Solo funciona
+cuando se ejecuta como superusuario.
+</LI>
+<LI>[cleanup:]realiza la limpieza de los archivos utilizados para la
+compilaci&#243;n y creaci&#243;n del paquete.
+</LI>
+<LI>[auto:]ejecuta autom&#225;ticamente esta secuencia acciones: fetch, verify,
+unpack, patch, configure, build, install, postinstall, buildpkg.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00062000000000000000">
+5.2 El script install.sh:</A>
+</H2>
+
+<P>
+El script <I>install.sh</I> instala un paquete resolviendo dependencias
+instalandolas si es necesario de forma recursiva.
+
+<P>
+<BLOCKQUOTE>
+<TT><FONT SIZE="-1">$ ./install.sh xap/epiphany</FONT></TT></BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>
+
+</BLOCKQUOTE>
+Este comando instala el paquete epiphany resolviendo las dependencias
+de este paquete.
+
+<P>
+Opciones del script:
+
+<P>
+
+<UL>
+<LI>[-d]Ejecuta el script en modo <I>dummy</I> o tonto, resolviendo las
+dependencias pero sin instalar nada en el sistema.
+</LI>
+<LI>[-v]Ejecuta el script incrementando los mensajes de salida utilizado
+para depurar la gesti&#243;n de dependencias.
+</LI>
+<LI>[-p]Ejecuta el script en modo <I>frompackage</I>, en lugar de instalar
+el paquete compilandolo, lo instala a partir de un paquete precompilado
+localizado en el directorio $TMP.
+</LI>
+</UL>
+<P>
+
+<H2><A NAME="SECTION00063000000000000000">
+5.3 El script update.sh:</A>
+</H2>
+
+<P>
+El script update.sh actualiza todo el sistema buscando nuevas versiones
+de los paquetes en el arbol de ports.
+
+<P>
+
+<UL>
+<LI>[-d]Ejecuta el script en modo <I>dummy</I> o tonto, muestra los nuevos
+paquetes disponibles pero sin realizar sin ninguna acci&#243;n.
+</LI>
+</UL>Previamente a utilizar el script <I>update.sh</I> es necesario ejecutar
+el script <I>build_db.sh</I> que genera el archivo <B>PACKAGES</B>
+necesario para ejectuar el script <I>update.sh</I>.
+
+<P>
+
+<H1><A NAME="SECTION00070000000000000000">
+6 Creaci&#243;n de scripts build:</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00071000000000000000">
+6.1 Anatomia de un script build:</A>
+</H2>
+
+<P>
+Un script <B>build</B> define una serie de variables y m&#233;todos que
+dirigen la generaci&#243;n de un paquete. Adem&#225;s un script <B>build</B>
+puede heredar de otro ciertas caracteristicas que se repiten en m&#250;ltiples
+paquetes.
+
+<P>
+
+<H3><A NAME="SECTION00071100000000000000">
+6.1.1 Variables:</A>
+</H3>
+
+<P>
+Existen una serie de variables comunes a todos los scripts build que
+definen una serie de par&#225;metros cruciales para la construcci&#243;n de
+los paquetes. Aqui definimos la mayor&#237;a de ellos, es posible que se
+nos pase alguno, adem&#225;s cada paquete puede definir toda una serie
+extra de variables.
+
+<P>
+
+<UL>
+<LI><B>PKG_NAME</B>: Define el nombre del paquete y su valor esta implicito,
+no es necesario declararlo.
+</LI>
+<LI><B>PKG_VERSION</B>: Define la version del paquete y su valor esta
+implicito, no es necesario declararlo.
+</LI>
+<LI><B>PKG_BUILD</B>: Define el numero de la revision del paquete actual.
+Esto es necesario ya que aunque no se haya cambiado de version es
+necesario actualizar el paquete.
+</LI>
+<LI><B>PKG_ARCH</B>: Define la arquitectura del paquete. Por defecto
+toma el valor de la variable <B>ARCH</B> definida en el archivo
+<I>build.rc</I>.
+</LI>
+<LI><B>PKG_SRC</B>: Define el directorio donde residen los fuentes
+del paquete despu&#233;s de ser descomprimidos.
+</LI>
+<LI><B>PKG_UNPACK_DIR</B>: Define un directorio previo a <B>PKG_SRC</B>
+donde se descomprimiran los archivos. No suele ser necesario casi
+nunca ya que con definir <B>PKG_SRC</B> suele ser suficiente.
+</LI>
+<LI><B>PKG_DEST</B>: Define el directorio de destino para la instalaci&#243;n
+del paquete.
+</LI>
+<LI><B>PKG_DOC</B>: Define el directorio donde se instalaran los archivos
+de documentaci&#243;n.
+</LI>
+<LI><B>PKG_FILENAME</B>: Define la lista de nombres de archivos necesarios
+para la construcci&#243;n del paquete.
+</LI>
+<LI><B>PKG_URL</B>: Define la lista de URL's desde donde descargar
+los archivos necesarios para la construcci&#243;n del paquete.
+</LI>
+<LI><B>PKG_LICENSE</B>: Define la licencia del paquete.
+</LI>
+<LI><B>PKG_USE</B>: Resume la lista de flags USE utilizados para la
+construcci&#243;n del paquete. Estos flags determinan que dependencias
+utilizar y que opciones de construcci&#243;n se van a emplear, etcetera.
+</LI>
+<LI><B>PKG_DEPENDS</B>: Define la lista de dependencias necesarias
+para la construcci&#243;n del paquete. El sistema utiliza esta variable
+para resolver las dependencias. El formato con el que se especifican
+las dependencias es.
+</LI>
+<LI><B>PKG_HOMESITE</B>: Define la web principal del paquete donde
+encontrar informaci&#243;n extra sobre el paquete y nuevas versiones.
+</LI>
+<LI><B>PKG_DOC_FILES</B>: Lista de archivos que se copiaran dentro
+del directorio PKG_DOC.
+</LI>
+<LI><B>PKG_PREFIX</B>: Define el directorio prefijo. Este suele ser
+<B>/usr</B>.
+</LI>
+<LI><B>PKG_CONFIGURE_OPTIONS</B>: Define la opciones que se pasaran
+al script <B>./configure</B>.
+</LI>
+<LI><B>PKG_BUILD_OPTIONS</B>: Define las opciones que se pasaran a
+make a la hora de construir el paquete.
+</LI>
+<LI><B>PKG_BUILD_TARGET</B>: Define los targets o objetivos make que
+se utilizaran a hora de construir el paquete.
+</LI>
+<LI><B>PKG_INSTALL_OPTIONS</B>: Define las opciones que se pasaran
+a make a la hora de instalar el paquete.
+</LI>
+<LI><B>PKG_INSTALL_TARGET</B>: Define los targets o objetivos make
+que se utilizaran a hora de instalar el paquete.
+</LI>
+<LI><B>PKG_NOSTRIP</B>: Indica si es necesario o no pasar <B>strip</B>
+a los archivos binarios generados.
+</LI>
+<LI><B>PKG_CONFIG_FILES</B>: Defina la lista de archivos de configuraci&#243;n
+que deben tener un tratamiento especial.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00071200000000000000">
+6.1.2 Acciones:</A>
+</H3>
+
+<P>
+Todos los scripts <B>build</B> deben implementar todas las acciones,
+o sino ellos, s&#237; alguno de los scripts de los que heredan. El nombre
+de las funciones que implementan las acciones es <B>do_</B><B><I>&lt;nombre_accion&gt;</I></B>
+en todos los casos. Esta es la lista de funciones:
+
+<P>
+
+<UL>
+<LI>do_info
+</LI>
+<LI>do_fetch
+</LI>
+<LI>do_verify
+</LI>
+<LI>do_unpack
+</LI>
+<LI>do_patch
+</LI>
+<LI>do_configure
+</LI>
+<LI>do_build
+</LI>
+<LI>do_install
+</LI>
+<LI>do_postinstall
+</LI>
+<LI>do_buildpkg
+</LI>
+<LI>do_installpkg
+</LI>
+<LI>do_upgradepkg
+</LI>
+<LI>do_cleanup
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00072000000000000000">
+6.2 Herencia de scripts:</A>
+</H2>
+
+<P>
+Como se ha explicado anteriormente, cada script build debe implementar
+todas las acciones, pero si realmente se tuviera que implementar todas
+las funciones en cada script build, se llegar&#237;a a la situaci&#243;n de
+tener el mismo c&#243;digo repetido en todos los scripts. Esto har&#237;a al
+sistema inmantenible ya que si quisieramos modificar el comportamiento
+de una acci&#243;n, o a&#241;adir una nueva, habr&#237;a que modificar todos los
+scripts ya creados.
+
+<P>
+Para solucionar esto se ha implementado una herencia sencilla entre
+scripts build. Cada script build puede tener un padre del que hereda
+todas las acciones y variables definidas en &#233;l. Adem&#225;s el script padre
+puede heredar de otro y as&#237; sucesivamente, formando una jerarqu&#237;a.
+As&#237; hasta llegar al script base.build que implementa una serie de
+acciones globales y del que heredan todos los scripts build.
+
+<P>
+A la hora de ejecutar una acci&#243;n primero se busca si se ha declarado
+la funci&#243;n <B>do_&lt;accion&gt;</B>. Si esta no est&#225; definido se busca
+si el metodo est&#225; declarado en el padre a trav&#233;s de la funci&#243;n <B>&lt;padre&gt;_do_&lt;accion&gt;</B>,
+as&#237; sucesivamente subiendo por la jerarquia. Si no est&#225; declarada
+tampoco en la jerarqu&#237;a se buscar&#225; si esta acci&#243;n est&#225; implementada
+en el script <I>base.build</I> con el nombre <B>pkg_do_&lt;accion&gt;</B>.
+Si no se encuentra ninguna de estas funciones se asume que la acci&#243;n
+no ha sido implementada porque no es necesaria, sin mas.
+
+<P>
+Con esto conseguimos un sistema sencillo a base de shell scripts que
+nos permite mantener de forma sencilla el sistema.
+
+<P>
+
+<H2><A NAME="SECTION00073000000000000000">
+6.3 Funciones genericas:</A>
+</H2>
+
+<P>
+
+<UL>
+<LI><B>version</B>: imprime la versi&#243;n de <B>PkgBuilder</B>.
+</LI>
+<LI><B>include</B>: incluye el script build del directorio common que
+se le pasa como par&#225;metro
+</LI>
+<LI><B>inherit</B>: realiza las acciones necesarias para que el script
+build que se le pase como par&#225;metro sea el padre del script actual.
+</LI>
+<LI><B>use</B>: comprueba si est&#225; definido el flag use en la lista de
+la variable USE.
+</LI>
+<LI><B>use_dep</B>: comprueba si est&#225; definido el flag use en la lista
+de la variable USE, si es as&#237; adem&#225;s imprime la cadena que se le pasa
+como segundo par&#225;metro.
+</LI>
+<LI><B>use_enable</B>: comprueba si est&#225; definido el flag use en la
+lista de la variable USE, adem&#225;s imprime la cadena <I>-enable-&lt;flag&gt;</I>
+o <I>-disable-&lt;flag&gt;</I>.
+</LI>
+<LI><B>use_with</B>: comprueba si est&#225; definido el flag use en la lista
+de la variable USE, adem&#225;s imprime la cadena <I>-with-&lt;flag&gt;</I>
+o <I>-without-&lt;flag&gt;</I>.
+</LI>
+<LI><B>call_action</B>: llama la acci&#243;n correspondiente buscandola
+tal y como se describe en el punto 6.2.
+</LI>
+<LI><B>execute_action</B>: ejecuta la acci&#243;n que se le pasa como par&#225;metro.
+</LI>
+<LI><B>fetch</B>: descarga el archivo que se pasa como par&#225;metro.
+</LI>
+<LI><B>unpack</B>: descomprime el archivo que se pasa como par&#225;metro.
+</LI>
+<LI><B>apply_patch</B>: aplica el parche correspondiente buscando el
+nombre del archivos en varios directorios.
+</LI>
+<LI><B>verify</B>: verifica el checksum de los archivos descargados.
+</LI>
+<LI><B>gzip_man</B>: comprimir las p&#225;ginas man.
+</LI>
+<LI><B>gzip_info</B>: comprime las p&#225;ginas info.
+</LI>
+<LI><B>strip_all</B>: realiza el script sobre los binarios generados.
+</LI>
+<LI><B>is_installed</B>: comprueba si el paquete est&#225; instalado.
+</LI>
+<LI><B>compare_versions</B>: compara dos versiones determinado si una
+es mayor, menor o son iguales.
+</LI>
+<LI><B>latest_version</B>: imprime el valor de la &#250;ltima versi&#243;n disponible
+del paquete indicado.
+</LI>
+<LI><B>installed_version</B>: imprime la versi&#243;n instalada del paquete
+indicado.
+</LI>
+<LI><B>installed_build</B>: imprime la reversi&#243;n instalada del paquete
+indicado.
+</LI>
+<LI><B>extract_meta</B>: extrae el valor del metapaquete.
+</LI>
+<LI><B>extract_name</B>: extrae el valor del nombre del paquete
+</LI>
+<LI><B>extract_version</B>: extra la valor de la versi&#243;n del paquete
+</LI>
+<LI><B>extract_only_version</B>: extrae el valor de la versi&#243;n sin
+el valor de la version extra del paquete.
+</LI>
+<LI><B>extract_extra_version</B>: extra el valor de la versi&#243;n extra
+del paquete.
+</LI>
+<LI><B>result_msg</B>: imprime el resultado.
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00074000000000000000">
+6.4 Funciones de paquetes:</A>
+</H2>
+
+<P>
+
+<UL>
+<LI><B>pkg_installdoc</B>: instala los archivos definidos en la variable
+<B>PKG_DOC_FILES</B> en el directorio <B>PKG_DOC</B>.
+</LI>
+<LI><B>pkg_stripall</B>: realiza el strip sobre los binarios instalados
+en <B>PKG_DEST</B>.
+</LI>
+<LI><B>pkg_gzipmaninfo</B>: comprime las p&#225;ginas de manual instaladas
+en <B>PKG_DEST$PKG_PREFIX/man</B> y las p&#225;ginas info instaladas
+en <B>PKG_DEST$PKG_PREFIX/info</B>.
+</LI>
+<LI><B>pkg_configfiles</B>: realiza la gestion de los archivos definidos
+en la variable <B>PKG_CONFIG_FILES</B>.
+</LI>
+<LI><B>pkg_installfiles</B>: instala los archivos <B>slack-desc</B>
+y <B>doinst.sh</B> necesarios para la creaci&#243;n del paquete.
+</LI>
+<LI><B>pkg_fetchfiles</B>: descarga la lista de archivos definidos
+en la variable <B>PKG_URL</B>.
+</LI>
+<LI><B>pkg_fetchcvs</B>: descarga desde el cvs.
+</LI>
+<LI><B>pkg_unpack</B>: descomprime la lista de archivos definidos en
+la variable <B>PKG_FILE_NAME</B>.
+</LI>
+<LI><B>pkg_configure</B>: ejecuta el script <B>./configure</B> pasandole
+las variables necesarias definidas en el script <B>build</B>.
+</LI>
+<LI><B>pkg_build</B>: ejecuta el <B>make</B> pasandole las variables
+necesarias definidas en el script <B>build</B>.
+</LI>
+<LI><B>pkg_install</B>: ejecuta el <B>make install</B> pasandole
+las variables necesarias definidas en el script <B>build</B>.
+</LI>
+<LI><B>pkg_virtual</B>: a&#241;ade la creaci&#243;n de un paquete virtual.
+</LI>
+<LI><B>pkg_localeclean</B>: limpia los locales instalados.
+</LI>
+<LI><B>pkg_postinstall</B>: ejectuta todo lo necesario para despu&#233;s
+de la instalaci&#243;n.
+</LI>
+</UL>
+
+<P>
+
+<H2><A NAME="SECTION00075000000000000000">
+6.5 C&#243;mo escribir un script build:</A>
+</H2>
+
+<H1><A NAME="SECTION00080000000000000000">
+About this document ...</A>
+</H1>
+ <STRONG>PKGBUILDER</STRONG><P>
+This document was generated using the
+<A HREF="http://www.latex2html.org/"><STRONG>LaTeX</STRONG>2<tt>HTML</tt></A> translator Version 2002-2-1 (1.71)
+<P>
+Copyright &#169; 1993, 1994, 1995, 1996,
+<A HREF="http://cbl.leeds.ac.uk/nikos/personal.html">Nikos Drakos</A>, 
+Computer Based Learning Unit, University of Leeds.
+<BR>
+Copyright &#169; 1997, 1998, 1999,
+<A HREF="http://www.maths.mq.edu.au/~ross/">Ross Moore</A>, 
+Mathematics Department, Macquarie University, Sydney.
+<P>
+The command line arguments were: <BR>
+ <STRONG>latex2html</STRONG> <TT>-no_subdir -split 0 -show_section_numbers /tmp/lyx_tmpdir26824Q9QWOM/lyx_tmpbuf0/pkgbuilder.tex</TT>
+<P>
+The translation was initiated by  on 2004-11-14<HR>
+<!--Navigation Panel-->
+<IMG WIDTH="81" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next_inactive"
+ SRC="file:/usr/lib/latex2html/icons/nx_grp_g.png"> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/lib/latex2html/icons/up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/lib/latex2html/icons/prev_g.png">   
+<BR>
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2004-11-14
+</ADDRESS>
+</BODY>
+</HTML>
