@@ -1,16 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db-engine/Attic/foomatic-db-engine-3.0.0.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db-engine/foomatic-db-engine-3.0.1.build,v 1.1 2004/02/28 12:46:10 tomby Exp $
 #
-# foomatic-db-engine-3.0.0 pkgbuilder script
+# foomatic-db-engine-3.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="foomatic-db-engine"
-PKG_VERSION="3.0.0"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.linuxprinting.org/download/foomatic/$PKG_FILE_NAME"
@@ -24,25 +22,11 @@ PKG_DEPENDS="d/perl
              n/wget
              ap/foomatic-filters"
 
-PKG_HOMESITE="http://www.linuxprinting.org/foomatic"
+PKG_HOMESITE="http://www.linuxprinting.org/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog COPYING README* TODO USAGE"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-
-do_patch() {
-    cd $PKG_SRC
-
-    patch -p0 < $PKG_HOME/files/perl-module.diff
-
-    return $?
-}
 
 do_install_perl_module() {
     cd $PKG_SRC/lib
