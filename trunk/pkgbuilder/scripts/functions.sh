@@ -488,8 +488,11 @@ compare_versions() {
         return 1
     fi
     
-    local v1="`extract_version $1`"
-    local v2="`extract_version $2`"
+    local av1="`extract_version $1`"
+    local av2="`extract_version $2`"
+
+    local v1="`extract_only_version $av1`"
+    local v2="`extract_only_version $av2`"
     
     local tmp1
     local tmp2
@@ -527,6 +530,34 @@ compare_versions() {
             fi
         fi
     done
+    
+    local extra1="`extract_extra_version $av1`"
+    local extra2="`extract_extra_version $av2`"
+    
+    if [ "$extra1" != "" -o "$extra2" != "" ] ; then
+        if [ "$extra1" = "" -a "$extra2" != "" ] ; then
+            #lesser
+            return 1
+        elif [ "$extra1" != "" -a "$extra2" = "" ] ; then
+            #greater
+            return 2
+        fi
+        
+        if echo $extra1 | grep -q "[a-zA-Z]\+" ||
+           echo $extra2 | grep -q "[a-zA-Z]\+" ; then
+            if [[ "$extra2" < "$extra1" ]] ; then
+                return 1
+            elif [[ "$extra2" > "$extra1" ]] ; then
+                return 2
+            fi
+        else  
+            if [ "$extra2" -lt "$extra1" ] ; then
+                return 1
+            elif [ "$extra2" -gt "$extra1" ] ; then
+                return 2
+            fi
+        fi
+    fi
     
     return 0;
 }
@@ -675,6 +706,42 @@ extract_version() {
     local pkgminorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-[0-9]\([a-zA-Z0-9_\.]\+\)'`"
 
     echo "$pkgmayorversion$pkgminorversion"
+}
+
+#
+# Print version of package without extra version. 3.2.2_extraversion
+#
+# @param $1 version in format 3.2.2_extraversion
+#
+extract_only_version() {
+    if [ "$1" = "" ] ; then
+        return 1
+    fi
+
+    local extra_index="`expr index $1 '_'`"
+
+    if [ "$extra_index" -gt "0" ] ; then
+        echo "`echo $1 | cut -d'_' -f1`"
+    else
+        echo "$1"
+    fi
+}
+
+#
+# Print extra version of package. 3.2.2_extraversion
+#
+# @param $1 version in format 3.2.2_extraversion
+#
+extract_extra_version() {
+    if [ "$1" = "" ] ; then
+        return 1
+    fi
+
+    local extra_index="`expr index $1 '_'`"
+
+    if [ "$extra_index" -gt "0" ] ; then
+        echo "`echo $1 | cut -d'_' -f2`"
+    fi
 }
 
 #
