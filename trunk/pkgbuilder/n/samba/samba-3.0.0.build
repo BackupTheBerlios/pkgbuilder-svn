@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/samba/Attic/samba-3.0.0.build,v 1.1 2003/12/13 18:35:25 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/samba/Attic/samba-3.0.0.build,v 1.2 2003/12/13 19:19:40 tomby Exp $
 #
 # samba-3.0.0 pkgbuilder script
 #
@@ -73,14 +73,21 @@ include general
 include do_fetch
 include do_unpack_bzip2
 include do_patch
-include do_configure
 
-do_build() {
+do_configure() {
     cd $PKG_SRC/source
     
     CFLAGS=$CFLAGS \
     CXXFLAGS=$CXXFLAGS \
     ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+    
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC/source
+    
+    make $PKG_BUILD_OPTIONS
     
     return $?
 }
