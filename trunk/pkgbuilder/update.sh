@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/update.sh,v 1.3 2004/03/14 15:50:22 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/update.sh,v 1.4 2004/03/14 15:51:44 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -80,5 +80,3 @@ for PKG in `find $PACKAGES_LOGDIR -type f | sort` ; do
         
     fi
 done
-
-exit "$RETVAL"
