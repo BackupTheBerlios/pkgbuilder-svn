@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# postfix-2.1.4 pkgbuilder script
+# postfix-2.2.2 pkgbuilder script
 #
 
 inherit makeonly
@@ -10,16 +10,16 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp://ftp.porcupine.org/mirrors/postfix-release/official/$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION
-         `use_dep ssl "ftp://ftp.aet.tu-cottbus.de/pub/postfix_tls/pfixtls-0.8.18-2.1.3-0.9.7d.tar.gz"`"
+PKG_URL="ftp://ftp.porcupine.org/mirrors/postfix-release/official/$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 
 PKG_LICENSE="IPL-1"
 
-PKG_USE="sasl ssl"
+PKG_USE="sasl ssl mysql"
 
 PKG_DEPENDS=">=l/db3-3.2
-       	     >=l/pcre-3.4
-       	     `use_dep ssl ">=l/openssl-0.9.6g"`
+             >=l/pcre-3.4
+             `use_dep mysql ">=ap/mysql-3.23.51"`
+             `use_dep ssl ">=l/openssl-0.9.6g"`
              `use_dep sasl ">=l/cyrus-sasl-2"`"
 
 PKG_HOMESITE="http://www.postfix.org/"
@@ -38,46 +38,33 @@ PKG_CONFIG_FILES="etc/rc.d/rc.postfix
                   etc/postfix/post-install
                   `use_dep sasl "etc/postfix/saslpass etc/sasl2/smtpd.conf"`"
 
-do_unpack() {
-    cd $TMP
-    
-    unpack $PKG_FILE_NAME
-
-    cd $PKG_SRC
-    
-    use ssl && unpack pfixtls-0.8.18-2.1.3-0.9.7d.tar.gz
-    
-    return $?
-}
-
-do_patch() {
-    cd $PKG_SRC
-    
-    use ssl && apply_patch pfixtls-0.8.18-2.1.3-0.9.7d/pfixtls.diff -p1
-    
-    return $?
-}
-
 do_configure() {
     cd $PKG_SRC
 
     local mycc="-DHAS_PCRE"
-    local mylibs="-L/usr/lib -lpcre -ldl -lcrypt -lpthread"
-	
+    local mylibs="-Wl,-z,now -L/usr/lib -lpcre -ldl -lcrypt -lpthread"
+
+    if use mysql ; then
+        mycc="$mycc -DHAS_MYSQL -I/usr/include/mysql"
+        mylibs="$mylibs -lmysqlclient -lm -lz"
+    fi
+    
     if use sasl ; then
         mycc="$mycc -DUSE_SASL_AUTH -I/usr/include/sasl"
         mylibs="$mylibs -lsasl2"
     fi
-	
+    
     if use ssl ; then
         mycc="$mycc -DUSE_SSL"
         mylibs="$mylibs -lssl -lcrypto"
     fi
     
     mycc="$mycc -DDEF_CONFIG_DIR=\\\"/etc/postfix\\\""
+    mycc="$mycc -DDEF_DAEMON_DIR=\\\"/usr/lib/postfix\\\""
+    mycc="$mycc -DDEF_PROGRAM_DIR=\\\"/usr/lib/postfix\\\""
     mycc="$mycc -DDEF_MANPAGE_DIR=\\\"/usr/man\\\""
     mycc="$mycc -DDEF_README_DIR=\\\"/usr/doc/$PKG_NAME-$PKG_VERSION/readme\\\""
-    mycc="$mycc -DDEF_SAMPLE_DIR=\\\"/usr/doc/$PKG_NAME-$PKG_VERSION/sample\\\""
+    mycc="$mycc -DDEF_HTML_DIR=\\\"/usr/doc/$PKG_NAME-$PKG_VERSION/html\\\""
 
     make CC="gcc" OPT="$CFLAGS" CCARGS="$mycc" AUXLIBS="$mylibs" makefiles
 
@@ -88,23 +75,25 @@ do_install() {
     cd $PKG_SRC
     
     /bin/sh postfix-install \
-        -non-interactive \
-        install_root="$PKG_DEST" \
-        config_directory="/usr/doc/$PKG_NAME-$PKG_VERSION/defaults" \
-        readme_directory="/usr/doc/$PKG_NAME-$PKG_VERSION/readme" \
-        sample_directory="/usr/doc/$PKG_NAME-$PKG_VERSION/sample" \
-        manpage_directory="/usr/man" \
-        mail_owner="postfix" \
-        setgid_group="postdrop"
+                -non-interactive \
+                install_root="$PKG_DEST" \
+                daemon_directory="/usr/lib/postfix" \
+                program_directory="/usr/lib/postfix" \
+                config_directory="/usr/doc/$PKG_NAME-$PKG_VERSION/defaults" \
+                readme_directory="/usr/doc/$PKG_NAME-$PKG_VERSION/readme" \
+                manpage_directory="/usr/man" \
+                mail_owner="postfix" \
+                setgid_group="postdrop"
         
     return $?
 }
 
 postfix_postinstall() {
     cd $PKG_SRC
-	
+    
     cp auxiliary/rmail/rmail $PKG_DEST/usr/bin/rmail
-	
+    cp auxiliary/qshape/qshape.pl $PKG_DEST/usr/bin/qshape.pl
+    
     mkdir -p $PKG_DEST/etc/mail
     cp $PKG_HOME/files/aliases $PKG_DEST/etc/mail
     cp $PKG_HOME/files/mailcap $PKG_DEST/etc/mail
@@ -117,13 +106,13 @@ postfix_postinstall() {
 
     if use sasl ; then
         mkdir -p $PKG_DEST/etc/sasl2
-    	mkdir -p $PKG_DEST/usr/lib/sasl2
-    	cp $PKG_HOME/files/smtpd.conf $PKG_DEST/etc/sasl2
-    	( cd $PKG_DEST/usr/lib/sasl2 ; ln -s /etc/sasl2/smtpd.conf )
-		
+        mkdir -p $PKG_DEST/usr/lib/sasl2
+        cp $PKG_HOME/files/smtpd.conf $PKG_DEST/etc/sasl2
+        ( cd $PKG_DEST/usr/lib/sasl2 ; ln -s /etc/sasl2/smtpd.conf )
+        
         cp $PKG_HOME/files/saslpass $PKG_DEST/etc/postfix
     fi
-	
+    
     return $?
 }
 
@@ -132,6 +121,6 @@ do_postinstall() {
 
     postfix_postinstall &&    
     pkg_postinstall
-	
+    
     return $?
 }

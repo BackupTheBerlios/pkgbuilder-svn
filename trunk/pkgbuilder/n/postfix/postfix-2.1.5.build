@@ -6,7 +6,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -15,10 +15,11 @@ PKG_URL="ftp://ftp.porcupine.org/mirrors/postfix-release/official/$PKG_NAME-$PKG
 
 PKG_LICENSE="IPL-1"
 
-PKG_USE="sasl ssl"
+PKG_USE="sasl ssl mysql"
 
 PKG_DEPENDS=">=l/db3-3.2
              >=l/pcre-3.4
+             `use_dep mysql ">=ap/mysql-3.23.51"`
              `use_dep ssl ">=l/openssl-0.9.6g"`
              `use_dep sasl ">=l/cyrus-sasl-2"`"
 
@@ -63,6 +64,11 @@ do_configure() {
 
     local mycc="-DHAS_PCRE"
     local mylibs="-L/usr/lib -lpcre -ldl -lcrypt -lpthread"
+
+    if use mysql ; then
+        mycc="$mycc -DHAS_MYSQL -I/usr/include/mysql"
+        mylibs="$mylibs -lmysqlclient -lm -lz"
+    fi
     
     if use sasl ; then
         mycc="$mycc -DUSE_SASL_AUTH -I/usr/include/sasl"
