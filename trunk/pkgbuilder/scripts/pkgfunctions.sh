@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.9 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.10 2004/01/05 19:27:01 tomby Exp $
 
 #
 # Package specific functions
@@ -77,7 +77,7 @@ pkg_fetchfiles() {
         local sum="$PKG_HOME/files/md5sum-$PKG_VERSION"
 
         if [ -r $base -a -r $sum ] ; then
-            if grep -q `md5sum $base` $sum  ; then
+            if grep -q "`md5sum $base | cut -d" " -f1`  `basename "$pkg"`" $sum  ; then
                 true
             else
                 fetch $pkg || return $?
