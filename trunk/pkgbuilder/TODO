@@ -1,11 +1,29 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.34 2004/01/06 21:49:31 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.35 2004/01/09 19:43:36 tomby Exp $
 
 * New tasks:
 
     check pkg deps
     create virtual pkgs support like 'virtual/mta' in gentoo
-    use new 'use` variable values
+    use new 'use' variable flag values
     cleanup code
+    test latest estable kernel 2.6.1
+    
+* Packages to update:
+
+    distcc                  2.12.1
+    gnumeric                1.2.4
+    alsa-driver             1.0.1
+    alsa-lib                1.0.1
+    alsa-oss                1.0.1
+    alsa-utils              1.0.1
+    aalib                   1.4_rc5
+    
+* High priority packages:
+
+    ntp
+    cvs                     1.11.11
+    wget                    1.9.1
+    openssl                 0.9.7c
 
 * Packages:
 
