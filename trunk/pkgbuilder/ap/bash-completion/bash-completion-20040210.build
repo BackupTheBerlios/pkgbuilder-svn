@@ -1,14 +1,12 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/bash-completion/Attic/bash-completion-20040101.build,v 1.1 2004/01/01 12:55:46 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/bash-completion/bash-completion-20040210.build,v 1.1 2004/02/14 14:49:29 tomby Exp $
 #
-# bash-completion-20040101 pkgbuilder script
+# bash-completion-20040210 pkgbuilder script
 #
 
 inherit main
 
-PKG_NAME="bash-completion"
-PKG_VERSION="20040101"
 PKG_ARCH="noarch"
 PKG_BUILD="am1"
 PKG_EXTENSION="tar.gz"
@@ -24,8 +22,7 @@ PKG_DEPENDS=">=a/bash-2.0.5a a/bzip2 a/tar"
 PKG_HOMESITE="http://www.caliban.org/bash/index.shtml"
 
 PKG_SRC="$TMP/bash_completion"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_DOC_FILES="BUGS Changelog COPYING README"
 
 PKG_PREFIX="/usr"
