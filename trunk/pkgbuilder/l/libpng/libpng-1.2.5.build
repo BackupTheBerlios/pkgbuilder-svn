@@ -1,0 +1,53 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libpng/libpng-1.2.5.build,v 1.1 2003/11/29 23:24:07 tomby Exp $
+#
+# libpng-1.2.5 pkgbuilder script
+#
+
+PKG_NAME="libpng"
+PKG_VERSION="1.2.5"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/zlib"
+
+PKG_HOMESITE="http://www.libpng.org/pub/png/libpng.html"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ANNOUNCE CHANGES INSTALL KNOWNBUG LICENSE README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
+PKG_BUILD_OPTIONS="prefix=$PKG_PREFIX
+        ZLIBINC=$PKG_PREFIX/include ZLIBLIB=$PKG_PREFIX/lib -f scripts/makefile.linux"
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX -f scripts/makefile.linux"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure_null
+include do_build
+
+include do_postinstall
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/{include/libpng12,lib,man} &&
+    make $PKG_INSTALL_OPTIONS install
+    
+    return $?
+}
+
