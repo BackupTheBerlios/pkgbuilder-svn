@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.5 2003/12/24 11:40:04 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.6 2003/12/24 17:20:10 tomby Exp $
 
 #
 # Package specific functions
@@ -108,7 +108,7 @@ pkg_configure() {
 }
 
 pkg_build() {
-    make $PKG_BUILD_OPTIONS
+    make $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
 
     return $?
 }
@@ -117,8 +117,12 @@ pkg_install() {
     if [ "$PKG_INSTALL_OPTIONS" = "" ] ; then
         PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
     fi
+	
+	if [ "$PKG_INSTALL_TARGET" = "" ] ; then
+        $PKG_INSTALL_TARGET="install"
+    fi
 
-    make $PKG_INSTALL_OPTIONS install
+    make $PKG_INSTALL_OPTIONS $PKG_INSTALL_TARGET
 
     return $?
 }
