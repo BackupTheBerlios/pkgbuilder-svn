@@ -1,0 +1,36 @@
+#!/bin/sh
+# Start/stop/restart cpufreqd.
+
+# Start cpufreqd:
+cpufreqd_start() {
+  if [ -x /usr/sbin/cpufreqd -a -d /proc/acpi ]; then
+    echo "Starting ACPI daemon:  /usr/sbin/cpufreqd"
+    /usr/sbin/cpufreqd
+  fi
+}
+
+# Stop cpufreqd:
+cpufreqd_stop() {
+  killall cpufreqd
+}
+
+# Restart cpufreqd:
+cpufreqd_restart() {
+  cpufreqd_stop
+  sleep 1
+  cpufreqd_start
+}
+
+case "$1" in
+'start')
+  cpufreqd_start
+  ;;
+'stop')
+  cpufreqd_stop
+  ;;
+'restart')
+  cpufreqd_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
