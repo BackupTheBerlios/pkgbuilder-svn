@@ -1,0 +1,79 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/xmame/xmame-0.80.1.build,v 1.1 2004/04/12 21:35:43 tomby Exp $
+#
+# xmame-0.79.1 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://x.mame.net/download/$PKG_FILE_NAME"
+
+PKG_LICENSE="XMAME"
+
+PKG_USE="sdl alsa esd arts"
+
+PKG_DEPENDS="l/zlib
+             >=a/sed-4
+             d/nasm
+	         `use_dep alsa "l/alsa-lib"`
+	         `use_dep esd ">=l/esound-0.2.29"`
+	         `use_dep arts "kde/arts"`
+             `use sdl && echo ">=l/sdl-1.2.0" || echo "x/xfree86"`"
+
+PKG_HOMEPAGE="http://x.mame.net/"
+
+PKG_DOC_FILES="README todo doc/changes.unix doc/xmame-doc.txt doc/multiplayer-readme.txt"
+
+PKG_DISPLAY_METHOD="`use sdl && echo SDL || echo x11`"
+
+PKG_BUILD_OPTIONS="PREFIX=$PKG_PREFIX
+                   DISPLAY_METHOD=$PKG_DISPLAY_METHOD"
+
+PKG_INSTALL_OPTIONS="PREFIX=$PKG_DEST$PKG_PREFIX
+                     MANDIR=$PKG_DEST$PKG_PREFIX/man/man6
+                     DISPLAY_METHOD=$PKG_DISPLAY_METHOD"
+                     
+do_patch() {
+    cd $PKG_SRC
+    
+    cp Makefile Makefile.orig
+	sed -e "s:^CFLAGS = -O:CFLAGS = $CFLAGS:" Makefile.orig > Makefile
+    rm Makefile.orig
+    
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+    
+    if use esd ; then
+        cp Makefile Makefile.orig
+		sed -e '/SOUND_ESOUND/s:#::' Makefile.orig > Makefile
+        rm Makefile.orig
+	fi
+
+	if use alsa ; then
+        cp Makefile Makefile.orig
+		sed -e '/SOUND_ALSA/s:#::' Makefile.orig > Makefile
+        rm Makefile.orig
+	fi
+
+	if use arts ; then
+        cp Makefile Makefile.orig
+		sed -e '/SOUND_ARTS/s:#::' Makefile.orig > Makefile
+        rm Makefile.orig
+	fi
+
+	if use sdl ; then
+        cp Makefile Makefile.orig
+		sed -e '/SOUND_SDL/s:#::' Makefile.orig > Makefile
+        rm Makefile.orig
+	fi
+    
+    return $?
+}
