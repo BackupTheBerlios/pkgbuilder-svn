@@ -21,6 +21,8 @@ PKG_CONFIGURE_OPTIONS="--disable-static
 
 PKG_BUILD_TARGET="libphp4.la"
 
+PKG_CONFIG_FILES="etc/apache2/conf.d/mod_php.conf"
+
 PKG_NOSTRIP="Y"
 
 do_install() {
