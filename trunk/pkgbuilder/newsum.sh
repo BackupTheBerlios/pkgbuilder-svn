@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/newsum.sh,v 1.1 2003/12/06 12:53:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/newsum.sh,v 1.2 2004/01/02 12:49:24 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -30,7 +30,11 @@ if [ "$1" = "" ] ; then
     exit 1
 fi
 
-source $1
+PKG="$1"
+
+include base
+
+source $PKG
 
 cd $FETCH_DIR
 
