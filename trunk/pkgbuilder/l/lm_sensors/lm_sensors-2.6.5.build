@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lm_sensors/lm_sensors-2.6.5.build,v 1.3 2003/12/06 19:53:42 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lm_sensors/lm_sensors-2.6.5.build,v 1.4 2003/12/07 14:49:06 tomby Exp $
 #
 # lm_sensors pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="lm_sensors"
 PKG_VERSION="2.6.5"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://secure.netroedge.com/~lm78/archive/$PKG_FILE_NAME"
@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS=""
+PKG_DEPENDS="=k/kernel-source-`uname -r`"
 
 PKG_HOMESITE="http://secure.netroedge.com/~lm78/"
 
@@ -38,8 +38,8 @@ include do_configure_null
 do_build() {
     cd $PKG_SRC
     
-    make LINUX_HEADERS=/usr/include \
-        I2C_INCLUDE=/usr/include \
+    make LINUX_HEADERS=/usr/src/linux/include \
+        I2C_INCLUDE=/usr/src/linux/include \
         PREFIX=$PKG_PREFIX
     
     return $?
@@ -48,8 +48,8 @@ do_build() {
 do_install() {
     cd $PKG_SRC
     
-    make DESTDIR=$PKG_DEST LINUX_HEADERS=/usr/include \
-        I2C_INCLUDE=/usr/include PREFIX=$PKG_PREFIX install
+    make DESTDIR=$PKG_DEST LINUX_HEADERS=/usr/src/linux/include \
+        I2C_INCLUDE=/usr/src/linux/include PREFIX=$PKG_PREFIX install
     
     return $?
 }
