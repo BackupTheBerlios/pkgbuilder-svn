@@ -1,0 +1,40 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# sdl_sound-1.0.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL_sound-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://icculus.org/SDL_sound/downloads/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE="flac mikmod oggvorvis speex"
+
+PKG_DEPENDS=">=l/sdl-1.2
+             `use_dep flac "l/flac"`
+             `use_dep mikmod ">=l/libmikmod-3.1.9"`
+             `use_dep oggvorbis ">=l/libvorbis-1.0_beta4"`
+             `use_dep speex "l/speex l/libogg"`"
+
+PKG_HOMESITE="http://icculus.org/SDL_sound/"
+
+PKG_SRC="$TMP/SDL_sound-$PKG_VERSION"
+PKG_DOC_FILES="CHANGELOG CREDITS INSTALL README TODO"
+
+PKG_PREFIX="/usr"
+sPKG_CONFIGURE_OPTIONS="--disable-dependency-tracking
+                       --enable-midi
+                       --disable-smpeg
+                       `use_enable flac`
+                       `use_enable speex`
+                       `use_enable mikmod`
+                       `use_enable oggvorbis ogg`"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"

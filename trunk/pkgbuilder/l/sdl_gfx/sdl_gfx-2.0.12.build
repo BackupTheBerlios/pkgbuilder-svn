@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_gfx/sdl_gfx-2.0.10.build,v 1.1 2004/01/01 18:53:54 tomby Exp $
 #
-# sdl_gfx-2.0.11 pkgbuilder script
+# sdl_gfx-2.0.12 pkgbuilder script
 #
 
 inherit configscript

@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="sdl_perl"
-PKG_VERSION="1.20.0"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am3"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="SDL_perl-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://sdlperl.org/downloads/stable/$PKG_FILE_NAME"
@@ -22,18 +20,16 @@ PKG_USE=""
 PKG_DEPENDS=">=d/perl-5.8.0
              >=l/sdl-1.2.5
              >=l/sdl_mixer-1.0.5
-	         >=l/sdl_image-1.0.0
+             >=l/sdl_image-1.0.0
              l/sdl_net
              l/sdl_console
-	         l/sdl_gfx
-	         l/smpeg
-	         >=l/sdl_ttf-2.0.5"
+             l/sdl_gfx
+             l/smpeg
+             >=l/sdl_ttf-2.0.5"
 
 PKG_HOMESITE="http://sdlperl.org/"
 
 PKG_SRC="$TMP/SDL_perl-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="BUGS CHANGELOG COPYING README* TODO"
 
 PKG_PREFIX="/usr"
@@ -44,10 +40,6 @@ do_patch() {
     
     patch -p0 < $PKG_HOME/files/Makefile.linux.diff
     patch -p0 < $PKG_HOME/files/SDL_perl.xs.diff
-    
-    if is_installed nvidia-glx ; then
-        patch -p0 < $PKG_HOME/files/OpenGL.xs.diff
-    fi
     
     return $?
 }

@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="sdl_console"
-PKG_VERSION="2.1"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="sdlconsole-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/sdlconsole/$PKG_FILE_NAME"
@@ -25,8 +23,7 @@ PKG_DEPENDS=">=l/sdl-1.2
 PKG_HOMESITE="http://sdlconsole.sourceforge.net/"
 
 PKG_SRC="$TMP/sdlconsole-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README*"
 
 PKG_PREFIX="/usr"

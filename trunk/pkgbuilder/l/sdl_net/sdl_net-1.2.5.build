@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="sdl_net"
-PKG_VERSION="1.2.5"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="SDL_net-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.libsdl.org/projects/SDL_net/release/$PKG_FILE_NAME"
@@ -24,8 +22,7 @@ PKG_DEPENDS=">=l/sdl-1.2.5"
 PKG_HOMESITE="http://www.libsdl.org/projects/SDL_net/index.html"
 
 PKG_SRC="$TMP/SDL_net-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_DOC_FILES="COPYING CHANGES README"
 
 PKG_PREFIX="/usr"

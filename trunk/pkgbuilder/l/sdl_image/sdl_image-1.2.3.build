@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="sdl_image"
-PKG_VERSION="1.2.3"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am2"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="SDL_image-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.libsdl.org/projects/SDL_image/release/$PKG_FILE_NAME"
@@ -19,18 +17,17 @@ PKG_LICENSE="LGPLv2"
 
 PKG_USE="png gif tiff jpeg"
 
-PKG_DEPENDS="`use png && echo ">=l/libpng-1.2.1"`
-             `use gif && echo ">=l/libungif-4.1"`
-             `use tiff && echo ">=l/libtiff-3.6.0"`
-	         `use jpeg && echo ">=l/libjpeg-6b"`
-	         >=l/sdl-1.2.4
-	         l/zlib"
+PKG_DEPENDS="`use_dep png ">=l/libpng-1.2.1"`
+             `use_dep gif ">=l/libungif-4.1"`
+             `use_dep tiff ">=l/libtiff-3.6.0"`
+             `use_dep jpeg ">=l/libjpeg-6b"`
+             >=l/sdl-1.2.4
+             l/zlib"
 
 PKG_HOMESITE="http://www.libsdl.org/projects/SDL_image/index.html"
 
 PKG_SRC="$TMP/SDL_image-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_DOC_FILES="CHANGES COPYING README"
 
 PKG_PREFIX="/usr"
