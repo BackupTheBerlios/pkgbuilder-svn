@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxml/libxml-1.8.17.build,v 1.1 2003/11/29 00:00:14 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxml/libxml-1.8.17.build,v 1.2 2003/12/06 19:40:24 tomby Exp $
 #
-# libxml pkgbuilder script
+# libxml-1.8.17 pkgbuilder script
 #
 
 PKG_NAME="libxml"
@@ -17,7 +17,8 @@ PKG_LICENSE="GPLv2 LGPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/readline-4.1 >=l/ncurses-5.2"
+PKG_DEPENDS=">=l/readline-4.1 
+             >=l/ncurses-5.2"
 
 PKG_HOMESITE="http://xmlsoft.org/"
 
@@ -43,11 +44,7 @@ include do_install
 do_postinstall() {
     cd $PKG_SRC
     
-    mkdir -p $PKG_DOC
-
-    cp $PKG_DOC_FILES $PKG_DOC
-    find $PKG_DOC -type f -exec chmod 644 {} \;
-    find $PKG_DOC -type d -exec chmod 755 {} \;
+    pkg_installdoc
 
     strip_all $PKG_DEST
 
@@ -59,11 +56,5 @@ do_postinstall() {
     rm -f libxml
     ln -s $PKG_PREFIX/include/gnome-xml libxml
 
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
-    
-    if [ -f $PKG_HOME/files/doinst.sh ] ; then
-        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
-    fi
+    pkg_installfiles
 }
