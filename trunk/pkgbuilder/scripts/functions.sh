@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.6 2003/11/23 00:58:25 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.7 2003/11/23 15:46:12 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -175,6 +175,10 @@ is_installed() {
 latest_version() {
     if [ "$1" == "" -o "$2" == "" ] ; then
         return 1
+    fi
+    
+    if [ ! -d "$PKGBUILDER_HOME/$1/$2" ] ; then
+        return 2
     fi
     
     local buildfiles=`cd $PKGBUILDER_HOME/$1/$2 ; ls -1v *.build`
