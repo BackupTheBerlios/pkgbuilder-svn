@@ -1,0 +1,57 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# mc-4.6.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.ibiblio.org/pub/Linux/utils/file/managers/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ncurses gpm slang samba X"
+
+PKG_DEPENDS="`use_dep ncurses ">=l/ncurses-5.2"`
+             l/glib2
+             `use_dep gpm ">=a/gpm-1.19.3"`
+             `use_dep slang ">=l/slang-1.4.2"`
+             `use_dep samba ">=net-fs/samba-3.0.0"`
+             `use_dep X "x/xfree86"`"
+
+PKG_HOMESITE="http://www.ibiblio.org/mc/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING FAQ INSTALL* MAINTAINERS NEWS README*"
+
+PKG_CONFIGURE_OPTIONS="--with-vfs
+                       --with-gnu-ld
+                       --with-ext2undel
+                       --with-edit
+                       --enable-charset
+                       `use_with gpm gpm-mouse`
+                       `use_with X x`"
+
+do_configure() {
+    if ! use slang && ! use ncurses ; then
+        PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --with-screen=mcslang"
+    elif ! use slang && use ncurses ; then
+        PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --with-screen=ncurses"
+    elif use slang ; then
+        PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --with-screen=slang"
+    fi
+
+    if use samba ; then
+         PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --with-samba 
+                                    --with-configdir=/etc/samba
+                                    --with-privatedir=/etc/samba/private"
+    else
+         PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --without-samba"
+    fi
+
+    configscript_do_configure
+}
