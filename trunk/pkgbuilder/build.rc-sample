@@ -1,21 +1,23 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/Attic/build.rc,v 1.5 2003/11/28 22:02:45 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.1 2003/12/20 12:24:24 tomby Exp $
 
-PKGBUILDER_HOME="/home/tomby/proyectos/pkgbuilder"
+PKGBUILDER_HOME="/var/pkgbuilder"
 
 VERSION="20031128"
 
-PACKAGES_LOGDIR="/home/tomby/tmp/installed"
+PACKAGES_LOGDIR="/var/log/packages"
 
 FETCH_TRIES="5"
 FETCH_RATE="25K"
-FETCH_DIR="/home/tomby/tmp/distfiles"
+FETCH_DIR="/tmp/distfiles"
 FETCH_OPTIONS="--tries=$FETCH_TRIES --limit-rate=$FETCH_RATE --directory-prefix=$FETCH_DIR"
 
-TMP="/home/tomby/tmp"
+TMP="/tmp"
 
-USE="test3 test4"
+USE="alsa oss arts esd nls doc oggvorbis lame samba mad 
+     mmx sse 3dnow opengl tcltk ncurses cups xml python motif
+     dvd sdl aalib"
 
 ARCH="i486"
 CPU="i686"
