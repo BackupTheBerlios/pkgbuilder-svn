@@ -9,6 +9,8 @@ inherit php
 
 PKG_BUILD="am1"
 
+PKG_USE="$PKG_USE readline ncurses"
+
 PKG_DEPENDS="$PKG_DEPENDS
              `use_dep readline "l/readline l/ncurses"`
              `use_dep ncurses "l/ncurses"`"
