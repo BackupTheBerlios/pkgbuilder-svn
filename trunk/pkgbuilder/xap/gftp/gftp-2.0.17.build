@@ -1,0 +1,25 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gftp/gftp-2.0.16.build,v 1.1 2004/01/06 15:53:59 tomby Exp $
+#
+# gftp-2.0.17 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://www.gftp.org/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls gtk"
+
+PKG_DEPENDS="x/xfree86
+             >=l/gtk+2
+             `use_dep ssl "l/openssl"`
+             `use_dep nls "d/gettext"`"
+
+PKG_HOMESITE="http://www.gftp.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog* COPYING INSTALL NEWS README* T*"
