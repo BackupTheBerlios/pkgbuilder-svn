@@ -1,0 +1,32 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/xmms/Attic/xmms-1.2.9.build,v 1.1 2004/01/30 19:30:58 tomby Exp $
+#
+# xmms-1.2.8 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am2"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.xmms.org/files/1.2.x/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="alsa esd mikmod oggvorbis opengl nls mmx 3dnow"
+
+PKG_DEPENDS="a/infozip
+	         l/gtk+
+			 >=l/libxml-1.8.15
+			 `use alsa && echo ">=l/alsa-lib-0.9"`
+             `use mikmod && echo ">=l/libmikmod-3.1.6"`
+        	 `use esd && echo ">=l/esound-0.2.22"`
+        	 `use oggvorbis && echo ">=l/libvorbis-1.0_beta4"`
+			 `use nls && echo "d/gettext"`"
+
+PKG_HOMESITE="http://www.xmms.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING FAQ NEWS README TODO"
+
+PKG_CONFIGURE_OPTIONS="`use mmx || use 3dnow && echo "--enable-simd"`"

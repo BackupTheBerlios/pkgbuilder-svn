@@ -1,0 +1,71 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/t1lib/t1lib-1.3.1.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+#
+# t1lib-1.3.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="t1lib"
+PKG_VERSION="1.3.1"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://metalab.unc.edu/pub/Linux/libs/graphics/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="x/xfree86"
+
+PKG_HOMESITE="ftp://metalab.unc.edu/pub/Linux/libs/graphics"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="Changes LGPL LICENSE README.* doc/t1lib_doc.pdf"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
+PKG_BUILD_OPTIONS="without_doc"
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    rm -rf $PKG_DEST$PKG_PREFIX/share/$PKG_NAME/doc
+    
+    pkg_installdoc
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/share/t1lib/Fonts
+    cp -R Fonts/* $PKG_DEST$PKG_PREFIX/share/t1lib/Fonts/
+    
+    ls $PKG_DEST$PKG_PREFIX/share/t1lib/Fonts/afm/*.afm /usr/X11R6/lib/X11/fonts/Type1/*.afm | sort | uniq | wc -l | sed -e 's/ //g' > $PKG_DEST$PKG_PREFIX/share/t1lib/FontDataBase
+    ( cd $PKG_DEST$PKG_PREFIX/share/t1lib/Fonts/afm ; ls *.afm ; cd /usr/X11R6/lib/X11/fonts/Type1 ; ls *.afm ) | sort | uniq >> $PKG_DEST$PKG_PREFIX/share/t1lib/FontDataBase
+    
+    cat << EOF > $PKG_DEST$PKG_PREFIX/share/t1lib/t1lib.config
+This is a configuration file for t1lib
+
+FONTDATABASE=/usr/share/t1lib/FontDataBase
+ENCODING=/usr/share/t1lib/Fonts/enc
+AFM=/usr/share/t1lib/Fonts/afm:/usr/X11R6/lib/X11/fonts/Type1
+TYPE1=/usr/share/t1lib/Fonts/type1:/usr/X11R6/lib/X11/fonts/Type1
+EOF
+
+    mkdir -p $PKG_DEST/etc/profile.d
+    
+    cat << EOF > $PKG_DEST/etc/profile.d/t1lib.sh
+T1LIB_CONFIG=/usr/share/t1lib/t1lib.config
+export T1LIB_CONFIG
+EOF
+    
+    cat << EOF > $PKG_DEST/etc/profile.d/t1lib.csh
+setenv T1LIB_CONFIG /usr/share/t1lib/t1lib.config
+EOF
+    
+    chmod 755 $PKG_DEST/etc/profile.d/*
+}
+

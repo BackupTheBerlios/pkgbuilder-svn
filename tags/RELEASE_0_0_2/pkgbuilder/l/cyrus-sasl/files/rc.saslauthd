@@ -1,0 +1,33 @@
+#!/bin/sh
+# Start/stop/restart saslauthd:
+
+saslauthd_start() {
+  /usr/sbin/saslauthd -a shadow
+}
+
+saslauthd_stop() {
+  killall saslauthd
+}
+
+saslauthd_restart() {
+  saslauthd_stop
+
+  sleep 1
+  
+  saslauthd_start
+}
+
+case "$1" in
+'start')
+  saslauthd_start
+  ;;
+'stop')
+  saslauthd_stop
+  ;;
+'restart')
+  saslauthd_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
+

@@ -1,0 +1,40 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/liba52/liba52-0.7.4.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+#
+# liba52-0.7.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="liba52"
+PKG_VERSION="0.7.4"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="a52dec-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://liba52.sourceforge.net/files/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=d/autoconf-2.57"
+
+PKG_HOMESITE="http://liba52.sourceforge.net/"
+
+PKG_SRC="$TMP/a52dec-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog HISTORY NEWS README TODO doc/liba52.txt"
+
+PKG_PREFIX="/usr"
+
+do_configure() {
+	cd $PKG_SRC
+	
+	./configure --prefix=$PKG_PREFIX
+	
+	return $?
+}
+

@@ -1,0 +1,79 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/cups/cups-1.1.20.build,v 1.7 2004/01/05 12:25:00 tomby Exp $
+#
+# cups-1.1.20 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am3"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.easysw.com/pub/$PKG_NAME/$PKG_VERSION/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl slp"
+
+PKG_DEPENDS="l/glibc
+             >=l/libpng-1.2.1
+             >=l/libtiff-3.5.5
+             >=l/libjpeg-6b
+             `use slp && echo ">=l/openslp-1.0.4"`
+             `use ssl && echo ">=l/openssl-0.9.7c"`
+             !a/lprng"
+
+PKG_HOMESITE="http://www.cups.org"
+
+PKG_DOC_FILES="CHANGES.txt CREDITS.txt ENCRYPTION.txt LICENSE.txt README.txt"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var
+                       --with-logdir=/var/log/cups
+                       --disable-pam
+                       --with-cups-user=lp
+                       --with-cups-group=lp"
+
+PKG_INSTALL_OPTIONS="BUILDROOT=$PKG_DEST INITDIR=/etc"
+
+PKG_CONFIG_FILES="etc/cups/classes.conf
+                  etc/cups/client.conf
+                  etc/cups/cupsd.conf
+                  etc/cups/mime.convs
+                  etc/cups/mime.types
+                  etc/cups/printers.conf
+                  etc/rc.d/rc.cups"
+
+do_install() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST/etc/cups &&
+    mkdir -p $PKG_DEST/var/spool &&
+    mkdir -p $PKG_DEST/var/log/cups &&
+    pkg_install
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    pkg_installdoc
+
+    ( cd $PKG_DEST/usr/man
+        find . -type d -name "cat*" | xargs rm -rf )
+
+    pkg_gzipmaninfo
+
+    ( mkdir -p $PKG_DEST/etc/rc.d ; cd $PKG_DEST/etc/rc.d
+        mv ../init.d/cups rc.cups
+        rm -rf ../init.d ../rc?.d
+        chmod 644 rc.cups )
+
+    pkg_configfiles
+
+    pkg_installfiles
+
+    return $?
+}

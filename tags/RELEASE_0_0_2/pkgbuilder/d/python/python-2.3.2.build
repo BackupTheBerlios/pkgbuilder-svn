@@ -1,0 +1,45 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/python/python-2.3.2.build,v 1.3 2004/01/04 20:42:41 tomby Exp $
+#
+# python-2.3.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="Python-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.python.org/ftp/python/$PKG_VERSION/$PKG_FILE_NAME"
+
+PKG_LICENSE="PSFv2.2"
+
+PKG_USE="ncurses tcltk"
+
+PKG_DEPENDS="l/glibc
+             >=l/zlib-1.1.3
+             >=l/db3-3.1
+             l/gdbm
+             l/openssl
+             l/expat
+             `use ncurses && echo ">=l/ncurses-5.2"`
+             `use tcltk && echo ">=d/tk-8.0"`"
+
+PKG_HOMESITE="http://www.python.org"
+
+PKG_SRC="$TMP/Python-$PKG_VERSION"
+
+PKG_DOC_FILES="LICENSE README"
+
+PKG_CONFIGURE_OPTIONS="--with-fpectl
+                       --with-threads
+                       --enable-shared"
+                       
+do_configure() {
+    cd $PKG_SRC
+    
+    OPT="$CFLAGS" \
+    ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+    
+    return $?
+}

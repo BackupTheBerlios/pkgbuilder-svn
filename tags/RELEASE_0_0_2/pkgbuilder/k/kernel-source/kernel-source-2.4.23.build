@@ -1,0 +1,50 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/k/kernel-source/kernel-source-2.4.23.build,v 1.9 2004/01/11 15:05:01 tomby Exp $
+#
+# kernel-source-2.4.23 pkgbuilder script
+#
+
+PKG_NAME="kernel-source"
+PKG_VERSION="2.4.23"
+PKG_ARCH="noarch"
+PKG_BUILD="am4"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="linux-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.rediris.es/pub/mirror/kernel/v2.4/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_HOMESITE="http://www.kernel.org/"
+
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+
+PKG_PREFIX="/usr/src"
+
+do_install() {
+    mkdir -p $PKG_DEST$PKG_PREFIX &&
+    cd $PKG_DEST$PKG_PREFIX &&
+    unpack $PKG_FILE_NAME &&
+    ln -sf linux-$PKG_VERSION linux &&
+    
+    cd linux &&
+    make mrproper &&
+    cat $PKG_HOME/files/config-$PKG_VERSION > .config &&
+    make oldconfig &&
+    make include/linux/version.h &&
+    make clean &&
+    cat $PKG_HOME/files/config-$PKG_VERSION > .config &&
+    rm .config.old
+    
+    cd ..
+    chown -R root.root linux-$PKG_VERSION
+    
+    return $?
+}
+
+do_postinstall() {
+    pkg_installfiles
+    
+    return $?
+}
+

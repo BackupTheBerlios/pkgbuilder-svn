@@ -1,0 +1,48 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/nano/Attic/nano-1.2.2.build,v 1.9 2003/12/30 18:44:13 tomby Exp $
+#
+# nano-1.2.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="nano"
+PKG_VERSION="1.2.2"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am5"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.nano-editor.org/dist/v1.2/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/ncurses-5.2
+               d/gettext"
+
+PKG_HOMESITE="http://www.nano-editor.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS BUGS C* INSTALL NEWS README T* UPGRADE faq.html"
+PKG_CONFIG_FILES="etc/nanorc"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc --enable-all"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+PKG_CONFIG_FILES="etc/nanorc"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc
+    cp $PKG_HOME/files/nanorc-sample $PKG_DEST/etc/nanorc
+    chmod 644 $PKG_DEST/etc/nanorc
+
+    pkg_postinstall
+}

@@ -1,0 +1,494 @@
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.40 2004/02/15 13:17:44 tomby Exp $
+
+* New tasks:
+
+    check pkg deps
+    create virtual pkgs support like 'virtual/mta' in gentoo
+    use new 'use' variable flag values
+    cleanup code
+    documentation
+    
+* Packages to update:
+    
+* High priority packages:
+
+    cvs                     1.11.11
+    wget                    1.9.1
+    openssl                 0.9.7c
+
+* Packages:
+
+a)
+
+    acpid
+    apmd                   X    3.0.2
+    bash
+    bin
+    bzip2
+    coreutils
+    cpio
+    cups                   X    1.1.20
+    dcron
+    devfsd
+    devs
+    e2fsprogs
+    findutils
+    gawk
+    gpm                    X    1.20.1
+    grep
+    gzip
+    hdparm
+    hotplug
+    infozip
+    isapnptools
+    jfstools
+    kdb
+    less
+    lilo
+    logrotate
+    lprng
+    minicom
+    module-init-tools
+    pciutils
+    pcmcia-cs
+    procps
+    reiserfsprogs
+    sed
+    shadow
+    sysklogd
+    syslinux
+    tar
+    usb-utils
+    util-linux
+    xfsprogs
+
+ap)
+
+    a2ps
+    alsa-utils             X    1.0.2
+    apsfilter
+    ash
+    at
+    aumix
+    bash-completion        X    20040210 
+    bc                     X    1.06
+    cdparanoia             X    3.9.8
+    cdrdao                 X    1.1.8
+    cdrtools               X    2.00.3
+    diffutils
+    docbook-dsssl          X    1.78
+    docbook-sgml-dtd       X    3.0, 3.1, 4.0, 4.1, 4.2
+    docbook-sgml-utils     X    0.6.13
+    docbook-xml-dtd        X    4.1.2
+    docbook-xsl            X    1.62.4
+    emacs
+    enscript               X    1.6.3
+    esp-gs                 X    7.07.1
+    fam                    X    2.7.0
+    foomatic-db            X    3.0.0
+    foomatic-db-engine     X    20031221
+    foomatic-filters       X    3.0.0
+    gimp-print             X    4.3.25
+    gnupg                  X    1.2.4
+    groff
+    iptables               X    1.2.9
+    ispell
+    jadetex                X    3.12
+    jed
+    joe
+    lsof
+    lvm
+    madplay                X    0.15.0b
+    man
+    man-pages
+    mc
+    mpg321                 X    0.2.10
+    mysql
+    nano                   X    1.2.2
+    openjade               X    1.3.2
+    opensp                 X    1.5.1
+    pnm2ppa                X    1.12
+    postgresql
+    psutils
+    quota
+    sane
+    screen                 X    3.9.15
+    sgml-common            X    0.6.3
+    sgmlspm                X    1.03
+    slocate
+    sudo
+    tcsh                   X    6.12
+    tetex                  X    2.0.2
+    texinfo
+    vim                    X    6.2.242
+    vorbis-tools           X    1.0.1
+    workbone
+    wv                     X    1.0.0
+    wv2                    X    0.2.1
+    zsh                    X    4.0.9
+
+l)
+
+    aalib                  X    1.4rc5
+    alsa-driver            X    1.0.2c
+    alsa-libs              X    1.0.2
+    alsa-oss               X    1.0.2
+    aspell                 X    0.50.4.1
+    atk                    X    1.4.1
+    audio-file             X    0.2.5
+    cyrus-sasl             X    2.1.17
+    db1                    X    1.85
+    db2
+    db3                    X    3.3.11
+    db4
+    directfb               X    0.9.20
+    divx4linux             X    20030428
+    esound                 X    0.2.32
+    expat                  X    1.95.7
+    flac                   X    1.1.0
+    fontconfig             X    2.2.1
+    freetype2              X    2.1.5
+    fribidi                X    0.10.4
+    gdbm                   X    1.8.3
+    glib                   X    1.2.10
+    glib2                  X    2.2.3
+    glibc
+    glut
+    gmp                    X    4.1.2
+    gnet                   X    1.1.9
+    gtk+                   X    1.2.10
+    gtk+2                  X    2.2.4
+    gtkglarea              X    1.99.0
+    id3lib                 X    3.8.3
+    imlib                  X    1.9.14
+    imlib2                 X    1.1.0
+    lame                   X    3.95.1
+    lcms                   X    1.11
+    lesstif                X    0.93.94
+    liba52                 X    0.7.4
+    libao                  X    0.8.4
+    libart_gpl             X    2.3.16
+    libcroco               X    0.4.0
+    libdv
+    libdvdcss              X    1.2.8
+    libdvdnav
+    libdvdread
+    libexif                X    0.5.12
+    libfame                X    0.9.0
+    libgsf                 X    1.8.2
+    libid3tag              X    0.15.0b
+    libieee1284            X    0.2.1
+    libjpeg                X    6b
+    libmad                 X    0.15.0b
+    libmikmod              X    3.1.10
+    libmng                 X    1.0.5
+    libmpeg3               X    1.5.2
+    libmusicbrainz         X    2.0.2
+    libogg                 X    1.1
+    libpcap                X    0.8.1
+    libpng                 X    1.2.5
+    libsoup                X    1.99.26
+    libtermcap
+    libtiff                X    3.6.1
+    libungif               X    4.1.0b1
+    libvorbis              X    1.0.1
+    libxml2                X    2.6.6
+    libxml                 X    1.8.17
+    libxslt                X    1.1.2
+    libzvf                 X    2.0.1
+    lm_sensors             X    2.6.5 (compatible con serie 2.4)
+    nas
+    ncurses
+    openssl
+    openslp                X    1.0.11
+    pango                  X    1.2.5
+    pcre                   X    4.5
+    popt                   X    1.7
+    qt                     X    3.2.3
+    readline               X    4.3
+    ruby-gnome2            X    0.8.1
+    sdl_console            X    2.1
+    sdl_gfx                X    2.0.10
+    sdl_image              X    1.2.3
+    sdl_mixer              X    1.2.5
+    sdl_net                X    1.2.5
+    sdl_perl               X    1.20.0
+    sdl_ttf                X    2.0.6
+    sdl                    X    1.2.6
+    slang                  X    1.4.9
+    smpeg                  X    0.4.4
+    speex                  X    1.0.3
+    startup-notification   X    0.5
+    svgalib                X    1.4.3
+    t1lib                  X    1.3.1
+    taglib                 X    1.0beta2
+    utempter
+    win32codecs            X    1.0
+    xine-libs              X    1.0rc3
+    xvid                   X    0.9.2
+    zlib
+
+d)
+
+    autoconf
+    automake
+    bin86
+    binutils
+    bison
+    byacc
+    ccache                 X    2.3
+    cscope                 X    15.5
+    ctags                  X    5.5
+    cvs
+    distcc                 X    2.12.1
+    flex
+    gcc
+    gdb
+    gettext                X    0.11.5
+    guile                  X    1.6.4
+    indent                 X    2.2.9
+    j2sdk
+    libtool
+    m4
+    make
+    nasm                   X    0.98.38
+    perl
+    pkgconfig              X    0.15.0
+    pmake
+    pgtk                   X    2.0.0
+    python                 X    2.3.2
+    pyxml                  X    0.8.3
+    rcs
+    ruby                   X    1.8.1
+    tcl                    X    8.4.5
+    tk                     X    8.4.5
+
+emu)
+
+    dosbox                 X    0.61
+    scummvm                X    0.5.1
+    wine                   X    20040121
+    xmame                  X    0.78.1
+
+games)
+
+    frozen-bubble          X    1.0.0
+
+n)
+
+    airtraf                X    1.1
+    animail
+    apache
+    ap-utils               X    1.3.2
+    bind
+    bitchx                 X    1.0.19
+    courier
+    curl                   X    7.10.8
+    dhcp
+    dhcpd
+    epic4
+    etherape               X    0.9.0
+    ethereal               X    0.10.0a
+    exim
+    fetchmail
+    getmail
+    inetd
+    iptraf
+    kismet                 X    3.0.1
+    lftp
+    links                  X    2.1pre14
+    lynx                   X    2.8.5
+    mutt                   X    1.4.2.1
+    nail
+    nc
+    ncftp                  X    3.1.7
+    netwatch
+    nfs-utils
+    nmap                   X    3.50
+    nn
+    ntop                   X    2.2c
+    ntp                    X    4.1.2
+    openldap
+    openssh                X    3.7.1p2
+    php
+    pine
+    portmap                X    5.0
+    postfix                X    2.0.18
+    ppp
+    procmail
+    proftpd
+    pure-ftpd
+    qmail
+    qpopper
+    rp-pppoe
+    rsync                  X    2.5.7, 2.6.0
+    samba                  X    3.0.1
+    sendmail
+    slrn                   X    0.9.8.0
+    tcpdump                X    3.8.1
+    tcpip
+    tin
+    traceroute
+    trn
+    w3m
+    wget
+    wireless-tools
+    wvdial
+    wvstreams
+    xinetd                 X    2.3.12
+
+x)
+    nvidia-glx             X    1.0.5328
+    nvidia-kernel          X    1.0.5328
+
+    xfree                  X    4.3.0.1
+
+xap)
+
+    abiword                X    2.0.3
+    anjuta                 X    1.2.0
+    aterm                  X    0.4.2
+    epiphany               X    1.0.7
+    evolution              X    1.4.5
+    fluxbox                X    0.1.14, 0.9.8
+    fvwm
+    gaim                   X    0.75
+    galeon                 X    1.3.12
+    gftp                   X    2.0.16
+    ggv                    X    2.4.1
+    gimp
+    gkrellm                X    2.1.25
+    gnomeicu               X    0.99
+    gnucash
+    gnuchess
+    gnuplot
+    gnumeric               X    1.2.5   (falta soporte para libgda)
+    gqview                 X    1.3.9
+    gv
+    gvim                   X    6.2.242
+    imagemagick            X    5.5.7.15
+    kopete                 X    0.7.3
+    ksetispy               X    0.6.0
+    ksetiwatch             X    2.6.1
+    lincvs                 X    1.3.0
+    lyx                    X    1.3.3   (faltan paquetes de dependencias)
+    mozilla                X    1.6
+    mplayer                X    1.0pre3
+    nedit                  X    5.4
+    pan
+    rxvt
+    sawfish
+    umbrello               X    1.1.1
+    windowmaker            X    0.80.2
+    xchat                  X    2.0.6
+    xfce
+    xine
+    xmms                   X    1.2.9
+    xpdf                   X    2.03
+    xsane
+    xscreensaver           X    4.14
+
+
+kde)
+
+    arts                   X    1.2.0
+    kdeaccessibility       X    3.2.0
+    kdeaddons              X    3.2.0
+    kdeadmin               X    3.2.0
+    kdeartwork             X    3.2.0
+    kdebase                X    3.2.0
+    kdebindings            X    3.2.0
+    kdeedu                 X    3.2.0
+    kdegames               X    3.2.0
+    kdegraphics            X    3.2.0
+    kde-i18n               X    3.2.0
+    kdelibs                X    3.2.0
+    kdemultimedia          X    3.2.0
+    kdenetwork             X    3.2.0
+    kdepim                 X    3.2.0
+    kdesdk                 X    3.2.0
+    kdetoys                X    3.2.0
+    kdeutils               X    3.2.0
+    kdevelop               X    3.0.0
+    koffice                X    1.3
+    quanta                 X    3.2.0
+
+gnome)
+
+    acme                   X    2.4.2
+    at-spi                 X    1.3.7
+    bug-buddy              X    2.4.2
+    control-center         X    2.4.0
+    eel                    X    2.4.2
+    eog                    X    2.4.1
+    file-roller            X    2.4.4
+    gail                   X    1.4.1
+    gal                    X    1.99.10
+    gcalctool              X    4.3.42
+    gconf                  X    2.4.0.1
+    gconf-editor           X    2.4.0.1
+    gdm
+    gedit                  X    2.4.1
+    ghex
+    glade
+    gnome2-user-docs
+    gnome-applets          X    2.4.2
+    gnome-audio            X    2.0.0
+    gnome-desktop          X    2.4.1.1
+    gnome-extra-themes
+    gnome-games            X    2.4.2
+    gnome-icon-theme       X    1.1.5
+    gnome-mag
+    gnome-media            X    2.4.1.1
+    gnome-mime-data        X    2.4.1
+    gnome-panel            X    2.4.2
+    gnome-session          X    2.4.2
+    gnome-speech
+    gnome-system-monitor   X    2.4.0
+    gnome-terminal         X    2.4.2
+    gnome-themes           X    2.4.1
+    gnome-utils            X    2.4.1
+    gnome-vfs              X    2.4.2
+    gnome-vfs-extras
+    gnopernicus
+    gok
+    gpdf
+    gst-plugins            X    0.6.4
+    gstreamer              X    0.6.4
+    gthumb                 X    2.2.0
+    gtk-doc                X    1.1
+    gtk-engines            X    2.2.0
+    gtk-engines-thinice    X    2.0.2
+    gtkhtml                X    3.0.9
+    gucharmap
+    intltool               X    0.27.2
+    libbonobo              X    2.4.3
+    libbonoboui            X    2.4.3
+    libgail-gnome
+    libgda
+    libglade               X    2.0.1
+    libgnome               X    2.4.0
+    libgnomecanvas         X    2.4.0
+    libgnomeprint          X    2.4.2
+    libgnomeprintui        X    2.4.2
+    libgnomeui             X    2.4.0.1
+    libgtkhtml             X    2.4.1
+    libgtop                X    2.0.8
+    libidl                 X    0.8.3
+    librsvg                X    2.4.0
+    libwnck                X    2.4.0.1
+    linc                   X    1.0.3
+    metacity               X    2.6.3
+    nautilus               X    2.4.2
+    nautilus-cd-burner     X    0.5.3
+    nautilus-media         X    0.3.3.1
+    orbit2                 X    2.8.3
+    scrollkeeper           X    0.3.12
+    vte                    X    0.11.10
+    yelp                   X    2.4.2
+    zenity
+
+And more...
+
+
+

@@ -1,0 +1,79 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/gnome.build,v 1.6 2004/01/04 18:03:35 tomby Exp $
+#
+# pkgbuilder script for gnome packages
+#
+
+include configscript
+
+gnome_init() {
+    configscript_init
+    
+    PKG_ARCH="$ARCH"
+    PKG_EXTENSION="tar.bz2"
+    PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+    GNOME_BASE_URL="http://ftp.gnome.org/pub/GNOME/sources"
+    PKG_URL="$GNOME_BASE_URL/$PKG_NAME/`gnome_mayor_version`/$PKG_FILE_NAME"
+
+    PKG_LICENSE="GPLv2"
+
+    PKG_HOMESITE="http://www.gnome.org/"
+
+    PKG_PREFIX="/usr"
+    PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                           --localstatedir=/var/lib"
+    PKG_BUILD_OPTIONS=""
+    PKG_BUILD_TARGET=""
+    PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+    PKG_INSTALL_TARGET="install"
+}
+
+#private functions
+gnome_mayor_version() {
+    expr match $PKG_VERSION '\([0-9]*\.[0-9]*\)\.'
+}
+
+gnome_minor_version() {
+    expr match $PKG_VERSION '[0-9]*\.[0-9]*\.\([0-9]*\)'
+}
+
+gnome_gconf_install() {
+    mkdir -p $PKG_DEST/install
+    
+    SCHEMAS="`find $PKG_DEST -type f | grep "etc/gconf/schemas/.*.schemas$" | sed "s:$PKG_DEST/\(.*\):\1:g"`"
+
+    if [ "$SCHEMAS" != "" ] ; then    
+        echo 'export GCONF_CONFIG_SOURCE=`usr/bin/gconftool-2 --get-default-source`' >> $PKG_DEST/install/doinst.sh
+        echo "SCHEMAS=\"$SCHEMAS\"" >> $PKG_DEST/install/doinst.sh
+        echo 'usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS' >> $PKG_DEST/install/doinst.sh
+    fi
+}
+
+#public functions
+gnome_do_configure() {
+    configscript_do_configure
+}
+
+gnome_do_build() {
+    configscript_do_build
+}
+
+gnome_do_unpack() {
+    configscript_do_unpack
+}
+
+gnome_do_install() {
+    export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL="1"
+    
+    configscript_do_install
+    
+    unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
+}
+
+gnome_do_postinstall() {
+    configscript_do_postinstall
+    gnome_gconf_install
+}
+
+

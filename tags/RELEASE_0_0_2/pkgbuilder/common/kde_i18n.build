@@ -1,0 +1,65 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/kde_i18n.build,v 1.2 2004/02/05 20:57:29 tomby Exp $
+#
+# pkgbuilder script for kde-i18n-i18n packages
+#
+
+include kde
+
+kde_i18n_init() {
+    kde_init
+    
+    PKG_ARCH="noarch"
+    
+    unset PKG_FILE_NAME
+    unset PKG_URL
+    
+    PKG_UNPACK_DIR="$PKG_SRC"
+    
+    for lang in $I18N ; do
+        PKG_FILE_NAME="$PKG_FILE_NAME $PKG_NAME-$lang-$PKG_VERSION.$PKG_EXTENSION"
+    done
+    unset lang
+
+    for file in $PKG_FILE_NAME ; do
+        PKG_URL="$PKG_URL $KDE_BASE_URL/`kde_mayor_version`/src/$PKG_NAME/$file"
+    done
+    unset file
+}
+
+kde_i18n_do_unpack() {
+    kde_do_unpack
+}
+
+kde_i18n_do_configure() {
+    cd $PKG_SRC
+    
+    local lang
+
+    for lang in $I18N ; do
+        ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
+          pkg_configure )
+    done
+
+    return $?
+}
+
+kde_i18n_do_install() {
+    cd $PKG_SRC
+    
+    local lang
+
+    for lang in $I18N ; do
+        ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
+          pkg_install )
+    done
+
+    return $?
+}
+
+kde_i18n_do_postinstall() {
+    pkg_installfiles
+
+    return $?
+}
