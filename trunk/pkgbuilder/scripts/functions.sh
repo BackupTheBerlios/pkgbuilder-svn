@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.34 2003/12/30 20:27:14 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.35 2004/01/02 12:39:29 tomby Exp $
 
 #
 # Generic functions
@@ -41,6 +41,11 @@ inherit() {
     include $1
     
     PKG_PARENT="$1"
+    
+    #call constructor
+    if declare ${PKG_PARENT}_init ; then
+        ${PKG_PARENT}_init
+    fi
     
     return $?
 }
