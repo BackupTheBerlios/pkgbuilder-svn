@@ -1,14 +1,16 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/divx4linux/20030428/Attic/build.sh,v 1.1 2003/10/21 18:19:48 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/divx4linux/20030428/Attic/build.sh,v 1.2 2003/10/21 19:21:23 tomby Exp $
 #
 # divx4linux pkgbuilder script
 #
 
 include do_info
 include do_fetch
-
 include do_patch
+include do_configure_null
+include do_build_null
+
 include do_buildpkg
 include do_installpkg
 include do_upgradepkg
@@ -20,14 +22,6 @@ do_uncompress() {
     tar zxvf $FETCH_DIR/$PKG_NAME-std-$PKG_VERSION.tar.gz
 
     return $?
-}
-
-do_configure() {
-    echo "configure: nothing to do"
-}
-
-do_build() {
-    echo "build: nothing to do"
 }
 
 do_install() {

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gkrellm/2.1.19/Attic/build.sh,v 1.1 2003/10/21 18:19:55 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gkrellm/2.1.19/Attic/build.sh,v 1.2 2003/10/21 19:21:23 tomby Exp $
 #
 # gkrellm pkgbuilder script
 #
@@ -8,6 +8,9 @@
 include do_info
 include do_fetch
 include do_uncompress_bzip2
+
+include do_configure_null
+
 include do_postinstall
 include do_buildpkg
 include do_installpkg
@@ -21,10 +24,6 @@ do_patch() {
     sed "s/share\/man/man/g" Makefile.old > Makefile
     
     return $?
-}
-
-do_configure() {
-    echo "configure: nothing to do"
 }
 
 do_build() {

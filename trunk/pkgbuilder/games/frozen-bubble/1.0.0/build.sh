@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/games/frozen-bubble/1.0.0/Attic/build.sh,v 1.1 2003/10/21 18:19:55 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/games/frozen-bubble/1.0.0/Attic/build.sh,v 1.2 2003/10/21 19:21:23 tomby Exp $
 #
 # frozen-bubble pkgbuilder script
 #
@@ -8,6 +8,8 @@
 include do_info
 include do_fetch
 include do_uncompress_bzip2
+
+include do_configure_null
 
 include do_buildpkg
 include do_installpkg
@@ -21,10 +23,6 @@ do_patch() {
     sed -e "s:INSTALLDIRS=.*:PREFIX=${PKG_DEST}/usr:" c_stuff/Makefile.bak > c_stuff/Makefile
 
     return $?
-}
-
-do_configure() {
-    echo "configure: nothing to do"
 }
 
 do_build() {

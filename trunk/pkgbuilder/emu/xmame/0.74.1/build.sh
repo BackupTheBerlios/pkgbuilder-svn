@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/xmame/0.74.1/Attic/build.sh,v 1.1 2003/10/21 18:19:53 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/xmame/0.74.1/Attic/build.sh,v 1.2 2003/10/21 19:21:23 tomby Exp $
 #
 # xmame pkgbuilder script
 # 
@@ -8,6 +8,8 @@
 include do_info
 include do_fetch
 include do_uncompress_bzip2
+
+include do_configure_null
 
 include do_postinstall
 include do_buildpkg
@@ -21,10 +23,6 @@ do_patch() {
     patch -p0 < $PKG_HOME/files/makefile.unix.diff
     
     return $?
-}
-
-do_configure() {
-    echo "configure: nothing to do"
 }
 
 do_build() {
