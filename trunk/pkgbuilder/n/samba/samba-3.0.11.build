@@ -20,7 +20,7 @@ PKG_DEPENDS="d/autoconf
              l/popt
              l/readline
              l/libxml2
-            `use_dep mysql "n/mysql l/zlib"`
+            `use_dep mysql "ap/mysql l/zlib"`
             `use_dep cups "a/cups"`
             `use_dep python "d/python"`"
 
