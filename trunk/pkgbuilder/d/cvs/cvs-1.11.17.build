@@ -1,0 +1,30 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/cvs/cvs-1.11.15.build,v 1.1 2004/04/19 17:41:17 tomby Exp $
+#
+# cvs-1.11.17 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="https://ccvs.cvshome.org/files/documents/19/191/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/ncurses-5.1
+             >=l/zlib-1.1.4"
+
+PKG_HOMESITE="http://www.cvshome.org/"
+
+PKG_DOC_FILES="AUTHORS BUGS ChangeLog COPYING* DEVEL-CVS FAQ HACKING 
+               INSTALL MINOR-BUGS NEWS PROJECTS README* TESTS TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-tmpdir=/tmp"
+
