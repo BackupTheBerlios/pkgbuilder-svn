@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="fam"
-PKG_VERSION="2.7.0"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://oss.sgi.com/projects/$PKG_NAME/download/stable/$PKG_FILE_NAME"
@@ -23,15 +21,7 @@ PKG_DEPENDS="n/portmap"
 
 PKG_HOMESITE="http://oss.sgi.com/projects/fam/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
-
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
 
 PKG_CONFIG_FILES="etc/fam.conf etc/rc.d/rc.famd"
 
