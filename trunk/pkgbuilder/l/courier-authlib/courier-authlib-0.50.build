@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.20041020.$PKG_EXTENSION"
@@ -35,7 +35,7 @@ PKG_BUILD_TARGET=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 PKG_INSTALL_TARGET="install"
 
-PKG_CONFIG_FILES="etc/authlib/authdaemonrc"
+PKG_CONFIG_FILES="etc/authlib/authdaemonrc etc/rc.d/rc.authdaemon"
 
 do_configure() {
     cd $PKG_SRC
@@ -66,6 +66,9 @@ do_install() {
 
     mv authdaemonrc.dist > authdaemonrc
     chgrp daemon authdaemonrc
+
+    mkdir -p $PKG_DEST/etc/rc.d
+    cp $PKG_HOME/files/rc.* $PKG_DEST/etc/rc.d
 
     return $?
 }

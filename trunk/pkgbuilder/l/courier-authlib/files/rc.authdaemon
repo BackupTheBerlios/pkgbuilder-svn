@@ -1,0 +1,31 @@
+#!/bin/sh
+# Start/stop/restart authdaemon:
+
+imap_start() {
+  /usr/libexec/courier-authlib/authdaemond start
+}
+
+imap_stop() {
+  /usr/libexec/courier-authlib/authdaemond stop
+}
+
+imap_restart() {
+  /usr/libexec/courier-authlib/authdaemond stop
+  sleep 2
+  /usr/libexec/courier-authlib/authdaemond start
+}
+
+case "$1" in
+'start')
+  imap_start
+  ;;
+'stop')
+  imap_stop
+  ;;
+'restart')
+  imap_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
+
