@@ -1,0 +1,38 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# amule-2.0.0_rc7 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="aMule-${PKG_VERSION/_/}.$PKG_EXTENSION"
+PKG_URL="http://download.berlios.de/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/wxgtk-2.5
+             >=n/curl-7.11.0
+             >=l/gd-2.0.26"
+
+PKG_HOMESITE="http://www.amule.org/"
+
+PKG_SRC="$TMP/aMule-${PKG_VERSION/_/}"
+
+PKG_DOC_FILES="docs/Changelog"
+
+PKG_CONFIGURE_OPTIONS="--enable-webserver 
+                       --enable-webservergui
+                       --enable-optimize
+                       --enable-amulecmd 
+                       --enable-amulecmdgui 
+                       --enable-amule-daemon 
+                       --disable-debug"
+
+PKG_INSTALL_OPTIONS="$PKG_INSTALL_OPTIONS docdir=$PKG_PREFIX/doc/$PKG_NAME-$PKG_VERSION"
