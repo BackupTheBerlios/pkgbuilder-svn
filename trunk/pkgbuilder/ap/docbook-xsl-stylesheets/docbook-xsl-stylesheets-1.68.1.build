@@ -1,14 +1,15 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# docbook-xsl-stylesheets-1.62.4 pkgbuilder script
+# docbook-xsl-stylesheets-1.68.1 pkgbuilder script
 #
 
 inherit main
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am5"
+PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="docbook-xsl-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/docbook/$PKG_FILE_NAME"
@@ -24,7 +25,6 @@ PKG_HOMESITE="http://www.oasis-open.org/docbook/"
 PKG_SRC="$TMP/docbook-xsl-$PKG_VERSION"
 PKG_DOC_FILES="BUGS ChangeLog RE* TODO VERSION WhatsNew"
 
-PKG_PREFIX="/usr"
 PKG_DATADIR="$PKG_DEST$PKG_PREFIX/share/xml/docbook/xsl-stylesheets-$PKG_VERSION"
 
 PKG_NOSTRIP="Y"
@@ -37,18 +37,18 @@ do_install() {
     
     cp VERSION $PKG_DATADIR
     
-    for i in common extensions fo html htmlhelp images javahelp lib manpages template xhtml ; do
+    for ii in common extensions fo html htmlhelp images javahelp lib manpages template xhtml ; do
         cd $PKG_SRC
         
-        cp -Rf $i $PKG_DATADIR
+        cp -Rf $ii $PKG_DATADIR
         
-        cd $PKG_DATADIR/$i
+        cd $PKG_DATADIR/$ii
         
-        for j in ChangeLog README ; do
-			if [ -e $j ] ; then
-				mv $j $PKG_DOC/$j.$i
-	   		fi
-		done
+        for jj in ChangeLog README ; do
+            if [ -e $jj ] ; then
+                mv $jj $PKG_DOC/$jj.$ii
+            fi
+        done
     done
     
     return $?

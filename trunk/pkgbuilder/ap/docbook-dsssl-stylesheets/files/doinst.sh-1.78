@@ -1,5 +1,0 @@
-#!/bin/sh
-( /usr/bin/install-catalog --add /etc/sgml/dsssl-docbook-stylesheets.cat \
-/usr/share/sgml/docbook/dsssl-stylesheets-1.78/catalog )
-( /usr/bin/install-catalog --add /etc/sgml/sgml-docbook.cat \
-/etc/sgml/dsssl-docbook-stylesheets.cat )
