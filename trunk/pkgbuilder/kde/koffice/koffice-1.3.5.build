@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_URL="$KDE_BASE_URL/$PKG_NAME-$PKG_VERSION/src/$PKG_FILE_NAME"
 
@@ -27,3 +27,10 @@ PKG_DEPENDS=">=l/qt-3.3
 
 PKG_DOC_FILES="AUTHORS COPYING* INSTALL README"
 
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch post-$PKG_VERSION-$PKG_NAME.diff -Np1
+
+    return $?
+}
