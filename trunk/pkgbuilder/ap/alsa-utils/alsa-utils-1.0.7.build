@@ -1,13 +1,14 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/alsa-utils/alsa-utils-1.0.2.build,v 1.1 2004/02/07 16:38:46 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/alsa-utils/alsa-utils-1.0.4.build,v 1.1 2004/04/08 17:02:10 tomby Exp $
 #
-# alsa-utils-0.9.8 pkgbuilder script
+# alsa-utils-1.0.7 pkgbuilder script
 #
 
 inherit configscript
 
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.alsa-project.org/pub/utils/$PKG_FILE_NAME"
@@ -17,10 +18,10 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/ncurses-5.1
-        	 >=l/alsa-lib-0.9.8"
+             >=l/alsa-lib-1.0.0"
 
 PKG_HOMESITE="http://www.alsa-project.org/"
 
 PKG_DOC_FILES="COPYING ChangeLog INSTALL TODO
-			   seq/aconnect/README.aconnect
-			   seq/aseqnet/README.aseqnet"
+               seq/aconnect/README.aconnect
+               seq/aseqnet/README.aseqnet"
