@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gstreamer/gstreamer-0.8.0.build,v 1.1 2004/04/10 15:29:32 tomby Exp $
 #
-# gstreamer-0.8.0 pkgbuilder script
+# gstreamer-0.8.3 pkgbuilder script
 #
 
 inherit gnome
@@ -21,7 +21,7 @@ PKG_DEPENDS=">=l/glib2-2.2
 
 PKG_HOMESITE="http://gstreamer.sourceforge.net"
 
-PKG_DOC_FILES="ABOUT-NLS AUTHORS COPYING COPYING.LIB DEVEL DOCBUILDING 
+PKG_DOC_FILES="ABOUT-NLS AUTHORS COPYING DEVEL DOCBUILDING 
                INSTALL NEWS README RELEASE REQUIREMENTS TODO"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
