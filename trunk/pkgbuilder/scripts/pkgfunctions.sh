@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.13 2004/02/14 20:02:45 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.14 2004/02/14 22:23:44 tomby Exp $
 
 #
 # Package specific functions
@@ -123,10 +123,10 @@ pkg_configure() {
 }
 
 pkg_build() {
-    if [ "$COMPLATION" = "parallel" ] ; then
+    if [ "$COMPILATION" = "parallel" ] ; then
         DISTCC_HOSTS="$DISTCC_HOSTS" \
         CCACHE_PREFIX="$CCACHE_PREFIX" \
-        make $MAKE_OPTIONS CC="$CC" $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
+        make $MAKE_OPTIONS $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
 
         return $?
     else

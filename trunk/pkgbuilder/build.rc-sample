@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.14 2004/02/14 20:02:30 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.15 2004/02/14 22:24:28 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
@@ -46,9 +46,8 @@ I18N="es"
 #Parallel compilation. Use with care, some packages compilation fails.
 #COMPILATION="simple"
 #COMPILATION="parallel"
-#DISTCC_HOSTS="antares alcyone"
+#DISTCC_HOSTS="host1 host2 host3 hostn"
 #CCACHE_PREFIX="distcc"
-#CC="ccache gcc"
 #MAKE_OPTIONS="-j8"
 
 #CPU AND ARCHITECTURE FLAGS CONFIGURATION
