@@ -19,10 +19,11 @@ Existen varias acciones:
      
     - fetch: descarga los archivos necesarios para la compilación
         y creación del paquete.
+
+    - verify: verifica el checksum md5sum de los paquetes descargados
+        pare comprobar su integridad
         
     - unpack: descomprime los archivos necesarios.
-    
-    - verify: verifica el checksum de los paquetes descargados.
     
     - patch: parchea los archivos necesarios para la compilación
     
@@ -51,6 +52,7 @@ Existen varias acciones:
         
     - auto: ejecuta automáticamente esta secuencia acciones:
         fetch
+        verify
         unpack
         patch
         configure
@@ -75,43 +77,14 @@ el método correspondiente a la acción indicada.
 Existe un script en el directorio 'scripts' llamado 'functions.sh'
 que incluye toda una serie de funciones útiles para la compilación
 y creación de paquetes. Estas funciones se pueden utilizar en
-cada uno de los scripts para cada paquete. Actualmente
-estas son las funciones actualmente implementadas:
+cada uno de los scripts para cada paquete.
+        
+Ahora también esta el script install.sh que instala un paquete
+resolviendo las dependencias indicadas en la variabla PKG_DEPENDS
+de cada archivo build.
 
-    - version: imprime por pantalla la versión.
-    
-    - usage: imprime la información de uso.
-    
-    - include: incluye la función indicada como parámetro. Estas
-        funciones, son funciones genericas para relizar cada
-        una de las acciones. Se encuentran en el directorio
-        'common'.
-    
-    - use: determina si existe en la variable de entorno USE el
-        paquete que se indica como parámetro.
-        
-    - execute_action: ejecuta la acción indicada como parámetro.
-    
-    - fetch: descarga el archivo indicado en el parámetro $1
-        utilizando 'wget'.
-        
-    - gzip_map: comprime todas las páginas de manual del directorio
-        que se pasa en como parámetro.
-        
-    - strip_all: realiza la función strip en todos los archivos
-        binarios desde el directorio que se le pasa como parámetro.
-        
-Poco a poco esto va evolucionando. Ahora mismo estoy implementando
-la gestión de dependencias entre paquetes y también la gestión de la
-variable USE de forma a similar a como existe en Gentoo. Evidentemente
-todo esta aún en una fase muy, pero que muy preliminar.
-
-Cualquiera que se acerque un poco al codigo fuente verá
-que no soy precisamente un gurú de la programación en bash, pero
-siempre que lo he necesitado me he hecho mis propios scripts,
-no demasiados ortodoxos pero sí efectivos. Si notais que hay algo
-que se puede hacer mejor o eliminar cosas innecesarias, hacedmelo
-saber.
+Para más información leer la documentación dentro del directorio
+docs.
 
 
-<tomby (AT) tomby.homelinux.org>
+<tomby (AT) developer.berlios.de>
