@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/anjuta/1.1.97/Attic/build.sh,v 1.1 2003/10/30 22:53:53 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/anjuta/1.1.98/Attic/build.sh,v 1.1 2003/11/07 19:21:59 tomby Exp $
 #
 # anjuta pkgbuilder script
 #
