@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/Attic/mplayer-1.0pre2.build,v 1.1 2003/11/08 16:54:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/Attic/mplayer-1.0pre2.build,v 1.2 2003/11/22 18:23:43 tomby Exp $
 #
 # mplayer pkgbuilder script
 #
@@ -23,7 +23,7 @@ PKG_DOC_FILES="AUTHORS LICENSE README ChangeLog DOCS/en/*.html etc/example.conf"
 PKG_PREFIX="/usr"
 
 include do_info
-include do_patch
+include do_fetch
 include do_patch
 include do_build
 include do_install
