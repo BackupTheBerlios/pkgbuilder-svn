@@ -39,7 +39,7 @@ mozilla_init() {
                  >=l/pango-1.2.1
                  d/pkgconfig
                  d/perl
-                 `use_dep crypto "ap/gnupg ap/tcsh"`"
+                 `use_dep crypt "ap/gnupg ap/tcsh"`"
     
     PKG_HOMESITE="http://www.mozilla.org/"
     
