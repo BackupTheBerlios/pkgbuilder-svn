@@ -1,0 +1,40 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gdb-6.2.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="l/ncurses"
+
+PKG_HOMESITE="http://www.gnu.org/software/gdb/gdb.html"
+
+PKG_DOC_FILES="COPYING COPYING.LIB README gdb/NEWS gdb/TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="`use_enable nls`"
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+PKG_INSTALL_TARGET="install"
+
+do_postinstall() {
+    ( rm -f $PKG_DEST$PKG_PREFIX/include/{bfd.h,symcat.h,ansidecl.h,bfdlink.h}
+      rm -f $PKG_DEST$PKG_PREFIX/lib/{libopcodes.a,libopcodes.la}
+      rm -f $PKG_DEST$PKG_PREFIX/lib/{libiberty.a,libbfd.a,libbfd.la}
+      rm -f $PKG_DEST$PKG_PREFIX/include/dis-asm.h )
+
+    configscript_do_postinstall
+
+    ( cd $PKG_SRC/gdb ; cp README $PKG_DOC/README.gdb )
+    ( cd $PKG_SRC/gdb/gdbserver ; cp README $PKG_DOC/README.gdbserver )
+}
