@@ -1,0 +1,38 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# k3b-0.11.17 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="kde flac mad oggvorbis arts"
+
+PKG_DEPENDS="`use_dep kde ">=kde/kdebase-3.1"`
+             `use_dep flac "l/flac"`
+             `use_dep mad ">=ap/madplay-0.14.2b"`
+             `use_dep oggvorbis "l/libvorbis"`
+             `use_dep arts "kde/arts"`
+             >=ap/cdparanoia-3.9.8
+             >=l/id3lib-3.8.0
+             ap/cdrtools
+             >=ap/cdrdao-1.1.7
+             l/lame"
+
+# TODO ap/dvd+rw-tools
+
+PKG_HOMESITE="http://www.k3b.org/"
+
+PKG_DOC_FILES="AUTHORS C* FAQ INSTALL k3b.lsm README TODO"
+
+PKG_CONFIGURE_OPTIONS="`use_with kde k3bsetup`
+                       `use_with arts`"
