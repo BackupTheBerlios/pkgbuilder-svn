@@ -1,0 +1,83 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/pnm2ppa/pnm2ppa-1.12.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+#
+# pnm2ppa-1.12 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_NAME="pnm2ppa"
+PKG_VERSION="1.12"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/ncurses ap/enscript"
+
+PKG_HOMESITE="http://pnm2ppa.sourceforge.net"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="CALIBRATION*txt COLOR*txt PPA*txt RELEASE* CREDITS INSTALL LICENSE README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+PKG_CONFIG_FILES="etc/pnm2ppa.conf"
+
+do_patch() {
+    cd $PKG_SRC
+
+    patch -p0 < $PKG_HOME/files/$PKG_NAME-$PKG_VERSION-gentoo.diff
+
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC
+
+    make CFLAGS="$CFLAGS -DNDEBUG -DLANG_EN"
+
+    cd ppa_protocol && make CFLAGS="$CFLAGS -DNDEBUG"
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST/etc
+    mkdir -p $PKG_DEST$PKG_PREFIX/bin
+    mkdir -p $PKG_DEST$PKG_PREFIX/man/man1
+
+    make BINDIR=$PKG_DEST$PKG_PREFIX/bin     \
+         CONFDIR=$PKG_DEST/etc        \
+         MANDIR=$PKG_DEST$PKG_PREFIX/man/man1  \
+         install
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC/docs/en
+
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+
+    pkg_postinstall
+
+    return $?
+}

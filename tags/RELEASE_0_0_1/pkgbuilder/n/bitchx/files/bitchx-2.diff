@@ -1,0 +1,14 @@
+--- ./source/funny.c.orig	2002-02-27 20:22:48.000000000 -0800
++++ ./source/funny.c	2003-03-13 10:00:54.000000000 -0800
+@@ -260,7 +260,10 @@
+ 	type = Args[0];
+ 	channel = Args[1];
+ 	line = Args[2];
+-
++	if (channel == NULL || line == NULL) {
++		bitchsay("Invalid number of arguments for %s", __FUNCTION__);
++		return;
++	}
+ 	ptr = line;
+ 	while (*ptr)
+ 	{

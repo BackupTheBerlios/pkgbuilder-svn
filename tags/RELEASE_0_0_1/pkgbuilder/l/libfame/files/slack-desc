@@ -1,0 +1,15 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+       |-----handy-ruler------------------------------------------------------|
+libfame: libfame
+libfame:
+libfame: libfame is a video encoding library.
+libfame: It can currently encode MPEG-1 and MPEG-4 rectangular video, as well 
+libfame: as MPEG-4 video with arbitrary shape.
+libfame:
+

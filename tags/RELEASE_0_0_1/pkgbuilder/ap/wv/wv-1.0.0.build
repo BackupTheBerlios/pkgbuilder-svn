@@ -1,0 +1,46 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/wv/wv-1.0.0.build,v 1.1 2004/01/06 00:45:49 tomby Exp $
+#
+# wv-1.0.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://download.sourceforge.net/wvware/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/zlib
+	         l/libpng
+	         >=l/libwmf-0.2.2
+             l/glib2
+	         l/libxml2"
+
+PKG_HOMESITE="http://wvware.sourceforge.net/"
+
+PKG_DOC_FILES="COPYING INSTALL README"
+
+PKG_CONFIGURE_OPTIONS="--with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+
+do_install() {
+    configscript_do_install
+    
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/include
+    cp wvinternal.h $PKG_DEST$PKG_PREFIX/include
+    
+    return $?
+}
+
+do_postinstall() {
+    configscript_do_postinstall
+    
+    cd $PKG_DEST$PKG_PREFIX/man/man1
+    ln -sf wvWare.1.gz wvConvert.1.gz
+}

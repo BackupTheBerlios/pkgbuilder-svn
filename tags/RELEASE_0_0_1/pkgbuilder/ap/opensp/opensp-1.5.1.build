@@ -1,0 +1,59 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/opensp/opensp-1.5.1.build,v 1.1 2004/01/02 23:49:08 tomby Exp $
+#
+# opensp-1.5.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="OpenSP-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/openjade/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="`use nls && echo "d/gettext"`"
+
+PKG_HOMESITE="http://openjade.sourceforge.net/"
+
+PKG_SRC="$TMP/OpenSP-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_DATADIR="/usr/share/sgml/OpenSP-$PKG_VERSION"
+PKG_CONFIGURE_OPTIONS="--disable-static --enable-http
+                       --enable-default-catalog=/etc/sgml/catalog
+                       --enable-default-search-path=/usr/share/sgml"
+PKG_BUILD_OPTIONS="pkgdatadir=$PKG_DATADIR"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST pkgdatadir=$PKG_DATADIR 
+                     pkgdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+                     
+do_patch() {
+    cd $PKG_SRC
+    
+    #patch from blfs
+    patch -p1 -N < $PKG_HOME/files/$PKG_VERSION-LITLEN.patch
+    
+    return $?
+}
+
+do_install() {
+    configscript_do_install &&
+    cd $PKG_DEST$PKG_PREFIX/bin &&
+    ln -sf onsgmls nsgmls &&
+    ln -sf osgmlnorm sgmlnorm &&
+    ln -sf ospam spam &&
+    ln -sf ospcat spcat &&
+    ln -sf ospent spent &&
+    ln -sf osx sx &&
+    ln -sf osx sgml2xml &&
+    cd $PKG_DEST$PKG_PREFIX/lib &&
+    ln -sf libosp.so libsp.so
+    
+    return $?
+}

@@ -1,0 +1,81 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/lynx/lynx-2.8.4.1d.build,v 1.1 2003/12/31 13:13:56 tomby Exp $
+#
+# lynx-2.8.4.1d pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="lynx"
+PKG_VERSION="2.8.4.1d"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_BASE_NAME="${PKG_NAME}2.8.4rel.1"
+PKG_FILE_NAME="$PKG_BASE_NAME.$PKG_EXTENSION"
+PKG_URL="ftp://lynx.isc.org/$PKG_NAME/${PKG_NAME}2.8.4/$PKG_FILE_NAME
+         ftp://lynx.isc.org/$PKG_NAME/${PKG_NAME}2.8.4/patches/${PKG_BASE_NAME}a.patch
+         ftp://lynx.isc.org/$PKG_NAME/${PKG_NAME}2.8.4/patches/${PKG_BASE_NAME}b.patch
+         ftp://lynx.isc.org/$PKG_NAME/${PKG_NAME}2.8.4/patches/${PKG_BASE_NAME}c.patch
+         ftp://lynx.isc.org/$PKG_NAME/${PKG_NAME}2.8.4/patches/${PKG_BASE_NAME}d.patch"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls ssl"
+
+PKG_DEPENDS=">=l/ncurses-5.1
+	         >=l/zlib-1.1.3
+	         `use nls && echo "d/gettext"`
+             `use ssl && echo ">=l/openssl-0.9.6"`"
+
+PKG_HOMESITE="http://lynx.browser.org/"
+
+PKG_SRC="$TMP/${PKG_NAME}2-8-4"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="INSTALLATION"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--enable-default-colors
+                       --with-screen=ncurses
+                       --libdir=/etc/lynx
+                       --enable-gzip-help 
+                       --with-zlib
+                       --enable-read-eta
+                       --enable-scrollbar
+                       --enable-color-style
+                       --enable-prettysrc
+                       --enable-source-cache
+                       --enable-nsl-fork
+                       `use ssl && echo "--with-ssl"`
+                       `use nls && echo "--enable-nls"`"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_INSTALL_TARGET="install install-help install-doc"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    #patches from slackware
+    patch -p1 -N < $PKG_HOME/files/$PKG_NAME.path.diff
+    patch -p1 -N < $PKG_HOME/files/$PKG_NAME.cfg.diff
+    
+    #official patches
+    patch -p1 -N < $FETCH_DIR/${PKG_BASE_NAME}a.patch &&
+    patch -p1 -N < $FETCH_DIR/${PKG_BASE_NAME}b.patch &&
+    patch -p1 -N < $FETCH_DIR/${PKG_BASE_NAME}c.patch &&
+    patch -p1 -N < $FETCH_DIR/${PKG_BASE_NAME}d.patch
+    
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    pkg_postinstall &&
+    rm -f $PKG_DOC/*~
+    
+    return $?
+}

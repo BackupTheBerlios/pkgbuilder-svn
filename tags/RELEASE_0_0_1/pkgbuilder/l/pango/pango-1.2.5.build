@@ -1,0 +1,40 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/pango/pango-1.2.5.build,v 1.5 2003/12/31 18:53:59 tomby Exp $
+#
+# pango-1.2.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="pango"
+PKG_VERSION="1.2.5"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am3"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.gtk.org/pub/gtk/v2.2/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS="x/xfree86
+             l/glib2
+             l/fontconfig
+             l/freetype2
+             >=d/pkgconfig-0.12.0
+             `use doc && echo ">=gnome/gtk-doc-0.9"`"
+
+PKG_HOMESITE="http://www.gtk.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING README INSTALL NEWS TODO*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"

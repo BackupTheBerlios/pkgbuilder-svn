@@ -1,0 +1,11 @@
+--- ./bc/scan.l.orig	Mon May 13 10:51:42 2002
++++ ./bc/scan.l	Mon May 13 10:52:08 2002
+@@ -143,7 +143,7 @@
+ 
+ /* Definitions for readline access. */
+ extern FILE *rl_instream;
+-_PROTOTYPE(char *readline, (char *));
++/* _PROTOTYPE(char *readline, (char *)); */
+ 
+ /* rl_input puts upto MAX characters into BUF with the number put in
+    BUF placed in *RESULT.  If the yy input file is the same as

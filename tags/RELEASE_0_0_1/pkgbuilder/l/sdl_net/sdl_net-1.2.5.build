@@ -1,0 +1,35 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_net/sdl_net-1.2.5.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+#
+# sdl_net-1.2.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="sdl_net"
+PKG_VERSION="1.2.5"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL_net-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.libsdl.org/projects/SDL_net/release/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/sdl-1.2.5"
+
+PKG_HOMESITE="http://www.libsdl.org/projects/SDL_net/index.html"
+
+PKG_SRC="$TMP/SDL_net-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="COPYING CHANGES README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--disable-gui
+                       --disable-sdltest"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"

@@ -1,0 +1,109 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/ntop/ntop-2.2c.build,v 1.3 2003/12/30 18:44:13 tomby Exp $
+#
+# ntop pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="ntop"
+PKG_VERSION="2.2c"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_HOMEPAGE="http://www.ntop.org/"
+
+PKG_SRC="$TMP/$PKG_NAME"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS CONTENTS COPYING ChangeLog MANIFESTO NEWS
+               PORTING README SUPPORT_NTOP.txt THANKS docs/* ntop.html"
+
+PKG_PREFIX="/usr"
+
+do_patch() {
+    cd $PKG_SRC/ntop
+    
+    patch -p0 < $PKG_HOME/files/pthread_atfork.diff
+    
+    return $?
+}
+
+do_configure() {
+    do_build_gdchart &&
+    do_configure_ntop
+    
+    return $?
+}
+
+do_configure_ntop() {
+    cd $PKG_SRC/ntop
+    
+    CFLAGS=$CFLAGS \
+    CXXFLAGS=$CXXFLAGS \
+    ./configure --prefix=$PKG_PREFIX --sysconfdir=/etc
+    
+    return $?
+}
+
+do_build_gdchart() {
+    cd $PKG_SRC/gdchart0.94c
+    
+    CFLAGS=$CFLAGS \
+    CXXFLAGS=$CXXFLAGS \
+    ./configure || return $?
+    
+    cd gd-1.8.3/libpng-1.2.4
+    make -f scripts/makefile.linux || return $?
+    
+    cd ../../zlib-1.1.4
+    CFLAGS=$CFLAGS \
+    CXXFLAGS=$CXXFLAGS \
+    ./configure &&
+    make || return $?
+    
+    cd ../
+    make || return $?
+}
+
+do_build() {
+    cd $PKG_SRC/ntop
+    
+    make
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC/ntop
+    
+    make DESTDIR=$PKG_DEST install
+    
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC/ntop
+    
+    chown -R root.root $PKG_DEST/etc/ntop
+    chown -R root.root $PKG_DEST/usr/share/ntop
+    
+    mkdir -p $PKG_DEST/var/lib/ntop
+    
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+}

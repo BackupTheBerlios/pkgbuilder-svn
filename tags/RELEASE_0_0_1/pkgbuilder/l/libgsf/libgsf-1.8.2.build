@@ -1,0 +1,28 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libgsf/libgsf-1.8.2.build,v 1.4 2004/01/03 23:44:27 tomby Exp $
+#
+# libgsf-1.8.2 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am3"
+
+PKG_USE="gnome"
+
+PKG_DEPENDS=">=l/libxml2-2.4.16
+             l/glib2
+             >=l/zlib-1.1.4
+             >=a/sed-4
+             a/bzip2
+             >=d/pkgconfig-0.12.0
+             `use gnome && echo ">=gnome/libbonobo-2 >=gnome/gnome-vfs-2"`
+             `use doc && echo ">=gnome/gtk-doc-0.9"`"
+
+PKG_DOC_FILES="AUTHORS BUGS ChangeLog COPYING* HACKING INSTALL README TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --with-html-dir=/usr/doc/$PKG_NAME-$PKG_VERSION/html
+                       `use gnome && echo "--with-gnome"`
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"

@@ -1,0 +1,83 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/portmap/portmap-5.0.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+#
+# portmap-5.0 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_NAME="portmap"
+PKG_VERSION="5.0"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="${PKG_NAME}_5beta.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.porcupine.org/pub/security/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc n/tcpip"
+
+PKG_HOMESITE="ftp://ftp.porcupine.org/pub/security/index.html"
+
+PKG_SRC="$TMP/${PKG_NAME}_5beta"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="BLURB CHANGES README"
+
+PKG_PREFIX="/usr"
+
+PKG_CONFIG_FILES="etc/rpc etc/rc.d/rc.portmap"
+
+do_patch() {
+    cd $PKG_SRC
+
+    chmod u+w *
+
+    patch -p1 -N < $PKG_HOME/files/portmap_5-2.1.diff
+
+    cp Makefile Makefile.orig
+    sed -e "s:-O2:$CFLAGS:" Makefile.orig > Makefile
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST/sbin
+    cat portmap > $PKG_DEST/sbin/rpc.portmap
+    chmod 755 $PKG_DEST/sbin/rpc.portmap
+
+    mkdir -p $PKG_DEST/usr/sbin
+    cat pmap_dump > $PKG_DEST/usr/sbin/pmap_dump
+    cat pmap_set > $PKG_DEST/usr/sbin/pmap_set
+    chmod 755 $PKG_DEST/usr/sbin/*
+
+    mkdir -p $PKG_DEST/usr/man/man8
+
+    for file in *.8 ; do
+        cat ${file} > $PKG_DEST/usr/man/man8/${file}
+    done
+
+
+
+    mkdir -p $PKG_DEST/etc/rc.d
+
+    cat $PKG_HOME/files/rpc > $PKG_DEST/etc/rpc
+    cat $PKG_HOME/files/rc.portmap > $PKG_DEST/etc/rc.d/rc.portmap
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    pkg_postinstall &&
+    ( cd $PKG_DEST/usr/man/man8 ; ln -sf portmap.8.gz rpc.portmap.8.gz )
+
+    return $?
+}

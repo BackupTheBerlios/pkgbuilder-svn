@@ -1,0 +1,28 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/kopete/kopete-0.7.3.build,v 1.4 2003/12/30 20:33:46 tomby Exp $
+#
+# kopete pkgbuilder script
+#
+
+inherit kde
+
+PKG_NAME="kopete"
+PKG_VERSION="0.7.3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="kopete/AUTHORS kopete/C* kopete/INSTALL kopete/NEWS kopete/R* kopete/TODO kopete/VERSION kopete/*.txt"
+
+PKG_PREFIX="/opt/kde"
+PKG_CONFIGURE_OPTIONS="--disable-debug --without-debug"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"

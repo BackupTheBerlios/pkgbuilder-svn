@@ -1,0 +1,63 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/links/links-2.1pre14.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
+#
+# links-2.1pre14 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="links"
+PKG_VERSION="2.1pre14"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am2"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://atrey.karlin.mff.cuni.cz/~clock/twibright/$PKG_NAME/download/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gpm ssl svga X png jpeg tiff javascript directfb fbcon"
+
+PKG_DEPENDS="`use javascript && echo ">=d/flex-2.5.4a"`
+			 `use ssl && echo ">=l/openssl-0.9.6c"`
+			 `use gpm && echo "a/gpm"`
+	         `use png && echo ">=l/libpng-1.2.1"`
+	         `use jpeg && echo ">=l/libjpeg-6b"`
+	         `use tiff && echo ">=l/libtiff-3.5.7"`
+             `use X && echo "x/xfree86 >=l/libpng-1.2.1"`
+			 `use svga && echo ">=l/svgalib-1.4.3 >=l/libpng-1.2.1"`
+			 `use directfb && echo "l/directfb"`
+			 `use fbcon && echo "a/gpm >=l/libpng-1.2.1"`"
+
+PKG_HOMESITE="http://atrey.karlin.mff.cuni.cz/~clock/twibright/links/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS BUGS ChangeLog INSTALL NEWS README SITES TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       `use javascript && echo "--enable-javascript"`
+					   `use ssl && echo "--with-ssl"`
+	        		   `use png && echo "--enable-libpng"`
+	        		   `use jpeg && echo "--enable-libjpeg"`
+	        		   `use tiff && echo "--enable-libtiff"`
+            		   `use X && echo "--enable-graphics --with-x"`
+					   `use svga && echo "--enable-graphics --with-svgalib"`
+					   `use directfb && echo "--enable-graphics --with-directfb"`
+                       --program-suffix=2"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+do_install() {
+	cd $PKG_SRC
+	
+	pkg_install &&
+	( cd $PKG_DEST$PKG_PREFIX/bin
+	  ln -sf links2 links )
+	
+	return $?
+}
+

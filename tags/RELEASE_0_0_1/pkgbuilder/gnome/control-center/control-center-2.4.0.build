@@ -1,0 +1,33 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/control-center/control-center-2.4.0.build,v 1.1 2004/01/04 15:39:18 tomby Exp $
+#
+# control-center-2.4.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/gtk+2-2.2
+             >=l/atk-1.2
+             >=gnome/gconf-1.2
+             >=gnome/libgnomeui-2.2
+             >=gnome/libglade-2
+             >=gnome/libbonobo-2.2
+             >=gnome/libbonoboui-2.2
+             >=gnome/nautilus-2.2
+             >=gnome/gnome-vfs-2.2
+             >=gnome/gnome-desktop-2.2
+             l/libxml2
+             l/esound
+             >=gnome/metacity-2.4.5
+             >=gnome/scrollkeeper-0.3.11
+             >=d/pkgconfig-0.12.0"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-schemas-install"
