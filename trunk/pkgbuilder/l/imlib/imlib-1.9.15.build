@@ -1,15 +1,13 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# imlib-1.9.14 pkgbuilder script
+# imlib-1.9.15 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="imlib"
-PKG_VERSION="1.9.14"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.9/$PKG_FILE_NAME"
@@ -19,16 +17,13 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS="l/gtk+
-	        >=l/libtiff-3.5.5
-	        >=l/libungif-4.1.0
-	        >=l/libpng-1.2.1
-	        >=l/libjpeg-6b"
+            >=l/libtiff-3.5.5
+            >=l/libungif-4.1.0
+            >=l/libpng-1.2.1
+            >=l/libjpeg-6b"
 
 PKG_HOMESITE="http://developer.gnome.org/arch/imaging/imlib.html"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS COPYING* ChangeLog README NEWS"
 
 PKG_PREFIX="/usr"
