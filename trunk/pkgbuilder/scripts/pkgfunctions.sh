@@ -1,4 +1,4 @@
-# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.18 2004/02/28 13:07:39 tomby Exp $
 

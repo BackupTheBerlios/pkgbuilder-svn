@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
 
 source ../build.rc
 
@@ -10,21 +12,21 @@ do_init() {
 
 testnumber() {
     let i=$i+1
-	
+    
     echo -n "$i: "
 }
 
 do_assertTrue() {
     testnumber
-	
+    
     test $1 -eq 0
-	
+    
     result_msg $?
 }
 
 do_assertFalse() {
     testnumber
-	
+    
     test $1 -ne 0
 
     result_msg $?
@@ -32,7 +34,7 @@ do_assertFalse() {
 
 do_assertGreater() {
     testnumber
-	
+    
     test $1 -eq 2
 
     result_msg $?
@@ -40,7 +42,7 @@ do_assertGreater() {
 
 do_assertLesser() {
     testnumber
-	
+    
     test $1 -eq 1
 
     result_msg $?
@@ -48,10 +50,10 @@ do_assertLesser() {
 
 do_assertEquals() {
     testnumber
-	
+    
     test "$1" = "$2"
     RETVAL=$?
-	
+    
     if [ $RETVAL -ne 0 ] ; then
         echo -n "\"$1\" not equals to \"$2\" => "
     fi
@@ -61,14 +63,14 @@ do_assertEquals() {
 
 do_assertNotEquals() {
     testnumber
-	
+    
     test "$1" != "$2"
     RETVAL=$?
     
     if [ $RETVAL -ne 0 ] ; then
         echo -n "\"$1\" equals to \"$2\" => "
     fi
-	
+    
     result_msg $RETVAL
 }
 
