@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnome/libgnome-2.4.0.build,v 1.7 2004/01/04 13:35:44 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnome/libgnome-2.4.0.build,v 1.8 2004/01/07 18:01:53 tomby Exp $
 #
 # libgnome-2.4.0 pkgbuilder script
 #
@@ -11,7 +11,7 @@ PKG_BUILD="am4"
 
 PKG_USE="doc"
 
-PKG_DEPENDS=">=l/glib-2.0.3
+PKG_DEPENDS=">=l/glib2-2.0.3
              >=gnome/gconf-2
              >=gnome/libbonobo-2
              >=gnome/gnome-vfs-2.4
