@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/svgalib/svgalib-1.4.3.build,v 1.4 2004/01/08 20:09:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/svgalib/svgalib-1.4.3.build,v 1.5 2004/01/09 19:36:38 tomby Exp $
 #
 # svgalib-1.4.3 pkgbuilder script
 #
@@ -38,10 +38,10 @@ PKG_CONFIG_FILES="etc/vga/default.keymap
 				  etc/vga/libvga.config"
 
 do_patch() {
-    cd $PKG_SRC/src
+    cd $PKG_SRC
 
     if  installed_version gcc | grep -q "^3.3" ; then
-        patch -p0 -N < $PKG_HOME/files/$PKG_NAME-$PKG_VERSION-gcc33.diff
+        patch -p1 -N < $PKG_HOME/files/$PKG_NAME-$PKG_VERSION-gcc33.diff
     fi
 }
 
