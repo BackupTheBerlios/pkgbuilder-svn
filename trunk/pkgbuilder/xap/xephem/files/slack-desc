@@ -1,0 +1,13 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+      |-----handy-ruler------------------------------------------------------|
+xephem: xephem
+xephem:
+xephem: XEphem is the X Windows Ephemeris, and provides a scientific-grade 
+xephem: solar system model, star charts, sky views, plus a whole lot more.
+xephem:
