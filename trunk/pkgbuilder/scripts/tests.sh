@@ -5,35 +5,51 @@ source ../build.rc
 source functions.sh
 
 do_init() {
-	i=0
+    i=0
 }
 
 testnumber() {
-	let i=$i+1
+    let i=$i+1
 	
-	echo -n "$i: "
+    echo -n "$i: "
 }
 
 do_assertTrue() {
-	testnumber
+    testnumber
 	
-	test $1 -eq 0
+    test $1 -eq 0
 	
-	result_msg $?
+    result_msg $?
 }
 
 do_assertFalse() {
-	testnumber
+    testnumber
 	
-	test $1 -ne 0
+    test $1 -ne 0
 
-	result_msg $?
+    result_msg $?
+}
+
+do_assertGreater() {
+    testnumber
+	
+    test $1 -eq 2
+
+    result_msg $?
+}
+
+do_assertLesser() {
+    testnumber
+	
+    test $1 -eq 1
+
+    result_msg $?
 }
 
 do_assertEquals() {
-	testnumber
+    testnumber
 	
-	test "$1" = "$2"
+    test "$1" = "$2"
     RETVAL=$?
 	
     if [ $RETVAL -ne 0 ] ; then
@@ -44,16 +60,16 @@ do_assertEquals() {
 }
 
 do_assertNotEquals() {
-	testnumber
+    testnumber
 	
-	test "$1" != "$2"
+    test "$1" != "$2"
     RETVAL=$?
     
     if [ $RETVAL -ne 0 ] ; then
         echo -n "\"$1\" equals to \"$2\" => "
     fi
 	
-	result_msg $RETVAL
+    result_msg $RETVAL
 }
 
 echo "=> extract_version tests"
@@ -129,3 +145,52 @@ do_init
 do_assertEquals "`installed_build lincvs`" "am1"
 do_assertEquals "`installed_build lilo`" "1"
 do_assertNotEquals "`installed_build lilo`" "4"
+
+echo "=> extract_extra_version tests"
+do_init
+do_assertEquals "`extract_extra_version 2.3_p1`" "p1"
+do_assertEquals "`extract_extra_version 2.3`" ""
+
+echo "=> compare_versions test"
+compare_versions aaa-2.4.1 aaa-2.4.1.1 ; do_assertGreater $?
+
+compare_versions aaa-2.4.1.1 aaa-2.4.1 ; do_assertLesser $?
+
+compare_versions aaa-2.4.2 aaa-2.4.10 ; do_assertGreater $?
+
+compare_versions aaa-2.4.10 aaa-2.4.2 ; do_assertLesser $?
+
+compare_versions aaa-2.4.1 aaa-2.4.0 ; do_assertLesser $?
+
+compare_versions aaa-2.4.1 aaa-2.4.1 ; do_assertTrue $?
+
+compare_versions aaa-2.00.1 aaa-2.00.1.2 ; do_assertGreater $?
+
+compare_versions aaa-6b aaa-6c ; do_assertGreater $?
+
+compare_versions aaa-6c aaa-6c ; do_assertTrue $?
+
+compare_versions aaa-6c aaa-6b ; do_assertLesser $?
+
+compare_versions aaa-20031014 aaa-20040112 ; do_assertGreater $?
+
+compare_versions aaa-20040112 aaa-20031014 ; do_assertLesser $?
+
+compare_versions aaa-0.9.8 aaa-0.9.8b ; do_assertGreater $?
+
+compare_versions aaa-0.9.8a aaa-0.9.8b ; do_assertGreater $?
+
+compare_versions aaa-0.9.8a aaa-0.9.7b ; do_assertLesser $?
+
+compare_versions a-3.2.0 a-3.2.1 ; do_assertGreater $?
+
+compare_versions a-3.8_p1 a-3.8.1_p1 ; do_assertGreater $?
+
+compare_versions a-3.8.1_p1 a-3.8_p1 ; do_assertLesser $?
+
+compare_versions a-3.8.1_p1 a-3.8.1_p2 ; do_assertGreater $?
+
+compare_versions a-3.8.1_p3 a-3.8.1_p1 ; do_assertLesser $?
+
+compare_versions a-3.8.1 a-3.8.1_rc1 ; do_assertLesser $?
+
