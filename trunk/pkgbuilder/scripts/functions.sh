@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.18 2003/11/30 12:47:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.19 2003/11/30 13:37:22 tomby Exp $
 
 #
 # Print pkgbuilder version number
@@ -285,6 +285,39 @@ installed_version() {
     fi
 }
 
+#
+# Print meta package name
+#
+# @param $1 package dep in format >=meta/pkgname-1.2
+#
+extract_meta() {
+    if [ "$1" == "" ] ; then
+        return 1
+    fi
+    
+    local metapkg="`expr match "$1" '\!\?>\?=\?\([a-z]\+\)'`"
+    
+    echo "$metapkg"
+}
+
+#
+# Print name of package
+#
+# @param $1 pkgfile in format pkgname-1.2
+#
+extract_name() {
+    if [ "$1" == "" ] ; then
+        return 1
+    fi
+    
+    local pkgname="`expr match "$1" '\([a-zA-Z0-9_+\-]\+\)\-[0-9]\+'`"
+    
+    if [ "$pkgname" != "" ] ; then
+        echo "$pkgname"
+    else
+        echo "$1"
+    fi
+}
 
 #
 # Print version of package
@@ -296,8 +329,8 @@ extract_version() {
         return 1
     fi
     
-    local pkgmayorversion=`expr match $1 '[a-zA-Z0-9_+\-]\+\-\([0-9]\+\)'`
-    local pkgminorversion=`expr match $1 '[a-zA-Z0-9_+\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
+    local pkgmayorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-\([0-9]\+\)'`"
+    local pkgminorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-[0-9]\+\([a-zA-Z0-9_\.]\+\)'`"
 
     echo "$pkgmayorversion$pkgminorversion"
 }
