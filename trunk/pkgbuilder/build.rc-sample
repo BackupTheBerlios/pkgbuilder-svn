@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.13 2004/01/18 14:16:37 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.14 2004/02/14 20:02:30 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
@@ -18,6 +18,7 @@ PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
 #cdrom with source code
 #CDROM_DIR="/mnt/cdrom"
 
+#FETCH OPTIONS
 FETCH_TRIES="5"
 FETCH_DIR="/tmp/distfiles"
 FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
@@ -25,6 +26,7 @@ FETCH_FTP_OPTIONS="--passive-ftp"
 
 TMP="/tmp"
 
+#USE FLAGS
 USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod nas gstreamer"
 USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl aalib svga fbcon directfb"
 USE_NET="samba ssl slp maildir"
@@ -37,9 +39,19 @@ USE_MISC="nls doc gpm javascript mysql xml sane"
 
 USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
      $USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
-     
+
+#I18N CONFIGURATION
 I18N="es"
 
+#Parallel compilation. Use with care, some packages compilation fails.
+#COMPILATION="simple"
+#COMPILATION="parallel"
+#DISTCC_HOSTS="antares alcyone"
+#CCACHE_PREFIX="distcc"
+#CC="ccache gcc"
+#MAKE_OPTIONS="-j8"
+
+#CPU AND ARCHITECTURE FLAGS CONFIGURATION
 ARCH="i486"
 CPU="i686"
 CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
