@@ -11,6 +11,13 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS=""
+PKG_DEPENDS="n/openssh
+             >=l/gtk+2-2.4
+             >=gnome/libgnomeui-1.109
+             >=gnome/libglade-1.99.5
+             >=gnome/gconf-2.2
+             >=l/libxml2-2.4.12
+             d/pkgconfig
+             >=gnome/intltool-0.29"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README"
