@@ -1,0 +1,44 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/nautilus/nautilus-2.4.1.build,v 1.1 2004/01/04 01:08:19 tomby Exp $
+#
+# nautilus-2.4.1 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_USE="gstreamer"
+
+PKG_DEPENDS="l/glib2
+             >=l/pango-1.2
+             >=l/gtk+2-2.2
+             >=gnome/eel-$PKG_VERSION
+             >=l/libxml2-2.4.7
+             >=gnome/gnome-vfs-2.3.5
+             >=l/esound-0.2.27
+             >=gnome/gconf-2.3
+             >=gnome/libgnome-2.2
+             >=gnome/libgnomeui-2.3.3
+             >=gnome/gnome-desktop-2.2
+             >=l/libart_lgpl-2.3.10
+             >=gnome/libbonobo-2.2
+             >=gnome/libbonoboui-2.2
+             >=gnome/librsvg-2.0.1
+             >=gnome/ORBit2-2.4
+             >=l/startup-notification-0.5
+             l/popt
+             ap/fam
+             >=gnome/scrollkeeper-0.3.11
+             >=d/pkgconfig-0.12.0
+             `use gstreamer || use oggvorbis && echo "ap/vorbis-tools"`
+             `use gstreamer && echo ">=gnome/gstreamer-0.6.3 >=gnome/gst-plugins-0.6.3"`"
+#            `use cups && echo "l/libgnomecups l/gnome-cups-manager"`
+
+PKG_DOC_FILES="AUTHORS COPYIN* ChangeLo* HACKING INSTALL MAINTAINERS NEWS README THANKS TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use gstreamer && echo "--enable-gstreamer" || echo "--disable-gstreamer"`"
+                       
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
+                     GCONF_SCHEMA_CONFIG_SOURCE=xml::$PKG_DEST/etc/gconf/gconf.xml.defaults
+                     GCONF_SCHEMA_FILE_DIR=$PKG_DEST/etc/gconf/schemas"
