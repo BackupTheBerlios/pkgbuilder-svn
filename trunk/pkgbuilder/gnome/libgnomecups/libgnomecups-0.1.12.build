@@ -9,9 +9,15 @@ inherit gnome
 
 PKG_BUILD="am1"
 
-PKG_USE=""
+PKG_USE="doc"
 
-PKG_DEPENDS=""
+PKG_DEPENDS="l/glib2
+             d/gettext
+             >=gnome/intltool-0.31
+             >=d/pkgconfig-0.12.0
+             `use_dep doc ">=gnome/gtk-doc-0.9"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README"
 
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use_enable doc gtk-doc`"
