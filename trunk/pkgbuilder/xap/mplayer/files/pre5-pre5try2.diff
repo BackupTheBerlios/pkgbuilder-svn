@@ -1,0 +1,488 @@
+diff -Naur MPlayer-1.0pre5/ChangeLog MPlayer-1.0pre5try2/ChangeLog
+--- MPlayer-1.0pre5/ChangeLog	2004-07-15 02:14:35.000000000 +0200
++++ MPlayer-1.0pre5try2/ChangeLog	2004-12-15 22:11:18.546149409 +0100
+@@ -1,5 +1,13 @@
+ MPlayer (1.0)
+ 
++  pre5try2: December 15, 2004
++    Security:
++    * buffer overflow in mp3lib fixed
++    * heap overflow in Real rtsp streaming code fixed
++    * stack overflow in mmst streaming code fixed
++    * unnecessary bmp demuxer removed because of buffer overflows
++    * heap overflow in pnm streaming code fixed
++
+   pre5: "LinuxTag release" July 15, 2004
+ 
+     Name:
+diff -Naur MPlayer-1.0pre5/libmpdemux/asf_mmst_streaming.c MPlayer-1.0pre5try2/libmpdemux/asf_mmst_streaming.c
+--- MPlayer-1.0pre5/libmpdemux/asf_mmst_streaming.c	2004-07-02 22:36:50.000000000 +0200
++++ MPlayer-1.0pre5try2/libmpdemux/asf_mmst_streaming.c	2004-12-15 21:32:03.000000000 +0100
+@@ -42,6 +42,7 @@
+ #include "network.h"
+ 
+ #define BUF_SIZE 102400
++#define HDR_BUF_SIZE 8192
+ 
+ typedef struct 
+ {
+@@ -216,6 +217,11 @@
+ 
+ //      printf ("asf header packet detected, len=%d\n", packet_len);
+ 
++      if (packet_len < 0 || packet_len > HDR_BUF_SIZE - header_len) {
++        mp_msg(MSGT_NETWORK, MSGL_FATAL, "Invalid header size, giving up\n");
++        return 0;
++      }
++
+       if (!get_data (s, &header[header_len], packet_len)) {
+ 	printf ("header data read failed\n");
+ 	return 0;
+@@ -250,6 +256,12 @@
+       packet_len = get_32 ((unsigned char*)&packet_len, 0) + 4;
+       
+ //      printf ("command packet detected, len=%d\n", packet_len);
++
++      if (packet_len < 0 || packet_len > BUF_SIZE) {
++        mp_msg(MSGT_NETWORK, MSGL_FATAL,
++                "Invalid rtsp packet size, giving up\n");
++        return 0;
++      }
+       
+       if (!get_data (s, data, packet_len)) {
+ 	printf ("command data read failed\n");
+@@ -361,6 +373,12 @@
+ 
+ //    printf ("asf media packet detected, len=%d\n", packet_len);
+ 
++    if (packet_len < 0 || packet_len > BUF_SIZE) {
++      mp_msg(MSGT_NETWORK, MSGL_FATAL,
++              "Invalid rtsp packet size, giving up\n");
++      return 0;
++    }
++      
+     if (!get_data (s, data, packet_len)) {
+       printf ("media data read failed\n");
+       return 0;
+@@ -380,6 +398,12 @@
+ 
+     packet_len = get_32 ((unsigned char*)&packet_len, 0) + 4;
+ 
++    if (packet_len < 0 || packet_len > BUF_SIZE) {
++      mp_msg(MSGT_NETWORK, MSGL_FATAL,
++              "Invalid rtsp packet size, giving up\n");
++      return 0;
++    }
++
+     if (!get_data (s, data, packet_len)) {
+       printf ("command data read failed\n");
+       return 0;
+@@ -464,7 +488,7 @@
+ {
+   char                 str[1024];
+   char                 data[BUF_SIZE];
+-  uint8_t              asf_header[8192];
++  uint8_t              asf_header[HDR_BUF_SIZE];
+   int                  asf_header_len;
+   int                  len, i, packet_length;
+   char                *path, *unescpath;
+diff -Naur MPlayer-1.0pre5/libmpdemux/demux_bmp.c MPlayer-1.0pre5try2/libmpdemux/demux_bmp.c
+--- MPlayer-1.0pre5/libmpdemux/demux_bmp.c	2003-04-30 22:24:09.000000000 +0200
++++ MPlayer-1.0pre5try2/libmpdemux/demux_bmp.c	1970-01-01 01:00:00.000000000 +0100
+@@ -1,116 +0,0 @@
+-/*
+-    BMP file parser for the MPlayer program
+-    by Mike Melanson
+-*/
+-
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <unistd.h>
+-
+-#include "config.h"
+-#include "mp_msg.h"
+-#include "help_mp.h"
+-
+-#include "stream.h"
+-#include "demuxer.h"
+-#include "stheader.h"
+-
+-typedef struct {
+-  int image_size;
+-  int image_offset;
+-} bmp_image_t;
+-
+-// Check if a file is a BMP file depending on whether starts with 'BM'
+-int bmp_check_file(demuxer_t *demuxer)
+-{
+-  if (stream_read_word(demuxer->stream) == (('B' << 8) | 'M'))
+-    return 1;
+-  else
+-    return 0;
+-}
+-
+-// return value:
+-//     0 = EOF or no stream found
+-//     1 = successfully read a packet
+-int demux_bmp_fill_buffer(demuxer_t *demuxer)
+-{
+-  bmp_image_t *bmp_image = (bmp_image_t *)demuxer->priv;
+-
+-  stream_reset(demuxer->stream);
+-  stream_seek(demuxer->stream, bmp_image->image_offset);
+-  ds_read_packet(demuxer->video, demuxer->stream, bmp_image->image_size,
+-    0, bmp_image->image_offset, 1);
+-
+-  return 1;
+-}
+-
+-demuxer_t* demux_open_bmp(demuxer_t* demuxer)
+-{
+-  sh_video_t *sh_video = NULL;
+-  unsigned int filesize;
+-  unsigned int data_offset;
+-  bmp_image_t *bmp_image;
+-
+-  // go back to the beginning
+-  stream_reset(demuxer->stream);
+-  stream_seek(demuxer->stream, 2);
+-  filesize = stream_read_dword_le(demuxer->stream);
+-  stream_skip(demuxer->stream, 4);
+-  data_offset = stream_read_word_le(demuxer->stream);
+-  stream_skip(demuxer->stream, 2);
+-
+-  // create a new video stream header
+-  sh_video = new_sh_video(demuxer, 0);
+-
+-  // make sure the demuxer knows about the new video stream header
+-  demuxer->video->sh = sh_video;
+-
+-  // make sure that the video demuxer stream header knows about its
+-  // parent video demuxer stream
+-  sh_video->ds = demuxer->video;
+-
+-  // load the BITMAPINFOHEADER
+-  // allocate size and take the palette table into account
+-  sh_video->bih = (BITMAPINFOHEADER *)malloc(data_offset - 12);
+-  sh_video->bih->biSize = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biWidth = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biHeight = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biPlanes = stream_read_word_le(demuxer->stream);
+-  sh_video->bih->biBitCount = stream_read_word_le(demuxer->stream);
+-  sh_video->bih->biCompression = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biSizeImage = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biXPelsPerMeter = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biYPelsPerMeter = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biClrUsed = stream_read_dword_le(demuxer->stream);
+-  sh_video->bih->biClrImportant = stream_read_dword_le(demuxer->stream);
+-  // fetch the palette
+-  stream_read(demuxer->stream, (unsigned char *)(sh_video->bih) + 40,
+-    sh_video->bih->biClrUsed * 4);
+-
+-  // load the data
+-  bmp_image = (bmp_image_t *)malloc(sizeof(bmp_image_t));
+-  bmp_image->image_size = filesize - data_offset;
+-  bmp_image->image_offset = data_offset;
+-
+-  // custom fourcc for internal MPlayer use
+-  sh_video->format = sh_video->bih->biCompression;
+-
+-  sh_video->disp_w = sh_video->bih->biWidth;
+-  sh_video->disp_h = sh_video->bih->biHeight;
+-
+-  // get the speed
+-  sh_video->fps = 2;
+-  sh_video->frametime = 1 / sh_video->fps;
+-
+-  demuxer->priv = bmp_image;
+-
+-  return demuxer;
+-}
+-
+-void demux_close_bmp(demuxer_t* demuxer) {
+-  bmp_image_t *bmp_image = demuxer->priv;
+-
+-  if(!bmp_image)
+-    return;
+-  free(bmp_image);
+-}
+diff -Naur MPlayer-1.0pre5/libmpdemux/demuxer.c MPlayer-1.0pre5try2/libmpdemux/demuxer.c
+--- MPlayer-1.0pre5/libmpdemux/demuxer.c	2004-05-07 10:31:39.000000000 +0200
++++ MPlayer-1.0pre5try2/libmpdemux/demuxer.c	2004-12-15 21:34:12.000000000 +0100
+@@ -121,7 +121,6 @@
+ extern void demux_close_mf(demuxer_t* demuxer);
+ extern void demux_close_roq(demuxer_t* demuxer);
+ extern void demux_close_film(demuxer_t* demuxer);
+-extern void demux_close_bmp(demuxer_t* demuxer);
+ extern void demux_close_fli(demuxer_t* demuxer);
+ extern void demux_close_nsv(demuxer_t* demuxer);
+ extern void demux_close_nuv(demuxer_t* demuxer);
+@@ -172,8 +171,6 @@
+       demux_close_roq(demuxer);  break;
+     case DEMUXER_TYPE_FILM:
+       demux_close_film(demuxer); break;
+-    case DEMUXER_TYPE_BMP:
+-      demux_close_bmp(demuxer); break;
+     case DEMUXER_TYPE_FLI:
+       demux_close_fli(demuxer); break;
+     case DEMUXER_TYPE_NSV:
+@@ -290,7 +287,6 @@
+ int demux_mf_fill_buffer( demuxer_t *demux);
+ int demux_roq_fill_buffer(demuxer_t *demux);
+ int demux_film_fill_buffer(demuxer_t *demux);
+-int demux_bmp_fill_buffer(demuxer_t *demux);
+ int demux_fli_fill_buffer(demuxer_t *demux);
+ int demux_mpg_es_fill_buffer(demuxer_t *demux);
+ int demux_mpg_fill_buffer(demuxer_t *demux);
+@@ -330,7 +326,6 @@
+     case DEMUXER_TYPE_MF: return demux_mf_fill_buffer(demux);
+     case DEMUXER_TYPE_ROQ: return demux_roq_fill_buffer(demux);
+     case DEMUXER_TYPE_FILM: return demux_film_fill_buffer(demux);
+-    case DEMUXER_TYPE_BMP: return demux_bmp_fill_buffer(demux);
+     case DEMUXER_TYPE_FLI: return demux_fli_fill_buffer(demux);
+     case DEMUXER_TYPE_MPEG_TY: return demux_ty_fill_buffer( demux );
+     case DEMUXER_TYPE_MPEG4_ES:
+@@ -587,7 +582,6 @@
+ int demux_open_fli(demuxer_t* demuxer);
+ int demux_open_mf(demuxer_t* demuxer);
+ int demux_open_film(demuxer_t* demuxer);
+-int demux_open_bmp(demuxer_t* demuxer);
+ int demux_open_roq(demuxer_t* demuxer);
+ #ifdef HAVE_LIBDV095
+ int demux_open_rawdv(demuxer_t* demuxer);
+@@ -613,7 +607,6 @@
+ extern int demux_rawvideo_open(demuxer_t* demuxer);
+ extern int smjpeg_check_file(demuxer_t *demuxer);
+ extern int demux_open_smjpeg(demuxer_t* demuxer);
+-extern int bmp_check_file(demuxer_t *demuxer);
+ extern int demux_xmms_open(demuxer_t* demuxer);
+ extern int gif_check_file(demuxer_t *demuxer);
+ extern int demux_open_gif(demuxer_t* demuxer);
+@@ -884,17 +877,6 @@
+   }
+ }
+ #endif
+-//=============== Try to open as BMP file: =================
+-if(file_format==DEMUXER_TYPE_UNKNOWN || file_format==DEMUXER_TYPE_BMP){
+-  demuxer=new_demuxer(stream,DEMUXER_TYPE_BMP,audio_id,video_id,dvdsub_id);
+-  if(bmp_check_file(demuxer)){
+-      mp_msg(MSGT_DEMUXER,MSGL_INFO,MSGTR_Detected_XXX_FileFormat,"BMP");
+-      file_format=DEMUXER_TYPE_BMP;
+-  } else {
+-      free_demuxer(demuxer);
+-      demuxer = NULL;
+-  }
+-}
+ #ifdef HAVE_OGGVORBIS
+ //=============== Try to open as Ogg file: =================
+ if(file_format==DEMUXER_TYPE_UNKNOWN || file_format==DEMUXER_TYPE_OGG){
+@@ -1165,10 +1147,6 @@
+   break;
+  }
+ #endif
+- case DEMUXER_TYPE_BMP: {
+-  if (!demux_open_bmp(demuxer)) return NULL;
+-  break;
+- }
+  case DEMUXER_TYPE_ROQ: {
+   if (!demux_open_roq(demuxer)) return NULL;
+   break;
+diff -Naur MPlayer-1.0pre5/libmpdemux/demuxer.h MPlayer-1.0pre5try2/libmpdemux/demuxer.h
+--- MPlayer-1.0pre5/libmpdemux/demuxer.h	2004-04-12 16:19:12.000000000 +0200
++++ MPlayer-1.0pre5try2/libmpdemux/demuxer.h	2004-12-15 21:34:12.000000000 +0100
+@@ -27,7 +27,6 @@
+ #define DEMUXER_TYPE_MF 16
+ #define DEMUXER_TYPE_AUDIO 17
+ #define DEMUXER_TYPE_OGG 18
+-#define DEMUXER_TYPE_BMP 19
+ #define DEMUXER_TYPE_RAWAUDIO 20
+ #define DEMUXER_TYPE_RTP 21
+ #define DEMUXER_TYPE_RAWDV 22
+diff -Naur MPlayer-1.0pre5/libmpdemux/Makefile MPlayer-1.0pre5try2/libmpdemux/Makefile
+--- MPlayer-1.0pre5/libmpdemux/Makefile	2004-07-12 00:47:49.000000000 +0200
++++ MPlayer-1.0pre5try2/libmpdemux/Makefile	2004-12-15 21:34:12.000000000 +0100
+@@ -3,7 +3,7 @@
+ 
+ include ../config.mak
+ 
+-SRCS = mp3_hdr.c video.c mpeg_hdr.c cache2.c asfheader.c aviheader.c aviprint.c muxer.c muxer_avi.c muxer_mpeg.c demux_asf.c demux_avi.c demux_mov.c parse_mp4.c demux_mpg.c demux_ty.c demux_ty_osd.c demux_pva.c demux_viv.c demuxer.c dvdnav_stream.c open.c parse_es.c stream.c stream_file.c stream_netstream.c stream_vcd.c stream_null.c stream_ftp.c tv.c tvi_dummy.c tvi_v4l.c tvi_v4l2.c tvi_bsdbt848.c frequencies.c demux_fli.c demux_real.c demux_y4m.c yuv4mpeg.c yuv4mpeg_ratio.c demux_nuv.c demux_film.c demux_roq.c mf.c demux_mf.c demux_audio.c demux_demuxers.c demux_ogg.c demux_bmp.c cdda.c demux_rawaudio.c demux_rawvideo.c cddb.c cdinfo.c demux_rawdv.c ai_alsa.c ai_alsa1x.c ai_oss.c audio_in.c demux_smjpeg.c demux_lmlm4.c cue_read.c extension.c demux_gif.c demux_ts.c demux_realaud.c url.c muxer_rawvideo.c demux_lavf.c demux_nsv.c
++SRCS = mp3_hdr.c video.c mpeg_hdr.c cache2.c asfheader.c aviheader.c aviprint.c muxer.c muxer_avi.c muxer_mpeg.c demux_asf.c demux_avi.c demux_mov.c parse_mp4.c demux_mpg.c demux_ty.c demux_ty_osd.c demux_pva.c demux_viv.c demuxer.c dvdnav_stream.c open.c parse_es.c stream.c stream_file.c stream_netstream.c stream_vcd.c stream_null.c stream_ftp.c tv.c tvi_dummy.c tvi_v4l.c tvi_v4l2.c tvi_bsdbt848.c frequencies.c demux_fli.c demux_real.c demux_y4m.c yuv4mpeg.c yuv4mpeg_ratio.c demux_nuv.c demux_film.c demux_roq.c mf.c demux_mf.c demux_audio.c demux_demuxers.c demux_ogg.c cdda.c demux_rawaudio.c demux_rawvideo.c cddb.c cdinfo.c demux_rawdv.c ai_alsa.c ai_alsa1x.c ai_oss.c audio_in.c demux_smjpeg.c demux_lmlm4.c cue_read.c extension.c demux_gif.c demux_ts.c demux_realaud.c url.c muxer_rawvideo.c demux_lavf.c demux_nsv.c
+ ifeq ($(XMMS_PLUGINS),yes)
+ SRCS += demux_xmms.c
+ endif 
+diff -Naur MPlayer-1.0pre5/libmpdemux/pnm.c MPlayer-1.0pre5try2/libmpdemux/pnm.c
+--- MPlayer-1.0pre5/libmpdemux/pnm.c	2003-10-04 19:29:01.000000000 +0200
++++ MPlayer-1.0pre5try2/libmpdemux/pnm.c	2004-12-15 21:37:11.000000000 +0100
+@@ -307,9 +307,12 @@
+                          char *data, int *need_response) {
+ 
+   unsigned int chunk_size;
+-  int n;
++  unsigned int n;
+   char *ptr;
+  
++  if (max < PREAMBLE_SIZE)
++    return -1;
++
+   /* get first PREAMBLE_SIZE bytes and ignore checksum */
+   rm_read (p->s, data, CHECKSUM_SIZE);
+   if (data[0] == 0x72)
+@@ -317,6 +320,8 @@
+   else
+     rm_read (p->s, data+CHECKSUM_SIZE, PREAMBLE_SIZE-CHECKSUM_SIZE);
+   
++  max -= PREAMBLE_SIZE;
++
+   *chunk_type = BE_32(data);
+   chunk_size = BE_32(data+4);
+ 
+@@ -324,18 +329,30 @@
+     case PNA_TAG:
+       *need_response=0;
+       ptr=data+PREAMBLE_SIZE;
++      if (max < 1)
++	return -1;
+       rm_read (p->s, ptr++, 1);
++      max -= 1;
+ 
+       while(1) {
+ 	/* expecting following chunk format: 0x4f <chunk size> <data...> */
+ 
++        if (max < 2)
++          return -1;
+         rm_read (p->s, ptr, 2);
++        max -= 2;
+ 	if (*ptr == 'X') /* checking for server message */
+ 	{
+ 	  printf("input_pnm: got a message from server:\n");
++	  if (max < 1)
++	    return -1;
+ 	  rm_read (p->s, ptr+2, 1);
++	  max = -1;
+ 	  n=BE_16(ptr+1);
++	  if (max < n)
++	    return -1;
+ 	  rm_read (p->s, ptr+3, n);
++	  max -= n;
+ 	  ptr[3+n]=0;
+ 	  printf("%s\n",ptr+3);
+ 	  return -1;
+@@ -354,10 +371,15 @@
+ 	}
+ 	if (*ptr != 0x4f) break;
+ 	n=ptr[1];
++	if (max < n)
++	  return -1;
+ 	rm_read (p->s, ptr+2, n);
++	max -= n;
+ 	ptr+=(n+2);
+       }
+       /* the checksum of the next chunk is ignored here */
++      if (max < 1)
++        return -1;
+       rm_read (p->s, ptr+2, 1);
+       ptr+=3;
+       chunk_size=ptr-data;
+@@ -367,10 +389,12 @@
+     case PROP_TAG:
+     case MDPR_TAG:
+     case CONT_TAG:
+-      if (chunk_size > max) {
++      if (chunk_size > max || chunk_size < PREAMBLE_SIZE) {
+         printf("error: max chunk size exeeded (max was 0x%04x)\n", max);
++#ifdef LOG
+         n=rm_read (p->s, &data[PREAMBLE_SIZE], 0x100 - PREAMBLE_SIZE);
+         hexdump(data,n+PREAMBLE_SIZE);
++#endif
+         return -1;
+       }
+       rm_read (p->s, &data[PREAMBLE_SIZE], chunk_size-PREAMBLE_SIZE);
+diff -Naur MPlayer-1.0pre5/libmpdemux/realrtsp/real.c MPlayer-1.0pre5try2/libmpdemux/realrtsp/real.c
+--- MPlayer-1.0pre5/libmpdemux/realrtsp/real.c	2004-04-25 02:17:23.000000000 +0200
++++ MPlayer-1.0pre5try2/libmpdemux/realrtsp/real.c	2004-12-15 21:35:34.000000000 +0100
+@@ -683,6 +683,8 @@
+   return 1;
+ }
+ 
++//! maximum size of the rtsp description, must be < INT_MAX
++#define MAX_DESC_BUF (20 * 1024 * 1024)
+ rmff_header_t  *real_setup_and_get_header(rtsp_t *rtsp_session, uint32_t bandwidth) {
+ 
+   char *description=NULL;
+@@ -733,13 +735,21 @@
+   else
+     size=atoi(rtsp_search_answers(rtsp_session,"Content-length"));
+ 
++  // as size is unsigned this also catches the case (size < 0)
++  if (size > MAX_DESC_BUF) {
++    printf("real: Content-length for description too big (> %uMB)!\n",
++            MAX_DESC_BUF/(1024*1024) );
++    xbuffer_free(buf);
++    return NULL;
++  }
++
+   if (!rtsp_search_answers(rtsp_session,"ETag"))
+     printf("real: got no ETag!\n");
+   else
+     session_id=strdup(rtsp_search_answers(rtsp_session,"ETag"));
+     
+ #ifdef LOG
+-  printf("real: Stream description size: %i\n", size);
++  printf("real: Stream description size: %u\n", size);
+ #endif
+ 
+   description=malloc(sizeof(char)*(size+1));
+diff -Naur MPlayer-1.0pre5/mp3lib/layer2.c MPlayer-1.0pre5try2/mp3lib/layer2.c
+--- MPlayer-1.0pre5/mp3lib/layer2.c	2004-04-06 03:06:21.000000000 +0200
++++ MPlayer-1.0pre5try2/mp3lib/layer2.c	2004-12-15 22:06:29.120521177 +0100
+@@ -80,12 +80,12 @@
+     bita = bit_alloc;
+     if(stereo)
+     {
+-      for (i=jsbound;i;i--,alloc1+=(1<<step))
++      for (i=jsbound;i>0;i--,alloc1+=(1<<step))
+       {
+         *bita++ = (char) getbits(step=alloc1->bits);
+         *bita++ = (char) getbits(step);
+       }
+-      for (i=sblimit-jsbound;i;i--,alloc1+=(1<<step))
++      for (i=sblimit-jsbound;i>0;i--,alloc1+=(1<<step))
+       {
+         bita[0] = (char) getbits(step=alloc1->bits);
+         bita[1] = bita[0];
+@@ -93,24 +93,24 @@
+       }
+       bita = bit_alloc;
+       scfsi=scfsi_buf;
+-      for (i=sblimit2;i;i--)
++      for (i=sblimit2;i>0;i--)
+         if (*bita++)
+           *scfsi++ = (char) getbits_fast(2);
+     }
+     else /* mono */
+     {
+-      for (i=sblimit;i;i--,alloc1+=(1<<step))
++      for (i=sblimit;i>0;i--,alloc1+=(1<<step))
+         *bita++ = (char) getbits(step=alloc1->bits);
+       bita = bit_alloc;
+       scfsi=scfsi_buf;
+-      for (i=sblimit;i;i--)
++      for (i=sblimit;i>0;i--)
+         if (*bita++)
+           *scfsi++ = (char) getbits_fast(2);
+     }
+ 
+     bita = bit_alloc;
+     scfsi=scfsi_buf;
+-    for (i=sblimit2;i;i--) 
++    for (i=sblimit2;i>0;i--) 
+       if (*bita++)
+         switch (*scfsi++) 
+         {
+diff -Naur MPlayer-1.0pre5/version.sh MPlayer-1.0pre5try2/version.sh
+--- MPlayer-1.0pre5/version.sh	2004-07-15 02:18:47.000000000 +0200
++++ MPlayer-1.0pre5try2/version.sh	2004-12-15 22:12:19.181995904 +0100
+@@ -1,2 +1,2 @@
+ #!/bin/sh
+-echo "#define VERSION \"1.0pre5-$1\"" > version.h
++echo "#define VERSION \"1.0pre5try2-$1\"" > version.h

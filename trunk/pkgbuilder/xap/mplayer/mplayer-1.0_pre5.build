@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="MPlayer-${PKG_VERSION/_/}.$PKG_EXTENSION"
@@ -64,6 +64,15 @@ if [ -r $PKG_SRC/config.mak ] ; then
     PKG_ARCH="`expr match "$OPTFLAGS" '.*\-march=\([a-z0-9A-Z\-]*\)'`"
     PKG_ARCH="`echo $PKG_ARCH | sed -e 's:\-::'`"
 fi
+
+do_patch() {
+    cd $PKG_SRC
+
+    # security fix
+    apply_patch pre5-pre5try2.diff -Np1
+
+    return $?
+}
 
 do_configure() {
     cd $PKG_SRC
