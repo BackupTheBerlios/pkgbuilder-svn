@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.7 2003/12/26 00:52:45 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.8 2003/12/27 00:05:34 tomby Exp $
 
 #
 # Package specific functions
@@ -15,7 +15,7 @@ pkg_installdoc() {
 }
 
 pkg_stripall() {
-    if [ "$PKG_NOSTRIP" == "Y" ] ; then
+    if [ "$PKG_NOSTRIP" != "Y" ] ; then
         strip_all $PKG_DEST
     fi
 }
@@ -38,7 +38,7 @@ pkg_configfiles() {
             mv $PKG_DEST/$config $PKG_DEST/$config.new
         done
 
-        cat > $PKG_DEST/install/doinst.sh << "EOF"
+        cat >> $PKG_DEST/install/doinst.sh << "EOF"
 #!/bin/sh
 config() {
   NEW="$1"
@@ -125,4 +125,30 @@ pkg_install() {
     make $PKG_INSTALL_OPTIONS $PKG_INSTALL_TARGET
 
     return $?
+}
+
+pkg_virtual() {
+	if [ "$PKG_VIRTUAL" != "" ] ; then
+		mkdir -p $PKG_DEST/install
+		
+		cat >> $PKG_DEST/install/doinst.sh << "EOF"
+virtual() {
+  cd /var/log/package
+  
+  ln -sf $1 $2-0.0-virtual-1
+}
+EOF
+
+		for virtual in $PKG_VIRTUAL ; do
+            echo "virtual $PKG_NAME-$PKG_VERSION-$PKG_ARCH-$PKG_BUILD $virtual" >> $PKG_DEST/install/doinst.sh
+        done
+	fi
+}
+
+pkg_postinstall() {
+	pkg_installdoc &&
+    pkg_stripall &&
+    pkg_gzipmaninfo &&
+    pkg_configfiles &&
+    pkg_installfiles
 }
