@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.27 2003/12/20 14:58:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.28 2003/12/24 16:33:32 tomby Exp $
 
 #
 # Generic functions
@@ -278,7 +278,9 @@ installed_version() {
         return 2
     fi
     
-    if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then        
+    if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then
+        pkgfile="`echo $pkgfile | sed -e 's:\-[a-zA-Z0-9]\+\-[a-z]*[0-9]\+$::'`"
+        
         local pkgversion="`extract_version $pkgfile`"
         
         echo "$pkgversion"
