@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="startup-notification"
-PKG_VERSION="0.5"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am4"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.freedesktop.org/software/$PKG_NAME/releases/$PKG_FILE_NAME"
@@ -19,13 +17,10 @@ PKG_LICENSE="LGPLv2 BSD"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86"
+PKG_DEPENDS="x/x11"
 
 PKG_HOMESITE="http://www.freedesktop.org/software/startup-notification/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL NEWS README doc/startup-notification.txt"
 
 PKG_PREFIX="/usr"

@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxklavier/libxklavier-1.00.build,v 1.1 2004/04/10 14:54:52 tomby Exp $
 #
-# libxklavier-1.00 pkgbuilder script
+# libxklavier-1.02 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,7 +17,7 @@ PKG_LICENSE="LGPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
              l/libxml2
              d/pkgconfig"
 

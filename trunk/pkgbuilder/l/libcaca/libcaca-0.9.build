@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -20,7 +20,7 @@ PKG_USE=""
 PKG_DEPENDS=">=l/ncurses-5.3
              l/imlib2
              `use_dep slang ">=l/slang-1.4.2"`
-             `use X "x/xfree86"`"
+             `use_dep X "x/x11"`"
 
 PKG_HOMESITE="http://sam.zoy.org/projects/libcaca/"
 

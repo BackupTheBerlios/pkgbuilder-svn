@@ -17,12 +17,12 @@ PKG_LICENSE="QPLv1.0 | GPLv2"
 
 PKG_USE="mysql gif cups"
 
-PKG_DEPENDS="x/xfree86
-	         l/libpng
-	         l/lcms
-	         l/libjpeg
-         	 l/libmng
-	         l/freetype2
+PKG_DEPENDS="x/x11
+             l/libpng
+             l/lcms
+             l/libjpeg
+             l/libmng
+             l/freetype2
              `use_dep gif "l/libungif"`
              `use_dep cups "a/cups"`
              `use_dep mysql ">=ap/mysql-4.0.15a"`"
@@ -57,7 +57,7 @@ do_configure() {
     export YACC="byacc -d"
     export SYSCONF="$PKG_DEST$PKG_PREFIX/etc/settings"
     local LD_LIBRARY_PATH_OLD="$LD_LIBRARY_PATH"
-	export LD_LIBRARY_PATH="$QTDIR/lib:$LD_LIBRARY_PATH"
+    export LD_LIBRARY_PATH="$QTDIR/lib:$LD_LIBRARY_PATH"
     export LDFLAGS="-ldl"
     export PLATFORM="linux-g++"
     
@@ -92,7 +92,7 @@ do_build() {
     export YACC="byacc -d"
     export SYSCONF="$PKG_DEST$PKG_PREFIX/etc/settings"
     local LD_LIBRARY_PATH_OLD="$LD_LIBRARY_PATH"
-	export LD_LIBRARY_PATH="$QTDIR/lib:$LD_LIBRARY_PATH"
+    export LD_LIBRARY_PATH="$QTDIR/lib:$LD_LIBRARY_PATH"
     export LDFLAGS="-ldl"
     export PLATFORM="linux-g++"
     
@@ -127,8 +127,8 @@ do_install() {
     #plugins
     for plug in `find plugins -name "lib*.so"`; do
         mkdir -p $PKG_DEST$PKG_PREFIX/`dirname $plug`
-		cp $plug $PKG_DEST$PKG_PREFIX/$plug
-	done
+        cp $plug $PKG_DEST$PKG_PREFIX/$plug
+    done
     
     #documentation
     cp -R doc/* $PKG_DEST$PKG_PREFIX/doc/

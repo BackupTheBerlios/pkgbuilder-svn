@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="arts esd nls dvd aalib oggvorbis alsa sdl divx win32codecs"
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
              >=l/flac-1.0.4
              >=l/libfame-0.9.0
              >=l/xvid-0.9.0

@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
 #
-# libgd-2.0.23 pkgbuilder script
+# libgd-2.0.33 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="gd-$PKG_VERSION.$PKG_EXTENSION"

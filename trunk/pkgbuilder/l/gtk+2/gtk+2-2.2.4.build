@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="gtk+2"
-PKG_VERSION="2.2.4"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="gtk+-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.gtk.org/pub/gtk/v2.2/$PKG_FILE_NAME"
@@ -19,25 +17,23 @@ PKG_LICENSE="LGPLv2.1"
 
 PKG_USE="doc tiff jpeg"
 
-PKG_DEPENDS=">=x/xfree86-4.3.0
-	         >=l/glib2-2.2
-	         >=l/atk-1.2
-	         >=l/pango-1.2
-	         >=l/libpng-1.2.1
-	         `use jpeg && echo ">=l/libjpeg-6b"`
-	         `use tiff && echo ">=l/libtiff-3.5.7"`
-             `use doc && echo ">=gnome/gtk-doc-1.0"`"
+PKG_DEPENDS="x/x11
+             >=l/glib2-2.2
+             >=l/atk-1.2
+             >=l/pango-1.2
+             >=l/libpng-1.2.1
+             `use_dep jpeg ">=l/libjpeg-6b"`
+             `use_dep tiff ">=l/libtiff-3.5.7"`
+             `use_dep doc ">=gnome/gtk-doc-1.0"`"
 
 PKG_HOMESITE="http://www.gtk.org/"
 
 PKG_SRC="$TMP/gtk+-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog* HACKING INSTALL NEWS* README*"
 
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
-                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
+                       `use_enable doc gtk-doc`"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 

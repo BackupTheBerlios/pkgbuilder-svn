@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="wxGTK-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,7 +17,7 @@ PKG_LICENSE="wxWin"
 
 PKG_USE="opengl unicode"
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
             l/libpng
             l/libjpeg
             l/libtiff

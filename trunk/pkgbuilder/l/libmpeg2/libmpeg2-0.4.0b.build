@@ -18,7 +18,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="X sdl"
 
 PKG_DEPENDS="`use_dep sdl "l/sdl"`
-             `use dep X "x/xfree86"`"
+             `use dep X "x/x11"`"
 
 PKG_HOMESITE="http://libmpeg2.sourceforge.net/"
 

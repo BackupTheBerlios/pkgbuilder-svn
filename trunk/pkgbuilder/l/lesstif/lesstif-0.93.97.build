@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -18,7 +18,7 @@ PKG_LICENSE="LGPLv2"
 PKG_USE=""
 
 PKG_DEPENDS="l/glibc
-             x/xfree86"
+             x/x11"
 
 PKG_HOMESITE="http://www.lesstif.org/"
 

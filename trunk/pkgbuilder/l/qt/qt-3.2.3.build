@@ -7,23 +7,24 @@
 
 inherit configscript
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
+
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-x11-free-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.trolltech.com/qt/source/$PKG_FILE_NAME"
 
 PKG_LICENSE="QPLv1.0 | GPLv2"
 
-PKG_USE="mysql"
+PKG_USE="mysql cups"
 
-PKG_DEPENDS="x/xfree86
-	         l/libpng
-	         l/lcms
-	         l/libjpeg
-         	 l/libmng
-	         l/freetype2
-             `use cups && echo "a/cups"`
-             `use mysql && echo ">=ap/mysql-4.0.15a"`"
+PKG_DEPENDS="x/x11
+             l/libpng
+             l/lcms
+             l/libjpeg
+             l/libmng
+             l/freetype2
+             `use_dep cups "a/cups"`
+             `use_dep mysql ">=ap/mysql-4.0.15a"`"
 
 PKG_HOMESITE="http://www.trolltech.com/"
 
@@ -52,7 +53,7 @@ do_configure() {
     export YACC="byacc -d"
     export SYSCONF=$PKG_DEST$PKG_PREFIX/etc/settings
     local LD_LIBRARY_PATH_OLD=$LD_LIBRARY_PATH
-	export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
     export LDFLAGS="-ldl"
     
     local myconf="-release -system-zlib -qt-gif
@@ -76,7 +77,7 @@ do_build() {
     export YACC="byacc -d"
     export SYSCONF=$PKG_DEST$PKG_PREFIX/etc/settings
     local LD_LIBRARY_PATH_OLD=$LD_LIBRARY_PATH
-	export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
     export LDFLAGS="-ldl"
     
     make -i src-qmake src-moc sub-src sub-tools
@@ -110,8 +111,8 @@ do_install() {
     #plugins
     for plug in `find plugins -name "lib*.so"`; do
         mkdir -p $PKG_DEST$PKG_PREFIX/`dirname $plug`
-		cp $plug $PKG_DEST$PKG_PREFIX/$plug
-	done
+        cp $plug $PKG_DEST$PKG_PREFIX/$plug
+    done
     
     #documentation
     cp -R doc/* $PKG_DEST$PKG_PREFIX/doc/

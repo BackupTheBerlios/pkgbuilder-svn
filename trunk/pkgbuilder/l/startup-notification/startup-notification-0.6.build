@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,7 +17,7 @@ PKG_LICENSE="LGPLv2 BSD"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86"
+PKG_DEPENDS="x/x11"
 
 PKG_HOMESITE="http://www.freedesktop.org/software/startup-notification/"
 

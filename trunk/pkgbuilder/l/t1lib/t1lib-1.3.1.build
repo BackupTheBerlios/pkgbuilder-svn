@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="t1lib"
-PKG_VERSION="1.3.1"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://metalab.unc.edu/pub/Linux/libs/graphics/$PKG_FILE_NAME"
@@ -19,13 +17,10 @@ PKG_LICENSE="GPLv2 LGPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86"
+PKG_DEPENDS="x/x11"
 
 PKG_HOMESITE="ftp://metalab.unc.edu/pub/Linux/libs/graphics"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="Changes LGPL LICENSE README.* doc/t1lib_doc.pdf"
 
 PKG_PREFIX="/usr"

@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/pango/pango-1.4.0.build,v 1.1 2004/03/18 22:23:36 tomby Exp $
 #
-# pango-1.4.0 pkgbuilder script
+# pango-1.4.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,7 +17,7 @@ PKG_LICENSE="LGPLv2.1"
 
 PKG_USE="doc"
 
-PKG_DEPENDS=">=x/xfree86-4.3.0
+PKG_DEPENDS="x/x11
              >=l/glib2-2.4
              >=l/fontconfig-1.0.1
              l/freetype2

@@ -17,7 +17,7 @@ PKG_LICENSE="LGPLv2.1"
 
 PKG_USE="doc tiff jpeg"
 
-PKG_DEPENDS=">=x/xfree86-4.3.0
+PKG_DEPENDS="x/x11
              >=l/glib2-2.4
              >=l/atk-1.2
              >=l/pango-1.4
