@@ -26,6 +26,7 @@ usage() {
     echo
     echo "    options:"
     echo "        -v verbose mode"
+    echo "        -p from precompiled packages mode"
     echo "        -d dummy mode"
     echo
     echo "    example: ./install.sh xap/aterm"
