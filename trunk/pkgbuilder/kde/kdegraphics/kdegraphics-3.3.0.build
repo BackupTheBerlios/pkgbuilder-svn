@@ -11,7 +11,7 @@ PKG_BUILD="am1"
 
 PKG_USE="tetex"
 
-PKG_DEPENDS=">=l/qt-3.2
+PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdelibs-3.3.0
              >=kde/kdebase-3.3.0
              >=xap/xpdf-2.02p1

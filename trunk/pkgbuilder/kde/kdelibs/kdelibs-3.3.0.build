@@ -18,7 +18,7 @@ PKG_DEPENDS="d/perl
              l/pcre
              l/libxml2
              l/libtiff
-             l/qt
+             >=l/qt-3.3
              ap/esp-gs
              l/libart_lgpl
              d/gettext

@@ -13,7 +13,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="devel nls accessibility"
 
-PKG_DEPENDS=">=l/qt-3.2
+PKG_DEPENDS=">=l/qt-3.3
              =kde/arts-1.3.0
              =kde/kdelibs-3.3.0
              =kde/kdebase-3.3.0

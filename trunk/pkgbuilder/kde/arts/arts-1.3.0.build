@@ -14,7 +14,7 @@ PKG_USE="alsa oggvorbis mad"
 
 PKG_DEPENDS="l/audiofile
              l/glib2
-             >=l/qt-3.2
+             >=l/qt-3.3
              d/pkgconfig
              `use_dep alsa "l/alsa-lib"`
              `use_dep oggvorbis  "l/libvorbis l/libogg"`

@@ -14,7 +14,7 @@ PKG_USE="oggvorbis lame samba cups opengl"
 PKG_DEPENDS="ap/cdparanoia
              >=l/lesstif-0.93.91
              l/freetype2
-             l/qt
+             >=l/qt-3.3
              d/pkgconfig
              l/openssl
              >=kde/kdelibs-3.3.0

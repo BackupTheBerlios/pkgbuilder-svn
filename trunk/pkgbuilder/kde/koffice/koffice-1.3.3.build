@@ -17,7 +17,7 @@ PKG_HOMESITE="http://www.koffice.org/"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/qt-3.2
+PKG_DEPENDS=">=l/qt-3.3
              d/perl
              >=kde/kdelibs-3.1
              >=d/python-2.2.1

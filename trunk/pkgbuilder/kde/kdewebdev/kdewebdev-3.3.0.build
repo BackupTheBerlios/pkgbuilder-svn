@@ -11,8 +11,26 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/qt-3.2
+PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdelibs-3.3.0
-             >=kde/kdebase-3.3.0"
+             >=kde/kdebase-3.3.0
+             >=kde/kdesdk-3.3.0
+             >=l/libxml2-2.6
+             >=l/libxslt-1.0.18"
 
-PKG_DOC_FILES="COPYING README kdewebdev.lsm"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL* NEWS PACKAGING README TODO VERSION kdewebdev.lsm"
+
+do_patch() {
+    cd $PKG_SRC/quanta/parts/kafka
+
+    # missing WYSIWYG support
+    apply_patch wysiwyg.diff -Np0
+
+    cd $PKG_SRC
+
+    cp $PKG_HOME/files/Makefile.cvs .
+
+    make -f Makefile.cvs
+
+    return $?
+}

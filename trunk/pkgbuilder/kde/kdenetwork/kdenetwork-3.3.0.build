@@ -11,8 +11,7 @@ PKG_BUILD="am1"
 
 PKG_USE="slp"
 
-PKG_DEPENDS="!xap/kopete
-             >=l/qt-3.2
+PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdelibs-3.3.0
              >=kde/kdebase-3.3.0
              `use_dep slp "l/openslp"`"

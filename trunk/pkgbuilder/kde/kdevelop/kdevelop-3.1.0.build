@@ -13,7 +13,7 @@ PKG_URL="$KDE_BASE_URL/3.2.3/src/$PKG_FILE_NAME"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/qt-3.2
+PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdelibs-3.3.0
              >=kde/kdebase-3.3.0
              d/perl
