@@ -34,25 +34,32 @@ do_assertEquals() {
 	testnumber
 	
 	test "$1" = "$2"
+    RETVAL=$?
 	
-	result_msg $?
+    if [ $RETVAL -ne 0 ] ; then
+        echo -n "\"$1\" not equals to \"$2\" => "
+    fi
+    
+    result_msg $RETVAL
 }
 
 do_assertNotEquals() {
 	testnumber
 	
 	test "$1" != "$2"
+    RETVAL=$?
+    
+    if [ $RETVAL -ne 0 ] ; then
+        echo -n "\"$1\" equals to \"$2\" => "
+    fi
 	
-	result_msg $?
+	result_msg $RETVAL
 }
 
 echo "=> extract_version tests"
 do_init
-do_assertEquals "`extract_version libjpeg-6b`" "6b" 
+do_assertEquals "`extract_version libjpeg-6b`" "6b"
 do_assertEquals "`extract_version esp-gs`" ""
-do_assertEquals "`extract_version esp-gs-7.07.1-i686-am1`" "7.07.1"
-do_assertEquals "`extract_version esp-gs-7.07.1-i686-1am`" "7.07.1"
-do_assertEquals "`extract_version esp-gs-7.07.1-i686-1`" "7.07.1"
 do_assertEquals "`extract_version vim-a-b-6.1`" "6.1"
 do_assertEquals "`extract_version vim3_b-6.1`" "6.1"
 do_assertEquals "`extract_version vim3_b-6.1_9`" "6.1_9"
@@ -86,23 +93,27 @@ is_installed vim 6.1 ; do_assertFalse $?
 is_installed vim 6.2 ; do_assertTrue $?
 is_installed vimes 6.2 ; do_assertFalse $?
 is_installed gettext ; do_assertTrue $?
-is_installed glib2 ; do_assertTrue $?
-is_installed oggutils ; do_assertFalse $?
+is_installed gettext-tools ; do_assertTrue $?
+is_installed bzip2 ; do_assertTrue $?
+is_installed glibc ; do_assertTrue $?
 is_installed skljdf ; do_assertFalse $?
-is_installed gimp 1.2* ; do_assertFalse $?
-is_installed gimp 1.3* ; do_assertFalse $?
+is_installed libjpeg ; do_assertTrue $?
+is_installed libjpeg 6b ; do_assertTrue $?
+is_installed glibc 2.3* ; do_assertTrue $?
 
 echo "=> latest_version tests"
 do_init
 do_assertEquals "`latest_version xap nedit`" "5.4"
 do_assertEquals "`latest_version xap gaim`" "0.74"
 do_assertEquals "`latest_version l divx4linux`" "20030428"
+do_assertEquals "`latest_version xap mplayer`" "1.0pre3"
+do_assertEquals "`latest_version ap docbook-xml-dtd`" "4.2"
 
 echo "=> installed_version tests"
 do_init
 do_assertEquals "`installed_version gettext`" "0.11.5"
 do_assertEquals "`installed_version gettext-tools`" "0.11.5"
-do_assertEquals "`installed_version glib2`" "2.2.3"
-do_assertEquals "`installed_version oggutils`" ""
+do_assertEquals "`installed_version bzip2`" "1.0.2"
+do_assertEquals "`installed_version glibc`" "2.3.2"
 do_assertEquals "`installed_version libjpeg`" "6b"
 do_assertEquals "`installed_version divx4linux`" "20030428"
