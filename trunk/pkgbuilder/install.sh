@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.8 2003/11/28 21:37:00 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.9 2003/11/30 13:38:43 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -33,14 +33,14 @@ source build.rc
 #global functions
 source scripts/functions.sh
 
-#package to build
-PKG="$1"
-
 #verify script to execute
 if [ "$PKG" == "" -o "$PKG" == "help" ] ; then
-    echo usage
+    usage
     exit 1
 fi
+
+#package to build
+PKG="$1"
 
 #the build script
 source $PKG
@@ -55,20 +55,22 @@ for DEP in $PKG_DEPENDS ; do
     echo
     echo "DEP=\"$DEP\""
     
+    DEP_METAPKG_BASENAME="`dirname $DEP`"
+    DEP_PKG_BASENAME="`basename $DEP`"
+    
+    echo "DEP_METAPKG_BASENAME=\"$DEP_METAPKG_BASENAME\""
+    echo "DEP_PKG_BASENAME=\"$DEP_PKG_BASENAME\""
+    
     #metapkg
-    DEP_METAPKG=`expr match "$DEP" '\!\?>\?=\?\([a-z]\+\)/'`
+    DEP_METAPKG="`extract_meta "$DEP_METAPKG_BASENAME"`"
 
     #pkg
-    DEP_PKG_NAME=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/\([a-zA-Z0-9_\-]\+\)\-[0-9]\+'`
-    
-    test "$DEP_PKG_NAME" == "" && 
-        DEP_PKG_NAME=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/\([a-zA-Z0-9_\-]\+\)'`
+    DEP_PKG_NAME="`extract_name "$DEP_PKG_BASENAME"`"
 
     #version
-    mayorversion=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
-    minorversion=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
-    DEP_PKG_VERSION="$mayorversion$minorversion"
+    DEP_PKG_VERSION="`extract_version "$DEP_PKG_BASENAME"`"
     
+    echo
     echo "DEP_METAPKG=\"$DEP_METAPKG\""
     echo "DEP_PKG_NAME=\"$DEP_PKG_NAME\""
     echo "DEP_PKG_VERSION=\"$DEP_PKG_VERSION\""
