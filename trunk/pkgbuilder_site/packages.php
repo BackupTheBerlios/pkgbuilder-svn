@@ -307,11 +307,11 @@
                         <li>ncftp-3.1.7</li>
                         <li>neon-0.24.4</li>
                         <li>nmap-3.50</li>
-                        <li>ntop-3.0</li>
-                        <li>ntp-4.2.0</li>
+                        <li>ntop-2.2c</li>
+                        <li>ntp-4.1.2</li>
                         <li>openssh-3.8.1_p1</li>
                         <li>portmap-5.0</li>
-                        <li>postfix-2.1.0</li>
+                        <li>postfix-2.0.18</li>
                         <li>pure-ftpd-1.0.16b</li>
                         <li>rsync-2.6.2</li>
                         <li>samba-3.0.3</li>

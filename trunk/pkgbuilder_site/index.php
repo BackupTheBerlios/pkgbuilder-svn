@@ -22,6 +22,7 @@
                 <p>Como nuevas funcionalidades destaca la opción -p en el script "install.sh" que permite
                 instalar desde paquetes precompilados gestionando dependencias y una versión mejorada de
                 la función de comparación de versiones.</p>
+                <p><a href="http://download.berlios.de/pkgbuilder/pkgbuilder-20040502.tar.gz">pkgbuilder-20040502.tar.gz</a></p>
             </div>
         </div>
     </div>
