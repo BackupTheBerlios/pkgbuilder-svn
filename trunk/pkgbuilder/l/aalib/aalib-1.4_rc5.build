@@ -2,13 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/aalib/aalib-1.4rc5.build,v 1.2 2004/01/17 13:31:14 tomby Exp $
 #
-# aalib-1.4rc5 pkgbuilder script
+# aalib-1.4_rc5 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
+PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_/}.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/aa-project/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
@@ -17,8 +18,8 @@ PKG_USE="X slang"
 
 PKG_DEPENDS=">=l/ncurses-5.1
              a/gpm
-	         `use X && echo "x/xfree86"`
-	         `use slang && echo ">=l/slang-1.4.2"`"
+             `use_dep X "x/xfree86"`
+             `use_dep slang ">=l/slang-1.4.2"`"
 
 PKG_HOMESITE="http://aa-project.sourceforge.net/aalib/"
 
@@ -26,3 +27,4 @@ PKG_SRC="$TMP/$PKG_NAME-1.4.0"
 PKG_DOC_FILES="ANNOUNCE AUTHORS ChangeLog COPYING NEWS README*"
 
 PKG_CONFIGURE_OPTIONS=""
+
