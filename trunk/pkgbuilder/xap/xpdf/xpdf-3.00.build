@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_URL="ftp://ftp.foolabs.com/pub/$PKG_NAME/$PKG_FILE_NAME"
 
@@ -40,6 +40,7 @@ do_patch() {
     ( cd $PKG_SRC ; apply_patch $PKG_NAME-lesstif.patch -Np1 )
     ( cd $PKG_SRC/xpdf ; apply_patch $PKG_NAME-${PKG_VERSION}pl1.patch -Np0 )
     ( cd $PKG_SRC/xpdf ; apply_patch $PKG_NAME-${PKG_VERSION}pl2.patch -Np0 )
+    ( cd $PKG_SRC/xpdf ; apply_patch $PKG_NAME-${PKG_VERSION}pl3.patch -Np0 )
 
     ( cd $PKG_SRC/splash
       sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFont.h
