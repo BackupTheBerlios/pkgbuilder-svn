@@ -1,6 +1,10 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.22 2003/12/01 22:28:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.23 2003/12/03 23:25:58 tomby Exp $
+
+#
+# Generic functions
+#
 
 #
 # Print pkgbuilder version number
