@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.15 2003/12/21 15:19:51 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.16 2003/12/24 13:38:21 tomby Exp $
 
 * New tasks:
 
@@ -20,7 +20,7 @@ ap)
     esp-gs          X
     gimp-print      X
     a2ps
-    enscript
+    enscript        X
     psutils
 
     iptables
@@ -40,7 +40,7 @@ ap)
     emacs
     nano            X
     joe
-    
+
     bc              X
 
     tcsh
@@ -108,14 +108,14 @@ l)
     pango           X
     atk             X
     lesstif         X
-    
+
     libart_gpl      X
 
     libsoup         X
 
     alsa-libs       X
     alsa-driver     X
-    alsa-utils
+    alsa-utils		X
     alsa-tools
     alsa-oss        X
     audio-file      X
@@ -156,6 +156,7 @@ d)
     tcl             X
     tk              X
     nasm            X
+	perl
 
 emu)
 
@@ -163,7 +164,7 @@ emu)
     scummvm         X
     wine            X
     xmame           X
-    
+
 games)
 
     frozen-bubble   X
@@ -232,7 +233,7 @@ n)
 x)
 
     xfree           X (falta mucho por hacer)
-    
+
     nvidia-glx      X
     nvidia-kernel   X
 
@@ -296,7 +297,7 @@ kde)
     kdebindings
     kdesdk          X
 
-    kde-i18n
+    kde-i18n        X
 
     koffice
     quanta
