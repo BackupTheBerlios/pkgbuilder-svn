@@ -168,6 +168,8 @@ mozilla_do_postinstall() {
       
     ( cd $PKG_DEST$PKG_PREFIX/lib
       ln -sf mozilla-$PKG_VERSION mozilla )
+    ( cd $PKG_DEST$PKG_PREFIX/include
+      ln -sf mozilla-$PKG_VERSION mozilla )
       
     # Install icon and .desktop for menu entry
     if use gnome ; then
