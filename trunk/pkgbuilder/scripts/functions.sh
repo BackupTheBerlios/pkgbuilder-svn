@@ -1,11 +1,19 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.17 2003/11/29 23:02:31 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.18 2003/11/30 12:47:56 tomby Exp $
 
+#
+# Print pkgbuilder version number
+#
 version() {
     echo "pkgbuilder $VERSION"
 }
 
+#
+# Include a file of the common directory
+#
+# @param $1 file name to include
+#
 include() {
     if [ "$1" == "" ] ; then
         return 1  
@@ -16,6 +24,11 @@ include() {
     return $?
 }
 
+#
+# Returns if in use variable exists use parameter
+#
+# @param $1 use parameter
+#
 use() {
     if [ "$1" == "" ] ; then
         return 1  
@@ -26,6 +39,11 @@ use() {
     return $?
 }
 
+#
+# Execute the given action and returns the result of the action
+#
+# @param $1 action name
+#
 execute_action() {
     if [ "$1" == "" ] ; then
         return 1  
@@ -106,6 +124,11 @@ execute_action() {
     return $RETVAL
 }
 
+#
+# Fetch a file using wget
+#
+# @param $1 url
+#
 fetch() {
     if [ "$1" == "" ] ; then
         return 1  
@@ -124,6 +147,11 @@ fetch() {
     return $?
 }
 
+#
+# Gzip all the man pages under the given directory
+#
+# @param $1 base directory
+#
 gzip_man() {
     if [ "$1" == "" ] ; then
         return 1
@@ -138,6 +166,11 @@ gzip_man() {
     return $?
 }
 
+#
+# Gzip all the info files under the given directory
+#
+# @param $1 base directory
+#
 gzip_info() {
     if [ "$1" == "" ] ; then
         return 1
@@ -152,6 +185,11 @@ gzip_info() {
     return $?
 }
 
+#
+# Strip all the files under the given directory
+#
+# @param $1 base directory
+#
 strip_all() {
     if [ "$1" == "" ] ; then
         return 1
@@ -162,6 +200,12 @@ strip_all() {
     return $?
 }
 
+#
+# Returns if a package is installed
+#
+# @param $1 package name
+# @param $2 package version (optional)
+#
 is_installed() {
     if [ "$1" == "" ] ; then
         return 1
@@ -180,6 +224,12 @@ is_installed() {
     return $retval
 }
 
+#
+# Print the latest version of a package
+#
+# @param $1 meta package
+# @param $2 package name
+#
 latest_version() {
     if [ "$1" == "" -o "$2" == "" ] ; then
         return 1
@@ -202,15 +252,19 @@ latest_version() {
         
         latestbuildfile="`basename $latestbuildfile .build`"
 
-        local pkgmayorversion=`expr match $latestbuildfile '[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
-        local pkgminorversion=`expr match $latestbuildfile '[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
-
-        echo "$pkgmayorversion$pkgminorversion"
+        local pkgversion="`extract_version $latestbuildfile`"
+        
+        echo "$pkgversion"
     else
         return 1
     fi
 }
 
+#
+# Print instaled version of package
+#
+# @param $1 package name
+#
 installed_version() {
     if [ "$1" == "" ] ; then
         return 1
@@ -222,16 +276,37 @@ installed_version() {
         return 2
     fi
     
-    if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then
-        local pkgmayorversion=`expr match $pkgfile '[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
-        local pkgminorversion=`expr match $pkgfile '[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
+    if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then        
+        local pkgversion="`extract_version $pkgfile`"
         
-        echo "$pkgmayorversion$pkgminorversion"
+        echo "$pkgversion"
     else
         return 1
     fi
 }
 
+
+#
+# Print version of package
+#
+# @param $1 pkgfile in format pkgname-1.2
+#
+extract_version() {
+    if [ "$1" == "" ] ; then
+        return 1
+    fi
+    
+    local pkgmayorversion=`expr match $1 '[a-zA-Z0-9_+\-]\+\-\([0-9]\+\)'`
+    local pkgminorversion=`expr match $1 '[a-zA-Z0-9_+\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
+
+    echo "$pkgmayorversion$pkgminorversion"
+}
+
+#
+# Print result message
+#
+# @param $1 result value
+#
 result_msg() {
     if [ "$1" -eq 0 ] ; then
         echo "SUCCESS"
