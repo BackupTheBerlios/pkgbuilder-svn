@@ -75,11 +75,8 @@ mozilla_init() {
                            --enable-extensions=default,irc"
                            
     MAKE_OPTIONS="-j1"
-
     PKG_BUILD_TARGET="export libs"
-    
     PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-    
     PKG_INSTALL_TARGET="install"
     
     export MOZILLA_OFFICIAL="1"
@@ -91,25 +88,15 @@ mozilla_init() {
 }
 
 mozilla_build_enigmail() {
-    cd $PKG_SRC
-    
-    ( cd extensions/ipc &&
-      csh makemake && make ) &&
-    ( cd extensions/enigmail &&
-      csh makemake && make )
-      
+    ( cd $PKG_SRC/extensions/ipc && csh makemake && make ) &&
+    ( cd $PKG_SRC/extensions/enigmail && csh makemake && make )      
     return $?
 }
 
 mozilla_install_enigmail() {
-    cd $PKG_SRC
-    
-    for component in components/enigmime.xpt \
-        components/ipc.xpt components/libenigmime.so components/enigmail.js \
-        components/enigmail.xpt chrome/enigmail.jar
-    do
-        cp dist/bin/$component $PKG_DEST$MOZILLA_FIVE_HOME/$component
-    done
+    ( cd $PKG_SRC/extensions/ipc && pkg_install ) &&
+    ( cd $PKG_SRC/extensions/enigmail && pkg_install )
+    return $?    
 }
 
 mozilla_do_unpack() {
