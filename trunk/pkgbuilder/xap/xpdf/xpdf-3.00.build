@@ -17,7 +17,7 @@ PKG_USE="motif"
 PKG_DEPENDS=">=l/freetype2-2.0.5
              >=l/t1lib-1.3
              ap/esp-gs
-             `use_dep motif "x/xfree86 l/lesstif"`"
+             `use_dep motif "x/x11 l/lesstif"`"
 
 PKG_HOMESITE="http://www.foolabs.com/xpdf/xpdf.html"
 

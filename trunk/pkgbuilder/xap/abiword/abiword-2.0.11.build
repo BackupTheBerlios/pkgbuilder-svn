@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/abiword/abiword-2.0.6.build,v 1.1 2004/04/10 23:19:15 tomby Exp $
 #
-# abiword-2.0.9 pkgbuilder script
+# abiword-2.0.11 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="jpeg gnome"
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
              >=l/fontconfig-2.1
              l/libpng
              l/gtk+2
@@ -82,8 +82,8 @@ do_patch() {
     cd $PKG_ABI_SRC
     
     cp configure configure.old
-	sed 's:-pedantic::g' configure.old > configure
-	rm -f configure.old
+    sed 's:-pedantic::g' configure.old > configure
+    rm -f configure.old
     
     if installed_version gtk+2 | grep -q "^2\.4" ; then
         ( cd $PKG_ABI_SRC/src/af/xap/unix/gnome

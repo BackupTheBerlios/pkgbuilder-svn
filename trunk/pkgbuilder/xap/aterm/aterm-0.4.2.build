@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
@@ -15,7 +15,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
              l/libpng
              l/libjpeg"
              

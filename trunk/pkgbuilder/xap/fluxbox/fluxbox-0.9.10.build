@@ -7,7 +7,8 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
+
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
@@ -16,7 +17,7 @@ PKG_LICENSE="BSD"
 
 PKG_USE="kde gnome"
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
              >=d/autoconf-2.52"
             
 PKG_HOMESITE="http://fluxbox.org/"

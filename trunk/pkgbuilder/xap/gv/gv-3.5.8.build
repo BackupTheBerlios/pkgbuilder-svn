@@ -7,7 +7,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
              l/xaw3d
              ap/esp-gs
              >=a/sed-4"

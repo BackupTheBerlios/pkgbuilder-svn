@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_FILE_NAME="WindowMaker-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.windowmaker.org/pub/source/release/$PKG_FILE_NAME
@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=" nls oss alsa esd gif jpeg png kde gnome"
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
              >=l/libtiff-3.5.5
              `use_dep nls ">=d/gettext-0.10.39"`
              `use_dep gif "l/libungif"`
@@ -32,8 +32,8 @@ PKG_DOC_FILES="AUTHORS BUG* ChangeLog COPYING* FAQ* INSTALL* MIRRORS NEWS README
 
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/X11
                        --with-x
-		               --enable-newstyle
-		               --enable-superfluous
+                       --enable-newstyle
+                       --enable-superfluous
                        --enable-usermenu
                        --with-appspath=/usr/lib/GNUstep/Apps
                        --with-pixmapdir=/usr/share/pixmaps
