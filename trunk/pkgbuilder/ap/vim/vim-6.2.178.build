@@ -1,0 +1,16 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/vim/vim-6.2.178.build,v 1.1 2004/01/11 01:13:27 tomby Exp $
+#
+# vim-6.2 pkgbuilder script
+#
+
+inherit vim
+
+PKG_BUILD="am1"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --enable-gui=no
+                       --without-x"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"

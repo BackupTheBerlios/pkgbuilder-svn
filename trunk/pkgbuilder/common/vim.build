@@ -1,0 +1,105 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/vim.build,v 1.1 2004/01/11 01:12:22 tomby Exp $
+#
+# pkgbuilder script for vim packages
+#
+
+include configscript
+
+vim_init() {
+    configscript_init
+    
+    PKG_EXTENSION="tar.bz2"
+    
+    VIM_VERSION="`vim_mayor_version`"
+    VIM_EXTRA_VERSION="`vim_minor_version`"
+
+    PKG_FILE_NAME="vim-$VIM_VERSION.$PKG_EXTENSION"
+    PKG_LANG_FILE_NAME="vim-$VIM_VERSION-lang.tar.gz"
+    PKG_PATCHES_FILE_NAME="vim-$VIM_VERSION.$VIM_EXTRA_VERSION-patches.tar.gz"
+
+    VIM_BASE_URL="ftp://ftp.vim.org/pub/vim"
+
+    PKG_URL="$VIM_BASE_URL/unix/$PKG_FILE_NAME
+             $PKGBUILDER_MIRROR/$PKG_PATCHES_FILE_NAME
+            `use nls && echo "$VIM_BASE_URL/extra/$PKG_LANG_FILE_NAME"`"
+            
+    PKG_LICENSE="VIM"
+    
+    PKG_USE="gpm ruby python perl tcltk"
+    
+    PKG_DEPENDS=">=l/ncurses-5.2
+	             d/ctags
+                 d/cscope
+                 `use gpm && echo "a/gpm"`
+                 `use ruby && echo "d/ruby"`
+                 `use python && echo "d/python"`
+                 `use perl && echo "d/perl"`
+                 `use tcltk && echo "d/tcl"`"
+    
+    PKG_HOMESITE="http://www.vim.org/"
+    
+    PKG_SRC="$TMP/vim${VIM_VERSION/.}"
+    
+    PKG_PREFIX="/usr"
+    PKG_CONFIGURE_OPTIONS="--with-features=big
+                           --enable-cscope
+                           `use gpm && echo "--enable-gpm"`
+                           `use ruby && echo "--enable-rubyinterp"`
+                           `use python && echo "--enable-pythoninterp"`
+                           `use perl && echo "--enable-perlinterp"`
+                           `use tcltk && echo "--enable-tclinterp --with-tclsh=/usr/bin/tclsh"`"
+    PKG_BUILD_OPTIONS=""
+    PKG_BUILD_TARGET=""
+    PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+    PKG_INSTALL_TARGET="install"
+}
+
+vim_mayor_version() {
+    expr match $PKG_VERSION '\([0-9]*\.[0-9]*\)\.'
+}
+
+vim_minor_version() {
+    expr match $PKG_VERSION '[0-9]*\.[0-9]*\.\([0-9]*\)'
+}
+
+vim_do_unpack() {
+    cd $TMP
+    
+    unpack $PKG_FILE_NAME
+    
+    use nls && unpack $PKG_LANG_FILE_NAME
+    
+    cd $PKG_SRC
+    
+    unpack $PKG_PATCHES_FILE_NAME
+    
+    return $?
+}
+
+vim_do_patch() {
+    cd $PKG_SRC
+    
+    for file in `find $PKG_SRC/patches | sort` ; do
+        patch -p0 --batch < $file
+    done
+    
+    return $?
+}
+
+vim_do_configure() {
+    configscript_do_configure
+}
+
+vim_do_build() {
+    configscript_do_build
+}
+
+vim_do_install() {
+    configscript_do_install
+}
+
+vim_do_postinstall() {
+    configscript_do_postinstall
+}
