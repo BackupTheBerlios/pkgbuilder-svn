@@ -10,6 +10,6 @@ flac: flac
 flac:
 flac: FLAC stands for Free Lossless Audio Codec. Grossly oversimplified, 
 flac: FLAC is similar to MP3, but lossless, meaning that audio is 
-flac: compressed in FLAC without any loss in quality.flac
+flac: compressed in FLAC without any loss in quality.
 flac:
 

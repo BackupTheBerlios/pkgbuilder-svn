@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/flac/flac-1.1.0.build,v 1.1 2003/12/14 15:04:57 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/flac/flac-1.1.0.build,v 1.2 2003/12/30 00:45:02 tomby Exp $
 #
 # flac-1.1.0 pkgbuilder script
 #
@@ -15,13 +15,14 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="sse"
+PKG_USE="sse X xmms"
 
 PKG_DEPENDS="l/glibc 
              l/id3lib 
-             >=l/libogg-1.0rc2 
+             >=l/libogg-1.0
              d/nasm 
-             a/gawk"
+             a/gawk
+             `use X && use xmms && echo "xap/xmms"`"
 
 PKG_HOMESITE="http://flac.sourceforge.net/"
 
