@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.22 2003/12/27 16:20:44 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.23 2003/12/27 17:00:40 tomby Exp $
 
 * New tasks:
 
@@ -49,7 +49,7 @@ a)
     sysklogd
     syslinux
     tar
-    tcsh                   X
+
     usb-utils
     util-linux
     xfsprogs
@@ -106,6 +106,7 @@ ap)
     sgml-common            X
     slocate
     sudo
+    tcsh                   X
     texinfo
     vim
     vorbis-tools           X
