@@ -1,0 +1,68 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# provoxy-3.0.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-2-stable.src.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/ijbswa/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/pcre"
+
+PKG_HOMESITE="http://www.privoxy.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION-stable"
+
+PKG_DOC_FILES="LICENSE README AUTHORS doc/text/faq.txt ChangeLog"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/privoxy
+                       --localstatedir=/var"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX 
+                     CONF_BASE=$PKG_DEST/etc/privoxy 
+                     VAR_DEST=$PKG_DEST/var
+                     DOC_DEST=$PKG_DOC"
+PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES="/etc/privoxy/default.action 
+                  /etc/privoxy/default.filter 
+                  /etc/privoxy/config 
+                  /etc/privoxy/standard.action 
+                  /etc/privoxy/trust 
+                  /etc/privoxy/user.action
+                  /etc/rc.d/rc.privoxy"
+
+do_configure() {
+    autoheader || return 1
+    autoconf || return 1
+
+    configscript_do_configure
+}
+
+do_postinstall() {
+    ( chmod 750 $PKG_DEST/var/log/privoxy )
+    ( cd $PKG_DEST/var/log/privoxy ; rm * )
+    ( chmod 750 $PKG_DEST$PKG_PREFIX/sbin/privoxy )
+    ( cd $PKG_DEST/etc/privoxy 
+      chmod 640 default.action default.filter config \
+                standard.action trust user.action templates/* )
+    ( rmdir $PKG_DEST$PKG_PREFIX/share )
+
+    ( mkdir -p $PKG_DEST/etc/rc.d 
+      cat $PKG_HOME/files/rc.privoxy > $PKG_DEST/etc/rc.d/rc.privoxy )
+
+    configscript_do_postinstall
+
+}
