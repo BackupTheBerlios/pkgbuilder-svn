@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebase/Attic/kdebase-3.1.93.build,v 1.3 2003/11/23 20:01:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebase/Attic/kdebase-3.1.93.build,v 1.4 2003/12/06 16:38:42 tomby Exp $
 #
-# kdebase pkgbuilder script
+# kdebase-3.1.93 pkgbuilder script
 #
 
 PKG_NAME="kdebase"
@@ -13,6 +13,22 @@ PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_FILE_NAME"
 
+PKG_LICENSE="GPLv2 LGPLv2"
+
+PKG_USE="oggvorbis lame samba cups opengl"
+
+PKG_DEPENDS="ap/cdparanoia
+             l/freetype2
+             l/qt
+             d/pkgconfig
+             l/openssl
+             >=kde/kdelibs-3.1.93
+             `use oggvorbis && echo "l/libvorbis"`
+             `use lame && echo "l/lame"`
+             `use samba && echo "n/samba"`
+             `use cups && echo "a/cups"`"
+
+
 PKG_HOMESITE="http://www.kde.org/"
 
 PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
@@ -21,7 +37,11 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS COPYING INSTALL README kdebase.lsm"
 
 PKG_PREFIX="/opt/kde-3.2"
-PKG_CONFIGURE_OPTIONS="--disable-debug"
+PKG_CONFIGURE_OPTIONS="--disable-debug --with-dpms
+                       `use oggvorbis && echo "--with-vorbis"`
+                       `use lame && echo "--with-lame"`
+                       `use cups && echo "--with-cups"`
+                       `use opengl && echo "--with-gl"`"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
@@ -52,21 +72,11 @@ do_postinstall() {
     cp $PKG_HOME/files/xinitrc.kde32 $PKG_DEST/etc/X11/xinit/
     chmod +x $PKG_DEST/etc/X11/xinit/xinitrc.kde32
     
-    mkdir -p $PKG_DOC
-
-    cp $PKG_DOC_FILES $PKG_DOC
-    find $PKG_DOC -type f -exec chmod 644 {} \;
-    find $PKG_DOC -type d -exec chmod 755 {} \;
+    pkg_installdoc
 
     strip_all $PKG_DEST
 
     gzip_man $PKG_DEST$PKG_PREFIX/man
 
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
-    
-    if [ -f $PKG_HOME/files/doinst.sh ] ; then
-        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
-    fi
+    pkg_installfiles
 }

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/Attic/kdegraphics-3.1.93.build,v 1.4 2003/11/29 23:47:53 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/Attic/kdegraphics-3.1.93.build,v 1.5 2003/12/06 16:38:42 tomby Exp $
 #
 # kdepim pkgbuilder script
 #
@@ -13,7 +13,9 @@ PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_FILE_NAME"
 
-PKG_USE="sane"
+PKG_LICENSE="GPLv2 LGPLv2"
+
+PKG_USE="sane tetex"
 
 PKG_DEPENDS=">=l/qt-3.2 
              >=kde/kdelibs-3.1.93 
@@ -24,7 +26,9 @@ PKG_DEPENDS=">=l/qt-3.2
              >=l/libtiff-3.5.7
              >=l/fridibi-0.10.4
              >=ap/epsgs-7.05.6
-             `use sane && echo ">=xap/sane-1.0.12"`"
+             xap/xpdf
+             `use sane && echo "ap/sane"`
+             `use tetex && echo "t/tetex"`"
 
 PKG_HOMESITE="http://www.kde.org/"
 
