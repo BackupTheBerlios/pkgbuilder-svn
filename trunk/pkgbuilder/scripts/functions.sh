@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.1 2003/10/21 18:19:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.2 2003/10/31 19:07:49 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -36,7 +36,11 @@ fetch() {
         mkdir -p $FETCH_DIR
     fi
     
-    wget -c --tries=$FETCH_TRIES --limit-rate=$FETCH_RATE --directory-prefix=$FETCH_DIR $1
+    if [ `echo $1 | grep "^ftp"` ] ; then
+        FETCH_OPTIONS="--passive-ftp $FETCH_OPTIONS"
+    fi
+    
+    wget -c $FETCH_OPTIONS $1
 
     return $?
 }
