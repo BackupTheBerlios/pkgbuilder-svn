@@ -1,8 +1,9 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.19 2003/12/26 13:27:56 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.20 2003/12/27 01:18:51 tomby Exp $
 
 * New tasks:
 
     check pkg deps
+	create virtual pkgs support like virtual/mta in gentoo
 	use new 'use` variable values
 
 * Packages:
@@ -53,7 +54,7 @@ ap)
     mpg321          X
     cdparanoia      X
     cdrtools		X
-    cdrdao
+    cdrdao			X
     vorbis-tools	X
 
 l)
@@ -115,7 +116,6 @@ l)
     alsa-libs       X
     alsa-driver     X
     alsa-utils		X
-    alsa-tools
     alsa-oss        X
     audio-file      X
     esound          X
@@ -124,7 +124,7 @@ l)
     libogg          X
     libvorbis       X
     nas
-    libmpeg3
+    libmpeg3		X
     libmad          X
     libfame         X
     speex           X
@@ -134,14 +134,18 @@ l)
     libdvdread
     libdvdcss       X
     libdv
-    liba52
+    liba52			X
     xvid            X
     xine-libs       X
+	libmikmod		X
 
     db1             X
     db2
     db3             X
     db4
+	
+	svgalib 		X
+	directfb		X
 
 d)
 
@@ -208,9 +212,9 @@ n)
     nail
     procmail
     fetchmail
-    mutt
+    mutt			X
     pine
-    slrn
+    slrn			X
 
     postfix         X
     qmail
@@ -266,8 +270,8 @@ xap)
     pan
 
     xine
-    xmms
-    mplayer
+    xmms			X
+    mplayer 		X
 
     xsane
     imagemagick     X
