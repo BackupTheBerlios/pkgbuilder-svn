@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgtkhtml/libgtkhtml-2.4.1.build,v 1.1 2004/01/02 19:08:42 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgtkhtml/libgtkhtml-2.4.1.build,v 1.2 2004/02/29 16:44:29 tomby Exp $
 #
-# example pkgbuilder script
+# libgtkhtml-2.4.1 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE=""
 
@@ -18,3 +18,5 @@ PKG_DEPENDS="l/gtk+2
              >=d/pkgconfig-0.12.0"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README TODO"
+
+MAKE_OPTIONS="-j1"
