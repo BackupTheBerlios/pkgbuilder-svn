@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/update.sh,v 1.1 2004/03/13 17:39:04 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/update.sh,v 1.2 2004/03/14 15:17:52 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -42,15 +42,19 @@ while [ 0 ]; do
 done
 
 if ! [ -r $PKGBUILDER_HOME/PACKAGES ] ; then
-    echo "DB file PACKAGES not found"
-    echo "Please build it with build_db.sh script"
+    echo "DB file \"PACKAGES\" not found"
+    echo "Please build it with \"build_db.sh\" script"
     exit 1
 fi
 
 for PKG in `find $PACKAGES_LOGDIR -type f | sort` ; do
-    BASEPKG="`basename $PKG`"
+    BASEPKG="`basename $PKG | sed -e 's:\-[a-zA-Z0-9]\+\-[a-z]*[0-9]\+[a-z]*$::'`"
     
     PKG_NAME="`extract_name $BASEPKG`"
+    
+    if [ "$VERBOSE" = "Y" ] ; then
+        echo $PKG_NAME
+    fi
     
     PKG_DB_NAME="`grep "[a-z]\+/$PKG_NAME-[0-9]" $PKGBUILDER_HOME/PACKAGES`"
 
@@ -59,15 +63,21 @@ for PKG in `find $PACKAGES_LOGDIR -type f | sort` ; do
         PKG_META="`extract_meta $PKG_DB_NAME`"
         PKG_VERSION="`latest_version $PKG_META $PKG_NAME`"
         
-        eval "`grep "PKG_BUILD=" $PKGBUILDER_HOME/$PKG_META/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build`"
+        PKG="$PKG_META/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
+        
+        eval "`grep "PKG_BUILD=" $PKGBUILDER_HOME/$PKG`"
         
         if ! is_installed $PKG_NAME $PKG_VERSION $PKG_BUILD ; then
             if [ "$MODE" = "install" ] ; then
-                ( cd $PKGBUILDER_HOME ; ./install.sh "$PKG_META/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build" )
+                ( cd $PKGBUILDER_HOME ; ./install.sh $OPTIONS $PKG )
+                RETVAL="$?"
             else
                 echo ./install.sh "$PKG_META/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
             fi
         fi
+        
+        test "$RETVAL" -ne 0 && exit "$RETVAL"
     fi
 done
 
+exit "$RETVAL"

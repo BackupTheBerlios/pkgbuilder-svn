@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.22 2004/03/13 17:53:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.23 2004/03/14 15:18:00 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -209,7 +209,7 @@ for DEP in $PKG_DEPENDS ; do
             echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
         fi
     
-        test $RETVAL -ne 0 && exit $RETVAL
+        test "$RETVAL" -ne 0 && exit "$RETVAL"
         
         # update environment
         if [ "$MODE" = "install" ] ; then

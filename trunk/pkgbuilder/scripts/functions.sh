@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.42 2004/03/13 17:38:49 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.43 2004/03/14 15:16:20 tomby Exp $
 
 #
 # Generic functions
@@ -592,7 +592,7 @@ installed_version() {
     fi
     
     if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then
-        pkgfile="`echo $pkgfile | sed -e 's:\-[a-zA-Z0-9]\+\-[a-z]*[0-9]\+$::'`"
+        pkgfile="`echo $pkgfile | sed -e 's:\-[a-zA-Z0-9]\+\-[a-z]*[0-9]\+[a-z]*$::'`"
         
         local pkgversion="`extract_version $pkgfile`"
         
@@ -652,7 +652,7 @@ extract_name() {
         return 1
     fi
     
-    local pkgname="`expr match "$1" '\([a-zA-Z0-9_+\-]\+\)\-[0-9][a-zA-Z0-9_\.]\+'`"
+    local pkgname="`expr match "$1" '\([a-zA-Z0-9_+\-]\+\)\-[0-9]'`"
     
     if [ "$pkgname" != "" ] ; then
         echo "$pkgname"
@@ -671,7 +671,7 @@ extract_version() {
         return 1
     fi
     
-    local pkgmayorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-\([0-9]\)[a-zA-Z0-9_\.]\+'`"
+    local pkgmayorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-\([0-9]\)'`"
     local pkgminorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-[0-9]\([a-zA-Z0-9_\.]\+\)'`"
 
     echo "$pkgmayorversion$pkgminorversion"

@@ -66,6 +66,7 @@ do_assertEquals "`extract_version vim3_b-6.1_9`" "6.1_9"
 do_assertEquals "`extract_version vim3_b-2003_11_20`" "2003_11_20"
 do_assertEquals "`extract_version vim3+3-6.1`" "6.1"
 do_assertEquals "`extract_version divx4linux-20030428`" "20030428"
+do_assertEquals "`extract_version asdf-asdf-2003_04_03`" "2003_04_03"
 
 echo "=> extract_name tests"
 do_init
@@ -77,6 +78,7 @@ do_assertEquals "`extract_name vim3_b-2003_11_20`" "vim3_b"
 do_assertEquals "`extract_name vim3+3-6.1`" "vim3+3"
 do_assertEquals "`extract_name vims-d5-6.1.d`" "vims-d5"
 do_assertEquals "`extract_name vims-asdf-d`" "vims-asdf-d"
+do_assertEquals "`extract_name gnome-vfs-2`" "gnome-vfs"
 
 echo "=> extract_meta tests"
 do_init
@@ -93,12 +95,10 @@ use fame ; do_assertTrue $?
 
 echo "=> is_installed tests"
 do_init
-is_installed vim ; do_assertTrue $?
-is_installed vim 6.1 ; do_assertFalse $?
-is_installed vim 6.2 ; do_assertTrue $?
+is_installed gvim ; do_assertTrue $?
+is_installed gvim 6.1 ; do_assertFalse $?
 is_installed vimes 6.2 ; do_assertFalse $?
 is_installed gettext ; do_assertTrue $?
-is_installed gettext-tools ; do_assertTrue $?
 is_installed bzip2 ; do_assertTrue $?
 is_installed glibc ; do_assertTrue $?
 is_installed skljdf ; do_assertFalse $?
@@ -111,15 +111,14 @@ is_installed lilo 22.5.7.2 4 ; do_assertFalse $?
 echo "=> latest_version tests"
 do_init
 do_assertEquals "`latest_version xap nedit`" "5.4"
-do_assertEquals "`latest_version xap gaim`" "0.74"
+do_assertEquals "`latest_version xap gaim`" "0.75"
 do_assertEquals "`latest_version l divx4linux`" "20030428"
 do_assertEquals "`latest_version xap mplayer`" "1.0pre3"
-do_assertEquals "`latest_version ap docbook-xml-dtd`" "4.2"
+do_assertEquals "`latest_version ap docbook-xml-dtd`" "4.1.2"
 
 echo "=> installed_version tests"
 do_init
-do_assertEquals "`installed_version gettext`" "0.11.5"
-do_assertEquals "`installed_version gettext-tools`" "0.11.5"
+do_assertEquals "`installed_version gettext`" "0.14.1"
 do_assertEquals "`installed_version bzip2`" "1.0.2"
 do_assertEquals "`installed_version glibc`" "2.3.2"
 do_assertEquals "`installed_version libjpeg`" "6b"
@@ -127,7 +126,6 @@ do_assertEquals "`installed_version divx4linux`" "20030428"
 
 echo "=> installed_build tests"
 do_init
-do_assertEquals "`installed_build lincvs`" "am2"
+do_assertEquals "`installed_build lincvs`" "am1"
 do_assertEquals "`installed_build lilo`" "1"
 do_assertNotEquals "`installed_build lilo`" "4"
-

@@ -268,7 +268,7 @@ e2fsprogs 1.34
 \layout List
 \labelwidthstring 00.00.0000
 
-elflibs 9.1.0
+elflibs 9.1.0 (este paquete en la rama current toma el nombre de aaa_elflibs)
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -348,7 +348,8 @@ pci-utils 2.1.11
 \layout List
 \labelwidthstring 00.00.0000
 
-pcmcia-cs 3.2.5 (optional)
+pcmcia-cs 3.2.5 (opcional, necesario en portatiles y ordenadores con interfaz
+ pcmcia)
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -501,14 +502,14 @@ ncurses 5.3
 \layout List
 \labelwidthstring 00.00.0000
 
-openssl 0.9.7c
-\layout List
-\labelwidthstring 00.00.0000
-
 zlib 1.1.4
 \layout Paragraph
 
 n)
+\layout List
+\labelwidthstring 00.00.0000
+
+openssl 0.9.7c
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -520,7 +521,8 @@ wget 1.8.2
 \layout List
 \labelwidthstring 00.00.0000
 
-wireless-tools 26 (opcional)
+wireless-tools 26 (opcional, necesario si queremos utilizar dispositivos
+ inalambricos)
 \layout Paragraph
 
 
@@ -952,18 +954,6 @@ distcc
 
 \family typewriter 
 \size footnotesize 
-#COMPILATION="simple"
-\layout Quotation
-
-
-\family typewriter 
-\size footnotesize 
-COMPILATION="parallel"
-\layout Quotation
-
-
-\family typewriter 
-\size footnotesize 
 DISTCC_HOSTS="host1 host2 host3 hostn"
 \layout Quotation
 
@@ -977,35 +967,6 @@ CCACHE_PREFIX="distcc"
 \family typewriter 
 \size footnotesize 
 MAKE_OPTIONS="-j8"
-\layout Paragraph
-
-COMPILATION 
-\series medium 
-especifica el modo de compilación, 
-\series default 
-
-\begin_inset Quotes eld
-\end_inset 
-
-simple
-\begin_inset Quotes erd
-\end_inset 
-
-
-\series medium 
- para compilación normal y 
-\series default 
-
-\begin_inset Quotes eld
-\end_inset 
-
-parallel
-\begin_inset Quotes erd
-\end_inset 
-
-
-\series medium 
- para compilación paralela.
 \layout Paragraph
 
 DISTCC_HOST 
@@ -1176,10 +1137,10 @@ Creación de scripts:
 Anatomia de un script:
 \layout Subsubsection
 
-Acciones:
+Variables:
 \layout Subsubsection
 
-Variables:
+Acciones:
 \layout Subsection
 
 Herencia de scripts:
