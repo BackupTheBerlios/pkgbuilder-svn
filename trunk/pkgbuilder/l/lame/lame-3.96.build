@@ -1,0 +1,45 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lame/lame-3.95.1.build,v 1.1 2004/01/14 19:55:33 tomby Exp $
+#
+# lame-3.96 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE="gtk"
+
+PKG_DEPENDS="l/glibc
+             >=l/ncurses-5.2
+             d/nasm
+             `use_dep gtk "l/gtk+"`"
+
+PKG_HOMESITE="http://lame.sourceforge.net/"
+
+PKG_DOC_FILES="API COPYING HACKING PRESETS.draft LICENSE README* TODO USAGE"
+
+PKG_CONFIGURE_OPTIONS="--enable-shared
+                       --enable-nasm
+                       --enable-mp3rtp
+                       `use_enable gtk mp3x`"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST 
+                     pkghtmldir=$PKG_PREFIX/doc/$PKG_NAME-$PKG_VERSION/html"
+
+MAKE_OPTIONS="-j1"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    cp configure configure.old
+    
+    sed "s/gtk12-config/gtk-config/g" configure.old > configure
+    
+    return $?
+}
