@@ -70,7 +70,7 @@ do_install() {
 
     mkdir -p $PKG_DEST$PKG_PREFIX/man/man8
     cat lsof.8 > $PKG_DEST$PKG_PREFIX/man/man8/lsof.8
-    chmod 755 $PKG_DEST$PKG_PREFIX/man/man8/lsof.8
+    chmod 644 $PKG_DEST$PKG_PREFIX/man/man8/lsof.8
 
     mkdir -p $PKG_DEST$PKG_PREFIX/lib
     cat lib/liblsof.a > $PKG_DEST$PKG_PREFIX/lib/liblsof.a
