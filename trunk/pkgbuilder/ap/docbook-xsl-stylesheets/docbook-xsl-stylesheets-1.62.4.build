@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xsl-stylesheets/docbook-xsl-stylesheets-1.62.4.build,v 1.1 2003/11/29 17:16:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xsl-stylesheets/docbook-xsl-stylesheets-1.62.4.build,v 1.2 2003/11/29 17:26:22 tomby Exp $
 #
 # docbook-xsl-stylesheets-1.62.4 pkgbuilder script
 #
@@ -27,7 +27,6 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="BUGS ChangeLog RE* TODO VERSION WhatsNew"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGDIR="$PKG_DEST/etc/xml"
 PKG_DATADIR="$PKG_DEST$PKG_PREFIX/share/sgml/docbook/xsl-stylesheets-$PKG_VERSION"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
 PKG_BUILD_OPTIONS=""
@@ -48,7 +47,6 @@ do_install() {
     
     mkdir -p $PKG_DOC
     mkdir -p $PKG_DATADIR
-    mkdir -p $PKG_CONFIGDIR
     
     for i in common extensions fo html htmlhelp images javahelp lib manpages template xhtml ; do
         cd $PKG_SRC
