@@ -1,0 +1,40 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_mixer/sdl_mixer-1.2.5.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+#
+# sdl_mixer-1.2.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="sdl_mixer"
+PKG_VERSION="1.2.5"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL_mixer-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.libsdl.org/projects/SDL_mixer/release/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE="mikmod oggvorbis"
+
+PKG_DEPENDS=">=l/sdl-1.2.5
+	         >=a/sed-4
+	         >=l/smpeg-0.4.4
+	         `use mikmod && echo ">=l/libmikmod-3.1.10"`
+	         `use oggvorbis && echo ">=l/libvorbis-1.0"`"
+
+PKG_HOMESITE="http://www.libsdl.org/projects/SDL_mixer/index.html"
+
+PKG_SRC="$TMP/SDL_mixer-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="CHANGES COPYING README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-smpeg-prefix=/usr 
+                       --disable-smpegtest 
+                       --disable-sdltest"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"

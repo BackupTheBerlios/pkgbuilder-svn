@@ -1,0 +1,48 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/root-tail/root-tail-0.9.build,v 1.1 2004/02/25 22:20:38 tomby Exp $
+#
+# root-tail-0.9 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.goof.com/pcg/marc/data/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="x/xfree86"
+
+PKG_HOMESITE="http://www.goof.com/pcg/marc/root-tail.html"
+
+PKG_DOC_FILES="Changes README"
+
+PKG_PREFIX="/usr/X11R6"
+
+do_configure() {
+    cd $PKG_SRC
+    
+    xmkmf -a
+    
+    cp Makefile Makefile.orig
+    sed -e "s:-O2:${CFLAGS}:g" Makefile.orig > Makefile
+    
+    return $?
+}
+
+do_install() {
+    configscript_do_install
+    
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/man/man1
+    cp root-tail.man $PKG_DEST$PKG_PREFIX/man/man1/root-tail.1
+
+    return $?
+}

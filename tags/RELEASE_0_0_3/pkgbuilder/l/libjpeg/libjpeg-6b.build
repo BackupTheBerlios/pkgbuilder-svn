@@ -1,0 +1,46 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libjpeg/libjpeg-6b.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+#
+# libjpeg-6b pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="libjpeg"
+PKG_VERSION="6b"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="jpegsrc.v$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.uu.net/graphics/jpeg/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://www.ijg.org/"
+
+PKG_SRC="$TMP/jpeg-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="README install.doc usage.doc wizard.doc change.log
+               libjpeg.doc example.c structure.doc filelist.doc
+		       coderules.doc"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--enable-static --enable-shared"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/{include,lib,bin,man/man1} &&
+    pkg_install
+    
+    return $?   
+}
+

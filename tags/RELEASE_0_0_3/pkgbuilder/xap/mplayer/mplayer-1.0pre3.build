@@ -1,0 +1,121 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.15 2004/01/11 15:06:24 tomby Exp $
+#
+# mplayer-1.0pre3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am9"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="MPlayer-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
+         http://www1.mplayerhq.hu/MPlayer/releases/fonts/font-arial-iso-8859-1.tar.bz2
+         `use gtk && echo "http://www1.mplayerhq.hu/MPlayer/Skin/Blue-1.0.tar.bz2"`"
+         
+PKG_LICENSE="GPLv2"
+
+PKG_USE="divx win32codecs gtk gtk2 jpeg gif esd sdl alsa arts aalib svga lame flac oggvorbis nls samba svga"
+
+PKG_DEPENDS=">=l/xvid-0.9.0
+			 >=l/freetype2-2.1
+			 ap/cdparanoia
+             `use divx && echo "l/divx4linux"`
+			 `use win32codecs && echo "l/win32codecs"`
+    		 `use gtk && echo "l/libpng x/xfree86"`
+			 `use gtk2 && echo ">=l/glib2-2.0.6 >=l/gtk+2-2.0.6"`
+			 `use gtk2 || echo ">=l/glib-1.2 >=l/gtk+-1.2"`
+    		 `use jpeg && echo "l/libjpeg"`
+    		 `use gif && echo "l/libungif"`
+    		 `use esd && echo "l/esound"`
+    		 `use sdl && echo "l/sdl"`
+    		 `use alsa && echo "l/alsa-lib"`
+			 `use arts && echo "kde/arts"`
+    		 `use aalib && echo "l/aalib"`
+    		 `use lame && echo "l/lame"`
+			 `use flac && echo "l/flac"`
+    		 `use oggvorbis && echo "l/libvorbis"`
+			 `use nls && echo "d/gettext"`
+    		 `use samba && echo ">=n/samba-2.2.8a"`
+			 `use svga && echo ">=l/svgalib-1.4.3"`"
+
+PKG_HOMESITE="http://www.mplayerhq.hu/"
+
+PKG_SRC="$TMP/MPlayer-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS LICENSE README ChangeLog DOCS/HTML/en/*.html etc/example.conf"
+
+PKG_CONFIGURE_OPTIONS="--confdir=/etc/mplayer
+                       --datadir=/usr/share/mplayer
+                       --disable-runtime-cpudetection
+                       --enable-menu
+                       --enable-largefiles
+                       --language=all
+					   `use win32codecs && echo "--enable-win32"`
+					   `use flac && echo "--enable-external-flac"`
+					   `use gtk && echo "--enable-gui --enable-x11"`
+					   `use gtk && use gtk2 && echo "--enable-gtk2"`"
+
+PKG_CONFIG_FILES="etc/mplayer/codecs.conf etc/mplayer/input.conf etc/mplayer/menu.conf"
+
+if [ -r $PKG_SRC/config.mak ] ; then
+	OPTFLAGS="`grep 'OPTFLAGS' $PKG_SRC/config.mak | grep -v '#'`"
+	PKG_ARCH="`expr match "$OPTFLAGS" '.*\-march=\([a-z0-9A-Z\-]*\)'`"
+	PKG_ARCH="`echo $PKG_ARCH | sed -e 's:\-::'`"
+fi
+
+do_patch() {
+	cd $PKG_SRC
+	
+	use gtk2 && patch -p1 -N < $PKG_HOME/files/$PKG_NAME-1.0-gentoo-gtk2.patch
+	
+	patch -p0 -N < $PKG_HOME/files/mencoder-gentoo-segfault.patch
+	
+	return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+        
+    return $? 
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    cat etc/codecs.conf > $PKG_DEST/etc/mplayer/codecs.conf
+    cat etc/input.conf > $PKG_DEST/etc/mplayer/input.conf
+	cat etc/menu.conf > $PKG_DEST/etc/mplayer/menu.conf
+
+    pkg_installdoc
+
+    pkg_stripall
+
+    pkg_gzipmaninfo
+
+    ( for dir in `find $PKG_DEST$PKG_PREFIX/man -type d -name 'man1'` ; do
+        cd $dir
+        rm $dir/mencoder.1
+        ln -s mplayer.1.gz mencoder.1.gz
+      done )
+    
+    use gtk && ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/Skin
+      unpack Blue-1.0.tar.bz2
+      mv Blue default
+      find ./ -type f -exec chmod 644 {} \;
+      find ./ -type d -exec chmod 755 {} \;
+      rm -f default/README
+      chown -R root.root default )
+    
+    ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/font
+      unpack font-arial-iso-8859-1.tar.bz2
+      find ./ -type f -exec chmod 644 {} \;
+      find ./ -type d -exec chmod 755 {} \;
+      chown -R root.root font-arial-iso-8859-1 )
+    
+    pkg_configfiles
+    
+    pkg_installfiles
+}

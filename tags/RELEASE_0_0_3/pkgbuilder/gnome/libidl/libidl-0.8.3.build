@@ -1,0 +1,21 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libidl/libidl-0.8.3.build,v 1.1 2004/02/08 13:26:09 tomby Exp $
+#
+# libidl-0.8.3 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+PKG_FILE_NAME="libIDL-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="$GNOME_BASE_URL/libIDL/0.8/$PKG_FILE_NAME"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glib2
+            >=d/pkgconfig-0.12.0 
+            >=d/flex-2.5.4"
+
+PKG_SRC="$TMP/libIDL-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS BUGS COPYING HACKING MAINTAINERS NEWS README"

@@ -1,0 +1,29 @@
+#!/bin/sh
+# Start/stop/restart postfix:
+
+postfix_start() {
+  postfix start
+}
+
+postfix_stop() {
+  postfix stop
+}
+
+postfix_restart() {
+  postfix reload
+}
+
+case "$1" in
+'start')
+  postfix_start
+  ;;
+'stop')
+  postfix_stop
+  ;;
+'restart')
+  postfix_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
+

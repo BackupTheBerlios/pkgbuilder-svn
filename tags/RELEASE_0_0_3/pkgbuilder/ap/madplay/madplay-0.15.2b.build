@@ -1,0 +1,29 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/madplay/madplay-0.15.2b.build,v 1.1 2004/02/28 13:05:14 tomby Exp $
+#
+# madplay-0.15.2b pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/mad/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="l/glibc
+             >=l/libmad-0.15.1b
+             >=l/libid3tag-0.15.1b
+             `use_dep nls ">=d/gettext-0.11.2"`"
+
+PKG_HOMESITE="http://mad.sourceforge.net"
+
+PKG_DOC_FILES="CHANGES COPYING COPYRIGHT CREDITS README TODO VERSION"
+
+PKG_CONFIGURE_OPTIONS="--disable-debugging"

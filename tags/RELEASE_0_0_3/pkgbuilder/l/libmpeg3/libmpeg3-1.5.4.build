@@ -1,0 +1,68 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libmpeg3/libmpeg3-1.5.4.build,v 1.1 2004/03/21 19:06:24 tomby Exp $
+#
+# libmpeg3-1.5.4 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-src.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/heroines/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/nasm
+             l/zlib
+			 l/libjpeg
+			 l/liba52"
+
+PKG_HOMESITE="http://heroinewarrior.com/libmpeg3.php3"
+
+PKG_DOC_FILES="COPYING docs/index.html"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST$PKG_PREFIX"
+
+do_patch() {
+	cd $PKG_SRC
+	
+	#lot of patches from gentoo	
+	apply_patch 1.5.2-gentoo-p1.patch -p1 -N
+	apply_patch 1.5.2-gentoo-mpeg3split.patch -p0 -N
+	apply_patch 1.5.2-pthread.patch -p0 -N
+	apply_patch 1.5.2-largefile.patch -p0 -N
+	#apply_patch 1.5.2-proper-c.patch -p0 -N
+	#apply_patch 1.5.2-no-nasm.patch -p0 -N
+	
+	echo > Makefile.a52
+	rm -rf a52dec-0.7.3/*
+	ln -s /usr/include/a52dec a52dec-0.7.3/include
+	
+	return $?
+}
+
+do_build() {
+	cd $PKG_SRC
+	
+	make LIBS="-lm -lpthread -la52"
+	
+	return $?
+}
+
+do_install() {
+	cd $PKG_SRC
+	
+	apply_patch 1.5.2-gentoo-p2.patch -p1 -N &&
+	pkg_install &&
+	( cd $PKG_DEST$PKG_PREFIX/lib/
+	  mv $PKG_NAME.so $PKG_NAME.so.1
+	  chmod +x $PKG_NAME.so.1
+	  ln -sf $PKG_NAME.so.1 $PKG_NAME.so )
+
+	return $?
+}

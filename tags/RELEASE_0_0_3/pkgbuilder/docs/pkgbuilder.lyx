@@ -1,0 +1,1156 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language spanish
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+PKGBUILDER
+\layout Date
+
+Sábado, 15 de frebrero de 2004
+\layout Author
+
+Antonio Gabriel Muñoz Conejo
+\layout Abstract
+
+Instalación de 
+\series bold 
+PkgBuilder
+\series default 
+, gestión y administración del arbol de ports y creación de scripts de construcc
+ión de paquetes.
+\layout Abstract
+
+
+\begin_inset LatexCommand \tableofcontents{}
+
+\end_inset 
+
+
+\layout Section
+
+Motivos:
+\layout Paragraph
+
+
+\series medium 
+Los motivos por los que nace 
+\series default 
+PkgBuilder
+\series medium 
+ son varios pero el principal es la escasez de paquetes oficiales que existen
+ en 
+\series default 
+Slackware
+\series medium 
+, multitud de paquetes que no se incluyen en la distribución oficial de
+ 
+\series default 
+Slackware
+\series medium 
+, tan básicos como pueden ser 
+\emph on 
+gkrellm
+\emph default 
+, 
+\emph on 
+wine
+\emph default 
+,
+\emph on 
+ 
+\emph default 
+o 
+\emph on 
+postfix
+\emph default 
+.
+ Buscando solucionar esto intenté migrar a otras distribuciones de 
+\series default 
+GNU/Linux
+\series medium 
+ o incluso migrar a otros sistemas operativos libres como 
+\series default 
+NetBSD
+\series medium 
+ pero no encontré nada que se ajustara a lo que buscaba.
+ Lo que buscaba era un sistema que me permitiera crear paquetes para 
+\series default 
+Slackware
+\series medium 
+ a partir de los fuentes sin tenerme que preocupar de nada salvo de ejecutar
+ unos sencillos comandos, que resolviera dependencias automaticamente y
+ que compilara los paquetes optimizados para mi sistema.
+ Asi que decidí ponerme manos a la obra.
+\layout Section
+
+Descripción general:
+\layout Paragraph
+
+PkgBuilder
+\series medium 
+ es un sistema para automatizar la creación de paquetes similar a los 
+\begin_inset Quotes eld
+\end_inset 
+
+ports
+\begin_inset Quotes erd
+\end_inset 
+
+ de los sistemas BSD.
+ La intención inicial es que funcione en cualquier distribución y/o cualquier
+ sistema de paquetes, pero por ahora solo soporta 
+\series default 
+Slackware
+\series medium 
+, que es la distribución que uso.
+ 
+\layout Paragraph
+
+
+\series medium 
+Su funcionamiento es muy simple: se descarga el código fuente desde la web
+ oficial del desarrollador, después verifica el checksum de los archivos
+ descargados, descomprime los archivos y les aplica los parches correspondientes
+, luego se realiza la compilación del paquete y la creación del tgz.
+ 
+\layout Paragraph
+
+
+\series medium 
+Todo esto está gobernado por una serie de sencillos scripts escritos en
+ 
+\series default 
+shell script
+\series medium 
+.
+ Por cada paquete existe un script para cada versión del paquete y en él
+ se configuran las variables necesarias para la compilación y creación del
+ paquete y se implementan una serie de métodos, uno por cada acción.
+ Dentro de cada uno de esos métodos está la implementación de la acción
+ para ese paquete.
+\layout Section
+
+Prerrequisitos:
+\layout Subsection
+
+Sistema operativo:
+\layout Paragraph
+
+
+\series medium 
+El sistema se basa sobre 
+\series default 
+Slackware 9.1
+\series medium 
+, instalando sólo una serie de paquetes básicos sobre los que construir
+ el resto del sistema.
+ Para la mayoría de paquetes que contiene 
+\series default 
+PkgBuilder
+\series medium 
+ existe un paquete oficial compatible en 
+\series default 
+Slackware
+\series medium 
+, asi que se puede optar por instalar el paquete oficial en lugar del paquete
+ de 
+\series default 
+PkgBuilder
+\series medium 
+, aunque no todos, de hecho, algunos son totalmente incompatibles, como
+ puede ser el paquete 
+\shape italic 
+oggutils
+\shape default 
+ y los paquetes 
+\shape italic 
+libao
+\shape default 
+, 
+\shape italic 
+libogg
+\shape default 
+ y 
+\shape italic 
+libvorbis
+\shape default 
+ de 
+\series default 
+PkgBuilder
+\series medium 
+.
+\layout Paragraph
+
+
+\series medium 
+El sistema deberá tener tamaño libre suficiente para almacenar los ficheros
+ de código fuente descargados, los paquetes binarios creados y también tamaño
+ suficiente para la compilación de cada paquete.
+ Los paquetes descargados se pueden eliminar sin problemas y los binarios
+ también para liberar espacio en disco.
+\layout Subsection
+
+Paquetes basicos:
+\layout Paragraph
+
+
+\series medium 
+Esta es la lista de paquetes de 
+\series default 
+Slackware 9.1
+\series medium 
+ necesarios para el sistema base.
+ Algunos de ellos son opcionales como jfsutils o xfsprogs, estos serán necesario
+s si el sistema se va instalar en una partición con el sistema de ficheros
+ jfs o xfs, respectivamente.
+\layout Paragraph
+
+a)
+\layout List
+\labelwidthstring 00.00.0000
+
+aaa_base 9.1.0
+\layout List
+\labelwidthstring 00.00.0000
+
+bash 2.05b
+\layout List
+\labelwidthstring 00.00.0000
+
+bin 8.5.0
+\layout List
+\labelwidthstring 00.00.0000
+
+bzip2 1.0.2
+\layout List
+\labelwidthstring 00.00.0000
+
+coreutils 5.0
+\layout List
+\labelwidthstring 00.00.0000
+
+cxxlibs 5.1.0
+\layout List
+\labelwidthstring 00.00.0000
+
+dcron 2.3.3
+\layout List
+\labelwidthstring 00.00.0000
+
+devs 2.3.1
+\layout List
+\labelwidthstring 00.00.0000
+
+e2fsprogs 1.34
+\layout List
+\labelwidthstring 00.00.0000
+
+elflibs 9.1.0 (este paquete en la rama current toma el nombre de aaa_elflibs)
+\layout List
+\labelwidthstring 00.00.0000
+
+elvis 2.1_4
+\layout List
+\labelwidthstring 00.00.0000
+
+etc 5.1
+\layout List
+\labelwidthstring 00.00.0000
+
+findutils 4.1.7
+\layout List
+\labelwidthstring 00.00.0000
+
+gawk 3.1.3
+\layout List
+\labelwidthstring 00.00.0000
+
+glibc-solibs 2.3.2
+\layout List
+\labelwidthstring 00.00.0000
+
+glibc-zoneinfo 2.3.2
+\layout List
+\labelwidthstring 00.00.0000
+
+grep 2.5
+\layout List
+\labelwidthstring 00.00.0000
+
+gzip 1.3.3
+\layout List
+\labelwidthstring 00.00.0000
+
+hdparm 5.3
+\layout List
+\labelwidthstring 00.00.0000
+
+hotplug 2003_08_05
+\layout List
+\labelwidthstring 00.00.0000
+
+infozip 5.50
+\layout List
+\labelwidthstring 00.00.0000
+
+jfsutils 1.1.3 (opcional)
+\layout List
+\labelwidthstring 00.00.0000
+
+kdb 1.08
+\layout List
+\labelwidthstring 00.00.0000
+
+kernel-modules 2.4.22
+\layout List
+\labelwidthstring 00.00.0000
+
+less 381
+\layout List
+\labelwidthstring 00.00.0000
+
+lilo 22.5.7.2
+\layout List
+\labelwidthstring 00.00.0000
+
+module-init-tools 0.9.14
+\layout List
+\labelwidthstring 00.00.0000
+
+openssl-solibs 0.9.7c
+\layout List
+\labelwidthstring 00.00.0000
+
+pci-utils 2.1.11
+\layout List
+\labelwidthstring 00.00.0000
+
+pcmcia-cs 3.2.5 (opcional, necesario en portatiles y ordenadores con interfaz
+ pcmcia)
+\layout List
+\labelwidthstring 00.00.0000
+
+pkgtools 9.1.0
+\layout List
+\labelwidthstring 00.00.0000
+
+procps 2.0.16
+\layout List
+\labelwidthstring 00.00.0000
+
+reiserfsprogs 3.6.11 (opcional)
+\layout List
+\labelwidthstring 00.00.0000
+
+sed 3.02
+\layout List
+\labelwidthstring 00.00.0000
+
+shadow 4.0.3
+\layout List
+\labelwidthstring 00.00.0000
+
+sysklogd 1.4.1
+\layout List
+\labelwidthstring 00.00.0000
+
+sysvinit 2.06
+\layout List
+\labelwidthstring 00.00.0000
+
+syslinux 2.84
+\layout List
+\labelwidthstring 00.00.0000
+
+tar 1.13.25
+\layout List
+\labelwidthstring 00.00.0000
+
+usbutils 0.11
+\layout List
+\labelwidthstring 00.00.0000
+
+util-linux 2.12
+\layout List
+\labelwidthstring 00.00.0000
+
+xfsprogs 2.5.6 (opcional)
+\layout Paragraph
+
+ap)
+\layout List
+\labelwidthstring 00.00.0000
+
+diffutils 2.8.1
+\layout List
+\labelwidthstring 00.00.0000
+
+groff 1.17.2
+\layout List
+\labelwidthstring 00.00.0000
+
+man 1.51
+\layout List
+\labelwidthstring 00.00.0000
+
+man-pages 1.60
+\layout List
+\labelwidthstring 00.00.0000
+
+texinfo 4.5
+\layout Paragraph
+
+d)
+\layout List
+\labelwidthstring 00.00.0000
+
+autoconf 2.57
+\layout List
+\labelwidthstring 00.00.0000
+
+automake 1.7.7
+\layout List
+\labelwidthstring 00.00.0000
+
+bin86 0.16.11
+\layout List
+\labelwidthstring 00.00.0000
+
+binutils 2.14.90.0.6
+\layout List
+\labelwidthstring 00.00.0000
+
+bison 1.35
+\layout List
+\labelwidthstring 00.00.0000
+
+byacc 1.9
+\layout List
+\labelwidthstring 00.00.0000
+
+cvs 1.11.6
+\layout List
+\labelwidthstring 00.00.0000
+
+flex 2.5.4a
+\layout List
+\labelwidthstring 00.00.0000
+
+gcc 3.2.3
+\layout List
+\labelwidthstring 00.00.0000
+
+gcc-g++ 3.2.3
+\layout List
+\labelwidthstring 00.00.0000
+
+kernel-headers 2.4.22
+\layout List
+\labelwidthstring 00.00.0000
+
+libtool 1.4.3
+\layout List
+\labelwidthstring 00.00.0000
+
+m4 1.4
+\layout List
+\labelwidthstring 00.00.0000
+
+make 3.80
+\layout List
+\labelwidthstring 00.00.0000
+
+perl 5.8.0
+\layout Paragraph
+
+l)
+\layout List
+\labelwidthstring 00.00.0000
+
+glibc 2.3.2
+\layout List
+\labelwidthstring 00.00.0000
+
+glibc-i18n 2.3.2 (opcional)
+\layout List
+\labelwidthstring 00.00.0000
+
+ncurses 5.3
+\layout List
+\labelwidthstring 00.00.0000
+
+zlib 1.1.4
+\layout Paragraph
+
+n)
+\layout List
+\labelwidthstring 00.00.0000
+
+openssl 0.9.7c
+\layout List
+\labelwidthstring 00.00.0000
+
+tcpip 0.17
+\layout List
+\labelwidthstring 00.00.0000
+
+wget 1.8.2
+\layout List
+\labelwidthstring 00.00.0000
+
+wireless-tools 26 (opcional, necesario si queremos utilizar dispositivos
+ inalambricos)
+\layout Paragraph
+
+
+\series medium 
+También se pueden utilizar paquetes equivalentes de la rama 
+\series default 
+current
+\series medium 
+ de 
+\series default 
+Slackware
+\series medium 
+.
+\layout Section
+
+Instalación:
+\layout Subsection
+
+Instalación del sistema base:
+\layout Paragraph
+
+
+\series medium 
+La instalación del sistema base es totalmente similar a una instalación
+ usual de 
+\series default 
+Slackware
+\series medium 
+.
+ Se seleccionarán para su instalación unicamente los paquetes indicados
+ en la lista de paquetes básicos.
+\layout Subsection
+
+Instalación de PkgBuilder:
+\layout Paragraph
+
+
+\series medium 
+Para instalar 
+\series default 
+PkgBuilder
+\series medium 
+ es necesario primero conseguir una copia del arbol de ports.
+ Se puede descargar un tarball de la página oficial o se puede descargar
+ directamente a traves del CVS.
+ Yo recomiendo instalarlo a traves del CVS ya que esto permitirá ir actualizando
+ 
+\series default 
+PkgBuilder
+\series medium 
+ facilmente.
+\layout Subsubsection
+
+Instalación desde tar ball:
+\layout Paragraph
+
+
+\series medium 
+Simplemente será necesario descomprimir el tar ball en el lugar elegido.
+\layout Subsubsection
+
+Instalación desde el CVS:
+\layout Standard
+
+La instalación a traves del cvs requiere ejecutar una serie de comandos:
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+$ cvs -d :pserver:anonymous@cvs.berlios.de:/cvsroot/pkgbuilder login
+\layout Quotation
+
+Cuando pida la password se pulsará 
+\series bold 
+enter
+\series default 
+.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+$ cvs -d :pserver:anonymous@cvs.berlios.de:/cvsroot/pkgbuilder co pkgbuilder
+\layout Quotation
+
+Y ya tendremos nuestra copia del arbol de ports local.
+\layout Subsubsection
+
+Configuración del archivo build.rc
+\layout Paragraph
+
+
+\series medium 
+Después de obtener una copia de 
+\series default 
+PkgBuilder
+\series medium 
+ hay que configurar el archivo 
+\shape italic 
+build.rc
+\shape default 
+.
+ Existe un archivo con un ejemplo del archivo de configuración, se trata
+ de 
+\shape italic 
+build.rc-sample
+\shape default 
+.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+# Copyright 2003 Antonio G.
+ Muñoz, tomby (AT) tomby.homemelinux.org
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+# Distributed under the terms of the GNU General Public License v2
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+PKGBUILDER_HOME="/var/pkgbuilder"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+VERSION="20040111"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+# packages db directory
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+PACKAGES_LOGDIR="/var/log/packages"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#pkgbuilder mirror
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#local network source code mirror
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#MIRROR_URL="ftp://localhost/pub/pkgbuilder"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#cdrom with source code
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#CDROM_DIR="/mnt/cdrom"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+FETCH_TRIES="5"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+FETCH_DIR="/tmp/distfiles"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+FETCH_FTP_OPTIONS="--passive-ftp"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+TMP="/tmp"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod nas
+ gstreamer"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl aalib svga fbcon directfb"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_NET="samba ssl slp maildir"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_PRINT="cups pnm2ppa"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_XLIBS="motif gtk gtk2 qt kde gnome"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_LIBS="ncurses readline sasl bidi jpeg png tiff gif slang fam"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_CPU="mmx sse 3dnow"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_DEV="python tcltk perl java ruby scheme"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE_MISC="nls doc gpm javascript mysql xml sane"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+$USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+I18N="es"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+ARCH="i486"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+CPU="i686"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+CXXFLAGS="$CFLAGS"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+CPPFLAGS="$CFLAGS"
+\layout Paragraph
+
+PKGBUILDER_HOME
+\series medium 
+ configura el directorio donde se ha instalado 
+\series default 
+PkgBuilder
+\series medium 
+.
+\layout Paragraph
+
+PACKAGES_LOGDIR
+\series medium 
+ configura el directorio donde se encuentra la base de datos de paquetes
+ instalados.
+ Usualmente toma el valor de /var/log/packages.
+\layout Paragraph
+
+PKGBUILDER_MIRROR
+\series medium 
+ configura la url del ftp oficial de 
+\series default 
+PkgBuilder
+\layout Paragraph
+
+MIRROR_URL
+\series medium 
+ permite configurar un servidor local para que actue como cache.
+\layout Paragraph
+
+CDROM_DIR
+\series medium 
+ permite configurar el directorio donde tomar los archivos con el codigo
+ fuente desde una unidad de CDROM.
+\layout Paragraph
+
+FETCH_DIR
+\series medium 
+ configura el directorio donde se almacenaran los archivos descargados.
+\layout Paragraph
+
+FETCH_OPTIONS
+\series medium 
+ permite configurar los parametros a utilizar por wget a la hora de descargar
+ archivos.
+\layout Paragraph
+
+FETCH_FTP_OPTIONS
+\series medium 
+ permite configurar los parametros a utilizar por wget cuando la url se
+ trata de un servidor FTP.
+\layout Paragraph
+
+USE
+\series medium 
+ permite configurar una serie de flags para activar o desactivar funcionalidades
+ a la hora de compilar los paquetes.
+ Es similimar a la variable USE de Gentoo GNU/Linux.
+ Se ha dividido en varios grupos para facilitar la lectura de las opciones.
+\layout Paragraph
+
+I18N
+\series medium 
+ permite configurar la opcion de internacionalización indicando el lenguaje
+ deseado.
+\layout Paragraph
+
+ARCH
+\series medium 
+ permite configurar la arquitectura de la máquina actual.
+\layout Paragraph
+
+CPU
+\series medium 
+ permite configurar el procesador de la máquina actual.
+\layout Paragraph
+
+CFLAGS
+\series medium 
+ permite configurar los flags de compilación indicando las opciones de optimizac
+ión.
+\layout Subsubsection
+
+Configuración del soporte de compilación paralela con distcc:
+\layout Standard
+
+Por defecto el soporte de compilación paralela está deshabilitado y es necesario
+ configurarlo explicitamente.
+ Para ello existe una serie de variables que es necesario configurar.
+ También es necesario instalar y configurar correctamente 
+\series bold 
+distcc
+\series default 
+ y/o 
+\series bold 
+ccache
+\series default 
+ para que funcione junto con 
+\series bold 
+distcc
+\series default 
+.
+ El soporte de compilación paralela aún es experimental y es posible que
+ la compilación de algunos paquetes falle.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#Parallel compilation.
+ Use with care, some packages compilation fails.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+DISTCC_HOSTS="host1 host2 host3 hostn"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+CCACHE_PREFIX="distcc"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+MAKE_OPTIONS="-j8"
+\layout Paragraph
+
+DISTCC_HOST 
+\series medium 
+especifica el nombre de las diferentes maquina a usar para la compilación
+ paralela.
+\layout Paragraph
+
+CCACHE_PREFIX 
+\series medium 
+es necesario configurarla si queremos utilizar distcc junto con ccache.
+\layout Paragraph
+
+MAKE_OPTIONS 
+\series medium 
+especifica las opciones para 
+\series default 
+make
+\series medium 
+.
+ Usualmente tomara el valor -j
+\series default 
+n
+\series medium 
+, siendo 
+\series default 
+n
+\series medium 
+ el número de procesos simultaneos que queremos que se ejecuten.
+\layout Section
+
+Empieza la fiesta:
+\layout Subsection
+
+El script build.sh:
+\layout Standard
+
+El script build.sh permite ejecutar diversas acciones sobre los archivos
+ build, entre ellas, descargar el codigo fuente compilarlo y generar el
+ paquete tgz correspondiente.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+# ./build.sh xap/aterm/aterm-0.4.2.build fetch patch configure
+\layout Paragraph
+
+
+\series medium 
+Este ejemplo ejecutará las acciones fetch, patch y configure para el archivo
+ build aterm-0.4.2.build del paquete aterm.
+\layout Paragraph
+
+
+\series medium 
+Esta es la lista completa de acciones que podemos ejecutar:
+\layout List
+\labelwidthstring 00.00.0000
+
+info: muestra información del paquete
+\layout List
+\labelwidthstring 00.00.0000
+
+fetch: descarga los archivos necesarios para la compilación y creación del
+ paquete.
+\layout List
+\labelwidthstring 00.00.0000
+
+unpack: descomprime los archivos necesarios.
+\layout List
+\labelwidthstring 00.00.0000
+
+verify: verifica el checksum de los paquetes descargados.
+\layout List
+\labelwidthstring 00.00.0000
+
+patch: parchea los archivos necesarios para la compilación
+\layout List
+\labelwidthstring 00.00.0000
+
+configure: ejecuta el script configure del paquete
+\layout List
+\labelwidthstring 00.00.0000
+
+build: ejecuta make
+\layout List
+\labelwidthstring 00.00.0000
+
+install: ejecuta make install
+\layout List
+\labelwidthstring 00.00.0000
+
+postinstall: ejecuta todas la acciones necesarias después de la instalación
+ del paquete
+\layout List
+\labelwidthstring 00.00.0000
+
+buildpkg: genera el paquete tgz correspondiente listo para su instalación
+ en el sistema.
+ El paquete sólo se generará si se ejecuta como superusuario.
+\layout List
+\labelwidthstring 00.00.0000
+
+installpkg: instala el paquete previamente generado por la acción buildpkg.
+ Solo funciona cuando se ejecuta como superusuario.
+\layout List
+\labelwidthstring 00.00.0000
+
+upgradepkg: actualiza el paquete previamente generado.
+ Solo funciona cuando se ejecuta como superusuario.
+\layout List
+\labelwidthstring 00.00.0000
+
+cleanup: realiza la limpieza de los archivos utilizados para la compilación
+ y creación del paquete.
+\layout List
+\labelwidthstring 00.00.0000
+
+auto: ejecuta automáticamente esta secuencia acciones: fetch, verify, unpack,
+ patch, configure, build, install, postinstall, buildpkg.
+\layout Subsection
+
+El script install.sh:
+\layout Standard
+
+El script install.sh instala un paquete resolviendo dependencias instalandolas
+ si es necesario de forma recursiva.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+$ ./install.sh xap/epiphany
+\layout Paragraph
+
+
+\series medium 
+Este comando instala el paquete epiphany resolviendo las dependencias de
+ este paquete.
+\layout Paragraph
+
+
+\series medium 
+Opciones del script:
+\layout List
+\labelwidthstring 00.00.0000
+
+-d Ejecuta el script en modo dummy o tonto, resolviendo las dependencias
+ pero sin instalar nada en el sistema.
+\layout List
+\labelwidthstring 00.00.0000
+
+-v Ejecuta el script incrementando los mensajes de salida utilizado para
+ depurar la gestión de dependencias.
+\layout Subsection
+
+El script update.sh:
+\layout Standard
+
+El script update.sh actualiza todo el sistema buscando nuevas versiones de
+ los paquetes en el arbol de ports.
+\layout Section
+
+Creación de scripts:
+\layout Subsection
+
+Anatomia de un script:
+\layout Subsubsection
+
+Variables:
+\layout Subsubsection
+
+Acciones:
+\layout Subsection
+
+Herencia de scripts:
+\layout Subsection
+
+Funciones genericas:
+\layout Subsection
+
+Funciones de paquetes:
+\layout Subsection
+
+Escribir un script:
+\the_end

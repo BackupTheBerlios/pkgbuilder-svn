@@ -1,0 +1,57 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.22 2004/03/14 15:18:07 tomby Exp $
+
+PKGBUILDER_HOME="/var/pkgbuilder"
+
+VERSION="20040314"
+
+# packages db directory
+PACKAGES_LOGDIR="/var/log/packages"
+
+#pkgbuilder mirror
+PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
+
+#local network source code mirror
+#MIRROR_URL="ftp://localhost/pub/pkgbuilder"
+
+#cdrom with source code
+#CDROM_DIR="/mnt/cdrom"
+
+#FETCH OPTIONS
+FETCH_TRIES="5"
+FETCH_DIR="/tmp/distfiles"
+FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
+FETCH_FTP_OPTIONS="--passive-ftp"
+
+TMP="/tmp"
+
+#USE FLAGS
+USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod nas gstreamer"
+USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl aalib svga fbcon directfb"
+USE_NET="samba ssl slp maildir"
+USE_PRINT="cups pnm2ppa"
+USE_XLIBS="motif gtk gtk2 qt kde gnome"
+USE_LIBS="ncurses readline sasl bidi jpeg png tiff gif slang fam"
+USE_CPU="mmx sse 3dnow"
+USE_DEV="python tcltk perl java ruby scheme"
+USE_MISC="nls doc gpm javascript mysql xml sane crypto tetex"
+
+USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
+     $USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
+
+#I18N CONFIGURATION
+#I18N="es"
+
+#Parallel compilation. Use with care, some packages compilation fails.
+#COMPILATION="parallel"
+#DISTCC_HOSTS="host1 host2 host3 hostn"
+#CCACHE_PREFIX="distcc"
+#MAKE_OPTIONS="-j8"
+
+#CPU AND ARCHITECTURE FLAGS CONFIGURATION
+ARCH="i486"
+CPU="i686"
+CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
+CXXFLAGS="$CFLAGS"
+CPPFLAGS="$CFLAGS"

@@ -1,0 +1,56 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-dsssl-stylesheets/docbook-dsssl-stylesheets-1.78.build,v 1.3 2003/12/30 18:44:13 tomby Exp $
+#
+# docbook-dsssl-stylesheets-1.78 pkgbuilder script
+#
+
+inherit main
+
+PKG_NAME="docbook-dsssl-stylesheets"
+PKG_VERSION="1.78"
+PKG_ARCH="noarch"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="docbook-dsssl-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/docbook/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_DEPENDS="ap/sgml-common"
+
+PKG_HOMESITE="http://www.sourceforge.net/docbook/"
+
+PKG_SRC="$TMP/docbook-dsssl-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="BUGS ChangeLog README TODO VERSION WhatsNew"
+
+PKG_PREFIX="/usr"
+PKG_BINDIR="$PKG_DEST$PKG_PREFIX/bin"
+PKG_DATADIR="$PKG_DEST$PKG_PREFIX/share/sgml/docbook/dsssl-stylesheets-$PKG_VERSION"
+
+PKG_NOSTRIP="Y"
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DATADIR/{dtds,lib,common,html,print,images}
+    mkdir -p $PKG_DATADIR/dtds/decls
+    mkdir -p $PKG_BINDIR
+        
+    install bin/collateindex.pl $PKG_BINDIR
+    
+    cp catalog VERSION $PKG_DATADIR &&
+    cp dtds/decls/*.dcl $PKG_DATADIR/dtds/decls &&
+    cp lib/dblib.dsl $PKG_DATADIR/lib &&
+    cp common/*.dsl $PKG_DATADIR/common &&
+    cp common/*.ent $PKG_DATADIR/common &&
+    cp html/*.dsl $PKG_DATADIR/html &&
+    cp lib/*.dsl $PKG_DATADIR/lib &&
+    cp print/*.dsl $PKG_DATADIR/print &&
+    cp images/*.gif $PKG_DATADIR/images
+    
+    return $?
+}
+

@@ -1,0 +1,20 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-icon-theme/gnome-icon-theme-1.1.2.build,v 1.2 2004/01/02 12:25:11 tomby Exp $
+#
+# gnome-icon-theme-1.1.2 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_ARCH="noarch"
+PKG_BUILD="am1"
+
+PKG_DOC_FILES="COPYING INSTALL NEWS TODO ChangeLog"
+
+PKG_DEPENDS="gnome/intltool"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var/lib"
+
+PKG_NOSTRIP="Y"

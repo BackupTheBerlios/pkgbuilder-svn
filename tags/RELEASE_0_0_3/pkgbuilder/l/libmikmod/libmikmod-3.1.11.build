@@ -1,0 +1,32 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libmikmod/libmikmod-3.1.11.build,v 1.1 2004/03/19 19:53:27 tomby Exp $
+#
+# libmikmod-3.1.11 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://mikmod.raphnet.net/files/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2.1"
+
+PKG_USE="oss esd alsa"
+
+PKG_DEPENDS=">=l/audiofile-0.2.3
+        	 `use_dep alsa`
+        	 `use_dep esd`"
+
+PKG_HOMESITE="http://mikmod.raphnet.net/"
+
+PKG_DOC_FILES="AUTHORS COPYING* NEWS README TODO"
+
+
+PKG_CONFIGURE_OPTIONS="--enable-af
+					   `use_enable alsa`
+        	 		   `use_enable esd`
+					   `use_enable oss`"

@@ -1,0 +1,23 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gtk-engines-thinice/gtk-engines-thinice-2.0.2.build,v 1.1 2004/01/04 16:20:33 tomby Exp $
+#
+# gtk-engines-thinice pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="gtk-thinice-engine-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/thinice/$PKG_FILE_NAME"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/gtk+2"
+
+PKG_HOMESITE="http://thinice.sourceforge.net/"
+
+PKG_SRC="$TMP/gtk-thinice-engine-$PKG_VERSION"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"

@@ -1,0 +1,40 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/fluxbox/fluxbox-0.9.6.build,v 1.6 2004/01/05 15:08:44 tomby Exp $
+#
+# fluxbox-0.9.6 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="BSD"
+
+PKG_USE="kde gnome"
+
+PKG_DEPENDS="x/xfree86
+    		>=d/autoconf-2.52"
+            
+PKG_HOMESITE="http://fluxbox.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO doc/Coding_style"
+
+PKG_PREFIX="/usr/X11R6"
+PKG_CONFIGURE_OPTIONS="`use kde && echo "--enable-kde"`
+                       `use gnome && echo "--enable-gnome"`"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc/X11/xinit
+    
+    cat $PKG_HOME/files/xinitrc.fluxbox > $PKG_DEST/etc/X11/xinit/xinitrc.fluxbox
+    
+    pkg_postinstall
+	
+	return $?
+}

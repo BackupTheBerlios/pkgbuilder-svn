@@ -1,0 +1,182 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/mozilla.build,v 1.5 2004/02/29 17:42:37 tomby Exp $
+#
+# pkgbuilder script for mozilla packages
+#
+
+include configscript
+
+mozilla_init() {
+    configscript_init
+    
+    ENIGMAIL_VERSION="0.76.7"
+    IPC_VERSION="1.0.4"
+    
+    PKG_EXTENSION="tar.bz2"
+
+    PKG_FILE_NAME="$PKG_NAME-source-$PKG_VERSION.$PKG_EXTENSION"
+
+    ENIGMAIL_FILE_NAME="enigmail-$ENIGMAIL_VERSION.tar.gz"
+    IPC_FILE_NAME="ipc-$IPC_VERSION.tar.gz"
+
+    MOZILLA_BASE_URL="http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases"
+
+    PKG_URL="$MOZILLA_BASE_URL/$PKG_NAME$PKG_VERSION/src/$PKG_FILE_NAME
+             `use crypt && echo "http://downloads.mozdev.org/enigmail/src/$ENIGMAIL_FILE_NAME"`
+			 `use crypt && echo "http://downloads.mozdev.org/enigmail/src/$IPC_FILE_NAME"`"
+    
+    PKG_LICENSE="MPL-1.1 NPL-1.1"
+    
+    PKG_USE="ssl gnome crypto"
+    
+    PKG_DEPENDS=">=x/xfree86
+	             >=gnome/libidl-0.8.0
+	             >=l/zlib-1.1.4
+	             >=l/fontconfig-2.1
+	             >=l/libjpeg-6b
+	             >=l/libpng-1.2.1
+	             l/expat
+	             a/infozip
+	             >=l/gtk+2-2.2.0
+                 >=l/glib2-2.2.0
+	             >=l/pango-1.2.1
+                 d/pkgconfig
+                 d/perl
+                 `use crypto && echo "ap/gnupg"`"
+    
+    PKG_HOMESITE="http://www.mozilla.org/"
+    
+    PKG_SRC="$TMP/$PKG_NAME"
+    
+    PKG_PREFIX="/usr"
+    MOZILLA_FIVE_HOME="$PKG_PREFIX/lib/mozilla-$PKG_VERSION"
+
+    PKG_CONFIGURE_OPTIONS="--enable-toolkit-gtk2
+		                   --enable-default-toolkit=gtk2
+		                   --disable-toolkit-qt
+		                   --disable-toolkit-xlib
+		                   --disable-toolkit-gtk
+                           --enable-optimize
+                           --enable-strip-libs
+                           --disable-debug
+                           --disable-tests
+						   --enable-reorder
+						   --enable-strip
+                           --disable-freetype2
+                           --enable-xft
+                           --with-default-mozilla-five-home=$MOZILLA_FIVE_HOME
+                           --disable-pedantic
+		                   --disable-short-wchar
+		                   --disable-xprint
+		                   --enable-mathml
+		                   --without-system-nspr
+		                   --enable-nspr-autoconf
+		                   --with-system-zlib
+		                   --enable-xsl
+		                   --enable-crypto
+                           --enable-calendar
+		                   --enable-extensions=default,irc"
+                           
+    MAKE_OPTIONS="-j1"
+
+    PKG_BUILD_TARGET="export libs"
+    
+    PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+    
+    PKG_INSTALL_TARGET="install"
+    
+    export MOZILLA_OFFICIAL=1
+	export BUILD_OFFICIAL=1
+    
+	if ! use ssl ; then
+		export MOZ_PSM="1"
+	fi
+}
+
+mozilla_build_enigmail() {
+    cd $PKG_SRC
+    
+    ( cd extensions/ipc &&
+      cp $PKG_HOME/files/Makefile-ipc Makefile &&
+      make ) &&
+    ( cd extensions/enigmail &&
+      cp $PKG_HOME/files/Makefile-enigmail Makefile &&
+      make )
+      
+    return $?
+}
+
+mozilla_install_enigmail() {
+    cd $PKG_SRC
+    
+    for component in components/enigmime.xpt \
+        components/ipc.xpt components/libenigmime.so components/enigmail.js \
+        components/enigmail.xpt chrome/enigmail.jar
+    do
+        cp dist/bin/$component $PKG_DEST$MOZILLA_FIVE_HOME/$component
+    done
+}
+
+mozilla_do_unpack() {
+    configscript_do_unpack
+    
+    if use crypt ; then
+        cd $PKG_SRC/extensions
+        unpack $ENIGMAIL_FILE_NAME
+        unpack $IPC_FILE_NAME
+    fi
+}
+
+mozilla_do_configure() {
+    configscript_do_configure
+}
+
+mozilla_do_build() {
+    configscript_do_build
+    
+    if use crypt ; then
+        mozilla_build_enigmail
+    fi
+}
+
+mozilla_do_install() {
+    configscript_do_install
+    
+    if use crypt ; then
+        mozilla_install_enigmail
+    fi
+}
+
+mozilla_do_postinstall() {
+    cd $PKG_SRC
+    
+    # Install nss headers.
+    mkdir -p $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss
+    find security/nss/lib -name "*.h" -type f -exec cp {} $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss \;
+    chown -R root.root $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss
+    chmod 644 $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss/*
+    
+    # Move nss libraries into /usr/lib.
+    ( cd $PKG_DEST$MOZILLA_FIVE_HOME
+      for nsslib in libnspr4.so libnss3.so libplc4.so libplds4.so libsmime3.so libsoftokn3.so libssl3.so ; do
+        # Move library:
+        mv $nsslib ..
+        # Link to it... you don't just go messing with stuff without leaving it "clean"
+        ln -sf ../$nsslib .
+      done )
+      
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      ln -sf mozilla-$PKG_VERSION mozilla )
+      
+    # Install icon and .desktop for menu entry
+	if use gnome ; then
+		mkdir -p $PKG_DEST/usr/share/pixmaps
+		cp build/package/rpm/SOURCES/mozilla-icon.png $PKG_DEST/usr/share/pixmaps
+
+		mkdir -p $PKG_DEST/usr/share/gnome/apps/Internet
+		cp build/package/rpm/SOURCES/mozilla.desktop $PKG_DEST/usr/share/gnome/apps/Internet
+	fi
+    
+    configscript_do_postinstall
+}

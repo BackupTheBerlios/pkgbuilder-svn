@@ -1,0 +1,22 @@
+diff -urN gnome.orig/xap_UnixGnomeDlg_About.cpp gnome/xap_UnixGnomeDlg_About.cpp
+--- gnome.orig/xap_UnixGnomeDlg_About.cpp	2004-03-19 16:03:26.000000000 +0100
++++ gnome/xap_UnixGnomeDlg_About.cpp	2004-03-19 16:05:03.000000000 +0100
+@@ -17,6 +17,7 @@
+  * 02111-1307, USA.
+  */
+ 
++#undef GTK_DISABLE_DEPRECATED
+ #include <gnome.h>
+ 
+ #include "xap_Dialog_Id.h"
+diff -urN gnome.orig/xap_UnixGnomeDlg_ClipArt.cpp gnome/xap_UnixGnomeDlg_ClipArt.cpp
+--- gnome.orig/xap_UnixGnomeDlg_ClipArt.cpp	2004-03-19 16:03:26.000000000 +0100
++++ gnome/xap_UnixGnomeDlg_ClipArt.cpp	2004-03-19 16:05:38.000000000 +0100
+@@ -17,6 +17,7 @@
+  * 02111-1307, USA.
+  */
+ 
++#undef GTK_DISABLE_DEPRECATED
+ #include "xap_Strings.h"
+ #include "xap_Dialog_Id.h"
+ #include "xap_UnixGnomeDlg_ClipArt.h"

@@ -1,0 +1,38 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/mutt/mutt-1.4.2.1.build,v 1.1 2004/02/13 23:01:12 tomby Exp $
+#
+# mutt-1.4.2.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am2"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION}i.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.mutt.org/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl slang nls maildir"
+
+PKG_DEPENDS=">=l/ncurses-5.2
+        	 `use ssl && echo ">=l/openssl-0.9.6"`
+        	 `use slang && echo ">=l/slang-1.4.2"`
+			 `use nls && echo "d/gettext"`"
+
+PKG_HOMESITE="http://www.mutt.org"
+
+PKG_DOC_FILES="BEWARE VERSION"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/mutt
+					   --with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
+					   --with-regex --enable-pop --enable-imap --enable-nfs-fix
+                	   --disable-fcntl --enable-flock --enable-external-dotlock
+					   `use ssl && echo "--with-ssl"`
+					   `use slang && echo "--with-slang" || echo "--with-ncurses"`
+					   `use nls && echo "--enable-nls"  || echo "--disable-nls"`
+					   `use maildir && echo "--with-homespool=Maildir" || echo "--with-maildir=/var/spool/mail"`"
+
+PKG_CONFIG_FILES="etc/mutt/Muttrc etc/mutt/mime.types"

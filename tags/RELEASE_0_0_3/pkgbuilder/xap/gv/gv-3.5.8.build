@@ -1,0 +1,66 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gv/gv-3.5.8.build,v 1.2 2004/03/21 16:55:09 tomby Exp $
+#
+# gv-3.5.8 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftpthep.physik.uni-mainz.de/pub/gv/unix/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="x/xfree86
+             l/xaw3d
+             ap/esp-gs
+             >=a/sed-4"
+
+PKG_HOMESITE="http://wwwthep.physik.uni-mainz.de/~plass/gv/"
+
+PKG_DOC_FILES="CHANGES COPYING INSTALL.Unix README"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST GV_DOCDIR=/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_INSTALL_TARGET="install install.doc"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_NAME-$PKG_VERSION-gcc3.patch -Np0 &&    
+    apply_patch $PKG_NAME-$PKG_VERSION-gentoo.patch -Np1
+    sed -i -e 's:usr/local:usr:' config.Unix
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    xmkmf && make Makefiles
+
+    cd source
+    sed -i \
+        -e 's/install.man:: gv.man/install.man::/' \
+        -e 's/all:: gv./\#all:: gv./' \
+        -e '/gv.man/ c \#removed by sed for ebuilding' \
+        Makefile
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST/usr/man/man1
+    cat doc/gv.man > $PKG_DEST/usr/man/man1/gv.1
+
+    makeonly_do_postinstall
+
+    return $?
+}

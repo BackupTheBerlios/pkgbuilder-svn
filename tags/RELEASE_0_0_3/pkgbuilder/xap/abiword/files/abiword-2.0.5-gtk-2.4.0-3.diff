@@ -1,0 +1,30 @@
+--- abiwidget.cpp.orig	2004-03-19 16:36:30.000000000 +0100
++++ abiwidget.cpp	2004-03-19 16:36:56.000000000 +0100
+@@ -20,6 +20,7 @@
+  * 02111-1307, USA.
+  */
+ 
++#undef GTK_DISABLE_DEPRECATED
+ #include <string.h>
+ 
+ #include "abiwidget.h"
+--- ap_UnixApp.cpp.orig	2004-03-19 16:29:48.000000000 +0100
++++ ap_UnixApp.cpp	2004-03-19 16:30:15.000000000 +0100
+@@ -25,6 +25,7 @@
+ 
+ #define ABIWORD_INTERNAL
+ 
++#undef GTK_DISABLE_DEPRECATED
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+--- ap_UnixDialogFactory.cpp.orig	2004-03-19 16:31:19.000000000 +0100
++++ ap_UnixDialogFactory.cpp	2004-03-19 16:31:42.000000000 +0100
+@@ -21,6 +21,7 @@
+ 
+ // get the class definitions
+ 
++#undef GTK_DISABLE_DEPRECATED
+ #include "ap_Dialog_Id.h"
+ #include "xap_UnixDialogFactory.h"
+ #include "ap_UnixDialog_All.h"

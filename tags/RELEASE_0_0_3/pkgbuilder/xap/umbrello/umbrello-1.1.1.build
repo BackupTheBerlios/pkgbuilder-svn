@@ -1,0 +1,32 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/umbrello/umbrello-1.1.1.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+
+inherit kde
+
+PKG_NAME="umbrello"
+PKG_VERSION="1.1.1"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am2"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/uml/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=kde/kdebase-3.1
+             d/flex"
+
+PKG_HOMESITE="http://umbrello.sourceforge.net/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README TODO uml.lsm"
+
+PKG_PREFIX="/opt/kde"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
