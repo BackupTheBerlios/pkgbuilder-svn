@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.4 2003/11/23 20:01:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.5 2003/11/30 21:39:06 tomby Exp $
 #
 # qt pkgbuilder script
 #
@@ -15,7 +15,13 @@ PKG_URL="ftp://ftp.trolltech.com/qt/source/$PKG_FILE_NAME"
 
 PKG_USE="mysql"
 
-PKG_DEPENDS="`use mysql && echo ">=ap/mysql-4.0.15a"`"
+PKG_DEPENDS="x/xfree86
+	         l/libpng
+	         l/lcms
+	         l/libjpeg
+         	 l/libmng
+	         l/freetype2
+            `use mysql && echo ">=ap/mysql-4.0.15a"`"
 
 PKG_HOMESITE="http://www.trolltech.com/"
 
