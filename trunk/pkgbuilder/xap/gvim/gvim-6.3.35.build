@@ -1,24 +1,26 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# vim-6.2 pkgbuilder script
+# gvim-6.3.15 pkgbuilder script
 #
 
 inherit vim
 
 PKG_BUILD="am1"
 
-PKG_USE="$PKG_USE gtk"
+PKG_USE="$PKG_USE gtk gtk2"
 
 PKG_DEPENDS="$PKG_DEPENDS
-             l/gtk+
+             `use gtk2 && echo "l/gtk+2"`
+             `use gtk && ! use gtk2 && echo "l/gtk+"`
              !ap/vim"
 
 PKG_DOC_FILES="README*"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --with-x 
-                       --enable-gui=gtk"
+                       `use gtk2 && echo "--enable-gui=gtk2"`
+                       `use gtk && ! use gtk2 && echo "--enable-gui=gtk"`"
 
 do_postinstall() {
     vim_do_postinstall

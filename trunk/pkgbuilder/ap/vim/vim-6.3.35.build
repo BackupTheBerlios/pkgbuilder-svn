@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# vim-6.2.242 pkgbuilder script
+# vim-6.3.35 pkgbuilder script
 #
 
 inherit vim
