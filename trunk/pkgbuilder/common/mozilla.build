@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/mozilla.build,v 1.1 2004/01/05 19:06:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/mozilla.build,v 1.2 2004/01/05 21:58:38 tomby Exp $
 #
 # pkgbuilder script for mozilla packages
 #
@@ -33,7 +33,7 @@ mozilla_init() {
     PKG_DEPENDS=">=x/xfree86
 	             >=gnome/libidl-0.8.0
 	             >=l/zlib-1.1.4
-	             >=l/fontconfig2-2.1
+	             >=l/fontconfig-2.1
 	             >=l/libjpeg-6b
 	             >=l/libpng-1.2.1
 	             l/expat
