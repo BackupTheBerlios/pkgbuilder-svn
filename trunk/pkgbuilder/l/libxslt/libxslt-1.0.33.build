@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxslt/Attic/libxslt-1.0.33.build,v 1.1 2003/11/29 00:54:16 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxslt/Attic/libxslt-1.0.33.build,v 1.2 2003/12/06 19:45:19 tomby Exp $
 #
-# libxslt pkgbuilder script
+# libxslt-1.0.33 pkgbuilder script
 #
 
 PKG_NAME="libxslt"
@@ -48,24 +48,12 @@ do_postinstall() {
         mv $PKG_DEST$PKG_PREFIX/doc/$PKG_NAME-python-$PKG_VERSION $PKG_DOC
     fi
     
-    mkdir -p $PKG_DOC
-    
-    cp $PKG_DOC_FILES $PKG_DOC
-    find $PKG_DOC -type f -exec chmod 644 {} \;
-    find $PKG_DOC -type d -exec chmod 755 {} \;
+    pkg_installdoc
 
     strip_all $PKG_DEST
 
-    gzip_man $PKG_DEST$PKG_PREFIX/man
+    pkg_gzipmaninfo
 
-    gzip_info $PKG_DEST$PKG_PREFIX/info
-
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
-    
-    if [ -f $PKG_HOME/files/doinst.sh ] ; then
-        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
-    fi
+    pkg_installfiles
 }
 

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lm_sensors/lm_sensors-2.6.5.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lm_sensors/lm_sensors-2.6.5.build,v 1.3 2003/12/06 19:53:42 tomby Exp $
 #
 # lm_sensors pkgbuilder script
 #
@@ -9,7 +9,15 @@ PKG_NAME="lm_sensors"
 PKG_VERSION="2.6.5"
 PKG_ARCH="$ARCH"
 PKG_BUILD="am2"
-PKG_URL="http://secure.netroedge.com/~lm78/archive/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://secure.netroedge.com/~lm78/archive/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
 
 PKG_HOMESITE="http://secure.netroedge.com/~lm78/"
 
@@ -51,18 +59,11 @@ do_postinstall() {
     
     gzip -9 $PKG_DEST/lib/modules/`uname -r`/misc/*.o
     
-    mkdir -p $PKG_DOC
-
-    cp $PKG_DOC_FILES $PKG_DOC
-    find $PKG_DOC -type f -exec chmod 644 {} \;
-    find $PKG_DOC -type d -exec chmod 755 {} \;
+    pkg_installdoc
 
     strip_all $PKG_DEST$PKG_PREFIX/{bin,lib,sbin}
 
     gzip_man $PKG_DEST$PKG_PREFIX/man
 
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
-    cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
+    pkg_installfiles
 }
