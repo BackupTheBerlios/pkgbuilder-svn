@@ -33,6 +33,8 @@ PKG_DOC_FILES="A* BUGS C* DEVELOPERS-HINTS LICENSE* README VERSION winedefault.r
 PKG_CONFIGURE_OPTIONS="--disable-debug --disable-trace
                       `use_enable opengl`"
 
+#PKG_BUILD_TARGET="depend all"
+
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
 
 do_patch() {
