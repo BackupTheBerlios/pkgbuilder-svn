@@ -469,8 +469,8 @@ is_installed() {
     elif [ "$3" = "" ] ; then
         ls $PACKAGES_LOGDIR/$1-$2-*-* &> /dev/null
         retval="$?"
-	else
-		ls $PACKAGES_LOGDIR/$1-$2-*-$3 &> /dev/null
+    else
+        ls $PACKAGES_LOGDIR/$1-$2-*-$3 &> /dev/null
         retval="$?"
     fi    
     

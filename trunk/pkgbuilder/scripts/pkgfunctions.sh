@@ -141,7 +141,7 @@ pkg_install() {
         PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
     fi
 	
-	if [ "$PKG_INSTALL_TARGET" = "" ] ; then
+    if [ "$PKG_INSTALL_TARGET" = "" ] ; then
         PKG_INSTALL_TARGET="install"
     fi
 
@@ -151,10 +151,10 @@ pkg_install() {
 }
 
 pkg_virtual() {
-	if [ "$PKG_VIRTUAL" != "" ] ; then
-		mkdir -p $PKG_DEST/install
+    if [ "$PKG_VIRTUAL" != "" ] ; then
+        mkdir -p $PKG_DEST/install
 		
-		cat >> $PKG_DEST/install/doinst.sh << "EOF"
+        cat >> $PKG_DEST/install/doinst.sh << "EOF"
 virtual() {
   cd /var/log/package
   
@@ -162,10 +162,10 @@ virtual() {
 }
 EOF
 
-		for virtual in $PKG_VIRTUAL ; do
+        for virtual in $PKG_VIRTUAL ; do
             echo "virtual $PKG_NAME-$PKG_VERSION-$PKG_ARCH-$PKG_BUILD $virtual" >> $PKG_DEST/install/doinst.sh
         done
-	fi
+    fi
 }
 
 pkg_localeclean() {
@@ -175,7 +175,7 @@ pkg_localeclean() {
 }
 
 pkg_postinstall() {
-	pkg_installdoc &&
+    pkg_installdoc &&
     pkg_stripall &&
     pkg_gzipmaninfo &&
     pkg_localeclean &&
