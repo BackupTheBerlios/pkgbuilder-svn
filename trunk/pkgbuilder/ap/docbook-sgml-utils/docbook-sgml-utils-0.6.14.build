@@ -1,0 +1,39 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-sgml-utils/docbook-sgml-utils-0.6.13.build,v 1.1 2004/01/03 17:57:44 tomby Exp $
+#
+# docbook-sgml-utils-0.6.14 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_FILE_NAME="docbook-utils-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="tetex"
+
+PKG_DEPENDS=">=d/perl-5
+             ap/docbook-dsssl-stylesheets
+             ap/openjade
+             ap/docbook-xml-dtd
+             ap/docbook-sgml-dtd
+             ap/sgmlspm
+             `use tetex && echo "ap/jadetex"`"
+
+
+PKG_HOMESITE="http://sources.redhat.com/docbook-tools/"
+
+PKG_SRC="$TMP/docbook-utils-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
+
+PKG_NOSTRIP="Y"
+
+PKG_CONFIG_FILES=""
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX 
+                     mandir=$PKG_DEST$PKG_PREFIX/man
+                     docdir=$PKG_DOC"

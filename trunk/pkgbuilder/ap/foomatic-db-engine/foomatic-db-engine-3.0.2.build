@@ -1,0 +1,56 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db-engine/foomatic-db-engine-3.0.1.build,v 1.1 2004/02/28 12:46:10 tomby Exp $
+#
+# foomatic-db-engine-3.0.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.linuxprinting.org/download/foomatic/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/perl
+             l/libxml2
+             n/wget
+             ap/foomatic-filters"
+
+PKG_HOMESITE="http://www.linuxprinting.org/"
+
+PKG_DOC_FILES="ChangeLog COPYING README* TODO USAGE"
+
+PKG_CONFIGURE_OPTIONS=""
+
+do_install_perl_module() {
+    cd $PKG_SRC/lib
+
+    eval `perl '-V:installsitearch'`
+    eval `perl '-V:installarchlib'`
+
+    ./Makefile.PL PREFIX=$PKG_PREFIX INSTALLDIRS=vendor &&
+    make &&
+    make PREFIX=$PKG_DEST$PKG_PREFIX \
+         INSTALLVENDORLIB=$PKG_DEST/$installarchlib \
+         INSTALLVENDORARCH=$PKG_DEST/$installsitearch \
+         INSTALLVENDORMAN1DIR=$PKG_DEST$PKG_PREFIX/man/man1 \
+         INSTALLVENDORMAN3DIR=$PKG_DEST$PKG_PREFIX/man/man3 \
+         INSTALLSCRIPT=$PKG_DEST$PKG_PREFIX/bin install
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    pkg_install &&
+    do_install_perl_module
+
+    return $?
+}

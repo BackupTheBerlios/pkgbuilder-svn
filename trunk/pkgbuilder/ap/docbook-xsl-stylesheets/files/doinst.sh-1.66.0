@@ -1,0 +1,49 @@
+#!/bin/sh
+CATALOG=/etc/xml/catalog
+
+[ -e $CATALOG ] || /usr/bin/xmlcatalog --noout --create $CATALOG
+
+# cleanup
+/usr/bin/xmlcatalog --noout --del \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.52.2" $CATALOG
+/usr/bin/xmlcatalog --noout --del \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.57.0" $CATALOG
+/usr/bin/xmlcatalog --noout --del \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.59.1" $CATALOG
+/usr/bin/xmlcatalog --noout --del \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.59.2" $CATALOG
+/usr/bin/xmlcatalog --noout --del \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.60.1" $CATALOG
+/usr/bin/xmlcatalog --noout --del \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.62.4" $CATALOG
+/usr/bin/xmlcatalog --noout --del \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.65.1" $CATALOG
+
+# 1.62.4
+/usr/bin/xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/1.62.4" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
+/usr/bin/xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/1.62.4" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
+# 1.65.1
+/usr/bin/xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/1.65.1" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
+/usr/bin/xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/1.65.1" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
+# 1.66.0
+/usr/bin/xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/1.66.0" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
+/usr/bin/xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/1.66.0" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
+# current
+/usr/bin/xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/current" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
+/usr/bin/xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/current" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.66.0" $CATALOG
