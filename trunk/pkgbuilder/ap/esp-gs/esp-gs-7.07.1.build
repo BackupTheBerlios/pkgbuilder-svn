@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.1 2003/12/13 15:23:42 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.2 2003/12/20 17:03:43 tomby Exp $
 #
 # esp-gs-7.07.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="esp-gs"
 PKG_VERSION="7.07.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="espgs-$PKG_VERSION-source.$PKG_EXTENSION"
 PKG_FONTS_FILE_NAME="ghostscript-fonts-std-8.11.tar.gz"
@@ -50,10 +50,63 @@ include general
 
 include do_fetch
 include do_unpack_bzip2
-include do_patch
-include do_configure
-include do_build
-include do_install
+
+do_patch() {
+	cd $PKG_SRC/ijs
+	
+	cp Makefile.in Makefile.in.orig
+	sed -e 's:@OBJEXT@:o:' -e 's:@EXEEXT@::' Makefile.in.orig > Makefile.in
+	
+	return $?
+}
+
+do_configure_ijs() {
+	cd $PKG_SRC/ijs
+	
+	CFLAGS=$CFLAGS \
+	CXXFLAGS=$CXXFLAGS \
+	./configure --prefix=$PKG_DEST$PKG_PREFIX
+	
+	return $?
+}
+
+do_configure() {
+	pkg_configure &&
+	do_configure_ijs
+	
+	return $?
+}
+
+do_build_ijs() {
+	cd $PKG_SRC/ijs
+	
+	make
+	
+	return $?
+}
+
+do_build() {
+	pkg_build &&
+	do_build_ijs
+	
+	return $?
+}
+
+do_install_ijs() {
+	cd $PKG_SRC/ijs
+	
+	mkdir -p $PKG_DEST$PKG_PREFIX/{bin,include,lib} &&
+	make $PKG_INSTALL_OPTIONS install
+	
+	return $?
+}
+
+do_install() {
+	pkg_install &&
+	do_install_ijs
+	
+	return $?
+}
 
 do_postinstall() {
     cd $PKG_SRC
