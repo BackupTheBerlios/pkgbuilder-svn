@@ -89,6 +89,10 @@ php_init() {
     PHP_EXTENSION_DIR="/usr/lib/php/extensions"
 }
 
+php_do_unpack() {
+    configscript_do_unpack
+}
+
 php_do_patch() {
     cd $PKG_SRC
 
@@ -107,4 +111,16 @@ php_do_configure() {
     unset EXTENSION_DIR
 
     return $retval
+}
+
+php_do_build() {
+    configscript_do_build
+}
+
+php_do_install() {
+    configscript_do_install
+}
+
+php_do_postinstall() {
+    configscript_do_postinstall
 }

@@ -11,10 +11,22 @@ makeonly_init() {
     main_init
 }
 
+makeonly_do_unpack() {
+    main_do_unpack
+}
+
 makeonly_do_build() {
     cd $PKG_SRC
 
     pkg_build
 
     return $?
+}
+
+makeonly_do_install() {
+    main_do_install
+}
+
+makeonly_do_postinstall() {
+    main_do_postinstall
 }

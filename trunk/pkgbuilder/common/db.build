@@ -25,6 +25,10 @@ db_init() {
     PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX docdir=$PKG_DOC"
 }
 
+db_do_unpack() {
+    configscript_do_unpack
+}
+
 db_do_configure() {
     cd $PKG_SRC/build_unix
 

@@ -49,6 +49,28 @@ multi_do_verify() {
     return $retval
 }
 
+multi_do_unpack() {
+    local retval
+    local iter
+    for iter in $PKG_ITER ; do
+        if declare -f do_unpack_$iter &> /dev/null ; then
+            do_init_$iter
+            do_unpack_$iter
+            retval="$?"
+
+            test retval || break
+        else
+            do_init_$iter
+            configscript_do_unpack
+            retval="$?"
+
+            test retval || break
+        fi
+    done
+
+    return $retval
+}
+
 multi_do_patch() {
     local retval
     local iter
@@ -100,28 +122,6 @@ multi_do_build() {
         else
             do_init_$iter
             configscript_do_build
-            retval="$?"
-
-            test retval || break
-        fi
-    done
-
-    return $retval
-}
-
-multi_do_unpack() {
-    local retval
-    local iter
-    for iter in $PKG_ITER ; do
-        if declare -f do_unpack_$iter &> /dev/null ; then
-            do_init_$iter
-            do_unpack_$iter
-            retval="$?"
-
-            test retval || break
-        else
-            do_init_$iter
-            configscript_do_unpack
             retval="$?"
 
             test retval || break
