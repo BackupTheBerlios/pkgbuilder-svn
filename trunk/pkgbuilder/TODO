@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.18 2003/12/25 21:09:49 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.19 2003/12/26 13:27:56 tomby Exp $
 
 * New tasks:
 
@@ -52,7 +52,7 @@ ap)
 
     mpg321          X
     cdparanoia      X
-    cdrtools
+    cdrtools		X
     cdrdao
     vorbis-tools	X
 
@@ -305,79 +305,79 @@ kde)
 
 gnome)
 
-   gtk-doc          X
-   linc
-   libIDL
-   ORBit2
-   intltool
-   bonobo-activation
-   libbonobo
-   gconf2
-   gnome-mime-data
-   gnome-vfs2
-   libgnome
+	gtk-doc         X
+	linc
+	libIDL
+	ORBit2
+	intltool
+	bonobo-activation
+	libbonobo
+	gconf2
+	gnome-mime-data
+	gnome-vfs2
+	libgnome
 
-   libglade2
-   libgnomecanvas
-   libbonoboui
-   libwnck
-   gtk-engines
-   gtk-thinice-engine
-   gnome-themes
-   scrollkeeper
-   vte
-   libgtop
-   gail
-   at_spi
-   libgail-gnome
-   librsvg
-   eel
-   libgtkhtml2
-   libgsf
-   gal
-   libgnomeprint
-   libgnomeprintui
-   gtkhtml3
+	libglade2
+	libgnomecanvas
+	libbonoboui
+	libwnck
+	gtk-engines
+	gtk-thinice-engine
+	gnome-themes
+	scrollkeeper
+	vte
+	libgtop
+	gail
+	at_spi
+	libgail-gnome
+	librsvg
+	eel
+	libgtkhtml2
+	libgsf
+	gal
+	libgnomeprint
+	libgnomeprintui
+	gtkhtml3
 
-   gnome-desktop
-   gnome-panel
-   gnome-session
-   control-center
+	gnome-desktop
+	gnome-panel
+	gnome-session
+	control-center
 
-   gnome-terminal
-   gnome-system-monitor
-   gnome-applets
-   gnome-utilities
-   gnome-games
-   nautilus
-   yelp
-   bug-buddy
-   gedit
-   eog
-   gstreamer
-   gst-plugins
-   gnome-media
-   nautilus-media
-   gnome2-user-docs
+	gnome-terminal
+	gnome-system-monitor
+	gnome-applets
+	gnome-utilities
+	gnome-games
+	nautilus
+	yelp
+	bug-buddy
+	gedit
+	eog
+	gstreamer
+	gst-plugins
+	gnome-media
+	nautilus-media
+	gnome2-user-docs
 
-   gconf-editor
-   gdm
+	gconf-editor
+	gdm
 
-   orbit
-   oaf
-   gnome-libraries
-   gdk-pixbuf
-   gnome-print
-   bonobo
-   gconf
-   gnome-vfs
-   libglade
-   gal
-   guppi
-   libcapplet
-   soup
-   gtkhtml
-   libghtml
+	orbit
+	oaf
+	gnome-libraries
+	gdk-pixbuf
+	gnome-print
+	bonobo
+	gconf
+	gnome-vfs
+	libglade
+	gal
+	guppi
+	libcapplet
+	soup
+	gtkhtml
+	libghtml
 
 t)
 
