@@ -1,0 +1,42 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libmpeg2/libmpeg2-0.4.0b.build,v 1.1 2004/04/09 23:52:28 tomby Exp $
+#
+# libmpeg2-0.4.0b pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="mpeg2dec-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://libmpeg2.sourceforge.net/files/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="X sdl"
+
+PKG_DEPENDS="`use_dep sdl "l/sdl"`
+             `use dep X "x/xfree86"`"
+
+PKG_HOMESITE="http://libmpeg2.sourceforge.net/"
+
+PKG_SRC="$TMP/mpeg2dec-${PKG_VERSION/b/}"
+
+PKG_DOC_FILES="AUTHORS ChangeLog NEWS README TODO"
+
+PKG_CONFIGURE_OPTIONS="--enable-shared
+                       --disable-dependency-tracking
+                       `use_enable sdl`
+                       `use_with X x`"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    cp configure configure.orig
+    sed -e 's:OPT_CFLAGS=\"$CFLAGS -mcpu=.*\":OPT_CFLAGS=\"$CFLAGS\":g' configure.orig > configure
+
+    return $?
+}
+
