@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/ncftp/Attic/ncftp-3.1.6.build,v 1.1 2003/12/31 12:28:05 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/ncftp/ncftp-3.1.7.build,v 1.1 2004/02/14 14:57:22 tomby Exp $
 #
 # ncftp-3.1.6 pkgbuilder script
 #
@@ -8,8 +8,7 @@
 inherit configscript
 
 PKG_NAME="ncftp"
-PKG_VERSION="3.1.6"
-PKG_ARCH="$ARCH"
+
 PKG_BUILD="am1"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-src.$PKG_EXTENSION"
@@ -23,17 +22,9 @@ PKG_DEPENDS=">=l/ncurses-5.2"
 
 PKG_HOMESITE="http://www.ncftp.com/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="README.txt doc/*.txt"
 
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX mandir=$PKG_DEST$PKG_PREFIX/man"
-PKG_INSTALL_TARGET="install"
 
 do_install() {
     cd $PKG_SRC
