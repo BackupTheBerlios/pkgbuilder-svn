@@ -1,10 +1,10 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.1 2003/12/20 12:24:24 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.2 2003/12/24 13:05:05 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
-VERSION="20031128"
+VERSION="20031224"
 
 PACKAGES_LOGDIR="/var/log/packages"
 
@@ -17,7 +17,10 @@ TMP="/tmp"
 
 USE="alsa oss arts esd nls doc oggvorbis lame samba mad 
      mmx sse 3dnow opengl tcltk ncurses cups xml python motif
-     dvd sdl aalib"
+     dvd sdl aalib gtk gtk2 kde"
+     
+LANG="es"
+LOCALE="es_ES"
 
 ARCH="i486"
 CPU="i686"
