@@ -1,17 +1,27 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.10 2004/01/04 23:03:29 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.11 2004/01/11 15:03:48 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
-VERSION="20031230"
+VERSION="20030111"
 
+# packages db directory
 PACKAGES_LOGDIR="/var/log/packages"
 
+#pkgbuilder mirror
+PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
+
+#local network source code mirror
+#MIRROR_URL="ftp://localhost/pub/pkgbuilder"
+
+#cdrom with source code
+#CDROM_DIR="/mnt/cdrom"
+
 FETCH_TRIES="5"
-FETCH_RATE="25K"
 FETCH_DIR="/tmp/distfiles"
-FETCH_OPTIONS="--tries=$FETCH_TRIES --limit-rate=$FETCH_RATE --directory-prefix=$FETCH_DIR"
+FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
+FETCH_FTP_OPTIONS="--passive-ftp"
 
 TMP="/tmp"
 
@@ -28,10 +38,10 @@ USE_MISC="nls doc gpm javascript mysql xml sane"
 USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
      $USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
      
-LANG="es"
-LOCALE="es_ES"
+I18N="es"
 
 ARCH="i486"
 CPU="i686"
 CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
 CXXFLAGS="$CFLAGS"
+CPPFLAGS="$CFLAGS"
