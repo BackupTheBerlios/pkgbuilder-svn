@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
 PKG_USE="alsa cups fam"
 
@@ -44,6 +44,8 @@ do_patch() {
       apply_patch post-$PKG_VERSION-$PKG_NAME-htmlframes2.patch -Np0 )
     ( cd $PKG_SRC/kio/kio
       apply_patch post-$PKG_VERSION-$PKG_NAME-kio.diff -Np0 )
+    ( cd $PKG_SRC
+      apply_patch post-$PKG_VERSION-$PKG_NAME-kioslave.patch -Np0 )
 
     return $?
 }
