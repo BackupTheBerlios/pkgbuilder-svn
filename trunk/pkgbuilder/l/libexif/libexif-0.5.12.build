@@ -1,0 +1,23 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libexif/libexif-0.5.12.build,v 1.1 2004/01/04 22:02:07 tomby Exp $
+#
+# libexif-0.5.12 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="d/pkgconfig"
+
+PKG_HOMESITE="http://libexif.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
+
