@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.12 2003/11/23 18:12:09 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.13 2003/11/23 20:12:46 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -54,6 +54,10 @@ execute_action() {
             do_fetch
             RETVAL="$?"
         ;;
+        'verify')
+            do_verify
+            RETVAL="$?"
+        ;;
         'unpack')
             do_unpack
             RETVAL="$?"
@@ -96,6 +100,7 @@ execute_action() {
         ;;
         'auto')
             do_fetch && 
+            do_verify &&
             do_unpack &&
             do_patch && 
             do_configure &&
