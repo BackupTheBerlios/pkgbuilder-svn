@@ -7,7 +7,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -22,7 +22,7 @@ PKG_DEPENDS="l/zlib
              `use_dep alsa "l/alsa-lib"`
              `use_dep esd ">=l/esound-0.2.29"`
              `use_dep arts "kde/arts"`
-             `use sdl && echo ">=l/sdl-1.2.0" || echo "x/xfree86"`"
+             `use sdl && echo ">=l/sdl-1.2.0" || echo "x/x11"`"
 
 PKG_HOMESITE="http://x.mame.net/"
 

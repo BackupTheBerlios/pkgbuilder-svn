@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/wine/wine-20040408.build,v 1.1 2004/04/09 09:58:15 tomby Exp $
 #
-# wine-20040914 pkgbuilder script
+# wine-20041019 pkgbuilder script
 # 
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_FILE_NAME="Wine-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.ibiblio.org/pub/Linux/ALPHA/wine/development/$PKG_FILE_NAME"
@@ -20,7 +20,7 @@ PKG_DEPENDS="d/flex
              d/byacc
              >=l/ncurses-5.2
              >=l/freetype2-2.0.0
-             x/xfree86
+             x/x11
              `use_dep tcltk "d/tcl d/tk"`
              `use_dep arts "kde/arts"`
              `use_dep alsa "l/alsa-lib"`
