@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.4 2003/11/08 22:09:34 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.5 2003/11/09 13:41:58 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -37,7 +37,7 @@ if [ "$1" = "" ] ; then
 fi
 
 #where is the package home
-PKG_HOME=$PKGBUILDER_HOME/`echo $1 | cut -d/ -f1`/`echo $1 | cut -d/ -f2`
+PKG_HOME="$PKGBUILDER_HOME/`dirname $1`"
 
 #the build script
 source $1
