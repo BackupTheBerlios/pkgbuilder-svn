@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/alsa-utils/alsa-utils-1.0.4.build,v 1.1 2004/04/08 17:02:10 tomby Exp $
 #
-# alsa-utils-1.0.4 pkgbuilder script
+# alsa-utils-1.0.5 pkgbuilder script
 #
 
 inherit configscript
@@ -18,10 +18,10 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/ncurses-5.1
-        	 >=l/alsa-lib-1.0.0"
+             >=l/alsa-lib-1.0.0"
 
 PKG_HOMESITE="http://www.alsa-project.org/"
 
 PKG_DOC_FILES="COPYING ChangeLog INSTALL TODO
-			   seq/aconnect/README.aconnect
-			   seq/aseqnet/README.aseqnet"
+               seq/aconnect/README.aconnect
+               seq/aseqnet/README.aseqnet"
