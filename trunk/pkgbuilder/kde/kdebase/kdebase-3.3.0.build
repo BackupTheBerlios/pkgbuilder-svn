@@ -42,8 +42,8 @@ do_postinstall() {
       ln -sf settings.menu kde-settings.menu )
 
     mkdir -p $PKG_DEST/etc/X11/xinit
-    cp $PKG_HOME/files/xinitrc.kde32 $PKG_DEST/etc/X11/xinit/
-    chmod +x $PKG_DEST/etc/X11/xinit/xinitrc.kde32
+    cp $PKG_HOME/files/xinitrc.kde33 $PKG_DEST/etc/X11/xinit/xinitrc.kde
+    chmod +x $PKG_DEST/etc/X11/xinit/xinitrc.kde
 
     kde_do_postinstall
 }
