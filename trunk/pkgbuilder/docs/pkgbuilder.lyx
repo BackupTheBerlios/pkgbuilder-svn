@@ -29,7 +29,7 @@
 PKGBUILDER
 \layout Date
 
-Sábado, 17 de enero de 2004
+Sábado, 15 de frebrero de 2004
 \layout Author
 
 Antonio Gabriel Muñoz Conejo
@@ -60,7 +60,8 @@ Los motivos por los que nace
 \series default 
 PkgBuilder
 \series medium 
- son varios pero el principal es la escasez de paquetes que existe en 
+ son varios pero el principal es la escasez de paquetes oficiales que existen
+ en 
 \series default 
 Slackware
 \series medium 
@@ -103,6 +104,53 @@ Slackware
  unos sencillos comandos, que resolviera dependencias automaticamente y
  que compilara los paquetes optimizados para mi sistema.
  Asi que decidí ponerme manos a la obra.
+\layout Section
+
+Descripción general:
+\layout Paragraph
+
+PkgBuilder
+\series medium 
+ es un sistema para automatizar la creación de paquetes similar a los 
+\begin_inset Quotes eld
+\end_inset 
+
+ports
+\begin_inset Quotes erd
+\end_inset 
+
+ de los sistemas BSD.
+ La intención inicial es que funcione en cualquier distribución y/o cualquier
+ sistema de paquetes, pero por ahora solo soporta 
+\series default 
+Slackware
+\series medium 
+, que es la distribución que uso.
+ 
+\layout Paragraph
+
+
+\series medium 
+Su funcionamiento es muy simple: se descarga el código fuente desde la web
+ oficial del desarrollador, después verifica el checksum de los archivos
+ descargados, descomprime los archivos y les aplica los parches correspondientes
+, luego se realiza la compilación del paquete y la creación del tgz.
+ 
+\layout Paragraph
+
+
+\series medium 
+Todo esto está gobernado por una serie de sencillos scripts escritos en
+ 
+\series default 
+shell script
+\series medium 
+.
+ Por cada paquete existe un script para cada versión del paquete y en él
+ se configuran las variables necesarias para la compilación y creación del
+ paquete y se implementan una serie de métodos, uno por cada acción.
+ Dentro de cada uno de esos métodos está la implementación de la acción
+ para ese paquete.
 \layout Section
 
 Prerrequisitos:
@@ -516,7 +564,7 @@ Para instalar
 PkgBuilder
 \series medium 
  es necesario primero conseguir una copia del arbol de ports.
- Se puede descargar un tar ball de la página oficial o se puede descargar
+ Se puede descargar un tarball de la página oficial o se puede descargar
  directamente a traves del CVS.
  Yo recomiendo instalarlo a traves del CVS ya que esto permitirá ir actualizando
  
@@ -869,15 +917,257 @@ CFLAGS
 \series medium 
  permite configurar los flags de compilación indicando las opciones de optimizac
 ión.
+\layout Subsubsection
+
+Configuración del soporte de compilación paralela con distcc:
+\layout Standard
+
+Por defecto el soporte de compilación paralela está deshabilitado y es necesario
+ configurarlo explicitamente.
+ Para ello existe una serie de variables que es necesario configurar.
+ También es necesario instalar y configurar correctamente 
+\series bold 
+distcc
+\series default 
+ y/o 
+\series bold 
+ccache
+\series default 
+ para que funcione junto con 
+\series bold 
+distcc
+\series default 
+.
+ El soporte de compilación paralela aún es experimental y es posible que
+ la compilación de algunos paquetes falle.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#Parallel compilation.
+ Use with care, some packages compilation fails.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+#COMPILATION="simple"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+COMPILATION="parallel"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+DISTCC_HOSTS="host1 host2 host3 hostn"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+CCACHE_PREFIX="distcc"
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+MAKE_OPTIONS="-j8"
+\layout Paragraph
+
+COMPILATION 
+\series medium 
+especifica el modo de compilación, 
+\series default 
+
+\begin_inset Quotes eld
+\end_inset 
+
+simple
+\begin_inset Quotes erd
+\end_inset 
+
+
+\series medium 
+ para compilación normal y 
+\series default 
+
+\begin_inset Quotes eld
+\end_inset 
+
+parallel
+\begin_inset Quotes erd
+\end_inset 
+
+
+\series medium 
+ para compilación paralela.
+\layout Paragraph
+
+DISTCC_HOST 
+\series medium 
+especifica el nombre de las diferentes maquina a usar para la compilación
+ paralela.
+\layout Paragraph
+
+CCACHE_PREFIX 
+\series medium 
+es necesario configurarla si queremos utilizar distcc junto con ccache.
+\layout Paragraph
+
+MAKE_OPTIONS 
+\series medium 
+especifica las opciones para 
+\series default 
+make
+\series medium 
+.
+ Usualmente tomara el valor -j
+\series default 
+n
+\series medium 
+, siendo 
+\series default 
+n
+\series medium 
+ el número de procesos simultaneos que queremos que se ejecuten.
 \layout Section
 
 Empieza la fiesta:
 \layout Subsection
 
 El script build.sh:
+\layout Standard
+
+El script build.sh permite ejecutar diversas acciones sobre los archivos
+ build, entre ellas, descargar el codigo fuente compilarlo y generar el
+ paquete tgz correspondiente.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+# ./build.sh xap/aterm/aterm-0.4.2.build fetch patch configure
+\layout Paragraph
+
+
+\series medium 
+Este ejemplo ejecutará las acciones fetch, patch y configure para el archivo
+ build aterm-0.4.2.build del paquete aterm.
+\layout Paragraph
+
+
+\series medium 
+Esta es la lista completa de acciones que podemos ejecutar:
+\layout List
+\labelwidthstring 00.00.0000
+
+info: muestra información del paquete
+\layout List
+\labelwidthstring 00.00.0000
+
+fetch: descarga los archivos necesarios para la compilación y creación del
+ paquete.
+\layout List
+\labelwidthstring 00.00.0000
+
+unpack: descomprime los archivos necesarios.
+\layout List
+\labelwidthstring 00.00.0000
+
+verify: verifica el checksum de los paquetes descargados.
+\layout List
+\labelwidthstring 00.00.0000
+
+patch: parchea los archivos necesarios para la compilación
+\layout List
+\labelwidthstring 00.00.0000
+
+configure: ejecuta el script configure del paquete
+\layout List
+\labelwidthstring 00.00.0000
+
+build: ejecuta make
+\layout List
+\labelwidthstring 00.00.0000
+
+install: ejecuta make install
+\layout List
+\labelwidthstring 00.00.0000
+
+postinstall: ejecuta todas la acciones necesarias después de la instalación
+ del paquete
+\layout List
+\labelwidthstring 00.00.0000
+
+buildpkg: genera el paquete tgz correspondiente listo para su instalación
+ en el sistema.
+ El paquete sólo se generará si se ejecuta como superusuario.
+\layout List
+\labelwidthstring 00.00.0000
+
+installpkg: instala el paquete previamente generado por la acción buildpkg.
+ Solo funciona cuando se ejecuta como superusuario.
+\layout List
+\labelwidthstring 00.00.0000
+
+upgradepkg: actualiza el paquete previamente generado.
+ Solo funciona cuando se ejecuta como superusuario.
+\layout List
+\labelwidthstring 00.00.0000
+
+cleanup: realiza la limpieza de los archivos utilizados para la compilación
+ y creación del paquete.
+\layout List
+\labelwidthstring 00.00.0000
+
+auto: ejecuta automáticamente esta secuencia acciones: fetch, verify, unpack,
+ patch, configure, build, install, postinstall, buildpkg.
 \layout Subsection
 
 El script install.sh:
+\layout Standard
+
+El script install.sh instala un paquete resolviendo dependencias instalandolas
+ si es necesario de forma recursiva.
+\layout Quotation
+
+
+\family typewriter 
+\size footnotesize 
+$ ./install.sh xap/epiphany
+\layout Paragraph
+
+
+\series medium 
+Este comando instala el paquete epiphany resolviendo las dependencias de
+ este paquete.
+\layout Paragraph
+
+
+\series medium 
+Opciones del script:
+\layout List
+\labelwidthstring 00.00.0000
+
+-d Ejecuta el script en modo dummy o tonto, resolviendo las dependencias
+ pero sin instalar nada en el sistema.
+\layout List
+\labelwidthstring 00.00.0000
+
+-v Ejecuta el script incrementando los mensajes de salida utilizado para
+ depurar la gestión de dependencias.
+\layout Subsection
+
+El script update.sh:
+\layout Standard
+
+El script update.sh actualiza todo el sistema buscando nuevas versiones de
+ los paquetes en el arbol de ports.
 \layout Section
 
 Creación de scripts:
@@ -901,5 +1191,5 @@ Funciones genericas:
 Funciones de paquetes:
 \layout Subsection
 
-Escribir el script:
+Escribir un script:
 \the_end
