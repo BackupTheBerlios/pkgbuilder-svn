@@ -1,0 +1,60 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xml-dtd/Attic/docbook-xml-dtd-4.2.build,v 1.1 2003/11/29 18:34:38 tomby Exp $
+#
+# docbook-xml-dtd-4.2 pkgbuilder script
+#
+
+PKG_NAME="docbook-xml-dtd"
+PKG_VERSION="4.2"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="zip"
+PKG_FILE_NAME="docbook-xml-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.oasis-open.org/docbook/xml/$PKG_VERSION/$PKG_FILE_NAME"
+
+PKG_LICENSE="BSD"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=a/unzip-5.41
+	         >=l/libxml2-2.4
+	         >=ap/docbook-xsl-stylesheets-1.45"
+
+PKG_HOMESITE="http://www.oasis-open.org/docbook/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_UNPACK_DIR="$PKG_SRC"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ChangeLog README"
+
+PKG_PREFIX="/usr"
+PKG_DATADIR="$PKG_DEST$PKG_PREFIX/share/sgml/docbook/xml-dtd-$PKG_VERSION"
+PKG_CONFIGURE_OPTIONS=""
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_zip
+include do_patch
+include do_configure_null
+include do_build_null
+
+include do_postinstall_nostrip
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DATADIR
+    cp *.dtd *.mod $PKG_DATADIR
+    cp docbook.cat $PKG_DATADIR
+    
+    mkdir -p $PKG_DATADIR/ent
+    cp ent/*.ent $PKG_DATADIR/ent
+    
+    return $?
+}
+
