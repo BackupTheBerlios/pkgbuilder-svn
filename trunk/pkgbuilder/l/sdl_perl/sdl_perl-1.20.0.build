@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_perl/sdl_perl-1.20.0.build,v 1.7 2004/01/01 19:04:08 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_perl/sdl_perl-1.20.0.build,v 1.8 2004/01/01 19:40:46 tomby Exp $
 #
-# sdl_perl pkgbuilder script
+# sdl_perl-1.20.0 pkgbuilder script
 #
 
 inherit configscript
@@ -44,6 +44,7 @@ do_patch() {
     
     patch -p0 < $PKG_HOME/files/Makefile.linux.diff
     patch -p0 < $PKG_HOME/files/SDL_perl.xs.diff
+    is_installed nvidia-glx && patch -p0 < $PKG_HOME/files/OpenGL.xs.diff
     
     return $?
 }
@@ -56,18 +57,17 @@ do_configure() {
     return $?
 }
 
-do_postinstall() {
+do_install() {
     cd $PKG_SRC
     
-    pkg_installdoc
+    eval `perl '-V:installsitearch'`
+    eval `perl '-V:installarchlib'`
+
+    make PREFIX=$PKG_DEST$PKG_PREFIX \
+         INSTALLSITELIB=$PKG_DEST/$installarchlib \
+         INSTALLSITEARCH=$PKG_DEST/$installsitearch \
+         INSTALLSITEMAN3DIR=$PKG_DEST$PKG_PREFIX/man/man3 \
+         INSTALLSCRIPT=$PKG_DEST$PKG_PREFIX/bin install
     
-    mv $PKG_DEST$PKG_PREFIX/share/man $PKG_DEST$PKG_PREFIX/man
-    rmdir $PKG_DEST$PKG_PREFIX/share
-
-    strip_all $PKG_DEST
-
-    gzip_man $PKG_DEST$PKG_PREFIX/man
-
-    pkg_installfiles
+    return $?
 }
-
