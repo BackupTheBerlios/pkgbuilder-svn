@@ -17,7 +17,7 @@ PKG_LICENSE="APLv2.0"
 
 PKG_USE=""
 
-PKG_DEPENDS="d/yacc
+PKG_DEPENDS="d/byacc
              d/perl
              l/zlib
              l/expat
