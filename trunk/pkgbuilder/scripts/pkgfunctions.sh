@@ -117,7 +117,7 @@ pkg_configure() {
     CXXFLAGS=$CXXFLAGS \
     CPPFLAGS=$CPPFLAGS \
     LDFLAGS=$LDFLAGS \
-    ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+    ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS $@
 
     return $?
 }
@@ -126,10 +126,10 @@ pkg_build() {
     if [ "$COMPILATION" = "parallel" ] ; then
         DISTCC_HOSTS="$DISTCC_HOSTS" \
         CCACHE_PREFIX="$CCACHE_PREFIX" \
-        make $MAKE_OPTIONS $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
+        make $MAKE_OPTIONS $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET $@
         RETVAL="$?"
     else
-        make $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
+        make $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET $@
         RETVAL="$?"
     fi
 
@@ -145,7 +145,7 @@ pkg_install() {
         PKG_INSTALL_TARGET="install"
     fi
 
-    make $PKG_INSTALL_OPTIONS $PKG_INSTALL_TARGET
+    make $PKG_INSTALL_OPTIONS $PKG_INSTALL_TARGET $@
 
     return $?
 }
