@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/base.build,v 1.3 2004/01/02 12:25:39 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/base.build,v 1.4 2004/01/05 19:26:06 tomby Exp $
 #
 # base pkgbuilder script
 #
@@ -41,8 +41,22 @@ pkg_do_fetch() {
 pkg_do_verify() {
     cd $FETCH_DIR
     
-    if [ -f $PKG_HOME/files/md5sum-$PKG_VERSION ] ; then
-        md5sum -c $PKG_HOME/files/md5sum-$PKG_VERSION &> /dev/null || return 1
+    local sum="$PKG_HOME/files/md5sum-$PKG_VERSION"
+    
+    if [ -r $sum ] ; then
+        for pkg in $PKG_URL ; do
+            local base="$FETCH_DIR/`basename "$pkg"`"
+            
+            if [ -r $base ] ; then
+                if grep -q "`md5sum $base | cut -d" " -f1`  `basename "$pkg"`" $sum  ; then
+                    true
+                else
+                    return 1
+                fi
+            else
+                return 1
+            fi
+        done
     else 
         echo "pkgbuilder: WARNING no md5sum-$PKG_VERSION file found"
     fi
