@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.17 2003/12/31 19:37:53 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.18 2004/01/18 14:16:08 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -43,17 +43,17 @@ OPTIONS=""
 MODE="install"
 
 while [ 0 ]; do
-  if [ "$1" = "-v" ]; then
-    VERBOSE="Y"
-    OPTIONS="$OPTIONS -v"
-    shift 1
-  elif [ "$1" = "-d" ]; then
-    MODE="dummy"
-    OPTIONS="$OPTIONS -d"
-    shift 1
-  else
-    break
-  fi
+    if [ "$1" = "-v" ]; then
+        VERBOSE="Y"
+        OPTIONS="$OPTIONS -v"
+        shift 1
+    elif [ "$1" = "-d" ]; then
+        MODE="dummy"
+        OPTIONS="$OPTIONS -d"
+        shift 1
+    else
+        break
+    fi
 done
 
 #verify script to execute
@@ -160,8 +160,11 @@ for DEP in $PKG_DEPENDS ; do
                 if [ "$VERBOSE" = "Y" ] ; then
                     echo "DEP_PKG_INSTALLED_VERSION=\"$DEP_PKG_INSTALLED_VERSION\""
                 fi
+                
+                compare_versions $DEP_PKG_INSTALLED_VERSION $DEP_PKG_VERSION
+                RESULT="$?"
 
-                if [[ "$DEP_PKG_INSTALLED_VERSION" < "$DEP_PKG_VERSION" ]] ; then
+                if [ "$RESULT" -eq "2" ] ; then
                     DEP_PKG_VERSION="$DEP_PKG_LATEST_VERSION"
                 else
                     DEP_PKG_VERSION="$DEP_PKG_INSTALLED_VERSION"

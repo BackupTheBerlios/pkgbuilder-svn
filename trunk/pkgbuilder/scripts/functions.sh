@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.38 2004/01/14 19:30:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.39 2004/01/18 14:16:23 tomby Exp $
 
 #
 # Generic functions
@@ -401,6 +401,60 @@ is_installed() {
 }
 
 #
+# Compare version numbers. Returns 0 if equals, 1 if b < a and 2 if b > a
+#
+# @param $1 package a
+# @param $2 package b
+#
+compare_versions() {
+    if [ "$1" == "" -o "$2" == "" ] ; then
+        return 1
+    fi
+    
+    local v1="`extract_version $1`"
+    local v2="`extract_version $2`"
+    
+    local tmp1
+    local tmp2
+    
+    for field in 1 2 3 4 5 6 7 8 9 10 ; do
+        tmp1="`echo $v1 | cut -d. -f$field`"
+        tmp2="`echo $v2 | cut -d. -f$field`"
+        
+        if [ "$tmp1" == "" -a "$tmp2" == "" ] ; then
+            break
+        elif [ "$tmp1" == "" -a "$tmp2" != "" ] ; then
+            #greater
+            return 2
+        elif [ "$tmp1" != "" -a "$tmp2" == "" ] ; then
+            #lesser
+            return 1
+        fi
+
+        if echo $tmp1 | grep -q "[a-zA-Z]\+" ||
+           echo $tmp2 | grep -q "[a-zA-Z]\+" ; then
+            if [[ "$tmp2" < "$tmp1" ]] ; then
+                return 1
+            elif [[ "$tmp2" > "$tmp1" ]] ; then
+                return 2
+            else
+                continue
+            fi
+        else  
+            if [ "$tmp2" -lt "$tmp1" ] ; then
+                return 1
+            elif [ "$tmp2" -gt "$tmp1" ] ; then
+                return 2
+            else
+                continue
+            fi
+        fi
+    done
+    
+    return 0;
+}
+
+#
 # Print the latest version of a package
 #
 # @param $1 meta package
@@ -421,7 +475,17 @@ latest_version() {
         local latestbuildfile=""
         
         for i in $buildfiles ; do
-            latestbuildfile="$i"
+            if [ "$latestbuildfile" == "" ] ; then
+                latestbuildfile="$i"
+                continue
+            fi
+            
+            compare_versions `basename $latestbuildfile .build` `basename $i .build`
+            local RESULT="$?"
+            
+            if [ "$RESULT" -eq "2" ] ; then
+                latestbuildfile="$i"
+            fi
         done
         
         latestbuildfile="`basename $latestbuildfile .build`"
