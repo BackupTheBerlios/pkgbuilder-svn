@@ -1,21 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdelibs/Attic/kdelibs-3.1.94.build,v 1.7 2004/01/01 17:15:20 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdelibs/Attic/kdelibs-3.1.94.build,v 1.8 2004/01/04 23:34:59 tomby Exp $
 #
 # kdelibs-3.1.94 pkgbuilder script
 #
 
 inherit kde
 
-PKG_NAME="kdelibs"
-PKG_VERSION="3.1.94"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am5"
-PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_FILE_NAME"
-
-PKG_LICENSE="GPLv2 LGPLv2"
 
 PKG_USE="alsa cups fam"
 
@@ -37,25 +29,16 @@ PKG_DEPENDS="d/perl
              `use fam && echo "ap/fam"`
              `use cups && echo "a/cups"`"
 
-PKG_HOMESITE="http://www.kde.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS COMPILING COMPILING.html COPYING COPYING.BSD COPYING.LIB DEBUG
                INSTALL KDE2PORTING.html KDE3PORTING.html NAMING README  kdelibs.lsm"
 
-PKG_PREFIX="/opt/kde-3.2"
-PKG_CONFIGURE_OPTIONS="--with-ssl-dir=/usr
-                       --disable-debug
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --with-ssl-dir=/usr
                        --enable-fast-malloc=full
                        --enable-dnotify
                        `use fam || echo "--disable-libfam"`
                        `use alsa && echo "--with-alsa"`
                        `use cups && echo "--enable-cups"`"
-                       
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 do_postinstall() {
     cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus

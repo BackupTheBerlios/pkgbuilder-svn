@@ -1,17 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.8 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.9 2004/01/04 23:34:59 tomby Exp $
 #
 # kde-i18n-3.1.94 pkgbuilder script
 #
 
 inherit kde
 
-PKG_NAME="kde-i18n"
-PKG_VERSION="3.1.94"
 PKG_ARCH="noarch"
 PKG_BUILD="am1"
-PKG_EXTENSION="tar.bz2"
 
 for lang in $LANG ; do
     PKG_FILE_NAME="$PKG_FILE_NAME $PKG_NAME-$lang-$PKG_VERSION.$PKG_EXTENSION"
@@ -21,25 +18,13 @@ for file in $PKG_FILE_NAME ; do
     PKG_URL="$PKG_URL ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_NAME/$file"
 done
 
-PKG_LICENSE="GPLv2 LGPLv2"
-
 PKG_USE=""
 
 PKG_DEPENDS=">=l/qt-3.2
              >=kde/kdelibs-3.1.94
              >=kde/kdebase-3.1.94"
 
-PKG_HOMESITE="http://www.kde.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
-
-PKG_PREFIX="/opt/kde-3.2"
-PKG_CONFIGURE_OPTIONS="--disable-debug"
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 do_unpack() {
     mkdir -p $PKG_SRC

@@ -1,21 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.94.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.94.build,v 1.6 2004/01/04 23:34:59 tomby Exp $
 #
 # kdemultimedia-3.1.94 pkgbuilder script
 #
 
 inherit kde
 
-PKG_NAME="kdemultimedia"
-PKG_VERSION="3.1.94"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am2"
-PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_FILE_NAME"
-
-PKG_LICENSE="GPLv2 LGPLv2"
 
 PKG_USE="nas esd tcltk oggvorbis alsa gstreamer"
 
@@ -38,17 +30,10 @@ PKG_DEPENDS=">=l/qt-3.2
              `use tcltk && echo "d/tcl d/tk"`
              `use gstreamer && echo "l/gstreamer"`"
 
-PKG_HOMESITE="http://www.kde.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README*"
 
-PKG_PREFIX="/opt/kde-3.2"
-PKG_CONFIGURE_OPTIONS="--disable-strict --disable-warnings --disable-debug"
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS 
+                       --disable-strict"
 
 do_patch_kscd_libwm() {
     cd $PKG_SRC

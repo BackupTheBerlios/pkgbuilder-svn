@@ -1,21 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/arts/Attic/arts-1.1.94.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/arts/Attic/arts-1.1.94.build,v 1.5 2004/01/04 23:34:59 tomby Exp $
 #
 # arts-1.1.94 pkgbuilder script
 #
 
 inherit kde
 
-PKG_NAME="arts"
-PKG_VERSION="1.1.94"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
-PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://mirrors.isc.org/pub/kde/unstable/3.1.94/src/$PKG_FILE_NAME"
-
-PKG_LICENSE="GPLv2 LGPLv2"
+PKG_URL="$KDE_BASE_URL/3.1.94/src/$PKG_FILE_NAME"
 
 PKG_USE="alsa oggvorbis mad"
 
@@ -27,18 +20,11 @@ PKG_DEPENDS="l/audiofile
              `use oggvorbis && echo "l/libvorbis l/libogg"`
              `use mad && echo "l/libmad"`"
 
-PKG_HOMESITE="http://www.kde.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="COPYING COPYING.LIB INSTALL doc/NEWS doc/README doc/TODO"
 
-PKG_PREFIX="/opt/kde-3.2"
-PKG_CONFIGURE_OPTIONS="--disable-debug
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                       `use alsa && echo "--enable-alsa"`"
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 do_postinstall() {    
     cd $PKG_SRC
