@@ -70,7 +70,6 @@ ap)
     lvm
     man
     man-pages
-    mysql
     postgresql
     psutils
     quota
@@ -119,9 +118,7 @@ games)
 
 n)
 
-    animail
     bind
-    courier
     dhcp
     dhcpd
     epic4
@@ -137,11 +134,9 @@ n)
     nfs-utils
     nn
     openldap
-    php
     pine
     ppp
     procmail
-    proftpd
     pure-ftpd
     qmail
     qpopper
