@@ -1,9 +1,18 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/main.build,v 1.1 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/main.build,v 1.2 2003/12/30 20:26:28 tomby Exp $
 #
 # main pkgbuilder script
 #
+
+PKG_EXTENSION="tar.gz"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
 
 main_do_unpack() {
     cd $TMP

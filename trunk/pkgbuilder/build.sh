@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.12 2003/12/30 20:13:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.13 2003/12/30 20:27:07 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -78,16 +78,11 @@ fi
 #where is the package home
 PKG_HOME="$PKGBUILDER_HOME/`dirname $PKG`"
 
-#load build script
-source $PKG
-
 #load base build script
 include base
 
-#load parent build script
-if [ "$PKG_PARENT" != "" ] ; then
-    include $PKG_PARENT
-fi
+#load build script
+source $PKG
 
 #execute action
 for i in $ACTION ; do
