@@ -1,16 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xsl-stylesheets/docbook-xsl-stylesheets-1.62.4.build,v 1.6 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xsl-stylesheets/docbook-xsl-stylesheets-1.62.4.build,v 1.7 2004/01/03 20:15:26 tomby Exp $
 #
 # docbook-xsl-stylesheets-1.62.4 pkgbuilder script
 #
 
 inherit main
 
-PKG_NAME="docbook-xsl-stylesheets"
-PKG_VERSION="1.62.4"
 PKG_ARCH="noarch"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="docbook-xsl-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/docbook/$PKG_FILE_NAME"
@@ -24,15 +22,10 @@ PKG_DEPENDS="l/libxml2"
 PKG_HOMESITE="http://www.oasis-open.org/docbook/"
 
 PKG_SRC="$TMP/docbook-xsl-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="BUGS ChangeLog RE* TODO VERSION WhatsNew"
 
 PKG_PREFIX="/usr"
-PKG_DATADIR="$PKG_DEST$PKG_PREFIX/share/sgml/docbook/xsl-stylesheets-$PKG_VERSION"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_DATADIR="$PKG_DEST$PKG_PREFIX/share/xml/docbook/xsl-stylesheets-$PKG_VERSION"
 
 PKG_NOSTRIP="Y"
 
