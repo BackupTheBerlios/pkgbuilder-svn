@@ -1942,7 +1942,8 @@ build
 \series medium 
  puede tener un padre del que hereda todas las acciones y variables definidas
  en él.
- Además el script padre puede heredar de otro y así sucesivamente.
+ Además el script padre puede heredar de otro y así sucesivamente, formando
+ una jerarquía.
  Así hasta llegar al script 
 \series default 
 base.build
@@ -1960,13 +1961,13 @@ do_<accion>
 \series medium 
 .
  Si esta no está definido se busca si el metodo está declarado en el padre
- a través de la funcion 
+ a través de la función 
 \series default 
 <padre>_do_<accion>
 \series medium 
-.
- Si no está declarado tampoco en el padré se buscará si este está implementado
- en el script 
+, así sucesivamente subiendo por la jerarquia.
+ Si no está declarada tampoco en la jerarquía se buscará si esta acción
+ está implementada en el script 
 \emph on 
 base.build
 \emph default 
@@ -1976,7 +1977,7 @@ pkg_do_<accion>
 \series medium 
 .
  Si no se encuentra ninguna de estas funciones se asume que la acción no
- ha sido implementada porque no es necesaria.
+ ha sido implementada porque no es necesaria, sin mas.
 \layout Paragraph
 
 
