@@ -29,8 +29,8 @@ PKG_DOC_FILES="INSTALL README README.debugging xscreensaver.lsm"
 PKG_PREFIX="/usr/X11R6"
 
 PKG_CONFIGURE_OPTIONS="--with-shadow
-                       `use_with jpeg "--with-jpeg"`
-                       `use_with gtk2 "--with-gtk"`"
+                       `use_with jpeg`
+                       `use_with gtk2 gtk`"
 
 PKG_INSTALL_OPTIONS="install_prefix=$PKG_DEST"
 
