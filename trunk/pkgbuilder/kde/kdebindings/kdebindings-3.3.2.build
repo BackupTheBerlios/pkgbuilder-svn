@@ -8,13 +8,14 @@ inherit kde
 
 PKG_BUILD="am2"
 
-PKG_USE="java python ruby mozilla gtk"
+PKG_USE="java python ruby mozilla gtk perl"
 
 PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdelibs-3.3.2
              >=kde/kdebase-3.3.2
              >=kde/kdenetwork-3.3.2
              l/glib
+             `use_dep perl "d/perl"`
              `use_dep gtk "l/gtk+"`
              `use_dep python "d/python"`
              `use_dep java "d/j2sdk"`
@@ -22,6 +23,8 @@ PKG_DEPENDS=">=l/qt-3.3
              `use_dep mozilla "xap/mozilla"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL kdebindings.lsm NEWS README"
+
+MAKE_OPTIONS="-j1"
 
 do_patch() {
     cd $PKG_SRC
@@ -37,6 +40,10 @@ do_postinstall() {
     ( cd $PKG_DEST/usr
       mv share/man .
       rmdir share )
+    ( cd $PKG_DEST/usr/lib/perl5/
+      rm -rf `installed_version perl` )
     gzip_man $PKG_DEST/usr/man
     kde_do_postinstall
 }
+
+
