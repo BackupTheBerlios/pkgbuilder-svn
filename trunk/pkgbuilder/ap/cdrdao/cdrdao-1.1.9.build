@@ -1,0 +1,33 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/cdrdao/cdrdao-1.1.8.build,v 1.1 2004/02/14 14:51:05 tomby Exp $
+#
+# cdrdao-1.1.9 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="lame"
+
+PKG_DEPENDS="ap/cdrtools 
+             ap/cdparanoia
+            `use_dep lame "l/lame"`"
+
+PKG_HOMESITE="http://cdrdao.sourceforge.net/"
+
+
+PKG_DOC_FILES="COPYING CREDITS INSTALL README* Release*"
+
+PKG_CONFIGURE_OPTIONS="--with-scglib-inc=/usr/include/scsilib
+					   --with-scglib-lib=/usr/lib"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
