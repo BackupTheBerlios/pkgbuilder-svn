@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/wine/Attic/wine-20040121.build,v 1.1 2004/01/24 22:40:31 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/wine/wine-20040309.build,v 1.1 2004/03/14 17:10:49 tomby Exp $
 #
-# wine-20031212 pkgbuilder script
+# wine-20040309 pkgbuilder script
 # 
 
 inherit configscript
@@ -21,33 +21,24 @@ PKG_DEPENDS="d/flex
              >=l/ncurses-5.2
              >=l/freetype2-2.0.0
              x/xfree86
-             `use tcltk && echo "d/tcl d/tk"`
-             `use arts && echo "kde/arts"`
-             `use alsa && echo "l/alsa-lib"`
-             `use nas && echo "l/nas"`
-             `use cups && echo "a/cups"`"
+             `use_dep tcltk "d/tcl d/tk"`
+             `use_dep arts "kde/arts"`
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep cups "a/cups"`"
 
 PKG_HOMESITE="http://www.winehq.com/"
 
 PKG_DOC_FILES="A* BUGS C* DEVELOPERS-HINTS LICENSE* README VERSION winedefault.reg"
 
 PKG_CONFIGURE_OPTIONS="--disable-debug --disable-trace
-                      `use opengl && echo "--enable-opengl"`"
+                      `use_enable opengl`"
 
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
 
 do_patch() {
     cd $PKG_SRC
 
-    patch -p0 < $PKG_HOME/files/wine-artsc-pthread.diff
-
-    return $?
-}
-
-do_build() {
-    cd $PKG_SRC
-
-    make depend $PKG_BUILD_OPTIONS && make $PKG_BUILD_OPTIONS
+    apply_patch $PKG_HOME/files/wine-artsc-pthread.diff -p0
 
     return $?
 }
@@ -55,15 +46,7 @@ do_build() {
 do_postinstall() {
     cd $PKG_SRC
 
-    pkg_installdoc
-
     rmdir $PKG_DEST/usr/man/man3w
 
-    strip_all $PKG_DEST
-
-    gzip_man $PKG_DEST$PKG_PREFIX/man
-
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    pkg_postinstall
 }
