@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/vte/vte-0.11.10.build,v 1.1 2004/01/02 17:14:39 tomby Exp $
 #
-# vte-0.11.10 pkgbuilder script
+# vte-0.11.11 pkgbuilder script
 #
 
 inherit gnome
@@ -15,12 +15,12 @@ PKG_DEPENDS="l/glib2
              l/gtk+2
              >=l/pango-1.2
              >=d/pkgconfig-0.12.0 
-             `use python && echo ">=d/pygtk-1.99 >=d/python-2.2"`
-             `use doc && echo ">=gnome/gtk-doc-0.6"`"
+             `use_dep python ">=d/pygtk-1.99 >=d/python-2.2"`
+             `use_dep doc ">=gnome/gtk-doc-0.6"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING HACKING INSTALL MESSAGE-OF-DOOM NEWS README"
 
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --disable-static
-                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
+                       `use_enable doc gtk-doc`"
