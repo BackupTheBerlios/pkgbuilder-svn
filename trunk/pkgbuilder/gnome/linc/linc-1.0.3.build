@@ -1,0 +1,47 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/linc/linc-1.0.3.build,v 1.1 2003/12/27 20:02:17 tomby Exp $
+#
+# linc-1.0.3 pkgbuilder script
+#
+
+PKG_NAME="linc"
+PKG_VERSION="1.0.3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.0/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl doc"
+
+PKG_DEPENDS="l/glib2
+            >=d/pkgconfig-0.12.0 
+            `use ssl && echo ">=l/openssl-0.9.6"`
+            `use doc && echo ">=gnome/gtk-doc-0.6"`"
+
+PKG_HOMESITE="http://www.gnome.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS COPYING HACKING MAINTAINERS NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var/lib
+                       `use ssl && echo "--with-ssl"`
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
