@@ -24,6 +24,9 @@ FETCH_DIR="/tmp/distfiles"
 FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
 FETCH_FTP_OPTIONS="--passive-ftp"
 
+#BINARY PACKAGES DIRECTORY
+BINARIES_DIR="/home/tomby/tmp/binaries"
+
 TMP="/tmp"
 
 #USE FLAGS

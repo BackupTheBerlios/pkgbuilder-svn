@@ -59,13 +59,13 @@ pkg_do_buildpkg() {
         $PKG_ARCH="${ARCH/-/}"
     fi
     
-    makepkg -l y -c n ../$PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    makepkg -l y -c n $BINARIES_DIR/$PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
     
     return $?
 }
 
 pkg_do_installpkg() {
-    cd $TMP
+    cd $BINARIES_DIR
     
     if [ "$PKG_ARCH" = "" ] ; then
         $PKG_ARCH="${ARCH/-/}"
@@ -77,7 +77,7 @@ pkg_do_installpkg() {
 }
 
 pkg_do_upgradepkg() {
-    cd $TMP
+    cd $BINARIES_DIR
     
     if [ "$PKG_ARCH" = "" ] ; then
         $PKG_ARCH="${ARCH/-/}"

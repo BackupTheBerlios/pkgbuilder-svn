@@ -39,7 +39,7 @@ multi_do_verify() {
     local retval
     local iter
     for iter in $PKG_ITER ; do
-        do_init_${iter}
+        do_init_$iter
         verify $PKG_SRC $sum
         retval="$?"
 
@@ -76,7 +76,7 @@ multi_do_configure() {
 
             test retval || break
         else
-            do_init_${iter}
+            do_init_$iter
             configscript_do_configure
             retval="$?"
 
@@ -98,7 +98,7 @@ multi_do_build() {
 
             test retval || break
         else
-            do_init_${iter}
+            do_init_$iter
             configscript_do_build
             retval="$?"
 
@@ -166,7 +166,7 @@ multi_do_postinstall() {
 multi_do_cleanup() {
     local iter
     for iter in $PKG_ITER ; do
-        do_init_${iter}
+        do_init_$iter
         pkg_do_cleanup
     done
 }
