@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/directfb/directfb-0.9.20.build,v 1.2 2003/12/27 01:02:05 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/directfb/directfb-0.9.20.build,v 1.3 2003/12/27 01:02:41 tomby Exp $
 #
 # directfb-0.9.20 pkgbuilder script
 #
@@ -21,7 +21,7 @@ PKG_DEPENDS="d/perl
 		     >=l/freetype2-2.0.1
 			 `use sdl && echo "l/sdl"`
 			 `use mpeg && echo "l/libmpeg3"`
-			 `use gif && echo "l/ungif"`
+			 `use gif && echo "l/libungif"`
 			 `use png && echo "l/libpng"`
 			 `use jpeg && echo "l/libjpeg"`"
 
