@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_console/sdl_console-2.1.build,v 1.1 2003/11/08 16:47:03 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_console/sdl_console-2.1.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 #
 # sdl_console pkgbuilder script
 #
@@ -9,7 +9,9 @@ PKG_NAME="sdl_console"
 PKG_VERSION="2.1"
 PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
-PKG_URL="http://download.sourceforge.net/sdlconsole/sdlconsole-$PKG_VERSION.tar.gz"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="sdlconsole-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/sdlconsole/$PKG_FILE_NAME"
 
 PKG_SRC="$TMP/sdlconsole-$PKG_VERSION"
 PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
@@ -18,26 +20,15 @@ PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README*"
 
 PKG_PREFIX="/usr"
 
-include do_info
-include do_fetch
+include general
 
+include do_fetch
+include do_unpack_gzip
 include do_patch
 
 include do_build
 include do_install
 include do_postinstall
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
-
-do_unpack() {
-    cd $TMP
-
-    tar zxvf $FETCH_DIR/sdlconsole-$PKG_VERSION.tar.gz
-    
-    return $?
-}
 
 do_configure() {
     cd $PKG_SRC

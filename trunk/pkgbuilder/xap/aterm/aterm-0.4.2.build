@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/aterm/aterm-0.4.2.build,v 1.1 2003/11/08 16:54:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/aterm/aterm-0.4.2.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 #
 # aterm pkgbuilder script
 #
@@ -18,7 +18,8 @@ PKG_DOC_FILES="aterm.lsm ChangeLog INSTALL README* doc/BUGS doc/FAQ doc/README.*
 
 PKG_PREFIX="/usr/X11R6"
 
-include do_info
+include general
+
 include do_fetch
 include do_unpack_gzip
 include do_patch
@@ -26,10 +27,6 @@ include do_configure
 include do_build
 
 include do_postinstall
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_install() {
     cd $PKG_SRC

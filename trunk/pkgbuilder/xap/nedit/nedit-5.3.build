@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/Attic/nedit-5.3.build,v 1.1 2003/11/08 16:54:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/Attic/nedit-5.3.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 #
 # nedit pkgbuilder script
 #
@@ -19,16 +19,13 @@ PKG_DOC_FILES="README ReleaseNotes ChangeLog COPYRIGHT \
     
 PKG_PREFIX=/usr
 
-include do_info
+include general
+
 include do_fetch
 
 include do_configure_null
 
 include do_postinstall
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_unpack() {
     cd $TMP

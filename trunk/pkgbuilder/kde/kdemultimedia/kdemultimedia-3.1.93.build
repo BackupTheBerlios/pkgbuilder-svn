@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.93.build,v 1.2 2003/11/22 14:11:10 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.93.build,v 1.3 2003/11/23 20:01:32 tomby Exp $
 #
 # kdemultimedia pkgbuilder script
 #
@@ -39,7 +39,8 @@ PKG_CONFIGURE_OPTIONS="--disable-strict --disable-warnings --disable-debug"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
-include do_info
+include general
+
 include do_fetch
 include do_unpack_bzip2
 include do_patch
@@ -47,10 +48,6 @@ include do_configure
 
 include do_install
 include do_postinstall
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_patch_kscd_libwm() {
     cd $PKG_SRC

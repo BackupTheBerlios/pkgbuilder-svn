@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/lincvs/Attic/lincvs-1.2.0.build,v 1.1 2003/11/08 16:37:49 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/lincvs/Attic/lincvs-1.2.0.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 
 PKG_NAME="lincvs"
 PKG_VERSION="1.2.0"
@@ -18,15 +18,10 @@ PKG_DOC_FILES="AUTHORS BUGS.txt ChangeLog COPYING FAQ.txt INSTALL* \
 
 PKG_QTDIR="`whereis qt | cut -d ' ' -f 2`"
 
-include do_info
+include general
+
 include do_fetch
-
 include do_build
-
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_unpack() {
     cd $TMP

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/nvidia-glx/Attic/nvidia-glx-1.0.4496.build,v 1.1 2003/11/08 16:51:08 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/nvidia-glx/Attic/nvidia-glx-1.0.4496.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 #
 # nvidia-glx pkgbuilder script
 #
@@ -15,17 +15,13 @@ PKG_SRC="$TMP/NVIDIA-Linux-x86-1.0-4496-pkg0"
 PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
 PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 
-include do_info
+include general
+
 include do_fetch
 
 include do_patch
 include do_configure_null
 include do_build_null
-
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_unpack() {
     cd $TMP

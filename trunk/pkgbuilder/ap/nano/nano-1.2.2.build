@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/nano/Attic/nano-1.2.2.build,v 1.5 2003/11/23 18:09:09 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/nano/Attic/nano-1.2.2.build,v 1.6 2003/11/23 20:01:32 tomby Exp $
 
 PKG_NAME="nano"
 PKG_VERSION="1.2.2"
@@ -25,18 +25,14 @@ PKG_DOC_FILES="AUTHORS BUGS C* INSTALL NEWS README T* UPGRADE faq.html"
 
 PKG_PREFIX="/usr"
 
-include do_info
+include general
+
 include do_fetch
 include do_unpack_gzip
 include do_patch
 
 include do_build
 include do_install
-
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_configure() {
     cd $PKG_SRC

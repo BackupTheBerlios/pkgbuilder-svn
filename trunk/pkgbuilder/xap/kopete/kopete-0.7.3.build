@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/kopete/kopete-0.7.3.build,v 1.1 2003/11/08 16:54:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/kopete/kopete-0.7.3.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 #
 # kopete pkgbuilder script
 #
@@ -18,7 +18,8 @@ PKG_DOC_FILES="kopete/AUTHORS kopete/C* kopete/INSTALL kopete/NEWS kopete/R* kop
 
 PKG_PREFIX="/opt/kde"
 
-include do_info
+include general
+
 include do_fetch
 include do_unpack_bzip2
 include do_patch
@@ -26,10 +27,6 @@ include do_patch
 include do_build
 include do_install
 include do_postinstall
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_configure() {
     cd $PKG_SRC

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/cyrus-sasl/Attic/cyrus-sasl-2.1.15.build,v 1.1 2003/11/08 16:47:03 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/cyrus-sasl/Attic/cyrus-sasl-2.1.15.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 #
 # cyrus-sasl pkgbuilder script
 #
@@ -20,17 +20,14 @@ PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README doc/*"
 
 PKG_PREFIX="/usr"
 
-include do_info
+include general
+
 include do_fetch
 include do_unpack_gzip
 
 include do_build
 
 include do_postinstall
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_patch() {
     cd $PKG_SRC

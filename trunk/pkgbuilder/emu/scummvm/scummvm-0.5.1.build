@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/scummvm/scummvm-0.5.1.build,v 1.1 2003/11/08 16:39:16 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/scummvm/scummvm-0.5.1.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
 
 PKG_NAME="scummvm"
 PKG_VERSION="0.5.1"
@@ -22,7 +22,8 @@ PKG_CONFIGURE_OPTIONS="--backend=sdl"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
-include do_info
+include general
+
 include do_fetch
 include do_unpack_bzip2
 
@@ -30,10 +31,6 @@ include do_configure
 include do_build
 
 include do_postinstall
-include do_buildpkg
-include do_installpkg
-include do_upgradepkg
-include do_cleanup
 
 do_patch() {
     cd $PKG_SRC
