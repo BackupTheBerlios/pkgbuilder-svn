@@ -28,9 +28,7 @@ do_install() {
     cd $PKG_SRC
     
     mkdir -p $PKG_DEST$PKG_PREFIX/lib/win32
-    
     cp * $PKG_DEST$PKG_PREFIX/lib/win32
-    
     cd $PKG_DEST$PKG_PREFIX/lib/win32/
     
     chmod 755 *
