@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/latex2html/latex2html-2002_2_1.build,v 1.1 2004/03/21 15:51:49 tomby Exp $
 #
-# latex2html-2002_2_1 pkgbuilder script
+# latex2html-2002.2.1 pkgbuilder script
 #
 
 inherit configscript
@@ -11,7 +11,7 @@ PKG_BUILD="am1"
 
 PKG_ARCH="$ARCH"
 PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION//_/-}.$PKG_EXTENSION"
+PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION//./-}.$PKG_EXTENSION"
 PKG_URL="http://saftsack.fs.uni-bayreuth.de/~latex2ht/current/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
@@ -27,7 +27,7 @@ PKG_DEPENDS="ap/esp-gs
 
 PKG_HOMESITE="http://www.latex2html.org/"
 
-PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION//_/-}"
+PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION//./-}"
 
 PKG_DOC_FILES="BUGS Changes FAQ INSTALL LICENSE README TODO"
 
