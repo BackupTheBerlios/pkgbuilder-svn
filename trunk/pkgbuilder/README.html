@@ -1,7 +1,16 @@
 <p><h1>PKGBUILDER</h1></p>
 
-<p>El sistema es muy sencillo. Existe un script principal llamado
-<code>'build.sh'</code> al que se le pasan dos parámetros: el directorio 
+<p><code>PkgBuilder2</code> no es más que una revision nueva de <code>PkgBuilder</code>. En él
+cambian pequeñas cosas pero que permiten al sistemas ser mucho
+más flexible. Si le echais un vistazo vereis que se parece mucho
+al portage, pero los objetivos de ambos son diferentes.</p>
+
+El sistema sigue siendo muy sencillo. Existe un script principal 
+llamado 'build.sh' al que se le pasan dos parámetros: el script 
+del packete que queremos compilar y la acción. Por ejemplo:
+
+<p>El sistema sigue siendo muy sencillo. Existe un script principal 
+llamado <code>'build.sh'</code> al que se le pasan dos parámetros: el script 
 del packete que queremos compilar y la acción. Por ejemplo:</p>
 
 <blockquote><code># ./build.sh xap/aterm/0.4.2 fetch</code></blockquote>

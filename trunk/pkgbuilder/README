@@ -1,12 +1,17 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/README,v 1.2 2003/10/23 18:47:42 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/README,v 1.3 2003/11/08 16:55:24 tomby Exp $
 
-PKGBUILDER
+PKGBUILDER2
 
-El sistema es muy sencillo. Existe un script principal llamado
-'build.sh' al que se le pasan dos parámetros: el directorio 
+PkgBuilder2 no es más que una revision nueva de PkgBuilder. En él
+cambian pequeñas cosas pero que permiten al sistemas ser mucho
+más flexible. Si le echais un vistazo vereis que se parece mucho
+al portage, pero los objetivos de ambos son diferentes
+
+El sistema sigue siendo muy sencillo. Existe un script principal 
+llamado 'build.sh' al que se le pasan dos parámetros: el script 
 del packete que queremos compilar y la acción. Por ejemplo:
 
-# ./build.sh xap/aterm/0.4.2 fetch
+# ./build.sh xap/aterm/aterm-0.4.2.build fetch
 
 Esto hará que se ejecute la acción 'fetch' para la versión 0.4.2
 del paquete 'aterm'.

@@ -1,0 +1,12 @@
+--- initialize.c.orig	2003-11-01 12:43:24.000000000 +0100
++++ initialize.c	2003-11-01 12:46:25.000000000 +0100
+@@ -894,8 +894,7 @@
+ 
+ #ifdef CFG_MULTITHREADED
+ 
+-  i = pthread_atfork(NULL, NULL, &ReinitMutexes);
+-  traceEvent(CONST_TRACE_INFO, "NOTE: atfork() handler registered for mutexes, rc %d", i);
++  traceEvent(CONST_TRACE_INFO, "Initializing semaphores, mutexes and threads");
+ 
+   /*
+    * Create two variables (semaphores) used by functions in pbuf.c to queue packets

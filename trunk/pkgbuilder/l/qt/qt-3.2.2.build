@@ -1,0 +1,39 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/Attic/qt-3.2.2.build,v 1.1 2003/11/08 16:47:03 tomby Exp $
+#
+# qt pkgbuilder script
+#
+
+PKG_NAME="qt"
+PKG_VERSION="3.2.2"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-x11-free-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.trolltech.com/qt/source/$PKG_FILE_NAME"
+
+PKG_HOMESITE="http://www.trolltech.com/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr/lib/qt-3.2.2"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include do_info
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+include do_buildpkg
+include do_installpkg
+include do_upgradepkg
+include do_cleanup

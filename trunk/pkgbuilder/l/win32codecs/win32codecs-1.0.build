@@ -1,0 +1,58 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/win32codecs/win32codecs-1.0.build,v 1.1 2003/11/08 16:47:03 tomby Exp $
+#
+# win32codecs pkgbuilder script
+#
+
+PKG_NAME="win32codecs"
+PKG_VERSION="1.0pre1"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/codecs/extralite.tar.bz2"
+
+PKG_SRC="$TMP/extralite"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+
+PKG_PREFIX="/usr"
+
+include do_info
+include do_fetch
+include do_patch
+include do_buildpkg
+include do_configure_null
+include do_build_null
+
+include do_installpkg
+include do_upgradepkg
+include do_cleanup
+
+do_unpack() {
+    cd $TMP
+    
+    tar jxvf $FETCH_DIR/extralite.tar.bz2
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/win32
+    
+    cp * $PKG_DEST$PKG_PREFIX/lib/win32
+    
+    cd $PKG_DEST$PKG_PREFIX/lib/win32/
+    
+    chmod 755 *
+    chown root.root *
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    #Creando descripcion del paquete
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+}

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/newpkg.sh,v 1.1 2003/10/21 18:19:47 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/newpkg.sh,v 1.2 2003/11/08 16:55:24 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -26,12 +26,12 @@ if [ "$1" = "" -o "$2" = "" -o "$3" = "" ] ; then
     exit 1
 fi
 
-PKG_DIR=$1/$2/$3
+PKG_DIR=$1/$2
+PKG_FILE=$2-$3.build
 
 mkdir -p $PKG_DIR/files
 
-cp examples/example-build.sh $PKG_DIR/build.sh
-cp examples/example-config.sh $PKG_DIR/config.sh
+cp examples/example.build $PKG_DIR/$PKG_FILE
 cp examples/slack-desc $PKG_DIR/files/slack-desc
 
-chmod u+w $PKG_DIR/build.sh $PKG_DIR/config.sh $PKG_DIR/files/slack-desc
+chmod u+w $PKG_DIR/$PKG_FILE $PKG_DIR/files/slack-desc

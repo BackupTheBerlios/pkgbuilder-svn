@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.3 2003/11/01 13:49:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.4 2003/11/08 16:50:10 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -8,13 +8,13 @@ version() {
 
 usage() {
     echo
-    echo "usage: build.sh [package] [action]"
+    echo "usage: build.sh [script] [action]"
     echo
-    echo "    general actions: [help|info|clean]"
-    echo "    build actions:   [auto|fetch|uncompress|patch|configure|build|install|postinstall]"
+    echo "    general actions: [help|info|cleanup]"
+    echo "    build actions:   [auto|fetch|unpack|patch|configure|build|install|postinstall]"
     echo "    pkg actions:     [buildpkg|installpkg|upgradepkg]"
     echo
-    echo "    example: build.sh xap/aterm/0.4.2 fetch"
+    echo "    example: build.sh xap/aterm/aterm-0.4.2.build fetch"
 }
 
 include() {
@@ -22,7 +22,7 @@ include() {
         return 1  
     fi
     
-    source $PKGBUILDER_HOME/common/$1.sh
+    source $PKGBUILDER_HOME/common/$1
     
     return $?
 }

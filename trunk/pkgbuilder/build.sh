@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.2 2003/10/24 19:42:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.3 2003/11/08 16:55:24 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -18,51 +18,55 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
-# Script general para la compilación y creación de paquetes
-# Tal vez, futuro embrión de un arbol de ports para Slackware
+# General script to build and create new packages
 #
 
-#scripts globales y de configuración
-source scripts/config.sh
+#config file
+source build.rc
+
+#global functions
 source scripts/functions.sh
 
-#imprimo la versión
+#print version number
 version
 
-#obtengo primero el paquete a utilizar
+#script to execute
 if [ "$1" = "" ] ; then
     usage
     exit 1
 fi
 
-PKG_HOME=`pwd`/"$1"
+#where is the package home
+PKG_HOME=$PKGBUILDER_HOME/`echo $1 | cut -d/ -f1`/`echo $1 | cut -d/ -f2`
 
-source $PKG_HOME/config.sh
-source $PKG_HOME/build.sh
+#the build script
+source $1
 
-#ahora obtengo la acción a ejecutar
+#action to execute
 ACTION="auto"
 
 if [ "$2" != "" ] ; then
     ACTION=$2
 fi
 
-#inicialización de variables
+#temporal directory defined?
 if [ "$TMP" = "" ]; then
   TMP="/tmp"
 fi
 
+#create temporal directory if not exist
 if [ ! -d $TMP ]; then
-  mkdir -p $TMP # directorio donde compilar los fuentes
+  mkdir -p $TMP
 fi
 
+#create package directory if not exist
 if [ ! -d $PKG_DEST ]; then
-  mkdir -p $PKG_DEST # directorio donde instalar el paquete
+  mkdir -p $PKG_DEST
 fi
 
 RETVAL="0"
 
-#ahora ejecuto la acción correspondiente
+#execution
 case "$ACTION" in
     'info')
         do_info
@@ -71,8 +75,8 @@ case "$ACTION" in
     'fetch')
         do_fetch
     ;;
-    'uncompress')
-        do_uncompress
+    'unpack')
+        do_unpack
         RETVAL="$?"
     ;;
     'patch')
@@ -106,13 +110,13 @@ case "$ACTION" in
         do_upgradepkg
         RETVAL="$?"
     ;;
-    'clean')
-        do_clean
+    'cleanup')
+        do_cleanup
         RETVAL="$?"
     ;;
     'auto')
         do_fetch && 
-        do_uncompress &&
+        do_unpack &&
         do_patch && 
         do_configure &&
         do_build &&
@@ -129,6 +133,12 @@ case "$ACTION" in
         exit 1
 esac
 
+#print result
 echo
-echo "pkgbuilder: $ACTION for $1 result: $RETVAL"
+
+if [ $RETVAL ] ; then
+    echo "pkgbuilder: $ACTION for $1 result: SUCCESS"
+else
+    echo "pkgbuilder: $ACTION for $1 result: ERROR"
+fi
 
