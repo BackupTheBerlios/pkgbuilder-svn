@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.3 2003/11/23 16:06:39 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.4 2003/11/23 16:08:34 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -132,12 +132,12 @@ done
 #TODO: install or upgrade??
 if `is_installed $DEP_PKG_NAME $DEP_PKG_VERSION` ; then
     echo actualizar
-    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto upgradepkg cleanup )
     
     RETVAL="$?"
 else
     echo instalar
-    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto installpkg cleanup )
     
     RETVAL="$?"
 fi
