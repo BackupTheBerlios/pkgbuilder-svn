@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="wxGTK-$PKG_VERSION.$PKG_EXTENSION"
@@ -61,8 +61,13 @@ do_install() {
 }
 
 do_postinstall() {
-    cd $PKG_DEST$PKG_PREFIX/bin
-    ( rm -f wx-config ; ln -sf $PKG_PREFIX/lib/wx/config/gtk2-ansi-release-2.5 wx-config )
+    if use unicode ; then
+        ( cd $PKG_DEST$PKG_PREFIX/bin
+          rm -f wx-config ; ln -sf $PKG_PREFIX/lib/wx/config/gtk2-unicode-release-2.5 wx-config )
+    else
+        ( cd $PKG_DEST$PKG_PREFIX/bin
+          rm -f wx-config ; ln -sf $PKG_PREFIX/lib/wx/config/gtk2-ansi-release-2.5 wx-config )
+    fi
 
     cp $PKG_SRC/include/wx/html/htmlproc.h $PKG_DEST/usr/include/wx-2.5/wx/html
 
