@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.2 2003/11/23 00:59:01 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.3 2003/11/23 16:06:39 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -58,7 +58,9 @@ for DEP in $PKG_DEPENDS ; do
         DEP_PKG_NAME=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/\([a-zA-Z0-9_\-]\+\)'`
 
     #version
-    DEP_PKG_VERSION=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/[a-zA-Z0-9_\-]\+\-\([0-9a-z\.]\+\)'`
+    mayorversion=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
+    minorversion=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
+    DEP_PKG_VERSION="$mayorversion$minorversion"
     
     echo "DEP_METAPKG=\"$DEP_METAPKG\""
     echo "DEP_PKG_NAME=\"$DEP_PKG_NAME\""
