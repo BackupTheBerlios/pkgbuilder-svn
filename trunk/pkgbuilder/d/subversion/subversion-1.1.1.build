@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/d/subversion/subversion-1.0.1.build,v 1.1 2004/04/19 17:42:10 tomby Exp $
 #
-# subversion-1.0.1 pkgbuilder script
+# subversion-1.1.1 pkgbuilder script
 #
 
 inherit configscript
@@ -17,9 +17,9 @@ PKG_LICENSE="APLv1.1"
 
 PKG_USE="python perl server apache"
 
-PKG_DEPENDS=">=n/neon-0.24.4
-             `use_dep python ">=d/python-2.0 >=d/swig-1.3.21"`
-             `use_dep perl ">=d/perl-5.8 >=d/swig-1.3.21"`
+PKG_DEPENDS=">=n/neon-0.24.7
+             `use_dep python ">=d/python-2.0 =d/swig-1.3.21"`
+             `use_dep perl ">=d/perl-5.8 =d/swig-1.3.21"`
              `use_dep server "l/db4"`
              `use_dep apache ">=n/apache-2.0.48"`"
 
@@ -34,10 +34,6 @@ PKG_CONFIGURE_OPTIONS="--with-neon=/usr
                        --disable-experimental-libtool
                        --disable-mod-activation
                        `use python && echo "--with-python=/usr/bin/python --with-swig" || echo "--without-python"`"
-
-
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
 
 do_patch() {
     cd $PKG_SRC/ac-helpers
