@@ -1,12 +1,12 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/evolution/1.4.5/Attic/config.sh,v 1.1 2003/10/30 21:23:29 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/evolution/1.4.5/Attic/config.sh,v 1.2 2003/10/30 21:40:30 tomby Exp $
 
 PKG_NAME="evolution"
 PKG_VERSION="1.4.5"
 PKG_DB3_VERSION="3.1.17"
 PKG_ARCH="i486"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_DB3_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"

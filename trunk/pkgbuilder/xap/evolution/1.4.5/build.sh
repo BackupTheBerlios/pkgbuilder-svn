@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/evolution/1.4.5/Attic/build.sh,v 1.1 2003/10/30 21:23:29 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/evolution/1.4.5/Attic/build.sh,v 1.2 2003/10/30 21:40:30 tomby Exp $
 #
 # evolution pkgbuilder script
 #
@@ -40,7 +40,15 @@ do_configure() {
     
     CFLAGS=$CFLAGS \
     CXXFLAGS=$CXXFLAGS \
-    ./configure --prefix=$PKG_PREFIX --with-db3=$PKG_SRC/db3 --sysconfdir=/etc
+    ./configure --prefix=$PKG_PREFIX \
+        --sysconfdir=/etc \
+        --with-db3=$PKG_SRC/db3 \
+        --without-nspr-libs \
+        --without-nspr-includes \
+		--without-nss-libs \
+        --without-nss-includes \
+        --enable-openssl=yes \
+        --enable-gtk-doc
     
     return $?
 }
