@@ -1,0 +1,89 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# tcl-8.4.9 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_FILE_NAME="$PKG_NAME$PKG_VERSION-src.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="BSD"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://dev.scriptics.com/software/tcltk/"
+
+PKG_SRC="$TMP/$PKG_NAME$PKG_VERSION"
+
+PKG_DOC_FILES="README changes license.terms"
+
+PKG_CONFIGURE_OPTIONS="--enable-shared 
+                       --enable-man-symlinks 
+                       --enable-man-compression=/bin/gzip"
+
+PKG_INSTALL_OPTIONS="INSTALL_ROOT=$PKG_DEST"
+
+do_configure() {
+    cd $PKG_SRC/unix
+    
+    pkg_configure
+    
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC/unix
+    
+    pkg_build
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC/unix
+    
+    pkg_install
+    
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    pkg_installdoc
+    
+    pkg_stripall
+    
+    ( cd $PKG_DEST$PKG_PREFIX/bin
+      rm -f tclsh
+      ln -sf tclsh8.4 tclsh )
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      rm -f libtcl.so libtclstub.a
+      ln -sf libtcl8.4.so libtcl.so
+      ln -sf libtclstub8.4.a libtclstub.a )
+
+    sed -e "s,^TCL_BUILD_LIB_SPEC='-L$PKG_SRC/unix,TCL_BUILD_LIB_SPEC='-L$PKG_PREFIX/lib," \
+        -e "s,^TCL_SRC_DIR='$PKG_SRC',TCL_SRC_DIR='$PKG_PREFIX/lib/tcl8.4/include'," \
+        -e "s,^TCL_BUILD_STUB_LIB_SPEC='-L$PKG_SRC/unix,TCL_BUILD_STUB_LIB_SPEC='-L$PKG_PREFIX/lib," \
+        -e "s,^TCL_BUILD_STUB_LIB_PATH='$PKG_SRC/unix,TCL_BUILD_STUB_LIB_PATH='$PKG_PREFIX/lib," \
+        -e "s,^TCL_LIB_FILE='libtcl8.4..TCL_DBGX..so',TCL_LIB_FILE=\"libtcl8.4\$\{TCL_DBGX\}.so\"," \
+        $PKG_DEST$PKG_PREFIX/lib/tclConfig.sh > $PKG_DEST$PKG_PREFIX/lib/tclConfig.sh.new
+
+    mv $PKG_DEST$PKG_PREFIX/lib/tclConfig.sh.new $PKG_DEST$PKG_PREFIX/lib/tclConfig.sh
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/tcl8.4/include/unix
+    install -c -m0644 $PKG_SRC/unix/*.h $PKG_DEST$PKG_PREFIX/lib/tcl8.4/include/unix
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/tcl8.4/include/generic
+    install -c -m0644 $PKG_SRC/generic/*.h $PKG_DEST$PKG_PREFIX/lib/tcl8.4/include/generic
+    rm -f $PKG_DEST$PKG_PREFIX/lib/tcl8.4/include/generic/tcl.h
+    rm -f $PKG_DEST$PKG_PREFIX/lib/tcl8.4/include/generic/tclDecls.h
+    rm -f $PKG_DEST$PKG_PREFIX/lib/tcl8.4/include/generic/tclPlatDecl
+    
+    pkg_installfiles
+}
