@@ -86,6 +86,11 @@ do_assertEquals "`extract_meta '!asdf'`" "asdf"
 do_assertEquals "`extract_meta 'asdf'`" "asdf"
 do_assertEquals "`extract_meta '>=asdf/pkg'`" "asdf"
 
+echo "=> use tests"
+do_init
+use fam ; do_assertFalse $?
+use fame ; do_assertTrue $?
+
 echo "=> is_installed tests"
 do_init
 is_installed vim ; do_assertTrue $?
