@@ -7,7 +7,7 @@
 
 inherit php
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_DEPENDS="$PKG_DEPENDS
              n/apache
@@ -21,7 +21,7 @@ PKG_CONFIGURE_OPTIONS="--disable-static
 
 PKG_BUILD_TARGET="libphp4.la"
 
-PKG_CONFIG_FILES="etc/apache2/conf.d/mod_php.conf"
+PKG_CONFIG_FILES="etc/apache2/conf.d/mod_php.conf etc/apache2/php.ini"
 
 PKG_NOSTRIP="Y"
 
@@ -30,6 +30,7 @@ do_install() {
     mkdir -p $PKG_DEST/usr/lib/apache2
 
     cat $PKG_HOME/files/mod_php.conf > $PKG_DEST/etc/apache2/conf.d/mod_php.conf
+    cat $PKG_HOME/files/php.ini > $PKG_DEST/etc/apache2/php.ini
     cat $PKG_SRC/.libs/libphp4.so > $PKG_DEST/usr/lib/apache2/libphp4.so
     chmod 755 $PKG_DEST/usr/lib/apache2/libphp4.so
 
