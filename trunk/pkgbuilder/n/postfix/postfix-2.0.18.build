@@ -1,19 +1,19 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/postfix/postfix-2.0.18.build,v 1.1 2004/01/24 11:15:18 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/postfix/postfix-2.0.18.build,v 1.2 2004/02/25 22:31:10 tomby Exp $
 #
 # postfix-2.1.18 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.porcupine.org/mirrors/postfix-release/official/$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION
          ftp://ftp.porcupine.org/mirrors/postfix-release/official/$PKG_NAME-2.0-ns-mx-acl-patch.gz
-         `use ssl && echo "ftp://ftp.aet.tu-cottbus.de/pub/postfix_tls/pfixtls-0.8.16-2.0.16-0.9.7b.tar.gz"`"
+         `use ssl && echo "ftp://ftp.aet.tu-cottbus.de/pub/postfix_tls/pfixtls-0.8.16-2.0.18-0.9.7c.tar.gz"`"
 
 PKG_LICENSE="IPL-1"
 
@@ -48,7 +48,7 @@ do_unpack() {
 
     cd $PKG_SRC
     
-    use ssl && unpack pfixtls-0.8.16-2.0.16-0.9.7b.tar.gz
+    use ssl && unpack pfixtls-0.8.16-2.0.18-0.9.7c.tar.gz
     
     return $?
 }
@@ -56,7 +56,7 @@ do_unpack() {
 do_patch() {
     cd $PKG_SRC
     
-    use ssl && apply_patch pfixtls-0.8.16-2.0.16-0.9.7b/pfixtls.diff -p1
+    use ssl && apply_patch pfixtls-0.8.16-2.0.18-0.9.7c/pfixtls.diff -p1
     
     apply_patch $PKG_NAME-2.0-ns-mx-acl-patch.gz -p0
     
