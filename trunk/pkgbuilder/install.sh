@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.7 2003/11/23 18:21:17 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.8 2003/11/28 21:37:00 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -19,6 +19,13 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 # Install a package resolving dependencies
+
+usage() {
+    echo
+    echo "usage: ./install.sh [pkg]"
+    echo
+    echo "    example: ./install.sh xap/aterm"
+}
 
 #config file
 source build.rc
@@ -124,21 +131,17 @@ for DEP in $PKG_DEPENDS ; do
         echo "pkgbuilder: $DEP allready installed"
     else
         
-        if [ "$DEP_PKG_INSTALLED_VERSION" == "" ] ; then
-            ( cd $PKGBUILDER_HOME ; ./install.sh $DEP_PKG )
-            RETVAL="$?"
-        else
-            ( cd $PKGBUILDER_HOME ; ./upgrade.sh $DEP_PKG )
-            RETVAL="$?"
-        fi
+        ( cd $PKGBUILDER_HOME ; ./install.sh $DEP_PKG )
+        RETVAL="$?"
         
-        echo "pkgbuilder: instalation for $DEP result: $RETVAL"
+        echo
+        echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
     
         test $RETVAL -ne 0 && exit $RETVAL
     fi
 done
 
 echo "pkgbuilder: installing $PKG"
-( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto installpkg cleanup )
+( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto upgradepkg cleanup )
 
 exit $?
