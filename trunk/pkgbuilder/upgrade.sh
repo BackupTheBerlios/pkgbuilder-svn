@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.5 2003/11/23 16:55:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/Attic/upgrade.sh,v 1.1 2003/11/23 16:55:35 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -135,6 +135,6 @@ for DEP in $PKG_DEPENDS ; do
 done
 
 echo "pkgbuilder: installing $PKG"
-( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto installpkg cleanup )
+( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto upgradepkg cleanup )
 
 exit $?
