@@ -9,7 +9,7 @@
 <div id="tmiddle">
 
     <?php site_side(); ?>
-    
+
     <!--Content-->
     <div id="tmain">
         <div class="tbox">
@@ -18,14 +18,13 @@
                 <p><b>Tasks:</b></p>
                 <ul>
                     <li>Test, test, test :)</li>
-                    <li>Create new packages</li>
+                    <li>New packages. Help wanted.</li>
                 </ul>
                 <p><b>Packages:</b></p>
                 <ul>
                     <li>a2ps</li>
                     <li>acpid</li>
                     <li>animail</li>
-                    <li>apache</li>
                     <li>apsfilter</li>
                     <li>ash</li>
                     <li>at</li>
@@ -43,9 +42,7 @@
                     <li>coreutils</li>
                     <li>courier</li>
                     <li>cpio</li>
-                    <li>cvs</li>
                     <li>db2</li>
-                    <li>db4</li>
                     <li>dcron</li>
                     <li>devfsd</li>
                     <li>devs</li>
@@ -62,10 +59,8 @@
                     <li>fvwm</li>
                     <li>gawk</li>
                     <li>gdb</li>
-                    <li>gdm</li>
                     <li>getmail</li>
                     <li>ghex</li>
-                    <li>gimp</li>
                     <li>glade</li>
                     <li>glut</li>
                     <li>gnome2-user-docs</li>
@@ -82,7 +77,6 @@
                     <li>grep</li>
                     <li>groff</li>
                     <li>gucharmap</li>
-                    <li>gv</li>
                     <li>gzip</li>
                     <li>hdparm</li>
                     <li>hotplug</li>

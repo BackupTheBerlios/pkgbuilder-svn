@@ -27,7 +27,7 @@
                 &rsaquo; <a href="http://developer.berlios.de/project/showfiles.php?group_id=1114">Download</a>
             </div>
             <div class="tleft">
-                &rsaquo; <a href="http://developer.berlios.de/cvs/?group_id=1114">CVS</a>
+                &rsaquo; <a href="http://developer.berlios.de/svn/?group_id=1114">SVN</a>
             </div>
             <div class="tleft">
                 &rsaquo; <a href="contact.php">Contact</a>
@@ -50,13 +50,13 @@
                 &rsaquo; <a href="http://www.slackware.com/">Slackware</a>
             </div>
         </div>
-        
-       <!-- BerliOS--> 
+
+       <!-- BerliOS-->
         <div class="tbox">
             <a href="http://developer.berlios.de" name="Powered by BerliOS">
                 <img src="http://developer.berlios.de/bslogo.php?group_id=1114" width="124" height="32" border="0" alt="BerliOS Developer Logo"/>
             </a>
         </div>
     </div>
-    
+
 <?php } ?>
