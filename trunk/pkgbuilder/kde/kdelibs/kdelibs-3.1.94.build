@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdelibs/Attic/kdelibs-3.1.94.build,v 1.1 2003/12/13 16:01:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdelibs/Attic/kdelibs-3.1.94.build,v 1.2 2003/12/13 16:02:44 tomby Exp $
 #
 # kdelibs-3.1.93 pkgbuilder script
 #
@@ -25,7 +25,7 @@ PKG_DEPENDS="d/perl
 	         l/libxml2
 	         l/libtiff
              l/qt
-	         ap/eps-gs
+	         ap/esp-gs
 	         l/libart_lgpl
              a/gettext
 	         d/gettext-tools
