@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.13 2003/12/13 12:00:15 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.14 2003/12/26 20:12:57 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -58,11 +58,6 @@ if [ "$PKG_VERSION" == "" ] ; then
     PKG_VERSION="`latest_version "$METAPKG" "$PKG_NAME"`"
 fi
 
-if is_installed "$PKG_NAME" "$PKG_VERSION" ; then
-    echo "pkgbuilder: $PKG_NAME-$PKG_VERSION allready installed"
-    exit 1
-fi
-
 PKG="$METAPKG/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
 
 if [ ! -r "$PKG" ] ; then
@@ -77,6 +72,11 @@ echo
 echo "PKG=\"$PKG\""
 
 echo "PKG_DEPENDS=\"$PKG_DEPENDS\""
+
+if is_installed "$PKG_NAME" "$PKG_VERSION" "$PKG_BUILD" ; then
+    echo "pkgbuilder: Package \"$PKG_NAME-$PKG_VERSION-$PKG_BUILD\" allready installed"
+    exit 1
+fi
 
 #resolving dependencies
 for DEP in $PKG_DEPENDS ; do
@@ -173,9 +173,7 @@ for DEP in $PKG_DEPENDS ; do
     fi
 done
 
-if is_installed "$PKG_NAME" && is_installed "$PKG_NAME" "$PKG_VERSION" ; then
-    echo "pkgbuilder: $PKG_NAME-$PKG_VERSION allready installed"
-elif is_installed "$PKG_NAME" ; then
+if is_installed "$PKG_NAME" ; then
     echo "pkgbuilder: upgrading $PKG"
     ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto upgradepkg cleanup )
     RETVAL="$?"
