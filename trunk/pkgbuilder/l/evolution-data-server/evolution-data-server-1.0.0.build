@@ -13,7 +13,7 @@ PKG_USE="doc"
 
 PKG_DEPENDS="l/glib2
              >=gnome/libbonobo-2.4
-             >=gnome/orbit-2.9.8
+             >=gnome/orbit2-2.9.8
              >=gnome/gnome-vfs-2
              >=gnome/libgnome-2
              >=gnome/gconf-2
