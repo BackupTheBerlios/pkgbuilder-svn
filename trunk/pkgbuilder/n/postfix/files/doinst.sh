@@ -1,4 +1,5 @@
 ( useradd postfix )
+( groupadd postfix )
 ( groupadd postdrop )
 ( usermod -G mail postfix )
 ( chown root:postdrop usr/sbin/postdrop )

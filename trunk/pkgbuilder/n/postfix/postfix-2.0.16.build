@@ -1,14 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/postfix/postfix-2.0.16.build,v 1.5 2003/12/26 01:17:02 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/postfix/postfix-2.0.16.build,v 1.6 2003/12/26 01:39:40 tomby Exp $
 #
-# postfix pkgbuilder script
+# postfix-2.1.16 pkgbuilder script
 #
 
 PKG_NAME="postfix"
 PKG_VERSION="2.0.16"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.porcupine.org/mirrors/postfix-release/official/$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION

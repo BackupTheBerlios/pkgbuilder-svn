@@ -8,6 +8,6 @@
        |-----handy-ruler------------------------------------------------------|
 postfix: postfix
 postfix:
-postfix: postfix
+postfix: A fast and secure drop-in replacement for sendmail.
 postfix:
 
