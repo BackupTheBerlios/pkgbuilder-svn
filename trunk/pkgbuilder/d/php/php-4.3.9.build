@@ -20,3 +20,5 @@ PKG_CONFIGURE_OPTIONS="--disable-cgi
                        $PKG_CONFIGURE_OPTIONS"
 
 PKG_CONFIG_FILES="etc/pear.conf"
+
+PKG_NOSTRIP="Y"
