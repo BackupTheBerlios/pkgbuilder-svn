@@ -1,0 +1,31 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/flac/flac-1.1.0.build,v 1.4 2004/01/17 13:23:46 tomby Exp $
+#
+# flac-1.1.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="sse X xmms"
+
+PKG_DEPENDS="l/glibc 
+             l/id3lib 
+             >=l/libogg-1.0
+             d/nasm 
+             a/gawk
+             `use X && use xmms && echo "xap/xmms"`"
+
+PKG_HOMESITE="http://flac.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS COPYING.* README"
+
+PKG_CONFIGURE_OPTIONS="`use_enable sse`"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION/html"
