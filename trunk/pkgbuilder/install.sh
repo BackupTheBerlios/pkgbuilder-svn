@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.10 2003/11/30 15:05:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.11 2003/12/07 22:58:24 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -167,6 +167,8 @@ for DEP in $PKG_DEPENDS ; do
         echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
     
         test $RETVAL -ne 0 && exit $RETVAL
+        
+        . /etc/profile
     fi
 done
 
