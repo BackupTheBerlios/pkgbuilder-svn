@@ -1,0 +1,63 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# distcc-2.18.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://distcc.samba.org/ftp/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gnome gtk"
+
+PKG_DEPENDS="a/shadow
+             l/popt
+            `use gnome && echo ">=l/gtk+2-2.0.0
+                                >=gnome/libgnome-2.0.0
+                                >=gnome/libgnomeui-2.0.0.0
+                                >=gnome/libglade-2.0.0
+                                l/pango"`
+            `use gtk && echo ">=l/gtk+2-2.0.0 l/pango"`"
+
+PKG_HOMESITE="http://distcc.samba.org/"
+
+PKG_DOC_FILES="INSTALL README"
+
+PKG_CONFIGURE_OPTIONS="--datadir=$PKG_PREFIX/share/distcc
+                       --sysconfdir=/etc
+                       `use gtk && ! use gnome && echo "--with-gtk"`
+                       `use gtk && use gnome && echo "--with-gnome"`"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST 
+                     docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
+                     pkgdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+                     
+PKG_CONFIG_FILES="etc/rc.d/rc.distccd etc/profile.d/distcc.sh etc/profile.d/distcc.csh"
+                     
+do_install() {
+    configscript_do_install
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/$PKG_NAME/bin
+    
+    cd $PKG_DEST$PKG_PREFIX/lib/$PKG_NAME/bin
+    ln -s /usr/bin/distcc gcc
+    ln -s /usr/bin/distcc cc
+    ln -s /usr/bin/distcc g++
+    ln -s /usr/bin/distcc c++
+    
+    mkdir -p $PKG_DEST/etc/profile.d
+    cp $PKG_HOME/files/distcc.sh $PKG_DEST/etc/profile.d
+    cp $PKG_HOME/files/distcc.csh $PKG_DEST/etc/profile.d
+    chmod 644 $PKG_DEST/etc/profile.d/distcc.*
+    
+    mkdir -p $PKG_DEST/etc/rc.d
+    cp $PKG_HOME/files/rc.distccd $PKG_DEST/etc/rc.d
+    chmod 755 $PKG_DEST/etc/rc.d/rc.distccd
+}
+
