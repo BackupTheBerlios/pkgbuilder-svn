@@ -78,3 +78,13 @@ do_install() {
       cat $PKG_HOME/files/rc.privoxy > $PKG_DEST/etc/rc.d/rc.privoxy
       chmod 750 $PKG_DEST/etc/rc.d/rc.privoxy )
 }
+
+do_postinstall() {
+    configscript_do_postinstall
+
+    local doc
+    for doc in developer-manual faq man-page user-manual ; do
+        mkdir -p $PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION/$doc
+        cp doc/webserver/$doc/* $PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION/$doc
+    done
+}
