@@ -1,0 +1,31 @@
+#!/bin/sh
+# Start/stop/restart the GPM mouse server:
+
+source rc.gpm.conf
+
+gpm_start() {
+  echo "Starting gpm:  /usr/sbin/gpm -m $GPM_DEV -t $GPM_TYPE"
+  /usr/sbin/gpm -m $GPM_DEV -t $GPM_TYPE
+}
+
+gpm_stop() {
+  echo "Stopping gpm..."
+  /usr/sbin/gpm -k
+}
+
+case "$1" in
+    'stop')
+        gpm_stop
+    ;;
+    'start')
+        gpm_start
+    ;;
+    'restart')
+        gpm_stop
+        sleep 1
+        gpm_start
+    ;;
+    *)
+        gpm_start
+esac
+
