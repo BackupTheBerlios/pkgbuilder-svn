@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/foomatic-db/Attic/foomatic-db-20031221.build,v 1.4 2003/12/24 11:18:03 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db/Attic/foomatic-db-20031221.build,v 1.1 2003/12/27 16:47:03 tomby Exp $
 #
 # foomatic-db-3.0.0 pkgbuilder script
 #
@@ -20,8 +20,8 @@ PKG_USE="cups"
 
 PKG_DEPENDS="l/libxml2
              n/wget
-             a/foomatic-filters
-             a/foomatic-db-engine"
+             ap/foomatic-filters
+             ap/foomatic-db-engine"
 
 PKG_HOMESITE="http://www.linuxprinting.org/foomatic"
 
