@@ -1,0 +1,47 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/nedit-5.4.build,v 1.4 2004/01/05 15:11:40 tomby Exp $
+#
+# nedit-5.5_rc1 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_/}-src.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.nedit.org/pub/NEdit/beta/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/byacc l/lesstif"
+
+PKG_HOMESITE="www.nedit.org"
+
+PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION/_/}"
+PKG_DOC_FILES="README ReleaseNotes ChangeLog COPYRIGHT
+    		   doc/*.txt doc/nedit.doc doc/README.FAQ doc/NEdit.ad"
+
+do_build() {
+    cd $PKG_SRC
+    
+    make linux
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/bin
+    cp source/nedit $PKG_DEST$PKG_PREFIX/bin
+    cp source/nc $PKG_DEST$PKG_PREFIX/bin/neditc
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/man/man1
+    cp doc/nedit.man $PKG_DEST$PKG_PREFIX/man/man1/nedit.1
+    cp doc/nc.man $PKG_DEST$PKG_PREFIX/man/man1/neditc.1
+    
+    return $?
+}
