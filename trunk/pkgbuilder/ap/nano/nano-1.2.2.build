@@ -1,14 +1,20 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/nano/Attic/nano-1.2.2.build,v 1.1 2003/11/08 16:35:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/nano/Attic/nano-1.2.2.build,v 1.2 2003/11/23 15:30:02 tomby Exp $
 
 PKG_NAME="nano"
 PKG_VERSION="1.2.2"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.nano-editor.org/dist/v1.2/$PKG_FILE_NAME"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/ncurses-5.2
+               a/gettext 
+               d/gettext-tools"
 
 PKG_HOMESITE="http://www.nano-editor.org/"
 
@@ -26,7 +32,7 @@ include do_patch
 
 include do_build
 include do_install
-include do_postinstall
+
 include do_buildpkg
 include do_installpkg
 include do_upgradepkg
@@ -42,4 +48,30 @@ do_configure() {
         --enable-all
         
     return $?        
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc
+    cp $PKG_HOME/files/nanorc-sample $PKG_DEST/etc/nanorc
+    chmod 644 $PKG_DEST/etc/nanorc
+    
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    
+    if [ -f $PKG_HOME/files/doinst.sh ] ; then
+        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
+    fi
 }
