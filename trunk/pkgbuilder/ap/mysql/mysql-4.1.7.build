@@ -74,19 +74,19 @@ do_install() {
     mkdir -p $PKG_DEST/etc/rc.d
     cat $PKG_HOME/files/rc.mysqld > $PKG_DEST/etc/rc.d/rc.mysqld
 
-    if [ -r $PKG_DEST/usr/lib/mysql/libmysqlclient.so.12 ]; then
+    if [ -r $PKG_DEST/usr/lib/mysql/libmysqlclient.so.14 ]; then
         ( cd $PKG_DEST/usr/lib
-          rm -f libmysqlclient.so libmysqlclient.so.12
+          rm -f libmysqlclient.so libmysqlclient.so.14
           ln -sf mysql/libmysqlclient.so .
-          ln -sf mysql/libmysqlclient.so.12 .
+          ln -sf mysql/libmysqlclient.so.14 .
         )
     fi
 
-    if [ -r $PKG_DEST/usr/lib/mysql/libmysqlclient_r.so.12 ]; then
+    if [ -r $PKG_DEST/usr/lib/mysql/libmysqlclient_r.so.14 ]; then
         ( cd $PKG_DEST/usr/lib
-          rm -f libmysqlclient_r.so libmysqlclient_r.so.12
+          rm -f libmysqlclient_r.so libmysqlclient_r.so.14
           ln -sf mysql/libmysqlclient_r.so .
-          ln -sf mysql/libmysqlclient_r.so.12 .
+          ln -sf mysql/libmysqlclient_r.so.14 .
         )
     fi
 
