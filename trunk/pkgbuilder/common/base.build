@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/base.build,v 1.7 2004/02/28 20:12:17 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/base.build,v 1.8 2004/02/28 20:27:55 tomby Exp $
 #
 # base pkgbuilder script
 #
@@ -56,10 +56,10 @@ pkg_do_buildpkg() {
     cd $PKG_DEST
     
     if [ "$PKG_ARCH" = "" ] ; then
-        $PKG_ARCH="$ARCH"
+        $PKG_ARCH="${ARCH/-/}"
     fi
     
-    makepkg -l y -c n ../$PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    makepkg -l y -c n ../$PKG_NAME-$PKG_VERSION-$PKG_ARCH-$PKG_BUILD.tgz
     
     return $?
 }
