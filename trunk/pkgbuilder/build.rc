@@ -1,10 +1,10 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/Attic/build.rc,v 1.4 2003/11/23 00:58:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/Attic/build.rc,v 1.5 2003/11/28 22:02:45 tomby Exp $
 
 PKGBUILDER_HOME="/home/tomby/proyectos/pkgbuilder"
 
-VERSION="20031115"
+VERSION="20031128"
 
 PACKAGES_LOGDIR="/home/tomby/tmp/installed"
 

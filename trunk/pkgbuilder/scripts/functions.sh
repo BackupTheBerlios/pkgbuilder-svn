@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.14 2003/11/28 21:36:18 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.15 2003/11/28 22:01:18 tomby Exp $
 
 version() {
     echo "pkgbuilder $VERSION"
@@ -167,7 +167,7 @@ is_installed() {
         return 1
     fi
     
-    local retval
+    local retval=""
     
     if [ "$2" == "" ] ; then
         ls $PACKAGES_LOGDIR/$1-*-*-* &> /dev/null
@@ -195,11 +195,15 @@ latest_version() {
         local latestbuildfile=""
         
         for i in $buildfiles ; do
-            latestbuildfile="$i"
+            if [[ "$latestbuildfile" < "$i" ]] ; then
+                latestbuildfile="$i"
+            fi
         done
+        
+        latestbuildfile="`basename $latestbuildfile .build`"
 
         local pkgmayorversion=`expr match $latestbuildfile '[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
-        local pkgminorversion=`expr match $latestbuildfile '[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)\.build'`
+        local pkgminorversion=`expr match $latestbuildfile '[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
 
         echo "$pkgmayorversion$pkgminorversion"
     else
