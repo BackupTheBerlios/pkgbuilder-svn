@@ -77,7 +77,10 @@ PKG_DEPENDS=">=l/glib2-2.4
              >=xap/gpdf-0.132
              >=gnome/gucharmap-1.4
              >=gnome/ghex-2.6
-             >=gnome/libgail-gnome-1.0"
+             >=gnome/libgail-gnome-1.0
+             >=gnome/gnome-netstatus-2.8
+             >=gnome/gnome-nettool-0.99
+             >=gnome/gnome-system-tools-1.0"
 
 PKG_HOMESITE="http://www.gnome.org/"
 
