@@ -70,7 +70,7 @@ if [ ! -d $TMP ]; then
     mkdir -p $TMP
 fi
 
-if [ ! -r "$PKG" ] ; then
+if [ ! -f "$PKG" ] ; then
     echo "pkgbuilder: $PKG script not found"
     exit 1
 fi
