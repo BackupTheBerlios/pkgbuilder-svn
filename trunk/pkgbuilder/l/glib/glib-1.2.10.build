@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/glib/glib-1.2.10.build,v 1.1 2003/11/29 12:32:12 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/glib/glib-1.2.10.build,v 1.2 2003/12/06 17:14:08 tomby Exp $
 #
 # glib-1.2.10 pkgbuilder script
 #
@@ -17,7 +17,7 @@ PKG_LICENSE="LGPLv2.1"
 
 PKG_USE=""
 
-PKG_DEPENDS="d/glibc"
+PKG_DEPENDS="l/glibc"
 
 PKG_HOMESITE="http://www.gtk.org/"
 
