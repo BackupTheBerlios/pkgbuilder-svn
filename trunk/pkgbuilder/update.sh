@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/update.sh,v 1.2 2004/03/14 15:17:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/update.sh,v 1.3 2004/03/14 15:50:22 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -70,13 +70,14 @@ for PKG in `find $PACKAGES_LOGDIR -type f | sort` ; do
         if ! is_installed $PKG_NAME $PKG_VERSION $PKG_BUILD ; then
             if [ "$MODE" = "install" ] ; then
                 ( cd $PKGBUILDER_HOME ; ./install.sh $OPTIONS $PKG )
-                RETVAL="$?"
+
+                test "$?" -ne 0 && exit "$?"
             else
                 echo ./install.sh "$PKG_META/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
             fi
         fi
         
-        test "$RETVAL" -ne 0 && exit "$RETVAL"
+        
     fi
 done
 
