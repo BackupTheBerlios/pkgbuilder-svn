@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/abiword/Attic/abiword-2.0.3.build,v 1.1 2004/02/01 18:26:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/abiword/abiword-2.0.5.build,v 1.1 2004/03/19 15:59:50 tomby Exp $
 #
-# abiword-2.0.2 pkgbuilder script
+# abiword-2.0.5 pkgbuilder script
 #
 
 inherit configscript
@@ -18,22 +18,23 @@ PKG_LICENSE="GPLv2"
 PKG_USE="jpeg gnome"
 
 PKG_DEPENDS="x/xfree86
-	         >=l/fontconfig-2.1
-	         l/libpng
-	         l/gtk+2
-	         >=gnome/libglade-2
-	         >=l/fribidi-0.10.4
-	         >=l/libxml2-2.4.10
+             >=l/fontconfig-2.1
+             l/libpng
+             l/gtk+2
+             l/aspell
+             >=gnome/libglade-2
+             >=l/fribidi-0.10.4
+             >=l/libxml2-2.4.10
              >=ap/wv-1
              d/automake
              d/pkgconfig
              d/perl
              a/bzip2
              `use jpeg && echo "l/libjpeg"`
-	         `use gnome && echo ">=gnome/libgnomeui-2.2
-		                         >=gnome/libgnomeprint-2.2.1
-		                         >=gnome/libgnomeprintui-2.2.1
-		                         >=gnome/libbonobo-2"`"
+             `use gnome && echo ">=gnome/libgnomeui-2.2
+                                 >=gnome/libgnomeprint-2.2.1
+                                 >=gnome/libgnomeprintui-2.2.1
+                                 >=gnome/libbonobo-2"`"
 
 PKG_HOMESITE="http://www.abisource.com"
 
@@ -48,13 +49,14 @@ PKG_CONFIGURE_OPTIONS="--enable-bidi
                        --enable-threads
                        --without-ImageMagick
                        --disable-scripting
+                       --disable-gucharmap
                        --with-sys-wv
-                       `use gnome && echo "--enable-gnome"`"
+                       `use_enable gnome`"
 
 PKG_BUILD_OPTIONS=""
 PKG_BUILD_TARGET="all-recursive"
 
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST PERLDEST=${D}"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST PERLDEST=$PKG_DEST"
 PKG_INSTALL_TARGET="install"
 
 abiword_build_plugins() {
@@ -84,6 +86,15 @@ do_patch() {
     cp configure configure.old
 	sed 's:-pedantic::g' configure.old > configure
 	rm -f configure.old
+    
+    if installed_version gtk+2 | grep -q "^2\.4" ; then
+        ( cd $PKG_ABI_SRC/src/af/xap/unix/gnome
+          apply_patch $PKG_NAME-2.0.5-gtk-2.4.0-1.diff -p1 -N )
+        ( cd $PKG_ABI_SRC/src/af/xap/unix
+          apply_patch $PKG_NAME-2.0.5-gtk-2.4.0-2.diff -p0 -N )
+        ( cd $PKG_ABI_SRC/src/wp/ap/unix
+          apply_patch $PKG_NAME-2.0.5-gtk-2.4.0-3.diff -p0 -N )
+    fi
     
     return $?
 }
