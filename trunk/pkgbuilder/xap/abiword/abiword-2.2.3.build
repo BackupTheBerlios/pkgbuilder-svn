@@ -1,0 +1,115 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# abiword-2.2.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="jpeg gnome"
+
+PKG_DEPENDS="x/x11
+             >=l/fontconfig-2.1
+             l/libpng
+             l/zlib
+             l/popt
+             l/glib2
+             l/gtk+2
+             l/aspell
+             l/enchant
+             >=gnome/libglade-2.0
+             >=l/fribidi-0.10.4
+             >=l/libxml2-2.4.10
+             >=ap/wv-1.0
+             d/automake
+             d/pkgconfig
+             d/perl
+             a/bzip2
+             `use_dep jpeg "l/libjpeg"`
+             `use_dep gnome ">=gnome/libgnomeui-2.2
+                             >=gnome/libgnomeprint-2.2.1
+                             >=gnome/libgnomeprintui-2.2.1
+                             >=gnome/libbonobo-2"`"
+
+PKG_HOMESITE="http://www.abisource.com"
+
+PKG_ABI_SRC="$PKG_SRC/abi"
+PKG_PLUGIN_SRC="$PKG_SRC/abiword-plugins"
+
+PKG_DOC_FILES="abi/COPY* abi/CREDITS.TXT abi/README.TXT"
+
+PKG_CONFIGURE_OPTIONS="--enable-bidi
+                       --enable-threads
+                       --without-ImageMagick
+                       --disable-scripting
+                       --disable-gucharmap
+                       --with-sys-wv
+                       `use_enable gnome`"
+
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET="all-recursive"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST PERLDEST=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+abiword_build_plugins() {
+    cd $PKG_PLUGIN_SRC
+
+    PKG_CONFIGURE_OPTIONS="--enable-all
+                           --with-abiword=$PKG_ABI_SRC
+                           --without-ImageMagick" 
+    
+    pkg_configure && make
+    
+    return $?
+}
+
+abiword_install_plugins() {
+    cd $PKG_PLUGIN_SRC
+    
+    PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+    pkg_install
+    
+    return $?
+}
+
+do_patch() {
+    cd $PKG_ABI_SRC
+    
+    cp configure configure.old
+    sed 's:-pedantic::g' configure.old > configure
+    rm -f configure.old
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_ABI_SRC
+    
+    pkg_configure
+    
+    return $?
+}
+
+do_build() {
+    cd $PKG_ABI_SRC
+    
+    pkg_build &&
+    abiword_build_plugins
+}
+
+do_install() {
+    cd $PKG_ABI_SRC
+    
+    pkg_install &&
+    abiword_install_plugins
+}
+
