@@ -1,18 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/xscreensaver/xscreensaver-4.14.build,v 1.1 2004/01/01 16:14:07 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/xscreensaver/xscreensaver-4.14.build,v 1.2 2004/01/05 15:13:20 tomby Exp $
 #
 # xscreensaver-4.14 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="xscreensaver"
-PKG_VERSION="4.14"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
-PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.jwz.org/xscreensaver/$PKG_FILE_NAME"
 
 PKG_LICENSE="BSD"
@@ -29,19 +24,15 @@ PKG_DEPENDS="x/xfree86
 
 PKG_HOMESITE="http://www.jwz.org/xscreensaver/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="INSTALL README README.debugging xscreensaver.lsm"
 
 PKG_PREFIX="/usr/X11R6"
 PKG_CONFIGURE_OPTIONS="--with-shadow
                        `use jpeg && echo "--with-jpeg"`
                        `use gtk2 && echo "--with-gtk"`"
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
+
 PKG_INSTALL_OPTIONS="install_prefix=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
+
 
 do_install() {
     cd $PKG_SRC

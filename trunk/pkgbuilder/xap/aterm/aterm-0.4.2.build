@@ -1,18 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/aterm/aterm-0.4.2.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/aterm/aterm-0.4.2.build,v 1.6 2004/01/05 15:08:30 tomby Exp $
 #
 # aterm-0.4.2 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="aterm"
-PKG_VERSION="0.4.2"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
-PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
@@ -25,12 +21,8 @@ PKG_DEPENDS="x/xfree86
              
 PKG_HOMESITE="http://aterm.sourceforge.net/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="aterm.lsm ChangeLog INSTALL README* doc/BUGS doc/FAQ doc/README.* doc/TODO"
 
 PKG_PREFIX="/usr/X11R6"
-PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
+
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
