@@ -16,7 +16,7 @@
 ( chmod 730 var/spool/postfix/maildrop )
 ( chmod 755 var/spool/postfix/pid )
 ( chmod 710 var/spool/postfix/public )
-( usr/sbin/postconf -c "/etc/postfix" -e \
+( usr/sbin/postconf -c "etc/postfix" -e \
         "alias_maps=hash:/etc/mail/aliases" \
         "alias_database=hash:/etc/mail/aliases" \
         "local_destination_concurrency_limit=2" \
