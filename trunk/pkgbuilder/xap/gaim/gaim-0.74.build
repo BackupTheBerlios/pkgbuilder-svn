@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gaim/Attic/gaim-0.74.build,v 1.1 2003/11/29 11:41:34 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gaim/Attic/gaim-0.74.build,v 1.2 2003/11/30 10:33:05 tomby Exp $
 #
 # gaim-0.74 pkgbuilder script
 #
@@ -24,7 +24,7 @@ PKG_DEPENDS="l/db1
 	         >=l/audiofile-0.2.0
 	         >=d/perl-5.6.1
 		     a/sed
-             =xap/mozilla-1.4"
+             >=xap/mozilla-1.4"
 
 PKG_HOMESITE="http://www.gaim.org/"
 
@@ -47,5 +47,41 @@ include do_patch
 include do_configure
 include do_build
 include do_install
-include do_postinstall
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+    
+    if [ -f $PKG_DEST$PKG_PREFIX/info/dir ] ; then
+        rm -f $PKG_DEST$PKG_PREFIX/info/dir
+    fi
+
+    gzip_info $PKG_DEST$PKG_PREFIX/info
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    
+    local mozilla_version="`installed_version mozilla`"
+    
+    cat << EOF > $PKG_DEST/install/doinst.sh
+#!/bin/sh
+if fgrep "/usr/lib/mozilla-$mozilla_version" etc/ld.so.conf 1> /dev/null 2> /dev/null ; then
+  true
+else
+  echo "/usr/lib/mozilla-$mozilla_version" >> etc/ld.so.conf
+fi
+EOF
+
+}
+
 
