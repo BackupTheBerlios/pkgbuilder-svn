@@ -47,10 +47,12 @@ gnome_gconf_install() {
     SCHEMAS="`find $PKG_DEST -type f | grep "etc/gconf/schemas/.*.schemas$" | sed "s:$PKG_DEST/\(.*\):\1:g"`"
 
     if [ "$SCHEMAS" != "" ] ; then
-        echo 'export GCONF_CONFIG_SOURCE=`usr/bin/gconftool-2 --get-default-source`' >> $PKG_DEST/install/doinst.sh
-        echo "SCHEMAS=\"$SCHEMAS\"" >> $PKG_DEST/install/doinst.sh
-        echo "echo \"Gnome Schemas Instalation\"" >> $PKG_DEST/install/doinst.sh
-        echo 'usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS &> /dev/null' >> $PKG_DEST/install/doinst.sh
+        echo "if [ -x usr/bin/gconftool-2 ] ; then "
+        echo '  export GCONF_CONFIG_SOURCE=`usr/bin/gconftool-2 --get-default-source`' >> $PKG_DEST/install/doinst.sh
+        echo "  SCHEMAS=\"$SCHEMAS\"" >> $PKG_DEST/install/doinst.sh
+        echo "  echo \"Gnome Schemas Instalation\"" >> $PKG_DEST/install/doinst.sh
+        echo '  usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS &> /dev/null' >> $PKG_DEST/install/doinst.sh
+        echo "fi"
     fi
 }
 
@@ -61,7 +63,9 @@ gnome_scrollkeeper_update() {
 
     if [ "$OMFS" != "" ] ; then
         echo "echo \"updating scrollkeeper catalogue ...\"" >> $PKG_DEST/install/doinst.sh
-        echo "usr/bin/scrollkeeper-update -p var/lib/scrollkeeper &> /dev/null" >> $PKG_DEST/install/doinst.sh
+        echo "if [ -x usr/bin/scrollkeeper-update ] ; then "
+        echo "  usr/bin/scrollkeeper-update -p var/lib/scrollkeeper &> /dev/null" >> $PKG_DEST/install/doinst.sh
+        echo "fi"
     fi
 }
 
