@@ -23,7 +23,7 @@ PKG_DEPENDS="`use_dep javascript ">=d/flex-2.5.4a"`
              `use_dep png ">=l/libpng-1.2.1"`
              `use_dep jpeg ">=l/libjpeg-6b"`
              `use_dep tiff ">=l/libtiff-3.5.7"`
-             `use_dep X "x/xfree86 >=l/libpng-1.2.1"`
+             `use_dep X "x/x11 >=l/libpng-1.2.1"`
              `use_dep svga ">=l/svgalib-1.4.3 >=l/libpng-1.2.1"`
              `use_dep directfb "l/directfb"`
              `use_dep fbcon "a/gpm >=l/libpng-1.2.1"`"
@@ -38,10 +38,9 @@ PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        `use_enable javascript`
                        `use_with ssl`
                        `use_enable png libpng`
-               	       `use_enable jpeg libjpeg`
+                       `use_enable jpeg libjpeg`
                        `use_enable tiff libtiff`
                        `use X && echo "--enable-graphics --with-x"`
                        `use svga && echo "--enable-graphics --with-svgalib"`
                        `use directfb && echo "--enable-graphics --with-directfb"`"
-
 
