@@ -1,19 +1,19 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# wine-20040914 pkgbuilder script
+# wine-20050211 pkgbuilder script
 # 
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_FILE_NAME="Wine-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.ibiblio.org/pub/Linux/ALPHA/wine/development/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="nas arts cups alsa tcltk opengl"
+PKG_USE="arts cups alsa tcltk opengl"
 
 PKG_DEPENDS="d/flex
              d/byacc
@@ -27,7 +27,7 @@ PKG_DEPENDS="d/flex
 
 PKG_HOMESITE="http://www.winehq.com/"
 
-PKG_DOC_FILES="A* BUGS C* DEVELOPERS-HINTS LICENSE* README VERSION winedefault.reg"
+PKG_DOC_FILES="A* BUGS C* DEVELOPERS-HINTS LICENSE* README VERSION"
 
 PKG_CONFIGURE_OPTIONS="--disable-debug --disable-trace
                       `use_enable opengl`"
