@@ -1,0 +1,37 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/gettext/gettext-0.14.1.build,v 1.1 2004/02/28 18:03:27 tomby Exp $
+#
+# gettext-0.14.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_URL="ftp://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls"
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://www.gnu.org/software/gettext/gettext.html"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog* NEWS README* PACKAGING THANKS"
+
+PKG_CONFIGURE_OPTIONS="`use nls || echo "--disable-nls"`"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION/html"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    ( rm -f $PKG_DEST$PKG_PREFIX/lib/libintl.* 
+      rm -f $PKG_DEST$PKG_PREFIX/share/locale/locale.alias 
+      rm -f $PKG_DEST$PKG_PREFIX/include/libintl.h 
+      mv $PKG_DEST$PKG_PREFIX/share/man $PKG_DEST$PKG_PREFIX ) &&
+    pkg_postinstall
+    
+    return $?
+}
