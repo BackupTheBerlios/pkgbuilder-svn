@@ -1,0 +1,56 @@
+Binary files xpdf-3.00/xpdf/.XPDFViewer.cc.swp and xpdf-3.00-new/xpdf/.XPDFViewer.cc.swp differ
+diff -urN xpdf-3.00/xpdf/XPDFViewer.cc xpdf-3.00-new/xpdf/XPDFViewer.cc
+--- xpdf-3.00/xpdf/XPDFViewer.cc	2004-01-21 17:26:45.000000000 -0800
++++ xpdf-3.00-new/xpdf/XPDFViewer.cc	2004-11-07 18:57:35.000000000 -0800
+@@ -1742,7 +1742,7 @@
+   aboutBigFont =
+     createFontList("-*-times-bold-i-normal--20-*-*-*-*-*-iso8859-1");
+   aboutVersionFont =
+-    createFontList("-*-times-medium-r-normal--16-*-*-*-*-*-iso8859-1");
++    createFontList("-*-times-medium-r-normal--14-*-*-*-*-*-iso8859-1");
+   aboutFixedFont =
+     createFontList("-*-courier-medium-r-normal--12-*-*-*-*-*-iso8859-1");
+ 
+@@ -1757,21 +1757,21 @@
+   n = 0;
+   s = XmStringCreateLocalized("Version " xpdfVersion);
+   XtSetArg(args[n], XmNlabelString, s); ++n;
+-  XtSetArg(args[n], XmNfontList, aboutVersionFont); ++n;
++  XtSetArg(args[n], XmNfontList, NULL); ++n;
+   label = XmCreateLabel(col, "h1", args, n);
+   XmStringFree(s);
+   XtManageChild(label);
+   n = 0;
+   s = XmStringCreateLocalized(xpdfCopyright);
+   XtSetArg(args[n], XmNlabelString, s); ++n;
+-  XtSetArg(args[n], XmNfontList, aboutVersionFont); ++n;
++  XtSetArg(args[n], XmNfontList, NULL); ++n;
+   label = XmCreateLabel(col, "h2", args, n);
+   XmStringFree(s);
+   XtManageChild(label);
+   n = 0;
+   s = XmStringCreateLocalized(" ");
+   XtSetArg(args[n], XmNlabelString, s); ++n;
+-  XtSetArg(args[n], XmNfontList, aboutVersionFont); ++n;
++  XtSetArg(args[n], XmNfontList, NULL); ++n;
+   label = XmCreateLabel(col, "h3", args, n);
+   XmStringFree(s);
+   XtManageChild(label);
+@@ -1782,7 +1782,7 @@
+   n = 0;
+   s = XmStringCreateLocalized(" ");
+   XtSetArg(args[n], XmNlabelString, s); ++n;
+-  XtSetArg(args[n], XmNfontList, aboutVersionFont); ++n;
++  XtSetArg(args[n], XmNfontList, NULL); ++n;
+   label = XmCreateLabel(col, "h4", args, n);
+   XmStringFree(s);
+   XtManageChild(label);
+@@ -1793,7 +1793,7 @@
+     n = 0;
+     s = XmStringCreateLocalized(aboutWinText[i]);
+     XtSetArg(args[n], XmNlabelString, s); ++n;
+-    XtSetArg(args[n], XmNfontList, aboutFixedFont); ++n;
++    XtSetArg(args[n], XmNfontList, NULL); ++n;
+     sprintf(buf, "t%d", i);
+     label = XmCreateLabel(col, buf, args, n);
+     XtManageChild(label);

@@ -7,7 +7,8 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
+
 PKG_URL="ftp://ftp.foolabs.com/pub/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
@@ -19,27 +20,32 @@ PKG_DEPENDS=">=l/freetype2-2.0.5
              ap/esp-gs
              `use_dep motif "x/x11 l/lesstif"`"
 
-PKG_HOMESITE="http://www.foolabs.com/xpdf/xpdf.html"
+PKG_HOMESITE="http://www.foolabs.com/xpdf"
 
 PKG_DOC_FILES="README ANNOUNCE CHANGES"
 
 PKG_PREFIX="/usr/X11R6"
 
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
-                       --enable-freetype2
-                       --with-freetype2-library=/usr/lib
-                       --with-freetype2-includes=/usr/include/freetype2
+PKG_CONFIGURE_OPTIONS="--enable-freetype2 
+                       --sysconfdir=/etc 
+                       --with-freetype2-library=/usr/lib 
+                       --with-freetype2-includes=/usr/include/freetype2/freetype 
+                       --with-t1-library=/usr/lib  
+                       --with-t1-includes=/usr/include 
                        `use_dep motif "--x-includes=/usr/X11R6/include
                                        --with-Xm-library=/usr/X11R6/lib
                                        --with-Xm-includes=/usr/X11R6/include"`
                        --with-gzip"
 
 do_patch() {
-    cd $PKG_SRC/splash
+    ( cd $PKG_SRC ; apply_patch $PKG_NAME-lesstif.patch -Np1 )
+    ( cd $PKG_SRC/xpdf ; apply_patch $PKG_NAME-${PKG_VERSION}pl1.patch -Np0 )
 
-    sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFont.h
-    sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFontFile.h
-    sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFontEngine.h
+    ( cd $PKG_SRC/splash
+      sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFont.h
+      sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFontFile.h
+      sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFontEngine.h
+    )
 }
 
 do_build() {
