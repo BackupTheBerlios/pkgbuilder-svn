@@ -1,0 +1,53 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/Attic/kdegraphics-3.1.94.build,v 1.1 2003/12/14 13:00:06 tomby Exp $
+#
+# kdegraphics-3.1.94 pkgbuilder script
+#
+
+PKG_NAME="kdegraphics"
+PKG_VERSION="3.1.94"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2"
+
+PKG_USE="sane tetex"
+
+PKG_DEPENDS=">=l/qt-3.2 
+             >=kde/kdelibs-3.1.94 
+             >=kde/kdebase-3.1.94 
+             >=xap/xpdf-2.02p1 
+             >=l/lcms-1.11 
+             >=l/imlib-1.9.14 
+             >=l/libtiff-3.5.7
+             >=l/fridibi-0.10.4
+             >=ap/epsgs-7.05.6
+             `use sane && echo "ap/sane"`
+             `use tetex && echo "t/tetex"`"
+
+PKG_HOMESITE="http://www.kde.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL kdegraphics.lsm README"
+
+PKG_PREFIX="/opt/kde-3.2"
+PKG_CONFIGURE_OPTIONS="--disable-debug"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
