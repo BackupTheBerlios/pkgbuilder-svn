@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/distcc/distcc-2.12.1.build,v 1.2 2004/02/14 22:20:49 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/distcc/distcc-2.12.1.build,v 1.3 2004/02/29 13:28:36 tomby Exp $
 #
 # distcc-2.12.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://distcc.samba.org/ftp/$PKG_NAME/$PKG_FILE_NAME"
@@ -38,6 +38,8 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
                      docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
                      pkgdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
                      
+PKG_CONFIG_FILES="etc/rc.d/rc.distcc etc/profile.d/distcc.sh etc/profile.d/distcc.csh"
+                     
 do_install() {
     configscript_do_install
     
@@ -48,5 +50,14 @@ do_install() {
     ln -s /usr/bin/distcc cc
     ln -s /usr/bin/distcc g++
     ln -s /usr/bin/distcc c++
+    
+    mkdir -p $PKG_DEST/etc/profile.d
+    cp $PKG_HOME/files/distcc.sh $PKG_DEST/etc/profile.d
+    cp $PKG_HOME/files/distcc.csh $PKG_DEST/etc/profile.d
+    chmod 644 $PKG_DEST/etc/profile.d/distcc.*
+    
+    mkdir -p $PKG_DEST/etc/rc.d
+    cp $PKG_HOME/files/rc.distccd $PKG_DEST/etc/rc.d
+    chmod 755 $PKG_DEST/etc/rc.d/rc.distccd
 }
 
