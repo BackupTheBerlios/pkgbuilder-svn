@@ -57,6 +57,10 @@ pkg_do_buildpkg() {
     if [ "$PKG_ARCH" = "" ] ; then
         $PKG_ARCH="${ARCH/-/}"
     fi
+
+    if [ ! -d $BINARIES_DIR ] ; then
+        mkdir -p $BINARIES_DIR
+    fi
     
     makepkg -l y -c n $BINARIES_DIR/$PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
     
