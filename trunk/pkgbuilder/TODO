@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.36 2004/01/11 15:54:59 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.37 2004/01/17 16:16:21 tomby Exp $
 
 * New tasks:
 
@@ -6,7 +6,7 @@ $Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.36 2004/01/11 15:54:59 tomby Ex
     create virtual pkgs support like 'virtual/mta' in gentoo
     use new 'use' variable flag values
     cleanup code
-    test latest estable kernel 2.6.1
+    documentation
     
 * Packages to update:
 
@@ -17,6 +17,7 @@ $Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.36 2004/01/11 15:54:59 tomby Ex
     cvs                     1.11.11
     wget                    1.9.1
     openssl                 0.9.7c
+    tcpdump
 
 * Packages:
 
@@ -163,7 +164,7 @@ l)
     id3lib                 X    3.8.3
     imlib                  X    1.9.14
     imlib2                 X    1.1.0
-    lame                   X    3.93.1
+    lame                   X    3.95.1
     lcms                   X    1.11
     lesstif                X    0.93.94
     liba52                 X    0.7.4
@@ -237,6 +238,8 @@ d)
     bison
     byacc
     ccache                 X    2.3
+    cscope                 X    15.4
+    ctags                  X    5.5
     cvs
     distcc                 X    2.12.1
     flex
@@ -346,11 +349,11 @@ xap)
     abiword                X    2.0.2
     anjuta                 X    1.2.0
     aterm                  X    0.4.2
-    epiphany               X    1.0.6
+    epiphany               X    1.0.7
     evolution              X    1.4.5
-    fluxbox                X    0.1.14, 0.9.6
+    fluxbox                X    0.1.14, 0.9.8
     fvwm
-    gaim                   X    0.74
+    gaim                   X    0.75
     gftp                   X    2.0.16
     ggv                    X    2.4.0.2
     gimp
@@ -369,14 +372,14 @@ xap)
     ksetiwatch             X    2.6.1
     lincvs                 X    1.2.0
     lyx                    X    1.3.3   (faltan paquetes de dependencias)
-    mozilla                X    1.5
+    mozilla                X    1.6
     mplayer                X    1.0pre3
     nedit                  X    5.4
     pan
     rxvt
     sawfish
     umbrello               X    1.1.1
-    windowmaker
+    windowmaker            X    0.80.2
     xchat                  X    2.0.6
     xfce
     xine
