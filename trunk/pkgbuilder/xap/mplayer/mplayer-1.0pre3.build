@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.16 2004/04/08 17:24:25 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.17 2004/04/09 18:39:50 tomby Exp $
 #
 # mplayer-1.0pre3 pkgbuilder script
 #
@@ -71,7 +71,7 @@ do_patch() {
 	use gtk2 && apply_patch $PKG_NAME-1.0-gentoo-gtk2.patch -p1 -N
 	
 	apply_patch mencoder-gentoo-segfault.patch -p0 -N
-    apply_patch vuln02-fix.diff -p0 -N
+    ( cd libmpdemux ; apply_patch vuln02-fix.diff -p0 -N )
 	
 	return $?
 }
