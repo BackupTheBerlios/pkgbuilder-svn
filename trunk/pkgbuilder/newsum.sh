@@ -38,4 +38,8 @@ source $PKG
 
 cd $FETCH_DIR
 
+if [ ! -d $PKGBUILDER_HOME/`dirname $1`/files ] ; then
+    mkdir -p $PKGBUILDER_HOME/`dirname $1`/files
+fi
+
 md5sum $PKG_FILE_NAME > $PKGBUILDER_HOME/`dirname $1`/files/md5sum-$PKG_VERSION
