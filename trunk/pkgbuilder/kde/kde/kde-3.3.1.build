@@ -7,7 +7,7 @@
 
 inherit meta
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_LICENSE="GPLv2"
 
@@ -33,6 +33,6 @@ PKG_DEPENDS=">=l/qt-3.3
              `use_dep devel "=kde/kdebindings-3.3.1
                              =kde/kdesdk-3.3.1
                              =kde/kdevelop-3.1.1
-                             =kde/webdev-3.3.1"`"
+                             =kde/kdewebdev-3.3.1"`"
 
 PKG_HOMESITE="http://www.kde.org/"
