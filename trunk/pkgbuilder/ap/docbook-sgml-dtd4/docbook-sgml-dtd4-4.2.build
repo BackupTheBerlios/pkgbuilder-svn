@@ -1,0 +1,64 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-sgml-dtd4/Attic/docbook-sgml-dtd4-4.2.build,v 1.1 2003/11/29 19:49:33 tomby Exp $
+#
+# docbook-sgml-dtd4-4.2 pkgbuilder script
+#
+
+PKG_NAME="docbook-sgml-dtd4"
+PKG_VERSION="4.2"
+PKG_ARCH="noarch"
+PKG_BUILD="am1"
+PKG_EXTENSION="zip"
+PKG_FILE_NAME="docbook-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.docbook.org/sgml/$PKG_VERSION/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=a/infozip-5.41
+             ap/sgml-common"
+
+PKG_HOMESITE="http://www.oasis-open.org/docbook/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_UNPACK_DIR="$PKG_SRC"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ChangeLog README"
+
+PKG_PREFIX="/usr"
+PKG_DATADIR="$PKG_DEST$PKG_PREFIX/share/sgml/docbook/sgml-dtd-$PKG_VERSION"
+
+include general
+
+include do_fetch
+include do_unpack_zip
+
+include do_configure_null
+include do_build_null
+
+include do_postinstall_nostrip
+
+do_patch() {
+    cd $PKG_SRC
+    
+    cp docbook.cat docbook.cat.orig &&
+    sed -e '/ISO 8879/d' docbook.cat.orig > docbook.cat &&
+    cp docbook.cat docbook.cat.orig &&
+    sed -e '/gml/d' docbook.cat.orig > docbook.cat 
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DATADIR
+    
+    cp docbook.cat $PKG_DATADIR/catalog
+    cp *.dtd *.mod *.dcl $PKG_DATADIR
+    
+    return $?
+}
