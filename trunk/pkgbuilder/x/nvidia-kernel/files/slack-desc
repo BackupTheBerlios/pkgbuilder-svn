@@ -8,6 +8,6 @@
              |-----handy-ruler------------------------------------------------------|
 nvidia-kernel: nvidia-kernel
 nvidia-kernel:
-nvidia-kernel: Propietary kernel module for nvidia graphic boards
+nvidia-kernel: Linux kernel module for the NVIDIA's X driver
 nvidia-kernel:
 
