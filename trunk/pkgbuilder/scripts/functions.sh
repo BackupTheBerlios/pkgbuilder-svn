@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.8 2003/11/23 16:06:49 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.9 2003/11/23 16:20:38 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -205,7 +205,7 @@ installed_version() {
     fi
     
     if ls $PACKAGES_LOGDIR/$1-*-*-* &> /dev/null ; then
-        local pkgfile=`cd $PACKAGES_LOGDIR ; ls $1-*-*-*`
+        local pkgfile=`cd $PACKAGES_LOGDIR ; ls -1 $1-*-*-* | grep "$1\-[0-9]"`
     else
         return 2
     fi
