@@ -1,0 +1,72 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/lincvs/lincvs-1.3.1.build,v 1.1 2004/04/04 15:20:58 tomby Exp $
+
+inherit makeonly
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-0-generic-src.$PKG_EXTENSION"
+PKG_URL="http://ppprs1.phy.tu-dresden.de/~trogisch/$PKG_NAME/download/20_LinCVS/hl_$PKG_NAME-$PKG_VERSION/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="kde"
+
+PKG_DEPENDS=">=l/qt-3.0.5
+             >=d/cvs
+             `use kde && echo "kde/kdelibs"`"
+
+PKG_HOMESITE="http://www.lincvs.org/"
+
+PKG_DOC_FILES="AUTHORS BUGS.txt ChangeLog COPYING FAQ.txt INSTALL*
+    LICENSE NEWS PROXY-HOWTO.txt README* SSH-HOWTO.txt THANKS todo.txt VERSION"
+
+PKG_QTDIR="`whereis qt | cut -d ' ' -f 2`"
+
+do_patch() {
+    cd $PKG_SRC
+
+    patch -p0 < $PKG_HOME/files/$PKG_NAME-1.2.0-gentoo.diff
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    QTDIR=$PKG_QTDIR qmake -o Makefile lincvs.pro
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    make install
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST$PKG_PREFIX/share
+    mkdir -p $PKG_DEST$PKG_PREFIX/bin
+
+    cp -pR LinCVS $PKG_DEST$PKG_PREFIX/share
+    cp LinCVS/lincvs $PKG_DEST$PKG_PREFIX/bin
+    rm -f $PKG_DEST$PKG_PREFIX/share/LinCVS/lincvs
+    chown -R root.root $PKG_DEST$PKG_PREFIX/share
+
+    #fix perms
+    find  $PKG_DEST$PKG_PREFIX/share/LinCVS/ -type f -exec chmod 444 {} \;
+    find  $PKG_DEST$PKG_PREFIX/share/LinCVS/ -type d -exec chmod 555 {} \;
+    chmod +x $PKG_DEST$PKG_PREFIX/share/LinCVS/{lincvs.bin,AppRun}
+    chmod +x $PKG_DEST$PKG_PREFIX/share/LinCVS/tools/*
+
+    pkg_installdoc
+
+    pkg_installfiles
+}
