@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/bash-completion/bash-completion-20040331.build,v 1.1 2004/04/08 17:02:10 tomby Exp $
 #
-# bash-completion-20040711 pkgbuilder script
+# bash-completion-20041017 pkgbuilder script
 #
 
 inherit main
