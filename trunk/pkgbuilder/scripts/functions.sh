@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.35 2004/01/02 12:39:29 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.36 2004/01/05 20:04:57 tomby Exp $
 
 #
 # Generic functions
@@ -201,6 +201,32 @@ fetch() {
 }
 
 #
+# Verify a package file md5sum
+#
+# @param $1 package file name
+# @param $2 md5sum fila name
+#
+verify() {
+    if [ "$1" == "" ] ; then
+        return 1  
+    fi
+    
+    if [ "$2" == "" -a -r "$2" ] ; then
+        return 1  
+    fi
+    
+    local base="$FETCH_DIR/`basename "$1"`"
+    
+    if [ -r "$base" ] ; then
+        if ! grep -q "`md5sum $base | cut -d" " -f1`  `basename "$1"`" $2  ; then
+            return 1
+        fi
+    else
+        return 1
+    fi
+}
+
+#
 # Gzip all the man pages under the given directory
 #
 # @param $1 base directory
@@ -258,7 +284,7 @@ strip_all() {
 #
 # @param $1 package name
 # @param $2 package version (optional)
-# @PARAM $3 package build (optional)
+# @param $3 package build (optional)
 #
 is_installed() {
     if [ "$1" == "" ] ; then
