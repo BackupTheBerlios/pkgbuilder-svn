@@ -1,0 +1,25 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/tcpdump/tcpdump-3.8.3.build,v 1.1 2004/04/08 17:22:56 tomby Exp $
+#
+# tcpdump-3.8.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://www.tcpdump.org/releases/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl"
+
+PKG_DEPENDS=">=l/libpcap-3.8.1 
+            `use_dep ssl "l/openssl"`"
+
+PKG_HOMESITE="http://www.tcpdump.org/"
+
+PKG_DOC_FILES="CHANGES CREDITS FILES INSTALL LICENSE PLATFORMS README TODO VERSION"
+
+PKG_CONFIGURE_OPTIONS=""

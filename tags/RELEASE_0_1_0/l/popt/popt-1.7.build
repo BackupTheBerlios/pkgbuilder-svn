@@ -1,0 +1,27 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/popt/popt-1.7.build,v 1.4 2004/03/28 17:28:36 tomby Exp $
+#
+# popt-1.7 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am2"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.1.x/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="`use_dep nls "d/gettext"`"
+
+PKG_HOMESITE="ftp://ftp.rpm.org/pub/rpm/dist/rpm-4.1.x/"
+
+PKG_DOC_FILES="CHANGES COPYING README"
+
+PKG_CONFIGURE_OPTIONS="`use_enable nls`
+                       --with-gnu-ld"

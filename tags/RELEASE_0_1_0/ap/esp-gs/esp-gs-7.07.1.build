@@ -1,0 +1,132 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.7 2004/04/09 09:58:31 tomby Exp $
+#
+# esp-gs-7.07.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am3"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="espgs-$PKG_VERSION-source.$PKG_EXTENSION"
+PKG_FONTS_FILE_NAME="ghostscript-fonts-std-8.11.tar.gz"
+PKG_URL="http://download.sourceforge.net/espgs/$PKG_FILE_NAME
+         ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/fonts/$PKG_FONTS_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2"
+
+PKG_USE="cups"
+
+PKG_DEPENDS="l/glibc
+            >=l/libjpeg-6b
+            >=l/libpng-1.2.1
+            >=l/zlib-1.1.4
+            `use_dep cups "a/cups"`"
+
+PKG_HOMESITE="http://www.cups.org/ghostscript.php"
+
+PKG_SRC="$TMP/espgs-$PKG_VERSION"
+
+PKG_FONT_DOC_FILES="ChangeLog COPYING README* TODO"
+
+PKG_CONFIGURE_OPTIONS="--with-ijs
+                       --with-omni
+                       --without-gimp-print
+                      `use_enable cups`"
+
+PKG_INSTALL_OPTIONS="install_prefix=$PKG_DEST
+                     prefix=$PKG_DEST$PKG_PREFIX
+                     datadir=$PKG_DEST$PKG_PREFIX/share
+                     docdir=$PKG_DOC
+                     exdir=$PKG_DOC/examples"
+
+PKG_CONFIG_FILES="`use cups && echo "etc/cups/pstoraster.convs"`"
+
+MAKE_OPTIONS="-j1"
+
+do_patch() {
+    cd $PKG_SRC/ijs
+
+    cp Makefile.in Makefile.in.orig
+    sed -e 's:@OBJEXT@:o:' -e 's:@EXEEXT@::' Makefile.in.orig > Makefile.in
+
+    return $?
+}
+
+do_configure_ijs() {
+    cd $PKG_SRC/ijs
+
+    pkg_configure
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    pkg_configure &&
+    do_configure_ijs
+
+    return $?
+}
+
+do_build_ijs() {
+    cd $PKG_SRC/ijs
+
+    pkg_build
+
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC
+
+    pkg_build &&
+    do_build_ijs
+
+    return $?
+}
+
+do_install_ijs() {
+    cd $PKG_SRC/ijs
+
+    mkdir -p $PKG_DEST$PKG_PREFIX/{bin,include,lib} &&
+    pkg_install
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    pkg_install &&
+    do_install_ijs
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    ( cd $PKG_DEST/$PKG_PREFIX/share/ghostscript
+        unpack $PKG_FONTS_FILE_NAME
+        chmod 755 fonts
+        chmod 644 fonts/*
+        chown -R root.root fonts )
+
+    ( cd $PKG_DEST/$PKG_PREFIX/share/ghostscript/fonts
+        mkdir -p $PKG_DOC/fonts
+        mv $PKG_FONT_DOC_FILES $PKG_DOC/fonts )
+
+    pkg_gzipmaninfo
+
+    pkg_stripall
+
+    use cups && pkg_configfiles
+
+    pkg_installfiles
+
+    return $?
+}

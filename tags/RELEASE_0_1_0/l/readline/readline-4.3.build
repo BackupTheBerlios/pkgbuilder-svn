@@ -1,0 +1,29 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/readline/readline-4.3.build,v 1.5 2004/03/28 17:29:31 tomby Exp $
+#
+# readline-4.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am3"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=a/bash-2.05b
+             >=l/ncurses-5.2"
+
+PKG_HOMESITE="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_CONFIGURE_OPTIONS=""
+
+PKG_BUILD_OPTIONS="SHLIB_LIBS=-lcurses"

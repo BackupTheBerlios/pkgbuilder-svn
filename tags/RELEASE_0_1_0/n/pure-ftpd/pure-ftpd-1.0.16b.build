@@ -1,0 +1,45 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/pure-ftpd/pure-ftpd-1.0.16b.build,v 1.3 2003/12/30 18:44:13 tomby Exp $
+#
+# pure-ftpd pkgbuilder script
+#
+
+inherit configscript
+
+PKG_NAME="pure-ftpd"
+PKG_VERSION="1.0.16b"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.pureftpd.org/pub/pure-ftpd/releases/$PKG_FILE_NAME"
+
+PKG_HOMESITE="http://www.pureftpd.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS C* FAQ HISTORY INSTALL NEWS README* THANKS"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+do_configure() {
+    cd $PKG_SRC
+
+    CFLAGS=$CFLAGS \
+    CXXFLAGS=$CXXFLAGS \
+    ./configure --prefix=$PKG_PREFIX \
+        --with-altlog --with-extauth \
+        --with-puredb --with-cookie \
+        --with-throttling --with-ratios \
+        --with-quotas --with-ftpwho \
+        --with-uploadscript --with-virtualhosts \
+        --with-virtualchroot --with-diraliases \
+        --with-peruserlimits --with-tls
+
+    return $?        
+}

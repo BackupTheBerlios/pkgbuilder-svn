@@ -1,0 +1,126 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/db.build,v 1.1 2004/04/19 17:42:59 tomby Exp $
+#
+# berkdb script for db packages
+#
+
+include configscript
+
+db_init() {
+    configscript_init
+
+    DB_VERSION="${PKG_NAME/db/}"
+
+    PKG_EXTENSION="tar.gz"
+    PKG_FILE_NAME="db-$PKG_VERSION.$PKG_EXTENSION"
+    PKG_URL="http://www.sleepycat.com/update/snapshot/$PKG_FILE_NAME"
+
+    PKG_LICENSE="DB"
+
+    PKG_HOMESITE="http://www.sleepycat.com"
+
+    PKG_SRC="$TMP/db-$PKG_VERSION"
+
+    PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX docdir=$PKG_DOC"
+}
+
+db_do_unpack() {
+    configscript_do_unpack
+}
+
+db_do_configure() {
+    cd $PKG_SRC/build_unix
+
+    CFLAGS=$CFLAGS \
+    CXXFLAGS=$CXXFLAGS \
+    ../dist/configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+
+    return $?
+}
+
+db_do_build() {
+    cd $PKG_SRC/build_unix
+
+    pkg_build
+
+    return $?
+}
+
+db_do_install() {
+    cd $PKG_SRC/build_unix
+
+    pkg_install
+
+    return $?
+}
+
+db_do_postinstall() {
+    db_fix_binaries &&
+    db_fix_includes &&
+    db_fix_libraries &&
+    configscript_do_postinstall
+}
+
+db_fix_binaries() {
+    cd $PKG_DEST$PKG_PREFIX/bin
+
+    local file
+    local name
+
+    for file in `ls -1 .` ; do
+        name="`echo $file | cut -d_ -f2`"
+        mv $file db${DB_VERSION}_${name}
+    done
+
+    return $?
+}
+
+db_fix_includes() {
+    cd $PKG_DEST$PKG_PREFIX/include
+
+    mkdir -p $PKG_DEST$PKG_PREFIX/include/db${DB_VERSION}
+
+    mv *.h db${DB_VERSION}
+
+    return $?
+}
+
+db_fix_libraries() {
+    cd $PKG_DEST$PKG_PREFIX/lib
+
+    local lib
+    local target
+
+    #clean symlinks
+    for lib in libdb libdb_cxx libdb_tcl libdb_java ; do
+        rm -f $lib.a
+        rm -f $lib.so
+    done
+
+    #build correct symlinks
+    for lib in libdb libdb_cxx libdb_tcl libdb_java ; do
+        target="`ls -1 $lib*.a | head -n 1`"
+        if [ -e $target ] ; then
+            ln -sf $target $lib.a
+        fi
+
+        target="`ls -1 $lib*.so | head -n 1`"
+        if [ -e $target ] ; then
+            ln -sf $target $lib.so
+        fi
+    done
+
+    #jar file
+    if `use java` ; then
+        mv db.jar db${DB_VERSION}.jar
+        ln -sf db${DB_VERSION}.jar db.jar
+    fi
+
+    #include
+    cd $PKG_DEST$PKG_PREFIX/include
+    rm -f db.h
+    ln -sf db${DB_VERSION}/db.h db.h
+
+    return $?
+}

@@ -1,0 +1,201 @@
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.43 2004/04/19 18:01:53 tomby Exp $
+
+* New tasks:
+
+    check pkg deps
+    create virtual pkgs support like 'virtual/mta' in gentoo
+    use new 'use' variable flag values
+    cleanup code
+    documentation
+    
+* Packages to update:
+    
+* High priority packages:
+
+* Packages:
+
+a)
+
+    bash
+    bin
+    bzip2
+    coreutils
+    cpio
+    dcron
+    devfsd
+    devs
+    e2fsprogs
+    findutils
+    gawk
+    grep
+    gzip
+    hdparm
+    hotplug
+    infozip
+    isapnptools
+    jfstools
+    kdb
+    less
+    lilo
+    logrotate
+    lprng
+    minicom
+    module-init-tools
+    pciutils
+    pcmcia-cs
+    procps
+    reiserfsprogs
+    sed
+    shadow
+    sysklogd
+    syslinux
+    tar
+    usb-utils
+    util-linux
+    xfsprogs
+
+ap)
+
+    a2ps
+    ash
+    at
+    aumix
+    diffutils
+    emacs
+    groff
+    ispell
+    jed
+    joe
+    lsof
+    lvm
+    man
+    man-pages
+    mc
+    mysql
+    postgresql
+    psutils
+    quota
+    sane
+    slocate
+    sudo
+    texinfo
+    workbone
+
+l)
+
+    db2
+    db4
+    glibc
+    glut
+    libdv
+    libdvdnav
+    libdvdread
+    libtermcap
+    nas
+    ncurses
+    openssl
+    utempter
+    zlib
+
+d)
+
+    autoconf
+    automake
+    bin86
+    binutils
+    bison
+    byacc
+    flex
+    gcc
+    gdb
+    j2sdk
+    libtool
+    m4
+    make
+    perl
+    pmake
+    rcs
+
+emu)
+
+games)
+
+n)
+
+    animail
+    apache
+    bind
+    courier
+    dhcp
+    dhcpd
+    epic4
+    exim
+    fetchmail
+    getmail
+    inetd
+    iptraf
+    lftp
+    nail
+    nc
+    netwatch
+    nfs-utils
+    nn
+    openldap
+    php
+    pine
+    ppp
+    procmail
+    proftpd
+    pure-ftpd
+    qmail
+    qpopper
+    rp-pppoe
+    sendmail
+    tcpip
+    tin
+    traceroute
+    trn
+    w3m
+    wget
+    wireless-tools
+    wvdial
+    wvstreams
+
+x)
+
+xap)
+
+    fvwm
+    gnucash
+    gnuchess
+    gnuplot
+    pan
+    rxvt
+    sawfish
+    xfce
+    xine
+    xsane
+
+kde)
+
+gnome)
+
+    ghex
+    glade
+    gnome2-user-docs
+    gnome-extra-themes
+    gnome-mag
+    gnome-speech
+    gnome-vfs-extras
+    gnopernicus
+    gok
+    gpdf
+    gucharmap
+    libgail-gnome
+    libgda
+    zenity
+
+And more...
+
+
+

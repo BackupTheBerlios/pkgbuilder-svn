@@ -1,0 +1,24 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/pkgconfig/pkgconfig-0.15.0.build,v 1.4 2004/01/04 20:42:41 tomby Exp $
+#
+# pkgconfig-0.15.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_URL="http://www.freedesktop.org/software/$PKG_NAME/releases/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://www.freedesktop.org/software/pkgconfig/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""

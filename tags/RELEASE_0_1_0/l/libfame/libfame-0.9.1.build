@@ -1,0 +1,27 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libfame/libfame-0.9.1.build,v 1.1 2004/03/19 19:45:38 tomby Exp $
+#
+# libfame-0.9.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/fame/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="mmx sse"
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://fame.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS BUGS CHANGES COPYING INSTALL README TODO"
+
+PKG_CONFIGURE_OPTIONS="`use_enable mmx` 
+                       `use_enable sse`"

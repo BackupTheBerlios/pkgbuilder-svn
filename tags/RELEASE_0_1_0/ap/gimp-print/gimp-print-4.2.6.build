@@ -1,0 +1,58 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/gimp-print/gimp-print-4.2.6.build,v 1.1 2004/03/28 09:55:09 tomby Exp $
+#
+# gimp-print-4.2.6 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="cups nls"
+
+PKG_DEPENDS="`use_dep cups ">=a/cups-1.1.14"`
+             xap/imagemagick
+             ap/esp-gs
+             l/readline
+             `use_dep gtk ">=l/gtk+-1.2.5"`
+             d/perl
+             `use_dep foomatic "ap/foomatic-db"`"
+
+PKG_HOMESITE="http://gimp-print.sourceforge.net"
+
+PKG_DOC_FILES="ABOUT-NLS AUTHORS COPYING NEWS README"
+
+PKG_CONFIGURE_OPTIONS="--infodir=$PKG_PREFIX/info
+                       --enable-test 
+                       --disable-static 
+                       --with-ijs
+                       --with-ghost
+                       --without-samples 
+                       --without-user-guide
+                       --with-escputil
+                       --with-readline
+                       `use_with cups`
+                       `use_enable nls`
+                       `use foomatic && echo "--with-foomatic3" || echo "--without-foomatic"`
+                       `is_installed gimp 1.2* && echo "--with-gimp" || echo "--without-gimp"`"
+
+PKG_CONFIG_FILES="`use cups && echo "etc/cups/command.types"`"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    ( cd $PKG_DEST$PKG_PREFIX/share/$PKG_NAME
+      rm -rf doc
+      rm -rf samples ) &&
+    pkg_postinstall
+    
+    return $?
+}
+

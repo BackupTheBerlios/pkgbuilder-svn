@@ -1,0 +1,32 @@
+#!/bin/sh
+# Start/stop/restart distccd:
+
+distccd_start() {
+  /usr/bin/distccd --daemon
+}
+
+distccd_stop() {
+  killall distccd
+}
+
+distccd_restart() {
+  distccd_stop
+
+  sleep 1
+  
+  distccd_start
+}
+
+case "$1" in
+'start')
+  distccd_start
+  ;;
+'stop')
+  distccd_stop
+  ;;
+'restart')
+  distccd_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac

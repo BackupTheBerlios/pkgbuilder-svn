@@ -1,0 +1,47 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-filters/foomatic-filters-3.0.1.build,v 1.1 2004/02/28 12:46:46 tomby Exp $
+#
+# foomatic-filters pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.linuxprinting.org/download/foomatic/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="cups samba"
+
+PKG_DEPENDS="d/perl
+             `use cups && echo '>=a/cups-1.1.19'`
+             `use samba && echo 'n/samba'`"
+
+PKG_HOMESITE="http://www.linuxprinting.org/"
+
+PKG_DOC_FILES="ChangeLog COPYING README TODO USAGE"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+
+PKG_CONFIG_FILES="etc/foomatic/filter.conf"
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    use cups &&
+    ( cd $PKG_DEST$PKG_PREFIX/lib/cups/filter
+        ln -sf /usr/bin/foomatic-gswrapper foomatic-gswrapper
+        ln -sf /usr/bin/foomatic-rip cupsomatic )
+    ( cd $PKG_DEST$PKG_PREFIX/bin
+        ln -sf foomatic-rip lpdomatic )
+    pkg_installdoc &&
+    pkg_gzipmaninfo &&
+    pkg_configfiles &&
+    pkg_installfiles
+
+    return $?
+}

@@ -1,0 +1,16 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+    |-----handy-ruler------------------------------------------------------|
+ntop: ntop
+ntop:
+ntop: ntop is a network traffic probe that shows the network usage, 
+ntop: similar to what the popular top Unix command does. ntop is based 
+ntop: on libpcap and it has been written in a portable way in order to 
+ntop: virtually run on every Unix platform and on Win32 as well.
+ntop:
+

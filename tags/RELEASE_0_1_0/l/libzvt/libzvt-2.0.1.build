@@ -1,0 +1,21 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libzvt/libzvt-2.0.1.build,v 1.1 2004/03/28 17:36:52 tomby Exp $
+#
+# libzvt-2.0.1 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am2"
+
+PKG_LICENSE="GPLv2 LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/glib-2.0.3
+	         >=l/gtk+-2.0.5
+	         >=l/libart_lgpl-2.3.9
+             >=d/pkgconfig-0.12.0"
+
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"

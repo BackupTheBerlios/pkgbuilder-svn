@@ -1,0 +1,38 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libwww/libwww-5.4.0.build,v 1.1 2004/01/02 22:19:57 tomby Exp $
+#
+# libwww-5.4.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="w3c-$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.w3.org/Library/Distribution/$PKG_FILE_NAME"
+
+PKG_LICENSE="W3C"
+
+PKG_USE="ssl"
+
+PKG_DEPENDS="d/perl
+             >=l/zlib-1.1.4
+             l/expat
+             >=d/autoconf-2.13
+             `use ssl && echo ">=l/openssl-0.9.6"`"
+
+PKG_HOMESITE="http://www.w3.org/Library/"
+
+PKG_SRC="$TMP/w3c-$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="COPYRIGH ChangeLog"
+
+PKG_CONFIGURE_OPTIONS="--enable-shared
+                       --enable-static
+                       --with-zlib
+                       --with-md5
+                       --with-expat
+                       `use ssl && echo "--with-ssl"`"
+
+PKG_CONFIG_FILES=""

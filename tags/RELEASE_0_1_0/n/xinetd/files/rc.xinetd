@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# xinetd rc script
+# 
+
+xinetd_start() {
+    /usr/sbin/xinetd -pidfile /var/run/xinetd.pid -stayalive -reuse
+}
+
+xinetd_stop() {
+    kill `cat /var/run/xinetd.pid`
+}
+
+xinetd_restart() {
+    killall -HUP xinetd
+}
+
+case "$1" in
+    'start')
+        xinetd_start
+    ;;
+    'stop')
+        xinetd_stop
+    ;;
+    'restart')
+        xinetd_restart
+    ;;
+    *)
+        echo "usage $0 start|stop|restart"
+esac

@@ -1,0 +1,28 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# gqradio-1.9.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/gqmpeg/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/gtk+2-2.2 
+             d/pkgconfig
+             `use_dep nls "d/gettext"`"
+
+PKG_HOMESITE="http://gqmpeg.sourceforge.net/radio.html"
+
+PKG_DOC_FILES="ABOUT-NLS AUTHORS COPYING ChangeLog INSTALL NEWS README SKIN-SPECS TODO"
+
+PKG_CONFIGURE_OPTIONS="`use_enable nls`"

@@ -1,0 +1,65 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/scummvm/scummvm-0.6.0.build,v 1.1 2004/04/10 01:32:32 tomby Exp $
+#
+# scummvm-0.6.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="alsa oggvorbis mad"
+
+PKG_DEPENDS=">=l/sdl-1.2.2
+             l/zlib
+             >=l/libmpeg2-0.3.2
+            `use_dep oggvorbis "l/libvorbis"`
+            `use_dep alsa ">=l/alsa-lib-0.9"`
+            `use_dep mad "l/libmad"`"
+
+PKG_HOMESITE="http://www.scummvm.org/"
+
+PKG_DOC_FILES="COPYING NEWS README"
+
+PKG_CONFIGURE_OPTIONS="--backend=sdl
+                      `use_enable oggvorbis vorbis`
+                      `use_enable alsa`
+                      `use_enable mad`"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    cp Makefile Makefile.orig
+    sed -e "s:-O:$CXXFLAGS:" \
+        Makefile.orig > Makefile
+    
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    # not autoconf script
+    ./configure $PKG_CONFIGURE_OPTIONS
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/bin
+    cp scummvm $PKG_DEST$PKG_PREFIX/bin
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/man/man6
+    cp scummvm.6 $PKG_DEST$PKG_PREFIX/man/man6
+    
+    return $?
+}

@@ -1,0 +1,49 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxml2/libxml2-2.6.8.build,v 1.1 2004/04/08 17:17:09 tomby Exp $
+#
+# libxml2-2.6.8 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://xmlsoft.org/$PKG_FILE_NAME"
+
+PKG_LICENSE="MIT"
+
+PKG_USE="python"
+
+PKG_DEPENDS="l/zlib l/readline `use python && echo ">=d/python-2.3"`"
+
+PKG_HOMESITE="http://www.xmlsoft.org/"
+
+PKG_DOC_FILES="AUTHORS NEWS ChangeLog README INSTALL"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-zlib --with-readline `use python && echo "--with-python"`"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc/xml
+      
+    mv $PKG_DEST$PKG_PREFIX/share/doc $PKG_DEST$PKG_PREFIX
+    if [ -d $PKG_DEST$PKG_PREFIX/doc/$PKG_NAME-python-$PKG_VERSION ] ; then
+        mv $PKG_DEST$PKG_PREFIX/doc/$PKG_NAME-python-$PKG_VERSION $PKG_DOC
+    fi
+    
+    pkg_installdoc
+
+    strip_all $PKG_DEST
+
+    pkg_gzipmaninfo
+
+    pkg_installfiles
+}
+

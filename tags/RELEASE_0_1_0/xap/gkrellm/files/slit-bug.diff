@@ -1,0 +1,12 @@
+--- main.c.orig	2004-05-01 14:12:15.000000000 +0200
++++ main.c	2004-05-01 14:12:25.000000000 +0200
+@@ -2214,8 +2214,8 @@
+ 
+ 	if (_GK.sticky_state)
+ 		gtk_window_stick(GTK_WINDOW(top_window));
+-	gkrellm_winop_options(argc, argv);
+ 	gtk_widget_show(gtree.window);
++	gkrellm_winop_options(argc, argv);
+ 
+ 	if (geometry || _GK.save_position)
+ 		configure_position_lock = TRUE;		/* see cb_configure_notify */

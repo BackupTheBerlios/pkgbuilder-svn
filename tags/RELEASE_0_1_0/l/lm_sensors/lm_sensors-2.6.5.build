@@ -1,0 +1,59 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lm_sensors/lm_sensors-2.6.5.build,v 1.6 2004/01/09 19:35:53 tomby Exp $
+#
+# lm_sensors pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_NAME="lm_sensors"
+PKG_VERSION="2.6.5"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am3"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://secure.netroedge.com/~lm78/archive/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="=k/kernel-source-`uname -r`"
+
+PKG_HOMESITE="http://secure.netroedge.com/~lm78/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="B* C* INSTALL lm_sensors.lsm QUICKSTART README* TODO doc/FAQ"
+
+PKG_PREFIX="/usr"
+PKG_BUILD_OPTIONS="LINUX_HEADERS=/usr/src/linux/include
+                   I2C_INCLUDE=/usr/src/linux/include
+                   PREFIX=$PKG_PREFIX"
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST $PKG_BUILD_OPTIONS"
+PKG_INSTALL_TARGET="install"
+
+do_patch() {
+    cd $PKG_SRC
+
+    if  installed_version gcc | grep -q "^3.3" ; then
+        patch -p1 -N < $PKG_HOME/files/gcc33.diff
+    fi
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    gzip -9 $PKG_DEST/lib/modules/`uname -r`/misc/*.o
+    
+    pkg_installdoc
+
+    strip_all $PKG_DEST$PKG_PREFIX/{bin,lib,sbin}
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    pkg_installfiles
+}

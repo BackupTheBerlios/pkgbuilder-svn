@@ -1,0 +1,49 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/sgmlspm/sgmlspm-1.03.build,v 1.3 2004/01/03 19:43:24 tomby Exp $
+#
+# sgmlspm-1.03 pkgbuilder script
+#
+
+inherit main
+
+PKG_BUILD="am3"
+
+PKG_FILE_NAME="SGMLSpm-${PKG_VERSION}ii.$PKG_EXTENSION"
+PKG_URL="http://search.cpan.org/CPAN/authors/id/D/DM/DMEGG/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=d/perl-5.8.0
+             >=a/sed-4"
+
+PKG_HOMESITE="http://search.cpan.org/author/DMEGG/SGMLSpm-1.03ii/"
+
+PKG_SRC="$TMP/SGMLSpm"
+PKG_DOC_FILES="BUGS COPYING ChangeLog README TODO"
+
+PKG_NOSTRIP="Y"
+
+do_install() {
+    cd $PKG_SRC
+    
+    eval `perl '-V:installsitearch'`
+    
+    mkdir -p $PKG_DEST/usr/bin
+    cp sgmlspl.pl $PKG_DEST/usr/bin/sgmlspl
+    chmod 755 $PKG_DEST/usr/bin/sgmlspl
+    
+    mkdir -p $PKG_DEST/$installsitearch/SGMLS
+    cp Output.pm Refs.pm $PKG_DEST/$installsitearch/SGMLS
+    chmod 644 $PKG_DEST/$installsitearch/SGMLS/*
+    cp SGMLS.pm $PKG_DEST/$installsitearch
+    chmod 644 $PKG_DEST/$installsitearch/SGMLS.pm 
+    
+    mkdir -p $PKG_DEST/usr/share/SGMLS
+    cp skel.pl $PKG_DEST/usr/share/SGMLS
+    chmod 644 $PKG_DEST/usr/share/SGMLS/*
+
+    return $?
+}

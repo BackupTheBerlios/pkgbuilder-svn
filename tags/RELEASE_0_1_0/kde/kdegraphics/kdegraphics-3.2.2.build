@@ -1,0 +1,25 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/kdegraphics-3.2.1.build,v 1.2 2004/04/09 10:19:12 tomby Exp $
+#
+# kdegraphics-3.2.2 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="tetex"
+
+PKG_DEPENDS=">=l/qt-3.2
+             >=kde/kdelibs-3.2.2
+             >=kde/kdebase-3.2.2
+             >=xap/xpdf-2.02p1
+             >=l/lcms-1.11
+             >=l/imlib-1.9.14
+             >=l/libtiff-3.5.7
+             >=l/fribidi-0.10.4
+             >=ap/esp-gs-7.05.6
+             `use_dep tetex "ap/tetex"`"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL kdegraphics.lsm README"

@@ -1,0 +1,15 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+         |-----handy-ruler------------------------------------------------------|
+freetype2: freetype2
+freetype2:
+freetype2: FreeType 2 is a software font engine that is designed to be small, 
+freetype2: efficient, highly customizable and portable while capable of 
+freetype2: producing high-quality output (glyph images).
+freetype2:
+

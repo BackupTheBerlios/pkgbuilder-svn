@@ -1,0 +1,21 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+      |-----handy-ruler------------------------------------------------------|
+kismet: kismet
+kismet:
+kismet: Kismet is an 802.11 wireless network sniffer - this is different 
+kismet: from a normal network sniffer (such as Ethereal or tcpdump) because 
+kismet: it separates and identifies different wireless networks in the area. 
+kismet: Kismet works with any 802.11b wireless card which is capable of 
+kismet: reporting raw packets (rfmon support), which include any prism2 
+kismet: based card (Linksys, D-Link, Rangelan, etc), Cisco Aironet cards, 
+kismet: and Orinoco based cards. Kismet also supports the WSP100 802.11b 
+kismet: remote sensor by Network Chemistry and is able to monitor 802.11a 
+kismet: networks with cards which use the ar5k chipset. 
+kismet:
+

@@ -1,0 +1,12 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mozilla/mozilla-1.5.build,v 1.1 2004/01/05 19:06:25 tomby Exp $
+#
+# mozilla-1.5 pkgbuilder script
+#
+
+inherit mozilla
+
+PKG_BUILD="am1"
+
+PKG_DOC_FILES="LEGAL LICENSE README.txt"

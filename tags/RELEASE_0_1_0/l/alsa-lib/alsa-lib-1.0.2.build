@@ -1,0 +1,27 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-lib/alsa-lib-1.0.2.build,v 1.1 2004/02/07 16:31:57 tomby Exp $
+#
+# alsa-lib-1.0.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.alsa-project.org/pub/lib/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc >=d/automake-1.7.2 >=d/autoconf-2.57 >=l/alsa-driver-0.9.8"
+
+PKG_HOMESITE="http://www.alsa-project.org/"
+
+PKG_DOC_FILES="INSTALL TODO COPYING"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
+

@@ -1,0 +1,117 @@
+$Header: /cvsroot/pkgbuilder/pkgbuilder/README,v 1.5 2004/02/15 16:49:50 tomby Exp $
+
+PKGBUILDER
+
+El sistema es muy sencillo. Existe un script principal 
+llamado 'build.sh' al que se le pasan varios parámetros: el script 
+del paquete que queremos compilar y una lista de acciones. Por ejemplo:
+
+# ./build.sh xap/aterm/aterm-0.4.2.build fetch patch configure
+
+Esto hará que se ejecuten las acciones 'fetch', 'patch' y 'configure'
+para el script aterm-0.4.2.build.
+
+Si se omite la acción se ejecutará la acción 'auto'.
+
+Existen varias acciones:
+
+    - info: muestra información del paquete
+     
+    - fetch: descarga los archivos necesarios para la compilación
+        y creación del paquete.
+        
+    - unpack: descomprime los archivos necesarios.
+    
+    - verify: verifica el checksum de los paquetes descargados.
+    
+    - patch: parchea los archivos necesarios para la compilación
+    
+    - configure: ejecuta el script configure del paquete
+    
+    - build: ejecuta make
+    
+    - install: ejecuta make install
+    
+    - postinstall: ejecuta todas la acciones necesarias después
+        de la instalación del paquete
+        
+    - buildpkg: genera el paquete tgz correspondiente listo para
+        su instalación en el sistema. El paquete sólo se generará
+        si se ejecuta como superusuario.
+
+    - installpkg: instala el paquete previamente generado por la
+        acción buildpkg. Solo funciona cuando se ejecuta como
+        superusuario.
+        
+    - upgradepkg: actualiza el paquete previamente generado. Solo 
+        funciona cuando se ejecuta como superusuario.
+    
+    - cleanup: realiza la limpieza de los archivos utilizados
+        para la compilación y creación del paquete.
+        
+    - auto: ejecuta automáticamente esta secuencia acciones:
+        fetch
+        unpack
+        patch
+        configure
+        build
+        install
+        postinstall
+        buildpkg
+        
+Por cada paquete existen un script para cada versión del paquete.
+En el se configuran las variables necesarias para la compilación 
+y creación del paquete y se implementan una serie de metodos, uno 
+por cada acción. Dentro de cada uno de esos métodos está la 
+implementación de la acción para ese paquete.
+
+Luego en el subdirectorio files se incluyen otro tipo de archivos
+necesarios para la creación del paquete, como parches, scripts,
+archivos slack-desc, etc...
+
+El script principal incluye a este script y luego ejecuta
+el método correspondiente a la acción indicada.
+
+Existe un script en el directorio 'scripts' llamado 'functions.sh'
+que incluye toda una serie de funciones útiles para la compilación
+y creación de paquetes. Estas funciones se pueden utilizar en
+cada uno de los scripts para cada paquete. Actualmente
+estas son las funciones actualmente implementadas:
+
+    - version: imprime por pantalla la versión.
+    
+    - usage: imprime la información de uso.
+    
+    - include: incluye la función indicada como parámetro. Estas
+        funciones, son funciones genericas para relizar cada
+        una de las acciones. Se encuentran en el directorio
+        'common'.
+    
+    - use: determina si existe en la variable de entorno USE el
+        paquete que se indica como parámetro.
+        
+    - execute_action: ejecuta la acción indicada como parámetro.
+    
+    - fetch: descarga el archivo indicado en el parámetro $1
+        utilizando 'wget'.
+        
+    - gzip_map: comprime todas las páginas de manual del directorio
+        que se pasa en como parámetro.
+        
+    - strip_all: realiza la función strip en todos los archivos
+        binarios desde el directorio que se le pasa como parámetro.
+        
+Poco a poco esto va evolucionando. Ahora mismo estoy implementando
+la gestión de dependencias entre paquetes y también la gestión de la
+variable USE de forma a similar a como existe en Gentoo. Evidentemente
+todo esta aún en una fase muy, pero que muy preliminar.
+
+Cualquiera que se acerque un poco al codigo fuente verá
+que no soy precisamente un gurú de la programación en bash, pero
+siempre que lo he necesitado me he hecho mis propios scripts,
+no demasiados ortodoxos pero sí efectivos. Si notais que hay algo
+que se puede hacer mejor o eliminar cosas innecesarias, hacedmelo
+saber.
+
+
+<tomby (AT) tomby.homelinux.org>

@@ -1,0 +1,28 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/aterm/aterm-0.4.2.build,v 1.6 2004/01/05 15:08:30 tomby Exp $
+#
+# aterm-0.4.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="x/xfree86
+             l/libpng
+             l/libjpeg"
+             
+PKG_HOMESITE="http://aterm.sourceforge.net/"
+
+PKG_DOC_FILES="aterm.lsm ChangeLog INSTALL README* doc/BUGS doc/FAQ doc/README.* doc/TODO"
+
+PKG_PREFIX="/usr/X11R6"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"

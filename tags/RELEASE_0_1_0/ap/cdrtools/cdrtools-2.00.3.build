@@ -1,0 +1,60 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/cdrtools/cdrtools-2.00.3.build,v 1.3 2003/12/30 18:44:13 tomby Exp $
+#
+# cdrtools-2.00.3 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_NAME="cdrtools"
+PKG_VERSION="2.00.3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am2"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.berlios.de/pub/cdrecord/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://www.fokus.gmd.de/research/cc/glone/employees/joerg.schilling/private/cdrecord.html"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="Changelog COPYING PORTING README* START"
+
+PKG_PREFIX="/usr"
+PKG_BUILD_OPTIONS="INS_BASE=$PKG_PREFIX DEFINSUSR=root DEFINSGRP=root"
+PKG_INSTALL_OPTIONS="INS_BASE=$PKG_DEST$PKG_PREFIX DEFINSUSR=root DEFINSGRP=root"
+
+do_patch() {
+	cd $PKG_SRC/DEFAULTS
+	cp Defaults.linux Defaults.linux.orig
+	sed -e 's:/opt/schily:$PKG_PREFIX:g' Defaults.linux.orig > Defaults.linux
+	
+	cd $PKG_SRC/librscg
+	chmod 644 scsi-remote.c
+	cp scsi-remote.c scsi-remote.c.orig
+	sed -e 's:/opt/schily:$PKG_PREFIX:g' scsi-remote.c.orig > scsi-remote.c
+	
+	return $?
+}
+
+do_install() {
+	cd $PKG_SRC
+	
+	pkg_install
+	
+	cp incs/*-linux-cc/xconfig.h $PKG_DEST$PKG_PREFIX/include
+	
+	mkdir -p $PKG_DEST$PKG_PREFIX/include/scsilib/scg
+	cp include/*.h $PKG_DEST$PKG_PREFIX/include/scsilib
+	cp include/scg/*.h $PKG_DEST$PKG_PREFIX/include/scsilib/scg
+	
+	return $?
+}
