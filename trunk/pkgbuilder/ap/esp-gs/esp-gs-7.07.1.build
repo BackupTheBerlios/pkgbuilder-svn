@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.2 2003/12/20 17:03:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.3 2003/12/20 18:56:00 tomby Exp $
 #
 # esp-gs-7.07.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="esp-gs"
 PKG_VERSION="7.07.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="espgs-$PKG_VERSION-source.$PKG_EXTENSION"
 PKG_FONTS_FILE_NAME="ghostscript-fonts-std-8.11.tar.gz"
@@ -65,7 +65,7 @@ do_configure_ijs() {
 	
 	CFLAGS=$CFLAGS \
 	CXXFLAGS=$CXXFLAGS \
-	./configure --prefix=$PKG_DEST$PKG_PREFIX
+	./configure --prefix=$PKG_PREFIX
 	
 	return $?
 }
