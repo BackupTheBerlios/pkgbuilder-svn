@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.12 2003/12/14 01:08:13 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.13 2003/12/14 16:30:39 tomby Exp $
 
 * New tasks:
 
@@ -50,7 +50,7 @@ ap)
 
     sane
 
-    mpg321
+    mpg321          X
     cdparanoia      X
     cdrtools
     cdrdao
@@ -126,17 +126,17 @@ l)
     nas
     libmpeg3
     libmad          X
-    libfame
-    speex
+    libfame         X
+    speex           X
     lame            X
     id3lib          X
-    flac
+    flac            X
     libdvdread
-    libdvdcss
+    libdvdcss       X
     libdv
     liba52
-    xvid
-    xine-libs
+    xvid            X
+    xine-libs       X
 
     db1             X
     db2
@@ -279,12 +279,12 @@ kde)
     kdebase         X
 
     kdemultimedia   
-    kdenetwork      
-    kdegraphics     
-    kdepim          
-    kdeadmin        
+    kdenetwork      X
+    kdegraphics     X
+    kdepim          X
+    kdeadmin        X
     kdegames        
-    kdeutils        
+    kdeutils        X
     kdeedu
     kdeartwork
     kdetoys
@@ -373,7 +373,7 @@ gnome)
    libcapplet
    soup
    gtkhtml
-   lightml
+   libghtml
 
 t)
 
