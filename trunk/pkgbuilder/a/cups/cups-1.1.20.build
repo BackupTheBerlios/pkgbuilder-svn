@@ -1,15 +1,12 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/cups/cups-1.1.20.build,v 1.6 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/cups/cups-1.1.20.build,v 1.7 2004/01/05 12:25:00 tomby Exp $
 #
 # cups-1.1.20 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="cups"
-PKG_VERSION="1.1.20"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am3"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
@@ -29,19 +26,15 @@ PKG_DEPENDS="l/glibc
 
 PKG_HOMESITE="http://www.cups.org"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="CHANGES.txt CREDITS.txt ENCRYPTION.txt LICENSE.txt README.txt"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        --localstatedir=/var
                        --with-logdir=/var/log/cups
                        --disable-pam
                        --with-cups-user=lp
                        --with-cups-group=lp"
-PKG_BUILD_OPTIONS=""
+
 PKG_INSTALL_OPTIONS="BUILDROOT=$PKG_DEST INITDIR=/etc"
 
 PKG_CONFIG_FILES="etc/cups/classes.conf
