@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.13 2003/12/14 16:30:39 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.14 2003/12/15 22:49:41 tomby Exp $
 
 * New tasks:
 
@@ -278,15 +278,15 @@ kde)
     kdelibs         X
     kdebase         X
 
-    kdemultimedia   
+    kdemultimedia   X
     kdenetwork      X
     kdegraphics     X
     kdepim          X
     kdeadmin        X
-    kdegames        
+    kdegames        X
     kdeutils        X
     kdeedu
-    kdeartwork
+    kdeartwork      X
     kdetoys
 
     kdeaddons
