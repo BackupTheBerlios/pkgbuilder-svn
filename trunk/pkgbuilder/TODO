@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.37 2004/01/17 16:16:21 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.38 2004/01/25 12:00:24 tomby Exp $
 
 * New tasks:
 
@@ -9,15 +9,12 @@ $Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.37 2004/01/17 16:16:21 tomby Ex
     documentation
     
 * Packages to update:
-
-    gnumeric                1.2.4
     
 * High priority packages:
 
     cvs                     1.11.11
     wget                    1.9.1
     openssl                 0.9.7c
-    tcpdump
 
 * Packages:
 
@@ -187,15 +184,16 @@ l)
     libmpeg3               X    1.5.2
     libmusicbrainz         X    2.0.2
     libogg                 X    1.1
+    libpcap                X    0.8.1
     libpng                 X    1.2.5
     libsoup                X    1.99.26
     libtermcap
     libtiff                X    3.6.1
     libungif               X    4.1.0b1
     libvorbis              X    1.0.1
-    libxml2                X    2.5.11
+    libxml2                X    2.6.4
     libxml                 X    1.8.17
-    libxslt                X    1.0.33
+    libxslt                X    1.1.2
     libzvf                 X    2.0.1
     lm_sensors             X    2.6.5 (compatible con serie 2.4)
     nas
@@ -218,7 +216,7 @@ l)
     sdl                    X    1.2.6
     slang                  X    1.4.9
     smpeg                  X    0.4.4
-    speex                  X    1.0.2
+    speex                  X    1.0.3
     startup-notification   X    0.5
     svgalib                X    1.4.3
     t1lib                  X    1.3.1
@@ -289,7 +287,7 @@ n)
     dhcpd
     epic4
     etherape               X    0.9.0
-    ethereal               X    0.9.16
+    ethereal               X    0.10.0a
     exim
     fetchmail
     getmail
@@ -305,7 +303,7 @@ n)
     ncftp                  X    3.1.6
     netwatch
     nfs-utils
-    nmap                   X    3.48
+    nmap                   X    3.50
     nn
     ntop                   X    2.2c
     ntp                    X    4.1.2
@@ -314,7 +312,7 @@ n)
     php
     pine
     portmap                X    5.0
-    postfix                X    2.0.16
+    postfix                X    2.0.18
     ppp
     procmail
     proftpd
@@ -326,7 +324,7 @@ n)
     samba                  X    3.0.1
     sendmail
     slrn                   X    0.9.8.0
-    tcpdump
+    tcpdump                X    3.8.1
     tcpip
     tin
     traceroute
@@ -354,15 +352,16 @@ xap)
     fluxbox                X    0.1.14, 0.9.8
     fvwm
     gaim                   X    0.75
+    galeon                 X    1.3.12
     gftp                   X    2.0.16
     ggv                    X    2.4.0.2
     gimp
-    gkrellm                X    2.1.24
+    gkrellm                X    2.1.25
     gnomeicu               X    0.99
     gnucash
     gnuchess
-    gnuplog
-    gnumeric               X    1.2.2   (falta soporte para libgda)
+    gnuplot
+    gnumeric               X    1.2.5   (falta soporte para libgda)
     gqview                 X    1.3.7
     gv
     gvim                   X    6.2.178
@@ -391,24 +390,24 @@ xap)
 
 kde)
 
-    arts                   X    1.1.94
+    arts                   X    1.1.95
     kdeaccessibility
-    kdeaddons              X    3.1.94
-    kdeadmin               X    3.1.94
-    kdeartwork             X    3.1.94
-    kdebase                X    3.1.94
+    kdeaddons              X    3.1.95
+    kdeadmin               X    3.1.95
+    kdeartwork             X    3.1.95
+    kdebase                X    3.1.95
     kdebindings
-    kdeedu                 X    3.1.94
-    kdegames               X    3.1.94
-    kdegraphics            X    3.1.94
-    kde-i18n               X    3.1.94
-    kdelibs                X    3.1.94
-    kdemultimedia          X    3.1.94
-    kdenetwork             X    3.1.94
-    kdepim                 X    3.1.94
-    kdesdk                 X    3.1.94
+    kdeedu                 X    3.1.95
+    kdegames               X    3.1.95
+    kdegraphics            X    3.1.95
+    kde-i18n               X    3.1.95
+    kdelibs                X    3.1.95
+    kdemultimedia          X    3.1.95
+    kdenetwork             X    3.1.95
+    kdepim                 X    3.1.95
+    kdesdk                 X    3.1.95
     kdetoys
-    kdeutils               X    3.1.94
+    kdeutils               X    3.1.95
     koffice
     quanta
 
@@ -416,33 +415,32 @@ gnome)
 
     acme                   X    2.4.2
     at-spi                 X    1.3.7
-    bug-buddy              X    2.4.1
+    bug-buddy              X    2.4.1.1
     control-center         X    2.4.0
     eel                    X    2.4.1
     eog                    X    2.4.1
-    file-roller            X    2.4.2
+    file-roller            X    2.4.3
     gail                   X    1.4.1
     gal                    X    1.99.10
-    galeon
-    gcalctool              X    4.3.16
+    gcalctool              X    4.3.38
     gconf                  X    2.4.0.1
-    gconf-editor           X    2.4.0
+    gconf-editor           X    2.4.0.1
     gdm
     gedit                  X    2.4.1
     ghex
     glade
     gnome2-user-docs
-    gnome-applets          X    2.4.1
+    gnome-applets          X    2.4.2
     gnome-audio            X    2.0.0
     gnome-desktop          X    2.4.1.1
     gnome-extra-themes
     gnome-games            X    2.4.1.1
-    gnome-icon-theme       X    1.1.2
+    gnome-icon-theme       X    1.1.5
     gnome-mag
     gnome-media            X    2.4.1.1
     gnome-mime-data        X    2.4.1
-    gnome-panel            X    2.4.1
-    gnome-session          X    2.4.1
+    gnome-panel            X    2.4.2
+    gnome-session          X    2.4.2
     gnome-speech
     gnome-system-monitor   X    2.4.0
     gnome-terminal         X    2.4.2
@@ -462,8 +460,8 @@ gnome)
     gtkhtml                X    3.0.9
     gucharmap
     intltool               X    0.27.2
-    libbonobo              X    2.4.2
-    libbonoboui            X    2.4.1
+    libbonobo              X    2.4.3
+    libbonoboui            X    2.4.3
     libgail-gnome
     libgda
     libglade               X    2.0.1
