@@ -1,16 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db/Attic/foomatic-db-20031221.build,v 1.5 2004/01/11 15:04:48 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db/foomatic-db-20040228.build,v 1.1 2004/02/28 12:45:11 tomby Exp $
 #
-# foomatic-db-3.0.0 pkgbuilder script
+# foomatic-db-20040228 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="foomatic-db"
-PKG_VERSION="20031221"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am3"
+PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.linuxprinting.org/download/foomatic/$PKG_FILE_NAME
@@ -26,17 +24,11 @@ PKG_DEPENDS="l/libxml2
              ap/foomatic-db-engine
              `use pnm2ppa && echo "ap/pnm2ppa"`"
 
-PKG_HOMESITE="http://www.linuxprinting.org/foomatic"
+PKG_HOMESITE="http://www.linuxprinting.org/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog COPYING README TODO USAGE"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 PKG_NOSTRIP="Y"
 
@@ -48,6 +40,7 @@ do_install_ppds() {
     cd foomatic-filters-ppds-$PKG_VERSION &&
     ./install -d $PKG_DEST -p $PKG_PREFIX -z &&
     find $PKG_DEST$PKG_PREFIX/share/ppd -name '*hpijs*' -exec rm -rf {} \;
+
     chown -R root.root $PKG_DEST$PKG_PREFIX/share
 
     return $?
@@ -58,7 +51,8 @@ do_install() {
 
     pkg_install &&
     do_install_ppds &&
-    mv $PKG_DEST$PKG_PREFIX/share/man $PKG_DEST$PKG_PREFIX &&
+    mv $PKG_DEST$PKG_PREFIX/share/man $PKG_DEST$PKG_PREFIX
+
     chown -R root.root $PKG_DEST$PKG_PREFIX
 
     use cups && ( mkdir -p $PKG_DEST$PKG_PREFIX/share/cups/model
