@@ -1,13 +1,12 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libpng/libpng-1.2.5.build,v 1.4 2004/02/28 23:34:11 tomby Exp $
 #
-# libpng-1.2.6 pkgbuilder script
+# libpng-1.2.7 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -23,21 +22,17 @@ PKG_HOMESITE="http://www.libpng.org/pub/png/libpng.html"
 
 PKG_DOC_FILES="ANNOUNCE CHANGES INSTALL KNOWNBUG LICENSE README TODO"
 
-PKG_BUILD_OPTIONS="prefix=$PKG_PREFIX
-                   ZLIBINC=$PKG_PREFIX/include 
-                   ZLIBLIB=$PKG_PREFIX/lib 
-                   -f scripts/makefile.linux"
-                   
-PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX 
-                     -f scripts/makefile.linux"
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
                      
-do_patch() {
+do_configure() {
     cd $PKG_SRC
-    
-    cd scripts
-    cp makefile.linux makefile.linux.old
-    sed -e "s:-O3:${CFLAGS}:g" makefile.linux.old > makefile.linux
-    
+
+    sed -e "s:ZLIBLIB=.*:ZLIBLIB=/usr/lib:" \
+        -e "s:ZLIBINC=.*:ZLIBINC=/usr/include:" \
+        -e "s:-O3:${CFLAGS}:" \
+        -e "s:prefix=/usr/local:prefix=/usr:" \
+        -e "s:OBJSDLL = :OBJSDLL = -lz -lm :" scripts/makefile.linux > Makefile
+
     return $?
 }
 
