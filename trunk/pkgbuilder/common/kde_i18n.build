@@ -23,7 +23,7 @@ kde_i18n_init() {
     unset lang
 
     for file in $PKG_FILE_NAME ; do
-        PKG_URL="$PKG_URL $KDE_BASE_URL/`kde_mayor_version`/src/$PKG_NAME/$file"
+        PKG_URL="$PKG_URL $KDE_BASE_URL/`kde_version`/src/$PKG_NAME/$file"
     done
     unset file
 }
