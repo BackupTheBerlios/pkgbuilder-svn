@@ -1,35 +1,62 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/evolution/evolution-1.4.5.build,v 1.3 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/evolution/evolution-1.4.5.build,v 1.4 2004/01/05 15:09:46 tomby Exp $
 #
-# evolution pkgbuilder script
+# evolution-1.4.5 pkgbuilder script
 #
 
-inherit configscript
+inherit gnome
 
-PKG_NAME="evolution"
-PKG_VERSION="1.4.5"
-PKG_DB3_VERSION="3.1.17"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am2"
-PKG_EXTENSION="tar.bz2"
+
+PKG_DB3_VERSION="3.1.17"
 PKG_DB3_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_DB3_FILE_NAME="db-$PKG_DB3_VERSION.$PKG_DB3_EXTENSION"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+
 PKG_URL="ftp://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.4/$PKG_FILE_NAME
          http://www.sleepycat.com/update/snapshot/$PKG_DB3_FILE_NAME"
+         
+PKG_USE="crypt ssl doc"
+
+PKG_DEPENDS=">=gnome/gtkhtml-3.0.9
+	         >=gnome/gal-1.99.10
+	         >=l/libsoup-1.99.26
+	         >=gnome/yelp-2.2
+	         >=gnome/orbit2-2.8.2
+	         >=gnome/libbonoboui-2.0
+	         >=gnome/gnome-vfs-2.0
+	         >=gnome/libgnomeui-2.0
+	         >=gnome/libglade-2.0
+	         >=gnome/libgnome-2.0
+	         >=l/libxml2-2.5
+	         >=gnome/gconf-2.0
+	         >=gnome/libgnomecanvas-2.2.0.2
+	         >=gnome/libgnomeprintui-2.2
+	         >=gnome/libgnomeprint-2.2
+             >=a/sed-4
+	         d/pkgconfig
+	         >=d/libtool-1.4.1
+	         >=gnome/intltool-0.20
+	         d/gettext
+             `use crypt && echo ">=ap/gnupg-1.2.2"`
+	         `use ssl && echo ">=l/openssl-0.9.5"`
+	         `use doc && echo ">=gnome/scrollkeeper-0.3.10 gnome/gtk-doc"`"
 
 PKG_HOMESITE="http://www.ximiam.com/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS C* HACKING INSTALL MAINTAINERS NEWS* README"
 
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --with-db3=$PKG_SRC/db3
+                       --without-nspr-libs
+                       --without-nspr-includes
+                       --without-nss-libs
+                       --without-nss-includes
+                       `use ssl && echo "--enable-openssl=yes"`
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
 
 do_unpack() {
     cd $TMP
@@ -42,21 +69,11 @@ do_unpack() {
 }
 
 do_configure() {
-    do_build_db3
+    do_build_db3 || return 1
     
     cd $PKG_SRC
     
-    CFLAGS=$CFLAGS \
-    CXXFLAGS=$CXXFLAGS \
-    ./configure --prefix=$PKG_PREFIX \
-        --sysconfdir=/etc \
-        --with-db3=$PKG_SRC/db3 \
-        --without-nspr-libs \
-        --without-nspr-includes \
-        --without-nss-libs \
-        --without-nss-includes \
-        --enable-openssl=yes \
-        --enable-gtk-doc
+    pkg_configure
     
     return $?
 }
