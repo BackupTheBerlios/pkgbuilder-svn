@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="aMule-${PKG_VERSION/_/}.$PKG_EXTENSION"
@@ -19,7 +19,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/wxgtk-2.5
              >=n/curl-7.11.0
-             >=l/gd-2.0.26"
+             >=l/libgd-2.0.26"
 
 PKG_HOMESITE="http://www.amule.org/"
 
