@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gmp-4.1.2 pkgbuilder script
+# gmp-4.1.4 pkgbuilder script
 #
 
 inherit configscript
@@ -26,30 +26,3 @@ PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS=""
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-
-do_postinstall() {
-    cd $PKG_SRC
-    
-    mkdir -p $PKG_DOC
-
-    cp $PKG_DOC_FILES $PKG_DOC
-    find $PKG_DOC -type f -exec chmod 644 {} \;
-    find $PKG_DOC -type d -exec chmod 755 {} \;
-
-    strip_all $PKG_DEST
-
-    gzip_man $PKG_DEST$PKG_PREFIX/man
-
-    rm -f $PKG_DEST$PKG_PREFIX/info/dir
-
-    gzip_info $PKG_DEST$PKG_PREFIX/info
-
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
-    
-    if [ -f $PKG_HOME/files/doinst.sh ] ; then
-        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
-    fi
-}
-
