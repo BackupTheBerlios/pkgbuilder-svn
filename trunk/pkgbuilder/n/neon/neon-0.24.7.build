@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -31,3 +31,13 @@ PKG_CONFIGURE_OPTIONS="--enable-shared
                        `use expat && echo "--with-expat" || echo "--with-xml2"`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=$PKG_PREFIX/man/$PKG_NAME-$PKG_VERSION"
+
+do_postinstall() {
+    mkdir -p $PKG_DOC
+    mv $PKG_DEST$PKG_PREFIX/man/$PKG_NAME-$PKG_VERSION/html $PKG_DOC
+    rmdir $PKG_DEST$PKG_PREFIX/man/$PKG_NAME-$PKG_VERSION
+
+    configscript_do_postinstall
+
+    return $?
+}
