@@ -1,0 +1,10 @@
+--- rbgdk-pixbuf-format.c.orig	2005-02-03 23:28:58.000000000 +0100
++++ rbgdk-pixbuf-format.c	2005-02-03 23:29:02.000000000 +0100
+@@ -13,7 +13,6 @@
+ #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
+ 
+ #ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
+-#define GDK_PIXBUF_ENABLE_BACKEND
+ #include <gdk-pixbuf/gdk-pixbuf-io.h>
+ #endif
+ 

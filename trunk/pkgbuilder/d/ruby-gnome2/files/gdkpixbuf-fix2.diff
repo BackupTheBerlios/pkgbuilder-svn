@@ -1,0 +1,10 @@
+--- rbgdk-pixbuf.h.orig	2005-02-03 23:30:04.000000000 +0100
++++ rbgdk-pixbuf.h	2005-02-03 23:30:44.000000000 +0100
+@@ -9,6 +9,7 @@
+   Copyright (C) 2002-2004 Masao Mutoh
+ ************************************************/
+ 
++#define GDK_PIXBUF_ENABLE_BACKEND
+ #include <gdk-pixbuf/gdk-pixbuf.h>
+ #include <gdk-pixbuf/gdk-pixdata.h>
+ #include "rbgobject.h"

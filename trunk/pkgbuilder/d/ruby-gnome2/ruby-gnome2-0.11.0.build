@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-all-$PKG_VERSION.$PKG_EXTENSION"
@@ -16,13 +16,23 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-#TODO: complete deps early
 PKG_DEPENDS=">=d/ruby-1.8.0
+             >=l/glib2-2.2
+             >=l/pango-1.4
+             >=l/atk-1.6
              >=l/gtk+2-2.2
              >=l/libart_lgpl-2.3
+             >=l/gtkglext-1.0
+             >=l/libgda-1.0
+             >=gnome/librsvg-2.2
+             >=gnome/gstreamer-0.6
+             >=gnome/libgtkhtml-2.2
              >=gnome/libgnome-2.2 
              >=gnome/libgnomeui-2.2
              >=gnome/libgnomecanvas-2.2
+             >=gnome/libgnomeprint-2.2
+             >=gnome/libgnomeprintui-2.2
+             >=gnome/gtksourceview-1.0
              >=gnome/gnome-vfs-2.2
              >=gnome/libglade-2.2
              >=gnome/gconf-2.2"
@@ -32,7 +42,14 @@ PKG_HOMESITE="http://ruby-gnome2.sourceforge.jp/"
 PKG_SRC="$TMP/$PKG_NAME-all-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog NEWS README"
 
-PKG_PREFIX="/usr"
+do_patch() {
+    cd $PKG_SRC/gdkpixbuf
+
+    apply_patch gdkpixbuf-fix1.diff -Np0
+    apply_patch gdkpixbuf-fix2.diff -Np0
+
+    return $?
+}
 
 do_configure() {
     cd $PKG_SRC
