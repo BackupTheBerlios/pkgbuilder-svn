@@ -140,7 +140,7 @@ pkg_install() {
     if [ "$PKG_INSTALL_OPTIONS" = "" ] ; then
         PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
     fi
-	
+    
     if [ "$PKG_INSTALL_TARGET" = "" ] ; then
         PKG_INSTALL_TARGET="install"
     fi
@@ -153,7 +153,7 @@ pkg_install() {
 pkg_virtual() {
     if [ "$PKG_VIRTUAL" != "" ] ; then
         mkdir -p $PKG_DEST/install
-		
+        
         cat >> $PKG_DEST/install/doinst.sh << "EOF"
 virtual() {
   cd /var/log/package
