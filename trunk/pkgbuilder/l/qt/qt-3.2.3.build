@@ -1,21 +1,18 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.7 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.8 2004/01/07 20:13:24 tomby Exp $
 #
 # qt-3.2.3 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="qt"
-PKG_VERSION="3.2.3"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-x11-free-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.trolltech.com/qt/source/$PKG_FILE_NAME"
 
-PKG_LICENSE="GPLv2"
+PKG_LICENSE="QPLv1.0 | GPLv2"
 
 PKG_USE="mysql"
 
@@ -25,24 +22,25 @@ PKG_DEPENDS="x/xfree86
 	         l/libjpeg
          	 l/libmng
 	         l/freetype2
-            `use mysql && echo ">=ap/mysql-4.0.15a"`"
+             `use cups && echo "a/cups"`
+             `use mysql && echo ">=ap/mysql-4.0.15a"`"
 
 PKG_HOMESITE="http://www.trolltech.com/"
 
 PKG_SRC="$TMP/$PKG_NAME-x11-free-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_DOC_FILES="FAQ INSTALL LICENSE.GPL LICENSE.QPL MANIFEST PLATFORMS README changes-$PKG_VERSION"
 
 PKG_PREFIX="/usr/lib/$PKG_NAME-$PKG_VERSION"
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 do_patch() {
     cd $PKG_SRC
     
-    patch -p0 < $PKG_HOME/files/qt-cflags.diff &&
     patch -p0 < $PKG_HOME/files/qt-x11.diff &&
-    patch -p0 < $PKG_HOME/files/qt-mysql.diff
+    patch -p0 < $PKG_HOME/files/qt-mysql.diff &&
+    ( cd mkspecs/linux-g++ &&
+      cp qmake.conf qmake.conf.orig &&
+      sed -e "s:-O2:$CFLAGS:" qmake.conf.orig > qmake.conf )
     
     return $?
 }
@@ -52,13 +50,13 @@ do_configure() {
     
     export QTDIR="`pwd`"
     export YACC="byacc -d"
-    export SYSCONF=$PREFIX/etc/settings
+    export SYSCONF=$PKG_DEST$PKG_PREFIX/etc/settings
     local LD_LIBRARY_PATH_OLD=$LD_LIBRARY_PATH
 	export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
     export LDFLAGS="-ldl"
     
     local myconf="-release -system-zlib -qt-gif
-                    -system-libpng -system-libjpeg
+                    -system-libpng -system-libjpeg --system-libmng
                     -plugin-imgfmt-mng -thread
                     -no-stl -no-g++-exceptions -xft"
                     
@@ -76,7 +74,7 @@ do_build() {
     
     export QTDIR="`pwd`"
     export YACC="byacc -d"
-    export SYSCONF=$PREFIX/etc/settings
+    export SYSCONF=$PKG_DEST$PKG_PREFIX/etc/settings
     local LD_LIBRARY_PATH_OLD=$LD_LIBRARY_PATH
 	export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
     export LDFLAGS="-ldl"
