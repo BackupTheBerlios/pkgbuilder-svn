@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gdbm/gdbm-1.8.3.build,v 1.2 2003/11/23 17:31:34 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gdbm/gdbm-1.8.3.build,v 1.3 2003/11/23 17:33:29 tomby Exp $
 #
 # gdbm pkgbuilder script
 #
@@ -45,7 +45,7 @@ include do_cleanup
 do_install() {
     cd $PKG_SRC
     
-    make $PKG_INSTALL_OPTIONS && make $PKG_INSTALL_OPTIONS install-compat
+    make $PKG_INSTALL_OPTIONS install && make $PKG_INSTALL_OPTIONS install-compat
     
     return $?
 }
