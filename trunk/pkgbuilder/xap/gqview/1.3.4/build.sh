@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gqview/1.3.3/Attic/build.sh,v 1.1 2003/10/22 21:27:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gqview/1.3.4/Attic/build.sh,v 1.1 2003/10/31 20:53:59 tomby Exp $
 #
 # gqview pkgbuilder script
 #
