@@ -1,0 +1,56 @@
+--- ./bx-conf/file_cpy.c.orig	Mon Mar  5 11:36:21 2001
++++ ./bx-conf/file_cpy.c	Mon May 27 13:37:23 2002
+@@ -196,7 +196,7 @@
+ { "Mode Compression",	"Code for performing mode compression on mass mode changes", "COMPRESS_MODES", ON, BOOL_TYPE, NULL},
+ { "MAX # of urls in list", "Max Number of URLS to save in memory", "DEFAULT_MAX_URLS",   30, INT_TYPE, edit_dir },
+ { "ChatNet Support", "Support chatnet\'s numeric 310", "WANT_CHATNET",			OFF,BOOL_TYPE, NULL},
+-{ "Notify BitchX.com", "Notify BitchX.com of our version", "SHOULD_NOTIFY_BITCHX_COM",	ON, BOOL_TYPE, NULL},
++{ "Notify BitchX.com", "Notify BitchX.com of our version", "SHOULD_NOTIFY_BITCHX_COM",	OFF, BOOL_TYPE, NULL},
+ { "Want Userlist",		"", "WANT_USERLIST",		ON,  BOOL_TYPE, NULL },
+ { NULL, NULL, NULL, 0, 0, NULL }
+ };
+--- ./include/config.h.orig	Sun Mar 24 01:31:04 2002
++++ ./include/config.h	Mon May 27 13:37:23 2002
+@@ -693,9 +693,9 @@
+ #undef WANT_CHATNET      /* define just for codelogic */
+ #endif
+ 
+-#if defined(_USE_LOCAL_CONFIG) && !defined(SHOULD_NOTIFY_BITCHX_COM)
++/* #if defined(_USE_LOCAL_CONFIG) && !defined(SHOULD_NOTIFY_BITCHX_COM) */
+ #undef WANT_NOTIFY_BITCHX_COM
+-#endif
++/* #endif */
+ 
+ #undef PARANOID		/* #define this if your paranoid about dcc hijacking */
+ #undef WANT_CHAN_NICK_SERV	/* do we want to include some chan/nick/oper server commands */
+--- ./source/irc.c.orig	Mon Mar 25 12:52:56 2002
++++ ./source/irc.c	Mon May 27 13:37:23 2002
+@@ -1081,7 +1081,7 @@
+ 	convert_unix(my_path);
+ #endif
+ 	if (!*realname)
+-		strmcpy(realname, "* I'm to lame to read BitchX.doc *", REALNAME_LEN);
++		strmcpy(realname, "* I'm too lame to read BitchX.doc *", REALNAME_LEN);
+ 
+        /*
+         * Yes... this is EXACTLY what you think it is.  And if you don't know..
+--- ./source/scr-bx.c.orig	Wed Feb 27 20:22:50 2002
++++ ./source/scr-bx.c	Mon May 27 13:38:21 2002
+@@ -234,7 +234,7 @@
+ 			fprintf(stderr, "%30s %s\r\n", dir->d_name, ((st.st_mode & 0700) == 0600) ? "detached":"Attached or dead");
+ 	}
+ 	if (!count)
+-		fprintf(stderr, "No sockets to attach too\r\n");
++		fprintf(stderr, "No BitchX sockets to attach to.\r\n");
+ 	closedir(dptr);
+ 	exit(1);
+ }
+@@ -412,7 +412,7 @@
+ 
+ 	if (!(name = find_detach_socket(socket_path, tty)))
+ 	{
+-		fprintf(stderr, "No detached process to attach too\r\n");
++		fprintf(stderr, "No detached BitchX process to attach to.\r\n");
+ 		_exit(1);
+ 	}
+ 
