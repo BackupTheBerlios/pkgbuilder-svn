@@ -1,5 +1,4 @@
 ( useradd privoxy )
 ( groupadd privoxy )
 ( chown privoxy:privoxy var/log/privoxy )
-( chown privoxy:privoxy etc/privoxy )
-( chown privoxy:privoxy etc/privoxy/templates )
+( chown -R privoxy:privoxy etc/privoxy )

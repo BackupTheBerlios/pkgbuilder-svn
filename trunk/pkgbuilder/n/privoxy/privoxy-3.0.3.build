@@ -28,13 +28,6 @@ PKG_DOC_FILES="LICENSE README AUTHORS doc/text/faq.txt ChangeLog"
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/privoxy
                        --localstatedir=/var"
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
-PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX 
-                     CONF_BASE=$PKG_DEST/etc/privoxy 
-                     VAR_DEST=$PKG_DEST/var
-                     DOC_DEST=$PKG_DOC"
-PKG_INSTALL_TARGET="install"
 
 PKG_CONFIG_FILES="/etc/privoxy/default.action 
                   /etc/privoxy/default.filter 
@@ -51,18 +44,37 @@ do_configure() {
     configscript_do_configure
 }
 
-do_postinstall() {
-    ( chmod 750 $PKG_DEST/var/log/privoxy )
-    ( cd $PKG_DEST/var/log/privoxy ; rm * )
-    ( chmod 750 $PKG_DEST$PKG_PREFIX/sbin/privoxy )
+# rewrite install
+do_install() {
+    # log directory
+    ( mkdir -p $PKG_DEST/var/log/privoxy ; chmod 750 $PKG_DEST/var/log/privoxy )
+
+    # privoxy bin
+    ( mkdir -p $PKG_DEST$PKG_PREFIX/sbin
+      cat $PKG_SRC/privoxy > $PKG_DEST$PKG_PREFIX/sbin/privoxy
+      chmod 750 $PKG_DEST$PKG_PREFIX/sbin/privoxy )
+
+    # manual page
+    ( mkdir -p $PKG_DEST$PKG_PREFIX/man/man1
+      cat $PKG_SRC/privoxy.1 > $PKG_DEST$PKG_PREFIX/man/man1/privoxy.1 )
+
+    # config dirs
+    ( mkdir -p $PKG_DEST/etc/privoxy $PKG_DEST/etc/privoxy/templates 
+      chmod 750 $PKG_DEST/etc/privoxy $PKG_DEST/etc/privoxy/templates )
+
+    # install config files
+    ( cd $PKG_SRC
+      cp default.action default.filter config \
+         standard.action trust user.action $PKG_DEST/etc/privoxy
+      cp templates/* $PKG_DEST/etc/privoxy/templates )
+
+    # config files permisions
     ( cd $PKG_DEST/etc/privoxy 
       chmod 640 default.action default.filter config \
                 standard.action trust user.action templates/* )
-    ( rmdir $PKG_DEST$PKG_PREFIX/share )
 
+    # rc script
     ( mkdir -p $PKG_DEST/etc/rc.d 
-      cat $PKG_HOME/files/rc.privoxy > $PKG_DEST/etc/rc.d/rc.privoxy )
-
-    configscript_do_postinstall
-
+      cat $PKG_HOME/files/rc.privoxy > $PKG_DEST/etc/rc.d/rc.privoxy
+      chmod 750 $PKG_DEST/etc/rc.d/rc.privoxy )
 }
