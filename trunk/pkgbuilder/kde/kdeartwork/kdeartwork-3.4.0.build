@@ -11,8 +11,8 @@ PKG_BUILD="am1"
 PKG_USE="opengl"
 
 PKG_DEPENDS=">=l/qt-3.3
-             >=kde/kdelibs-3.3.2
-             >=kde/kdebase-3.3.2
+             >=kde/kdelibs-3.4.0
+             >=kde/kdebase-3.4.0
              xap/xscreensaver"
 
 PKG_DOC_FILES="README"
