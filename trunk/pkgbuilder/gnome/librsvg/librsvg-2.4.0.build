@@ -1,0 +1,55 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/librsvg/librsvg-2.4.0.build,v 1.1 2004/01/01 22:25:48 tomby Exp $
+#
+# librsvg-2.4.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_NAME="librsvg"
+PKG_VERSION="2.4.0"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/2.4/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="doc"
+
+PKG_DEPENDS="l/gtk+2
+             >=l/libart_lgpl-2.3.10
+             >=l/libxml2-2.4.7
+             >=l/pango-1.1
+             >=l/popt-1.5
+             >=gnome/libgsf-1.6.0
+             >=d/pkgconfig-0.12.0
+             `use doc && echo ">=gnome/gtk-doc-0.6"`"
+
+PKG_HOMESITE="http://www.gnome.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var/lib
+                       --with-svgz
+                       --without-gimp
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST HTML_DIR=/usr/share/gtk-doc/html/$PKG_NAME"
+PKG_INSTALL_TARGET="install"
+
+do_postinstall() {
+    cd $PKG_DEST$PKG_PREFIX
+    
+    rm -rf lib/gimp
+    
+    gnome_do_postinstall
+}
