@@ -1,0 +1,60 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/cyrus-sasl/cyrus-sasl-2.1.18.build,v 1.1 2004/03/14 16:47:11 tomby Exp $
+#
+# cyrus-sasl-2.1.19 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/libtool
+             d/autoconf
+             d/automake
+             l/db3
+             l/openssl
+             l/gdbm"
+
+PKG_HOMESITE="http://asg.web.cmu.edu/sasl/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README doc/*"
+
+PKG_CONFIGURE_OPTIONS="--with-configdir=/etc/sasl2
+                       --with-openssh
+                       --with-dblib=gdbm 
+                       --with-gdbm=$PKG_PREFIX
+                       --enable-plain
+                       --enable-cram
+                       --enable-login
+                       --enable-anon"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    apply_patch $PKG_NAME-2.1.17-saslauthd-man.diff -p0
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+    
+    pkg_install
+    
+    mkdir -p $PKG_DEST/etc/{sasl2,rc.d}
+    
+    cp $PKG_HOME/files/rc.saslauthd $PKG_DEST/etc/rc.d
+    
+    mkdir -p $PKG_DEST/var/lib/saslauthd
+    
+    return $?
+}

@@ -1,0 +1,29 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/atk/atk-1.6.0.build,v 1.1 2004/03/18 22:22:36 tomby Exp $
+#
+# atk-1.8.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.8/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS="l/glib2
+             >=d/pkgconfig-0.12.0
+             `use_dep doc ">=gnome/gtk-doc-1.0"`"
+
+PKG_HOMESITE="http://developer.gnome.org/projects/gap/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING README* INSTALL NEWS"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       `use_enable doc gtk-doc`"
