@@ -36,12 +36,13 @@ kde_minor_version() {
 }
 
 kde_version() {
+    local mayor_version="`kde_mayor_version`"
     local minor_version="`kde_minor_version`"
     
     if [ "$minor_version" = "0" ] ; then
-        echo "3.2"
+        echo "$mayor_version"
     else
-        echo "3.2.$minor_version"
+        echo "$mayor_version.$minor_version"
     fi
 }
 
