@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.1 2003/11/15 18:22:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.2 2003/11/23 00:59:01 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -31,48 +31,113 @@ PKG="$1"
 
 #verify script to execute
 if [ "$PKG" == "" -o "$PKG" == "help" ] ; then
-    echo "tas equivocao"
+    echo usage
     exit 1
 fi
 
 #the build script
 source $PKG
 
+echo
+echo "PKG=\"$PKG\""
+
 echo "PKG_DEPENDS=\"$PKG_DEPENDS\""
 
 #resolving dependencies
-for i in $PKG_DEPENDS ; do
+for DEP in $PKG_DEPENDS ; do
+    echo
+    echo "DEP=\"$DEP\""
+    
     #metapkg
-    DEP_METAPKG=`expr match "$i" '>\?=\([a-z]\+\)/'`
+    DEP_METAPKG=`expr match "$DEP" '\!\?>\?=\?\([a-z]\+\)/'`
 
     #pkg
-    DEP_PKG_NAME=`expr match "$i" '>\?=[a-z]\+/\([a-zA-Z0-9_\-]\+\)\-[0-9]\+'`
+    DEP_PKG_NAME=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/\([a-zA-Z0-9_\-]\+\)\-[0-9]\+'`
+    
+    test "$DEP_PKG_NAME" == "" && 
+        DEP_PKG_NAME=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/\([a-zA-Z0-9_\-]\+\)'`
 
     #version
-    DEP_PKG_VERSION=`expr match "$i" '>\?=\?[a-z]\+/[a-zA-Z0-9_\-]\+\-\([0-9a-z\.]\+\)'`
+    DEP_PKG_VERSION=`expr match "$DEP" '\!\?>\?=\?[a-z]\+/[a-zA-Z0-9_\-]\+\-\([0-9a-z\.]\+\)'`
+    
+    echo "DEP_METAPKG=\"$DEP_METAPKG\""
+    echo "DEP_PKG_NAME=\"$DEP_PKG_NAME\""
+    echo "DEP_PKG_VERSION=\"$DEP_PKG_VERSION\""
+    
+    # superhipermega error
+    test "$DEP_METAPKG" = "" -o "$DEP_PKG_NAME" == "" && exit 1
+    
+    if [ "$DEP_PKG_VERSION" != "" ] ; then
+        if [ `echo $DEP | grep '^!'` ] ; then
+            #pkg must not installed
 
-    if [ `echo $i | grep "^="` ] ; then
-        BUILD_SCRIPT=$DEP_METAPKG/$DEP_PKG_NAME/$DEP_PKG_NAME-$DEP_PKG_VERSION.build
-    elif [ `echo $i | grep "^>="` ] ; then
-        #TODO: determine last version
-        
-        BUILD_SCRIPT=$DEP_METAPKG/$DEP_PKG_NAME/$DEP_PKG_NAME-$DEP_PKG_VERSION.build
+            test is_installed $DEP_PKG_NAME $DEP_PKG_VERSION && exit 1
+        elif [ `echo $DEP | grep '^>='` ] ; then
+            #pkg must installed greater or equal version
+
+            DEP_PKG_LATEST_VERSION="`latest_version $DEP_METAPKG $DEP_PKG_NAME`"
+            
+            echo "DEP_PKG_LATEST_VERSION=\"$DEP_PKG_LATEST_VERSION\""
+
+            if `is_installed $DEP_PKG_NAME` ; then
+                DEP_PKG_INSTALLED_VERSION="`installed_version $DEP_PKG_NAME`"
+                
+                echo "DEP_PKG_INSTALLED_VERSION=\"$DEP_PKG_INSTALLED_VERSION\""
+
+                if [[ "$DEP_PKG_INSTALLED_VERSION" < "$DEP_PKG_VERSION" ]] ; then
+                    DEP_PKG_VERSION="$DEP_PKG_LATEST_VERSION"
+                else
+                    DEP_PKG_VERSION="$DEP_PKG_INSTALLED_VERSION"
+                fi
+            else
+                DEP_PKG_VERSION="$DEP_PKG_LATEST_VERSION"
+            fi
+        fi
+    else 
+        if [ `echo $DEP | grep '^!'` ] ; then
+            #pkg must not installed
+
+            test is_installed $DEP_PKG_NAME && exit 1
+        else
+            DEP_PKG_LATEST_VERSION="`latest_version $DEP_METAPKG $DEP_PKG_NAME`"
+
+            if `is_installed $DEP_PKG_NAME` ; then
+                DEP_PKG_VERSION="`installed_version $DEP_PKG_NAME`"
+            else
+                DEP_PKG_VERSION="$DEP_PKG_LATEST_VERSION"
+            fi
+        fi
     fi
     
-    ( cd $PKGBUILDER_HOME ; ./install.sh $BUILD_SCRIPT )
+    DEP_PKG=$DEP_METAPKG/$DEP_PKG_NAME/$DEP_PKG_NAME-$DEP_PKG_VERSION.build
     
-    RETVAL=$?
+    echo "DEP_PKG=\"$DEP_PKG\""
+
+    # if not installed we must install the dependency
+    if `is_installed $DEP_PKG_NAME $DEP_PKG_VERSION` ; then
+        echo "pkgbuilder: nothing to install for $DEP"
+    else
+        ( cd $PKGBUILDER_HOME ; ./install.sh $DEP_PKG )
+        
+        RETVAL="$?"
+        
+        echo "pkgbuilder: instalation for $DEP result: $RETVAL"
     
-    echo "pkgbuilder: instalation for $i result: $RETVAL"
-    
-    [ $RETVAL -ne 0 ] && exit 1
+        test $RETVAL -ne 0 && exit $RETVAL
+    fi
 done
 
 #TODO: install or upgrade??
-#if [ install_pkg $DEP_PKG_NAME $DEP_PKG_VERSION ] ; then
-    # ( cd $PKGBUILDER_HOME ; ./build.sh $BUILD_SCRIPT auto installpkg )
-#elif [ upgrade_pkg $DEP_PKG_NAME $DEP_PKG_VERSION ] ; then
-    # ( cd $PKGBUILDER_HOME ; ./build.sh $BUILD_SCRIPT auto upgradepkg )
-#fi
+if `is_installed $DEP_PKG_NAME $DEP_PKG_VERSION` ; then
+    echo actualizar
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
+    
+    RETVAL="$?"
+else
+    echo instalar
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
+    
+    RETVAL="$?"
+fi
 
-( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
+exit $RETVAL
