@@ -1,81 +1,378 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.4 2003/11/30 11:22:00 tomby Exp $
-
-* New packages:
-
-evolution       X
-squid
-SDL_image       X
-SDL_mixer       X
-SDL_net         X
-apache2
-kopete          X
-xawdecode
-xawtv
-ksetywatch      X
-openldap
-ethereal        X
-ksensors
-partimage
-courier-imap
-gnu-nano        X
-PyGTK2
-dia
-frozen-bubble   X
-pure-ftpd
-wx-windows
-anjuta          X
-kde 3.2beta1    
-
-* Base Packages:
-
-iptables        
-gnupg
-tripwire
-
-reiserfs
-xfs
-
-vim
-emacs
-nano            X
-joe
-
-tcsh
-zsh
-
-openssl
-pcre            X
-popt            X
-slang           X
-libxml          X
-libxml2         X
-libxslt         X
-readline        X
-gmp             X
-gdbm            X
-glib            X
-glib2           X
-expat           X
-
-lcms            X
-libjpeg         X
-libpng          X
-libtiff         X
-libungif        X
-libmng          X
-imlib
-imlib2
-
-pkgconfig       X
-
-python
-ruby            X
-tcl
-tk
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.5 2003/11/30 12:28:04 tomby Exp $
 
 * New tasks:
 
-add checksum verification files to packages
-add dependies to build scripts and test dependency check
+    add checksum verification files to packages
+    add deps to build scripts and test dep check
+
+* Base Packages:
+
+a)
+    cups
+    lprng
+
+    reiserfs
+    xfs
+
+ap)
+
+    esp-gs
+    a2ps
+    enscript
+    psutils
+
+    iptables
+    gnupg
+    tripwire
+
+    sgml-common     X
+    docbook-sgml3   X
+    docbook-sgml4   X
+    opensp          X
+    openjade        X
+    docbook-dsss    X
+    docbook-xml     X
+    docbook-xsl     X
+
+    vim
+    emacs
+    nano            X
+    joe
+
+    tcsh
+    zsh
+
+    mysql
+    postgresql
+
+    sane
+
+    mpg321
+    cdparanoia-III
+    cdrtools
+    cdrdao
+    vorbis-tools
+
+l)
+    cyrus-sasl      X
+    divx4linux      X
+    fribidi         X
+    libmusicbrainz  X
+    libzvf          X
+    lm_sensors      X
+    ruby-gnome2     X
+    sdl_console     X
+    sdl_gfx         X
+    sdl_image       X
+    sdl_mixer       X
+    sdl_net         X
+    sdl_perl        X
+    sdl_ttf         X
+    slang           X
+    smpeg           X
+    win32codecs     X
+
+    openssl
+    pcre            X
+    popt            X
+    slang           X
+    libxml          X
+    libxml2         X
+    libxslt         X
+    readline        X
+    gmp             X
+    gdbm            X
+    glib            X
+    glib2           X
+    expat           X
+
+    lcms            X
+    libjpeg         X
+    libpng          X
+    libtiff         X
+    libungif        X
+    libmng          X
+    imlib
+    imlib2
+
+    freetype2
+    fontconfig
+    qt              X
+    gtk+
+    gtk+2
+    pango
+    atk
+    lesstif
+
+    libsoup         X
+
+    alsa-libs
+    alsa-driver
+    alsa-utils
+    alsa-tools
+    alsa-oss
+    audio-file
+    esound
+    sdl
+    libao
+    libogg
+    libvorbis
+    nas
+    libmpeg3
+    libmad
+    libfame
+    speex
+    lame            X
+    id3lib          X
+    flac
+    libdvdread
+    libdvdcss
+    libdv
+    liba52
+    xvid
+    xine-libs
+
+    db1
+    db2
+    db3
+    db4
+
+d)
+
+    anjuta          X
+    lincvs          X
+    umbrello        X
+
+    pkgconfig       X
+    python
+    ruby            X
+    tcl
+    tk
+
+emu)
+
+    dosbox          X
+    scummvm         X
+    wine            X
+    xmame           X
+    
+games)
+
+    frozen-bubble   X
+
+n)
+
+    airtraf         X
+    ap-utils        X
+    etherape        X
+    ethereal        X
+    kismet          X
+    ntop            X
+
+    ppp
+    wvdial
+    dhcp
+    dhcpd
+    rp-pppoe
+
+    curl
+    wvstreams
+    gnet
+
+    links
+    lynx
+    w3m
+
+    ncftp
+    openssh
+    rsync
+    cvs
+    wget
+    tcpwrappers
+    portmap
+    ntp
+
+    tcpdump
+    nmap            X
+    whois
+    bind
+
+    nail
+    procmail
+    fetchmail
+    mutt
+    pine
+    slrn
+
+    postfix         X
+    qmail
+    sendmail
+    exim
+    qpopper
+    courier
+
+    openldap
+    samba
+    inetd
+    xinitd
+
+    apache
+    php
+    proftpd
+    pure-ftpd
+
+x)
+
+    xfree
+    
+    nvidia-glx      X
+    nvidia-kernel   X
+
+xap)
+
+    aterm           X
+    evolution       X
+    gaim            X
+    gkrellm         X
+    gqview          X
+    kopete          X
+    ksetispy        X
+    ksetiwatch      X
+    lyx             X
+    nedit           X
+
+    fluxbox         X
+    sawfish
+    metacity
+    xfce
+
+    gimp
+    abiword
+    gnumeric
+    gnucash
+    evolution       X
+
+    mozilla
+    galeon
+
+    pan
+
+    xine
+    xmms
+    mplayer
+
+    xsane
+
+    xpdf
+
+kde)
+
+    arts            X
+    kdelibs         X
+    kdebase         X
+
+    kdemultimedia   X
+    kdenetwork      X
+    kdegraphics     X
+    kdepim          X
+    kdeadmin        X
+    kdegames        
+    kdeutils        X
+    kdeedu
+    kdeartwork
+    kdetoys
+
+    kdeaddons
+    kdeaccessibility
+    kdebindings
+    kdesdk
+
+    kde-i18n
+
+    koffice
+    quanta
+
+gnome)
+
+   gtk-doc          X
+   linc
+   libIDL
+   ORBit2
+   intltool
+   bonobo-activation
+   libbonobo
+   gconf2
+   gnome-mime-data
+   gnome-vfs2
+   libgnome
+   libart_gpl
+   libglade2
+   libgnomecanvas
+   libbonoboui
+   libwnck
+   gtk-engines
+   gtk-thinice-engine
+   gnome-themes
+   scrollkeeper
+   vte
+   libgtop
+   gail
+   at_spi
+   libgail-gnome
+   librsvg
+   eel
+   libgtkhtml2
+   libgsf
+   gal
+   libgnomeprint
+   libgnomeprintui
+   gtkhtml3
+
+   gnome-desktop
+   gnome-panel
+   gnome-session
+   control-center
+
+   gnome-terminal
+   gnome-system-monitor
+   gnome-applets
+   gnome-utilities
+   gnome-games
+   nautilus
+   yelp
+   bug-buddy
+   gedit
+   eog
+   gstreamer
+   gst-plugins
+   gnome-media
+   nautilus-media
+   gnome2-user-docs
+
+   gconf-editor
+   gdm
+
+   orbit
+   oaf
+   gnome-libraries
+   gdk-pixbuf
+   gnome-print
+   bonobo
+   gconf
+   gnome-vfs
+   libglade
+   gal
+   guppi
+   libcapplet
+   soup
+   gtkhtml
+   lightml
+
+t)
+
+    tex
+
+And more...
+
 
 
