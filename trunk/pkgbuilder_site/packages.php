@@ -20,14 +20,15 @@
                 <blockquote>
                     <p><b>a:</b></p>
                     <ul>
+                        <li>acpid-1.0.3</li>
                         <li>apmd-3.0.2</li>
                         <li>cups-1.1.20</li>
                         <li>gpm-1.20.1</li>
                     </ul>
                     <p><b>ap:</b></p>
                     <ul>
-                        <li>alsa-utils-1.0.2</li>
-                        <li>bash-completion-20040210</li>
+                        <li>alsa-utils-1.0.3</li>
+                        <li>bash-completion-20040214</li>
                         <li>bc-1.06</li>
                         <li>cdparanoia-3.9.8</li>
                         <li>cdrdao-1.1.8</li>
@@ -40,16 +41,17 @@
                         <li>enscript-1.6.3</li>
                         <li>esp-gs-7.07.1</li>
                         <li>fam-2.7.0</li>
-                        <li>foomatic-db-20031221</li>
-                        <li>foomatic-db-engine-3.0.0</li>
-                        <li>foomatic-filters-3.0.0</li>
+                        <li>foomatic-db-20040228</li>
+                        <li>foomatic-db-engine-3.0.1</li>
+                        <li>foomatic-filters-3.0.1</li>
                         <li>gimp-print-4.3.25</li>
                         <li>gnupg-1.2.4</li>
                         <li>iptables-1.2.9</li>
-                        <li>jadetex-3.12</li>
-                        <li>madplay-0.15.0b</li>
+                        <li>jadetex-3.13</li>
+                        <li>latex2html-2002_2_1</li>
+                        <li>madplay-0.15.2b</li>
                         <li>mpg321-0.2.10</li>
-                        <li>nano-1.2.2</li>
+                        <li>nano-1.2.3</li>
                         <li>openjade-1.3.2</li>
                         <li>opensp-1.5.1</li>
                         <li>pnm2ppa-1.12</li>
@@ -57,11 +59,11 @@
                         <li>sgmlspm-1.03</li>
                         <li>tcsh-6.12</li>
                         <li>tetex-2.0.2</li>
-                        <li>vim-6.2.242</li>
+                        <li>vim-6.2.351</li>
                         <li>vorbis-tools-1.0.1</li>
                         <li>wv-1.0.0</li>
                         <li>wv2-0.2.1</li>
-                        <li>zsh-4.0.9</li>
+                        <li>zsh-4.2.0</li>
                     </ul>
                     <p><b>d:</b></p>
                     <ul>
@@ -69,7 +71,7 @@
                         <li>cscope-15.5</li>
                         <li>ctags-5.5</li>
                         <li>distcc-2.12.1</li>
-                        <li>gettext-0.11.5</li>
+                        <li>gettext-0.14.1</li>
                         <li>guile-1.6.4</li>
                         <li>indent-2.2.9</li>
                         <li>nasm-0.98.38</li>
@@ -78,15 +80,15 @@
                         <li>python-2.3.3</li>
                         <li>pyxml-0.8.3</li>
                         <li>ruby-1.8.1</li>
-                        <li>tcl-8.4.5</li>
-                        <li>tk-8.4.5</li>
+                        <li>tcl-8.4.6</li>
+                        <li>tk-8.4.6</li>
                     </ul>
                     <p><b>emu:</b></p>
                     <ul>
                         <li>dosbox-0.61</li>
                         <li>scummvm-0.5.1</li>
-                        <li>wine-20040121</li>
-                        <li>xmame-0.78.1</li>
+                        <li>wine-20040309</li>
+                        <li>xmame-0.79.1</li>
                     </ul>
                     <p><b>games:</b></p>
                     <ul>
@@ -102,7 +104,7 @@
                         <li>eog-2.4.1</li>
                         <li>file-roller-2.4.4</li>
                         <li>gail-1.4.1</li>
-                        <li>gal-1.99.10</li>
+                        <li>gal-1.99.11</li>
                         <li>gcalctool-4.3.42</li>
                         <li>gconf-2.4.0.1</li>
                         <li>gconf-editor-2.4.0</li>
@@ -111,7 +113,7 @@
                         <li>gnome-audio-2.0.0</li>
                         <li>gnome-desktop-2.4.1.1</li>
                         <li>gnome-games-2.4.2</li>
-                        <li>gnome-icon-theme-1.1.5</li>
+                        <li>gnome-icon-theme-1.1.3</li>
                         <li>gnome-media-2.4.1.1</li>
                         <li>gnome-mime-data-2.4.1</li>
                         <li>gnome-panel-2.4.2</li>
@@ -127,7 +129,7 @@
                         <li>gtk-doc-1.1</li>
                         <li>gtk-engines-2.2.0</li>
                         <li>gtk-engines-thinice-2.0.2</li>
-                        <li>gtkhtml-3.0.9</li>
+                        <li>gtkhtml-3.0.10</li>
                         <li>gtksourceview-0.7.0</li>
                         <li>intltool-0.30</li>
                         <li>libbonobo-2.4.3</li>
@@ -155,48 +157,49 @@
                     </ul>
                     <p><b>kde:</b></p>
                     <ul>
-                        <li>arts-1.2.0</li>
-                        <li>kdeaccessibility-3.2.0</li>
-                        <li>kdeaddons-3.2.0</li>
-                        <li>kdeadmin-3.2.0</li>
-                        <li>kdeartwork-3.2.0</li>
-                        <li>kdebase-3.2.0</li>
-                        <li>kdebindings-3.2.0</li>
-                        <li>kdeedu-3.2.0</li>
-                        <li>kdegames-3.2.0</li>
-                        <li>kdegraphics-3.2.0</li>
-                        <li>kde-i18n-3.2.0</li>
-                        <li>kdelibs-3.2.0</li>
-                        <li>kdemultimedia-3.2.0</li>
-                        <li>kdenetwork-3.2.0</li>
-                        <li>kdepim-3.2.0</li>
-                        <li>kdesdk-3.2.0</li>
-                        <li>kdetoys-3.2.0</li>
-                        <li>kdeutils-3.2.0</li>
-                        <li>kdevelop-3.0.0</li>
+                        <li>arts-1.2.1</li>
+                        <li>kde-3.2.1</li>
+                        <li>kdeaccessibility-3.2.1</li>
+                        <li>kdeaddons-3.2.1</li>
+                        <li>kdeadmin-3.2.1</li>
+                        <li>kdeartwork-3.2.1</li>
+                        <li>kdebase-3.2.1</li>
+                        <li>kdebindings-3.2.1</li>
+                        <li>kdeedu-3.2.1</li>
+                        <li>kdegames-3.2.1</li>
+                        <li>kdegraphics-3.2.1</li>
+                        <li>kde-i18n-3.2.1</li>
+                        <li>kdelibs-3.2.1</li>
+                        <li>kdemultimedia-3.2.1</li>
+                        <li>kdenetwork-3.2.1</li>
+                        <li>kdepim-3.2.1</li>
+                        <li>kdesdk-3.2.1</li>
+                        <li>kdetoys-3.2.1</li>
+                        <li>kdeutils-3.2.1</li>
+                        <li>kdevelop-3.0.2</li>
                         <li>koffice-1.3</li>
                         <li>koffice-i18n-1.3</li>
-                        <li>quanta-3.2.0</li>
+                        <li>quanta-3.2.1</li>
                     </ul>
                     <p><b>k:</b></p>
                     <ul>
-                        <li>kernel-source-2.4.24</li>
+                        <li>kernel-source-2.4.25</li>
                     </ul>
                     <p><b>l:</b></p>
                     <ul>
                         <li>aalib-1.4rc5</li>
-                        <li>alsa-driver-1.0.2c</li>
-                        <li>alsa-lib-1.0.2</li>
-                        <li>alsa-oss-1.0.2</li>
+                        <li>alsa-driver-1.0.3</li>
+                        <li>alsa-lib-1.0.3a</li>
+                        <li>alsa-oss-1.0.3a</li>
                         <li>aspell-0.50.4.1</li>
-                        <li>atk-1.4.1</li>
+                        <li>atk-1.6.0</li>
                         <li>audiofile-0.2.5</li>
-                        <li>cyrus-sasl-2.1.17</li>
+                        <li>cyrus-sasl-2.1.18</li>
                         <li>db1-1.85</li>
                         <li>db3-3.3.11</li>
                         <li>directfb-0.9.20</li>
                         <li>divx4linux-20030428</li>
-                        <li>esound-0.2.32</li>
+                        <li>esound-0.2.33</li>
                         <li>expat-1.95.7</li>
                         <li>flac-1.1.0</li>
                         <li>fontconfig-2.2.1</li>
@@ -204,56 +207,57 @@
                         <li>fribidi-0.10.4</li>
                         <li>gdbm-1.8.3</li>
                         <li>glib-1.2.10</li>
-                        <li>glib2-2.2.3</li>
+                        <li>glib2-2.4.0</li>
                         <li>gmp-4.1.2</li>
                         <li>gnet-1.1.9</li>
                         <li>gtk+-1.2.10</li>
-                        <li>gtk+2-2.2.4</li>
+                        <li>gtk+2-2.4.0</li>
                         <li>gtkglarea-1.99.0</li>
                         <li>id3lib-3.8.3</li>
                         <li>imlib-1.9.14</li>
                         <li>imlib2-1.1.0</li>
                         <li>lame-3.95.1</li>
-                        <li>lcms-1.11</li>
+                        <li>lcms-1.12</li>
                         <li>lesstif-0.93.94</li>
                         <li>liba52-0.7.4</li>
-                        <li>libao-0.8.4</li>
+                        <li>libao-0.8.5</li>
                         <li>libart_lgpl-2.3.16</li>
                         <li>libcroco-0.4.0</li>
                         <li>libdvdcss-1.2.8</li>
                         <li>libexif-0.5.12</li>
-                        <li>libfame-0.9.0</li>
+                        <li>libfame-0.9.1</li>
                         <li>libgsf-1.8.2</li>
-                        <li>libid3tag-0.15.0b</li>
-                        <li>libieee1284-0.2.1</li>
+                        <li>libid3tag-0.15.1b</li>
+                        <li>libieee1284-0.2.8</li>
                         <li>libjpeg-6b</li>
-                        <li>libmad-0.15.0b</li>
-                        <li>libmikmod-3.1.10</li>
-                        <li>libmng-1.0.5</li>
-                        <li>libmpeg3-1.5.2</li>
-                        <li>libmusicbrainz-2.0.2</li>
+                        <li>libmad-0.15.1b</li>
+                        <li>libmikmod-3.1.11</li>
+                        <li>libmng-1.0.6</li>
+                        <li>libmpeg3-1.5.4</li>
+                        <li>libmusicbrainz-2.1.1</li>
                         <li>libogg-1.1</li>
                         <li>libpcap-0.8.1</li>
                         <li>libpng-1.2.5</li>
-                        <li>libsoup-1.99.26</li>
+                        <li>libsoup-1.99.28</li>
                         <li>libtiff-3.6.1</li>
                         <li>libungif-4.1.0b1</li>
                         <li>libvorbis-1.0.1</li>
                         <li>libwmf-0.2.8.2</li>
                         <li>libwww-5.4.0</li>
                         <li>libxml-1.8.17</li>
-                        <li>libxml2-2.6.6</li>
-                        <li>libxslt-1.1.2</li>
+                        <li>libxml2-2.6.7</li>
+                        <li>libxslt-1.1.4</li>
                         <li>libzvf-2.0.1</li>
                         <li>lm_sensors-2.6.5</li>
+                        <li>netpbm-10.20</li>
                         <li>openslp-1.0.11</li>
-                        <li>pango-1.2.5</li>
+                        <li>pango-1.4.0</li>
                         <li>pcre-4.5</li>
                         <li>popt-1.7</li>
-                        <li>qt-3.2.3</li>
+                        <li>qt-3.3.1</li>
                         <li>readline-4.3</li>
                         <li>ruby-gnome2-0.8.1</li>
-                        <li>sdl-1.2.6</li>
+                        <li>sdl-1.2.7</li>
                         <li>sdl_console-2.1</li>
                         <li>sdl_gfx-2.0.10</li>
                         <li>sdl_image-1.2.3</li>
@@ -267,19 +271,20 @@
                         <li>startup-notification-0.5</li>
                         <li>svgalib-1.4.3</li>
                         <li>t1lib-1.3.1</li>
-                        <li>taglib-1.0beta2</li>
+                        <li>taglib-1.0</li>
                         <li>win32codecs-1.0</li>
-                        <li>xine-lib-1.0rc3</li>
-                        <li>xvid-0.9.2</li>
+                        <li>xaw3d-1.5</li>
+                        <li>xine-lib-1.0_rc3b</li>
+                        <li>xvid-1.0.0_rc3</li>
                     </ul>
                     <p><b>n:</b></p>
                     <ul>
                         <li>airtraf-1.1</li>
                         <li>ap-utils-1.3.2</li>
                         <li>bitchx-1.0.19</li>
-                        <li>curl-7.10.8</li>
+                        <li>curl-7.11.1</li>
                         <li>etherape-0.9.0</li>
-                        <li>ethereal-0.10.0a</li>
+                        <li>ethereal-0.10.2</li>
                         <li>kismet-3.0.1</li>
                         <li>links-2.1pre14</li>
                         <li>lynx-2.8.5</li>
@@ -288,48 +293,50 @@
                         <li>nmap-3.50</li>
                         <li>ntop-2.2c</li>
                         <li>ntp-4.1.2</li>
-                        <li>openssh-3.7.1p2</li>
+                        <li>openssh-3.8p1</li>
                         <li>portmap-5.0</li>
                         <li>postfix-2.0.18</li>
                         <li>pure-ftpd-1.0.16b</li>
                         <li>rsync-2.6.0</li>
-                        <li>samba-3.0.1</li>
+                        <li>samba-3.0.2a</li>
                         <li>slrn-0.9.8.0</li>
                         <li>tcpdump-3.8.1</li>
                         <li>xinetd-2.3.12</li>
                     </ul>
                     <p><b>xap:</b></p>
                     <ul>
-                        <li>abiword-2.0.3</li>
-                        <li>anjuta-1.2.0</li>
+                        <li>abiword-2.0.5</li>
+                        <li>anjuta-1.2.1</li>
                         <li>aterm-0.4.2</li>
                         <li>epiphany-1.0.7</li>
-                        <li>evolution-1.4.5</li>
+                        <li>evolution-1.4.6</li>
                         <li>fluxbox-0.9.8</li>
                         <li>gaim-0.75</li>
-                        <li>galeon-1.3.12</li>
+                        <li>galeon-1.3.14</li>
                         <li>gftp-2.0.16</li>
                         <li>ggv-2.4.1</li>
-                        <li>gkrellm-2.1.25</li>
+                        <li>gkrellm-2.1.28</li>cd
                         <li>gnomeicu-0.99</li>
-                        <li>gnumeric-1.2.6</li>
-                        <li>gqview-1.3.9</li>
-                        <li>gvim-6.2.242</li>
+                        <li>gnumeric-1.2.8</li>
+                        <li>gqview-1.4.1</li>
+                        <li>gv-3.5.8</li>
+                        <li>gvim-6.2.351</li>
                         <li>imagemagick-5.5.7.15</li>
                         <li>kopete-0.7.3</li>
                         <li>ksetispy-0.6.0</li>
                         <li>ksetiwatch-2.6.1</li>
                         <li>lincvs-1.3.0</li>
-                        <li>lyx-1.3.3</li>
+                        <li>lyx-1.3.4</li>
                         <li>mozilla-1.6</li>
                         <li>mplayer-1.0pre3</li>
                         <li>nedit-5.4</li>
+                        <li>root-tail-0.9</li>
                         <li>umbrello-1.1.1</li>
                         <li>windowmaker-0.80.2</li>
                         <li>xchat-2.0.7</li>
-                        <li>xmms-1.2.9</li>
+                        <li>xmms-1.2.10</li>
                         <li>xpdf-2.03</li>
-                        <li>xscreensaver-4.14</li>
+                        <li>xscreensaver-4.15</li>
                     </ul>
                     <p><b>x:</b></p>
                     <ul>
@@ -338,7 +345,7 @@
                         <li>xfree86-4.3.0.1</li>
                     </ul>
                 </blockquote>
-                <div class="tleft"><b>Last update: $Date: 2004/02/15 13:46:53 $</b></div>
+                <div class="tleft"><b>Last update: $Date: 2004/03/21 21:08:30 $</b></div>
             </div>
         </div>
     </div>

@@ -14,6 +14,19 @@
     <div id="tmain">
         <div class="tbox">
             <div class="ttitle">Nueva versión de PkgBuilder</div>
+            <div class="tleft"><b>Sábado, 21 de Marzo de 2004</b></div>
+            <div class="tleft">
+                <p>Esta nueva versión incluye KDE 3.2.1, Gnome 2.4.2 y nuevas versiones de otras 
+                importantes aplicaciones como KDevelor 3.0.2 y Quanta 3.2.1, Galeon 1.3.14, Evolution 1.4.6 
+                y nuevas versiones de los drivers ALSA 1.0.3.</p>
+                <p>También se incluye en esta versión un script que actualiza todos los paquetes 
+                a la última versión disponible.</p>
+            </div>
+        </div>
+    </div>
+    <div id="tmain">
+        <div class="tbox">
+            <div class="ttitle">Nueva versión de PkgBuilder</div>
             <div class="tleft"><b>Sábado, 15 de Febrero de 2004</b></div>
             <div class="tleft">
                 <p>Esta nueva versión incluye las últimas versiones de los escritorios
