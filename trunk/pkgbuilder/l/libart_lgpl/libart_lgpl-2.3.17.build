@@ -1,0 +1,19 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# libart_lgpl-2.3.17 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2 LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/pkgconfig"
+
+PKG_HOMESITE="http://www.levien.com/libart"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog NEWS README"
