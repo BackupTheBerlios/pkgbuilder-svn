@@ -1,10 +1,17 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.24 2003/12/27 20:14:32 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.25 2003/12/28 19:17:32 tomby Exp $
 
 * New tasks:
 
     check pkg deps
     create virtual pkgs support like 'virtual/mta' in gentoo
     use new 'use` variable values
+
+* Package tasks:
+
+    Fixes:
+
+        fix docbook stuff
+
 
 * Packages:
 
@@ -68,13 +75,13 @@ ap)
     cdrtools               X
     diffutils
     docbook-dsss           X
-    docbook-sgml3          X
-    docbook-sgml4          X
-    docbook-xml            X
+    docbook-sgml           ?
+    docbook-xml            ?
     docbook-xsl            X
     emacs
     enscript               X
     esp-gs                 X
+    fame                   X
     foomatic-db            X
     foomatic-db-engine     X
     foomatic-filters       X
@@ -195,6 +202,7 @@ l)
     slang                  X
     smpeg                  X
     speex                  X
+    startup-notification   X
     svgalib                X
     taglib                 X
     t1lib                  X
@@ -217,7 +225,7 @@ d)
     flex
     gcc
     gdb
-    indent
+    indent                 X
     j2sdk
     libtool
     m4
@@ -227,6 +235,7 @@ d)
     pkgconfig              X
     pmake
     python                 X
+    pyxml                  X
     rcs
     ruby                   X
     tcl                    X
@@ -282,7 +291,7 @@ n)
     openssh
     php
     pine
-    portmap
+    portmap                X
     postfix                X
     ppp
     procmail
@@ -384,21 +393,18 @@ gnome)
 
     acme
     at-spi
-    bonobo
-    bonobo-activation
     bug-buddy
     control-center
-    eel
+    eel                    X
     eog
     epiphany
     file-roller
-    gail
+    gail                   X
     gal
     gal2
     galeon
     gcalctool
-    gconf
-    gconf2
+    gconf                  X
     gconf-editor
     gdk-pixbuf
     gdm
@@ -409,13 +415,13 @@ gnome)
     gnome2-user-docs
     gnome-applets
     gnome-audio
-    gnome-desktop
+    gnome-desktop          X
     gnome-extra-themes
     gnome-games
     gnome-icon-theme
     gnome-libraries
     gnome-media
-    gnome-mime-data
+    gnome-mime-data        X
     gnome-panel
     gnome-print
     gnome-session
@@ -424,8 +430,7 @@ gnome)
     gnome-terminal
     gnome-themes
     gnome-utils
-    gnome-vfs
-    gnome-vfs2
+    gnome-vfs              X
     gnomeicu
     gnopernicus
     gst-plugins
@@ -437,35 +442,33 @@ gnome)
     gtk-thinice-engine
     gucharmap
     guppi
-    intltool
-    libbonobo
-    libbonoboui
+    intltool               X
+    libbonobo              X
+    libbonoboui            X
     libcapplet
     libgail-gnome
     libghtml
-    libglade
-    libglade2
-    libgnome
-    libgnomecanvas
-    libgnomeprint
-    libgnomeprintui
-    libgnomeui
+    libglade               X
+    libgnome               X
+    libgnomecanvas         X
+    libgnomeprint          X
+    libgnomeprintui        X
+    libgnomeui             X
     libgsf
     libgtkhtml
     libgtop
     libidl                 X
     librsvg
-    libwnck
+    libwnck                X
     linc                   X
     nautilus
     nautilus-cd-burner
     nautilus-media
     oaf
     orbit
-    orbit2
-    scrollkeeper
+    orbit2                 X
+    scrollkeeper           ?
     soup
-    startup-notification
     vte
     yelp
 
