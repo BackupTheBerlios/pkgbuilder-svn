@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.4 2003/12/21 17:49:47 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.5 2003/12/21 18:02:19 tomby Exp $
 #
 # kde-i18n-3.1.94 pkgbuilder script
 #
@@ -44,8 +44,6 @@ include general
 include do_fetch
 
 include do_patch
-
-include do_postinstall_null
 
 do_unpack() {
     mkdir -p $PKG_SRC
@@ -91,5 +89,11 @@ do_install() {
           make $PKG_INSTALL_OPTIONS install )
     done
 
+    return $?
+}
+
+do_postinstall() {
+    pkg_installfiles
+    
     return $?
 }
