@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/Attic/nedit-5.4rc2.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/Attic/nedit-5.4rc2.build,v 1.3 2003/12/24 12:08:58 tomby Exp $
 #
-# nedit pkgbuilder script
+# nedit-5.4rc2 pkgbuilder script
 #
 
 PKG_NAME="nedit"
@@ -10,8 +10,14 @@ PKG_VERSION="5.4rc2"
 PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-5.4RC2.tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-5.4RC2.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.nedit.org/pub/beta/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/yacc l/lesstif"
 
 PKG_HOMESITE="www.nedit.org"
 
@@ -19,7 +25,7 @@ PKG_SRC="$TMP/$PKG_NAME-5.4RC2"
 PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
 PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="README ReleaseNotes ChangeLog COPYRIGHT
-    doc/*.txt doc/nedit.doc doc/README.FAQ doc/NEdit.ad"
+    		   doc/*.txt doc/nedit.doc doc/README.FAQ doc/NEdit.ad"
     
 PKG_PREFIX="/usr"
 

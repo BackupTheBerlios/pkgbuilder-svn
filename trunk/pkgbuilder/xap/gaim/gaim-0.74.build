@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gaim/Attic/gaim-0.74.build,v 1.2 2003/11/30 10:33:05 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gaim/Attic/gaim-0.74.build,v 1.3 2003/12/24 12:08:58 tomby Exp $
 #
 # gaim-0.74 pkgbuilder script
 #
@@ -20,7 +20,7 @@ PKG_DEPENDS="l/db1
 	         l/glib2
 	         a/gettext
              d/gettext-tools
-	         ap/oggutils
+	         l/libao
 	         >=l/audiofile-0.2.0
 	         >=d/perl-5.6.1
 		     a/sed
@@ -51,25 +51,10 @@ include do_install
 do_postinstall() {
     cd $PKG_SRC
     
-    mkdir -p $PKG_DOC
-
-    cp $PKG_DOC_FILES $PKG_DOC
-    find $PKG_DOC -type f -exec chmod 644 {} \;
-    find $PKG_DOC -type d -exec chmod 755 {} \;
-
-    strip_all $PKG_DEST
-
-    gzip_man $PKG_DEST$PKG_PREFIX/man
-    
-    if [ -f $PKG_DEST$PKG_PREFIX/info/dir ] ; then
-        rm -f $PKG_DEST$PKG_PREFIX/info/dir
-    fi
-
-    gzip_info $PKG_DEST$PKG_PREFIX/info
-
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    pkg_installdoc &&
+    pkg_stripall &&
+    pkg_gzipmaninfo &&
+    pkg_installfiles
     
     local mozilla_version="`installed_version mozilla`"
     

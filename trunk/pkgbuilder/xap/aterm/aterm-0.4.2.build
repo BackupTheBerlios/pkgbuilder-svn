@@ -1,17 +1,22 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/aterm/aterm-0.4.2.build,v 1.3 2003/11/30 23:00:24 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/aterm/aterm-0.4.2.build,v 1.4 2003/12/24 12:08:58 tomby Exp $
 #
-# aterm pkgbuilder script
+# aterm-0.4.2 pkgbuilder script
 #
 
 PKG_NAME="aterm"
 PKG_VERSION="0.4.2"
 PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
-PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
 
 PKG_USE=""
+
 PKG_DEPENDS="x/xfree86
              l/libpng
              l/libjpeg"
@@ -24,6 +29,9 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="aterm.lsm ChangeLog INSTALL README* doc/BUGS doc/FAQ doc/README.* doc/TODO"
 
 PKG_PREFIX="/usr/X11R6"
+PKG_CONFIGURE_OPTIONS=""
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
 
 include general
 
@@ -32,13 +40,5 @@ include do_unpack_gzip
 include do_patch
 include do_configure
 include do_build
-
+include do_install
 include do_postinstall
-
-do_install() {
-    cd $PKG_SRC
-    
-    make prefix=$PKG_DEST$PKG_PREFIX install
-    
-    return $?
-}
