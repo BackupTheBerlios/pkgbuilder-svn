@@ -1,0 +1,64 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libexif/libexif-0.5.12.build,v 1.1 2004/01/04 22:02:07 tomby Exp $
+#
+# libexif-0.6.11 pkgbuilder script
+#
+
+inherit multi
+
+PKG_BUILD="am1"
+
+PKG_ITER="new old"
+
+PKG_LICENSE="GPLv2"
+
+PKG_HOMESITE="http://libexif.sourceforge.net/"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="d/pkgconfig"
+
+PKG_DOC_FILES="A* C* INSTALL NEWS README"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var/lib
+                       `use_enable nls`"
+
+do_init_new() {
+    multi_init
+    PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+    PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+}
+
+do_patch_new() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_NAME.po.diff -Np1
+
+    return $?
+}
+
+do_install_new() {
+    configscript_do_install
+}
+
+do_postinstall_new() {
+    configscript_do_postinstall
+}
+
+do_init_old() {
+    multi_init
+    PKG_VERSION="0.5.12"
+    PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+    PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+    PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+}
+
+do_install_old() {
+    cd $PKG_SRC
+    cat libexif/.libs/libexif.so.9.1.2 > $PKG_DEST$PKG_PREFIX/lib/libexif.so.9.1.2
+    chmod 755 $PKG_DEST/usr/lib/libexif.so.9.1.2
+    ( cd $PKG_DEST$PKG_PREFIX/lib ; rm -rf libexif.so.9 )
+    ( cd $PKG_DEST$PKG_PREFIX/lib ; ln -sf libexif.so.9.1.2 libexif.so.9 )
+}
