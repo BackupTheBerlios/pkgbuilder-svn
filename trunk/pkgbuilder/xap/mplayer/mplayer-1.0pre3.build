@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.2 2003/12/25 21:34:59 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.3 2003/12/25 22:21:15 tomby Exp $
 #
 # mplayer-1.0pre3 pkgbuilder script
 #
@@ -47,15 +47,18 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS LICENSE README ChangeLog DOCS/HTML/en/*.html etc/example.conf"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS=" --confdir=/etc/mplayer
-                        --datadir=/usr/share/mplayer
-                        --disable-runtime-cpudetection
-                        --enable-gui
-                        --enable-menu
-                        --enable-largefiles
-                        --language=all"
+PKG_CONFIGURE_OPTIONS="--confdir=/etc/mplayer
+                       --datadir=/usr/share/mplayer
+                       --disable-runtime-cpudetection
+                       --enable-menu
+                       --enable-largefiles
+                       --language=all
+					   `use gtk && echo "--enable-gui"`
+					   `use gtk && use gtk2 && echo "--enable-gtk2"`"
 
 PKG_CONFIG_FILES="etc/mplayer/codecs.conf etc/mplayer/input.conf"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
 
 include general
 
