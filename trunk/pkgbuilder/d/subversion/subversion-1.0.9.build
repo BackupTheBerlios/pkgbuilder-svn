@@ -48,5 +48,7 @@ do_postinstall() {
     cd $PKG_DEST$PKG_PREFIX
     rmdir info
 
+    use apache || chown root.root "$PKG_DEST$PKG_PREFIX/apr-0/*"
+
     configscript_do_postinstall
 }

@@ -45,8 +45,9 @@ do_patch() {
 }
 
 do_postinstall() {
-    cd $PKG_DEST$PKG_PREFIX
-    rmdir info
+    rmdir $PKG_DEST$PKG_PREFIX/info
+
+    use apache || chown root.root $PKG_DEST$PKG_PREFIX/apr-0/*
 
     configscript_do_postinstall
 }
