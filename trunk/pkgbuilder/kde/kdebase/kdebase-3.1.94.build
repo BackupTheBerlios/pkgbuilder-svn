@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebase/Attic/kdebase-3.1.94.build,v 1.1 2003/12/13 18:56:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebase/Attic/kdebase-3.1.94.build,v 1.2 2003/12/14 11:33:55 tomby Exp $
 #
 # kdebase-3.1.94 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="kdebase"
 PKG_VERSION="3.1.94"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_FILE_NAME"
@@ -56,11 +56,6 @@ include do_install
 
 do_postinstall() {
     cd $PKG_SRC
-    
-    ( cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
-        mv default_kde-information.menu kde-information.menu
-        mv default_kde-screensavers.menu kde-screensavers.menu
-        mv default_kde-settings.menu kde-settings.menu )
     
     mkdir -p $PKG_DEST/etc/X11/xinit
     cp $PKG_HOME/files/xinitrc.kde32 $PKG_DEST/etc/X11/xinit/
