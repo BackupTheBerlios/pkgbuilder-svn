@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.23 2003/12/27 17:00:40 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.24 2003/12/27 20:14:32 tomby Exp $
 
 * New tasks:
 
@@ -49,7 +49,6 @@ a)
     sysklogd
     syslinux
     tar
-
     usb-utils
     util-linux
     xfsprogs
@@ -156,8 +155,7 @@ l)
     libdvdcss              X
     libdvdread
     libfame                X
-    libgr
-    libieee1284
+    libieee1284            X
     libjpeg                X
     libmad                 X
     libmikmod              X
@@ -170,7 +168,6 @@ l)
     libtermcap
     libtiff                X
     libungif               X
-    libusb
     libvorbis              X
     libxml2                X
     libxml                 X
@@ -456,10 +453,10 @@ gnome)
     libgsf
     libgtkhtml
     libgtop
-    libidl
+    libidl                 X
     librsvg
     libwnck
-    linc
+    linc                   X
     nautilus
     nautilus-cd-burner
     nautilus-media
