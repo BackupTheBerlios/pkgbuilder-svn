@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.18 2004/01/18 14:16:08 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.19 2004/03/13 15:40:30 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -161,7 +161,7 @@ for DEP in $PKG_DEPENDS ; do
                     echo "DEP_PKG_INSTALLED_VERSION=\"$DEP_PKG_INSTALLED_VERSION\""
                 fi
                 
-                compare_versions $DEP_PKG_INSTALLED_VERSION $DEP_PKG_VERSION
+                compare_versions $DEP_PKG_NAME-$DEP_PKG_INSTALLED_VERSION $DEP_PKG_NAME-$DEP_PKG_VERSION
                 RESULT="$?"
 
                 if [ "$RESULT" -eq "2" ] ; then
