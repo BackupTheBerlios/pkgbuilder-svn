@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# scummvm-0.6.0 pkgbuilder script
+# scummvm-0.7.1 pkgbuilder script
 #
 
 inherit configscript
@@ -10,18 +10,19 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+PKG_URL="http://belnet.dl.sourceforge.net/sourceforge/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="alsa oggvorbis mad"
+PKG_USE="alsa oggvorbis mad flac"
 
 PKG_DEPENDS=">=l/sdl-1.2.2
              l/zlib
              >=l/libmpeg2-0.3.2
             `use_dep oggvorbis "l/libvorbis"`
             `use_dep alsa ">=l/alsa-lib-0.9"`
-            `use_dep mad "l/libmad"`"
+            `use_dep mad "l/libmad"`
+            `use_dep flac "l/flac"`"
 
 PKG_HOMESITE="http://www.scummvm.org/"
 
@@ -30,14 +31,13 @@ PKG_DOC_FILES="COPYING NEWS README"
 PKG_CONFIGURE_OPTIONS="--backend=sdl
                       `use_enable oggvorbis vorbis`
                       `use_enable alsa`
-                      `use_enable mad`"
+                      `use_enable mad`
+                      `use_enable flac`"
 
 do_patch() {
     cd $PKG_SRC
     
-    cp Makefile Makefile.orig
-    sed -e "s:-O:$CXXFLAGS:" \
-        Makefile.orig > Makefile
+    sed -i -e "s:-O:$CXXFLAGS:" Makefile
     
     return $?
 }
