@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.14 2004/01/05 15:11:29 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.15 2004/01/11 15:06:24 tomby Exp $
 #
 # mplayer-1.0pre3 pkgbuilder script
 #
@@ -102,7 +102,7 @@ do_postinstall() {
       done )
     
     use gtk && ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/Skin
-      tar jxvf $FETCH_DIR/Blue-1.0.tar.bz2
+      unpack Blue-1.0.tar.bz2
       mv Blue default
       find ./ -type f -exec chmod 644 {} \;
       find ./ -type d -exec chmod 755 {} \;
@@ -110,7 +110,7 @@ do_postinstall() {
       chown -R root.root default )
     
     ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/font
-      tar jxvf $FETCH_DIR/font-arial-iso-8859-1.tar.bz2
+      unpack font-arial-iso-8859-1.tar.bz2
       find ./ -type f -exec chmod 644 {} \;
       find ./ -type d -exec chmod 755 {} \;
       chown -R root.root font-arial-iso-8859-1 )

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/base.build,v 1.5 2004/01/05 20:05:54 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/base.build,v 1.6 2004/01/11 15:04:11 tomby Exp $
 #
 # base pkgbuilder script
 #
@@ -38,9 +38,7 @@ pkg_do_fetch() {
     return $?
 }
 
-pkg_do_verify() {
-    cd $FETCH_DIR
-    
+pkg_do_verify() {    
     local sum="$PKG_HOME/files/md5sum-$PKG_VERSION"
     
     if [ -r $sum ] ; then

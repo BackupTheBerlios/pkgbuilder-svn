@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/k/kernel-source/kernel-source-2.4.23.build,v 1.8 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/k/kernel-source/kernel-source-2.4.23.build,v 1.9 2004/01/11 15:05:01 tomby Exp $
 #
 # kernel-source-2.4.23 pkgbuilder script
 #
@@ -24,7 +24,7 @@ PKG_PREFIX="/usr/src"
 do_install() {
     mkdir -p $PKG_DEST$PKG_PREFIX &&
     cd $PKG_DEST$PKG_PREFIX &&
-    tar jxvf $FETCH_DIR/$PKG_FILE_NAME &&
+    unpack $PKG_FILE_NAME &&
     ln -sf linux-$PKG_VERSION linux &&
     
     cd linux &&

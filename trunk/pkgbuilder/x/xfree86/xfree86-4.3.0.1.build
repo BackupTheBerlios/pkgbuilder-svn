@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.12 2004/01/02 18:07:11 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.13 2004/01/11 15:05:54 tomby Exp $
 #
 # xfree86-4.3.0.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="xfree86"
 PKG_VERSION="4.3.0.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am6"
+PKG_BUILD="am7"
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="X430src-1.tgz
                X430src-2.tgz
@@ -57,24 +57,10 @@ PKG_CONFIG_FILES="etc/X11/xdm/Xsession
                   etc/X11/xdm/xdm-config 
                   etc/X11/xdm/Xservers"
 
-do_unpack() {
-    cd $TMP
-    
-    mkdir -p $PKG_UNPACK_DIR
-    
-    cd $PKG_UNPACK_DIR
-    
-    for pkgfile in $PKG_FILE_NAME ; do
-        tar zxvf $FETCH_DIR/$pkgfile
-    done
-    
-    return $?
-}
-
 do_patch() {
     cd $PKG_SRC
     
-    zcat $FETCH_DIR/4.3.0-4.3.0.1.diff.gz | patch -Np1
+    apply_patch 4.3.0-4.3.0.1.diff.gz -Np1
     
     return $?
 }
@@ -84,7 +70,7 @@ do_configure() {
     
     local mmxsupport="`use mmx && echo "YES" || echo "NO"`"
     local ssesupport="`use sse && echo "YES" || echo "NO"`"
-    local threednowsupport="`use 3dnew && echo "YES" || echo "NO"`"
+    local threednowsupport="`use 3dnow && echo "YES" || echo "NO"`"
     
     cat > config/cf/host.def << "EOF"
 /* Begin XFree86 host.def file */
@@ -219,7 +205,7 @@ EOF
 do_build() {
     cd $PKG_SRC
     
-    WORLDOPTS="" make World 2>&1 | tee $TMP/xfree-compile.log
+    WORLDOPTS="" make World
     
     return $?
 }

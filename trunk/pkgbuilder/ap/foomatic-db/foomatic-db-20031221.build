@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db/Attic/foomatic-db-20031221.build,v 1.4 2004/01/01 18:05:25 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db/Attic/foomatic-db-20031221.build,v 1.5 2004/01/11 15:04:48 tomby Exp $
 #
 # foomatic-db-3.0.0 pkgbuilder script
 #
@@ -43,7 +43,7 @@ PKG_NOSTRIP="Y"
 do_install_ppds() {
     cd $PKG_SRC
 
-    tar zxvf $FETCH_DIR/foomatic-filters-ppds-$PKG_VERSION.$PKG_EXTENSION
+    unpack foomatic-filters-ppds-$PKG_VERSION.$PKG_EXTENSION
 
     cd foomatic-filters-ppds-$PKG_VERSION &&
     ./install -d $PKG_DEST -p $PKG_PREFIX -z &&
