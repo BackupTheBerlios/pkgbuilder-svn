@@ -1,0 +1,59 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/distcc/Attic/distcc-2.11.2.build,v 1.1 2003/12/29 00:54:43 tomby Exp $
+#
+# distcc-2.11.2 pkgbuilder script
+#
+
+PKG_NAME="distcc"
+PKG_VERSION="2.11.2"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://distcc.samba.org/ftp/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gnome gtk"
+
+PKG_DEPENDS="a/shadow
+             l/popt
+            `use gnome && echo ">=l/gtk+2-2.0.0
+		                        >=gnome/libgnome-2.0.0
+		                        >=gnome/libgnomeui-2.0.0.0
+		                        >=gnome/libglade-2.0.0
+		                        l/pango"`
+	        `use gtk && echo ">=l/gtk+2-2.0.0 l/pango"`"
+
+PKG_HOMESITE="http://distcc.samba.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="INSTALL README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--datadir=/usr/share/distcc \
+                       --sysconfdir=/etc
+                       `use gtk && ! use gnome && echo "--with-gtk"`
+                       `use gtk && use gnome && echo "--with-gnome"`"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST 
+                     docdir=/usr/doc 
+                     pkgdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES=""
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
