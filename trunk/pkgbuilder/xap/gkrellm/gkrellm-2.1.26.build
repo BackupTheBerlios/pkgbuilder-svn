@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gkrellm/gkrellm-2.1.26.build,v 1.1 2004/02/28 12:00:36 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gkrellm/gkrellm-2.1.26.build,v 1.2 2004/02/28 23:17:12 tomby Exp $
 #
 # gkrellm-2.1.26 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -31,8 +31,16 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST PREFIX=$PKG_PREFIX"
 do_patch() {
     cd $PKG_SRC
     
-    cp Makefile Makefile.old
-    sed "s:share\/man:man:g" Makefile.old > Makefile
+    ( cp Makefile Makefile.old
+      sed -e "s:share\/man:man:g" Makefile.old > Makefile )
+    
+    ( cd src
+      cp Makefile Makefile.old
+      sed -e "s:-O2:${CFLAGS}:g" Makefile.old > Makefile )
+    
+    ( cd server
+      cp Makefile Makefile.old
+      sed -e "s:-O2:${CFLAGS}:g" Makefile.old > Makefile )
     
     return $?
 }
