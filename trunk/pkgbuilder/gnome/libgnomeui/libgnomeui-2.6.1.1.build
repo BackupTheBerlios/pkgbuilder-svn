@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnomeui/libgnomeui-2.6.0.build,v 1.1 2004/04/10 12:29:03 tomby Exp $
 #
-# libgnomeui-2.6.0 pkgbuilder script
+# libgnomeui-2.6.1.1 pkgbuilder script
 #
 
 inherit gnome
