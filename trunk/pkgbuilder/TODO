@@ -82,7 +82,6 @@ l)
 
     db2
     glibc
-    glut
     libdv
     libdvdnav
     libdvdread
@@ -162,7 +161,6 @@ xap)
     rxvt
     sawfish
     xfce
-    xine
     xsane
 
 kde)

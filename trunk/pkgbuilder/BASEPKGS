@@ -25,12 +25,12 @@ a/infozip-5.51-i486-1
 a/isapnptools-1.26-i386-1 #optional
 a/jfsutils-1.1.6-i486-1 #optional
 a/kbd-1.12-i486-2
-a/kernel-ide-2.4.27-i486-1
-a/kernel-modules-2.4.27-i486-1
+a/kernel-ide-2.4.28-i486-1
+a/kernel-modules-2.4.28-i486-1
 a/less-382-i486-1
 a/lilo-22.5.9-i486-2
 a/module-init-tools-3.0-i486-1
-a/openssl-solibs-0.9.7d-i486-1
+a/openssl-solibs-0.9.7e-i486-2
 a/pciutils-2.1.11-i486-5
 a/pcmcia-cs-3.2.8-i486-1 #optional
 a/pkgtools-10.1.0-i486-1
@@ -41,7 +41,7 @@ a/shadow-4.0.3-i486-11
 a/sysklogd-1.4.1-i486-9
 a/syslinux-2.11-i486-1
 a/sysvinit-2.84-i486-51
-a/tar-1.14-i486-4
+a/tar-1.15.1-i486-4
 a/udev-042-i486-1 #optional
 a/usbutils-0.11-i486-2
 a/utempter-1.1.1-i486-1
@@ -65,7 +65,7 @@ d/byacc-1.9-i386-1
 d/flex-2.5.4a-i486-2
 d/gcc-3.3.4-i486-1
 d/gcc-g++-3.3.4-i486-1
-d/kernel-headers-2.4.27-i386-1
+d/kernel-headers-2.4.28-i386-1
 d/libtool-1.5.10-i486-1
 d/m4-1.4.2-i486-1
 d/make-3.80-i386-1
@@ -77,7 +77,7 @@ l/ncurses-5.4-i486-2
 l/zlib-1.2.2-i486-1
 
 # n)
-n/openssl-0.9.7d-i486-1
+n/openssl-0.9.7e-i486-2
 n/tcpip-0.17-i486-30
 n/wget-1.9.1-i486-1
 n/wireless-tools-26-i486-3 #optional
