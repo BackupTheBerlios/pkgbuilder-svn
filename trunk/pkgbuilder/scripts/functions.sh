@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.24 2003/12/06 16:38:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.25 2003/12/14 17:48:56 tomby Exp $
 
 #
 # Generic functions
@@ -334,7 +334,7 @@ extract_version() {
     fi
     
     local pkgmayorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-\([0-9]\+\)'`"
-    local pkgminorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-[0-9]\+\([a-zA-Z0-9_\.]\+\)'`"
+    local pkgminorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-[0-9]\+\([_\.][a-zA-Z0-9_\.]\+\)'`"
 
     echo "$pkgmayorversion$pkgminorversion"
 }
