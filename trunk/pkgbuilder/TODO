@@ -67,7 +67,6 @@ ap)
     ispell
     jed
     joe
-    lsof
     lvm
     man
     man-pages
@@ -184,7 +183,6 @@ gnome)
     gnome-vfs-extras
     gnopernicus
     gok
-    libgail-gnome
     libgda
     zenity
 
