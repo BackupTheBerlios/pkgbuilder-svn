@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libgsf/libgsf-1.8.2.build,v 1.1 2004/01/01 21:02:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libgsf/libgsf-1.8.2.build,v 1.2 2004/01/01 21:10:47 tomby Exp $
 #
 # libgsf-1.8.2 pkgbuilder script
 #
@@ -20,7 +20,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="gnome"
 
 PKG_DEPENDS=">=l/libxml2-2.4.16
-             l/glib-2
+             l/glib2
              >=l/zlib-1.1.4
              >=a/sed-4
              a/bzip2
