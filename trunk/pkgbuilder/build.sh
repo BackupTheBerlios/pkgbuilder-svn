@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.3 2003/11/08 16:55:24 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.4 2003/11/08 22:09:34 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -74,6 +74,7 @@ case "$ACTION" in
     ;;
     'fetch')
         do_fetch
+        RETVAL="$?"
     ;;
     'unpack')
         do_unpack
@@ -81,6 +82,7 @@ case "$ACTION" in
     ;;
     'patch')
         do_patch
+        RETVAL="$?"
     ;;
     'configure')
         do_configure
