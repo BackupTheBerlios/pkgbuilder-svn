@@ -15,28 +15,187 @@
         <div class="tbox">
             <div class="ttitle">Todo</div>
             <div class="tleft">
-                <p>Esta es una pequeña lista de paquete y funcionalidades que quedan por hacer.</p>
+                <p>Esta es una pequeña lista de paquetes y funcionalidades que quedan por hacer.</p>
                 
                 <p><b>Paquetes:</b></p>
                 <ul>
-                    <li>squid</li>
-                    <li>apache2</li>
-                    <li>xawdecode</li>
-                    <li>xawtv</li>
+                    <li>a2ps</li>
+                    <li>acpid</li>
+                    <li>animail</li>
+                    <li>apache</li>
+                    <li>apsfilter</li>
+                    <li>ash</li>
+                    <li>aspell</li>
+                    <li>at</li>
+                    <li>aumix</li>
+                    <li>autoconf</li>
+                    <li>automake</li>
+                    <li>bash</li>
+                    <li>bin</li>
+                    <li>bin86</li>
+                    <li>bind</li>
+                    <li>binutils</li>
+                    <li>bison</li>
+                    <li>byacc</li>
+                    <li>bzip2</li>
+                    <li>coreutils</li>
+                    <li>courier</li>
+                    <li>cpio</li>
+                    <li>cvs</li>
+                    <li>db2</li>
+                    <li>db4</li>
+                    <li>dcron</li>
+                    <li>devfsd</li>
+                    <li>devs</li>
+                    <li>dhcp</li>
+                    <li>dhcpd</li>
+                    <li>diffutils</li>
+                    <li>e2fsprogs</li>
+                    <li>emacs</li>
+                    <li>epic4</li>
+                    <li>exim</li>
+                    <li>fetchmail</li>
+                    <li>findutils</li>
+                    <li>flex</li>
+                    <li>fvwm</li>
+                    <li>galeon</li>
+                    <li>gawk</li>
+                    <li>gconf-editor</li>
+                    <li>gdb</li>
+                    <li>gdm</li>
+                    <li>getmail</li>
+                    <li>ghex</li>
+                    <li>gimp</li>
+                    <li>glade</li>
+                    <li>glut</li>
+                    <li>gnome2-user-docs</li>
+                    <li>gnome-extra-themes</li>
+                    <li>gnome-mag</li>
+                    <li>gnome-speech</li>
+                    <li>gnome-vfs-extras</li>
+                    <li>gnopernicus</li>
+                    <li>gnucash</li>
+                    <li>gnuchess</li>
+                    <li>gnuplog</li>
+                    <li>gok</li>
+                    <li>gpdf</li>
+                    <li>grep</li>
+                    <li>groff</li>
+                    <li>gucharmap</li>
+                    <li>gv</li>
+                    <li>gzip</li>
+                    <li>hdparm</li>
+                    <li>hotplug</li>
+                    <li>inetd</li>
+                    <li>infozip</li>
+                    <li>iptraf</li>
+                    <li>isapnptools</li>
+                    <li>ispell</li>
+                    <li>j2sdk</li>
+                    <li>jed</li>
+                    <li>jfstools</li>
+                    <li>joe</li>
+                    <li>kdb</li>
+                    <li>kdeaccessibility</li>
+                    <li>kdebindings</li>
+                    <li>kdetoys</li>
+                    <li>koffice</li>
+                    <li>less</li>
+                    <li>lftp</li>
+                    <li>libdv</li>
+                    <li>libdvdnav</li>
+                    <li>libdvdread</li>
+                    <li>libgail-gnome</li>
+                    <li>libgda</li>
+                    <li>libtermcap</li>
+                    <li>libtool</li>
+                    <li>lilo</li>
+                    <li>logrotate</li>
+                    <li>lprng</li>
+                    <li>lsof</li>
+                    <li>lvm</li>
+                    <li>m4</li>
+                    <li>make</li>
+                    <li>man</li>
+                    <li>man-pages</li>
+                    <li>mc</li>
+                    <li>minicom</li>
+                    <li>module-init-tools</li>
+                    <li>mysql</li>
+                    <li>nail</li>
+                    <li>nas</li>
+                    <li>nc</li>
+                    <li>ncurses</li>
+                    <li>netwatch</li>
+                    <li>nfs-utils</li>
+                    <li>nn</li>
+                    <li>ntp</li>
+                    <li>ntp</li>
                     <li>openldap</li>
-                    <li>ksensors</li>
-                    <li>partimage</li>
-                    <li>courier-imap</li>
-                    <li>PyGTK2</li>
-                    <li>dia</li>
+                    <li>openssl</li>
+                    <li>pan</li>
+                    <li>pciutils</li>
+                    <li>pcmcia-cs</li>
+                    <li>perl</li>
+                    <li>php</li>
+                    <li>pine</li>
+                    <li>pmake</li>
+                    <li>postgresql</li>
+                    <li>ppp</li>
+                    <li>procmail</li>
+                    <li>procps</li>
+                    <li>proftpd</li>
+                    <li>psutils</li>
+                    <li>pure-ftpd</li>
+                    <li>qmail</li>
+                    <li>qpopper</li>
+                    <li>quanta</li>
+                    <li>quota</li>
+                    <li>rcs</li>
+                    <li>reiserfsprogs</li>
+                    <li>rp-pppoe</li>
+                    <li>rxvt</li>
+                    <li>sane</li>
+                    <li>sawfish</li>
+                    <li>sed</li>
+                    <li>sendmail</li>
+                    <li>shadow</li>
+                    <li>slocate</li>
+                    <li>sudo</li>
+                    <li>sysklogd</li>
+                    <li>syslinux</li>
+                    <li>tar</li>
+                    <li>tcpdump</li>
+                    <li>tcpip</li>
+                    <li>texinfo</li>
+                    <li>tin</li>
+                    <li>traceroute</li>
+                    <li>trn</li>
+                    <li>usb-utils</li>
+                    <li>use</li>
+                    <li>utempter</li>
+                    <li>util-linux</li>
+                    <li>vim</li>
+                    <li>w3m</li>
+                    <li>wget</li>
+                    <li>windowmaker</li>
+                    <li>wireless-tools</li>
+                    <li>workbone</li>
+                    <li>wvdial</li>
+                    <li>wvstreams</li>
+                    <li>xfce</li>
+                    <li>xfsprogs</li>
+                    <li>xine</li>
+                    <li>xsane</li>
+                    <li>zenity</li>
+                    <li>zlib</li>
                 </ul>
                 <p><b>Funcionalidades:</b></p>
                 <ul>
-                    <li>Verificación de checksum</li>
-                    <li>Dependencia entre acciones</li>
-                    <li>Resolución de dependencias entre paquetes</li>
+                    <li>Probar las dependencias de los paquetes</li>
+                    <li>Crear nuevos paquetes</li>
                 </ul>
-                <div class="tleft"><b>Última modificacion: $Date: 2003/10/31 19:21:36 $</b></div>
+                <div class="tleft"><b>Última modificacion: $Date: 2004/01/10 14:59:09 $</b></div>
             </div>
         </div>
     </div>
