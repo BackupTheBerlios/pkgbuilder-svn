@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.5 2003/11/15 16:15:39 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.6 2003/11/23 00:58:25 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -106,7 +106,7 @@ execute_action() {
             RETVAL="$?"
         ;;
         *)
-            RETVAL=1
+            RETVAL="1"
     esac
     
     return $RETVAL
@@ -152,4 +152,62 @@ strip_all() {
     find $1 -type f | xargs file | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded
 
     return $?
+}
+
+is_installed() {
+    if [ "$1" == "" ] ; then
+        return 1
+    fi
+    
+    local retval
+    
+    if [ "$2" == "" ] ; then
+        ls $PACKAGES_LOGDIR/$1-*-*-* &> /dev/null
+        retval="$?"
+    else
+        ls $PACKAGES_LOGDIR/$1-$2-*-* &> /dev/null
+        retval="$?"
+    fi    
+    
+    return $retval
+}
+
+latest_version() {
+    if [ "$1" == "" -o "$2" == "" ] ; then
+        return 1
+    fi
+    
+    local buildfiles=`cd $PKGBUILDER_HOME/$1/$2 ; ls -1v *.build`
+    
+    if [ "$buildfiles" != "" ] ; then
+        local latestbuildfile=""
+        
+        for i in $buildfiles ; do
+            latestbuildfile="$i"
+        done
+
+        local pkgmayorversion=`expr match $latestbuildfile '[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
+        local pkgminorversion=`expr match $latestbuildfile '[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)\.build'`
+
+        echo "$pkgmayorversion$pkgminorversion"
+    else
+        return 1
+    fi
+}
+
+installed_version() {
+    if [ "$1" == "" ] ; then
+        return 1
+    fi
+
+    local pkgfile=`cd $PACKAGES_LOGDIR ; ls $1-*-*-*`
+    
+    if [ -f "$PACKAGES_LOGDIR/$pkgfile" ] ; then
+        local pkgmayorversion=`expr match $pkgfile '[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
+        local pkgminorversion=`expr match $pkgfile '[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
+        
+        echo "$pkgmayorversion$pkgminorversion"
+    else
+        return 1
+    fi
 }
