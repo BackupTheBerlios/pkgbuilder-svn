@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.31 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.32 2003/12/30 18:47:40 tomby Exp $
 
 #
 # Generic functions
@@ -23,7 +23,7 @@ include() {
         return 1  
     fi
     
-    source $PKGBUILDER_HOME/common/$1
+    source $PKGBUILDER_HOME/common/$1.build
     
     return $?
 }
@@ -38,7 +38,7 @@ inherit() {
         return 1  
     fi
     
-    include $1.build
+    include $1
     
     PKG_PARENT="$1"
     
