@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.94.build,v 1.2 2003/12/14 13:27:54 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/Attic/kdemultimedia-3.1.94.build,v 1.3 2003/12/14 17:03:18 tomby Exp $
 #
 # kdemultimedia-3.1.94 pkgbuilder script
 #
@@ -32,7 +32,7 @@ PKG_DEPENDS=">=l/qt-3.2
              `use nas && echo "l/nas"`
              `use esd && echo "l/esound"`
              `use oggvorbis && echo "l/libvorbis"`
-             `use tcktk && echo "d/tcl d/tk"`
+             `use tcltk && echo "d/tcl d/tk"`
              `use gstreamer && echo "l/gstreamer"`"
 
 PKG_HOMESITE="http://www.kde.org/"
