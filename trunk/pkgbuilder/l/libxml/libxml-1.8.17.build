@@ -1,0 +1,69 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxml/libxml-1.8.17.build,v 1.1 2003/11/29 00:00:14 tomby Exp $
+#
+# libxml pkgbuilder script
+#
+
+PKG_NAME="libxml"
+PKG_VERSION="1.8.17"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://xmlsoft.org/old/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/readline-4.1 >=l/ncurses-5.2"
+
+PKG_HOMESITE="http://xmlsoft.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    gzip_info $PKG_DEST$PKG_PREFIX/info
+    
+    cd $PKG_DEST$PKG_PREFIX/include/gnome-xml
+    rm -f libxml
+    ln -s $PKG_PREFIX/include/gnome-xml libxml
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    
+    if [ -f $PKG_HOME/files/doinst.sh ] ; then
+        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
+    fi
+}
