@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_image/sdl_image-1.2.3.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_image/sdl_image-1.2.3.build,v 1.5 2004/01/01 18:39:26 tomby Exp $
 #
 # sdl_image-1.2.3 pkgbuilder script
 #
@@ -10,20 +10,20 @@ inherit configscript
 PKG_NAME="sdl_image"
 PKG_VERSION="1.2.3"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="SDL_image-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.libsdl.org/projects/SDL_image/release/$PKG_FILE_NAME"
 
 PKG_LICENSE="LGPLv2"
 
-PKG_USE=""
+PKG_USE="png gif tiff jpeg"
 
-PKG_DEPENDS=">=l/libpng-1.2.1
-             >=l/libungif-4.1
-             >=l/libtiff-3.6.0
-	         >=l/jpeg-6b
-	         >=l/libsdl-1.2.4
+PKG_DEPENDS="`use png && echo ">=l/libpng-1.2.1"`
+             `use gif && echo ">=l/libungif-4.1"`
+             `use tiff && echo ">=l/libtiff-3.6.0"`
+	         `use jpeg && echo ">=l/libjpeg-6b"`
+	         >=l/sdl-1.2.4
 	         l/zlib"
 
 PKG_HOMESITE="http://www.libsdl.org/projects/SDL_image/index.html"
