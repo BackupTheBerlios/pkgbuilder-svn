@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/arts/Attic/arts-1.1.94.build,v 1.1 2003/12/09 21:35:26 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/arts/Attic/arts-1.1.94.build,v 1.2 2003/12/09 21:40:54 tomby Exp $
 #
 # arts-1.1.93 pkgbuilder script
 #
@@ -11,7 +11,7 @@ PKG_ARCH="$ARCH"
 PKG_BUILD="am1"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp://ftp.es.kde.org/pub/mirror/kde/unstable/3.1.93/src/$PKG_FILE_NAME"
+PKG_URL="http://mirrors.isc.org/pub/kde/unstable/3.1.94/src/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2 LGPLv2"
 
