@@ -1,0 +1,38 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde/kde-3.2.1.build,v 1.1 2004/03/13 13:29:10 tomby Exp $
+#
+# kde-3.2.1 pkgbuilder script
+#
+
+inherit meta
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="devel nls accessibility"
+
+PKG_DEPENDS=">=l/qt-3.2
+             >=kde/arts-1.2.2
+             >=kde/kdelibs-3.2.2
+             >=kde/kdebase-3.2.2
+             >=kde/kdegraphics-3.2.2
+             >=kde/kdemultimedia-3.2.2
+             >=kde/kdenetwork-3.2.2
+             >=kde/kdepim-3.2.2
+             >=kde/kdeedu-3.2.2
+             >=kde/kdegames-3.2.2
+             >=kde/kdeutils-3.2.2
+             >=kde/kdeadmin-3.2.2
+             >=kde/kdetoys-3.2.2
+             >=kde/kdeartwork-3.2.2
+             >=kde/kdeaddons-3.2.2
+             `use_dep accessibility ">=kde/kdeaccessibility-3.2.2"`
+             `use_dep nls ">=kde/kde-i18n-3.2.2"`
+             `use_dep devel ">=kde/kdebindings-3.2.2
+                             >=kde/kdesdk-3.2.2
+                             >=kde/kdevelop-3.0.3
+                             >=kde/quanta-3.2.2"`"
+
+PKG_HOMESITE="http://www.kde.org/"

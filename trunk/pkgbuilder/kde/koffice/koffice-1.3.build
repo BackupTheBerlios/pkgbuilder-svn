@@ -17,14 +17,14 @@ PKG_HOMESITE="http://www.koffice.org/"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/qt-3.2 
-	         d/perl
+PKG_DEPENDS=">=l/qt-3.2
+             d/perl
              >=kde/kdelibs-3.1
-	         >=d/python-2.2.1
-	         >=l/libart_lgpl-2.3.9
-	         >=xap/imagemagick-5.4.5
-	         >=ap/wv2-0.1.8
-	         d/pkgconfig"
+             >=d/python-2.2.1
+             >=l/libart_lgpl-2.3.9
+             >=xap/imagemagick-5.4.5
+             >=ap/wv2-0.1.8
+             d/pkgconfig"
 
 PKG_DOC_FILES="AUTHORS COPYING* INSTALL README"
 

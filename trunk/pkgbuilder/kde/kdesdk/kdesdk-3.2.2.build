@@ -1,0 +1,20 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdesdk/kdesdk-3.2.1.build,v 1.1 2004/03/13 15:00:55 tomby Exp $
+#
+# kdesdk-3.2.2 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/qt-3.2
+             >=kde/kdelibs-3.2.2
+             >=kde/kdebase-3.2.2
+             !xap/umbrello
+             d/flex"
+
+PKG_DOC_FILES="COPYING README kdesdk.lsm"
