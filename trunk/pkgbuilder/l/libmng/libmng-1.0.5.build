@@ -1,0 +1,58 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libmng/Attic/libmng-1.0.5.build,v 1.1 2003/11/30 00:04:20 tomby Exp $
+#
+# libmng-1.0.5 pkgbuilder script
+#
+
+PKG_NAME="libmng"
+PKG_VERSION="1.0.5"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/jpeg-6b
+	         >=l/zlib-1.1.4
+	         >=l/lcms-1.0.8"
+
+PKG_HOMESITE="http://www.libmng.com/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="Changes LICENSE README* doc/doc.readme doc/libmng.txt"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-zlib --with-jpeg --with-lcms"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+
+include do_postinstall
+
+do_install() {
+    cd $PKG_SRC
+    
+    
+    
+    make $PKG_INSTALL_OPTIONS install &&
+    mkdir -p $PKG_DEST$PKG_PREFIX/man/man{3,5} &&
+    cp doc/man/*.3 $PKG_DEST$PKG_PREFIX/man/man3 &&
+    cp doc/man/*.5 $PKG_DEST$PKG_PREFIX/man/man5
+    
+    return $?
+}
+
