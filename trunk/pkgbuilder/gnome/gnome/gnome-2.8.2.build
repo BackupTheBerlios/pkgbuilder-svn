@@ -1,0 +1,86 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gnome-2.8.2 pkgbuilder script
+#
+
+inherit meta
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="=l/glib2-2.4.8
+             =l/atk-1.8.0
+             =l/pango-1.6.0
+             =l/gtk+2-2.4.14
+             =l/libxml2-2.6.16
+             =l/libxslt-1.1.12
+             =gnome/libidl-0.8.4
+             =gnome/orbit2-2.12.0
+             =gnome/intltool-0.32.1
+             =gnome/libbonobo-2.8.0
+             =gnome/gconf-2.8.1
+             =gnome/gnome-vfs-2.8.3
+             =l/esound-0.2.34
+             =gnome/libgnome-2.8.0
+             =l/libart_lgpl-2.3.16
+             =gnome/libglade-2.4.1
+             =gnome/libgnomecanvas-2.8.0
+             =gnome/libbonoboui-2.8.0
+             =gnome/gnome-icon-theme-2.8.0
+             =gnome/gnome-keyring-0.4.0
+             =gnome/libgnomeui-2.8.0
+             =gnome/gtk-engines-2.2.0
+             =gnome/gnome-themes-2.8.2
+             =gnome/libwnck-2.8.1
+             =gnome/scrollkeeper-0.3.14
+             =gnome/gnome-panel-2.8.2
+             =gnome/gnome-session-2.8.1
+             =gnome/gnome-desktop-2.8.1
+             =gnome/vte-0.11.11
+             =gnome/gnome-terminal-2.8.2
+             =gnome/libgtop-2.8.2
+             =gnome/gail-1.8.1
+             =gnome/gnome-applets-2.8.2
+             =gnome/metacity-2.8.8
+             =l/libgsf-1.9.1
+             =l/libcroco-0.6.0
+             =gnome/librsvg-2.8.1
+             =gnome/eel-2.8.2
+             =gnome/nautilus-2.8.2
+             =gnome/control-center-2.8.1
+             =gnome/libgtkhtml-2.6.2
+             =gnome/yelp-2.6.5
+             =gnome/bug-buddy-2.8.0
+             =gnome/libgnomeprint-2.8.1
+             =gnome/libgnomeprintui-2.8.1
+             =gnome/gtksourceview-1.1.1
+             =gnome/gedit-2.8.2
+             =gnome/eog-2.8.2
+             =xap/ggv-2.8.1
+             =gnome/file-roller-2.8.3
+             =gnome/gconf-editor-2.8.2
+             =gnome/gnome-utils-2.8.1
+             =gnome/gal-2.2.4
+             =gnome/gnome-system-monitor-2.8.1
+             =gnome/gstreamer-0.8.7
+             =gnome/gst-plugins-0.8.6
+             =gnome/gnome-media-2.8.0
+             =gnome/nautilus-media-0.8.1
+             =gnome/at-spi-1.6.1
+             =xap/epiphany-1.4.6
+             =gnome/gnome-games-2.8.2
+             =gnome/gdm-2.6.0.6
+             =xap/gpdf-2.8.1
+             =gnome/gucharmap-1.4.2
+             =gnome/ghex-2.6.1
+             =gnome/libgail-gnome-1.1.0
+             =gnome/gnome-netstatus-2.8.0
+             =gnome/gnome-nettool-0.99.3
+             =gnome/gnome-system-tools-1.0.2"
+
+PKG_HOMESITE="http://www.gnome.org/"
+
