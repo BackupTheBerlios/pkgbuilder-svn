@@ -1,10 +1,10 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.18 2004/02/22 10:39:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.19 2004/02/28 13:07:50 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
-VERSION="20040222"
+VERSION="20040228"
 
 # packages db directory
 PACKAGES_LOGDIR="/var/log/packages"
@@ -44,6 +44,7 @@ USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
 I18N="es"
 
 #Parallel compilation. Use with care, some packages compilation fails.
+#COMPILATION="parallel"
 #DISTCC_HOSTS="host1 host2 host3 hostn"
 #CCACHE_PREFIX="distcc"
 #MAKE_OPTIONS="-j8"
