@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.30 2004/01/04 23:03:13 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.31 2004/01/05 23:58:28 tomby Exp $
 
 * New tasks:
 
@@ -350,7 +350,7 @@ xap)
     ksetiwatch             X
     lincvs                 X
     lyx                    X
-    mozilla
+    mozilla                X
     mplayer                X
     nedit                  X
     pan
