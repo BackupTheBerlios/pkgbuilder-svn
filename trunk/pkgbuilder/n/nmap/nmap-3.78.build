@@ -1,0 +1,27 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# nmap-3.75 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.insecure.org/$PKG_NAME/dist/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gtk"
+
+PKG_DEPENDS="l/glibc `use gtk && echo ">=l/gtk+-1.2"`"
+
+PKG_HOMESITE="http://www.insecure.org/nmap/"
+
+PKG_DOC_FILES="CHANGELOG COPYING HACKING INSTALL docs/README docs/*.txt"
+
+PKG_CONFIGURE_OPTIONS="`use gtk && echo "--with-nmapfe"`"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX nmapdatadir=$PKG_DEST$PKG_PREFIX/share/nmap"
