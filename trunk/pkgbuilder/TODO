@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.10 2003/12/08 22:48:59 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.11 2003/12/13 19:23:45 tomby Exp $
 
 * New tasks:
 
@@ -8,7 +8,7 @@ $Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.10 2003/12/08 22:48:59 tomby Ex
 * Packages:
 
 a)
-    cups
+    cups            X
     lprng
     gpm             X
 
@@ -17,7 +17,7 @@ a)
 
 ap)
 
-    esp-gs
+    esp-gs          X
     a2ps
     enscript
     psutils
@@ -51,7 +51,7 @@ ap)
     sane
 
     mpg321
-    cdparanoia-III
+    cdparanoia      X
     cdrtools
     cdrdao
     vorbis-tools
@@ -106,6 +106,8 @@ l)
     pango           X
     atk             X
     lesstif         X
+    
+    libart_gpl      X
 
     libsoup         X
 
@@ -151,6 +153,7 @@ d)
     ruby            X
     tcl             X
     tk              X
+    nasm            X
 
 emu)
 
@@ -215,7 +218,7 @@ n)
     courier
 
     openldap
-    samba
+    samba           X
     inetd
     xinitd
 
@@ -274,13 +277,13 @@ kde)
     kdelibs         X
     kdebase         X
 
-    kdemultimedia   X
-    kdenetwork      X
-    kdegraphics     X
-    kdepim          X
-    kdeadmin        X
+    kdemultimedia   
+    kdenetwork      
+    kdegraphics     
+    kdepim          
+    kdeadmin        
     kdegames        
-    kdeutils        X
+    kdeutils        
     kdeedu
     kdeartwork
     kdetoys
@@ -308,7 +311,7 @@ gnome)
    gnome-mime-data
    gnome-vfs2
    libgnome
-   libart_gpl
+
    libglade2
    libgnomecanvas
    libbonoboui
