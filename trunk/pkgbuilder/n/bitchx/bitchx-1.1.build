@@ -1,0 +1,55 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/bitchx/bitchx-1.0.19.build,v 1.4 2004/01/09 19:39:17 tomby Exp $
+#
+# bitchx-1.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="ircii-pana-1.1-final.$PKG_EXTENSION"
+PKG_URL="http://www.bitchx.org/files/source/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl"
+
+PKG_DEPENDS=">=l/ncurses-5.1
+            `use_dep ssl ">=l/openssl-0.9.6"`"
+
+PKG_HOMESITE="http://www.bitchx.org/"
+
+PKG_SRC="$TMP/BitchX"
+
+PKG_DOC_FILES="README* COMPILE-PROBLEMS INST* doc/* 
+               BitchX.help BitchX.ircnames BitchX.quit BitchX.reasons"
+
+PKG_CONFIGURE_OPTIONS="--enable-cdrom
+                       --with-plugins
+                       `use_with ssl`"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX
+                     mandir=$PKG_DEST$PKG_PREFIX/man 
+                     infodir=$PKG_DEST$PKG_PREFIX/info 
+                     sysconfdir=$PKG_DEST/etc 
+                     localstatedir=$PKG_DEST/var/lib 
+                     docdir=$PKG_DOC 
+                     HTML_DIR=$PKG_DOC/html"
+
+MAKE_OPTIONS="-j1"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    bzip2 -d $PKG_DEST$PKG_PREFIX/man/man1/BitchX.1.bz2
+
+    ( cd $PKG_DEST$PKG_PREFIX/bin
+      rm -f BitchX ; ln -sf BitchX-1.1-final BitchX )
+    
+    pkg_postinstall
+    
+    return $?
+}
