@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/d/subversion/subversion-1.0.1.build,v 1.1 2004/04/19 17:42:10 tomby Exp $
 #
-# subversion-1.0.1 pkgbuilder script
+# subversion-1.0.2 pkgbuilder script
 #
 
 inherit configscript
@@ -34,7 +34,6 @@ PKG_CONFIGURE_OPTIONS="--with-neon=/usr
                        --disable-experimental-libtool
                        --disable-mod-activation
                        `use python && echo "--with-python=/usr/bin/python --with-swig" || echo "--without-python"`"
-
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 PKG_INSTALL_TARGET="install"
