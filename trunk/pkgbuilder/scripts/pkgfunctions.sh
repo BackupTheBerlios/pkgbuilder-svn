@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.12 2004/01/11 15:07:21 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.13 2004/02/14 20:02:45 tomby Exp $
 
 #
 # Package specific functions
@@ -38,7 +38,7 @@ pkg_configfiles() {
             mv $PKG_DEST/$config $PKG_DEST/$config.new
         done
 
-        cat >> $PKG_DEST/install/doinst.sh << "EOF"
+        cat >> $PKG_DEST/install/doinst.sh << EOF
 #!/bin/sh
 config() {
   NEW="$1"
@@ -123,9 +123,17 @@ pkg_configure() {
 }
 
 pkg_build() {
-    make $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
+    if [ "$COMPLATION" = "parallel" ] ; then
+        DISTCC_HOSTS="$DISTCC_HOSTS" \
+        CCACHE_PREFIX="$CCACHE_PREFIX" \
+        make $MAKE_OPTIONS CC="$CC" $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
 
-    return $?
+        return $?
+    else
+        make $MAKE_OPTIONS $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
+
+        return $?
+    fi    
 }
 
 pkg_install() {
@@ -146,7 +154,7 @@ pkg_virtual() {
 	if [ "$PKG_VIRTUAL" != "" ] ; then
 		mkdir -p $PKG_DEST/install
 		
-		cat >> $PKG_DEST/install/doinst.sh << "EOF"
+		cat >> $PKG_DEST/install/doinst.sh << EOF
 virtual() {
   cd /var/log/package
   
