@@ -1,19 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libsoup/libsoup-1.99.26.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libsoup/libsoup-1.99.26.build,v 1.6 2004/01/02 19:19:00 tomby Exp $
 #
 # libsoup-1.99.26 pkgbuilder script
 #
 
-inherit configscript
+inherit gnome
 
-PKG_NAME="libsoup"
-PKG_VERSION="1.99.26"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
-PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp://ftp.gnome.org/pub/gnome/sources/$PKG_NAME/1.99/$PKG_FILE_NAME"
+PKG_BUILD="am2"
 
 PKG_LICENSE="LGPLv2"
 
@@ -24,14 +18,4 @@ PKG_DEPENDS="l/glib2
              l/popt
              l/openssl"
 
-PKG_HOMESITE="http://www.gnome.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README TODO"
-
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
