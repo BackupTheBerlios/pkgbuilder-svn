@@ -1,6 +1,5 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/k/kernel-source/kernel-source-2.4.25.build,v 1.2 2004/02/21 14:55:18 tomby Exp $
 #
 # kernel-source-2.4.26 pkgbuilder script
 #

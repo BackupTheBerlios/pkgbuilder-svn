@@ -1,6 +1,5 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_ttf/sdl_ttf-2.0.6.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
 #
 # sdl_ttf-2.0.6 pkgbuilder script
 #

@@ -1,6 +1,5 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/vim.build,v 1.1 2004/01/11 01:12:22 tomby Exp $
 #
 # pkgbuilder script for vim packages
 #

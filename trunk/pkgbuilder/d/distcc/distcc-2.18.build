@@ -1,6 +1,5 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/distcc/distcc-2.13.build,v 1.1 2004/03/27 18:42:19 tomby Exp $
 #
 # distcc-2.17 pkgbuilder script
 #

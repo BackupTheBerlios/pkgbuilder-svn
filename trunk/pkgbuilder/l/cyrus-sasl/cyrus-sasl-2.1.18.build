@@ -1,6 +1,5 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/cyrus-sasl/cyrus-sasl-2.1.18.build,v 1.1 2004/03/14 16:47:11 tomby Exp $
 #
 # cyrus-sasl-2.1.18 pkgbuilder script
 #

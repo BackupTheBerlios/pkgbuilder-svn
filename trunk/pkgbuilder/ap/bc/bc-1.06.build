@@ -1,6 +1,5 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/bc/bc-1.06.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
 #
 # bc-1.06 pkgbuilder script
 #
