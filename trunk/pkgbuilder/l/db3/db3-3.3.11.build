@@ -11,7 +11,9 @@ PKG_BUILD="am3"
 
 PKG_USE="java tcltk"
 
-PKG_DEPENDS="=l/db1-1.85"
+PKG_DEPENDS="$PKG_DEPENDS
+             `use_dep java "d/j2sdk"`
+             `use_dep tcltk ">=d/tcl-8.4"`"
 
 PKG_DOC_FILES="LICENSE README"
 
