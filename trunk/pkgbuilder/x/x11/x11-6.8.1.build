@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
 #
-# xorg-6.8.1 pkgbuilder script
+# x11-6.8.1 pkgbuilder script
 #
 
 inherit configscript
