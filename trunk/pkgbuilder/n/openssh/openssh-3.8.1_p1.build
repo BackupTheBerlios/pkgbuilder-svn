@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/n/openssh/openssh-3.8.1p1.build,v 1.1 2004/04/19 17:59:14 tomby Exp $
 #
-# openssh-3.8.1p1 pkgbuilder script
+# openssh-3.8.1_p1 pkgbuilder script
 #
 
 inherit configscript
 
 PKG_BUILD="am1"
 PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_/}.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$PKG_FILE_NAME"
 
 PKG_LICENSE="AS-IS"
@@ -23,6 +23,8 @@ PKG_DEPENDS="l/glibc
              ap/groff"
 
 PKG_HOMESITE="http://www.openssh.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION/_/}"
 
 PKG_DOC_FILES="CREDITS ChangeLog INSTALL LICENCE OVERVIEW README* RFC.nroff TODO WARNING.RNG"
 
