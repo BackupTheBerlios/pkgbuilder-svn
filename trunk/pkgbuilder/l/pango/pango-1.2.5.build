@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/pango/pango-1.2.5.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/pango/pango-1.2.5.build,v 1.5 2003/12/31 18:53:59 tomby Exp $
 #
 # pango-1.2.5 pkgbuilder script
 #
@@ -34,6 +34,7 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING README INSTALL NEWS TODO*"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
