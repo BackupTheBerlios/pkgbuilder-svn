@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libwnck/libwnck-2.6.0.1.build,v 1.1 2004/04/10 13:31:20 tomby Exp $
 #
-# libwnck-2.6.0.1 pkgbuilder script
+# libwnck-2.6.1 pkgbuilder script
 #
 
 inherit gnome
