@@ -17,6 +17,9 @@
 
 <div id="ttop">
     <!--Header-->
+    <div class="tbanner">
+        <img src="images/lazo-negro.jpg" width="43" height="63" alt="LazoNegro" />
+    </div>
     <div class="theader">
         <a href="index.php"><img src="images/pkgbuilder.png" width="345" height="85" alt="pkgbuilder" /></a>
     </div>

@@ -95,6 +95,14 @@ A:hover {
     clear: both;
 }
 
+.tbanner {
+     color: #000000;
+     background-color: #ffffff;
+     margin-top: 14px;
+     margin-right: 14px;
+     float: right;
+}
+
 .tbox {
     color: #000000;
     background-color: #ffffff;
