@@ -1,0 +1,59 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/pyxml/pyxml-0.8.3.build,v 1.1 2003/12/28 00:01:11 tomby Exp $
+#
+# pyxml-0.8.3 pkgbuilder script
+#
+
+PKG_NAME="pyxml"
+PKG_VERSION="0.8.3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="PyXML-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/python >=l/expat-1.95.6"
+
+PKG_HOMESITE="http://pyxml.sourceforge.net/"
+
+PKG_SRC="$TMP/PyXML-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ANNOUNCE CREDITS LICENCE README* PKG-INFO TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="--root=$PKG_DEST --no-compile"
+
+PKG_NOSTRIP="Y"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure_null
+
+include do_postinstall
+
+do_build() {
+    cd $PKG_SRC
+
+    python setup.py build $PKG_BUILD_OPTIONS
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    python setup.py install $PKG_INSTALL_OPTIONS
+
+    return $?
+}
