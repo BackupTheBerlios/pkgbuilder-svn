@@ -1,0 +1,116 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/tetex.build,v 1.1 2004/01/03 13:28:09 tomby Exp $
+#
+# pkgbuilder script for tetex package
+#
+
+include configscript
+
+tetex_init() {
+    configscript_init
+    
+    PKG_EXTENSION="tar.gz"
+    
+    TETEX_BASE_URL="ftp://dante.ctan.org/tex-archive/systems/unix/teTeX/current/distrib/"
+
+    TETEX_SRC="$PKG_NAME-src-$PKG_VERSION.$PKG_EXTENSION"
+    TETEX_TEXMF="$PKG_NAME-texmf-$PKG_VERSION.$PKG_EXTENSION"
+    TETEX_TEXMF_SRC="$PKG_NAME-texmfsrc-$PKG_VERSION.$PKG_EXTENSION"
+    
+    PKG_FILE_NAME="$TETEX_SRC $TETEX_TEXMF $TETEX_TEXMF_SRC"
+
+    PKG_URL="$TETEX_BASE_URL/$TETEX_SRC 
+             $TETEX_BASE_URL/$TETEX_TEXMF 
+             $TETEX_BASE_URL/$TETEX_TEXMF_SRC"
+    
+    PKG_LICENSE="GPLv2"
+    
+    PKG_USE="X"
+    
+    PKG_DEPENDS="l/zlib
+                 >=l/libpng-1.2.1
+                 l/libtiff
+                 l/t1lib
+                 ap/esp-gs
+                 l/ncurses
+                 >=l/libwww-5.3.2-r1
+                 >=d/perl-5.2
+                 `use X && echo "x/xfree86"`"
+                 
+    PKG_SRC="$TMP/$PKG_NAME-src-$PKG_VERSION"
+    
+    PKG_DOC_FILES="ChangeLog CREDITS INSTALL* LICENSE.src NEWS PROBLEMS* QuickInstall README"
+
+    PKG_PREFIX="/usr"
+    TEXMF_DIR="/usr/share/texmf"
+    CACHE_FONT_DIR="/var/cache/fonts"
+    
+    PKG_CONFIGURE_OPTIONS="--bindir=/usr/bin
+                           --datadir=$PKG_DEST/usr/share
+                           --disable-multiplatform 
+                           --without-dialog 
+                           --without-texinfo 
+                           --with-system-ncurses 
+                           --with-system-pnglib 
+                           --with-system-t1lib 
+                           --with-system-tifflib 
+                           --with-system-zlib 
+                           --with-system-wwwlib 
+                           --with-libwww-include=/usr/include/w3c-libwww 
+                           --with-epsfwin 
+                           --with-mftalkwin 
+                           --with-regiswin 
+                           --with-tektronixwin 
+                           --with-unitermwin 
+                           --with-ps=gs 
+                           --enable-ipc 
+                           --with-etex
+                           `use X && echo "--with-x" || echo "--without-x"`"
+    PKG_BUILD_OPTIONS="texmf=$TEXMF_DIR vartexfonts=$CACHE_FONT_DIR"
+    PKG_BUILD_TARGET=""
+    PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX
+                         bindir=$PKG_DEST/usr/bin 
+                         texmf=$PKG_DEST$TEXMF_DIR"
+    PKG_INSTALL_TARGET="install"
+}
+
+tetex_do_unpack() {
+    mkdir -p $TMP
+    ( cd $TMP ; tar zxvf $FETCH_DIR/$TETEX_SRC )
+    
+    mkdir -p $PKG_DEST$TEXMF_DIR
+    ( cd $PKG_DEST$TEXMF_DIR
+      umask 022
+      tar zxvf $FETCH_DIR/$TETEX_TEXMF ; tar zxvf $FETCH_DIR/$TETEX_TEXMF_SRC 
+      chown -R root.root $PKG_DEST )
+}
+
+tetex_do_configure() {
+    configscript_do_configure
+}
+
+tetex_do_build() {
+    configscript_do_build
+}
+
+tetex_do_install() {
+    configscript_do_install
+}
+
+tetex_do_postinstall() {
+    #cache font directories
+    mkdir -p $PKG_DEST$CACHE_FONT_DIR/{pk,fonts,tfm}
+    chmod 1777 $PKG_DEST$CACHE_FONT_DIR/{pk,fonts,tfm}
+    
+    #remove redundant docs
+    ( cd $PKG_DEST$TEXMF_DIR/doc
+      for file in `find . -name "*.dvi"` ; do
+        rm -f `dirname $file`/`basename $file .dvi`.pdf
+      done )
+
+    pkg_installdoc
+    pkg_stripall
+    pkg_gzipmaninfo
+    pkg_installfiles
+}
