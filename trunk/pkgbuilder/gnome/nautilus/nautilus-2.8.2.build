@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# nautilus-2.8.1 pkgbuilder script
+# nautilus-2.8.2 pkgbuilder script
 #
 
 inherit gnome
@@ -43,4 +43,12 @@ PKG_DOC_FILES="AUTHORS COPYIN* ChangeLo* HACKING INSTALL MAINTAINERS NEWS README
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --disable-schemas-install
                        `use_enable gstreamer`"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch libexif.patch -Np0
+
+    return $?
+}
  
