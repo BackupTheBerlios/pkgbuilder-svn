@@ -1,0 +1,47 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/bash-completion/Attic/bash-completion-20040101.build,v 1.1 2004/01/01 12:55:46 tomby Exp $
+#
+# bash-completion-20040101 pkgbuilder script
+#
+
+inherit main
+
+PKG_NAME="bash-completion"
+PKG_VERSION="20040101"
+PKG_ARCH="noarch"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.caliban.org/files/bash/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=a/bash-2.0.5a a/bzip2 a/tar"
+
+PKG_HOMESITE="http://www.caliban.org/bash/index.shtml"
+
+PKG_SRC="$TMP/bash_completion"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="BUGS Changelog COPYING README"
+
+PKG_PREFIX="/usr"
+
+PKG_NOSTRIP="Y"
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc/{bash_completion.d,profile.d}
+    
+    cp $PKG_SRC/contrib/* $PKG_DEST/etc/bash_completion.d
+    cp $PKG_SRC/bash_completion $PKG_DEST/etc
+    cp $PKG_HOME/files/bash_completion.sh $PKG_DEST/etc/profile.d
+    chmod 755 $PKG_DEST/etc/profile.d/bash_completion.sh
+    chmod 755 $PKG_DEST/etc/bash_completion.d/*
+    
+    return $?
+}
