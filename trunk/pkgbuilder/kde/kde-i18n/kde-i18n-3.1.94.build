@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.1 2003/12/21 17:24:26 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.2 2003/12/21 17:35:26 tomby Exp $
 #
 # kde-i18n-3.1.94 pkgbuilder script
 #
@@ -42,10 +42,19 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 include general
 
 include do_fetch
-include do_unpack_bzip2
+
 include do_patch
 include do_configure
 include do_build
 include do_install
 include do_postinstall
 
+do_unpack() {
+    cd $TMP
+    
+    for file in $PKG_FILE_NAME ; do
+        tar jxvf $FETCH_DIR/$file
+    done
+    
+    return $?
+}
