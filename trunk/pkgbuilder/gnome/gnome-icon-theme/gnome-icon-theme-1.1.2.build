@@ -1,39 +1,20 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-icon-theme/gnome-icon-theme-1.1.2.build,v 1.1 2004/01/02 11:13:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-icon-theme/gnome-icon-theme-1.1.2.build,v 1.2 2004/01/02 12:25:11 tomby Exp $
 #
 # gnome-icon-theme-1.1.2 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_NAME="gnome-icon-theme"
-PKG_VERSION="1.1.2"
-PKG_ARCH="$ARCH"
+PKG_ARCH="noarch"
 PKG_BUILD="am1"
-PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.1/$PKG_FILE_NAME"
 
-PKG_LICENSE="GPLv2"
-
-PKG_USE=""
-
-PKG_DEPENDS=""
-
-PKG_HOMESITE="http://www.gnome.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="COPYING INSTALL NEWS TODO ChangeLog"
 
-PKG_PREFIX="/usr"
+PKG_DEPENDS="gnome/intltool"
+
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        --localstatedir=/var/lib"
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
 
 PKG_NOSTRIP="Y"
