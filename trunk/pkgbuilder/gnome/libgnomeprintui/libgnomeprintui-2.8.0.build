@@ -1,0 +1,27 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnomeprintui/libgnomeprintui-2.6.0.build,v 1.2 2004/04/10 16:37:03 tomby Exp $
+#
+# libgnomeprintui-2.8.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS=">=l/gtk+2-2.4
+             =gnome/libgnomeprint-$PKG_VERSION
+             >=gnome/libgnomecanvas-2
+             >=gnome/gnome-icon-theme-1.2.0
+             d/gettext
+             >=d/pkgconfig-0.12.0
+             `use_dep doc ">=gnome/gtk-doc-1"`"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-static
+                       `use_enable doc gtk-doc`"
+

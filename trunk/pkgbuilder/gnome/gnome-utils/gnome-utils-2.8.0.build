@@ -1,0 +1,28 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-utils/gnome-utils-2.6.0.build,v 1.1 2004/04/10 17:15:39 tomby Exp $
+#
+# gnome-utils-2.8.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/gtk+2-2.3.2
+             >=gnome/libgnome-2.5
+             >=gnome/libgnomeui-2.5
+             >=gnome/gnome-desktop-2.2
+             >=gnome/libglade-2.3
+             >=gnome/libbonoboui-2.2
+             >=gnome/gnome-vfs-2.4
+             >=gnome/gnome-panel-2.4
+             >=gnome/gconf-1.2.1
+             l/popt
+             gnome/scrollkeeper
+             >=gnome/intltool-0.21
+             >=d/pkgconfig-0.12.0"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS"

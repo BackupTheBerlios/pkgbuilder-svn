@@ -1,0 +1,26 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# libgail-gnome-1.1.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/atk
+             l/gtk+2
+             gnome/gnome-panel
+             gnome/libbonoboui
+             gnome/libbonobo
+             gnome/libgnomeui
+             gnome/at-spi
+             d/pkgconfig"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING NEWS README"
+
