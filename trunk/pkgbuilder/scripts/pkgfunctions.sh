@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.15 2004/02/14 23:31:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.16 2004/02/15 22:15:17 tomby Exp $
 
 #
 # Package specific functions
@@ -130,7 +130,7 @@ pkg_build() {
 
         return $?
     else
-        make $MAKE_OPTIONS $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
+        make $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
 
         return $?
     fi    
