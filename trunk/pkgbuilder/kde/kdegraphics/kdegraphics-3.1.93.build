@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/Attic/kdegraphics-3.1.93.build,v 1.3 2003/11/23 20:01:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdegraphics/Attic/kdegraphics-3.1.93.build,v 1.4 2003/11/29 23:47:53 tomby Exp $
 #
 # kdepim pkgbuilder script
 #
@@ -19,7 +19,7 @@ PKG_DEPENDS=">=l/qt-3.2
              >=kde/kdelibs-3.1.93 
              >=kde/kdebase-3.1.93 
              >=xap/xpdf-2.02p1 
-             >=xap/lcms-1.11 
+             >=l/lcms-1.11 
              >=l/imlib-1.9.14 
              >=l/libtiff-3.5.7
              >=l/fridibi-0.10.4
