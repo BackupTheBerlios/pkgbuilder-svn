@@ -1,16 +1,14 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.6 2004/01/11 15:04:41 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.7 2004/04/09 09:58:31 tomby Exp $
 #
 # esp-gs-7.07.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_NAME="esp-gs"
-PKG_VERSION="7.07.1"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am3"
+
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="espgs-$PKG_VERSION-source.$PKG_EXTENSION"
 PKG_FONTS_FILE_NAME="ghostscript-fonts-std-8.11.tar.gz"
@@ -25,21 +23,19 @@ PKG_DEPENDS="l/glibc
             >=l/libjpeg-6b
             >=l/libpng-1.2.1
             >=l/zlib-1.1.4
-            `use cups && echo "a/cups"`"
+            `use_dep cups "a/cups"`"
 
 PKG_HOMESITE="http://www.cups.org/ghostscript.php"
 
 PKG_SRC="$TMP/espgs-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_FONT_DOC_FILES="ChangeLog COPYING README* TODO"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--with-ijs
                        --with-omni
                        --without-gimp-print
-                      `use cups && echo "--enable-cups"`"
-PKG_BUILD_OPTIONS=""
+                      `use_enable cups`"
+
 PKG_INSTALL_OPTIONS="install_prefix=$PKG_DEST
                      prefix=$PKG_DEST$PKG_PREFIX
                      datadir=$PKG_DEST$PKG_PREFIX/share
@@ -47,6 +43,8 @@ PKG_INSTALL_OPTIONS="install_prefix=$PKG_DEST
                      exdir=$PKG_DOC/examples"
 
 PKG_CONFIG_FILES="`use cups && echo "etc/cups/pstoraster.convs"`"
+
+MAKE_OPTIONS="-j1"
 
 do_patch() {
     cd $PKG_SRC/ijs
