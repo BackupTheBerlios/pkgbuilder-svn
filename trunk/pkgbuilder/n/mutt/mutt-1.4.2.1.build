@@ -7,6 +7,7 @@
 inherit configscript
 
 PKG_BUILD="am2"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION}i.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.mutt.org/$PKG_NAME/$PKG_FILE_NAME"
@@ -16,9 +17,9 @@ PKG_LICENSE="GPLv2"
 PKG_USE="ssl slang nls maildir"
 
 PKG_DEPENDS=">=l/ncurses-5.2
-        	 `use ssl && echo ">=l/openssl-0.9.6"`
-        	 `use slang && echo ">=l/slang-1.4.2"`
-			 `use nls && echo "d/gettext"`"
+             `use_dep ssl ">=l/openssl-0.9.6"`
+             `use_dep slang ">=l/slang-1.4.2"`
+             `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://www.mutt.org"
 
@@ -26,12 +27,12 @@ PKG_DOC_FILES="BEWARE VERSION"
 
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/mutt
-					   --with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
-					   --with-regex --enable-pop --enable-imap --enable-nfs-fix
-                	   --disable-fcntl --enable-flock --enable-external-dotlock
-					   `use ssl && echo "--with-ssl"`
-					   `use slang && echo "--with-slang" || echo "--with-ncurses"`
-					   `use nls && echo "--enable-nls"  || echo "--disable-nls"`
-					   `use maildir && echo "--with-homespool=Maildir" || echo "--with-maildir=/var/spool/mail"`"
+                       --with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
+                       --with-regex --enable-pop --enable-imap --enable-nfs-fix
+                       --disable-fcntl --enable-flock --enable-external-dotlock
+                       `use_with ssl`
+                       `use_enable nls`
+                       `use slang && echo "--with-slang" || echo "--with-ncurses"`
+                       `use maildir && echo "--with-homespool=Maildir" || echo "--with-maildir=/var/spool/mail"`"
 
 PKG_CONFIG_FILES="etc/mutt/Muttrc etc/mutt/mime.types"
