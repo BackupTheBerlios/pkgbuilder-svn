@@ -141,7 +141,7 @@
                 saber.</p>
                 
             </div>
-            <div class="tleft"><b>Última modificación: Domingo, 21 de Octubre de 2003</b></div>
+            <div class="tleft"><b>Última modificación: $Date: 2003/10/31 19:21:06 $</b></div>
         </div>
     </div>
 </div>

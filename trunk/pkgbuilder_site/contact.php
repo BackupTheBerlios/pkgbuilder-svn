@@ -19,7 +19,7 @@
                 o quieres reportar fallos o enviar parches enviadme un correo a esta dirección:</p>
                 <blockquote><code>tomby (AT) mail.berlios.de</code></blockquote>
             </div>
-            <div class="tleft"><b>Última modificación: Domingo, 21 de Octubre de 2003</b></div>
+            <div class="tleft"><b>Última modificación: $Date: 2003/10/31 19:21:13 $</b></div>
         </div>
     </div>
 </div>

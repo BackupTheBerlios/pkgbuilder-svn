@@ -91,7 +91,7 @@
                         <li>NEdit</li>
                     </ul>
                 </blockquote>
-                <div class="tleft"><b>Última modificacion: Domingo, 21 de Octubre de 2003</b></div>
+                <div class="tleft"><b>Última modificacion: $Date: 2003/10/31 19:21:28 $</b></div>
             </div>
         </div>
     </div>

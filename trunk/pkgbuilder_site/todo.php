@@ -36,7 +36,7 @@
                     <li>Dependencia entre acciones</li>
                     <li>Resolución de dependencias entre paquetes</li>
                 </ul>
-                <div class="tleft"><b>Última modificacion: Domingo, 21 de Octubre de 2003</b></div>
+                <div class="tleft"><b>Última modificacion: $Date: 2003/10/31 19:21:36 $</b></div>
             </div>
         </div>
     </div>
