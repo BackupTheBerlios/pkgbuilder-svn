@@ -21,7 +21,7 @@ PKG_DEPENDS="`use_dep ncurses ">=l/ncurses-5.2"`
              l/glib2
              `use_dep gpm ">=a/gpm-1.19.3"`
              `use_dep slang ">=l/slang-1.4.2"`
-             `use_dep samba ">=net-fs/samba-3.0.0"`
+             `use_dep samba ">=n/samba-3.0.0"`
              `use_dep X "x/xfree86"`"
 
 PKG_HOMESITE="http://www.ibiblio.org/mc/"
