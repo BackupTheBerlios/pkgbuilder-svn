@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE=""
 
@@ -15,3 +15,10 @@ PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdebase-3.3.2"
 
 PKG_DOC_FILES="COPYING INSTALL README kdeedu.lsm"
+
+do_patch() {
+    cd $PKG_SRC/kstars/kstars
+
+    apply_patch post-$PKG_VERSION-$PKG_NAME-kstars.diff -Np0
+    return $?
+}
