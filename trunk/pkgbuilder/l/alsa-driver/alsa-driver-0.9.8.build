@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.4 2003/12/14 22:05:54 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.5 2003/12/14 23:10:36 tomby Exp $
 #
 # alsa-driver-0.9.8 pkgbuilder script
 #
@@ -64,6 +64,8 @@ alsa_gzipmods() {
     for mod in `find $PKG_DEST/lib/modules -type f -name '*.o'` ; do
         gzip -9 $mod
     done
+    
+    rm -f $PKG_DEST/lib/modules/`uname -r`/modules.*
 }
 
 do_postinstall() {
