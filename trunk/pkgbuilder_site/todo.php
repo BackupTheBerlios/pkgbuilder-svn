@@ -24,7 +24,6 @@
                 <ul>
                     <li>a2ps</li>
                     <li>acpid</li>
-                    <li>animail</li>
                     <li>apsfilter</li>
                     <li>ash</li>
                     <li>at</li>
@@ -40,7 +39,6 @@
                     <li>byacc</li>
                     <li>bzip2</li>
                     <li>coreutils</li>
-                    <li>courier</li>
                     <li>cpio</li>
                     <li>db2</li>
                     <li>dcron</li>
@@ -61,7 +59,6 @@
                     <li>gdb</li>
                     <li>getmail</li>
                     <li>ghex</li>
-                    <li>glade</li>
                     <li>glut</li>
                     <li>gnome2-user-docs</li>
                     <li>gnome-extra-themes</li>
@@ -73,10 +70,8 @@
                     <li>gnuchess</li>
                     <li>gnuplog</li>
                     <li>gok</li>
-                    <li>gpdf</li>
                     <li>grep</li>
                     <li>groff</li>
-                    <li>gucharmap</li>
                     <li>gzip</li>
                     <li>hdparm</li>
                     <li>hotplug</li>
@@ -94,23 +89,19 @@
                     <li>libdv</li>
                     <li>libdvdnav</li>
                     <li>libdvdread</li>
-                    <li>libgail-gnome</li>
                     <li>libgda</li>
                     <li>libtermcap</li>
                     <li>libtool</li>
                     <li>lilo</li>
                     <li>logrotate</li>
                     <li>lprng</li>
-                    <li>lsof</li>
                     <li>lvm</li>
                     <li>m4</li>
                     <li>make</li>
                     <li>man</li>
                     <li>man-pages</li>
-                    <li>mc</li>
                     <li>minicom</li>
                     <li>module-init-tools</li>
-                    <li>mysql</li>
                     <li>nail</li>
                     <li>nas</li>
                     <li>nc</li>
@@ -124,14 +115,12 @@
                     <li>pciutils</li>
                     <li>pcmcia-cs</li>
                     <li>perl</li>
-                    <li>php</li>
                     <li>pine</li>
                     <li>pmake</li>
                     <li>postgresql</li>
                     <li>ppp</li>
                     <li>procmail</li>
                     <li>procps</li>
-                    <li>proftpd</li>
                     <li>psutils</li>
                     <li>pure-ftpd</li>
                     <li>qmail</li>
@@ -147,7 +136,6 @@
                     <li>sendmail</li>
                     <li>shadow</li>
                     <li>slocate</li>
-                    <li>sudo</li>
                     <li>sysklogd</li>
                     <li>syslinux</li>
                     <li>tar</li>
