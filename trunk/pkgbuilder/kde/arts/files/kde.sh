@@ -1,5 +1,5 @@
 #!/bin/sh
 # KDE additions:
-KDEDIR=/opt/kde-3.2
+KDEDIR=/opt/kde
 PATH=$PATH:$KDEDIR/bin
 export KDEDIR PATH
