@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.40 2004/02/15 22:15:08 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.41 2004/02/29 18:32:52 tomby Exp $
 
 #
 # Generic functions
@@ -102,6 +102,12 @@ use_enable() {
         else
             echo -n "--enable-$2"
         fi
+    else
+        if [ "$2" = "" ] ; then
+            echo -n "--disable-$1"
+        else
+            echo -n "--disable-$2"
+        fi
     fi
 }
 
@@ -121,6 +127,12 @@ use_with() {
             echo -n "--with-$1"
         else
             echo -n "--with-$2"
+        fi
+    else
+        if [ "$2" = "" ] ; then
+            echo -n "--without-$1"
+        else
+            echo -n "--without-$2"
         fi
     fi
 }
