@@ -1,0 +1,57 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/xvid/xvid-1.0.0_rc4.build,v 1.1 2004/04/09 09:57:39 tomby Exp $
+#
+# xvid-1.0.0_rc4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="${PKG_NAME}core-${PKG_VERSION/_/-}.$PKG_EXTENSION"
+PKG_URL="http://files.xvid.org/downloads/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=d/nasm-0.98.36"
+
+PKG_HOMESITE="http://www.xvid.org/"
+
+PKG_SRC="$TMP/${PKG_NAME}core-${PKG_VERSION/_/-}"
+
+PKG_DOC_FILES="AUTHORS ChangeLog CodingStyle LICENSE README TODO doc/INSTALL"
+
+PKG_CONFIGURE_OPTIONS=""
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_configure() {
+    cd $PKG_SRC/build/generic
+    
+    pkg_configure
+    
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC/build/generic
+    
+    pkg_build
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC/build/generic
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/{include,lib} &&
+    pkg_install &&
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+         rm -f libxvidcore.so ; ln -sf libxvidcore.so.4.0 libxvidcore.so )    
+    
+    return $?
+}
