@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gtk+2/gtk+2-2.4.0.build,v 1.1 2004/03/18 22:59:21 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gtk+2/gtk+2-2.4.0.build,v 1.2 2004/03/19 11:04:49 tomby Exp $
 #
 # gtk+2-2.4.0 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="gtk+-$PKG_VERSION.$PKG_EXTENSION"
@@ -40,6 +40,8 @@ PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        `use_with jpeg libjpeg`
                        `use_with tiff libtff`
                        `use_enable doc gtk-doc`"
+                       
+MAKE_OPTIONS="-j1"
 
 do_postinstall() {
     cd $PKG_SRC
