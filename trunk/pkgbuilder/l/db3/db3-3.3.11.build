@@ -28,7 +28,10 @@ PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX docdir=$PKG_DOC"
 do_patch() {
     cd $PKG_SRC
 
-    patch -p0 < $PKG_HOME/files/patch-3.3.11.1.diff
+    apply_patch patch-3.3.11.1.diff -p0 &&
+    ( # java 1.5 fix enum keyword
+      cd java/src/com/sleepycat/db/
+      sed -i -e "s|enum|enu|g" DbEnv.java )
 
     return $?
 }
