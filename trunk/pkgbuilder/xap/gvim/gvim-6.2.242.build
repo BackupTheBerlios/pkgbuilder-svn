@@ -1,0 +1,47 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gvim/gvim-6.2.242.build,v 1.1 2004/02/07 14:18:45 tomby Exp $
+#
+# vim-6.2 pkgbuilder script
+#
+
+inherit vim
+
+PKG_BUILD="am1"
+
+PKG_USE="$PKG_USE gtk"
+
+PKG_DEPENDS="$PKG_DEPENDS
+             l/gtk+
+             !ap/vim"
+
+PKG_DOC_FILES="README*"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --with-x 
+                       --enable-gui=gtk"
+
+do_postinstall() {
+    vim_do_postinstall
+    
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf ex.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz ex.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf eview.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf evim.1.gz eview.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf gview.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz gview.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf gvim.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz gvim.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf gvimdiff.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vimdiff.1.gz gvimdiff.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf rview.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz rview.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf rvim.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz rvim.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf view.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz view.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf rgview.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz rgview.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; rm -rf rgvim.1 )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz rgvim.1.gz )
+}
