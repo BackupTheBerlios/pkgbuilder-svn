@@ -13,6 +13,20 @@
     <!--Content-->
     <div id="tmain">
         <div class="tbox">
+            <div class="ttitle">Nueva versión de PkgBuilder</div>
+            <div class="tleft"><b>Sábado, 15 de Febrero de 2004</b></div>
+            <div class="tleft">
+                <p>Esta nueva versión incluye las últimas versiones de los escritorios
+                mas importantes, KDE 3.2, Gnome 2.4.2 y nuevas applicaciones como KOffice 1.3,
+                KDevelor 3.0.0 y Quanta 3.2.0, Mozilla 1.6, Galeon 1.3.12, Epiphany 1.0.7, nuevas
+                versiones de los drivers ALSA 1.0.2.</p>
+                <p>Por otra parte también se incluye soporte de compilación paralela con distcc
+                y ccache, para reducir el tiempo de compilación.</p>
+            </div>
+        </div>
+    </div>
+    <div id="tmain">
+        <div class="tbox">
             <div class="ttitle">Nuevas versiones de Mozilla y Epiphany</div>
             <div class="tleft"><b>Sábado, 17 de Enero de 2004</b></div>
             <div class="tleft">

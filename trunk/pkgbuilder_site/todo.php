@@ -28,7 +28,6 @@
                     <li>apache</li>
                     <li>apsfilter</li>
                     <li>ash</li>
-                    <li>aspell</li>
                     <li>at</li>
                     <li>aumix</li>
                     <li>autoconf</li>
@@ -61,7 +60,6 @@
                     <li>findutils</li>
                     <li>flex</li>
                     <li>fvwm</li>
-                    <li>galeon</li>
                     <li>gawk</li>
                     <li>gdb</li>
                     <li>gdm</li>
@@ -92,16 +90,11 @@
                     <li>infozip</li>
                     <li>iptraf</li>
                     <li>isapnptools</li>
-                    <li>ispell</li>
                     <li>j2sdk</li>
                     <li>jed</li>
                     <li>jfstools</li>
                     <li>joe</li>
                     <li>kdb</li>
-                    <li>kdeaccessibility</li>
-                    <li>kdebindings</li>
-                    <li>kdetoys</li>
-                    <li>koffice</li>
                     <li>less</li>
                     <li>lftp</li>
                     <li>libdv</li>
@@ -149,7 +142,6 @@
                     <li>pure-ftpd</li>
                     <li>qmail</li>
                     <li>qpopper</li>
-                    <li>quanta</li>
                     <li>quota</li>
                     <li>rcs</li>
                     <li>reiserfsprogs</li>
@@ -165,7 +157,6 @@
                     <li>sysklogd</li>
                     <li>syslinux</li>
                     <li>tar</li>
-                    <li>tcpdump</li>
                     <li>tcpip</li>
                     <li>texinfo</li>
                     <li>tin</li>
@@ -188,7 +179,7 @@
                     <li>zenity</li>
                     <li>zlib</li>
                 </ul>
-                <div class="tleft"><b>Last update: $Date: 2004/01/17 14:00:46 $</b></div>
+                <div class="tleft"><b>Last update: $Date: 2004/02/15 13:46:53 $</b></div>
             </div>
         </div>
     </div>
