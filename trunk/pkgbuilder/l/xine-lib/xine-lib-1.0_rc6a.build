@@ -36,7 +36,7 @@ PKG_DEPENDS="x/xfree86
 
 PKG_HOMESITE="http://xine.sourceforge.net/"
 
-PKG_SRC="$TMP/$PKG_NAME-1-rc5"
+PKG_SRC="$TMP/$PKG_NAME-1-rc6a"
 
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL TODO"
 
