@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-lib/alsa-lib-1.0.4.build,v 1.1 2004/04/08 17:09:04 tomby Exp $
 #
-# alsa-lib-1.0.3a pkgbuilder script
+# alsa-lib-1.0.5 pkgbuilder script
 #
 
 inherit configscript

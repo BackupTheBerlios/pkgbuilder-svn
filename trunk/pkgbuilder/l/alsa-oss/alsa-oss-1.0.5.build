@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-oss/alsa-oss-1.0.4.build,v 1.1 2004/04/08 17:09:15 tomby Exp $
 #
-# alsa-oss-1.0.3a pkgbuilder script
+# alsa-oss-1.0.5 pkgbuilder script
 #
 
 inherit configscript

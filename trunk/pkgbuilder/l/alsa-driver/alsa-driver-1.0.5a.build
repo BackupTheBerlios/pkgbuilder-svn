@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/alsa-driver-1.0.4.build,v 1.1 2004/04/08 17:08:58 tomby Exp $
 #
-# alsa-driver-1.0.3 pkgbuilder script
+# alsa-driver-1.0.5a pkgbuilder script
 #
 
 inherit configscript
