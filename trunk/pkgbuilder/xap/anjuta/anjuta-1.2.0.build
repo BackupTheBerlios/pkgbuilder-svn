@@ -1,0 +1,71 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/anjuta/anjuta-1.2.0.build,v 1.1 2003/12/27 17:19:52 tomby Exp $
+
+PKG_NAME="anjuta"
+PKG_VERSION="1.2.0"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am2"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/glib2-2.0.6
+	         >=l/gtk+2-2.0.8
+	         >=gnome/orbit2-2.4
+	         >=gnome/libglade-2.0.1
+	         >=gnome/libgnome-2.0.2
+	         >=gnome/libgnomeui-2.0.2
+	         >=gnome/libgnomeprint-2.0.1
+	         >=gnome/libgnomeprintui-2.0.1
+	         >=gnome/gnome-vfs-2.0.2
+	         >=gnome/libbonobo-2
+	         >=gnome/libbonoboui-2.0.1
+	         >=l/vte-0.9
+	         >=l/libxml2-2.4.23
+	         >=l/pango-1.1.1
+	         l/pcre
+	         l/scrollkeeper
+             d/pkgconfig"
+
+PKG_HOMESITE="http://www.anjuta.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS C* FUTURE INSTALL NEWS README T* doc/ScintillaDoc.html"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    rm -rf $PKG_DEST/usr/share/doc/anjuta
+    rmdir $PKG_DEST/usr/share/doc
+    
+    pkg_installdoc
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+}
