@@ -6,9 +6,9 @@
 
 inherit mozilla
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
-ENIGMAIL_VERSION="0.89.5"
+ENIGMAIL_VERSION="0.89.6"
 IPC_VERSION="1.1.2"
 
 PKG_FILE_NAME="$PKG_NAME-source-$PKG_VERSION.$PKG_EXTENSION"
@@ -21,3 +21,13 @@ PKG_URL="$MOZILLA_BASE_URL/$PKG_NAME$PKG_VERSION/source/$PKG_FILE_NAME
          `use_dep crypt "http://downloads.mozdev.org/enigmail/src/$IPC_FILE_NAME"`"
 
 PKG_DOC_FILES="LEGAL LICENSE README.txt"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch mozilla-1.7.3-ft2.patch -Np0 &&
+    apply_patch launcher.patch -Np0 &&
+    apply_patch idnfix.patch -Np0 &&
+
+    return $?
+}
