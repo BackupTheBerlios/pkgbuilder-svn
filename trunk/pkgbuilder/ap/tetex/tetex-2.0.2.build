@@ -8,4 +8,10 @@ inherit tetex
 
 PKG_BUILD="am1"
 
+TETEX_BASE_URL="ftp://sunsite.informatik.rwth-aachen.de/pub/comp/tex/teTeX/2.0/distrib/"
+
+PKG_URL="$TETEX_BASE_URL/$TETEX_SRC 
+         $TETEX_BASE_URL/$TETEX_TEXMF 
+         $TETEX_BASE_URL/$TETEX_TEXMF_SRC"
+
 PKG_HOMESITE="http://tug.org/teTeX/"
