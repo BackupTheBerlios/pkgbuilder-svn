@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.27 2003/12/29 19:32:23 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.28 2003/12/31 15:31:48 tomby Exp $
 
 * New tasks:
 
@@ -253,7 +253,7 @@ n)
     apache
     ap-utils               X
     bind
-    bitchx
+    bitchx                 X
     courier
     curl                   X
     dhcp
@@ -270,11 +270,11 @@ n)
     kismet                 X
     lftp
     links                  X
-    lynx
+    lynx                   X
     mutt                   X
     nail
     nc
-    ncftp
+    ncftp                  X
     netwatch
     nfs-utils
     nmap                   X
@@ -282,7 +282,7 @@ n)
     ntop                   X
     ntp
     openldap
-    openssh
+    openssh                X
     php
     pine
     portmap                X
@@ -300,17 +300,15 @@ n)
     slrn                   X
     tcpdump
     tcpip
-    tcpwrappers
     tin
     traceroute
     trn
     w3m
     wget
-    whois
     wireless-tools
     wvdial
     wvstreams
-    xinetd
+    xinetd                 X
 
 x)
     nvidia-glx             X
