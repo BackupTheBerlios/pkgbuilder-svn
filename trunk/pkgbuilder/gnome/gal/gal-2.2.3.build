@@ -7,7 +7,7 @@
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE="doc"
 
@@ -26,3 +26,12 @@ PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_enable doc gtk-doc`"
+
+do_patch() {
+    cd $PKG_SRC/docs
+
+    ln -s gal-decl.txt gal-2.2-decl.txt &&
+    ln -s gal-sections.txt gal-2.2-sections.txt
+
+    return $?
+}
