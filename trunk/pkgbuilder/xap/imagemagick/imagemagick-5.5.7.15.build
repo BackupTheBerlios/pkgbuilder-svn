@@ -1,0 +1,79 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/imagemagick/imagemagick-5.5.7.15.build,v 1.1 2003/12/20 15:44:47 tomby Exp $
+#
+# imagemagick-5.5.7.15 pkgbuilder script
+#
+
+PKG_NAME="imagemagick"
+PKG_VERSION="5.5.7.15"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="ImageMagick-5.5.7-15.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE="cups"
+
+PKG_DEPENDS=">=a/sed-4
+	         >=a/bzip2-1
+	         l/zlib
+	         x/xfree86
+	         >=l/libjpeg-6b
+	         >=l/lcms-1.06
+	         l/libpng
+	         >=l/libtiff-3.5.5
+	         >=l/libxml2-2.4.10
+	         l/freetype2
+             `use cups && echo "ap/esp-gs"`"
+
+PKG_HOMESITE="http://www.imagemagick.org/"
+
+PKG_SRC="$TMP/ImageMagick-5.5.7"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="*.txt"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--program-prefix=
+                       --enable-16bit-pixel
+                       --with-x
+                       --with-frozenpaths=no
+                       --enable-static=no
+                       --enable-shared
+                       --with-perl"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    ( cd $PKG_DEST
+      find . -name perllocal.pod | xargs rm -f ) &&
+    ( chmod 644 $PKG_DEST/usr/share/man/man3/*
+      mv $PKG_DEST/usr/share/man/man3 $PKG_DEST/usr/man
+      rmdir $PKG_DEST/usr/share/man ) &&
+    ( cd $PKG_DEST/usr/share
+      rmdir ImageMagick ) &&
+    ( cd $PKG_DEST/usr/lib/perl5
+      rmdir */* 2> /dev/null
+      rmdir * 2> /dev/null )
+    pkg_installdoc &&
+    pkg_stripall &&
+    pkg_gzipmaninfo &&
+    pkg_installfiles
+    
+    return $?
+}
+
