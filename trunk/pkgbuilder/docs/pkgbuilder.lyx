@@ -29,7 +29,7 @@
 PKGBUILDER
 \layout Date
 
-Sábado, 2 de Mayo de 2004
+Sábado, 1 de Noviembre de 2004
 \layout Author
 
 Antonio Gabriel Muñoz Conejo
@@ -163,7 +163,7 @@ Sistema operativo:
 \series medium 
 El sistema se basa sobre 
 \series default 
-Slackware 9.1
+Slackware 10.0
 \series medium 
 , instalando sólo una serie de paquetes básicos sobre los que construir
  el resto del sistema.
@@ -206,7 +206,7 @@ PkgBuilder
 
 
 \series medium 
-El sistema deberá tener tamaño libre suficiente para almacenar los ficheros
+El sistema deberá tener tamaño libre suficiente para almacenar los archivos
  de código fuente descargados, los paquetes binarios creados y también tamaño
  suficiente para la compilación de cada paquete.
  Los archivos descargados se pueden eliminar sin problemas y los paquetes
@@ -220,7 +220,7 @@ Paquetes basicos:
 \series medium 
 Esta es la lista de paquetes de 
 \series default 
-Slackware 9.1
+Slackware 10.0
 \series medium 
  necesarios para el sistema base.
  Algunos de ellos son opcionales como 
@@ -239,15 +239,19 @@ a)
 \layout List
 \labelwidthstring 00.00.0000
 
-aaa_base 9.1.0
+aaa_base 10.0.0
 \layout List
 \labelwidthstring 00.00.0000
 
-bash 2.05b
+aaa_elflibs 9.2.0
 \layout List
 \labelwidthstring 00.00.0000
 
-bin 8.5.0
+bash 3.0
+\layout List
+\labelwidthstring 00.00.0000
+
+bin 9.2.0
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -255,11 +259,11 @@ bzip2 1.0.2
 \layout List
 \labelwidthstring 00.00.0000
 
-coreutils 5.0
+coreutils 5.2.1
 \layout List
 \labelwidthstring 00.00.0000
 
-cxxlibs 5.1.0
+cxxlibs 5.0.6
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -271,15 +275,11 @@ devs 2.3.1
 \layout List
 \labelwidthstring 00.00.0000
 
-e2fsprogs 1.34
+e2fsprogs 1.35
 \layout List
 \labelwidthstring 00.00.0000
 
-elflibs 9.1.0 (este paquete en la rama current toma el nombre de aaa_elflibs)
-\layout List
-\labelwidthstring 00.00.0000
-
-elvis 2.1_4
+elvis 2.2_0
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -291,15 +291,15 @@ findutils 4.1.7
 \layout List
 \labelwidthstring 00.00.0000
 
-gawk 3.1.3
+gawk 3.1.4
 \layout List
 \labelwidthstring 00.00.0000
 
-glibc-solibs 2.3.2
+glibc-solibs 2.3.3
 \layout List
 \labelwidthstring 00.00.0000
 
-glibc-zoneinfo 2.3.2
+glibc-zoneinfo 2.3.3
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -311,43 +311,47 @@ gzip 1.3.3
 \layout List
 \labelwidthstring 00.00.0000
 
-hdparm 5.3
+hdparm 5.7
 \layout List
 \labelwidthstring 00.00.0000
 
-hotplug 2003_08_05
+hotplug 2004_01_05
 \layout List
 \labelwidthstring 00.00.0000
 
-infozip 5.50
+infozip 5.51
 \layout List
 \labelwidthstring 00.00.0000
 
-jfsutils 1.1.3 (opcional)
+jfsutils 1.1.6 (opcional, necesario si utilizamos particiones jfs)
 \layout List
 \labelwidthstring 00.00.0000
 
-kdb 1.08
+kdb 1.12
 \layout List
 \labelwidthstring 00.00.0000
 
-kernel-modules 2.4.22
+kernel-ide 2.4.27
 \layout List
 \labelwidthstring 00.00.0000
 
-less 381
+kernel-modules 2.4.27
 \layout List
 \labelwidthstring 00.00.0000
 
-lilo 22.5.7.2
+less 382
 \layout List
 \labelwidthstring 00.00.0000
 
-module-init-tools 0.9.14
+lilo 22.5.9
 \layout List
 \labelwidthstring 00.00.0000
 
-openssl-solibs 0.9.7c
+module-init-tools 3.0
+\layout List
+\labelwidthstring 00.00.0000
+
+openssl-solibs 0.9.7d
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -355,24 +359,24 @@ pci-utils 2.1.11
 \layout List
 \labelwidthstring 00.00.0000
 
-pcmcia-cs 3.2.5 (opcional, necesario en portatiles y ordenadores con interfaz
+pcmcia-cs 3.2.7 (opcional, necesario en portatiles y ordenadores con interfaz
  pcmcia)
 \layout List
 \labelwidthstring 00.00.0000
 
-pkgtools 9.1.0
+pkgtools 10.0.0
 \layout List
 \labelwidthstring 00.00.0000
 
-procps 2.0.16
+procps 3.2.3
 \layout List
 \labelwidthstring 00.00.0000
 
-reiserfsprogs 3.6.11 (opcional)
+reiserfsprogs 3.6.18 (opcional, necesario si utilizamos particiones reiserfs)
 \layout List
 \labelwidthstring 00.00.0000
 
-sed 3.02
+sed 4.0.9
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -384,15 +388,15 @@ sysklogd 1.4.1
 \layout List
 \labelwidthstring 00.00.0000
 
-sysvinit 2.06
+syslinux 2.11
 \layout List
 \labelwidthstring 00.00.0000
 
-syslinux 2.84
+sysvinit 2.84
 \layout List
 \labelwidthstring 00.00.0000
 
-tar 1.13.25
+tar 1.14
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -400,11 +404,15 @@ usbutils 0.11
 \layout List
 \labelwidthstring 00.00.0000
 
-util-linux 2.12
+util-linux 2.12g
 \layout List
 \labelwidthstring 00.00.0000
 
-xfsprogs 2.5.6 (opcional)
+utempter 1.1.1
+\layout List
+\labelwidthstring 00.00.0000
+
+xfsprogs 2.6.13 (opcional, necesario si utilizamos particiones xfs)
 \layout Paragraph
 
 ap)
@@ -419,34 +427,34 @@ groff 1.17.2
 \layout List
 \labelwidthstring 00.00.0000
 
-man 1.51
+man 1.5m2
 \layout List
 \labelwidthstring 00.00.0000
 
-man-pages 1.60
+man-pages 1.64
 \layout List
 \labelwidthstring 00.00.0000
 
-texinfo 4.5
+texinfo 4.7
 \layout Paragraph
 
 d)
 \layout List
 \labelwidthstring 00.00.0000
 
-autoconf 2.57
+autoconf 2.59
 \layout List
 \labelwidthstring 00.00.0000
 
-automake 1.7.7
+automake 1.9.2
 \layout List
 \labelwidthstring 00.00.0000
 
-bin86 0.16.11
+bin86 0.16.15
 \layout List
 \labelwidthstring 00.00.0000
 
-binutils 2.14.90.0.6
+binutils 2.15.90.0.3
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -458,31 +466,27 @@ byacc 1.9
 \layout List
 \labelwidthstring 00.00.0000
 
-cvs 1.11.6
-\layout List
-\labelwidthstring 00.00.0000
-
 flex 2.5.4a
 \layout List
 \labelwidthstring 00.00.0000
 
-gcc 3.2.3
+gcc 3.3.4
 \layout List
 \labelwidthstring 00.00.0000
 
-gcc-g++ 3.2.3
+gcc-g++ 3.3.4
 \layout List
 \labelwidthstring 00.00.0000
 
-kernel-headers 2.4.22
+kernel-headers 2.4.27
 \layout List
 \labelwidthstring 00.00.0000
 
-libtool 1.4.3
+libtool 1.5.10
 \layout List
 \labelwidthstring 00.00.0000
 
-m4 1.4
+m4 1.4.2
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -490,33 +494,33 @@ make 3.80
 \layout List
 \labelwidthstring 00.00.0000
 
-perl 5.8.0
+perl 5.8.5
 \layout Paragraph
 
 l)
 \layout List
 \labelwidthstring 00.00.0000
 
-glibc 2.3.2
+glibc 2.3.3
 \layout List
 \labelwidthstring 00.00.0000
 
-glibc-i18n 2.3.2 (opcional)
+glibc-i18n 2.3.3 (opcional)
 \layout List
 \labelwidthstring 00.00.0000
 
-ncurses 5.3
+ncurses 5.4
 \layout List
 \labelwidthstring 00.00.0000
 
-zlib 1.1.4
+zlib 1.2.2
 \layout Paragraph
 
 n)
 \layout List
 \labelwidthstring 00.00.0000
 
-openssl 0.9.7c
+openssl 0.9.7d
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -524,7 +528,7 @@ tcpip 0.17
 \layout List
 \labelwidthstring 00.00.0000
 
-wget 1.8.2
+wget 1.9.1
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -574,9 +578,16 @@ PkgBuilder
 \series medium 
  es necesario primero conseguir una copia del arbol de ports.
  Se puede descargar un tarball de la página oficial o se puede descargar
- directamente a traves del CVS.
- Yo recomiendo instalarlo a traves del CVS ya que esto permitirá ir actualizando
- 
+ directamente a traves de 
+\series default 
+Subversion
+\series medium 
+.
+ Yo recomiendo instalarlo a traves de 
+\series default 
+Subversion
+\series medium 
+ ya que esto permitirá ir actualizando 
 \series default 
 PkgBuilder
 \series medium 
@@ -588,35 +599,50 @@ Instalación desde tar ball:
 
 
 \series medium 
-Simplemente será necesario descomprimir el tar ball en el lugar elegido.
+Simplemente será necesario descomprimir el tar ball en el lugar elejido.
 \layout Subsubsection
 
-Instalación desde el CVS:
+Instalación desde Subversion:
 \layout Standard
 
-La instalación a traves del cvs requiere ejecutar una serie de comandos:
-\layout Quotation
-
-
-\family typewriter 
-\size footnotesize 
-$ cvs -d :pserver:anonymous@cvs.berlios.de:/cvsroot/pkgbuilder login
-\layout Quotation
-
-Cuando pida la password se pulsará 
+La instalación a traves de Subversion requiere instalar una serie de paquetes
+ extra.
+ Estos paquetes son 
 \series bold 
-enter
+neon
+\series default 
+ y 
+\series bold 
+subversion
 \series default 
 .
+ Se pueden encontrar estos paquetes precompilados en el ftp anonimo de 
+\series bold 
+PkgBuilder 
+\series default 
+o también se pueden crear utilizando 
+\series bold 
+PkgBuilder
+\series default 
+ desde el tar ball disponible en la web del proyecto.
+\layout Paragraph
+
+
+\series medium 
+El comando que descargar la última version de 
+\series default 
+PkgBuilder
+\series medium 
+ es muy sencillo:
 \layout Quotation
 
 
 \family typewriter 
 \size footnotesize 
-$ cvs -d :pserver:anonymous@cvs.berlios.de:/cvsroot/pkgbuilder co pkgbuilder
+$ svn checkout svn://svn.berlios.de/pkgbuilder/trunk/pkgbuilder
 \layout Quotation
 
-Y ya tendremos nuestra copia del arbol de ports local.
+Y ya tendremos nuestra copia del arbol de ports.
 \layout Subsubsection
 
 Configuración del archivo build.rc
@@ -644,7 +670,7 @@ build.rc-sample
 
 \family typewriter 
 \size footnotesize 
-# Copyright 2003 Antonio G.
+# Copyright 2004 Antonio G.
  Muñoz, tomby (AT) tomby.homemelinux.org
 \layout Quotation
 
@@ -723,7 +749,7 @@ FETCH_TRIES="5"
 
 \family typewriter 
 \size footnotesize 
-FETCH_DIR="/tmp/distfiles"
+FETCH_DIR="/var/tmp/distfiles"
 \layout Quotation
 
 
@@ -741,14 +767,13 @@ FETCH_FTP_OPTIONS="--passive-ftp"
 
 \family typewriter 
 \size footnotesize 
-TMP="/tmp"
+TMP="/var/tmp"
 \layout Quotation
 
 
 \family typewriter 
 \size footnotesize 
-USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod nas
- gstreamer"
+USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod"
 \layout Quotation
 
 
@@ -868,6 +893,8 @@ PKGBUILDER_MIRROR
  configura la url del ftp oficial de 
 \series default 
 PkgBuilder
+\series medium 
+.
 \layout Paragraph
 
 MIRROR_URL
@@ -908,8 +935,8 @@ USE
 
 I18N
 \series medium 
- permite configurar la opcion de internacionalización indicando el lenguaje
- deseado.
+ permite configurar la opcion de internacionalización indicando los lenguajes
+ deseadoa.
 \layout Paragraph
 
 ARCH
@@ -995,7 +1022,7 @@ especifica la modalidad de compilación.
 
 DISTCC_HOST 
 \series medium 
-especifica el nombre de las diferentes maquina a usar para la compilación
+especifica el nombre de las diferentes máquina a usar para la compilación
  paralela en el caso de utilizar 
 \series default 
 dictcc
@@ -1080,24 +1107,24 @@ verify: verifica el checksum de los paquetes descargados.
 \layout List
 \labelwidthstring 00.00.0000
 
-patch: parchea los archivos necesarios para la compilación
+patch: parchea los archivos necesarios para la compilación.
 \layout List
 \labelwidthstring 00.00.0000
 
-configure: ejecuta el script configure del paquete
+configure: ejecuta el script configure del paquete.
 \layout List
 \labelwidthstring 00.00.0000
 
-build: ejecuta make
+build: ejecuta make.
 \layout List
 \labelwidthstring 00.00.0000
 
-install: ejecuta make install
+install: ejecuta make install.
 \layout List
 \labelwidthstring 00.00.0000
 
 postinstall: ejecuta todas la acciones necesarias después de la instalación
- del paquete
+ del paquete.
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -1236,24 +1263,755 @@ Anatomia de un script build:
 
 
 \series medium 
-Un script build define una serie de variables y métodos que goviernan la
- generación de un paquete.
+Un script 
+\series default 
+build
+\series medium 
+ define una serie de variables y métodos que dirigen la generación de un
+ paquete.
+ Además un script build puede heredar de otro ciertas caracteristicas que
+ se repiten en múltiples paquetes.
 \layout Subsubsection
 
 Variables:
+\layout Paragraph
+
+
+\series medium 
+Existen una serie de variables comunes a todos los scripts build que definen
+ una serie de parámetros cruciales para la construcción de los paquetes.
+ Aqui definimos la mayoría de ellos, es posible que se nos pase alguno,
+ además cada paquete puede definir toda una serie extra de variables.
+\layout Itemize
+
+
+\series bold 
+PKG_NAME
+\series default 
+: Define el nombre del paquete y su valor esta implicito, no es necesario
+ declararlo.
+\layout Itemize
+
+
+\series bold 
+PKG_VERSION
+\series default 
+: Define la version del paquete y su valor esta implicito, no es necesario
+ declararlo.
+\layout Itemize
+
+
+\series bold 
+PKG_BUILD
+\series default 
+: Define el numero de la revision del paquete actual.
+ Esto es necesario ya que aunque no se haya cambiado de version es necesario
+ actualizar el paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_ARCH
+\series default 
+: Define la arquitectura del paquete.
+ Por defecto toma el valor de la variable 
+\series bold 
+ARCH
+\series default 
+ definida en el archivo 
+\emph on 
+build.rc
+\emph default 
+.
+\layout Itemize
+
+
+\series bold 
+PKG_SRC
+\series default 
+: Define el directorio donde residen los fuentes del paquete después de
+ ser descomprimidos.
+\layout Itemize
+
+
+\series bold 
+PKG_UNPACK_DIR
+\series default 
+: Define un directorio previo a 
+\series bold 
+PKG_SRC
+\series default 
+ donde se descomprimiran los archivos.
+ No suele ser necesario casi nunca ya que con definir 
+\series bold 
+PKG_SRC
+\series default 
+ suele ser suficiente.
+\layout Itemize
+
+
+\series bold 
+PKG_DEST
+\series default 
+: Define el directorio de destino para la instalación del paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_DOC
+\series default 
+: Define el directorio donde se instalaran los archivos de documentación.
+\layout Itemize
+
+
+\series bold 
+PKG_FILENAME
+\series default 
+: Define la lista de nombres de archivos necesarios para la construcción
+ del paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_URL
+\series default 
+: Define la lista de URL's desde donde descargar los archivos necesarios
+ para la construcción del paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_LICENSE
+\series default 
+: Define la licencia del paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_USE
+\series default 
+: Resume la lista de flags USE utilizados para la construcción del paquete.
+ Estos flags determinan que dependencias utilizar y que opciones de construcción
+ se van a emplear, etcetera.
+\layout Itemize
+
+
+\series bold 
+PKG_DEPENDS
+\series default 
+: Define la lista de dependencias necesarias para la construcción del paquete.
+ El sistema utiliza esta variable para resolver las dependencias.
+ El formato con el que se especifican las dependencias es.
+\layout Itemize
+
+
+\series bold 
+PKG_HOMESITE
+\series default 
+: Define la web principal del paquete donde encontrar información extra
+ sobre el paquete y nuevas versiones.
+\layout Itemize
+
+
+\series bold 
+PKG_DOC_FILES
+\series default 
+: Lista de archivos que se copiaran dentro del directorio PKG_DOC.
+\layout Itemize
+
+
+\series bold 
+PKG_PREFIX
+\series default 
+: Define el directorio prefijo.
+ Este suele ser 
+\series bold 
+/usr
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+PKG_CONFIGURE_OPTIONS
+\series default 
+: Define la opciones que se pasaran al script 
+\series bold 
+./configure
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+PKG_BUILD_OPTIONS
+\series default 
+: Define las opciones que se pasaran a make a la hora de construir el paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_BUILD_TARGET
+\series default 
+: Define los targets o objetivos make que se utilizaran a hora de construir
+ el paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_INSTALL_OPTIONS
+\series default 
+: Define las opciones que se pasaran a make a la hora de instalar el paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_INSTALL_TARGET
+\series default 
+: Define los targets o objetivos make que se utilizaran a hora de instalar
+ el paquete.
+\layout Itemize
+
+
+\series bold 
+PKG_NOSTRIP
+\series default 
+: Indica si es necesario o no pasar 
+\series bold 
+strip
+\series default 
+ a los archivos binarios generados.
+\layout Itemize
+
+
+\series bold 
+PKG_CONFIG_FILES
+\series default 
+: Defina la lista de archivos de configuración que deben tener un tratamiento
+ especial.
 \layout Subsubsection
 
 Acciones:
+\layout Paragraph
+
+
+\series medium 
+Todos los scripts 
+\series default 
+build
+\series medium 
+ deben implementar todas las acciones, o sino ellos, sí alguno de los scripts
+ de los que heredan.
+ El nombre de las funciones que implementan las acciones es 
+\series default 
+do_
+\emph on 
+<nombre_accion>
+\series medium 
+\emph default 
+ en todos los casos.
+ Esta es la lista de funciones:
+\layout Itemize
+
+do_info
+\layout Itemize
+
+do_fetch
+\layout Itemize
+
+do_verify
+\layout Itemize
+
+do_unpack
+\layout Itemize
+
+do_patch
+\layout Itemize
+
+do_configure
+\layout Itemize
+
+do_build
+\layout Itemize
+
+do_install
+\layout Itemize
+
+do_postinstall
+\layout Itemize
+
+do_buildpkg
+\layout Itemize
+
+do_installpkg
+\layout Itemize
+
+do_upgradepkg
+\layout Itemize
+
+do_cleanup
 \layout Subsection
 
 Herencia de scripts:
+\layout Paragraph
+
+
+\series medium 
+Como se ha explicado anteriormente, cada script 
+\series default 
+build
+\series medium 
+ debe implementar todas las acciones, pero si realmente se tuviera que implement
+ar todas las funciones en cada script 
+\series default 
+build
+\series medium 
+, se llegaría a la situación de tener el mismo código repetido en todos
+ los scripts.
+ Esto haría al sistema inmantenible ya que si quisieramos modificar el comportam
+iento de una acción, o añadir una nueva, habría que modificar todos los
+ scripts ya creados.
+\layout Paragraph
+
+
+\series medium 
+Para solucionar esto se ha implementado una herencia sencilla entre scripts
+ 
+\series default 
+build
+\series medium 
+.
+ Cada script 
+\series default 
+build
+\series medium 
+ puede tener un padre del que hereda todas las acciones y variables definidas
+ en él.
+ Además el script padre puede heredar de otro y así sucesivamente.
+ Así hasta llegar al script 
+\series default 
+base.build
+\series medium 
+ que implementa una serie de acciones globales y del que heredan todos los
+ scripts build.
+\layout Paragraph
+
+
+\series medium 
+A la hora de ejecutar una acción primero se busca si se ha declarado la
+ función 
+\series default 
+do_<accion>
+\series medium 
+.
+ Si esta no está definido se busca si el metodo está declarado en el padre
+ a través de la funcion 
+\series default 
+<padre>_do_<accion>
+\series medium 
+.
+ Si no está declarado tampoco en el padré se buscará si este está implementado
+ en el script 
+\emph on 
+base.build
+\emph default 
+ con el nombre 
+\series default 
+pkg_do_<accion>
+\series medium 
+.
+ Si no se encuentra ninguna de estas funciones se asume que la acción no
+ ha sido implementada porque no es necesaria.
+\layout Paragraph
+
+
+\series medium 
+Con esto conseguimos un sistema sencillo a base de shell scripts que nos
+ permite mantener de forma sencilla el sistema.
 \layout Subsection
 
 Funciones genericas:
+\layout Itemize
+
+
+\series bold 
+version
+\series default 
+: imprime la versión de 
+\series bold 
+PkgBuilder
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+include
+\series default 
+: incluye el script build del directorio common que se le pasa como parámetro
+\layout Itemize
+
+
+\series bold 
+inherit
+\series default 
+: realiza las acciones necesarias para que el script build que se le pase
+ como parámetro sea el padre del script actual.
+\layout Itemize
+
+
+\series bold 
+use
+\series default 
+: comprueba si está definido el flag use en la lista de la variable USE.
+\layout Itemize
+
+
+\series bold 
+use_dep
+\series default 
+: comprueba si está definido el flag use en la lista de la variable USE,
+ si es así además imprime la cadena que se le pasa como segundo parámetro.
+\layout Itemize
+
+
+\series bold 
+use_enable
+\series default 
+: comprueba si está definido el flag use en la lista de la variable USE,
+ además imprime la cadena 
+\emph on 
+--enable-<flag>
+\emph default 
+ o 
+\emph on 
+--disable-<flag>
+\emph default 
+.
+\layout Itemize
+
+
+\series bold 
+use_with
+\series default 
+: comprueba si está definido el flag use en la lista de la variable USE,
+ además imprime la cadena 
+\emph on 
+--with-<flag>
+\emph default 
+ o 
+\emph on 
+--without-<flag>
+\emph default 
+.
+\layout Itemize
+
+
+\series bold 
+call_action
+\series default 
+: llama la acción correspondiente buscandola tal y como se describe en el
+ punto 6.2.
+\layout Itemize
+
+
+\series bold 
+execute_action
+\series default 
+: ejecuta la acción que se le pasa como parámetro.
+\layout Itemize
+
+
+\series bold 
+fetch
+\series default 
+: descarga el archivo que se pasa como parámetro.
+\layout Itemize
+
+
+\series bold 
+unpack
+\series default 
+: descomprime el archivo que se pasa como parámetro.
+\layout Itemize
+
+
+\series bold 
+apply_patch
+\series default 
+: aplica el parche correspondiente buscando el nombre del archivos en varios
+ directorios.
+\layout Itemize
+
+
+\series bold 
+verify
+\series default 
+: verifica el checksum de los archivos descargados.
+\layout Itemize
+
+
+\series bold 
+gzip_man
+\series default 
+: comprimir las páginas man.
+\layout Itemize
+
+
+\series bold 
+gzip_info
+\series default 
+: comprime las páginas info.
+\layout Itemize
+
+
+\series bold 
+strip_all
+\series default 
+: realiza el script sobre los binarios generados.
+\layout Itemize
+
+
+\series bold 
+is_installed
+\series default 
+: comprueba si el paquete está instalado.
+\layout Itemize
+
+
+\series bold 
+compare_versions
+\series default 
+: compara dos versiones determinado si una es mayor, menor o son iguales.
+\layout Itemize
+
+
+\series bold 
+latest_version
+\series default 
+: imprime el valor de la última versión disponible del paquete indicado.
+\layout Itemize
+
+
+\series bold 
+installed_version
+\series default 
+: imprime la versión instalada del paquete indicado.
+\layout Itemize
+
+
+\series bold 
+installed_build
+\series default 
+: imprime la reversión instalada del paquete indicado.
+\layout Itemize
+
+
+\series bold 
+extract_meta
+\series default 
+: extrae el valor del metapaquete.
+\layout Itemize
+
+
+\series bold 
+extract_name
+\series default 
+: extrae el valor del nombre del paquete
+\layout Itemize
+
+
+\series bold 
+extract_version
+\series default 
+: extra la valor de la versión del paquete
+\layout Itemize
+
+
+\series bold 
+extract_only_version
+\series default 
+: extrae el valor de la versión sin el valor de la version extra del paquete.
+\layout Itemize
+
+
+\series bold 
+extract_extra_version
+\series default 
+: extra el valor de la versión extra del paquete.
+\layout Itemize
+
+
+\series bold 
+result_msg
+\series default 
+: imprime el resultado.
 \layout Subsection
 
 Funciones de paquetes:
+\layout Itemize
+
+
+\series bold 
+pkg_installdoc
+\series default 
+: instala los archivos definidos en la variable 
+\series bold 
+PKG_DOC_FILES
+\series default 
+ en el directorio 
+\series bold 
+PKG_DOC
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_stripall
+\series default 
+: realiza el strip sobre los binarios instalados en 
+\series bold 
+PKG_DEST
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_gzipmaninfo
+\series default 
+: comprime las páginas de manual instaladas en 
+\series bold 
+PKG_DEST$PKG_PREFIX/man
+\series default 
+ y las páginas info instaladas en 
+\series bold 
+PKG_DEST$PKG_PREFIX/info
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_configfiles
+\series default 
+: realiza la gestion de los archivos definidos en la variable 
+\series bold 
+PKG_CONFIG_FILES
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_installfiles
+\series default 
+: instala los archivos 
+\series bold 
+slack-desc
+\series default 
+ y 
+\series bold 
+doinst.sh
+\series default 
+ necesarios para la creación del paquete.
+\layout Itemize
+
+
+\series bold 
+pkg_fetchfiles
+\series default 
+: descarga la lista de archivos definidos en la variable 
+\series bold 
+PKG_URL
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_fetchcvs
+\series default 
+: descarga desde el cvs.
+\layout Itemize
+
+
+\series bold 
+pkg_unpack
+\series default 
+: descomprime la lista de archivos definidos en la variable 
+\series bold 
+PKG_FILE_NAME
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_configure
+\series default 
+: ejecuta el script 
+\series bold 
+./configure
+\series default 
+ pasandole las variables necesarias definidas en el script 
+\series bold 
+build
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_build
+\series default 
+: ejecuta el 
+\series bold 
+make
+\series default 
+ pasandole las variables necesarias definidas en el script 
+\series bold 
+build
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_install
+\series default 
+: ejecuta el 
+\series bold 
+make install
+\series default 
+ pasandole las variables necesarias definidas en el script 
+\series bold 
+build
+\series default 
+.
+\layout Itemize
+
+
+\series bold 
+pkg_virtual
+\series default 
+: añade la creación de un paquete virtual.
+\layout Itemize
+
+
+\series bold 
+pkg_localeclean
+\series default 
+: limpia los locales instalados.
+\layout Itemize
+
+
+\series bold 
+pkg_postinstall
+\series default 
+: ejectuta todo lo necesario para después de la instalación.
 \layout Subsection
 
-Escribir un script:
+Cómo escribir un script build:
 \the_end
