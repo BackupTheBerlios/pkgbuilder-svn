@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.9 2003/11/30 15:05:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.10 2003/12/05 22:01:41 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -37,6 +37,7 @@ source build.rc
 
 #global functions
 source scripts/functions.sh
+source scripts/pkgfunctions.sh
 
 #print version number
 version

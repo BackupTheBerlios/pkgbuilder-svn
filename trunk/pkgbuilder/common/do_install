@@ -1,15 +1,9 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_install,v 1.1 2003/11/08 16:36:27 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_install,v 1.2 2003/12/05 22:01:08 tomby Exp $
 
 do_install() {
-    cd $PKG_SRC
-    
-    if [ "$PKG_INSTALL_OPTIONS" = "" ] ; then
-        PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-    fi
-    
-    make $PKG_INSTALL_OPTIONS install
+    pkg_install
     
     return $?
 }

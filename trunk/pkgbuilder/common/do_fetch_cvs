@@ -1,12 +1,9 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_fetch_cvs,v 1.3 2003/11/30 15:26:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_fetch_cvs,v 1.4 2003/12/05 22:01:08 tomby Exp $
 
 do_fetch() {
-    cd $TMP
-    
-    echo "$PKG_CVSPASSWD" | cvs -d $PKG_CVSROOT login &&    
-    cvs -d $PKG_CVSROOT co -d $PKG_NAME-$PKG_VERSION $PKG_MODULE
+    pkg_fetchcvs
     
     return $?
 }
