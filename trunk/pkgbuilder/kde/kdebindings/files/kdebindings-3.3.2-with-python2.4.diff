@@ -1,0 +1,28 @@
+--- configure.old	2005-01-03 15:23:17.000000000 +0100
++++ configure	2005-01-03 15:24:03.000000000 +0100
+@@ -33116,10 +33116,10 @@
+ 
+ 
+ 
+-if test -z ""2.3""; then
++if test -z ""2.4""; then
+   version="1.5"
+ else
+-  version=""2.3""
++  version=""2.4""
+ fi
+ 
+ echo "$as_me:$LINENO: checking for Python$version" >&5
+@@ -40569,10 +40569,10 @@
+ 
+ 
+ 
+-if test -z ""2.3""; then
++if test -z ""2.4""; then
+   version="1.5"
+ else
+-  version=""2.3""
++  version=""2.4""
+ fi
+ 
+ echo "$as_me:$LINENO: checking for Python$version" >&5

@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE="java python ruby mozilla gtk"
 
@@ -22,6 +22,14 @@ PKG_DEPENDS=">=l/qt-3.3
              `use_dep mozilla "xap/mozilla"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL kdebindings.lsm NEWS README"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_NAME-$PKG_VERSION-with-python2.4.diff -Np0
+
+    return $?
+}
 
 do_postinstall() {
     ( cd $PKG_DEST$PKG_PREFIX/lib/java
