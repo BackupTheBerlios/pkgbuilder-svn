@@ -103,12 +103,10 @@ d)
     byacc
     flex
     gcc
-    gdb
     j2sdk
     libtool
     m4
     make
-    perl
     pmake
     rcs
 

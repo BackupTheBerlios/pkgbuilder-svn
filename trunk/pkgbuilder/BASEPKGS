@@ -65,12 +65,10 @@ d/byacc-1.9-i386-1
 d/flex-2.5.4a-i486-2
 d/gcc-3.3.4-i486-1
 d/gcc-g++-3.3.4-i486-1
-d/gdb-6.2.1-i486-1
 d/kernel-headers-2.4.27-i386-1
 d/libtool-1.5.10-i486-1
 d/m4-1.4.2-i486-1
 d/make-3.80-i386-1
-d/perl-5.8.5-i486-2
 
 # l)
 l/glibc-2.3.3-i486-2

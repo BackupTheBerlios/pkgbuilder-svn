@@ -485,10 +485,6 @@ gcc-g++ 3.3.4
 \layout List
 \labelwidthstring 00.00.0000
 
-gdb 6.2.1
-\layout List
-\labelwidthstring 00.00.0000
-
 kernel-headers 2.4.27
 \layout List
 \labelwidthstring 00.00.0000
@@ -502,10 +498,6 @@ m4 1.4.2
 \labelwidthstring 00.00.0000
 
 make 3.80
-\layout List
-\labelwidthstring 00.00.0000
-
-perl 5.8.5
 \layout Itemize
 
 l)
@@ -528,10 +520,6 @@ zlib 1.2.2
 \layout Itemize
 
 n)
-\layout List
-\labelwidthstring 00.00.0000
-
-openssl 0.9.7d
 \layout List
 \labelwidthstring 00.00.0000
 
