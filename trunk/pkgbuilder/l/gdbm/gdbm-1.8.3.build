@@ -7,13 +7,11 @@
 
 inherit configscript
 
-PKG_NAME="gdbm"
-PKG_VERSION="1.8.3"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://www.ibiblio.org/pub/gnu/$PKG_NAME/$PKG_FILE_NAME"
+PKG_URL="ftp://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
@@ -23,9 +21,6 @@ PKG_DEPENDS="l/glibc"
 
 PKG_HOMESITE="http://www.gnu.org/software/gdbm/gdbm.html"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
 PKG_PREFIX="/usr"
