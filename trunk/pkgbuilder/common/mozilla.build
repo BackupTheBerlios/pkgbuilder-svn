@@ -23,14 +23,14 @@ mozilla_init() {
     MOZILLA_BASE_URL="http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases"
 
     PKG_URL="$MOZILLA_BASE_URL/$PKG_NAME$PKG_VERSION/src/$PKG_FILE_NAME
-             `use crypt && echo "http://downloads.mozdev.org/enigmail/src/$ENIGMAIL_FILE_NAME"`
-             `use crypt && echo "http://downloads.mozdev.org/enigmail/src/$IPC_FILE_NAME"`"
+             `use_dep crypt "http://downloads.mozdev.org/enigmail/src/$ENIGMAIL_FILE_NAME"`
+             `use_dep crypt "http://downloads.mozdev.org/enigmail/src/$IPC_FILE_NAME"`"
     
     PKG_LICENSE="MPL-1.1 NPL-1.1"
     
     PKG_USE="ssl gnome crypto"
     
-    PKG_DEPENDS=">=x/xfree86
+    PKG_DEPENDS="x/x11
                  >=gnome/libidl-0.8.0
                  >=l/zlib-1.1.4
                  >=l/fontconfig-2.1

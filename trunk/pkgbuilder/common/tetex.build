@@ -36,7 +36,7 @@ tetex_init() {
                  l/ncurses
                  >=l/libwww-5.3.2-r1
                  >=d/perl-5.2
-                 `use X && echo "x/xfree86"`"
+                 `use_dep X "x/x11"`"
                  
     PKG_SRC="$TMP/$PKG_NAME-src-$PKG_VERSION"
     
@@ -66,7 +66,7 @@ tetex_init() {
                            --with-ps=gs 
                            --enable-ipc 
                            --with-etex
-                           `use X && echo "--with-x" || echo "--without-x"`"
+                           `use_with X x`"
     PKG_BUILD_OPTIONS="texmf=$TEXMF_DIR vartexfonts=$CACHE_FONT_DIR"
     PKG_BUILD_TARGET=""
     PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX
