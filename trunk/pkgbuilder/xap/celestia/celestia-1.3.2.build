@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -29,6 +29,14 @@ PKG_DOC_FILES="AUTHORS COPYING README TODO controls.txt"
 
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS=""
+
+do_patch() {
+    cd $PKG_SRC
+    
+    apply_patch qt-stl.patch -Np0
+
+    return $?
+}
 
 do_configure() {
     if use kde ; then
