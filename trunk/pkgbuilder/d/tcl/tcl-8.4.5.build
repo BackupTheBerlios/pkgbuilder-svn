@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/tcl/tcl-8.4.5.build,v 1.1 2003/12/08 16:52:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/tcl/tcl-8.4.5.build,v 1.2 2003/12/08 17:14:14 tomby Exp $
 #
-# tcl pkgbuilder script
+# tcl-8.4.5 pkgbuilder script
 #
 
 PKG_NAME="tcl"
@@ -76,8 +76,7 @@ do_postinstall() {
       rm -f tclsh
       ln -sf tclsh8.4 tclsh )
     ( cd $PKG_DEST$PKG_PREFIX/lib
-      rm -f libtcl.a libtcl.so libtclstub.a
-      ln -sf libtcl8.4.a libtcl.a
+      rm -f libtcl.so libtclstub.a
       ln -sf libtcl8.4.so libtcl.so
       ln -sf libtclstub8.4.a libtclstub.a )
 
