@@ -1,0 +1,43 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/audiofile/audiofile-0.2.4.build,v 1.1 2003/12/07 16:33:14 tomby Exp $
+#
+# audiofile-0.2.4 pkgbuilder script
+#
+
+PKG_NAME="audiofile"
+PKG_VERSION="0.2.4"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.68k.org/~michael/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://www.68k.org/~michael/audiofile/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="COPYING TODO README ChangeLog docs/*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--enable-largefile"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
