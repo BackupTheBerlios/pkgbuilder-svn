@@ -1,0 +1,47 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/esound/Attic/esound-0.2.32.build,v 1.1 2003/12/07 16:53:41 tomby Exp $
+#
+# esound-0.2.32 pkgbuilder script
+#
+
+PKG_NAME="esound"
+PKG_VERSION="0.2.32"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.gnome.org/pub/gnome/sources/$PKG_NAME/0.2/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="alsa"
+
+PKG_DEPENDS=">=l/audiofile-0.1.5
+	         `use alsa && echo ">=l/alsa-lib-0.5.10b"`"
+
+PKG_HOMESITE="http://www.tux.org/~ricdude/EsounD.html"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS COPYING COPYING.LIB ChangeLog INSTALL NEWS README TIPS TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                      `use alsa && echo "--enable-alsa"`"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+PKG_CONFIG_FILES="etc/esd.conf"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
