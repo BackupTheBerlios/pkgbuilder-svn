@@ -388,11 +388,13 @@ verify() {
     
     if [ -r "$FETCH_DIR/$base" ] ; then
         if ! grep -q "`md5sum $FETCH_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
-            return 1
+            echo "pkgbuilder: ERROR, checksum verification error at file $FETCH_DIR/$base"
+            return 2
         fi
     elif [ -r "$CDROM_DIR/$base" ] ; then
         if ! grep -q "`md5sum $CDROM_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
-            return 1
+            echo "pkgbuilder: ERROR, checksum verification error at file $CDROM_DIR/$base"
+            return 2
         fi
     else
         return 1
