@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.12 2003/12/13 11:55:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.13 2003/12/13 12:00:15 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -114,7 +114,7 @@ for DEP in $PKG_DEPENDS ; do
         if [ `echo $DEP | grep '^!'` ] ; then
             #pkg must not installed
 
-            is_installed $DEP_PKG_NAME $DEP_PKG_VERSION && exit 1
+            is_installed $DEP_PKG_NAME $DEP_PKG_VERSION && exit 1 || continue
         elif [ `echo $DEP | grep '^>='` ] ; then
             #pkg must installed greater or equal version
 
@@ -140,7 +140,7 @@ for DEP in $PKG_DEPENDS ; do
         if [ `echo $DEP | grep '^!'` ] ; then
             #pkg must not installed
 
-            is_installed $DEP_PKG_NAME && exit 1
+            is_installed $DEP_PKG_NAME && exit 1 || continue
         else
             DEP_PKG_LATEST_VERSION="`latest_version $DEP_METAPKG $DEP_PKG_NAME`"
 
