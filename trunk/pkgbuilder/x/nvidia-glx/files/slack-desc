@@ -8,6 +8,6 @@
           |-----handy-ruler------------------------------------------------------|
 nvidia-glx: nvidia-glx
 nvidia-glx:
-nvidia-glx: Propietary X-Window glx extension for nvidia graphic boards
+nvidia-glx: XFree86 GLX libraries for the NVIDIA's X driver
 nvidia-glx:
 
