@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/cups/cups-1.1.20.build,v 1.4 2003/12/24 11:18:03 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/cups/cups-1.1.20.build,v 1.5 2003/12/30 01:00:58 tomby Exp $
 #
 # cups-1.1.20 pkgbuilder script
 #
@@ -8,20 +8,21 @@
 PKG_NAME="cups"
 PKG_VERSION="1.1.20"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.easysw.com/pub/$PKG_NAME/$PKG_VERSION/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE=""
+PKG_USE="ssl slp"
 
 PKG_DEPENDS="l/glibc
-             >=l/openssl-0.9.7c
              >=l/libpng-1.2.1
              >=l/libtiff-3.5.5
              >=l/libjpeg-6b
+             `use slp && echo ">=l/openslp-1.0.4"`
+             `use ssl && echo ">=l/openssl-0.9.7c"`
              !a/lprng"
 
 PKG_HOMESITE="http://www.cups.org"
