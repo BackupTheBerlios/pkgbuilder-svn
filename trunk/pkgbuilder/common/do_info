@@ -1,15 +1,17 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_info,v 1.1 2003/11/08 16:36:27 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_info,v 1.2 2003/12/05 22:18:31 tomby Exp $
 
 do_info() {
     echo
-    echo $PKG_NAME-$PKG_VERSION
+    echo "$PKG_NAME-$PKG_VERSION"
     echo
-    
-    if [ -f $PKG_HOME/INFO ] ; then
-        cat $PKG_HOME/INFO      
-    else
-        echo package information not avaible
-    fi
+    echo "HOME..... $PKG_HOMESITE"
+    echo "URL...... $PKG_URL"
+    echo "LICENSE.. $PKG_LICENSE"
+    echo "DEPS..... $PKG_DEPENDS"
+    echo
+    echo "DESCRIPTION:"
+    echo
+    cat $PKG_HOME/files/slack-desc | grep "^$PKG_NAME" | cut -d: -f2 | uniq
 }
