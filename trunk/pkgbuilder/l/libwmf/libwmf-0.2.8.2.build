@@ -16,25 +16,24 @@ PKG_LICENSE="GPLv2"
 PKG_USE="jpeg X"
 
 PKG_DEPENDS="ap/esp-gs
-	         l/expat
-	         l/libxml2
-	         >=l/freetype2-2.0.1
-	         l/zlib
-	         l/libpng
-	         `use jpeg && echo "l/libjpeg"`
-	         `use X && echo "x/xfree86"`"
+             l/expat
+             l/libxml2
+             >=l/freetype2-2.0.1
+             l/libpng
+             `use_dep jpeg "l/libjpeg"`
+             `use_dep X "x/xfree86"`"
 
 PKG_HOMESITE="http://wvware.sourceforge.net/"
 
 PKG_DOC_FILES="README AUTHORS COPYING CREDITS ChangeLog NEWS TODO"
 
 PKG_CONFIGURE_OPTIONS="--with-gsfontdir=/usr/share/ghostscript/fonts
-		               --with-fontdir=/usr/share/libwmf/fonts
-		               --with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+                       --with-fontdir=/usr/share/libwmf/fonts
+                       --with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
-		             fontdir=/usr/share/libwmf/fonts
-		             wmfonedocdir=/usr/doc/$PKG_NAME-$PKG_VERSION/caolan
-		             wmfdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
+                             fontdir=/usr/share/libwmf/fonts
+                             wmfonedocdir=/usr/doc/$PKG_NAME-$PKG_VERSION/caolan
+                             wmfdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
 
 
