@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/nedit/nedit-5.4.build,v 1.4 2004/01/05 15:11:40 tomby Exp $
 #
-# nedit-5.5_rc1 pkgbuilder script
+# nedit-5.5_rc2 pkgbuilder script
 #
 
 inherit makeonly
 
 PKG_BUILD="am1"
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_/}-src.$PKG_EXTENSION"
+PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_rc/RC}-src.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.nedit.org/pub/NEdit/beta/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
@@ -20,9 +20,9 @@ PKG_DEPENDS="d/byacc l/lesstif"
 
 PKG_HOMESITE="www.nedit.org"
 
-PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION/_/}"
+PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION/_rc/RC}"
 PKG_DOC_FILES="README ReleaseNotes ChangeLog COPYRIGHT
-    		   doc/*.txt doc/nedit.doc doc/README.FAQ doc/NEdit.ad"
+               doc/*.txt doc/nedit.doc doc/README.FAQ doc/NEdit.ad"
 
 do_build() {
     cd $PKG_SRC
