@@ -18,11 +18,11 @@ PKG_LICENSE="GPLv2"
 PKG_USE=" nls oss alsa esd gif jpeg png kde gnome"
 
 PKG_DEPENDS="x/xfree86
-	         >=l/libtiff-3.5.5
-             `use nls && echo ">=d/gettext-0.10.39"`
-	         `use gif && echo "l/libungif"`
-	         `use png && echo ">=l/libpng-1.2.1"`
-	         `use jpeg && echo ">=l/libjpeg-6b"`"
+             >=l/libtiff-3.5.5
+             `use_dep nls ">=d/gettext-0.10.39"`
+             `use_dep gif "l/libungif"`
+             `use_dep png ">=l/libpng-1.2.1"`
+             `use_dep jpeg ">=l/libjpeg-6b"`"
 
 PKG_HOMESITE="http://www.windowmaker.org/"
 
