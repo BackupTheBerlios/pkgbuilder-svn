@@ -1,0 +1,26 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-games/gnome-games-2.6.0.1.build,v 1.1 2004/04/10 18:10:32 tomby Exp $
+#
+# gnome-games-2.8.1 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/gtk+2-2.3
+             >=gnome/gconf-1.2
+             >=gnome/gnome-vfs-2
+             >=gnome/libgnome-2
+             >=gnome/libgnomeui-2
+             >=gnome/librsvg-2
+             >=d/pkgconfig-0.12.0
+             >=gnome/intltool-0.29
+             >=d/gettext-0.10.40
+             >=gnome/scrollkeeper-0.3.8
+             `use scheme && echo "d/guile"`"
+
+PKG_DOC_FILES="AUTHORS COPYING* ChangeLog HACKING INSTALL MAINTAINERS NEWS README TODO"

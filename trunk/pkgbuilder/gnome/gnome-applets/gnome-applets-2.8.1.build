@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-applets/gnome-applets-2.6.0.build,v 1.1 2004/04/10 15:01:03 tomby Exp $
 #
-# gnome-applets-2.8.0 pkgbuilder script
+# gnome-applets-2.8.1 pkgbuilder script
 #
 
 inherit gnome
