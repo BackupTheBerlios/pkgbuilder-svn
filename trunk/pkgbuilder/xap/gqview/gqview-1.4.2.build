@@ -1,0 +1,21 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gqview/gqview-1.4.2.build,v 1.1 2004/04/08 17:41:12 tomby Exp $
+#
+# gqview-1.4.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="l/libpng 
+             >=l/gtk+2-2.2.0 
+             `use_dep nls "d/gettext"`"
+
+PKG_DOC_FILES="ABOUT-NLS AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"

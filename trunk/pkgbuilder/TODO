@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.41 2004/02/28 13:41:13 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.42 2004/04/08 17:43:18 tomby Exp $
 
 * New tasks:
 
@@ -11,10 +11,6 @@ $Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.41 2004/02/28 13:41:13 tomby Ex
 * Packages to update:
     
 * High priority packages:
-
-    cvs                     1.11.11
-    wget                    1.9.1
-    openssl                 0.9.7c
 
 * Packages:
 
@@ -61,7 +57,6 @@ a)
 ap)
 
     a2ps
-    apsfilter
     ash
     at
     aumix
@@ -172,11 +167,9 @@ x)
 xap)
 
     fvwm
-    gimp
     gnucash
     gnuchess
     gnuplot
-    gv
     pan
     rxvt
     sawfish
