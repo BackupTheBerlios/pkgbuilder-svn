@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gvim/gvim-6.2.178.build,v 1.1 2004/01/11 12:34:39 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gvim/gvim-6.2.178.build,v 1.2 2004/01/11 12:42:47 tomby Exp $
 #
 # vim-6.2 pkgbuilder script
 #
@@ -13,7 +13,7 @@ PKG_USE="$PKG_USE gtk"
 
 PKG_DEPENDS="$PKG_DEPENDS
              l/gtk+
-             ap/vim"
+             !ap/vim"
 
 PKG_DOC_FILES="README*"
 
