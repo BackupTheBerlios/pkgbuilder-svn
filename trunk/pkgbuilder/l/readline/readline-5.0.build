@@ -1,0 +1,27 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# readline-5.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/ncurses-5.2"
+
+PKG_HOMESITE="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html"
+
+PKG_DOC_FILES="CHANGE* COPYING INSTALL NEWS MANIFEST USAGE README"
+
+PKG_CONFIGURE_OPTIONS=""
+
+PKG_BUILD_OPTIONS="SHLIB_LIBS=-lncurses"
