@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.8 2003/12/07 18:08:00 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.9 2003/12/07 21:51:19 tomby Exp $
 
 * New tasks:
 
@@ -106,11 +106,11 @@ l)
 
     libsoup         X
 
-    alsa-libs
-    alsa-driver
+    alsa-libs       X
+    alsa-driver     X
     alsa-utils
     alsa-tools
-    alsa-oss
+    alsa-oss        X
     audio-file      X
     esound          X
     sdl             X
@@ -185,7 +185,7 @@ n)
 
     ncftp
     openssh
-    rsync
+    rsync           X
     cvs
     wget
     tcpwrappers
