@@ -29,7 +29,7 @@ PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        --bindir=/bin"
 
 do_postinstall() {
-	cd $PKG_SRC
+    cd $PKG_SRC
 	
     ( mkdir -p $PKG_DEST/etc
       cd $PKG_DEST/etc ; ln -sf profile zprofile ) &&
