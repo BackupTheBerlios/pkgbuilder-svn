@@ -1,0 +1,24 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# lcms-1.13 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.littlecms.com/$PKG_FILE_NAME"
+
+PKG_USE="python"
+
+PKG_DEPENDS=">=l/libjpeg-6b
+             >=l/libtiff-3.5.7
+             >=l/zlib-1.1.4
+             `use_dep python ">=d/python-2.2"`"
+
+PKG_HOMESITE="http://www.littlecms.com/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README.1ST doc/*.TXT"
