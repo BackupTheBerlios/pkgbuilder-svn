@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.16 2003/12/31 16:41:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.17 2003/12/31 19:37:53 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -72,7 +72,7 @@ PKG_NAME="`extract_name "$PKG_BASENAME"`"
 PKG_VERSION="`extract_version "$PKG_BASENAME"`"
 
 if [ "$METAPKG" == "" -o "$PKG_NAME" == "" ] ; then
-    echo "pkgbuilder: invalid package"
+    echo "pkgbuilder: invalid package name \"$1\""
     exit 1
 fi
 
@@ -83,7 +83,7 @@ fi
 PKG="$METAPKG/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
 
 if [ ! -r "$PKG" ] ; then
-    echo "pkgbuilder: invalid package"
+    echo "pkgbuilder: invalid package file \"$PKG\""
     exit 1
 fi
 
