@@ -1,0 +1,30 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnome/libgnome-2.6.0.build,v 1.1 2004/04/10 11:35:44 tomby Exp $
+#
+# libgnome-2.6.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS=">=l/glib2-2.0.3
+             >=gnome/gconf-2
+             >=gnome/libbonobo-2
+             >=gnome/gnome-vfs-2.5.3
+             >=l/esound-0.2.26
+             >=l/audiofile-0.2.3
+             >=l/popt-1.5
+             >=gnome/intltool-0.29
+             >=d/pkgconfig-0.12.0
+             `use_dep doc ">=gnome/gtk-doc-0.6"`"
+
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-schemas-install
+                       `use_enable doc gtk-doc`"
+
