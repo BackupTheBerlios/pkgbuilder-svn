@@ -109,3 +109,13 @@ if [ ! -e /etc/xml/docbook ]; then /usr/bin/xmlcatalog --noout --create \
 /usr/bin/xmlcatalog --noout --add "delegateURI" \
 "http://www.oasis-open.org/docbook/" \
 "file:///etc/xml/docbook" /etc/xml/catalog
+
+( /usr/bin/install-catalog --add /etc/sgml/xml-docbook-dtd-4.1.cat \
+/usr/share/sgml/docbook/xml-dtd-4.1/catalog )
+( /usr/bin/install-catalog --add /etc/sgml/xml-docbook-dtd-4.1.cat \
+/etc/sgml/sgml-docbook.cat )
+
+( /usr/bin/install-catalog --add /etc/sgml/xml-docbook-dtd-4.1.2.cat \
+/usr/share/sgml/docbook/xml-dtd-4.1.2/catalog )
+( /usr/bin/install-catalog --add /etc/sgml/xml-docbook-dtd-4.1.2.cat \
+/etc/sgml/sgml-docbook.cat )

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xml-dtd/Attic/docbook-xml-dtd-1.0.build,v 1.1 2004/01/02 23:20:50 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xml-dtd/Attic/docbook-xml-dtd-1.0.build,v 1.2 2004/01/03 00:11:20 tomby Exp $
 #
 # docbook-xml-dtd-1.0 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 inherit main
 
 PKG_ARCH="noarch"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="zip"
 PKG_FILE_NAME="docbkx41.$PKG_EXTENSION
                docbkx412.$PKG_EXTENSION"
@@ -51,9 +51,10 @@ do_install() {
     
     #4.1
     cd docbkx41
+    chmod -x *.dtd *.mod ent/*.ent
     mkdir -p $PKG_DATADIR-4.1
     cp *.dtd *.mod $PKG_DATADIR-4.1
-    cp docbook.cat $PKG_DATADIR-4.1
+    cp docbook.cat $PKG_DATADIR-4.1/catalog
     
     mkdir -p $PKG_DATADIR-4.1/ent
     cp ent/*.ent $PKG_DATADIR-4.1/ent
@@ -61,9 +62,10 @@ do_install() {
     #4.1.2
     cd ..
     cd docbkx412
+    chmod -x *.dtd *.mod ent/*.ent
     mkdir -p $PKG_DATADIR-4.1.2
     cp *.dtd *.mod $PKG_DATADIR-4.1.2
-    cp docbook.cat $PKG_DATADIR-4.1.2
+    cp docbook.cat $PKG_DATADIR-4.1.2/catalog
     
     mkdir -p $PKG_DATADIR-4.1.2/ent
     cp ent/*.ent $PKG_DATADIR-4.1.2/ent
