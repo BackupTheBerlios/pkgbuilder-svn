@@ -1,0 +1,60 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/openssh/openssh-3.8.1p1.build,v 1.1 2004/04/19 17:59:14 tomby Exp $
+#
+# openssh-3.9_p1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_/}.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc
+             >=l/openssl-0.9.6d
+             n/tcpip
+             d/perl
+             ap/groff"
+
+PKG_HOMESITE="http://www.openssh.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION/_/}"
+
+PKG_DOC_FILES="CREDITS ChangeLog INSTALL LICENCE OVERVIEW README* RFC.nroff TODO WARNING.RNG"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/ssh
+                       --without-pam
+                       --with-md5-passwords
+                       --with-tcp-wrappers
+                       --with-default-path=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin
+                       --with-ipv4-default
+                       --with-privsep-path=/var/empty
+                       --with-privsep-user=sshd"
+
+PKG_CONFIG_FILES="etc/ssh/ssh_config etc/ssh/sshd_config etc/rc.d/rc.sshd"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    ( cd contrib
+      cat ssh-copy-id > $PKG_DEST$PKG_PREFIX/bin/ssh-copy-id
+      chmod 755 $PKG_DEST$PKG_PREFIX/bin/ssh-copy-id
+      cat ssh-copy-id.1 > $PKG_DEST$PKG_PREFIX/man/man1/ssh-copy-id.1 ) &&
+    ( cd $PKG_DEST$PKG_PREFIX/man/man1
+      rm -f slogin.1
+      ln -sf ssh.1.gz slogin.1.gz ) &&
+    ( mkdir -p $PKG_DEST/var/empty
+      chmod 755 $PKG_DEST/var/empty ) &&
+    ( mkdir -p $PKG_DEST/etc/rc.d
+      cat $PKG_HOME/files/rc.sshd > $PKG_DEST/etc/rc.d/rc.sshd
+      chmod 755 $PKG_DEST/etc/rc.d/rc.sshd )
+
+    pkg_postinstall
+}
