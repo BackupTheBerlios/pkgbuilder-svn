@@ -1,0 +1,27 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_gfx/sdl_gfx-2.0.10.build,v 1.1 2004/01/01 18:53:54 tomby Exp $
+#
+# sdl_gfx-2.0.11 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL_gfx-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.ferzkopp.net/~aschiffler/Software/SDL_gfx-2.0/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/sdl-1.2"
+
+PKG_HOMESITE="http://www.ferzkopp.net/~aschiffler/Software/SDL_gfx-2.0/"
+
+PKG_SRC="$TMP/SDL_gfx-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL LICENSE README"
+
+PKG_CONFIGURE_OPTIONS="--disable-sdltest"
