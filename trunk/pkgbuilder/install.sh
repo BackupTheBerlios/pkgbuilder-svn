@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.15 2003/12/30 12:33:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.16 2003/12/31 16:41:52 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -22,7 +22,11 @@
 
 usage() {
     echo
-    echo "usage: ./install.sh [metapkg/pkgname/<script>]"
+    echo "usage: ./install.sh [options] [metapkg/pkgname/<script>]"
+    echo
+    echo "    options:"
+    echo "        -v verbose mode"
+    echo "        -d dummy mode"
     echo
     echo "    example: ./install.sh xap/aterm"
     echo "    example: ./install.sh xap/aterm/aterm-0.4.2.build"
@@ -33,6 +37,24 @@ source build.rc
 
 #global functions
 source scripts/functions.sh
+
+# Parse options:
+OPTIONS=""
+MODE="install"
+
+while [ 0 ]; do
+  if [ "$1" = "-v" ]; then
+    VERBOSE="Y"
+    OPTIONS="$OPTIONS -v"
+    shift 1
+  elif [ "$1" = "-d" ]; then
+    MODE="dummy"
+    OPTIONS="$OPTIONS -d"
+    shift 1
+  else
+    break
+  fi
+done
 
 #verify script to execute
 if [ "$1" == "" -o "$1" == "help" ] ; then
@@ -68,10 +90,12 @@ fi
 #the build script
 source $PKG
 
-echo
-echo "PKG=\"$PKG\""
+if [ "$VERBOSE" = "Y" ] ; then
+    echo
+    echo "PKG=\"$PKG\""
 
-echo "PKG_DEPENDS=\"$PKG_DEPENDS\""
+    echo "PKG_DEPENDS=\"$PKG_DEPENDS\""
+fi
 
 if is_installed "$PKG_NAME" "$PKG_VERSION" "$PKG_BUILD" ; then
     echo "pkgbuilder: Package \"$PKG_NAME-$PKG_VERSION-$PKG_BUILD\" allready installed"
@@ -80,14 +104,18 @@ fi
 
 #resolving dependencies
 for DEP in $PKG_DEPENDS ; do
-    echo
-    echo "DEP=\"$DEP\""
+    if [ "$VERBOSE" = "Y" ] ; then
+        echo
+        echo "DEP=\"$DEP\""
+    fi
     
     DEP_METAPKG_BASENAME="`dirname $DEP`"
     DEP_PKG_BASENAME="`basename $DEP`"
     
-    echo "DEP_METAPKG_BASENAME=\"$DEP_METAPKG_BASENAME\""
-    echo "DEP_PKG_BASENAME=\"$DEP_PKG_BASENAME\""
+    if [ "$VERBOSE" = "Y" ] ; then
+        echo "DEP_METAPKG_BASENAME=\"$DEP_METAPKG_BASENAME\""
+        echo "DEP_PKG_BASENAME=\"$DEP_PKG_BASENAME\""
+    fi
     
     #metapkg
     DEP_METAPKG="`extract_meta "$DEP_METAPKG_BASENAME"`"
@@ -98,10 +126,12 @@ for DEP in $PKG_DEPENDS ; do
     #version
     DEP_PKG_VERSION="`extract_version "$DEP_PKG_BASENAME"`"
     
-    echo
-    echo "DEP_METAPKG=\"$DEP_METAPKG\""
-    echo "DEP_PKG_NAME=\"$DEP_PKG_NAME\""
-    echo "DEP_PKG_VERSION=\"$DEP_PKG_VERSION\""
+    if [ "$VERBOSE" = "Y" ] ; then
+        echo
+        echo "DEP_METAPKG=\"$DEP_METAPKG\""
+        echo "DEP_PKG_NAME=\"$DEP_PKG_NAME\""
+        echo "DEP_PKG_VERSION=\"$DEP_PKG_VERSION\""
+    fi
     
     # superhipermega error
     test "$DEP_METAPKG" = "" -o "$DEP_PKG_NAME" == "" && exit 1
@@ -120,12 +150,16 @@ for DEP in $PKG_DEPENDS ; do
 
             DEP_PKG_LATEST_VERSION="`latest_version $DEP_METAPKG $DEP_PKG_NAME`"
             
-            echo "DEP_PKG_LATEST_VERSION=\"$DEP_PKG_LATEST_VERSION\""
+            if [ "$VERBOSE" = "Y" ] ; then
+                echo "DEP_PKG_LATEST_VERSION=\"$DEP_PKG_LATEST_VERSION\""
+            fi
 
             if is_installed $DEP_PKG_NAME ; then
                 DEP_PKG_INSTALLED_VERSION="`installed_version $DEP_PKG_NAME`"
                 
-                echo "DEP_PKG_INSTALLED_VERSION=\"$DEP_PKG_INSTALLED_VERSION\""
+                if [ "$VERBOSE" = "Y" ] ; then
+                    echo "DEP_PKG_INSTALLED_VERSION=\"$DEP_PKG_INSTALLED_VERSION\""
+                fi
 
                 if [[ "$DEP_PKG_INSTALLED_VERSION" < "$DEP_PKG_VERSION" ]] ; then
                     DEP_PKG_VERSION="$DEP_PKG_LATEST_VERSION"
@@ -152,35 +186,49 @@ for DEP in $PKG_DEPENDS ; do
         fi
     fi
     
-    DEP_PKG=$DEP_METAPKG/$DEP_PKG_NAME/$DEP_PKG_NAME-$DEP_PKG_VERSION.build
+    DEP_PKG="$DEP_METAPKG/$DEP_PKG_NAME/$DEP_PKG_NAME-$DEP_PKG_VERSION.build"
     
-    echo "DEP_PKG=\"$DEP_PKG\""
+    if [ "$VERBOSE" = "Y" ] ; then
+        echo "DEP_PKG=\"$DEP_PKG\""
+    fi
 
     # if not installed we must install the dependency
     if is_installed $DEP_PKG_NAME $DEP_PKG_VERSION ; then
-        echo "pkgbuilder: $DEP allready installed"
+        if [ "$VERBOSE" = "Y" ] ; then
+            echo "pkgbuilder: $DEP allready installed"
+        fi
     else
-        ( cd $PKGBUILDER_HOME ; ./install.sh $DEP_PKG )
+        ( cd $PKGBUILDER_HOME ; ./install.sh $OPTIONS $DEP_PKG )
         RETVAL="$?"
         
-        echo
-        echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
+        if [ "$VERBOSE" = "Y" ] ; then
+            echo
+            echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
+        fi
     
         test $RETVAL -ne 0 && exit $RETVAL
         
         # update environment
-        . /etc/profile
+        if [ "$MODE" = "install" ] ; then
+            source /etc/profile
+        fi
     fi
 done
 
 if is_installed "$PKG_NAME" ; then
     echo "pkgbuilder: upgrading $PKG"
-    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup upgradepkg )
-    RETVAL="$?"
+    
+    if [ "$MODE" = "install" ] ; then
+        ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup upgradepkg )
+        RETVAL="$?"
+    fi
 else
     echo "pkgbuilder: installing $PKG"
-    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup installpkg )
-    RETVAL="$?"
+
+    if [ "$MODE" = "install" ] ; then
+        ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup installpkg )
+        RETVAL="$?"
+    fi
 fi
 
 exit $RETVAL
