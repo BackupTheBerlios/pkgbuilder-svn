@@ -1,15 +1,12 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/anjuta/anjuta-1.2.0.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/anjuta/anjuta-1.2.0.build,v 1.3 2004/01/05 15:27:34 tomby Exp $
 #
 # anjuta-1.20.0 pkgbuilder script
 #
 
-inherit configscript
+inherit gnome
 
-PKG_NAME="anjuta"
-PKG_VERSION="1.2.0"
-PKG_ARCH="$ARCH"
 PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -30,24 +27,16 @@ PKG_DEPENDS=">=l/glib2-2.0.6
 	         >=gnome/gnome-vfs-2.0.2
 	         >=gnome/libbonobo-2
 	         >=gnome/libbonoboui-2.0.1
-	         >=l/vte-0.9
+	         >=gnome/vte-0.9
 	         >=l/libxml2-2.4.23
 	         >=l/pango-1.1.1
 	         l/pcre
-	         l/scrollkeeper
+	         gnome/scrollkeeper
              d/pkgconfig"
 
 PKG_HOMESITE="http://www.anjuta.org/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS C* FUTURE INSTALL NEWS README T* doc/ScintillaDoc.html"
-
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 do_postinstall() {
     cd $PKG_SRC
