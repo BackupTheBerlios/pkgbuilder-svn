@@ -2,43 +2,43 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gst-plugins/gst-plugins-0.8.0.build,v 1.1 2004/04/10 15:41:42 tomby Exp $
 #
-# gst-plugins-0.8.0 pkgbuilder script
+# gst-plugins-0.8.1 pkgbuilder script
 #
 # TODO: libdv libdvdnav libdvdread
 # 
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_LICENSE="LGPLv2"
 
 PKG_USE="aalib alsa arts dvd mpeg esd flac lame fame mad mikmod oggvorbis oss sdl
          png jpeg gnome"
 
-PKG_DEPENDS="=gnome/gstreamer-$PKG_VERSION
+PKG_DEPENDS=">=gnome/gstreamer-$PKG_VERSION
              >=gnome/gconf-1.2
              >=d/gettext-0.11.5
              >=d/pkgconfig-0.9
              l/audiofile
              ap/cdparanoia
-             `use X && echo "x/xfree86"`
-             `use xmms && echo "xap/xmms"`
-             `use gnome && echo "gnome/gnome-vfs"`
-             `use dvd && echo "l/liba52"`
-             `use png && echo "l/libpng"`
-             `use jpeg && echo "l/libjpeg"`
-             `use aalib && echo "l/aalib"`
-             `use alsa && echo "l/alsa-lib"`
-             `use arts && echo "kde/arts"`
-             `use esd && echo "l/esound"`
-             `use flac && echo "l/flac"`
-             `use lame && echo "l/lame"`
-             `use fame && echo "l/libfame"`
-             `use mad && echo "l/libmad"`
-             `use mikmod && echo "l/libmikmod"`
-             `use oggvorbis && echo "l/libvorbis"`
-             `use sdl && echo "l/sdl"`"
+             `use_dep X "x/x11"`
+             `use_dep xmms "xap/xmms"`
+             `use_dep gnome "gnome/gnome-vfs"`
+             `use_dep dvd "l/liba52"`
+             `use_dep png "l/libpng"`
+             `use_dep jpeg "l/libjpeg"`
+             `use_dep aalib "l/aalib"`
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep arts "kde/arts"`
+             `use_dep esd "l/esound"`
+             `use_dep flac "l/flac"`
+             `use_dep lame "l/lame"`
+             `use_dep fame "l/libfame"`
+             `use_dep mad "l/libmad"`
+             `use_dep mikmod "l/libmikmod"`
+             `use_dep oggvorbis "l/libvorbis"`
+             `use_dep sdl "l/sdl"`"
              
 PKG_HOMESITE="http://gstreamer.sourceforge.net"
 
@@ -50,7 +50,7 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --program-suffix=
                        --disable-tests 
                        --disable-examples
-                       `use doc && echo "--enable-docs-build" || echo "--disable-docs-build"`"
+                       `use_enable doc docs-build`"
 
 MAKE_OPTIONS="-j1"
  

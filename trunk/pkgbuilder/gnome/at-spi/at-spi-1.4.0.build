@@ -7,7 +7,7 @@
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE=""
 
@@ -17,7 +17,7 @@ PKG_DEPENDS=">=gnome/gail-1.3
              l/gtk+2
              >=l/popt-1.6.3
              >=gnome/orbit2-2
-             x/xfree86
+             x/x11
              >=d/pkgconfig-0.12.0
              gnome/intltool"
 

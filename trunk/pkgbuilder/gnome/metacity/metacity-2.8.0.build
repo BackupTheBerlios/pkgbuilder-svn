@@ -11,7 +11,7 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86
+PKG_DEPENDS="x/x11
             >=l/pango-1.2
             >=l/gtk+2-2.2.0
             >=gnome/gconf-2
