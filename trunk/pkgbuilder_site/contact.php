@@ -4,7 +4,7 @@
     include("footer.php");
 ?>
 
-<?php site_header("contacto"); ?>
+<?php site_header("contact"); ?>
 
 <div id="tmiddle">
 
@@ -13,13 +13,17 @@
     <!--Content-->
     <div id="tmain">
         <div class="tbox">
-            <div class="ttitle">Contacto</div>
+            <div class="ttitle">Contact</div>
             <div class="tleft">
-                <p>Si te interesa contribuir con tus propios paquetes para <b>pkgbuilder</b>
-                o quieres reportar fallos o enviar parches enviadme un correo a esta dirección:</p>
+                <p>Si quieres contribuir con tus propios scripts
+                o quieres reportar fallos o parches enviadme un correo a esta dirección:</p>
+                
+                <p>If you want to contribute with your own build scripts or you
+                want to reports bugs or patches, send me a mail to this address:</p>
+                
                 <blockquote><code>tomby (AT) mail.berlios.de</code></blockquote>
             </div>
-            <div class="tleft"><b>Última modificación: $Date: 2003/10/31 19:21:13 $</b></div>
+            <div class="tleft"><b>Last update: $Date: 2004/01/17 14:00:46 $</b></div>
         </div>
     </div>
 </div>

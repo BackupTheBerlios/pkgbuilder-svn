@@ -4,13 +4,23 @@
     include("footer.php");
 ?>
 
-<?php site_header("principal"); ?>
+<?php site_header("main"); ?>
 
 <div id="tmiddle">
 
     <?php site_side(); ?>
 
     <!--Content-->
+    <div id="tmain">
+        <div class="tbox">
+            <div class="ttitle">Nuevas versiones de Mozilla y Epiphany</div>
+            <div class="tleft"><b>Sábado, 17 de Enero de 2004</b></div>
+            <div class="tleft">
+                <p>Ya se encuentran en el CVS la nueva versión de Mozilla, 1.6 y la nueva
+                versión de Epiphany que añade soporte a esta versión de Mozilla, la 1.0.7.</p>
+            </div>
+        </div>
+    </div>
     <div id="tmain">
         <div class="tbox">
             <div class="ttitle">Nueva versión de PkgBuilder</div>

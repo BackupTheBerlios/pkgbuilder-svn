@@ -4,7 +4,7 @@
     include("footer.php");
 ?>
 
-<?php site_header("paquetes"); ?>
+<?php site_header("packages"); ?>
 
 <div id="tmiddle">
 
@@ -13,11 +13,9 @@
     <!--Content-->
     <div id="tmain">
         <div class="tbox">
-            <div class="ttitle">Paquetes</div>
+            <div class="ttitle">Packages</div>
             <div class="tleft">
-                <p>Esta es la lista de paquetes actualmente incluidos:</p>
-                
-                <p><b>Lista de paquetes:</b></p>
+                <p><b>Package List:</b></p>
 
                 <blockquote>
                     <p><b>a:</b></p>
@@ -59,6 +57,7 @@
                         <li>sgmlspm-1.03</li>
                         <li>tcsh-6.12</li>
                         <li>tetex-2.0.2</li>
+                        <li>vim-6.2.178</li>
                         <li>vorbis-tools-1.0.1</li>
                         <li>wv-1.0.0</li>
                         <li>zsh-4.0.9</li>
@@ -66,7 +65,9 @@
                     <p><b>d:</b></p>
                     <ul>
                         <li>ccache-2.3</li>
-                        <li>distcc-2.11.2</li>
+                        <li>cscope-15.4</li>
+                        <li>ctags-5.5</li>
+                        <li>distcc-2.12.1</li>
                         <li>gettext-0.11.5</li>
                         <li>guile-1.6.4</li>
                         <li>indent-2.2.9</li>
@@ -103,6 +104,7 @@
                         <li>gal-1.99.10</li>
                         <li>gcalctool-4.3.16</li>
                         <li>gconf-2.4.0.1</li>
+                        <li>gconf-editor-2.4.0</li>
                         <li>gedit-2.4.1</li>
                         <li>gnome-applets-2.4.1</li>
                         <li>gnome-audio-2.0.0</li>
@@ -174,7 +176,7 @@
                     </ul>
                     <p><b>l:</b></p>
                     <ul>
-                        <li>aalib-1.4rc4</li>
+                        <li>aalib-1.4rc5</li>
                         <li>alsa-driver-1.0.1</li>
                         <li>alsa-lib-1.0.1</li>
                         <li>alsa-oss-1.0.1</li>
@@ -202,7 +204,7 @@
                         <li>id3lib-3.8.3</li>
                         <li>imlib-1.9.14</li>
                         <li>imlib2-1.1.0</li>
-                        <li>lame-3.93.1</li>
+                        <li>lame-3.95.1</li>
                         <li>lcms-1.11</li>
                         <li>lesstif-0.93.94</li>
                         <li>liba52-0.7.4</li>
@@ -267,7 +269,7 @@
                         <li>bitchx-1.0.19</li>
                         <li>curl-7.10.8</li>
                         <li>etherape-0.9.0</li>
-                        <li>ethereal-0.9.16</li>
+                        <li>ethereal-0.10.0</li>
                         <li>kismet-3.0.1</li>
                         <li>links-2.1pre14</li>
                         <li>lynx-2.8.4.1d</li>
@@ -290,26 +292,28 @@
                         <li>abiword-2.0.2</li>
                         <li>anjuta-1.2.0</li>
                         <li>aterm-0.4.2</li>
-                        <li>epiphany-1.0.6</li>
+                        <li>epiphany-1.0.7</li>
                         <li>evolution-1.4.5</li>
-                        <li>fluxbox-0.9.6</li>
-                        <li>gaim-0.74</li>
+                        <li>fluxbox-0.9.8</li>
+                        <li>gaim-0.75</li>
                         <li>gftp-2.0.16</li>
                         <li>ggv-2.4.0.2</li>
                         <li>gkrellm-2.1.24</li>
                         <li>gnomeicu-0.99</li>
                         <li>gnumeric-1.2.4</li>
                         <li>gqview-1.3.7</li>
+                        <li>gvim-6.2.178</li>
                         <li>imagemagick-5.5.7.15</li>
                         <li>kopete-0.7.3</li>
                         <li>ksetispy-0.6.0</li>
                         <li>ksetiwatch-2.6.1</li>
                         <li>lincvs-1.2.0</li>
                         <li>lyx-1.3.3</li>
-                        <li>mozilla-1.5</li>
+                        <li>mozilla-1.6</li>
                         <li>mplayer-1.0pre3</li>
                         <li>nedit-5.4</li>
                         <li>umbrello-1.1.1</li>
+                        <li>windowmaker-0.80.2</li>
                         <li>xchat-2.0.6</li>
                         <li>xmms-1.2.8</li>
                         <li>xpdf-2.03</li>
@@ -321,8 +325,9 @@
                         <li>nvidia-kernel-1.0.5328</li>
                         <li>xfree86-4.3.0.1</li>
                     </ul>
+
                 </blockquote>
-                <div class="tleft"><b>Última modificacion: $Date: 2004/01/10 14:59:02 $</b></div>
+                <div class="tleft"><b>Last update: $Date: 2004/01/17 14:00:46 $</b></div>
             </div>
         </div>
     </div>

@@ -4,36 +4,36 @@
     <div id="tside">
         <!--Menu-->
         <div class="tbox">
-            <div class="ttitle">Menú</div>
+            <div class="ttitle">Menu</div>
             <div class="tleft">
-                &rsaquo; <a href="index.php">Principal</a>
+                &rsaquo; <a href="index.php">Main</a>
             </div>
             <div class="tleft">
-                &rsaquo; <a href="about.php">Acerca de</a>
+                &rsaquo; <a href="about.php">About</a>
             </div>
             <div class="tleft">
                 &rsaquo; <a href="todo.php">Todo</a>
             </div>
             <div class="tleft">
-                &rsaquo; <a href="packages.php">Paquetes</a>
+                &rsaquo; <a href="packages.php">Packages</a>
             </div>
             <div class="tleft">
-                &rsaquo; <a href="http://developer.berlios.de/projects/pkgbuilder/">Proyecto</a>
+                &rsaquo; <a href="http://developer.berlios.de/projects/pkgbuilder/">Project</a>
             </div>
             <div class="tleft">
-                &rsaquo; <a href="http://developer.berlios.de/project/showfiles.php?group_id=1114">Descarga</a>
+                &rsaquo; <a href="http://developer.berlios.de/project/showfiles.php?group_id=1114">Download</a>
             </div>
             <div class="tleft">
                 &rsaquo; <a href="http://developer.berlios.de/cvs/?group_id=1114">CVS</a>
             </div>
             <div class="tleft">
-                &rsaquo; <a href="contact.php">Contacto</a>
+                &rsaquo; <a href="contact.php">Contact</a>
             </div>
         </div>
 
         <!--QuickLinks-->
         <div class="tbox">
-            <div class="ttitle">Enlaces</div>
+            <div class="ttitle">Links</div>
             <div class="tleft">
                 &rsaquo; <a href="http://tomby.homelinux.org/">Tomby's</a>
             </div>
@@ -42,6 +42,9 @@
             </div>
             <div class="tleft">
                 &rsaquo; <a href="http://developer.berlios.de/">BerliOS</a>
+            </div>
+            <div class="tleft">
+                &rsaquo; <a href="http://www.slackware.com/">Slackware</a>
             </div>
         </div>
         

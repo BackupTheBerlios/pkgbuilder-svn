@@ -4,7 +4,7 @@
     include("footer.php");
 ?>
 
-<?php site_header("todo"); ?>
+<?php site_header("To do list"); ?>
 
 <div id="tmiddle">
 
@@ -13,11 +13,14 @@
     <!--Content-->
     <div id="tmain">
         <div class="tbox">
-            <div class="ttitle">Todo</div>
+            <div class="ttitle">To do list</div>
             <div class="tleft">
-                <p>Esta es una pequeña lista de paquetes y funcionalidades que quedan por hacer.</p>
-                
-                <p><b>Paquetes:</b></p>
+                <p><b>Tasks:</b></p>
+                <ul>
+                    <li>Test, test, test :)</li>
+                    <li>Create new packages</li>
+                </ul>
+                <p><b>Packages:</b></p>
                 <ul>
                     <li>a2ps</li>
                     <li>acpid</li>
@@ -60,7 +63,6 @@
                     <li>fvwm</li>
                     <li>galeon</li>
                     <li>gawk</li>
-                    <li>gconf-editor</li>
                     <li>gdb</li>
                     <li>gdm</li>
                     <li>getmail</li>
@@ -129,8 +131,6 @@
                     <li>netwatch</li>
                     <li>nfs-utils</li>
                     <li>nn</li>
-                    <li>ntp</li>
-                    <li>ntp</li>
                     <li>openldap</li>
                     <li>openssl</li>
                     <li>pan</li>
@@ -175,10 +175,8 @@
                     <li>use</li>
                     <li>utempter</li>
                     <li>util-linux</li>
-                    <li>vim</li>
                     <li>w3m</li>
                     <li>wget</li>
-                    <li>windowmaker</li>
                     <li>wireless-tools</li>
                     <li>workbone</li>
                     <li>wvdial</li>
@@ -190,12 +188,7 @@
                     <li>zenity</li>
                     <li>zlib</li>
                 </ul>
-                <p><b>Funcionalidades:</b></p>
-                <ul>
-                    <li>Probar las dependencias de los paquetes</li>
-                    <li>Crear nuevos paquetes</li>
-                </ul>
-                <div class="tleft"><b>Última modificacion: $Date: 2004/01/10 14:59:09 $</b></div>
+                <div class="tleft"><b>Last update: $Date: 2004/01/17 14:00:46 $</b></div>
             </div>
         </div>
     </div>

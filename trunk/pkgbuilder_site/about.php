@@ -4,7 +4,7 @@
     include("footer.php");
 ?>
 
-<?php site_header("acerca de"); ?>
+<?php site_header("about"); ?>
 
 <div id="tmiddle">
     <?php site_side(); ?>
@@ -141,7 +141,7 @@
                 saber.</p>
                 
             </div>
-            <div class="tleft"><b>Última modificación: $Date: 2003/10/31 19:21:06 $</b></div>
+            <div class="tleft"><b>Last update: $Date: 2004/01/17 14:00:46 $</b></div>
         </div>
     </div>
 </div>
