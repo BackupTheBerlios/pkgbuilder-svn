@@ -1,0 +1,46 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/glib2/glib2-2.2.3.build,v 1.1 2003/11/29 20:11:27 tomby Exp $
+#
+# example pkgbuilder script
+#
+
+PKG_NAME="glib2"
+PKG_VERSION="2.2.3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="glib-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.gtk.org/pub/gtk/v2.2/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="doc"
+
+PKG_DEPENDS=">=d/pkgconfig-0.14
+             >=a/gettext-0.11
+             >=d/gettext-0.11
+             `use doc && echo >=d/gtkdoc-0.9`"
+
+PKG_HOMESITE="http://www.gtk.org/"
+
+PKG_SRC="$TMP/glib-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS* README*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
