@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/ruby-gnome2/ruby-gnome2-0.8.1.build,v 1.1 2003/12/06 20:26:20 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/ruby-gnome2/ruby-gnome2-0.8.1.build,v 1.2 2003/12/30 01:16:16 tomby Exp $
 #
 # ruby-gnome2-0.8.1 pkgbuilder script
 #
@@ -15,11 +15,18 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="Ruby"
+PKG_USE=""
 
+#TODO: complete deps early
 PKG_DEPENDS=">=d/ruby-1.8.0
+             >=l/gtk+2-2.2
+             >=l/libart_lgpl-2.3
              >=gnome/libgnome-2.2 
-             >=gnome/libgnomeui-2.2"
+             >=gnome/libgnomeui-2.2
+             >=gnome/libgnomecanvas-2.2
+             >=gnome/gnome-vfs-2.2
+             >=gnome/libglade-2.2
+             >=gnome/gconf-2.2"
 
 PKG_HOMESITE="http://ruby-gnome2.sourceforge.jp/"
 
