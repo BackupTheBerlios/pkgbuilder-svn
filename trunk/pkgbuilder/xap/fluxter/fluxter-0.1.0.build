@@ -17,13 +17,11 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=t/test1-1.1 `use test2 && echo ">=t/test2-1.0"`"
+PKG_DEPENDS="xap/fluxbox"
 
 PKG_HOMESITE="http://benedict.isomedia.com/homes/stevencooper/projects/fluxter.html"
 
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
 PKG_PREFIX="/usr/X11R6"
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
 
