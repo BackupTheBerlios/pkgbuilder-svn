@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,12 +17,12 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="ncurses gpm slang samba X"
 
-PKG_DEPENDS="`use_dep ncurses ">=l/ncurses-5.2"`
-             l/glib2
+PKG_DEPENDS="l/glib2
+             `use_dep ncurses ">=l/ncurses-5.2"`
              `use_dep gpm ">=a/gpm-1.19.3"`
              `use_dep slang ">=l/slang-1.4.2"`
              `use_dep samba ">=n/samba-3.0.0"`
-             `use_dep X "x/xfree86"`"
+             `use_dep X "x/x11"`"
 
 PKG_HOMESITE="http://www.ibiblio.org/mc/"
 
