@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.3 2003/12/06 12:03:48 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.4 2003/12/07 22:33:39 tomby Exp $
 
 #
 # Package specific functions
@@ -56,7 +56,7 @@ config() {
 EOF
         
         for config in $PKG_CONFIG_FILES ; do
-            echo "config $config" >> $PKG_DEST/install/doinst.sh
+            echo "config $config.new" >> $PKG_DEST/install/doinst.sh
         done 
     fi
 }
