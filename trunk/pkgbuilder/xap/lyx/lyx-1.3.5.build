@@ -1,0 +1,42 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/lyx/lyx-1.3.4.build,v 1.1 2004/03/21 16:49:11 tomby Exp $
+#
+# lyx-1.3.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.lyx.org/pub/lyx/stable/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nsl"
+
+PKG_DEPENDS="x/xfree86
+             ap/tetex
+             >=d/perl-5
+             >=l/qt-2
+             xap/gv
+             ap/esp-gs
+             xap/xpdf
+             ap/latex2html
+             xap/imagemagick
+             a/cups
+             `use_dep nls "d/gettext"`"
+# TODO:      ap/aiksaurus
+#            ap/sgmltools-lite
+#            ap/chktex
+
+PKG_HOMESITE="http://www.lyx.org/"
+
+PKG_DOC_FILES="ABOUT-NLS ANNOUNCE ChangeLog COPYING INSTALL* NEWS README* UPGRADING"
+
+PKG_QTDIR="`whereis qt | cut -d " " -f 2`"
+
+PKG_CONFIGURE_OPTIONS="--with-frontend=qt
+                       --with-qt-dir=$PKG_QTDIR"
