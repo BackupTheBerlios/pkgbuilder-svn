@@ -1,0 +1,149 @@
+<?php
+    include("header.php");
+    include("side.php");
+    include("footer.php");
+?>
+
+<?php site_header("acerca de"); ?>
+
+<div id="tmiddle">
+    <?php site_side(); ?>
+    
+    <!--Content-->
+    <div id="tmain">
+        <div class="tbox">
+            <div class="ttitle">Acerca de PkgBuilder</div>            
+            <div class="tleft">
+                <p>Se podría decir que esto es el embrión de un arbol de <b>ports</b> para 
+                sistemas Linux, aunque ahora mismo se trata sólo de una serie de <b>scripts 
+                bash</b> que automatizan la construcción de paquetes.</p>
+                
+                <p>La idea surge de la necesidad de crear paquetes adicionales para 
+                las diversas distribuciones de Linux al margen de los
+                paquetes oficiales. También es una forma sencilla de recordar cómo demonios
+                compilé la versión <code>X</code> del paquete <code>Y</code> hace <code>N</code> meses.</p>
+                
+                <p>Actualmente solo he testeado el sistema en 
+                <a href="http://www.slackware.com/">Slackware</a>, 9.0 y 9.1, ya
+                que es la distribución que yo uso, pero no hay razón para pensar que no
+                funcione en otra distribución, los requisitos son muy escasos.</p>
+
+                <p>El sistema es muy sencillo. Existe un script principal llamado
+                <code>'build.sh'</code> al que se le pasan dos parámetros: el directorio 
+                del packete que queremos compilar y la acción. Por ejemplo:</p>
+
+                <blockquote><code># ./build.sh xap/aterm/0.4.2 fetch</code></blockquote>
+
+                <p>Esto hará que se ejecute la acción <code>'fetch'</code> para la versión 0.4.2
+                del paquete <code>'aterm'</code>.</p>
+
+                <p>Si se omite la acción se ejecutará la acción <code>'all'</code>.</p>
+
+                <p>Existen varias acciones:</p>
+
+                <ul>
+                    <li> <code>info</code>: muestra información del paquete.</li>
+
+                    <li> <code>fetch</code>: descarga los archivos necesarios para la compilación
+                        y creación del paquete.</li>
+
+                    <li> <code>uncompress</code>: descomprime los archivos necesarios.</li>
+
+                    <li> <code>patch</code>: parchea los archivos necesarios para la compilación.</li>
+
+                    <li> <code>configure</code>: ejecuta el script configure del paquete.</li>
+
+                    <li> <code>build</code>: ejecuta make.</li>
+
+                    <li> <code>install</code>: ejecuta make install.</li>
+
+                    <li> <code>postinstall</code>: ejecuta todas la acciones necesarias después
+                        de la instalación del paquete.</li>
+
+                    <li> <code>buildpkg</code>: genera el paquete <code>tgz</code> correspondiente listo para
+                        su instalación en el sistema. El paquete sólo se generará
+                        si se ejecuta como superusuario.</li>
+
+                    <li> <code>installpkg</code>: instala el paquete previamente generado por la
+                        acción buildpkg. Solo funciona cuando se ejecuta como
+                        superusuario.</li>
+
+                    <li> <code>upgradepkg</code>: actualiza el paquete previamente generado. Solo 
+                        funciona cuando se ejecuta como superusuario.</li>
+
+                    <li> <code>clean</code>: realiza la limpieza de los archivos utilizados
+                        para la compilación y creación del paquete.</li>
+
+                    <li> <code>auto</code>: ejecuta automáticamente esta secuencia acciones:
+                        fetch,
+                        uncompress,
+                        patch,
+                        configure,
+                        build,
+                        install,
+                        postinstall y
+                        buildpkg</li>
+                </ul>        
+
+                <p>Por cada paquete existen dos archivos principales: <code>'config.sh'</code> 
+                y <code>'build.sh'</code>. En <code>'config.sh'</code> se configuran las variables 
+                necesarias para la compilación y creación del paquete. En
+                <code>'build.sh'</code> se implementan una serie de metodos, uno por cada
+                acción. Dentro de cada uno de esos métodos está la implementación
+                de la acción para ese paquete.</p>
+
+                <p>Luego en el subdirectorio <code>'files'</code> se incluyen otro tipo de archivos
+                necesarios para la creación del paquete, como parches, scripts,
+                archivos slack-desc, etc...</p>
+
+                <p>El script principal, lee estos dos archivos y luego ejecuta
+                el método correspondiente a la acción indicada.</p>
+
+                <p>Existen además, dos scripts generales incluidos dentro del direc-
+                torio <code>'scripts'</code>: <code>'config.sh'</code> y 
+                <code>'functions.sh'</code>. <code>'config.sh'</code>
+                configura las variables globales comunes necesarias y <code>'functions.sh'</code>
+                incluye toda una serie de funciones útiles para la compilación
+                y creación de paquetes. Estas funciones se pueden utilizar en
+                cada uno de los scripts <code>'build.sh'</code> para cada paquete. Actualmente
+                estas son las funciones actualmente implementadas:</p>
+
+                <ul>
+                    <li> <code>version</code>: imprime por pantalla la versión.</li>
+
+                    <li> <code>usage</code>: imprime la información de uso.</li>
+
+                    <li> <code>include</code>: incluye la función indicada como parámetro. Estas
+                        funciones, son funciones genericas para relizar cada
+                        una de las acciones. Se encuentran en el directorio
+                        <code>'common'</code>.</li>
+
+                    <li> <code>fetch</code>: descarga el archivo indicado en el parámetro $1
+                        utilizando <code>'wget'</code>.</li>
+
+                    <li> <code>gzip_map</code>: comprime todas las páginas de manual del directorio
+                        que se pasa en como parámetro.</li>
+
+                    <li> <code>strip_all</code>: realiza la función strip en todos los archivos
+                        binarios desde el directorio que se le pasa como parámetro.</li>
+                </ul>
+
+                <p>Esto no es más que una versión preliminar, ahora mismo sólo
+                hay unos pocos paquetes creados, pero puede llegar a ser útil.
+                También quisiera que esto se mantuviera igual de sencillo que
+                es ahora, siguiendo la filosofía <b>KISS</b>.</p>
+
+                <p>Además, cualquiera que se acerque un poco al codigo fuente verá
+                que no soy precisamente un gurú de la programación en bash, pero
+                siempre que lo he necesitado me he hecho mis propios scripts,
+                no demasiados ortodoxos pero sí efectivos. Si notais que hay algo
+                que se puede hacer mejor o eliminar cosas innecesarias, hacedmelo
+                saber.</p>
+                
+            </div>
+            <div class="tleft"><b>Última modificación: Domingo, 21 de Octubre de 2003</b></div>
+        </div>
+    </div>
+</div>
+
+<?php site_footer(); ?>
