@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.1 2003/12/05 22:01:22 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.2 2003/12/06 11:51:27 tomby Exp $
 
 #
 # Package specific functions
@@ -32,17 +32,15 @@ pkg_gzipmaninfo() {
     gzip_info $PKG_DEST$PKG_PREFIX/info
 }
 
-pkg_configfiles() {
-    mkdir -p $PKG_DEST/install
-    
-    for config in $PKG_CONFIG_FILES ; do
-        mv $PKG_DEST$config $PKG_DEST$config.new
-    done
-    
+pkg_configfiles() {    
     if [ "$PKG_CONFIG_FILES" != "" ] ; then
-        cat $PKGBUILDER_HOME/examples/doinst.sh > $PKG_DEST/install/doinst.sh
+        mkdir -p $PKG_DEST/install
         
-        cat EOF > $PKG_DEST/install/doinst.sh << "EOF"
+        for config in $PKG_CONFIG_FILES ; do
+            mv $PKG_DEST/$config $PKG_DEST/$config.new
+        done
+        
+        cat > $PKG_DEST/install/doinst.sh << "EOF"
 #!/bin/sh
 config() {
   NEW="$1"
