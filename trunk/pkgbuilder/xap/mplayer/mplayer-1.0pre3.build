@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.3 2003/12/25 22:21:15 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.4 2003/12/25 22:53:01 tomby Exp $
 #
 # mplayer-1.0pre3 pkgbuilder script
 #
@@ -8,16 +8,16 @@
 PKG_NAME="mplayer"
 PKG_VERSION="1.0pre3"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am4"
+PKG_BUILD="am5"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="MPlayer-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
          http://www1.mplayerhq.hu/MPlayer/releases/fonts/font-arial-iso-8859-1.tar.bz2
-         http://www1.mplayerhq.hu/MPlayer/Skin/Blue-1.0.tar.bz2"
+         `use gtk && echo "http://www1.mplayerhq.hu/MPlayer/Skin/Blue-1.0.tar.bz2"`"
          
 PKG_LICENSE="GPLv2"
 
-PKG_USE="divx win32codecs gtk gtk2 jpeg gif esd sdl alsa arts aalib svga lame oggvorbis nls samba"
+PKG_USE="divx win32codecs gtk gtk2 jpeg gif esd sdl alsa arts aalib svga lame flac oggvorbis nls samba"
 
 PKG_DEPENDS=">=media-libs/xvid-0.9.0
 			 >=l/freetype2-2.1
@@ -35,6 +35,7 @@ PKG_DEPENDS=">=media-libs/xvid-0.9.0
 			 `use arts && echo "kde/arts"`
     		 `use aalib && echo "l/aalib"`
     		 `use lame && echo "l/lame"`
+			 `use flac && echo "l/flac"`
     		 `use oggvorbis && echo "l/libvorbis"`
 			 `use nls && echo "a/gettext d/gettext-tools"`
     		 `use samba && echo ">=n/samba-2.2.8a"`"
@@ -53,21 +54,33 @@ PKG_CONFIGURE_OPTIONS="--confdir=/etc/mplayer
                        --enable-menu
                        --enable-largefiles
                        --language=all
-					   `use gtk && echo "--enable-gui"`
+					   `use win32codecs && echo "--enable-win32"`
+					   `use flac && echo "--enable-external-flac"`
+					   `use gtk && echo "--enable-gui --enable-x11"`
 					   `use gtk && use gtk2 && echo "--enable-gtk2"`"
-
-PKG_CONFIG_FILES="etc/mplayer/codecs.conf etc/mplayer/input.conf"
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES="etc/mplayer/codecs.conf etc/mplayer/input.conf"
+
 
 include general
 
 include do_fetch
 include do_unpack_bzip2
-include do_patch
 
 include do_build
 include do_install
+
+do_patch() {
+	cd $PKG_SRC
+	
+	use gtk2 && patch -p1 -N < $PKG_HOME/files/$PKG_NAME-1.0-gentoo-gtk2.patch
+	
+	patch -p0 -N < $PKG_HOME/files/mencoder-gentoo-segfault.patch
+	
+	return $?
+}
 
 do_configure() {
     cd $PKG_SRC
@@ -95,7 +108,7 @@ do_postinstall() {
         ln -s mplayer.1.gz mencoder.1.gz
       done )
     
-    ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/Skin
+    use gtk && ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/Skin
       tar jxvf $FETCH_DIR/Blue-1.0.tar.bz2
       mv Blue default
       find ./ -type f -exec chmod 644 {} \;
