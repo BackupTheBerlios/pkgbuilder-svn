@@ -1,0 +1,59 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# glut-3.7 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_BUILD="am2"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.opengl.org/resources/libraries/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="x/x11"
+
+PKG_HOMESITE="http://www.opengl.org/resources/libraries/glut.html"
+
+PKG_DOC_FILES="CHANGES FAQ.glut NOTICE README*"
+
+PKG_PREFIX="/usr/X11R6"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET="depend all"
+
+do_patch() {
+    cd $PKG_SRC
+
+    rm -f Glut.cf lib/glut/Makefile
+    cp linux/Glut.cf .
+    cp linux/Makefile lib/glut/
+
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC/lib/glut
+
+    pkg_build
+
+    return $?
+}
+
+do_install() {
+    mkdir -p $PKG_DEST$PKG_PREFIX/{lib,include}
+    cp $PKG_SRC/lib/glut/libglut.so.3.7 $PKG_DEST$PKG_PREFIX/lib
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      rm -f libglut.so.3 ; ln -sf libglut.so.3.7 libglut.so.3
+      rm -f libglut.so ; ln -sf libglut.so.3.7 libglut.so )
+    cp -R $PKG_SRC/include/GL $PKG_DEST$PKG_PREFIX/include
+    cp -R $PKG_SRC/include/mui $PKG_DEST$PKG_PREFIX/include
+    mkdir -p $PKG_DEST/usr/lib
+    ( cd $PKG_DEST/usr/lib
+      rm -f libglut.so.3 ; ln -sf $PKG_PREFIX/lib/libglut.so.3.7 libglut.so.3
+      rm -f libglut.so ; ln -sf $PKG_PREFIX/lib/libglut.so.3.7 libglut.so )
+}
