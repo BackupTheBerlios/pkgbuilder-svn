@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/samba/samba-3.0.1.build,v 1.1 2003/12/24 11:48:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/samba/samba-3.0.1.build,v 1.2 2003/12/24 13:31:37 tomby Exp $
 #
 # samba-3.0.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="samba"
 PKG_VERSION="3.0.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.easynet.be/$PKG_NAME/$PKG_FILE_NAME"
@@ -64,7 +64,7 @@ PKG_CONFIGURE_OPTIONS="--localstatedir=/var
                        `use cups && echo "--enable-cups"`
                        `use python && echo "--with-python=yes"`"
 PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST MANDIR=$PKG_PREFIX/man"
 
 PKG_CONFIG_FILES="etc/rc.d/rc.samba etc/samba/smb.conf"
 
