@@ -22,10 +22,10 @@ PKG_DEPENDS=">=l/libjpeg-6b
 
 PKG_HOMESITE="http://www.libtiff.org/"
 
-PKG_SRC="$TMP/tiff-v$PKG_VERSION"
+PKG_SRC="$TMP/tiff-$PKG_VERSION"
 PKG_DOC_FILES="COPYRIGHT README TODO VERSION"
 
-PKG_CONFIGURE_OPTIONS="--prefix=$PKG_PREFIX --with-DIR_MAN=/usr/man --noninteractive"
+PKG_CONFIGURE_OPTIONS="--prefix=$PKG_PREFIX --with-DIR_MAN=/usr/man"
 
 do_configure() {
     cd $PKG_SRC
