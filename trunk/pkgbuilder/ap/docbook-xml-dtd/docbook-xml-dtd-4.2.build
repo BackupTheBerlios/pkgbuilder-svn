@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xml-dtd/Attic/docbook-xml-dtd-4.2.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xml-dtd/Attic/docbook-xml-dtd-4.2.build,v 1.6 2003/12/30 21:12:30 tomby Exp $
 #
 # docbook-xml-dtd-4.2 pkgbuilder script
 #
@@ -38,16 +38,6 @@ PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 PKG_NOSTRIP="Y"
-
-include general
-
-include do_fetch
-include do_unpack_zip
-include do_patch
-include do_configure_null
-include do_build_null
-
-include do_postinstall
 
 do_install() {
     cd $PKG_SRC
