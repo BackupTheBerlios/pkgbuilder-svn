@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.20 2004/03/13 17:39:04 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.21 2004/03/13 17:47:06 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -88,7 +88,7 @@ if [ ! -r "$PKG" ] ; then
 fi
 
 #add deps from build script
-eval "`grep "PKG_DEPENDS=" $PKG`"
+source $PKG
 
 if [ "$VERBOSE" = "Y" ] ; then
     echo
