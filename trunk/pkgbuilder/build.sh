@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.6 2003/11/15 16:14:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.7 2003/11/15 18:22:38 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -81,4 +81,6 @@ if [ $RETVAL -eq 0 ] ; then
 else    
     echo "pkgbuilder: overall result for $PKG: ERROR"
 fi
+
+exit $RETVAL
 
