@@ -1,0 +1,31 @@
+#!/bin/sh
+# Start/stop/restart courier-pop3d:
+
+pop3_start() {
+  /usr/libexec/courier-imap/pop3d.rc start
+}
+
+pop3_stop() {
+  /usr/libexec/courier-imap/pop3d.rc stop
+}
+
+pop3_restart() {
+  /usr/libexec/courier-imap/pop3d.rc stop
+  sleep 2
+  /usr/libexec/courier-imap/pop3d.rc start
+}
+
+case "$1" in
+'start')
+  pop3_start
+  ;;
+'stop')
+  pop3_stop
+  ;;
+'restart')
+  pop3_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
+

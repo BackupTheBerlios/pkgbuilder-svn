@@ -1,0 +1,31 @@
+#!/bin/sh
+# Start/stop/restart courier-imapd:
+
+imap_start() {
+  /usr/libexec/courier-imap/imapd.rc start
+}
+
+imap_stop() {
+  /usr/libexec/courier-imap/imapd.rc stop
+}
+
+imap_restart() {
+  /usr/libexec/courier-imap/imapd.rc stop
+  sleep 2
+  /usr/libexec/courier-imap/imapd.rc start
+}
+
+case "$1" in
+'start')
+  imap_start
+  ;;
+'stop')
+  imap_stop
+  ;;
+'restart')
+  imap_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
+

@@ -1,0 +1,91 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# courier-imap-3.0.8 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.20041020.$PKG_EXTENSION"
+PKG_URL="http://www.courier-mta.org/beta/imap/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="berkdb gdbm"
+
+PKG_DEPENDS="l/courier-authlib
+             >=l/openssl-0.9.6
+             `use_dep fam "ap/fam"`
+             `use_dep berkdb "l/db4"`
+             `use_dep gdbm ">=l/gdbm-1.8.0"`
+             d/perl"
+
+PKG_HOMESITE="http://www.courier-mta.org/imap/"
+
+PKG_SRC="$PKG_SRC.20041020"
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/courier-imap 
+                       --localstatedir=/var/lib/courier-imap
+                       --libexecdir=/usr/libexec/courier-imap
+                       --with-authdaemonvar=/var/lib/courier-imap/authdaemon
+                       --disable-root-check
+                       --without-redhat
+                       --enable-workarounds-for-imap-client-bugs"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES="etc/courier-imap/imapd etc/courier-imap/imapd.cnf etc/courier-imap/imapd-ssl
+                  etc/courier-imap/pop3d etc/courier-imap/pop3d.cnf etc/courier-imap/pop3d-ssl
+                  etc/rc.d/rc.courier-imapd etc/rc.d/rc.courier-imapd-ssl
+                  etc/rc.d/rc.courier-pop3d etc/rc.d/rc.courier-pop3d-ssl"
+
+do_configure() {
+    cd $PKG_SRC
+
+    local myconf=""
+
+    if use berkdb ; then
+       if use gdbm ; then
+           myconf="$myconf --with-db=gdbm"
+       else
+           myconf="$myconf --with-db=db"
+       fi
+    else
+        myconf="$myconf --with-db=gdbm"
+    fi
+
+    PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS $myconf"
+
+    configscript_do_configure
+
+    return $?
+}
+
+do_install() {
+    configscript_do_install
+
+    cd $PKG_DEST/etc/courier-imap
+    local i
+    for i in pop3d pop3d-ssl imapd imapd-ssl ; do
+        mv $i.dist $i
+    done
+
+    cd $PKG_DEST/usr/sbin
+    rm -f mkimapdcert
+    rm -f mkpop3dcert
+    mv ../share/* .
+    rmdir ../share
+
+    mkdir -p $PKG_DEST/etc/rc.d
+    cp $PKG_HOME/files/rc.* $PKG_DEST/etc/rc.d
+
+    return $?
+}
