@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.39 2004/01/18 14:16:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.40 2004/02/15 22:15:08 tomby Exp $
 
 #
 # Generic functions
@@ -19,7 +19,7 @@ version() {
 # @param $1 file name to include
 #
 include() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
@@ -34,7 +34,7 @@ include() {
 # @param $1 parent build file
 #
 inherit() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
@@ -56,7 +56,7 @@ inherit() {
 # @param $1 use parameter
 #
 use() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
@@ -66,13 +66,78 @@ use() {
 }
 
 #
+# Print the dependency if use flag is activated
+#
+# @param $1 use parameter
+# @param $2 dependency
+#
+use_dep() {
+    if [ "$1" = "" ] ; then
+        return 1  
+    fi
+    
+    if [ "$2" = "" ] ; then
+        return 1  
+    fi
+    
+    if `use $1` ; then
+        echo $2
+    fi
+}
+
+#
+# Print the enable option if use flag is activated
+#
+# @param $1 use parameter
+# @param $2 enable option (optional)
+#
+use_enable() {
+    if [ "$1" = "" ] ; then
+        return 1  
+    fi
+    
+    if `use $1` ; then
+        if [ "$2" = "" ] ; then
+            echo -n "--enable-$1"
+        else
+            echo -n "--enable-$2"
+        fi
+    fi
+}
+
+#
+# Print the with option if use flag is activated
+#
+# @param $1 use parameter
+# @param $2 with option (optional)
+#
+use_with() {
+    if [ "$1" = "" ] ; then
+        return 1  
+    fi
+    
+    if `use $1` ; then
+        if [ "$2" = "" ] ; then
+            echo -n "--with-$1"
+        else
+            echo -n "--with-$2"
+        fi
+    fi
+}
+
+
+#
 # Call the action function if exists
 #
 # @param $1 action function
 #
 call_action() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
+    fi
+    
+    if [ -d "$PKG_SRC" ] ; then
+        cd $PKG_SRC
     fi
 
     if declare -f $1 &> /dev/null ; then
@@ -98,7 +163,7 @@ call_action() {
 # @param $1 action name
 #
 execute_action() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
@@ -184,7 +249,7 @@ execute_action() {
 # @param $1 url
 #
 fetch() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
@@ -217,7 +282,7 @@ fetch() {
 # @param $1 file name
 #
 unpack() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
@@ -260,7 +325,7 @@ unpack() {
 # @param $@ patch options
 #
 apply_patch() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
@@ -296,11 +361,11 @@ apply_patch() {
 # @param $2 md5sum file name
 #
 verify() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1  
     fi
     
-    if [ "$2" == "" -a -r "$2" ] ; then
+    if [ "$2" = "" -a -r "$2" ] ; then
         return 1  
     fi
     
@@ -325,7 +390,7 @@ verify() {
 # @param $1 base directory
 #
 gzip_man() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
@@ -344,7 +409,7 @@ gzip_man() {
 # @param $1 base directory
 #
 gzip_info() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
@@ -363,7 +428,7 @@ gzip_info() {
 # @param $1 base directory
 #
 strip_all() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
 
@@ -380,16 +445,16 @@ strip_all() {
 # @param $3 package build (optional)
 #
 is_installed() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
     local retval=""
     
-    if [ "$2" == "" ] ; then
+    if [ "$2" = "" ] ; then
         ls $PACKAGES_LOGDIR/$1-*-*-* 2> /dev/null | grep "$1\-[0-9]" &> /dev/null
         retval="$?"
-    elif [ "$3" == "" ] ; then
+    elif [ "$3" = "" ] ; then
         ls $PACKAGES_LOGDIR/$1-$2-*-* &> /dev/null
         retval="$?"
 	else
@@ -407,7 +472,7 @@ is_installed() {
 # @param $2 package b
 #
 compare_versions() {
-    if [ "$1" == "" -o "$2" == "" ] ; then
+    if [ "$1" = "" -o "$2" = "" ] ; then
         return 1
     fi
     
@@ -421,12 +486,12 @@ compare_versions() {
         tmp1="`echo $v1 | cut -d. -f$field`"
         tmp2="`echo $v2 | cut -d. -f$field`"
         
-        if [ "$tmp1" == "" -a "$tmp2" == "" ] ; then
+        if [ "$tmp1" = "" -a "$tmp2" = "" ] ; then
             break
-        elif [ "$tmp1" == "" -a "$tmp2" != "" ] ; then
+        elif [ "$tmp1" = "" -a "$tmp2" != "" ] ; then
             #greater
             return 2
-        elif [ "$tmp1" != "" -a "$tmp2" == "" ] ; then
+        elif [ "$tmp1" != "" -a "$tmp2" = "" ] ; then
             #lesser
             return 1
         fi
@@ -461,7 +526,7 @@ compare_versions() {
 # @param $2 package name
 #
 latest_version() {
-    if [ "$1" == "" -o "$2" == "" ] ; then
+    if [ "$1" = "" -o "$2" = "" ] ; then
         return 1
     fi
     
@@ -475,7 +540,7 @@ latest_version() {
         local latestbuildfile=""
         
         for i in $buildfiles ; do
-            if [ "$latestbuildfile" == "" ] ; then
+            if [ "$latestbuildfile" = "" ] ; then
                 latestbuildfile="$i"
                 continue
             fi
@@ -504,7 +569,7 @@ latest_version() {
 # @param $1 package name
 #
 installed_version() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
@@ -531,7 +596,7 @@ installed_version() {
 # @param $1 package name
 #
 installed_build() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
@@ -556,7 +621,7 @@ installed_build() {
 # @param $1 package dep in format >=meta/pkgname-1.2
 #
 extract_meta() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
@@ -571,7 +636,7 @@ extract_meta() {
 # @param $1 pkgfile in format pkgname-1.2
 #
 extract_name() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
@@ -590,7 +655,7 @@ extract_name() {
 # @param $1 pkgfile in format pkgname-1.2
 #
 extract_version() {
-    if [ "$1" == "" ] ; then
+    if [ "$1" = "" ] ; then
         return 1
     fi
     
