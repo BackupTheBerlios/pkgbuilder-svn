@@ -1,0 +1,28 @@
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.1 2003/10/21 18:19:45 tomby Exp $
+
+* New packages:
+
+evolution
+squid
+SDL_image       X
+SDL_mixer       X
+SDL_net         X
+apache2
+kopete          X
+xawdecode
+xawtv
+ksetywatch      X
+openldap
+ethereal        X
+ksensors
+partimage
+courier-imap
+gnu-nano        X
+PyGTK2
+dia
+frozen-bubble   X
+
+* New features:
+
+checksum verification
+action dependency check

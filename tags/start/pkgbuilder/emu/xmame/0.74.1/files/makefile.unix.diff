@@ -1,0 +1,50 @@
+--- makefile.unix.orig	2003-10-05 19:50:26.000000000 +0200
++++ makefile.unix	2003-10-05 19:57:25.000000000 +0200
+@@ -48,7 +48,7 @@
+ 
+ # Enable experimental network support.  See 
+ # src/unix/doc/multiplayer-readme.txt for more information.
+-# XMAME_NET = 1
++XMAME_NET = 1
+ 
+ # Uncomment the next lines to use x86-asm cpu cores.  This is only
+ # supported for x86 machines with nasm-0.98 or higher available in your
+@@ -109,7 +109,7 @@
+ ###########################################################################
+ 
+ # gcc on x86
+-CFLAGS = -O -Wall -Wno-unused
++# CFLAGS = -O -Wall -Wno-unused
+ 
+ # gcc on x86 with some optimizations
+ # CFLAGS = -O2 -Wall -Wno-unused -mcpu=i686 -fomit-frame-pointer \
+@@ -575,11 +575,11 @@
+ 
+ # Choose any additonal sound drivers you want to include, besides the 
+ # native sound driver for your system.
+-# SOUND_ESOUND = 1
+-# SOUND_ALSA = 1
+-# SOUND_ARTS_TEIRA = 1
+-# SOUND_ARTS_SMOTEK = 1
+-# SOUND_SDL = 1
++SOUND_ESOUND = 1
++SOUND_ALSA = 1
++SOUND_ARTS_TEIRA = 1
++SOUND_ARTS_SMOTEK = 1
++SOUND_SDL = 1
+ # SOUND_WAVEOUT = 1
+ 
+ 
+@@ -591,10 +591,10 @@
+ # use SDL.
+ 
+ # X11
+-DISPLAY_METHOD = x11
++# DISPLAY_METHOD = x11
+ 
+ # SDL library 
+-# DISPLAY_METHOD = SDL
++DISPLAY_METHOD = SDL
+ 
+ # SVGALib, only supported under Linux
+ # DISPLAY_METHOD = svgalib

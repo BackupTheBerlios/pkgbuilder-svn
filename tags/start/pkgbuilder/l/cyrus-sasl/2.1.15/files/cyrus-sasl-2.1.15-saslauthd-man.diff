@@ -1,0 +1,13 @@
+--- saslauthd/Makefile.in	2003-07-15 17:42:30.000000000 +0200
++++ saslauthd/Makefile.in.orig	2003-09-21 18:08:06.000000000 +0200
+@@ -429,8 +429,8 @@
+ 	nroff -mdoc $(srcdir)/saslauthd.mdoc > $(srcdir)/saslauthd.8
+ 
+ install-data-local: saslauthd.8
+-	$(mkinstalldirs) $(DESTDIR)$(mandir)/cat8
+-	$(INSTALL_DATA) $(srcdir)/saslauthd.8 $(DESTDIR)$(mandir)/cat8/saslauthd.8
++	$(mkinstalldirs) $(DESTDIR)$(mandir)/man8
++	$(INSTALL_DATA) $(srcdir)/saslauthd.8 $(DESTDIR)$(mandir)/man8/saslauthd.8
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
+ # Otherwise a system limit (for SysV at least) may be exceeded.

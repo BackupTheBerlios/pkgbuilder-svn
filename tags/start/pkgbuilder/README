@@ -1,0 +1,119 @@
+$Header: /cvsroot/pkgbuilder/pkgbuilder/README,v 1.1 2003/10/21 18:19:45 tomby Exp $
+
+PKGBUILDER
+
+Se podría decir que esto es el embrión de un arbol de ports para 
+Slackware, aunque ahora mismo lo único que hace es automatizar
+la construcción de paquetes.
+
+El sistema es muy sencillo. Existe un script principal llamado
+'build.sh' al que se le pasan dos parámetros: el directorio 
+del packete que queremos compilar y la acción. Por ejemplo:
+
+# ./build.sh xap/aterm/0.4.2 fetch
+
+Esto hará que se ejecute la acción 'fetch' para la versión 0.4.2
+del paquete 'aterm'.
+
+Si se omite la acción se ejecutará la acción 'all'.
+
+Existen varias acciones:
+
+    - info: muestra información del paquete
+     
+    - fetch: descarga los archivos necesarios para la compilación
+        y creación del paquete.
+        
+    - uncompress: descomprime los archivos necesarios.
+    
+    - patch: parchea los archivos necesarios para la compilación
+    
+    - configure: ejecuta el script configure del paquete
+    
+    - build: ejecuta make
+    
+    - install: ejecuta make install
+    
+    - postinstall: ejecuta todas la acciones necesarias después
+        de la instalación del paquete
+        
+    - buildpkg: genera el paquete tgz correspondiente listo para
+        su instalación en el sistema. El paquete sólo se generará
+        si se ejecuta como superusuario.
+
+    - installpkg: instala el paquete previamente generado por la
+        acción buildpkg. Solo funciona cuando se ejecuta como
+        superusuario.
+        
+    - upgradepkg: actualiza el paquete previamente generado. Solo 
+        funciona cuando se ejecuta como superusuario.
+    
+    - clean: realiza la limpieza de los archivos utilizados
+        para la compilación y creación del paquete.
+        
+    - auto: ejecuta automáticamente esta secuencia acciones:
+        fetch
+        uncompress
+        patch
+        configure
+        build
+        install
+        postinstall
+        buildpkg
+        
+Por cada paquete existen dos archivos principales: 'config.sh' 
+y 'build.sh'. En 'config.sh' se configuran las variables 
+necesarias para la compilación y creación del paquete. En
+'build.sh' se implementan una serie de metodos, uno por cada
+acción. Dentro de cada uno de esos métodos está la implementación
+de la acción para ese paquete.
+
+Luego en el subdirectorio files se incluyen otro tipo de archivos
+necesarios para la creación del paquete, como parches, scripts,
+archivos slack-desc, etc...
+
+El script principal, lee estos dos archivos y luego ejecuta
+el método correspondiente a la acción indicada.
+
+Existen además, dos scripts generales incluidos dentro del direc-
+torio 'scripts': 'config.sh' y 'functions.sh'. 'config.sh'
+configura las variables globales comunes necesarias y 'functions.sh'
+incluye toda una serie de funciones útiles para la compilación
+y creación de paquetes. Estas funciones se pueden utilizar en
+cada uno de los scripts 'build.sh' para cada paquete. Actualmente
+estas son las funciones actualmente implementadas:
+
+    - version: imprime por pantalla la versión.
+    
+    - usage: imprime la información de uso.
+    
+    - include: incluye la función indicada como parámetro. Estas
+        funciones, son funciones genericas para relizar cada
+        una de las acciones. Se encuentran en el directorio
+        'common'.
+    
+    - fetch: descarga el archivo indicado en el parámetro $1
+        utilizando 'wget'.
+        
+    - gzip_map: comprime todas las páginas de manual del directorio
+        que se pasa en como parámetro.
+        
+    - strip_all: realiza la función strip en todos los archivos
+        binarios desde el directorio que se le pasa como parámetro.
+        
+Esto no es más que una versión preliminar, ahora mismo sólo
+hay unos pocos paquetes creados, pero puede llegar a ser útil.
+También quisiera que esto se mantuviera igual de sencillo que
+es ahora, siguiendo la filosofía KISS de Slackware.
+
+Además, cualquiera que se acerque un poco al codigo fuente verá
+que no soy precisamente un gurú de la programación en bash, pero
+siempre que lo he necesitado me he hecho mis propios scripts,
+no demasiados ortodoxos pero sí efectivos. Si notais que hay algo
+que se puede hacer mejor o eliminar cosas innecesarias, hacedmelo
+saber.
+
+NOTA: Principalmente todos los paquetes generados son válidos 
+exclusivamente para las versiones 9.0 y 9.1 de Slackware.
+
+<tomby (AT) tomby.homelinux.org>
