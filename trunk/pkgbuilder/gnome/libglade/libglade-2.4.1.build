@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# libglade-2.4.0 pkgbuilder script
+# libglade-2.4.1 pkgbuilder script
 #
 
 inherit gnome
@@ -21,14 +21,6 @@ PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_enable doc gtk-doc`"
-
-do_patch() {
-    cd $PKG_SRC
-
-    apply_patch Makefile.in.am-xmlcatalog.patch -p0 -N
-
-    return $?
-}
 
 do_install() {
     cd $PKG_SRC
