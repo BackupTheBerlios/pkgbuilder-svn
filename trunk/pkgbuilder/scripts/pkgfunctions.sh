@@ -9,7 +9,7 @@
 pkg_installdoc() {
     mkdir -p $PKG_DOC
 
-    cp $PKG_DOC_FILES $PKG_DOC
+    cp -R $PKG_DOC_FILES $PKG_DOC
     find $PKG_DOC -type f -exec chmod 644 {} \;
     find $PKG_DOC -type d -exec chmod 755 {} \;
 }
