@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdesdk/Attic/kdesdk-3.1.95.build,v 1.1 2004/01/23 22:43:55 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdesdk/kdesdk-3.2.0.build,v 1.1 2004/02/06 20:30:37 tomby Exp $
 #
-# kdesdk-3.1.94 pkgbuilder script
+# kdesdk-3.2.0 pkgbuilder script
 #
 
 inherit kde
@@ -12,8 +12,8 @@ PKG_BUILD="am1"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/qt-3.2 
-             >=kde/kdelibs-3.1.94 
-             >=kde/kdebase-3.1.94
+             >=kde/kdelibs-3.2.0
+             >=kde/kdebase-3.2.0
 			 !xap/umbrello
 			 d/flex"
 
