@@ -56,6 +56,9 @@ while [ 0 ]; do
         MODE="dummy"
         OPTIONS="$OPTIONS -d"
         shift 1
+    elif [ "$1" = "-i" ]; then
+        MODE="info"
+        shift 1
     else
         break
     fi
@@ -232,6 +235,9 @@ if is_installed "$PKG_NAME" ; then
     elif [ "$MODE" = "frompkg" ] ; then
         ( cd $PKGBUILDER_HOME ; ./build.sh $PKG upgradepkg )
         RETVAL="$?"
+    elif [ "$MODE" = "info" ] ; then
+        ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
+        RETVAL="$?"
     fi
 else
     echo "pkgbuilder: installing $PKG"
@@ -241,6 +247,9 @@ else
         RETVAL="$?"
     elif [ "$MODE" = "frompkg" ] ; then
         ( cd $PKGBUILDER_HOME ; ./build.sh $PKG installpkg )
+        RETVAL="$?"
+    elif [ "$MODE" = "info" ] ; then
+        ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
         RETVAL="$?"
     fi
 fi
