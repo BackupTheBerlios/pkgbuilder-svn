@@ -7,7 +7,7 @@
 
 inherit kde
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE="alsa cups fam"
 
@@ -39,6 +39,14 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_enable fam libfam`
                        `use_with alsa`
                        `use_with cups`"
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch post-3.2.2-kdelibs-kapplication.patch -p1 -N &&
+    apply_patch post-3.2.2-kdelibs-ktelnetservice.patch -p0 -N
+
+    return $?
+}
 
 do_postinstall() {
     cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
