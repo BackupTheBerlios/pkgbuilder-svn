@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.6 2003/12/24 17:20:10 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.7 2003/12/26 00:52:45 tomby Exp $
 
 #
 # Package specific functions
@@ -119,7 +119,7 @@ pkg_install() {
     fi
 	
 	if [ "$PKG_INSTALL_TARGET" = "" ] ; then
-        $PKG_INSTALL_TARGET="install"
+        PKG_INSTALL_TARGET="install"
     fi
 
     make $PKG_INSTALL_OPTIONS $PKG_INSTALL_TARGET
