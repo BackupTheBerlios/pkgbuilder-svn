@@ -11,7 +11,7 @@ PKG_BUILD="am3"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="SDL_perl-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://sdlperl.org/downloads/stable/$PKG_FILE_NAME"
+PKG_URL="http://kreiger.linuxgods.com/files/sources/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
