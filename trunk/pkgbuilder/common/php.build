@@ -16,7 +16,7 @@ php_init() {
 
     PKG_LICENSE="GPLv2"
 
-    PKG_USE="ssl gdbm berkdb exit gd jpeg png gmp mysql curl"
+    PKG_USE="ssl gdbm berkdb exif gd jpeg png gmp mysql curl crypto xml"
 
     PKG_DEPENDS="`use_dep ssl "l/openssl"`
                  `use_dep gdbm "l/gdbm"`
@@ -29,7 +29,7 @@ php_init() {
                  `use_dep gmp "l/gmp"`
                  `use_dep mysql "ap/mysql"`
                  `use_dep curl "n/curl"`
-                 `use_dep crypt "l/mhash"`
+                 `use_dep crypto "l/mhash"`
                  `use_dep xml "l/libxml2 l/libxslt"`
                  l/libwww
                  l/expat"
