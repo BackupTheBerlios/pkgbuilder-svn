@@ -1,0 +1,96 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/base.build,v 1.1 2003/12/30 18:44:13 tomby Exp $
+#
+# base pkgbuilder script
+#
+
+PKG_EXTENSION="tar.gz"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+pkg_do_info() {
+    echo
+    echo "$PKG_NAME-$PKG_VERSION-$PKG_BUILD"
+    echo
+    echo "HOME..... $PKG_HOMESITE"
+    echo "URL...... $PKG_URL"
+    echo "LICENSE.. $PKG_LICENSE"
+    echo "USE...... $PKG_USE"
+    echo "DEPS..... $PKG_DEPENDS"
+    echo
+    echo "DESCRIPTION:"
+    echo
+    cat $PKG_HOME/files/slack-desc | grep "^$PKG_NAME" | cut -d: -f2 | uniq
+}
+
+pkg_do_fetch() {
+    pkg_fetchfiles
+    
+    return $?
+}
+
+pkg_do_verify() {
+    cd $FETCH_DIR
+    
+    if [ -f $PKG_HOME/files/md5sum-$PKG_VERSION ] ; then
+        md5sum -c $PKG_HOME/files/md5sum-$PKG_VERSION &> /dev/null || return 1
+    else 
+        echo "pkgbuilder: WARNING no md5sum-$PKG_VERSION file found"
+    fi
+    
+    return 0
+}
+
+pkg_do_buildpkg() {
+    cd $PKG_DEST
+    
+    if [ "$PKG_ARCH" = "" ] ; then
+        $PKG_ARCH=$ARCH
+    fi
+    
+    makepkg -l y -c n ../$PKG_NAME-$PKG_VERSION-$PKG_ARCH-$PKG_BUILD.tgz
+    
+    return $?
+}
+
+pkg_do_installpkg() {
+    cd $TMP
+    
+    installpkg $PKG_NAME-$PKG_VERSION-$PKG_ARCH-$PKG_BUILD.tgz
+    
+    return $?
+}
+
+pkg_do_upgradepkg() {
+    cd $TMP
+    
+    upgradepkg --install-new $PKG_NAME-$PKG_VERSION-$PKG_ARCH-$PKG_BUILD.tgz
+    
+    return $?
+}
+
+pkg_do_cleanup() {
+	if [ -d $PKG_SRC ] ; then
+        rm -rf $PKG_SRC
+    fi
+    
+    if [ -d $PKG_UNPACK_DIR ] ; then
+        rm -rf $PKG_UNPACK_DIR
+    fi
+    
+    if [ -d $PKG_DEST ] ; then
+        rm -rf $PKG_DEST
+    fi
+}
+

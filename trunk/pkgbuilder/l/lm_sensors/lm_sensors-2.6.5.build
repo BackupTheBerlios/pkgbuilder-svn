@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lm_sensors/lm_sensors-2.6.5.build,v 1.4 2003/12/07 14:49:06 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/lm_sensors/lm_sensors-2.6.5.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
 #
 # lm_sensors pkgbuilder script
 #
+
+inherit makeonly
 
 PKG_NAME="lm_sensors"
 PKG_VERSION="2.6.5"
@@ -27,32 +29,12 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="B* C* INSTALL lm_sensors.lsm QUICKSTART README* TODO doc/FAQ"
 
 PKG_PREFIX="/usr"
-
-include general
-
-include do_fetch
-include do_unpack_gzip
-include do_patch
-include do_configure_null
-
-do_build() {
-    cd $PKG_SRC
-    
-    make LINUX_HEADERS=/usr/src/linux/include \
-        I2C_INCLUDE=/usr/src/linux/include \
-        PREFIX=$PKG_PREFIX
-    
-    return $?
-}
-
-do_install() {
-    cd $PKG_SRC
-    
-    make DESTDIR=$PKG_DEST LINUX_HEADERS=/usr/src/linux/include \
-        I2C_INCLUDE=/usr/src/linux/include PREFIX=$PKG_PREFIX install
-    
-    return $?
-}
+PKG_BUILD_OPTIONS="LINUX_HEADERS=/usr/src/linux/include
+                   I2C_INCLUDE=/usr/src/linux/include
+                   PREFIX=$PKG_PREFIX"
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST $PKG_BUILD_OPTIONS"
+PKG_INSTALL_TARGET="install"
 
 do_postinstall() {
     cd $PKG_SRC

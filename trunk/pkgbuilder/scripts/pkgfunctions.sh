@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.8 2003/12/27 00:05:34 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.9 2003/12/30 18:44:13 tomby Exp $
 
 #
 # Package specific functions
@@ -99,6 +99,47 @@ pkg_fetchcvs() {
     return $?
 }
 
+pkg_unpack() {
+    cd $TMP
+    
+    if [ "$PKG_FILE_NAME" = "" ] ; then
+        PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+    fi
+    
+    if [ "$PKG_UNPACK_DIR" != "" ] ; then
+        mkdir -p "$PKG_UNPACK_DIR"
+        cd $PKG_UNPACK_DIR
+    fi
+    
+    case "$PKG_EXTENSION" in
+        'tar.gz')
+            tar zxvf $FETCH_DIR/$PKG_FILE_NAME
+            RETVAL="$?"
+        ;;
+        'tgz')
+            tar zxvf $FETCH_DIR/$PKG_FILE_NAME
+            RETVAL="$?"
+        ;;
+        'tar.bz2')
+            tar jxvf $FETCH_DIR/$PKG_FILE_NAME
+            RETVAL="$?"
+        ;;
+        'tbz2')
+            tar jxvf $FETCH_DIR/$PKG_FILE_NAME
+            RETVAL="$?"
+        ;;
+        'zip')
+            unzip $FETCH_DIR/$PKG_FILE_NAME
+            RETVAL="$?"
+        ;;
+        *)
+            tar zxvf $FETCH_DIR/$PKG_FILE_NAME
+            RETVAL="$?"
+    esac
+    
+    return $RETVAL
+}
+
 pkg_configure() {
     CFLAGS=$CFLAGS \
     CXXFLAGS=$CXXFLAGS \
@@ -145,10 +186,17 @@ EOF
 	fi
 }
 
+pkg_localeclean() {
+    if [ -f "$PKG_DEST$PKG_PREFIX/share/locale/locale.alias" ] ; then
+        rm -f $PKG_DEST$PKG_PREFIX/share/locale/locale.alias
+    fi
+}
+
 pkg_postinstall() {
 	pkg_installdoc &&
     pkg_stripall &&
     pkg_gzipmaninfo &&
+    pkg_localeclean &&
     pkg_configfiles &&
     pkg_installfiles
 }

@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gtkhtml/gtkhtml-3.0.9.build,v 1.1 2003/12/27 16:57:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gtkhtml/gtkhtml-3.0.9.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
 #
-# gtkhtml pkgbuilder script
+# gtkhtml-3.0.9 pkgbuilder script
 #
+
+inherit gnome
 
 PKG_NAME="gtkhtml"
 PKG_VERSION="3.0.9"
@@ -40,15 +42,6 @@ PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
-
-include do_configure
-include do_build
-include do_install
 
 do_patch() {
     cd $PKG_SRC

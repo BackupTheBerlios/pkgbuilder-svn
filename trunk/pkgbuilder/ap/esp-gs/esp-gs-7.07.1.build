@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.4 2003/12/24 11:17:45 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/esp-gs/esp-gs-7.07.1.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
 #
 # esp-gs-7.07.1 pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="esp-gs"
 PKG_VERSION="7.07.1"
@@ -45,11 +47,6 @@ PKG_INSTALL_OPTIONS="install_prefix=$PKG_DEST
                      exdir=$PKG_DOC/examples"
 
 PKG_CONFIG_FILES="`use cups && echo "etc/cups/pstoraster.convs"`"
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
 
 do_patch() {
     cd $PKG_SRC/ijs

@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db-engine/Attic/foomatic-db-engine-3.0.0.build,v 1.1 2003/12/27 16:47:27 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/foomatic-db-engine/Attic/foomatic-db-engine-3.0.0.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
 #
 # foomatic-db-engine-3.0.0 pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="foomatic-db-engine"
 PKG_VERSION="3.0.0"
@@ -33,16 +35,6 @@ PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS=""
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-
-include general
-
-include do_fetch
-include do_unpack_gzip
-
-include do_configure
-include do_build
-
-include do_postinstall
 
 do_patch() {
     cd $PKG_SRC

@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/distcc/Attic/distcc-2.11.2.build,v 1.1 2003/12/29 00:54:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/distcc/Attic/distcc-2.11.2.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
 #
 # distcc-2.11.2 pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="distcc"
 PKG_VERSION="2.11.2"
@@ -46,14 +48,3 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
 PKG_INSTALL_TARGET="install"
 
 PKG_CONFIG_FILES=""
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
-include do_patch
-include do_configure
-include do_build
-include do_install
-include do_postinstall
-

@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xml-dtd/Attic/docbook-xml-dtd-4.2.build,v 1.4 2003/12/03 23:26:05 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-xml-dtd/Attic/docbook-xml-dtd-4.2.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
 #
 # docbook-xml-dtd-4.2 pkgbuilder script
 #
+
+inherit main
 
 PKG_NAME="docbook-xml-dtd"
 PKG_VERSION="4.2"

@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/iptables/iptables-1.2.9.build,v 1.1 2003/12/24 17:19:25 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/iptables/iptables-1.2.9.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
 #
 # iptables-1.2.9 pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="iptables"
 PKG_VERSION="1.2.9"
@@ -37,14 +39,4 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
 					 INCDIR=$PKG_PREFIX/include
                      MANDIR=$PKG_PREFIX/man"
 PKG_INSTALL_TARGET="install install-devel"
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
-include do_patch
-include do_configure_null
-include do_build
-include do_install
-include do_postinstall
 

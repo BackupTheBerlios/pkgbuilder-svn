@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/freetype2/freetype2-2.1.5.build,v 1.2 2003/12/30 01:18:07 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/freetype2/freetype2-2.1.5.build,v 1.3 2003/12/30 18:44:13 tomby Exp $
 #
 # freetype2-2.1.5 pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="freetype2"
 PKG_VERSION="2.1.5"
@@ -32,16 +34,6 @@ PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS=""
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
-
-include general
-
-include do_fetch
-include do_unpack_gzip
-
-include do_configure
-include do_build
-include do_install
-include do_postinstall
 
 do_patch() {
     cd $PKG_SRC

@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.6 2003/12/06 20:01:06 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.7 2003/12/30 18:44:13 tomby Exp $
 #
 # qt-3.2.3 pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="qt"
 PKG_VERSION="3.2.3"
@@ -34,11 +36,6 @@ PKG_DOC_FILES="FAQ INSTALL LICENSE.GPL LICENSE.QPL MANIFEST PLATFORMS README cha
 
 PKG_PREFIX="/usr/lib/$PKG_NAME-$PKG_VERSION"
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
 
 do_patch() {
     cd $PKG_SRC

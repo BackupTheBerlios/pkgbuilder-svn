@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.30 2003/12/29 20:18:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.31 2003/12/30 18:44:13 tomby Exp $
 
 #
 # Generic functions
@@ -29,6 +29,23 @@ include() {
 }
 
 #
+# Include a build file
+#
+# @param $1 parent build file
+#
+inherit() {
+    if [ "$1" == "" ] ; then
+        return 1  
+    fi
+    
+    include $1.build
+    
+    PKG_PARENT="$1"
+    
+    return $?
+}
+
+#
 # Returns if in use variable exists use parameter
 #
 # @param $1 use parameter
@@ -41,6 +58,33 @@ use() {
     echo $USE | grep -o "\b$1\b" &> /dev/null
 
     return $?
+}
+
+#
+# Call the action function if exists
+#
+# @param $1 action function
+#
+call_action() {
+    if [ "$1" == "" ] ; then
+        return 1  
+    fi
+
+    if declare -f $1 &> /dev/null ; then
+        $1
+        RETVAL="$?"
+    elif declare -f ${PKG_PARENT}_$1 &> /dev/null ; then
+        ${PKG_PARENT}_$1
+        RETVAL="$?"
+    elif declare -f pkg_$1 &> /dev/null ; then
+        pkg_$1
+        RETVAL="$?"
+    else
+        echo "pkgbuilder: $1 function not defined in build script"
+        RETVAL="$?"
+    fi
+    
+    return $RETVAL
 }
 
 #
@@ -58,67 +102,67 @@ execute_action() {
     #execution
     case "$1" in
         'info')
-            do_info
+            call_action do_info
             RETVAL="$?"
         ;;
         'fetch')
-            do_fetch
+            call_action do_fetch
             RETVAL="$?"
         ;;
         'verify')
-            do_verify
+            call_action do_verify
             RETVAL="$?"
         ;;
         'unpack')
-            do_unpack
+            call_action do_unpack
             RETVAL="$?"
         ;;
         'patch')
-            do_patch
+            call_action do_patch
             RETVAL="$?"
         ;;
         'configure')
-            do_configure
+            call_action do_configure
             RETVAL="$?"
         ;;
         'build')
-            do_build
+            call_action do_build
             RETVAL="$?"
         ;;
         'install')
-            do_install
+            call_action do_install
             RETVAL="$?"
         ;;
         'postinstall')
-            do_postinstall
+            call_action do_postinstall
             RETVAL="$?"
         ;;
         'buildpkg')
-            do_buildpkg
+            call_action do_buildpkg
             RETVAL="$?"
         ;;
         'installpkg')
-            do_installpkg
+            call_action do_installpkg
             RETVAL="$?"
         ;;
         'upgradepkg')
-            do_upgradepkg
+            call_action do_upgradepkg
             RETVAL="$?"
         ;;
         'cleanup')
-            do_cleanup
+            call_action do_cleanup
             RETVAL="$?"
         ;;
         'auto')
-            do_fetch && 
-            do_verify &&
-            do_unpack &&
-            do_patch && 
-            do_configure &&
-            do_build &&
-            do_install &&  
-            do_postinstall && 
-            do_buildpkg
+            call_action do_fetch && 
+            call_action do_verify &&
+            call_action do_unpack &&
+            call_action do_patch && 
+            call_action do_configure &&
+            call_action do_build &&
+            call_action do_install &&  
+            call_action do_postinstall && 
+            call_action do_buildpkg
             RETVAL="$?"
         ;;
         *)

@@ -1,10 +1,10 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.8 2003/12/30 01:18:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.9 2003/12/30 18:44:13 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
-VERSION="20031226"
+VERSION="20031230"
 
 PACKAGES_LOGDIR="/var/log/packages"
 

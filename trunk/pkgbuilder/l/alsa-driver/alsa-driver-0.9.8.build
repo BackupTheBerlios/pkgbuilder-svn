@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.7 2003/12/29 22:03:57 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.8 2003/12/30 18:44:13 tomby Exp $
 #
 # alsa-driver-0.9.8 pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="alsa-driver"
 PKG_VERSION="0.9.8"
@@ -37,14 +39,6 @@ PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
 PKG_CONFIG_FILES="etc/rc.d/rc.alsa"
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
-include do_patch
-include do_configure
-include do_build
 
 do_install() {
 	cd $PKG_SRC

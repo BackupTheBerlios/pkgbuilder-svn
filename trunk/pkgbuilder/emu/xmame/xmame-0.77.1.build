@@ -1,6 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/xmame/xmame-0.77.1.build,v 1.1 2003/12/06 15:04:57 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/xmame/xmame-0.77.1.build,v 1.2 2003/12/30 18:44:13 tomby Exp $
+#
+# xmame-0.77.1 pkgbuilder script
+#
+
+inherit makeonly
 
 PKG_NAME="xmame"
 PKG_VERSION="0.77.1"
@@ -32,14 +37,6 @@ PKG_DOC_FILES="README todo doc/changes.unix doc/xmame-doc.txt doc/multiplayer-re
 PKG_PREFIX="/usr"
 
 PKG_DISPLAY_METHOD="`use sdl && echo SDL || echo x11`"
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
-include do_patch
-
-include do_postinstall
 
 do_configure() {
     cd $PKG_SRC

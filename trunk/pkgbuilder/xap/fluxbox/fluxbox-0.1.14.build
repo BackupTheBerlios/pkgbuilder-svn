@@ -1,9 +1,11 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/fluxbox/fluxbox-0.1.14.build,v 1.4 2003/12/24 12:08:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/fluxbox/fluxbox-0.1.14.build,v 1.5 2003/12/30 18:44:13 tomby Exp $
 #
 # fluxbox pkgbuilder script
 #
+
+inherit configscript
 
 PKG_NAME="fluxbox"
 PKG_VERSION="0.1.14"
@@ -15,7 +17,7 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="BSD"
 
-PKG_USE=""
+PKG_USE="gnome kde"
 
 PKG_DEPENDS="x/xfree86
     		>=d/autoconf-2.52"
@@ -28,18 +30,10 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO doc/Coding_style"
 
 PKG_PREFIX="/usr/X11R6"
-PKG_CONFIGURE_OPTIONS="--enable-kde --enable-gnome"
+PKG_CONFIGURE_OPTIONS="`use kde && echo "--enable-kde"`
+                       `use gnome && echo "--enable-gnome"`"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-
-include general
-
-include do_fetch
-include do_unpack_bzip2
-include do_patch
-include do_configure
-include do_build
-include do_install
 
 do_postinstall() {
     cd $PKG_SRC
