@@ -29,7 +29,7 @@ pkg_do_info() {
     echo
     echo "DESCRIPTION:"
     echo
-    cat $PKG_HOME/files/slack-desc | grep "^$PKG_NAME" | cut -d: -f2 | uniq
+    cat $PKG_HOME/files/slack-desc | grep "^$PKG_NAME" | cut -d: -f2,3,4,5 | uniq
 }
 
 pkg_do_fetch() {

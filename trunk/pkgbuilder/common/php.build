@@ -1,0 +1,126 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/db.build,v 1.1 2004/04/19 17:42:59 tomby Exp $
+#
+# php script for php packages
+#
+
+include configscript
+
+php_init() {
+    configscript_init
+
+    PKG_EXTENSION="tar.bz2"
+    PKG_FILE_NAME="php-$PKG_VERSION.$PKG_EXTENSION"
+    PKG_URL="http://es.php.net/distributions/$PKG_FILE_NAME"
+
+    PKG_LICENSE="GPLv2"
+
+    PKG_USE="ssl gdbm berkdb exit gd jpeg png gmp mysql curl"
+
+    PKG_DEPENDS="`use_dep ssl "l/openssl"`
+                 `use_dep gdbm "l/gdbm"`
+                 `use_dep berkdb "l/db3"`
+                 `use_dep exif "l/libexif"`
+                 `use_dep gd "l/libgd"`
+                 `use_dep jpeg "l/libjpeg"`
+                 `use_dep png "l/libpng"`
+                 `use_dep tiff "l/libtiff"`
+                 `use_dep gmp "l/gmp"`
+                 `use_dep mysql "ap/mysql"`
+                 `use_dep curl "n/curl"`
+                 `use_dep crypt "l/mhash"`
+                 `use_dep xml "l/libxml2 l/libxslt"`
+                 l/libwww
+                 l/expat"
+
+    PKG_HOMESITE="http://www.php.net/"
+
+    PKG_SRC="$TMP/php-$PKG_VERSION"
+    PKG_DOC_FILES="C* EXTENSIONS INSTALL LICENSE NEWS README.* TODO*"
+
+    PKG_PREFIX="/usr"
+    PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                           --enable-discard-path
+                           --with-config-file-path=/etc/apache2
+                           --enable-safe-mode
+                           --enable-bcmath
+                           --with-bz2
+                           --with-pic
+                           --enable-calendar
+                           --enable-ctype
+                           --enable-dbase
+                           --enable-ftp
+                           --with-iconv
+                           --with-gettext=shared,/usr
+                           --with-expat-dir=/usr
+                           --with-xml
+                           --enable-wddx
+                           --enable-trans-sid
+                           --enable-shmop
+                           --enable-sockets
+                           --with-regex=php
+                           --enable-sysvsem
+                           --enable-sysvshm
+                           --enable-yp
+                           --enable-memory-limit
+                           --with-tsrm-pthreads
+                           --enable-shared
+                           --disable-debug
+                           --with-zlib=/usr
+                           `use_dep crypt "--with-mhash=/usr"`
+                           `use_with ssl openssl`
+                           `use_with gdbm`
+                           `use_with berkdb db3`
+                           `use_with exif`
+                           `use_enable exif`
+                           `use_dep gd "--with-gd --enable-gd-native-ttf"`
+                           `use_dep jpeg "--with-jpeg-dir=/usr"`
+                           `use_with png`
+                           `use_with tiff`
+                           `use_with gmp`
+                           `use_with curl`
+                           `use_dep mysql "--with-mysql=shared,/usr"`"
+    PKG_BUILD_OPTIONS=""
+    PKG_BUILD_TARGET=""
+    PKG_INSTALL_OPTIONS="INSTALL_ROOT=$PKG_DEST"
+    PKG_INSTALL_TARGET="install"
+
+    PHP_EXTENSION_DIR="/usr/lib/php/extensions"
+}
+
+php_do_patch() {
+    cd $PKG_SRC
+
+    sed -i -e 's|@$(INSTALL_IT)||' Makefile.global
+
+    return $?
+}
+
+php_do_unpack() {
+    configscript_do_unpack
+}
+
+php_do_configure() {
+    export EXTENSION_DIR="$PHP_EXTENSION_DIR"
+
+    local retval
+    configscript_do_configure
+    retval=$?
+
+    unset EXTENSION_DIR
+
+    return $retval
+}
+
+php_do_build() {
+    configscript_do_build
+}
+
+php_do_install() {
+    configscript_do_install
+}
+
+php_do_postinstall() {
+    configscript_do_postinstall
+}
