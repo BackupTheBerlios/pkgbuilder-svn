@@ -1,0 +1,58 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/abiword/Attic/abiword-2.0.2.build,v 1.1 2004/01/05 23:58:13 tomby Exp $
+#
+# abiword-2.0.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="jpeg gnome"
+
+PKG_DEPENDS="x/xfree86
+	         >=l/fontconfig2-2.1
+	         l/libpng
+	         l/gtk+2
+	         >=gnome/libglade-2
+	         >=app-text/wv-1
+	         >=l/fribidi-0.10.4
+	         >=l/libxml2-2.4.10
+             l/expat
+             d/automake
+             d/pkgconfig
+             `use jpeg && echo "l/libjpeg"`
+	         `use gnome && echo ">=gnome/libgnomeui-2.2
+		                         >=gnome/libgnomeprint-2.2.1
+		                         >=gnome/libgnomeprintui-2.2.1
+		                         >=gnome/libbonobo-2"`"
+
+PKG_HOMESITE="http://www.abisource.com"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+
+PKG_CONFIGURE_OPTIONS="--enable-bidi
+                       --enable-threads
+                       --without-ImageMagick
+                       --disable-scripting
+                       --with-sys-wv
+                       `use gnome && echo "--enable-gnome"`"
+
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET="all-recursive"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+PKG_NOSTRIP="Y"
+
+PKG_CONFIG_FILES="etc/example.conf"
