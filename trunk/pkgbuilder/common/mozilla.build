@@ -9,9 +9,6 @@ inherit configscript
 mozilla_init() {
     configscript_init
     
-    ENIGMAIL_VERSION="0.76.7"
-    IPC_VERSION="1.0.4"
-    
     PKG_EXTENSION="tar.bz2"
 
     PKG_FILE_NAME="$PKG_NAME-source-$PKG_VERSION.$PKG_EXTENSION"
@@ -42,7 +39,7 @@ mozilla_init() {
                  >=l/pango-1.2.1
                  d/pkgconfig
                  d/perl
-                 `use_dep crypto "ap/gnupg"`"
+                 `use_dep crypto "ap/gnupg ap/tcsh"`"
     
     PKG_HOMESITE="http://www.mozilla.org/"
     
@@ -97,11 +94,9 @@ mozilla_build_enigmail() {
     cd $PKG_SRC
     
     ( cd extensions/ipc &&
-      cp $PKG_HOME/files/Makefile-ipc Makefile &&
-      make ) &&
+      csh makemake && make ) &&
     ( cd extensions/enigmail &&
-      cp $PKG_HOME/files/Makefile-enigmail Makefile &&
-      make )
+      csh makemake && make )
       
     return $?
 }
