@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/xvid/Attic/xvid-0.9.2.build,v 1.1 2003/12/14 15:23:55 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/xvid/Attic/xvid-0.9.2.build,v 1.2 2003/12/24 11:36:52 tomby Exp $
 #
 # xvid-0.9.2 pkgbuilder script
 #
@@ -43,9 +43,7 @@ include do_postinstall
 do_configure() {
     cd $PKG_SRC/build/generic
     
-    CFLAGS=$CFLAGS \
-    CXXFLAGS=$CXXFLAGS \
-    ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+    pkg_configure
     
     return $?
 }
@@ -53,7 +51,7 @@ do_configure() {
 do_build() {
     cd $PKG_SRC/build/generic
     
-    make $PKG_BUILD_OPTIONS
+    pkg_build
     
     return $?
 }
@@ -62,7 +60,7 @@ do_install() {
     cd $PKG_SRC/build/generic
     
     mkdir -p $PKG_DEST$PKG_PREFIX/{include,lib} &&
-    make $PKG_INSTALL_OPTIONS install &&
+    pkg_install &&
     ( cd $PKG_DEST$PKG_PREFIX/lib
         rm -f libxvidcore.so ; ln -sf libxvidcore.so.2.1 libxvidcore.so )    
     

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/db3/db3-3.3.11.build,v 1.1 2003/12/08 16:00:20 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/db3/db3-3.3.11.build,v 1.2 2003/12/24 11:36:52 tomby Exp $
 #
 # db3-3.3.11 pkgbuilder script
 #
@@ -65,7 +65,7 @@ do_configure() {
 do_build() {
     cd $PKG_SRC/build_unix
     
-    make
+    pkg_build
     
     return $?
 }
@@ -73,7 +73,7 @@ do_build() {
 do_install() {
     cd $PKG_SRC/build_unix
     
-    make $PKG_INSTALL_OPTIONS install
+    pkg_install
     
     ( cd $PKG_DEST$PKG_PREFIX/lib
       rm -f libdb-3.so libdb.so

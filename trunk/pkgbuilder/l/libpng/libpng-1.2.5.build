@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libpng/libpng-1.2.5.build,v 1.1 2003/11/29 23:24:07 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libpng/libpng-1.2.5.build,v 1.2 2003/12/24 11:36:52 tomby Exp $
 #
 # libpng-1.2.5 pkgbuilder script
 #
@@ -46,7 +46,7 @@ do_install() {
     cd $PKG_SRC
     
     mkdir -p $PKG_DEST$PKG_PREFIX/{include/libpng12,lib,man} &&
-    make $PKG_INSTALL_OPTIONS install
+    pkg_install
     
     return $?
 }

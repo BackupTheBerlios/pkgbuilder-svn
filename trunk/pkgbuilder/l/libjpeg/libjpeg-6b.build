@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libjpeg/libjpeg-6b.build,v 1.1 2003/11/29 23:04:57 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libjpeg/libjpeg-6b.build,v 1.2 2003/12/24 11:36:52 tomby Exp $
 #
 # libjpeg-6b pkgbuilder script
 #
@@ -47,7 +47,7 @@ do_install() {
     cd $PKG_SRC
     
     mkdir -p $PKG_DEST$PKG_PREFIX/{include,lib,bin,man/man1} &&
-    make $PKG_INSTALL_OPTIONS install
+    pkg_install
     
     return $?   
 }
