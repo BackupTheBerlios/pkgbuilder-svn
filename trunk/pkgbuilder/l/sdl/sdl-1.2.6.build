@@ -1,0 +1,49 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl/Attic/sdl-1.2.6.build,v 1.1 2003/12/07 18:06:38 tomby Exp $
+#
+# sdl-1.2.6 pkgbuilder script
+#
+
+PKG_NAME="sdl"
+PKG_VERSION="1.2.6"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.libsdl.org/release/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE="alsa arts esd opengl"
+
+PKG_DEPENDS=">=l/audiofile-0.1.9
+             >=x/xfree86-4.3.0
+            `use alsa && echo "l/alsa-lib"`
+            `use arts && echo "kde/arts"`
+            `use esd && echo ">=l/esound-0.2.19"`"
+
+PKG_HOMESITE="http://www.libsdl.org/"
+
+PKG_SRC="$TMP/SDL-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="BUGS COPYING CREDITS INSTALL README* TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--disable-nasm
+                       --disable-debug
+                      `use opengl && echo "--enable-video-opengl"`"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+

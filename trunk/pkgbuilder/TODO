@@ -1,11 +1,11 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.7 2003/12/02 21:35:05 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.8 2003/12/07 18:08:00 tomby Exp $
 
 * New tasks:
 
     add checksum verification files to packages
     add deps to build scripts and test dep check
 
-* Base Packages:
+* Packages:
 
 a)
     cups
@@ -22,7 +22,7 @@ ap)
     psutils
 
     iptables
-    gnupg
+    gnupg           X
     tripwire
 
     sgml-common     X
@@ -92,8 +92,8 @@ l)
     libtiff         X
     libungif        X
     libmng          X
-    imlib
-    imlib2
+    imlib           X
+    imlib2          X
 
     freetype2       X
     fontconfig      X
@@ -102,7 +102,7 @@ l)
     gtk+2           X
     pango           X
     atk             X
-    lesstif
+    lesstif         X
 
     libsoup         X
 
@@ -111,15 +111,15 @@ l)
     alsa-utils
     alsa-tools
     alsa-oss
-    audio-file
-    esound
-    sdl
-    libao
-    libogg
-    libvorbis
+    audio-file      X
+    esound          X
+    sdl             X
+    libao           X
+    libogg          X
+    libvorbis       X
     nas
     libmpeg3
-    libmad
+    libmad          X
     libfame
     speex
     lame            X
