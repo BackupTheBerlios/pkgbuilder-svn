@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxml2/Attic/libxml2-2.5.11.build,v 1.1 2003/11/29 00:35:17 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/libxml2/Attic/libxml2-2.5.11.build,v 1.2 2003/11/29 17:16:05 tomby Exp $
 #
 # libxml2 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="libxml2"
 PKG_VERSION="2.5.11"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://xmlsoft.org/$PKG_FILE_NAME"
@@ -42,6 +42,8 @@ include do_install
 
 do_postinstall() {
     cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc/xml
       
     mv $PKG_DEST$PKG_PREFIX/share/doc $PKG_DEST$PKG_PREFIX
     if [ -d $PKG_DEST$PKG_PREFIX/doc/$PKG_NAME-python-$PKG_VERSION ] ; then
