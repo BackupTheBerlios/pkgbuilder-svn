@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.6 2003/12/25 23:27:18 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.7 2003/12/25 23:28:08 tomby Exp $
 #
 # mplayer-1.0pre3 pkgbuilder script
 #
@@ -68,8 +68,6 @@ if [ -r $PKG_SRC/config.mak ] ; then
 	PKG_ARCH="`expr match "$OPTFLAGS" '.*\-march=\([a-z0-9A-Z\-]*\)'`"
 	PKG_ARCH="`echo $PKG_ARCH | sed -e 's:\-::'`"
 fi
-
-echo $PKG_ARCH
 
 include general
 
