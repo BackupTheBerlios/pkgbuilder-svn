@@ -1,0 +1,56 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# directfb-0.9.21 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="DirectFB-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.directfb.org/download/DirectFB/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gif png jpeg mmx sse sdl"
+
+PKG_DEPENDS="d/perl
+             >=l/freetype2-2.0.1
+             `use_dep sdl "l/sdl"`
+             `use_dep mpeg "l/libmpeg3"`
+             `use_dep gif "l/libungif"`
+             `use_dep png "l/libpng"`
+             `use_dep jpeg "l/libjpeg"`"
+
+PKG_HOMESITE="http://www.directfb.org/"
+
+PKG_SRC="$TMP/DirectFB-$PKG_VERSION"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog NEWS README*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="`use_dep mpeg "CPPFLAGS=-I/usr/include/libmpeg3"`
+                       `use_enable gif`
+                       `use_enable png`
+                       `use_enable jpeg`
+                       `use_enable sdl`
+                       `use_enable mpeg libmpeg3`
+                       `use_enable mmx`
+                       `use_enable sse`
+                       --enable-freetype
+                       --with-gfxdrivers=all"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES="etc/fb.modes"
+
+do_install() {
+    cd $PKG_SRC
+    
+    pkg_install &&
+    ( mkdir -p $PKG_DEST/etc
+      cat fb.modes > $PKG_DEST/etc/fb.modes )
+    
+    return $?
+}
