@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.11 2003/12/31 15:52:06 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.12 2004/01/02 18:07:11 tomby Exp $
 #
 # xfree86-4.3.0.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="xfree86"
 PKG_VERSION="4.3.0.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am5"
+PKG_BUILD="am6"
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="X430src-1.tgz
                X430src-2.tgz
@@ -244,7 +244,15 @@ do_postinstall() {
         chmod 755 $module
     done
     
-    rm -f $PKG_DEST$PKG_PREFIX/lib/X11/config/host.def
+    #fixed bug in gtkglarea
+    ( cd $PKG_DEST/usr/lib
+      ln -sf $PKG_PREFIX/lib/libGL.so libGL.so
+      ln -sf $PKG_PREFIX/lib/libGL.so.1 libGL.so.1
+      ln -sf $PKG_PREFIX/lib/libGLU.so libGLU.so
+      ln -sf $PKG_PREFIX/lib/libGLU.so.1 libGLU.so.1 )
+
+    #fixed bug in kdebase    
+    echo > $PKG_DEST$PKG_PREFIX/lib/X11/config/host.def
 
     # TODO: improve the postinstall
     #cat $PKG_HOME/files/README.Xmodmap > $PKG_DEST/etc/X11/xinit/README.Xmodmap
