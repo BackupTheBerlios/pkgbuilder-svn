@@ -315,7 +315,7 @@ hdparm 5.7
 \layout List
 \labelwidthstring 00.00.0000
 
-hotplug 2004_01_05
+hotplug 2004_09_23
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -359,12 +359,12 @@ pci-utils 2.1.11
 \layout List
 \labelwidthstring 00.00.0000
 
-pcmcia-cs 3.2.7 (opcional, necesario en portatiles y ordenadores con interfaz
+pcmcia-cs 3.2.8 (opcional, necesario en portatiles y ordenadores con interfaz
  pcmcia)
 \layout List
 \labelwidthstring 00.00.0000
 
-pkgtools 10.0.0
+pkgtools 10.1.0
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -400,11 +400,16 @@ tar 1.14
 \layout List
 \labelwidthstring 00.00.0000
 
+udev 042 (opcional, recomendable si se va a utilizar un kernel de la serie
+ 2.6)
+\layout List
+\labelwidthstring 00.00.0000
+
 usbutils 0.11
 \layout List
 \labelwidthstring 00.00.0000
 
-util-linux 2.12g
+util-linux 2.12h
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -454,7 +459,7 @@ bin86 0.16.15
 \layout List
 \labelwidthstring 00.00.0000
 
-binutils 2.15.90.0.3
+binutils 2.15.92.0.2
 \layout List
 \labelwidthstring 00.00.0000
 
@@ -553,6 +558,9 @@ Instalación:
 \layout Subsection
 
 Instalación del sistema base:
+\layout Subsubsection
+
+Instalación desde el cdrom de Slackware:
 \layout Paragraph
 
 
@@ -565,6 +573,273 @@ Slackware
 .
  Se seleccionarán para su instalación unicamente los paquetes indicados
  en la lista de paquetes básicos.
+\layout Subsubsection
+
+Instalación desde una instalación Slackware previa:
+\layout Standard
+
+Para este tipo de instalación es necesario tener instalado previamente un
+ sistema Slackware completo.
+\layout Itemize
+
+
+\series bold 
+Creación y formateo de las particiones: 
+\layout Subparagraph
+
+
+\series medium 
+Primero debemos crear las particiones donde vamos a instalar el sistema
+ en el que vamos a utilizar 
+\series default 
+PkgBuilder
+\series medium 
+.
+ Podemos utilizar cualquier programa para ello como el clasico 
+\series default 
+fdisk
+\series medium 
+.
+ Luego debemos formatear las particiones utilizando el sistema de ficheros
+ que más nos guste.
+ Y por fin, las montamos bajo 
+\series default 
+/mnt/pkgbuilder
+\series medium 
+, por ejemplo.
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# mkdir /mnt/pkgbuilder
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# mkreiserfs /dev/sda7
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# mount /dev/sda7 /mnt/pkgbuilder
+\layout Itemize
+
+
+\series bold 
+Instalación de los paquetes: 
+\layout Subparagraph*
+
+
+\series medium 
+Después ya podemos instalar los paquetes que previamente hemos debido descargar
+ y los instalamos con el comando:
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# installpkg -root /mnt/pkgbuilder -menu *.tgz
+\layout Subparagraph
+
+
+\series medium 
+Esto hará que los paquetes se instalen bajo el directorio
+\series default 
+ /mnt/pkgbuilder
+\series medium 
+ sobre las particiones que hemos montado allí.
+ La opción 
+\emph on 
+-menu
+\emph default 
+ hará que se muestre un dialogo preguntando si se quiere instalar ese paquete.
+\layout Itemize
+
+
+\series bold 
+Hacer chroot:
+\layout Subparagraph
+
+
+\series medium 
+Ahora para entrar dentro del nuevo sistema debemos hacer 
+\series default 
+chroot
+\series medium 
+ sobre el directorio en el que hemos instalado los paquetes con esta secuencia
+ de comandos:
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# chroot /mnt/pkgbuilder ldconfig
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# mount -t proc proc /mnt/pkgbuilder/proc
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# mount -t devpts devpts /mnt/pkgbuilder/dev/pts
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# chroot /mnt/pkgbuilder
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+# .
+ /etc/profile
+\layout Subparagraph
+
+
+\series medium 
+Y ya estamos dentro.
+\layout Itemize
+
+
+\series bold 
+Configurar el sistema:
+\layout Subparagraph
+
+
+\series medium 
+Ahora es el momento de configurar el sistema.
+ Para ello, una vez dentro del sistema 
+\series default 
+chroot
+\series medium 
+, ejecutamos 
+\series default 
+pkgtool
+\series medium 
+ y seleccionamos la opción 
+\emph on 
+Setup
+\emph default 
+.
+ Nos aparecerá una lista de scripts de configuración de los que seleccionaremos
+ los que nos interesen.
+ 
+\layout List
+\labelwidthstring 00.00.0000
+
+install-kernel (opcional) si queremos instalar un kernel diferente al que
+ viene de serie.
+\layout List
+\labelwidthstring 00.00.0000
+
+make-bootdisk (opcional) si queremos crear un disco de arranque.
+\layout List
+\labelwidthstring 00.00.0000
+
+modem-device (opcional) si tenemos un modem y queremos configurarlo.
+\layout List
+\labelwidthstring 00.00.0000
+
+hotplug (opcional) si queremos que hotplug se ejecute al inicio.
+\layout List
+\labelwidthstring 00.00.0000
+
+liloconfig (obligatorio) desde aquí configuraremos lilo para poder arrancar
+ luego desde el nuevo sistema.
+\layout List
+\labelwidthstring 00.00.0000
+
+netconfig (obligatorio) configuramos la red.
+\layout List
+\labelwidthstring 00.00.0000
+
+services (opcional) para activar o desactivar servicios al inicio.
+\layout List
+\labelwidthstring 00.00.0000
+
+setconsolefont (opcional) si queremos cambiar la fuente de la consola.
+\layout List
+\labelwidthstring 00.00.0000
+
+timeconfig (obligatorio) para configurar la zona horaria.
+\layout Itemize
+
+Crear el archivo fstab:
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+/dev/sda2 swap swap defaults 0 0
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+/dev/sda6 / reiserfs defaults 1 1
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+/dev/sda1 /tmp reiserfs defaults 1 2
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+/dev/sda8 /home reiserfs defaults 1 2
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+/dev/hdc /mnt/cdrw iso9660 noauto,ro,user 0 0
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+/dev/hdd /mnt/cdrom iso9660 noauto,ro,user 0 0
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+/dev/fd0 /mnt/floppy auto noauto,user 0 0
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+devpts /dev/pts devpts gid=5,mode=620 0 0
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+proc /proc proc defaults 0 0
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+usbfs /proc/bus/usb usbfs defaults 0 0
+\layout Quotation
+
+
+\family typewriter 
+\size small 
+none /sys sysfs defaults 0 0
 \layout Subsection
 
 Instalación de PkgBuilder:
@@ -638,7 +913,7 @@ PkgBuilder
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 $ svn checkout svn://svn.berlios.de/pkgbuilder/trunk/pkgbuilder
 \layout Quotation
 
@@ -669,286 +944,346 @@ build.rc-sample
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
+\color blue
 # Copyright 2004 Antonio G.
- Muñoz, tomby (AT) tomby.homemelinux.org
+ Muñoz, tomby (AT) tomby.homelinux.org
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
+\color blue
 # Distributed under the terms of the GNU General Public License v2
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 PKGBUILDER_HOME="/var/pkgbuilder"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 VERSION="20040111"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
-# packages db directory
+\size small 
+\color blue
+# Packages db directory
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 PACKAGES_LOGDIR="/var/log/packages"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
-#pkgbuilder mirror
+\size small 
+\color blue
+# PkgBuilder mirror
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
-#local network source code mirror
+\size small 
+\color blue
+# Local network source code mirror
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
-#MIRROR_URL="ftp://localhost/pub/pkgbuilder"
+\size small 
+MIRROR_URL="ftp://localhost/pub/pkgbuilder"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
-#cdrom with source code
+\size small 
+\color blue
+# CDROM with source code
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
-#CDROM_DIR="/mnt/cdrom"
+\size small 
+CDROM_DIR="/mnt/cdrom"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
+\color blue
+# Fetch options
+\layout Quotation
+
+
+\family typewriter 
+\size small 
 FETCH_TRIES="5"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 FETCH_DIR="/var/tmp/distfiles"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 FETCH_FTP_OPTIONS="--passive-ftp"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 TMP="/var/tmp"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
+\color blue
+# USE flags
+\layout Quotation
+
+
+\family typewriter 
+\size small 
 USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
-USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl aalib svga fbcon directfb"
+\size small 
+USE_VIDEO="X opengl divx mpeg win32codecs sdl aalib svga fbcon directfb"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE_NET="samba ssl slp maildir"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE_PRINT="cups pnm2ppa"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE_XLIBS="motif gtk gtk2 qt kde gnome"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE_LIBS="ncurses readline sasl bidi jpeg png tiff gif slang fam"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE_CPU="mmx sse 3dnow"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE_DEV="python tcltk perl java ruby scheme"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE_MISC="nls doc gpm javascript mysql xml sane"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 $USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
+\color blue
+# I18N configuration
+\layout Quotation
+
+
+\family typewriter 
+\size small 
 I18N="es"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
+\color blue
+# CPU and ARCHITECTURE flags configuration
+\layout Quotation
+
+
+\family typewriter 
+\size small 
 ARCH="i486"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 CPU="i686"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 CXXFLAGS="$CFLAGS"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 CPPFLAGS="$CFLAGS"
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 PKGBUILDER_HOME
 \series medium 
  configura el directorio donde se ha instalado 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
 .
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 PACKAGES_LOGDIR
 \series medium 
  configura el directorio donde se encuentra la base de datos de paquetes
  instalados.
  Usualmente toma el valor de /var/log/packages.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 PKGBUILDER_MIRROR
 \series medium 
  configura la url del ftp oficial de 
-\series default 
+\series bold 
 PkgBuilder
 \series medium 
 .
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 MIRROR_URL
 \series medium 
  permite configurar un servidor local para que actue como cache.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 CDROM_DIR
 \series medium 
  permite configurar el directorio donde tomar los archivos con el codigo
  fuente desde una unidad de CDROM.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 FETCH_DIR
 \series medium 
  configura el directorio donde se almacenaran los archivos descargados.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 FETCH_OPTIONS
 \series medium 
  permite configurar los parametros a utilizar por wget a la hora de descargar
  archivos.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 FETCH_FTP_OPTIONS
 \series medium 
  permite configurar los parametros a utilizar por wget cuando la url se
  trata de un servidor FTP.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 USE
 \series medium 
  permite configurar una serie de flags para activar o desactivar funcionalidades
  a la hora de compilar los paquetes.
  Es similimar a la variable USE de Gentoo GNU/Linux.
  Se ha dividido en varios grupos para facilitar la lectura de las opciones.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 I18N
 \series medium 
  permite configurar la opcion de internacionalización indicando los lenguajes
  deseadoa.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 ARCH
 \series medium 
  permite configurar la arquitectura de la máquina actual.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 CPU
 \series medium 
  permite configurar el procesador de la máquina actual.
-\layout Paragraph
+\layout Itemize
 
+
+\series bold 
 CFLAGS
 \series medium 
  permite configurar los flags de compilación indicando las opciones de optimizac
@@ -986,76 +1321,93 @@ También se puede utilizar la compilación paraléla en el caso tener varios
 
 
 \family typewriter 
-\size footnotesize 
-#Parallel compilation.
+\size small 
+\color blue
+# Parallel compilation.
  Use with care, some packages compilation fails.
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 COMPILATION="parallel"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 DISTCC_HOSTS="host1 host2 host3 hostn"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 CCACHE_PREFIX="distcc"
 \layout Quotation
 
 
 \family typewriter 
-\size footnotesize 
+\size small 
 MAKE_OPTIONS="-j4"
-\layout Paragraph
+\layout Itemize
 
-COMPILATION 
+
+\series bold 
+COMPILATION
+\series default 
+ 
 \series medium 
 especifica la modalidad de compilación.
-\layout Paragraph
+\layout Itemize
 
-DISTCC_HOST 
+
+\series bold 
+DISTCC_HOST
+\series default 
+ 
 \series medium 
 especifica el nombre de las diferentes máquina a usar para la compilación
  paralela en el caso de utilizar 
-\series default 
+\series bold 
 dictcc
 \series medium 
 .
-\layout Paragraph
+\layout Itemize
 
-CCACHE_PREFIX 
+
+\series bold 
+CCACHE_PREFIX
+\series default 
+ 
 \series medium 
 es necesario configurarla si queremos utilizar 
-\series default 
+\series bold 
 distcc
 \series medium 
  junto con 
-\series default 
+\series bold 
 ccache
 \series medium 
 .
-\layout Paragraph
+\layout Itemize
 
-MAKE_OPTIONS 
+
+\series bold 
+MAKE_OPTIONS
+\series default 
+ 
 \series medium 
 especifica las opciones para 
-\series default 
+\series bold 
 make
 \series medium 
 .
- Usualmente tomara el valor -j
-\series default 
-n
+ Usualmente tomara el valor 
+\series bold 
+-jn
 \series medium 
 , siendo 
-\series default 
+\series bold 
 n
 \series medium 
  el número de procesos simultaneos que queremos que se ejecuten.
@@ -1067,9 +1419,12 @@ Empieza la fiesta:
 El script build.sh:
 \layout Standard
 
-El script build.sh permite ejecutar diversas acciones sobre los archivos
- build, entre ellas, descargar el codigo fuente compilarlo y generar el
- paquete tgz correspondiente.
+El script 
+\emph on 
+build.sh
+\emph default 
+ permite ejecutar diversas acciones sobre los archivos build, entre ellas,
+ descargar el codigo fuente compilarlo y generar el paquete tgz correspondiente.
 \layout Quotation
 
 
@@ -1156,8 +1511,12 @@ auto: ejecuta automáticamente esta secuencia acciones: fetch, verify, unpack,
 El script install.sh:
 \layout Standard
 
-El script install.sh instala un paquete resolviendo dependencias instalandolas
- si es necesario de forma recursiva.
+El script 
+\emph on 
+install.sh
+\emph default 
+ instala un paquete resolviendo dependencias instalandolas si es necesario
+ de forma recursiva.
 \layout Quotation
 
 
@@ -1182,13 +1541,9 @@ Opciones del script:
 \labelwidthstring 00.00.0000
 
 -d Ejecuta el script en modo 
-\begin_inset Quotes eld
-\end_inset 
-
+\emph on 
 dummy
-\begin_inset Quotes erd
-\end_inset 
-
+\emph default 
  o tonto, resolviendo las dependencias pero sin instalar nada en el sistema.
 \layout List
 \labelwidthstring 00.00.0000
@@ -1199,13 +1554,9 @@ dummy
 \labelwidthstring 00.00.0000
 
 -p Ejecuta el script en modo 
-\begin_inset Quotes eld
-\end_inset 
-
+\emph on 
 frompackage
-\begin_inset Quotes erd
-\end_inset 
-
+\emph default 
 , en lugar de instalar el paquete compilandolo, lo instala a partir de un
  paquete precompilado localizado en el directorio $TMP.
 \layout Subsection
@@ -1219,13 +1570,9 @@ El script update.sh actualiza todo el sistema buscando nuevas versiones de
 \labelwidthstring 00.00.0000
 
 -d Ejecuta el script en modo 
-\begin_inset Quotes eld
-\end_inset 
-
+\emph on 
 dummy
-\begin_inset Quotes erd
-\end_inset 
-
+\emph default 
  o tonto, muestra los nuevos paquetes disponibles pero sin realizar sin
  ninguna acción.
 \layout Paragraph
@@ -1233,25 +1580,21 @@ dummy
 
 \series medium 
 Previamente a utilizar el script 
-\begin_inset Quotes eld
-\end_inset 
-
+\emph on 
 update.sh
-\begin_inset Quotes erd
-\end_inset 
-
- es necesario ejecutar el script build_db.sh que genera el archivo 
+\emph default 
+ es necesario ejecutar el script 
+\emph on 
+build_db.sh
+\emph default 
+ que genera el archivo 
 \series default 
 PACKAGES
 \series medium 
  necesario para ejectuar el script 
-\begin_inset Quotes eld
-\end_inset 
-
+\emph on 
 update.sh
-\begin_inset Quotes erd
-\end_inset 
-
+\emph default 
 .
 \layout Section
 
@@ -1269,8 +1612,12 @@ build
 \series medium 
  define una serie de variables y métodos que dirigen la generación de un
  paquete.
- Además un script build puede heredar de otro ciertas caracteristicas que
- se repiten en múltiples paquetes.
+ Además un script 
+\series default 
+build
+\series medium 
+ puede heredar de otro ciertas caracteristicas que se repiten en múltiples
+ paquetes.
 \layout Subsubsection
 
 Variables:
