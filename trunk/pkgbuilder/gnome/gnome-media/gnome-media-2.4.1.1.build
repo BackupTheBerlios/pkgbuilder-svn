@@ -1,0 +1,31 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-media/gnome-media-2.4.1.1.build,v 1.1 2004/01/04 22:23:19 tomby Exp $
+#
+# gnome-media-2.4.1.1 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/esound-0.2.23
+             l/gtk+2
+             l/glib2
+             >=gnome/libgnomeui-2
+             >=gnome/gconf-1.2.1
+             >=gnome/gnome-desktop-2
+             >=gnome/gnome-vfs-2
+             l/libxml2
+             >=gnome/orbit2-2.4.1
+             >=gnome/libbonobo-2
+             >=gnome/gail-0.0.3
+             >=gnome/gstreamer-0.6.3
+             >=gnome/gst-plugins-0.6.3
+             >=d/pkgconfig-0.12.0
+             >=gnome/scrollkeeper-0.3.11
+             >=gnome/intltool-0.21"
+
+PKG_DOC_FILES="AUTHORS COPYING* ChangeLog INSTALL NEWS README TODO"
