@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -21,6 +21,7 @@ PKG_DEPENDS="l/libpng
              l/zlib
              >=l/sdl-1.2.0
              l/sdl_net
+             l/sdl_sound
              `use_dep alsa "l/alsa-lib"`"
 
 PKG_HOMESITE="http://dosbox.sourceforge.net/"
