@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.10 2003/11/23 17:38:46 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.11 2003/11/23 17:41:56 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -153,7 +153,7 @@ gzip_info() {
         return 1
     fi
     
-    gzip -9 $1/*.info
+    gzip -9 $1/*
         
     return $?
 }
