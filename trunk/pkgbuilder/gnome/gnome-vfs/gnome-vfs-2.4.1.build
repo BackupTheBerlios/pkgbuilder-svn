@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-vfs/gnome-vfs-2.4.1.build,v 1.5 2004/01/04 01:09:40 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-vfs/gnome-vfs-2.4.1.build,v 1.6 2004/01/04 01:44:07 tomby Exp $
 #
 # gnome-vfs-2.4.1 pkgbuilder script
 #
@@ -29,6 +29,4 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use ssl && echo "--enable-ssl"`
                        `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
 
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
-                     GCONF_SCHEMA_CONFIG_SOURCE=xml::$PKG_DEST/etc/gconf/gconf.xml.defaults
-                     GCONF_SCHEMA_FILE_DIR=$PKG_DEST/etc/gconf/schemas"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"

@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnome/libgnome-2.4.0.build,v 1.5 2004/01/04 01:09:57 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libgnome/libgnome-2.4.0.build,v 1.6 2004/01/04 01:43:45 tomby Exp $
 #
 # libgnome-2.4.0 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_USE="doc"
 
@@ -27,6 +27,4 @@ PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
 
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
-                     GCONF_SCHEMA_CONFIG_SOURCE=xml::$PKG_DEST/etc/gconf/gconf.xml.defaults
-                     GCONF_SCHEMA_FILE_DIR=$PKG_DEST/etc/gconf/schemas"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"

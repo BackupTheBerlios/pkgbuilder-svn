@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gst-plugins/gst-plugins-0.6.4.build,v 1.3 2004/01/04 01:09:47 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gst-plugins/gst-plugins-0.6.4.build,v 1.4 2004/01/04 01:44:34 tomby Exp $
 #
 # gst-plugins-0.6.4 pkgbuilder script
 #
@@ -53,7 +53,5 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --disable-examples
                        `use doc && echo "--enable-docs-build" || echo "--disable-docs-build"`"
                        
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
-                     GCONF_SCHEMA_CONFIG_SOURCE=xml::$PKG_DEST/etc/gconf/gconf.xml.defaults
-                     GCONF_SCHEMA_FILE_DIR=$PKG_DEST/etc/gconf/schemas"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
                      
