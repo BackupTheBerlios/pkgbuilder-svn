@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/fontconfig/fontconfig-2.2.1.build,v 1.1 2003/11/30 16:35:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/fontconfig/fontconfig-2.2.1.build,v 1.2 2003/11/30 16:38:24 tomby Exp $
 #
 # fontconfig-2.2.1 pkgbuilder script
 #
@@ -18,7 +18,7 @@ PKG_LICENSE="fontconfig"
 PKG_USE=""
 
 PKG_DEPENDS=">=a/sed-4
-             >=l/freetype-2.1.4
+             >=l/freetype2-2.1.4
              >=l/expat-1.95.3
              a/bin"
 
