@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# wesnoth-0.8.9 pkgbuilder script
+# wesnoth-0.8.10 pkgbuilder script
 #
 
 inherit configscript
