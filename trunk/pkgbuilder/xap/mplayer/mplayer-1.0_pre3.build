@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.17 2004/04/09 18:39:50 tomby Exp $
 #
-# mplayer-1.0pre3 pkgbuilder script
+# mplayer-1.0_pre3 pkgbuilder script
 #
 
 inherit configscript
 
 PKG_BUILD="am10"
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="MPlayer-$PKG_VERSION.$PKG_EXTENSION"
+PKG_FILE_NAME="MPlayer-${PKG_VERSION/_/}.$PKG_EXTENSION"
 PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
          http://www1.mplayerhq.hu/MPlayer/releases/fonts/font-arial-iso-8859-1.tar.bz2
          `use_dep gtk "http://www1.mplayerhq.hu/MPlayer/Skin/Blue-1.0.tar.bz2"`"
@@ -43,7 +43,8 @@ PKG_DEPENDS=">=l/xvid-0.9.0
 
 PKG_HOMESITE="http://www.mplayerhq.hu/"
 
-PKG_SRC="$TMP/MPlayer-$PKG_VERSION"
+PKG_SRC="$TMP/MPlayer-${PKG_VERSION/_/}"
+
 PKG_DOC_FILES="AUTHORS LICENSE README ChangeLog DOCS/HTML/en/*.html etc/example.conf"
 
 PKG_CONFIGURE_OPTIONS="--confdir=/etc/mplayer
@@ -66,14 +67,15 @@ if [ -r $PKG_SRC/config.mak ] ; then
 fi
 
 do_patch() {
-	cd $PKG_SRC
+    cd $PKG_SRC
+
+    use gtk2 && apply_patch $PKG_NAME-1.0-gentoo-gtk2.patch -p1 -N
 	
-	use gtk2 && apply_patch $PKG_NAME-1.0-gentoo-gtk2.patch -p1 -N
-	
-	apply_patch mencoder-gentoo-segfault.patch -p0 -N
+    apply_patch mencoder-gentoo-segfault.patch -p0 -N
+    
     ( cd libmpdemux ; apply_patch vuln02-fix.diff -p0 -N )
-	
-	return $?
+
+    return $?
 }
 
 do_postinstall() {
@@ -81,7 +83,7 @@ do_postinstall() {
     
     cat etc/codecs.conf > $PKG_DEST/etc/mplayer/codecs.conf
     cat etc/input.conf > $PKG_DEST/etc/mplayer/input.conf
-	cat etc/menu.conf > $PKG_DEST/etc/mplayer/menu.conf
+    cat etc/menu.conf > $PKG_DEST/etc/mplayer/menu.conf
 
     pkg_installdoc
 
