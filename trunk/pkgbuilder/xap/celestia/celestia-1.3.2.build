@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="gtk gnome kde"
 
 PKG_DEPENDS=">=l/glut-3.7
-             l/jpeg
+             l/libjpeg
              l/libpng
              `use_dep kde "l/kdelibs"`
              `use_dep gnome ">=gnome/libgnomeui-2.0"`
