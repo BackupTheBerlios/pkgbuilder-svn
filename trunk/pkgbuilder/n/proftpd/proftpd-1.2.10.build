@@ -1,0 +1,68 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# proftpd-1.2.10 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.proftpd.org/distrib/source/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl"
+
+PKG_DEPENDS="`use_dep ssl ">=l/openssl-0.9.6f"`"
+
+PKG_HOMESITE="http://www.proftpd.org/"
+
+PKG_DOC_FILES="C* INSTALL NEWS RE* doc/ sample-configurations/"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sbindir=/usr/sbin
+                       --localstatedir=/var/run
+                       --sysconfdir=/etc/proftpd
+                       --enable-shadow
+                       --disable-sendfile
+                       --enable-autoshadow
+                       --enable-ctrls"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES="etc/proftpd/proftpd.conf"
+
+do_configure() {
+    cd $PKG_SRC
+    local modules
+
+    modules="mod_ratio:mod_readme"
+
+    if use ssl ; then
+        modules="$modules:mod_tls"
+    fi
+
+    if use quota ; then
+        modules="$modules:mod_quotatab:mod_quotatab_file"
+    fi
+
+    PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --with-modules=$modules"
+
+    configscript_do_configure
+
+    return $?
+}
+
+do_install() {
+    configscript_do_install
+
+    mkdir -p $PKG_DEST/home/ftp
+
+    return $?
+}
