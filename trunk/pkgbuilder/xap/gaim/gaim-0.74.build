@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gaim/Attic/gaim-0.74.build,v 1.6 2004/01/05 15:09:00 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/gaim/Attic/gaim-0.74.build,v 1.7 2004/01/06 22:04:37 tomby Exp $
 #
 # gaim-0.74 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_USE=""
@@ -28,24 +28,3 @@ PKG_DOC_FILES="ABOUT-NLS AUTHORS COPYING ChangeLog* HACKING INSTALL NEWS PROGRAM
                README* VERSION doc/FAQ doc/CREDITS"
 
 PKG_CONFIGURE_OPTIONS=""
-
-do_postinstall() {
-    cd $PKG_SRC
-    
-    pkg_installdoc &&
-    pkg_stripall &&
-    pkg_gzipmaninfo &&
-    pkg_installfiles
-    
-    local mozilla_version="`installed_version mozilla`"
-    
-    cat << EOF > $PKG_DEST/install/doinst.sh
-#!/bin/sh
-if fgrep "/usr/lib/mozilla-$mozilla_version" etc/ld.so.conf 1> /dev/null 2> /dev/null ; then
-  true
-else
-  echo "/usr/lib/mozilla-$mozilla_version" >> etc/ld.so.conf
-fi
-EOF
-
-}
