@@ -49,6 +49,7 @@ do_postinstall() {
     mkdir -p $PKG_DEST/etc/profile.d
     cat $PKG_HOME/files/j2sdk.sh > $PKG_DEST/etc/profile.d/j2sdk.sh
     cat $PKG_HOME/files/j2sdk.csh > $PKG_DEST/etc/profile.d/j2sdk.csh
+    chmod +x $PKG_DEST/etc/profile.d/j2sdk.*
 
     pkg_configfiles
 
