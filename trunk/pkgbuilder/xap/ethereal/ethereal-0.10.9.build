@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# ethereal-0.10.3 pkgbuilder script
+# ethereal-0.10.8 pkgbuilder script
 #
 
 inherit configscript
