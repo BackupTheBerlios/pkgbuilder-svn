@@ -1,0 +1,142 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/svgalib/svgalib-1.4.3.build,v 1.1 2003/12/13 23:45:46 tomby Exp $
+#
+# svgalib-1.4.3 pkgbuilder script
+#
+
+PKG_NAME="svgalib"
+PKG_VERSION="1.4.3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.svgalib.org/$PKG_FILE_NAME"
+
+PKG_LICENSE="BSD"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://www.svgalib.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="0-* LICENSE svgalib.lsm doc/README.* doc/CHANGES* 
+               doc/NEWS doc/TODO doc/Driver-programming-HOWTO"
+
+PKG_PREFIX="/usr"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+PKG_CONFIG_FILES="/etc/example.conf"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure_null
+
+include do_postinstall
+
+do_build() {
+    cd $PKG_SRC
+    
+    make prefix=$PKG_PREFIX \
+         datadir=/etc/vga \
+         OPTIMIZE="$CFLAGS" \
+         static shared textutils lrmi utils &&
+    make prefix=$PKG_PREFIX \
+         datadir=/etc/vga \
+         OPTIMIZE="$CFLAGS" \
+         -C gl &&
+    make prefix=$PKG_PREFIX \
+         datadir=/etc/vga \
+         OPTIMIZE="$CFLAGS" \
+         -C gl libvgagl.so.$PKG_VERSION &&
+    ( cd demos
+      cp Makefile Makefile.orig
+      cat Makefile.orig | grep -v chown | grep -v chmod > Makefile ) &&
+    ( cd threeDKit/
+      cp Makefile Makefile.orig
+      cat Makefile.orig | grep -v chown | grep -v chmod > Makefile ) &&
+    make prefix=$PKG_PREFIX \
+         datadir=/etc/vga \
+         OPTIMIZE="$CFLAGS" \
+         LDFLAGS='-L ../sharedlib' demoprogs
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST/etc/vga
+    mkdir -p $PKG_DEST$PKG_PREFIX/{include,lib/svgalib,lib/threeDKit,bin,man} 
+    
+    #config files
+    cp src/config/* $PKG_DEST/etc/vga/
+    
+    #include files
+    cp include/* gl/vgagl.h $PKG_DEST$PKG_PREFIX/include/
+    
+    #libs
+    cp sharedlib/libvga* $PKG_DEST$PKG_PREFIX/lib
+    cp staticlib/libvga* $PKG_DEST$PKG_PREFIX/lib
+    
+    ( cd $PKG_DEST$PKG_PREFIX/lib 
+        rm -rf libvga.so ; ln -sf libvga.so.1.4.3 libvga.so
+        rm -rf libvga.so.1 ; ln -sf libvga.so.1.4.3 libvga.so.1
+        rm -rf libvgagl.so ; ln -sf libvgagl.so.1.4.3 libvgagl.so
+        rm -rf libvgagl.so.1 ; ln -sf libvgagl.so.1.4.3 libvgagl.so.1 )
+
+    #man pages
+    for j in 1 3 5 6 7 8 ; do
+        mkdir -p $PKG_DEST$PKG_PREFIX/man/man$j
+        
+        ( cd doc/man$j ; cp *.$j $PKG_DEST$PKG_PREFIX/man/man$j )
+    done
+    
+    #demos
+    for demo in `find demos/ -type f -perm 755` ; do
+        cp $demo $PKG_DEST$PKG_PREFIX/lib/svgalib/`basename $demo`
+        chown root.root $PKG_DEST$PKG_PREFIX/lib/svgalib/`basename $demo`
+        chmod 4755 $PKG_DEST$PKG_PREFIX/lib/svgalib/`basename $demo`
+    done
+    
+    #threeDKit
+    for demo in `find threeDKit/ -type f -perm 755` ; do
+        cp $demo $PKG_DEST$PKG_PREFIX/lib/threeDKit/`basename $demo`
+        chown root.root $PKG_DEST$PKG_PREFIX/lib/threeDKit/`basename $demo`
+        chmod 4755 $PKG_DEST$PKG_PREFIX/lib/threeDKit/`basename $demo`
+    done
+    
+    #binaries
+    cp utils/restorefont $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/restorefont
+    
+    cp utils/restorepalette $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/restorepalette
+    
+    cp utils/restoretextmode $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/restoretextmode
+    
+    cp utils/savetextmode $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/savetextmode
+    
+    cp utils/svgakeymap $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/svgakeymap
+    
+    cp utils/textmode $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/textmode
+    
+    cp utils/dumpreg $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/dumpreg
+    
+    cp lrmi-0.6m/mode3 $PKG_DEST$PKG_PREFIX/bin/
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/mode3
+    
+    return $?
+}
