@@ -70,8 +70,8 @@ PKG_DEPENDS=">=l/glib2-2.4
              >=gnome/gst-plugins-0.8
              >=gnome/gnome-media-2.8
              >=gnome/nautilus-media-0.8
-             >=gnome/at-spi-1.4
-             >=xap/epiphany-1.2
+             >=gnome/at-spi-1.6
+             >=xap/epiphany-1.4
              >=gnome/gnome-games-2.8
              >=gnome/gdm-2.6
              >=xap/gpdf-0.132
