@@ -14,7 +14,6 @@ PKG_USE="doc"
 PKG_DEPENDS=">=l/glib2-2.3.1
              >=l/gtk+2-2.3
              >=l/atk-1.0.3
-             d/pyxml
              >=d/python-2.0
              >=l/libxml2-2.4.24
              >=d/pkgconfig-0.12.0
