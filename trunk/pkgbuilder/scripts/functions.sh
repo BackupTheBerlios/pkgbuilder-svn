@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.23 2003/12/03 23:25:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.24 2003/12/06 16:38:23 tomby Exp $
 
 #
 # Generic functions
@@ -162,7 +162,7 @@ gzip_man() {
     fi
     
     if [ ! -d $1 ]; then
-        return 1
+        return 0
     fi
     
     find $1 -type f | xargs gzip -9
@@ -181,10 +181,10 @@ gzip_info() {
     fi
     
     if [ ! -d $1 ]; then
-        return 1
+        return 0
     fi
     
-    gzip -9 $1/*
+    find $1 -type f | xargs gzip -9
         
     return $?
 }
