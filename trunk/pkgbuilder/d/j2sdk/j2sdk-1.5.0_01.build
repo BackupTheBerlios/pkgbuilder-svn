@@ -1,0 +1,56 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# j2sdk-1.5.0_01 pkgbuilder script
+#
+
+PKG_BUILD="am1"
+
+PKG_ARCH="i586"
+
+PKG_FILE_NAME="jdk-1_5_0_01-linux-i586.bin"
+PKG_URL="http://public.www.planetmirror.com/pub/java-sun/J2SE/5.0_01/linux/$PKG_FILE_NAME"
+
+PKG_LICENSE="SBCL"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://java.sun.com/"
+
+PKG_PREFIX="/usr"
+
+PKG_CONFIG_FILES="etc/profile.d/j2sdk.sh etc/profile.d/j2sdk.csh"
+
+do_unpack() {
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib ; cd $PKG_DEST$PKG_PREFIX/lib
+
+    local file
+    
+    if [ "$CDROM_DIR" != "" -a -r $CDROM_DIR/$PKG_FILE_NAME ] ; then
+        file="$CDROM_DIR/$PKG_FILE_NAME"
+    else
+        file="$FETCH_DIR/$PKG_FILE_NAME"
+    fi
+
+    echo -e "q\nyes" | sh $file -x
+}
+
+do_postinstall() {
+    cd $PKG_DEST$PKG_PREFIX/lib
+
+    ln -sf jdk$PKG_VERSION java
+
+    gzip_man $PKG_DEST$PKG_PREFIX/lib/jdk$PKG_VERSION/man
+
+    chown -R root:root jdk$PKG_VERSION
+
+    mkdir -p $PKG_DEST/etc/profile.d
+    cat $PKG_HOME/files/j2sdk.sh > $PKG_DEST/etc/profile.d/j2sdk.sh
+    cat $PKG_HOME/files/j2sdk.csh > $PKG_DEST/etc/profile.d/j2sdk.csh
+
+    pkg_configfiles
+
+    return $?
+}
