@@ -6,8 +6,9 @@
 # customary to leave one space after the ':'.
 
        |-----handy-ruler------------------------------------------------------|
-example: example
-example:
-example: example
-example:
+privoxy: privoxy
+privoxy:
+privoxy: A web proxy with advanced filtering capabilities for protecting 
+privoxy: privacy against internet junk.
+privoxy:
 
