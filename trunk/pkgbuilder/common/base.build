@@ -89,7 +89,7 @@ pkg_do_upgradepkg() {
 }
 
 pkg_do_cleanup() {
-	if [ -d $PKG_SRC ] ; then
+    if [ -d $PKG_SRC ] ; then
         rm -rf $PKG_SRC
     fi
     
