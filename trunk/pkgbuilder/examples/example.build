@@ -18,7 +18,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="test2"
 
-PKG_DEPENDS=">=t/test1-1.1 `use test2 && echo ">=t/test2-1.0"`"
+PKG_DEPENDS=">=t/test1-1.1 `use_dep test2 ">=t/test2-1.0"`"
 
 PKG_HOMESITE="http://www.example.net/"
 
