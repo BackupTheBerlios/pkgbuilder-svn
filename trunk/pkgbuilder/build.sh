@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.8 2003/11/28 21:36:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.9 2003/11/30 15:05:23 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -67,6 +67,11 @@ fi
 #create temporal directory if not exist
 if [ ! -d $TMP ]; then
     mkdir -p $TMP
+fi
+
+if [ ! -r "$PKG" ] ; then
+    echo "pkgbuilder: $PKG script not found"
+    exit 1
 fi
 
 #build script included

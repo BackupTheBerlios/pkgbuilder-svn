@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.19 2003/11/30 13:37:22 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.20 2003/11/30 15:04:58 tomby Exp $
 
 #
 # Print pkgbuilder version number
@@ -295,7 +295,7 @@ extract_meta() {
         return 1
     fi
     
-    local metapkg="`expr match "$1" '\!\?>\?=\?\([a-z]\+\)'`"
+    local metapkg="`expr match "$1" '\!\?>\?=\?\([a-z]\+\)/\?'`"
     
     echo "$metapkg"
 }

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.9 2003/11/30 13:38:43 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.10 2003/11/30 15:05:23 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -22,9 +22,10 @@
 
 usage() {
     echo
-    echo "usage: ./install.sh [pkg]"
+    echo "usage: ./install.sh [metapkg/pkgname/<script>]"
     echo
     echo "    example: ./install.sh xap/aterm"
+    echo "    example: ./install.sh xap/aterm/aterm-0.4.2.build"
 }
 
 #config file
@@ -34,13 +35,40 @@ source build.rc
 source scripts/functions.sh
 
 #verify script to execute
-if [ "$PKG" == "" -o "$PKG" == "help" ] ; then
+if [ "$1" == "" -o "$1" == "help" ] ; then
     usage
     exit 1
 fi
 
-#package to build
-PKG="$1"
+METAPKG_BASENAME="`dirname $1`"
+PKG_BASENAME="`basename $1 .build`"
+
+METAPKG="`extract_meta "$METAPKG_BASENAME"`"
+
+PKG_NAME="`extract_name "$PKG_BASENAME"`"
+
+PKG_VERSION="`extract_version "$PKG_BASENAME"`"
+
+if [ "$METAPKG" == "" -o "$PKG_NAME" == "" ] ; then
+    echo "pkgbuilder: invalid package"
+    exit 1
+fi
+
+if [ "$PKG_VERSION" == "" ] ; then
+    PKG_VERSION="`latest_version "$METAPKG" "$PKG_NAME"`"
+fi
+
+if is_installed "$PKG_NAME" "$PKG_VERSION" ; then
+    echo "pkgbuilder: $PKG_NAME-$PKG_VERSION allready installed"
+    exit 1
+fi
+
+PKG="$METAPKG/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
+
+if [ ! -r "$PKG" ] ; then
+    echo "pkgbuilder: invalid package"
+    exit 1
+fi
 
 #the build script
 source $PKG
@@ -132,7 +160,6 @@ for DEP in $PKG_DEPENDS ; do
     if is_installed $DEP_PKG_NAME $DEP_PKG_VERSION ; then
         echo "pkgbuilder: $DEP allready installed"
     else
-        
         ( cd $PKGBUILDER_HOME ; ./install.sh $DEP_PKG )
         RETVAL="$?"
         
@@ -143,7 +170,16 @@ for DEP in $PKG_DEPENDS ; do
     fi
 done
 
-echo "pkgbuilder: installing $PKG"
-( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto upgradepkg cleanup )
+if is_installed "$PKG_NAME" && is_installed "$PKG_NAME" "$PKG_VERSION" ; then
+    echo "pkgbuilder: $PKG_NAME-$PKG_VERSION allready installed"
+elif is_installed "$PKG_NAME" ; then
+    echo "pkgbuilder: upgrading $PKG"
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto upgradepkg cleanup )
+    RETVAL="$?"
+else
+    echo "pkgbuilder: installing $PKG"
+    ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto installpkg cleanup )
+    RETVAL="$?"
+fi
 
-exit $?
+exit $RETVAL
