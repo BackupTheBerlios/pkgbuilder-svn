@@ -1,10 +1,6 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/README,v 1.1 2003/10/21 18:19:45 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/README,v 1.2 2003/10/23 18:47:42 tomby Exp $
 
 PKGBUILDER
-
-Se podría decir que esto es el embrión de un arbol de ports para 
-Slackware, aunque ahora mismo lo único que hace es automatizar
-la construcción de paquetes.
 
 El sistema es muy sencillo. Existe un script principal llamado
 'build.sh' al que se le pasan dos parámetros: el directorio 
@@ -104,7 +100,7 @@ estas son las funciones actualmente implementadas:
 Esto no es más que una versión preliminar, ahora mismo sólo
 hay unos pocos paquetes creados, pero puede llegar a ser útil.
 También quisiera que esto se mantuviera igual de sencillo que
-es ahora, siguiendo la filosofía KISS de Slackware.
+es ahora, siguiendo la filosofía KISS.
 
 Además, cualquiera que se acerque un poco al codigo fuente verá
 que no soy precisamente un gurú de la programación en bash, pero
@@ -113,7 +109,5 @@ no demasiados ortodoxos pero sí efectivos. Si notais que hay algo
 que se puede hacer mejor o eliminar cosas innecesarias, hacedmelo
 saber.
 
-NOTA: Principalmente todos los paquetes generados son válidos 
-exclusivamente para las versiones 9.0 y 9.1 de Slackware.
 
 <tomby (AT) tomby.homelinux.org>
