@@ -1,0 +1,87 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/opensp/Attic/opensp-1.5.build,v 1.1 2003/11/29 15:32:35 tomby Exp $
+#
+# opensp-1.5 pkgbuilder script
+#
+
+PKG_NAME="opensp"
+PKG_VERSION="1.5"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="OpenSP-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/openjade/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE="nls"
+
+PKG_DEPENDS="`use nls && echo "a/gettext d/gettext"`"
+
+PKG_HOMESITE="http://openjade.sourceforge.net/"
+
+PKG_SRC="$TMP/OpenSP-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_DATADIR="/usr/share/sgml/OpenSP-$PKG_VERSION"
+PKG_CONFIGURE_OPTIONS="--disable-static --enable-http
+                       --enable-default-catalog=/etc/sgml/catalog
+                       --enable-default-search-path=/usr/share/sgml
+                       --datadir=$PKG_DATADIR"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+
+do_install() {
+    cd $PKG_SRC
+    
+    make $PKG_INSTALL_OPTIONS install &&
+    do_install_opensp
+    
+    return $?
+}
+
+do_install_opensp() {
+    cd $PKG_DEST$PKG_PREFIX/bin &&
+    ln -sf onsgmls nsgmls &&
+    ln -sf osgmlnorm sgmlnorm &&
+    ln -sf ospam spam &&
+    ln -sf ospcat spcat &&
+    ln -sf ospent spent &&
+    ln -sf osx sx &&
+    ln -sf osx sgml2xml &&
+    cd $PKG_DEST$PKG_PREFIX/lib &&
+    ln -sf libosp.so libsp.so
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+    
+    mv $PKG_DEST$PKG_PREFIX/doc/OpenSP $PKG_DOC
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    cat $PKG_HOME/files/doinst.sh-$PKG_VERSION > $PKG_DEST/install/doinst.sh
+}

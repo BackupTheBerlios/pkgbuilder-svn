@@ -1,0 +1,70 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/openjade/openjade-1.3.2.build,v 1.1 2003/11/29 15:32:35 tomby Exp $
+#
+# openjade-1.3.2 pkgbuilder script
+#
+
+PKG_NAME="openjade"
+PKG_VERSION="1.3.2"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/perl
+             ap/sgml-common
+             >=ap/opensp-1.5"
+
+PKG_HOMESITE="http://openjade.sourceforge.net"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+PKG_DATADIR="/usr/share/sgml/$PKG_NAME-$PKG_VERSION"
+PKG_CONFIGURE_OPTIONS="--enable-http --disable-static
+                       --enable-default-catalog=/etc/sgml/catalog
+                       --enable-default-search-path=/usr/share/sgml
+                       --datadir=$PKG_DATADIR"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX
+                     datadir=$PKG_DEST$PKG_DATADIR"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+
+include do_postinstall
+
+do_install() {
+    cd $PKG_SRC
+    
+    make $PKG_INSTALL_OPTIONS install &&
+    do_install_openjade
+    
+    return $?
+}
+
+do_install_openjade() {
+    cd $PKG_DEST$PKG_PREFIX/bin &&
+    ln -sf openjade  jade &&
+    cd $PKG_DEST$PKG_PREFIX/lib &&
+    ln -sf libogrove.so libgrove.so &&
+    ln -sf libospgrove.so libspgrove.so &&
+    ln -sf libostyle.so libstyle.so &&
+    cd $PKG_SRC &&
+    install -m644 dsssl/catalog $PKG_DEST$PKG_DATADIR &&
+    install -m644 dsssl/*.dtd dsssl/*.dsl dsssl/*.sgm  $PKG_DEST$PKG_DATADIR
+}
