@@ -43,6 +43,10 @@ do_patch() {
 do_configure() {
     cd $PKG_SRC
 
+    CFLAGS=$CFLAGS \
+    CXXFLAGS=$CXXFLAGS \
+    CPPFLAGS=$CPPFLAGS \
+    LDFLAGS=$LDFLAGS \
     ./configure --prefix=$PKG_PREFIX \
                 --enable-slirp \
                 `use_enable sdl` \
