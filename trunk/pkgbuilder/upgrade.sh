@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/Attic/upgrade.sh,v 1.2 2003/11/23 18:19:27 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/Attic/upgrade.sh,v 1.3 2003/11/23 18:21:17 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -70,8 +70,8 @@ for DEP in $PKG_DEPENDS ; do
     test "$DEP_METAPKG" = "" -o "$DEP_PKG_NAME" == "" && exit 1
     
     # reset variables
-    $DEP_PKG_LATEST_VERSION=""
-    $DEP_PKG_INSTALLED_VERSION=""
+    DEP_PKG_LATEST_VERSION=""
+    DEP_PKG_INSTALLED_VERSION=""
     
     if [ "$DEP_PKG_VERSION" != "" ] ; then
         if [ `echo $DEP | grep '^!'` ] ; then
