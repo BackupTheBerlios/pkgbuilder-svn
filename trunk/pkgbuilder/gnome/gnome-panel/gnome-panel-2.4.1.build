@@ -1,0 +1,33 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-panel/gnome-panel-2.4.1.build,v 1.1 2004/01/03 23:59:41 tomby Exp $
+#
+# gnome-panel-2.4.1 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS=">=l/gtk+2-2.1
+             >=gnome/libwnck-2.3
+             >=gnome/orbit2-2.4
+             >=gnome/gnome-vfs-2.3
+             >=gnome/gnome-desktop-2.3
+             >=gnome/libbonoboui-2.1.1
+             >=gnome/libglade-2
+             >=gnome/libgnome-2.1.1
+             >=gnome/libgnomeui-2.1
+             >=gnome/gconf-2.3.1
+             l/libpng
+             >=gnome/scrollkeeper-0.3.11
+             >=gnome/intltool-0.21
+             >=d/pkgconfig-0.12.0
+             `use doc && echo ">=gnome/gtk-doc-0.9"`"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* HACKING INSTALL NEWS README"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
