@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/links/links-2.1pre14.build,v 1.2 2003/12/08 21:39:59 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/links/links-2.1pre14.build,v 1.3 2003/12/08 22:13:31 tomby Exp $
 #
 # links-2.1pre14 pkgbuilder script
 #
@@ -22,7 +22,7 @@ PKG_DEPENDS=">=l/openssl-0.9.6c
              >=d/flex-2.5.4a
 	         >=l/libpng-1.2.1
 	         >=l/libjpeg-6b
-	         >=l/tiff-3.5.7
+	         >=l/libtiff-3.5.7
              x/xfree86"
 
 PKG_HOMESITE="http://atrey.karlin.mff.cuni.cz/~clock/twibright/links/"

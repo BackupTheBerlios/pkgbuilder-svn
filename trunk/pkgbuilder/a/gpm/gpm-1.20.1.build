@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/gpm/gpm-1.20.1.build,v 1.1 2003/12/08 22:12:10 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/gpm/gpm-1.20.1.build,v 1.2 2003/12/08 22:18:19 tomby Exp $
 #
 # gpm-1.20.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="gpm"
 PKG_VERSION="1.20.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://arcana.linux.it/pub/$PKG_NAME/$PKG_FILE_NAME"
