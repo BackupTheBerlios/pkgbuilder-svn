@@ -2,7 +2,7 @@
 #
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.13 2003/12/30 20:27:07 tomby Exp $
 #
-# Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
+# Copyright (C) 2003,2004,2005 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
