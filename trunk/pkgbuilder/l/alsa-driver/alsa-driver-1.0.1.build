@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/alsa-driver-1.0.1.build,v 1.1 2004/01/09 19:57:07 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/alsa-driver-1.0.1.build,v 1.2 2004/01/09 23:12:16 tomby Exp $
 #
 # alsa-driver-1.0.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.alsa-project.org/pub/driver/$PKG_FILE_NAME"
@@ -18,7 +18,7 @@ PKG_USE="oss"
 
 PKG_DEPENDS="d/autoconf
              l/glibc
-             k/kernel-source"
+             =k/kernel-source-`uname -r`"
 
 PKG_HOMESITE="http://www.alsa-project.org/"
 
