@@ -7,7 +7,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_URL="http://www.worldvisions.ca/~apenwarr/apmd/$PKG_FILE_NAME"
 
@@ -15,7 +15,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="X"
 
-PKG_DEPENDS="`use X && echo "x/xfree86"`"
+PKG_DEPENDS="`use_dep X "x/x11"`"
 
 PKG_HOMESITE="http://www.worldvisions.ca/~apenwarr/apmd/"
 
