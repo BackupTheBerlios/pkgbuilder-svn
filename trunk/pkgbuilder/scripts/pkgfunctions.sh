@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.11 2004/01/05 20:05:28 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.12 2004/01/11 15:07:21 tomby Exp $
 
 #
 # Package specific functions
@@ -103,31 +103,11 @@ pkg_unpack() {
         cd $PKG_UNPACK_DIR
     fi
     
-    case "$PKG_EXTENSION" in
-        'tar.gz')
-            tar zxvf $FETCH_DIR/$PKG_FILE_NAME
-            RETVAL="$?"
-        ;;
-        'tgz')
-            tar zxvf $FETCH_DIR/$PKG_FILE_NAME
-            RETVAL="$?"
-        ;;
-        'tar.bz2')
-            tar jxvf $FETCH_DIR/$PKG_FILE_NAME
-            RETVAL="$?"
-        ;;
-        'tbz2')
-            tar jxvf $FETCH_DIR/$PKG_FILE_NAME
-            RETVAL="$?"
-        ;;
-        'zip')
-            unzip $FETCH_DIR/$PKG_FILE_NAME
-            RETVAL="$?"
-        ;;
-        *)
-            tar zxvf $FETCH_DIR/$PKG_FILE_NAME
-            RETVAL="$?"
-    esac
+    local file
+    
+    for file in $PKG_FILE_NAME ; do
+        unpack $file
+    done
     
     return $RETVAL
 }
@@ -135,6 +115,8 @@ pkg_unpack() {
 pkg_configure() {
     CFLAGS=$CFLAGS \
     CXXFLAGS=$CXXFLAGS \
+    CPPFLAGS=$CPPFLAGS \
+    LDFLAGS=$LDFLAGS \
     ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
 
     return $?
