@@ -1,0 +1,50 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/orbit2/orbit2-2.8.3.build,v 1.1 2003/12/27 22:26:57 tomby Exp $
+#
+# orbit2-2.8.3 pkgbuilder script
+#
+
+PKG_NAME="orbit2"
+PKG_VERSION="2.8.3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="ORBit2-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/ORBit2/2.8/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="ssl"
+
+PKG_DEPENDS="l/glib2
+             >=l/popt-1.5
+             >=l/libidl-0.7.4
+             d/indent
+             >=d/pkgconfig-0.14.0
+             `use doc && echo ">=gnome/gtk-doc-1"`
+             `use ssl && echo ">=l/openssl-0.9.6"`"
+
+PKG_HOMESITE="http://www.gnome.org/"
+
+PKG_SRC="$TMP/ORBit2-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* README* HACKING INSTALL NEWS TODO MAINTAINERS"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var/lib
+                       `use ssl && echo "--with-ssl"`
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
