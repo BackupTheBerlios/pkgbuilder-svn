@@ -1,0 +1,35 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/pcre/pcre-4.5.build,v 1.4 2004/03/28 17:26:43 tomby Exp $
+#
+# pcre-5.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.csx.cam.ac.uk/pub/software/programming/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPL LGPL"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://pcre.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL LICENCE NEWS NON-UNIX-USE README"
+
+PKG_CONFIGURE_OPTIONS="--enable-utf8"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    cp ltmain.sh ltmain.sh.orig &&
+    sed -e 's:relink=yes:relink=no:' ltmain.sh.orig > ltmain.sh
+    
+    return $?
+}
