@@ -1,0 +1,17 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdeedu-3.3.2 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/qt-3.3
+             >=kde/kdelibs-3.3.2
+             >=kde/kdebase-3.3.2"
+
+PKG_DOC_FILES="COPYING INSTALL README kdeedu.lsm"

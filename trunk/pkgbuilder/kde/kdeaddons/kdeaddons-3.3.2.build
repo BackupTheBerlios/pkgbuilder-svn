@@ -1,0 +1,20 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdeaddons-3.3.2 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/qt-3.3
+             >=kde/kdebase-3.3.2
+             >=kde/kdenetwork-3.3.2
+             >=kde/kdemultimedia-3.3.2
+             >=kde/kdegames-3.3.2
+             >=l/sdl-1.2.1"
+
+PKG_DOC_FILES="kdeaddons.lsm README"

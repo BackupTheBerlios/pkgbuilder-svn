@@ -1,0 +1,48 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdebase-3.3.2 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="oggvorbis lame samba cups opengl"
+
+PKG_DEPENDS="ap/cdparanoia
+             >=l/lesstif-0.93.91
+             l/freetype2
+             >=l/qt-3.3
+             d/pkgconfig
+             l/openssl
+             >=kde/kdelibs-3.3.2
+             `use_dep oggvorbis "l/libvorbis"`
+             `use_dep lame "l/lame"`
+             `use_dep samba "n/samba"`
+             `use_dep cups "a/cups"`"
+
+PKG_DOC_FILES="AUTHORS COPYING INSTALL README kdebase.lsm"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --with-dpms
+                       `use_with oggvorbis vorbis`
+                       `use_with lame`
+                       `use_with cups`
+                       `use_with opengl gl`"
+
+do_postinstall() {
+    ( cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
+      mv kde-information.menu information.menu
+      mv kde-screensavers.menu screensavers.menu
+      mv kde-settings.menu settings.menu
+      ln -sf information.menu kde-information.menu
+      ln -sf screensavers.menu kde-screensavers.menu
+      ln -sf settings.menu kde-settings.menu )
+
+    mkdir -p $PKG_DEST/etc/X11/xinit
+    cp $PKG_HOME/files/xinitrc.kde33 $PKG_DEST/etc/X11/xinit/xinitrc.kde
+    chmod +x $PKG_DEST/etc/X11/xinit/xinitrc.kde
+
+    kde_do_postinstall
+}
