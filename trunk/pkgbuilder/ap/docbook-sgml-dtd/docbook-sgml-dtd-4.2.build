@@ -2,15 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/docbook-sgml-dtd/docbook-sgml-dtd-1.0.build,v 1.4 2004/01/11 15:04:26 tomby Exp $
 #
-# docbook-sgml-dtd-1.0 pkgbuilder script
+# docbook-sgml-dtd-4.2 pkgbuilder script
 #
 
 inherit main
 
-PKG_NAME="docbook-sgml-dtd"
-PKG_VERSION="1.0"
 PKG_ARCH="noarch"
-PKG_BUILD="am2"
+
+PKG_BUILD="am1"
 PKG_EXTENSION="zip"
 PKG_FILE_NAME="docbk30.$PKG_EXTENSION
                docbk31.$PKG_EXTENSION
@@ -34,8 +33,7 @@ PKG_HOMESITE="http://www.oasis-open.org/docbook/"
 
 PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
 PKG_UNPACK_DIR="$PKG_SRC"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_DOC_FILES="ChangeLog readme.txt"
 
 PKG_PREFIX="/usr"
