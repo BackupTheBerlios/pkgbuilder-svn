@@ -1,8 +1,8 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_gfx/Attic/sdl_gfx-2.0.9.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/sdl_gfx/Attic/sdl_gfx-2.0.9.build,v 1.3 2003/12/06 20:26:36 tomby Exp $
 #
-# sdl_gfx pkgbuilder script
+# sdl_gfx-2.0.9 pkgbuilder script
 #
 
 PKG_NAME="sdl_gfx"
@@ -12,6 +12,12 @@ PKG_BUILD="am1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="SDL_gfx-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.ferzkopp.net/Software/SDL_gfx-2.0/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/sdl-1.2"
 
 PKG_HOMESITE="http://www.ferzkopp.net/Software/SDL_gfx-2.0/"
 
