@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libbonobo/libbonobo-2.6.0.build,v 1.1 2004/04/10 11:24:51 tomby Exp $
 #
-# libbonobo-2.6.0 pkgbuilder script
+# libbonobo-2.6.2 pkgbuilder script
 #
 
 inherit gnome
