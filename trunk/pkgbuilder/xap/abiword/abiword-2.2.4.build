@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# abiword-2.2.2 pkgbuilder script
+# abiword-2.2.4 pkgbuilder script
 #
 
 inherit configscript
