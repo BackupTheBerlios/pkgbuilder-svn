@@ -21,7 +21,7 @@ PKG_DEPENDS=">=n/neon-0.24.4
              `use_dep python ">=d/python-2.0 =d/swig-1.3.21"`
              `use_dep perl ">=d/perl-5.8 =d/swig-1.3.21"`
              `use_dep server "l/db4"`
-             `use_dep apache ">=n/apache2-2.0.48"`"
+             `use_dep apache ">=n/apache-2.0.48"`"
 
 PKG_HOMESITE="http://subversion.tigris.org/"
 
