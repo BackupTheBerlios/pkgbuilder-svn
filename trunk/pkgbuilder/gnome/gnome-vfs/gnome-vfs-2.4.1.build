@@ -1,21 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-vfs/gnome-vfs-2.4.1.build,v 1.3 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome-vfs/gnome-vfs-2.4.1.build,v 1.4 2004/01/02 14:57:59 tomby Exp $
 #
 # gnome-vfs-2.4.1 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_NAME="gnome-vfs"
-PKG_VERSION="2.4.1"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am2"
-PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/2.4/$PKG_FILE_NAME"
-
-PKG_LICENSE="GPLv2"
+PKG_BUILD="am3"
 
 PKG_USE="doc ssl"
 
@@ -30,16 +22,9 @@ PKG_DEPENDS="l/glib2
             `use ssl && echo ">=l/openssl-0.9.6"`
             `use doc && echo ">=gnome/gtk-doc-0.6"`"
 
-PKG_HOMESITE="http://www.gnome.org/"
-
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS C* HACKING INSTALL NEWS README TODO"
 
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --enable-static=no
-                       --localstatedir=/var/lib
                        `use ssl && echo "--enable-ssl"`
                        `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"

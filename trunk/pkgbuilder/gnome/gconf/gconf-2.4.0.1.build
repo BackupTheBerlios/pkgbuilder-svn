@@ -1,21 +1,15 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gconf/gconf-2.4.0.1.build,v 1.4 2003/12/30 18:44:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gconf/gconf-2.4.0.1.build,v 1.5 2004/01/02 14:57:59 tomby Exp $
 #
 # gconf-2.4.0.1 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_NAME="gconf"
-PKG_VERSION="2.4.0.1"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am3"
-PKG_EXTENSION="tar.bz2"
+PKG_BUILD="am4"
 PKG_FILE_NAME="GConf-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/GConf/2.4/$PKG_FILE_NAME"
-
-PKG_LICENSE="GPLv2"
+PKG_URL="$GNOME_BASE_URL/GConf/2.4/$PKG_FILE_NAME"
 
 PKG_USE="doc"
 
@@ -28,25 +22,16 @@ PKG_DEPENDS=">=l/glib2-2.0.1
              >=gnome/intltool-0.17
              `use doc && echo ">=gnome/gtk-doc-0.6"`"
 
-PKG_HOMESITE="http://www.gnome.org/"
-
 PKG_SRC="$TMP/GConf-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
 
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
-                       --localstatedir=/var/lib
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
 
 do_postinstall() {
-    cd $PKG_SRC
-
-    mkdir -p $PKG_DEST/etc/gconf/schemas &&
-    pkg_postinstall
-
-    return $?
+    mkdir -p $PKG_DEST/etc/gconf/schemas
+    
+    gnome_do_postinstall
 }
 
 
