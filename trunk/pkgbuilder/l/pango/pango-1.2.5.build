@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/pango/pango-1.2.5.build,v 1.1 2003/12/01 22:19:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/pango/pango-1.2.5.build,v 1.2 2003/12/08 21:15:05 tomby Exp $
 #
 # pango-1.2.5 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="pango"
 PKG_VERSION="1.2.5"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.gtk.org/pub/gtk/v2.2/$PKG_FILE_NAME"
