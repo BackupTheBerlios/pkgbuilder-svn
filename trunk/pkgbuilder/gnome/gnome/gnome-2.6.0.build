@@ -1,0 +1,78 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome/gnome-2.6.0.build,v 1.1 2004/04/11 13:41:08 tomby Exp $
+#
+# gnome-2.6.0 pkgbuilder script
+#
+
+inherit meta
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/glib2-2.4
+             >=l/atk-1.6
+             >=l/pango-1.4
+             >=l/gtk+2-2.4
+             >=l/libxml2-2.6
+             >=l/libxslt-1.1
+             >=gnome/libidl-0.8
+             >=gnome/orbit2-2.10
+             >=gnome/intltool-0.29
+             >=gnome/libbonobo-2.6
+             >=gnome/gconf-2.6
+             >=gnome/gnome-vfs-2.6
+             >=l/esound-0.2.34
+             >=gnome/libgnome-2.6
+             >=l/libart_lgpl-2.3.16
+             >=gnome/libglade-2.3
+             >=gnome/libgnomecanvas-2.6
+             >=gnome/libbonoboui-2.6
+             >=gnome/gnome-icon-theme-1.2
+             >=gnome/gnome-keyring-0.2
+             >=gnome/libgnomeui-2.6
+             >=gnome/gtk-engines-2.2
+             >=gnome/gnome-themes-2.6
+             >=gnome/libwnck-2.6
+             >=gnome/scrollkeeper-0.3.14
+             >=gnome/gnome-panel-2.6
+             >=gnome/gnome-session-2.6
+             >=gnome/vte-0.11
+             >=gnome/gnome-terminal-2.6
+             >=gnome/libgtop-2.5
+             >=gnome/gail-1.6
+             >=gnome/gnome-applets-2.6
+             >=gnome/metacity-2.8
+             >=l/libgsf-1.8
+             >=l/libcroco-0.5
+             >=l/librsvg-2.6
+             >=gnome/eel-2.6
+             >=gnome/nautilus-2.6
+             >=gnome/control-center-2.6
+             >=gnome/libgtkhtml-2.6
+             >=gnome/yelp-2.6
+             >=gnome/bug-buddy-2.6
+             >=gnome/libgnomeprint-2.6
+             >=gnome/libgnomeprintui-2.6
+             >=gnome/gtksourceview-1.0
+             >=gnome/gedit-2.6
+             >=gnome/eog-2.6
+             >=xap/ggv-2.6
+             >=gnome/file-roller-2.6
+             >=gnome/gconf-editor-2.6
+             >=gnome/gnome-utils-2.6
+             >=gnome/gal-1.99
+             >=gnome/gnome-system-monitor-2.6
+             >=gnome/gstreamer-0.8
+             >=gnome/gst-plugins-0.8
+             >=gnome/gnome-media-2.6
+             >=gnome/nautilus-media-0.8
+             >=gnome/at-spi-1.4
+             >=xap/epiphany-1.2
+             >=gnome/gnome-games-2.6"
+
+PKG_HOMESITE="http://www.gnome.org/"
+
