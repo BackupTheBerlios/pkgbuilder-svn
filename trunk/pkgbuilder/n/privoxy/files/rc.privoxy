@@ -8,7 +8,7 @@ PRIVOXY_BIN="/usr/sbin/$PRIVOXY_PRG"
 PRIVOXY_CONF="/etc/privoxy/config"
 PRIVOXY_USER="privoxy"
 PRIVOXY_GROUP="privoxy"
-PRIVOXY_PID="/var/run/$PRIVOXY_PRG/$PRIVOXY_PRG.pid"
+PRIVOXY_PID="/var/run/$PRIVOXY_PRG.pid"
 
 declare -i check
 check=(`/bin/ps -e|/bin/grep $PRIVOXY_PRG|/usr/bin/wc -l`)
