@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="X11R$PKG_VERSION-src1.$PKG_EXTENSION
@@ -17,13 +17,13 @@ PKG_FILE_NAME="X11R$PKG_VERSION-src1.$PKG_EXTENSION
                X11R$PKG_VERSION-src5.$PKG_EXTENSION
                X11R$PKG_VERSION-src6.$PKG_EXTENSION
                X11R$PKG_VERSION-src7.$PKG_EXTENSION"
-PKG_URL="http://www.freedesktop.org/~xorg/X11R6.8.1/src/X11R$PKG_VERSION-src1.$PKG_EXTENSION
-         http://www.freedesktop.org/~xorg/X11R6.8.1/src/X11R$PKG_VERSION-src2.$PKG_EXTENSION
-         http://www.freedesktop.org/~xorg/X11R6.8.1/src/X11R$PKG_VERSION-src3.$PKG_EXTENSION
-         http://www.freedesktop.org/~xorg/X11R6.8.1/src/X11R$PKG_VERSION-src4.$PKG_EXTENSION
-         http://www.freedesktop.org/~xorg/X11R6.8.1/src/X11R$PKG_VERSION-src5.$PKG_EXTENSION
-         http://www.freedesktop.org/~xorg/X11R6.8.1/src/X11R$PKG_VERSION-src6.$PKG_EXTENSION
-         http://www.freedesktop.org/~xorg/X11R6.8.1/src/X11R$PKG_VERSION-src7.$PKG_EXTENSION"
+PKG_URL="http://ftp.skynet.be/pub/ftp.x.org/pub/X11R6.8.1/src/X11R$PKG_VERSION-src1.$PKG_EXTENSION
+         http://ftp.skynet.be/pub/ftp.x.org/pub/X11R6.8.1/src/X11R$PKG_VERSION-src2.$PKG_EXTENSION
+         http://ftp.skynet.be/pub/ftp.x.org/pub/X11R6.8.1/src/X11R$PKG_VERSION-src3.$PKG_EXTENSION
+         http://ftp.skynet.be/pub/ftp.x.org/pub/X11R6.8.1/src/X11R$PKG_VERSION-src4.$PKG_EXTENSION
+         http://ftp.skynet.be/pub/ftp.x.org/pub/X11R6.8.1/src/X11R$PKG_VERSION-src5.$PKG_EXTENSION
+         http://ftp.skynet.be/pub/ftp.x.org/pub/X11R6.8.1/src/X11R$PKG_VERSION-src6.$PKG_EXTENSION
+         http://ftp.skynet.be/pub/ftp.x.org/pub/X11R6.8.1/src/X11R$PKG_VERSION-src7.$PKG_EXTENSION"
 
 PKG_LICENSE="XOrg"
 
@@ -38,7 +38,7 @@ PKG_DEPENDS="!x/xfree86
              >=l/fontconfig-2.1
              l/libpng"
 
-PKG_HOMESITE="http://www.freedesktop.org/XOrg"
+PKG_HOMESITE="http://www.x.org/"
 
 PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION/xc"
 PKG_UNPACK_DIR="$TMP/$PKG_NAME-$PKG_VERSION"
@@ -56,6 +56,8 @@ PKG_VIRTUAL="xfree86-4.4.0"
 
 do_patch() {
     cd $PKG_SRC
+
+    apply_patch xorg-681-CAN-2004-0914.patch -p0 --backup --suffix=.orig -E || return $?
 
     local patch
     for patch in $PKG_HOME/files/*.diff ; do
