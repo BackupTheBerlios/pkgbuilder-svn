@@ -1,0 +1,51 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libbonobo/libbonobo-2.4.2.build,v 1.1 2003/12/27 23:12:38 tomby Exp $
+#
+# libbonobo-2.4.2 pkgbuilder script
+#
+
+PKG_NAME="libbonobo"
+PKG_VERSION="2.4.2"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/2.4/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="doc"
+
+PKG_DEPENDS=">=l/glib2-2.0.1
+             >=gnome/orbit2-2.8
+             >=l/libxml2-2.4.20
+             !gnome/bonobo-activation
+             >=d/pkgconfig-0.12.0
+             >=gnome/intltool-0.17
+             `use doc && echo ">=gnome/gtk-doc-0.6"`"
+
+PKG_HOMESITE="http://www.gnome.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog changes.txt COPYING* INSTALL NEWS README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var/lib
+                       `use doc && echo "--enable-gtk-doc" || echo "--disable-gtk-doc"`"
+
+PKG_CONFIG_FILES="etc/bonobo-activation/bonobo-activation-config.xml"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
