@@ -1,0 +1,96 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/mplayer-1.0pre3.build,v 1.1 2003/12/12 19:51:48 tomby Exp $
+#
+# mplayer-1.0pre3 pkgbuilder script
+#
+
+PKG_NAME="mplayer"
+PKG_VERSION="1.0pre3"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am3"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="MPlayer-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
+         http://www1.mplayerhq.hu/MPlayer/releases/fonts/font-arial-iso-8859-1.tar.bz2
+         http://www1.mplayerhq.hu/MPlayer/Skin/Blue-1.0.tar.bz2"
+         
+PKG_LICENSE="GPLv2"
+
+# TODO
+PKG_USE=""
+
+# TODO
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://www.mplayerhq.hu/"
+
+PKG_SRC="$TMP/MPlayer-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS LICENSE README ChangeLog DOCS/HTML/en/*.html etc/example.conf"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=" --confdir=/etc/mplayer
+                        --datadir=/usr/share/mplayer
+                        --disable-runtime-cpudetection
+                        --enable-gui
+                        --enable-menu
+                        --enable-largefiles
+                        --language=all"
+
+PKG_CONFIG_FILES="etc/mplayer/codecs.conf etc/mplayer/input.conf"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+
+include do_build
+include do_install
+
+do_configure() {
+    cd $PKG_SRC
+
+    ./configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
+        
+    return $? 
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    cat etc/codecs.conf > $PKG_DEST/etc/mplayer/codecs.conf
+    cat etc/input.conf > $PKG_DEST/etc/mplayer/input.conf
+
+    pkg_installdoc
+
+    pkg_stripall
+
+    pkg_gzipmaninfo
+
+    ( for dir in `find $PKG_DEST$PKG_PREFIX/man -type d -name 'man1'` ; do
+        cd $dir
+        rm $dir/mencoder.1
+        ln -s mplayer.1.gz mencoder.1.gz
+      done )
+    
+    ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/Skin
+      tar jxvf $FETCH_DIR/Blue-1.0.tar.bz2
+      mv Blue default
+      find ./ -type f -exec chmod 644 {} \;
+      find ./ -type d -exec chmod 755 {} \;
+      rm -f default/README
+      chown -R root.root default )
+    
+    ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/font
+      tar jxvf $FETCH_DIR/font-arial-iso-8859-1.tar.bz2
+      find ./ -type f -exec chmod 644 {} \;
+      find ./ -type d -exec chmod 755 {} \;
+      chown -R root.root font-arial-iso-8859-1 )
+    
+    pkg_configfiles
+    
+    pkg_installfiles
+}
