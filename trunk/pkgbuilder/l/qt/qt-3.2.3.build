@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.1 2003/11/15 18:36:00 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/qt/qt-3.2.3.build,v 1.2 2003/11/19 22:40:31 tomby Exp $
 #
 # qt pkgbuilder script
 #
@@ -12,9 +12,10 @@ PKG_BUILD="am1"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-x11-free-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.trolltech.com/qt/source/$PKG_FILE_NAME"
+
 PKG_USE="mysql"
 
-PKG_DEPENDS="`use mysql && echo mysql`"
+PKG_DEPENDS="`use mysql && echo >=mysql-4.0.15a`"
 
 PKG_HOMESITE="http://www.trolltech.com/"
 
@@ -51,7 +52,7 @@ do_configure() {
     export QTDIR="`pwd`"
     export YACC="byacc -d"
     export SYSCONF=$PREFIX/etc/settings
-    LD_LIBRARY_PATH_OLD=$LD_LIBRARY_PATH
+    local LD_LIBRARY_PATH_OLD=$LD_LIBRARY_PATH
 	export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
     export LDFLAGS="-ldl"
     
@@ -63,14 +64,21 @@ do_configure() {
     use mysql && myconf="$myconf -plugin-sql-mysql"
     
     echo "yes" | ./configure -prefix $PKG_PREFIX $myconf
+    
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_OLD
                     
     return $?
 }
 
 do_build() {
     cd $PKG_SRC
-
+    
     export QTDIR="`pwd`"
+    export YACC="byacc -d"
+    export SYSCONF=$PREFIX/etc/settings
+    local LD_LIBRARY_PATH_OLD=$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
+    export LDFLAGS="-ldl"
     
     make -i src-qmake src-moc sub-src sub-tools
     
