@@ -20,14 +20,14 @@ PKG_DEPENDS="`use_dep sdl "l/sdl"`"
 
 PKG_HOMESITE="http://fabrice.bellard.free.fr/qemu/"
 
-PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+PKG_DOC_FILES="C* README* TODO VERSION"
 
 PKG_PREFIX="/usr"
-PKG_INSTALL_OPTIONS="prefix=$PKG_DESTDIR/usr
-                     bindir=$PKG_DESTDIR/usr/bin
-                     datadir=$PKG_DESTDIR/usr/share/qemu
-                     docdir=$PKG_DESTDIR/usr/doc/$PKG_NAME-$PKG_DIR
-                     mandir=$PKG_DESTDIR/usr/man"
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST/usr
+                     bindir=$PKG_DEST/usr/bin
+                     datadir=$PKG_DEST/usr/share/qemu
+                     docdir=$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION
+                     mandir=$PKG_DEST/usr/man"
 PKG_INSTALL_TARGET="install"
 
 PKG_NOSTRIP="Y"
@@ -54,7 +54,8 @@ do_configure() {
 do_postinstall() {
     cd $PKG_DEST
 
-    chmod -x usr/share/man/*/*
+    chmod -x usr/man/*/* &&
+    configscript_do_postinstall
 
     return $?
 }
