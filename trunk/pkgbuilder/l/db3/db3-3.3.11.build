@@ -1,99 +1,68 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/db3/db3-3.3.11.build,v 1.4 2003/12/30 21:10:47 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/db3/db3-3.3.11.build,v 1.5 2004/04/19 17:47:28 tomby Exp $
 #
 # db3-3.3.11 pkgbuilder script
 #
 
-inherit configscript
+inherit db
 
-PKG_NAME="db3"
-PKG_VERSION="3.3.11"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
-PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="db-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://www.sleepycat.com/update/snapshot/$PKG_FILE_NAME"
+PKG_BUILD="am3"
 
-PKG_LICENSE="DB"
+PKG_USE="java tcltk"
 
-PKG_USE=""
+PKG_DEPENDS="=l/db1-1.85"
 
-PKG_DEPENDS="l/glibc
-             =l/db1-1.85
-	         d/libtool
-	         d/m4"
-
-PKG_HOMESITE="http://www.sleepycat.com"
-
-PKG_SRC="$TMP/db-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="LICENSE README"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--enable-compat185
-		               --enable-shared
-		               --enable-static
-		               --enable-cxx"
-PKG_BUILD_OPTIONS=""
+                       --enable-shared
+                       --enable-static
+                       --enable-cxx
+                       `use_enable java`
+                       `use tcltk && echo "--enable-tcl --with-tcl=/usr/lib" || echo "--disable-tcl"`"
+
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX docdir=$PKG_DOC"
 
 do_patch() {
     cd $PKG_SRC
-    
+
     patch -p0 < $PKG_HOME/files/patch-3.3.11.1.diff
-    
-    return $?
-}
 
-do_configure() {
-    cd $PKG_SRC/build_unix
-    
-    CFLAGS=$CFLAGS \
-    CXXFLAGS=$CXXFLAGS \
-    ../dist/configure --prefix=$PKG_PREFIX $PKG_CONFIGURE_OPTIONS
-    
-    return $?
-}
-
-do_build() {
-    cd $PKG_SRC/build_unix
-    
-    pkg_build
-    
     return $?
 }
 
 do_install() {
-    cd $PKG_SRC/build_unix
-    
-    pkg_install
-    
-    ( cd $PKG_DEST$PKG_PREFIX/lib
-      rm -f libdb-3.so libdb.so
-      ln -sf libdb-3.3.so libdb-3.so
-      ln -sf libdb-3.3.so libdb.so
-      rm -f libdb-3.a libdb.a
-      ln -sf libdb-3.3.a libdb-3.a  
-      ln -sf libdb-3.3.a libdb.a  
-      
-      rm -f libdb_cxx-3.so libdb_cxx.so
-      ln -sf libdb_cxx-3.3.so libdb_cxx-3.so
-      ln -sf libdb_cxx-3.3.so libdb_cxx.so
-      rm -f libdb_cxx-3.a libdb_cxx.a
-      ln -sf libdb_cxx-3.3.a libdb_cxx-3.a  
-      ln -sf libdb_cxx-3.3.a libdb_cxx.a  
-      
-      chmod 755 *.so
-      chmod 644 *.la
-    )
-    
-    ( cd  $PKG_DEST$PKG_PREFIX/include
-      mkdir db3
-      mv cxx_common.h cxx_except.h db.h db_185.h db_cxx.h db3
-      ln -sf db3/db.h db.h
-    )
-    
+    db_do_install
+
+    cd $PKG_DEST$PKG_PREFIX/lib
+
+    if [ -f libdb.a ] ; then
+        mv libdb.a libdb-3.3.a
+    fi
+
+    if [ -f libdb_cxx.a ] ; then
+        mv libdb_cxx.a libdb_cxx-3.3.a
+    fi
+
+    ln -sf libdb-3.3.so libdb-3.so
+    ln -sf libdb-3.3.a libdb-3.a
+
+    ln -sf libdb_cxx-3.3.so libdb_cxx-3.so
+    ln -sf libdb_cxx-3.3.a libdb_cxx-3.a
+
+    if `use java` ; then
+        ln -sf libdb_java-3.3.so libdb_java-3.so
+        ln -sf libdb_java-3.3.a libdb_java-3.a
+    fi
+
+    if `use tcltk` ; then
+        ln -sf libdb_tcl-3.3.so libdb_tcl-3.so
+        ln -sf libdb_tcl-3.3.a libdb_tcl-3.a
+    fi
+
+    chmod 755 *.so
+    chmod 644 *.la
+
     return $?
 }

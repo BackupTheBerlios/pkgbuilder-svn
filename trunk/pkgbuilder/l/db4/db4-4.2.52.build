@@ -1,0 +1,69 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/db4/db4-4.2.52.build,v 1.1 2004/04/19 17:47:46 tomby Exp $
+#
+# db4-4.2.52 pkgbuilder script
+#
+
+inherit db
+
+PKG_BUILD="am3"
+
+PKG_USE="java tcltk"
+
+PKG_DEPENDS="$PKG_DEPENDS
+             `use_dep java "d/j2sdk"`
+             `use_dep tcltk ">=d/tcl-8.4"`"
+
+PKG_DOC_FILES="LICENSE README"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --datadir=/usr/share
+                       --localstatedir=/var/lib
+                       --enable-compat185
+                       --enable-shared
+                       --enable-static
+                       --enable-cxx
+                       `use_enable java`
+                       `use tcltk && echo "--enable-tcl --with-tcl=/usr/lib" || echo "--disable-tcl"`"
+
+do_install() {
+    db_do_install
+
+    cd $PKG_DEST$PKG_PREFIX/lib
+
+    if [ -f libdb.a ] ; then
+        mv libdb.a libdb-4.2.a
+    fi
+
+    if [ -f libdb_cxx.a ] ; then
+        mv libdb_cxx.a libdb_cxx-4.2.a
+    fi
+
+    ln -sf libdb-4.2.so libdb-4.so
+    ln -sf libdb-4.2.a libdb-4.a
+
+    ln -sf libdb_cxx-4.2.so libdb_cxx-4.so
+    ln -sf libdb_cxx-4.2.a libdb_cxx-4.a
+
+    if `use java` ; then
+        ln -sf libdb_java-4.2.so libdb_java-4.so
+        ln -sf libdb_java-4.2.a libdb_java-4.a
+    fi
+
+    if `use tcltk` ; then
+        ln -sf libdb_tcl-4.2.so libdb_tcl-4.so
+        ln -sf libdb_tcl-4.2.a libdb_tcl-4.a
+    fi
+
+    chmod 755 *.so
+    chmod 644 *.la
+
+    return $?
+}
+
+do_postinstall() {
+    db_do_postinstall
+
+    chown -R root.root $PKG_DEST
+}

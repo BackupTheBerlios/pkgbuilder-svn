@@ -1,0 +1,78 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/apache/apache-2.0.49.build,v 1.1 2004/04/19 17:49:23 tomby Exp $
+#
+# apache-2.0.49 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="httpd-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.apache.org/dist/httpd/$PKG_FILE_NAME"
+
+PKG_LICENSE="APLv2.0"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/yacc
+             d/perl
+             l/zlib
+             l/expat
+             l/openssl
+             l/db4
+             l/gdbm
+             `use_dep ssl "l/openssl"`"
+
+PKG_HOMESITE="http://httpd.apache.org/"
+
+PKG_SRC="$TMP/httpd-$PKG_VERSION"
+
+PKG_DOC_FILES="ABOUT_APACHE CHANGES INSTALL LAYOUT LICENSE NOTICE README* VERSIONING"
+
+PKG_CONFIGURE_OPTIONS="--enable-layout=Slackware
+                       --enable-modules=most
+                       --enable-mods-shared=most
+                       --enable-suexec=shared
+                       --with-suexec-safepath="/usr/local/bin:/usr/bin:/bin"
+                       --with-suexec-userdir=public_html
+                       --with-suexec-caller=apache
+                       --with-suexec-docroot=/var/www
+                       --with-suexec-uidmin=1000
+                       --with-suexec-gidmin=100
+                       --with-suexec-umask=077
+                       --with-perl=/usr/bin/perl
+                       --with-expat=/usr
+                       --with-z=/usr
+                       --with-port=80
+                       --with-random=/dev/urandom
+                       `use ssl && echo "--enable-ssl=shared --with-ssl=/usr"`"
+
+PKG_CONFIG_FILES="etc/apache2/highperformance.conf
+                  etc/apache2/highperformance-std.conf
+                  etc/apache2/httpd.conf
+                  etc/apache2/httpd-std.conf
+                  etc/apache2/magic
+                  etc/apache2/mime.types
+                  etc/apache2/ssl.conf
+                  etc/apache2/ssl-std.conf"
+
+do_patch() {
+    cd $PKG_SRC
+
+    cat $PKG_HOME/files/config.layout >> config.layout
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    CFLAGS=$CFLAGS \
+    CXXFLAGS=$CXXFLAGS \
+    ./configure $PKG_CONFIGURE_OPTIONS
+
+    return $?
+}

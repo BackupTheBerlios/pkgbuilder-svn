@@ -1,0 +1,18 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+      |-----handy-ruler------------------------------------------------------|
+apache: apache (The Apache HTTP Server)
+apache:
+apache: Apache is the most popular web server in the known universe; over
+apache: half of the servers on the Internet are running Apache or one of
+apache: its variants.
+apache: If you need SSL support, you must create a server certificate.
+apache: A helper script - pkgmkcert.sh - is included to facilitate this task,
+apache: look for it in /etc/apache2/. Also, you must start apache with
+apache: 'apachectl startssl' instead of 'apachectl start'.
+apache:
