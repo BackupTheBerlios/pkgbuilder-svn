@@ -1,0 +1,82 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gtk+2/gtk+2-2.2.4.build,v 1.1 2003/12/01 22:50:35 tomby Exp $
+#
+# gtk+2-2.2.4 pkgbuilder script
+#
+
+PKG_NAME="gtk+2"
+PKG_VERSION="2.2.4"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="gtk+-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.gtk.org/pub/gtk/v2.2/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=x/xfree-4.3.0
+	         >=l/glib2-2.2
+	         >=l/atk-1.2
+	         >=l/pango-1.2
+	         >=l/libpng-1.2.1
+	         >=l/libjpeg-6b
+	         >=l/libtiff-3.5.7"
+
+PKG_HOMESITE="http://www.gtk.org/"
+
+PKG_SRC="$TMP/gtk+-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog* HACKING INSTALL NEWS* README*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc/profile.d
+    cat $PKG_HOME/files/gtk+.csh > $PKG_DEST/etc/profile.d/gtk+.csh
+    cat $PKG_HOME/files/gtk+.sh > $PKG_DEST/etc/profile.d/gtk+.sh
+    chmod 755 $PKG_DEST/etc/profile.d/*
+    
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+    
+    if [ -f $PKG_DEST$PKG_PREFIX/info/dir ] ; then
+        rm -f $PKG_DEST$PKG_PREFIX/info/dir
+    fi
+
+    gzip_info $PKG_DEST$PKG_PREFIX/info
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    
+    if [ -f $PKG_HOME/files/doinst.sh-$PKG_VERSION ] ; then
+        cat $PKG_HOME/files/doinst.sh-$PKG_VERSION > $PKG_DEST/install/doinst.sh
+    elif [ -f $PKG_HOME/files/doinst.sh ] ; then
+        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
+    fi
+}
