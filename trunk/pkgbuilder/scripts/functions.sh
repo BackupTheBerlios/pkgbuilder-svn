@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.41 2004/02/29 18:32:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.42 2004/03/13 17:38:49 tomby Exp $
 
 #
 # Generic functions
@@ -652,7 +652,7 @@ extract_name() {
         return 1
     fi
     
-    local pkgname="`expr match "$1" '\([a-zA-Z0-9_+\-]\+\)\-[0-9]\+'`"
+    local pkgname="`expr match "$1" '\([a-zA-Z0-9_+\-]\+\)\-[0-9][a-zA-Z0-9_\.]\+'`"
     
     if [ "$pkgname" != "" ] ; then
         echo "$pkgname"
@@ -671,7 +671,7 @@ extract_version() {
         return 1
     fi
     
-    local pkgmayorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-\([0-9]\)'`"
+    local pkgmayorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-\([0-9]\)[a-zA-Z0-9_\.]\+'`"
     local pkgminorversion="`expr match "$1" '[a-zA-Z0-9_+\-]\+\-[0-9]\([a-zA-Z0-9_\.]\+\)'`"
 
     echo "$pkgmayorversion$pkgminorversion"
