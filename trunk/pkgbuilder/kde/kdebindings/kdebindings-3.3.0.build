@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdebindings/kdebindings-3.2.1.build,v 1.1 2004/03/13 15:00:55 tomby Exp $
 #
-# kdebindings-3.2.3 pkgbuilder script
+# kdebindings-3.3.0 pkgbuilder script
 #
 
 inherit kde
@@ -12,9 +12,9 @@ PKG_BUILD="am1"
 PKG_USE="java python ruby mozilla gtk"
 
 PKG_DEPENDS=">=l/qt-3.2
-             >=kde/kdelibs-3.2.3
-             >=kde/kdebase-3.2.3
-             >=kde/kdenetwork-3.2.3
+             >=kde/kdelibs-3.3.0
+             >=kde/kdebase-3.3.0
+             >=kde/kdenetwork-3.3.0
              l/glib
              `use_dep gtk "l/gtk+"`
              `use_dep python "d/python"`

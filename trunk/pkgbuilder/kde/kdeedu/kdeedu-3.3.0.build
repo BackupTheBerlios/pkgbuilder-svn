@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdeedu/kdeedu-3.2.1.build,v 1.1 2004/03/13 15:00:55 tomby Exp $
 #
-# kdeedu-3.2.3 pkgbuilder script
+# kdeedu-3.3.0 pkgbuilder script
 #
 
 inherit kde
@@ -12,7 +12,7 @@ PKG_BUILD="am1"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/qt-3.2
-             >=kde/kdelibs-3.2.3
-             >=kde/kdebase-3.2.3"
+             >=kde/kdelibs-3.3.0
+             >=kde/kdebase-3.3.0"
 
 PKG_DOC_FILES="COPYING INSTALL README kdeedu.lsm"

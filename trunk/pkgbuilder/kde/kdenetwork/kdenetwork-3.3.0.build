@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdenetwork/kdenetwork-3.2.1.build,v 1.1 2004/03/13 15:00:55 tomby Exp $
 #
-# kdenetwork-3.2.3 pkgbuilder script
+# kdenetwork-3.3.0 pkgbuilder script
 #
 
 inherit kde
@@ -13,8 +13,8 @@ PKG_USE="slp"
 
 PKG_DEPENDS="!xap/kopete
              >=l/qt-3.2
-             >=kde/kdelibs-3.2.3
-             >=kde/kdebase-3.2.3
+             >=kde/kdelibs-3.3.0
+             >=kde/kdebase-3.3.0
              `use_dep slp "l/openslp"`"
 
 PKG_DOC_FILES="AUTHORS COPYING INSTALL kdenetwork.lsm README"

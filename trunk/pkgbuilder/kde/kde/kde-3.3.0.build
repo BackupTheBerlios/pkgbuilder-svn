@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde/kde-3.2.1.build,v 1.1 2004/03/13 13:29:10 tomby Exp $
 #
-# kde-3.2.3 pkgbuilder script
+# kde-3.3.0 pkgbuilder script
 #
 
 inherit meta
@@ -14,25 +14,25 @@ PKG_LICENSE="GPLv2"
 PKG_USE="devel nls accessibility"
 
 PKG_DEPENDS=">=l/qt-3.2
-             =kde/arts-1.2.3
-             =kde/kdelibs-3.2.3
-             =kde/kdebase-3.2.3
-             =kde/kdegraphics-3.2.3
-             =kde/kdemultimedia-3.2.3
-             =kde/kdenetwork-3.2.3
-             =kde/kdepim-3.2.3
-             =kde/kdeedu-3.2.3
-             =kde/kdegames-3.2.3
-             =kde/kdeutils-3.2.3
-             =kde/kdeadmin-3.2.3
-             =kde/kdetoys-3.2.3
-             =kde/kdeartwork-3.2.3
-             =kde/kdeaddons-3.2.3
-             `use_dep accessibility "=kde/kdeaccessibility-3.2.3"`
-             `use_dep nls "=kde/kde-i18n-3.2.3"`
-             `use_dep devel "=kde/kdebindings-3.2.3
-                             =kde/kdesdk-3.2.3
-                             =kde/kdevelop-3.0.4
-                             =kde/quanta-3.2.3"`"
+             =kde/arts-1.3.0
+             =kde/kdelibs-3.3.0
+             =kde/kdebase-3.3.0
+             =kde/kdegraphics-3.3.0
+             =kde/kdemultimedia-3.3.0
+             =kde/kdenetwork-3.3.0
+             =kde/kdepim-3.3.0
+             =kde/kdeedu-3.3.0
+             =kde/kdegames-3.3.0
+             =kde/kdeutils-3.3.0
+             =kde/kdeadmin-3.3.0
+             =kde/kdetoys-3.3.0
+             =kde/kdeartwork-3.3.0
+             =kde/kdeaddons-3.3.0
+             `use_dep accessibility "=kde/kdeaccessibility-3.3.0"`
+             `use_dep nls "=kde/kde-i18n-3.3.0"`
+             `use_dep devel "=kde/kdebindings-3.3.0
+                             =kde/kdesdk-3.3.0
+                             =kde/kdevelop-3.1.0
+                             =kde/webdev-3.3.0"`"
 
 PKG_HOMESITE="http://www.kde.org/"

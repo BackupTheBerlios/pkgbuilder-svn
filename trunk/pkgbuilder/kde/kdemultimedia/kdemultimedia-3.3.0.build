@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdemultimedia/kdemultimedia-3.2.1.build,v 1.2 2004/04/09 10:24:43 tomby Exp $
 #
-# kdemultimedia-3.2.3 pkgbuilder script
+# kdemultimedia-3.3.0 pkgbuilder script
 #
 
 inherit kde
@@ -12,8 +12,8 @@ PKG_BUILD="am1"
 PKG_USE="nas esd tcltk oggvorbis alsa gstreamer"
 
 PKG_DEPENDS=">=l/qt-3.2
-             >=kde/kdelibs-3.2.3
-             >=kde/kdebase-3.2.3
+             >=kde/kdelibs-3.3.0
+             >=kde/kdebase-3.3.0
              ap/mpg321
              l/libmusicbrainz
              l/id3lib

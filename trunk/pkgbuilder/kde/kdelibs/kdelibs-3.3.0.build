@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdelibs/kdelibs-3.2.1.build,v 1.1 2004/03/13 15:00:55 tomby Exp $
 #
-# kdelibs-3.2.3 pkgbuilder script
+# kdelibs-3.3.0 pkgbuilder script
 #
 
 inherit kde
@@ -22,7 +22,7 @@ PKG_DEPENDS="d/perl
              ap/esp-gs
              l/libart_lgpl
              d/gettext
-             >=kde/arts-1.2.3
+             >=kde/arts-1.3.0
              l/openssl
              ap/sgml-common
              `use_dep alsa "l/alsa-lib"`
