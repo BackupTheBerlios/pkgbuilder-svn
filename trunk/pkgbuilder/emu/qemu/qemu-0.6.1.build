@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -35,7 +35,8 @@ PKG_NOSTRIP="Y"
 do_patch() {
     cd $PKG_SRC
 
-    apply_patch $PKG_NAME-$PKG_VERSION-20041126.patch -Np1
+    apply_patch $PKG_NAME-$PKG_VERSION-20041126.patch -Np1 &&
+    sed -i -e "s|\-O2|$CFLAGS|" Makefile
 
     return $?
 }
@@ -43,10 +44,6 @@ do_patch() {
 do_configure() {
     cd $PKG_SRC
 
-    CFLAGS=$CFLAGS \
-    CXXFLAGS=$CXXFLAGS \
-    CPPFLAGS=$CPPFLAGS \
-    LDFLAGS=$LDFLAGS \
     ./configure --prefix=$PKG_PREFIX \
                 --enable-slirp \
                 `use_enable sdl` \
