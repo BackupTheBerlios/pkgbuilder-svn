@@ -1,0 +1,47 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/flac/flac-1.1.0.build,v 1.1 2003/12/14 15:04:57 tomby Exp $
+#
+# flac-1.1.0 pkgbuilder script
+#
+
+PKG_NAME="flac"
+PKG_VERSION="1.1.0"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="sse"
+
+PKG_DEPENDS="l/glibc 
+             l/id3lib 
+             >=l/libogg-1.0rc2 
+             d/nasm 
+             a/gawk"
+
+PKG_HOMESITE="http://flac.sourceforge.net/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS COPYING.* README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="`use sse && echo "--enable-sse"`"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION/html"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
