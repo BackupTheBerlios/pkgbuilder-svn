@@ -1,8 +1,8 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-oss/alsa-oss-1.0.2.build,v 1.1 2004/02/07 16:35:51 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-oss/alsa-oss-1.0.4.build,v 1.1 2004/04/08 17:09:15 tomby Exp $
 #
-# alsa-oss-1.0.2 pkgbuilder script
+# alsa-oss-1.0.7 pkgbuilder script
 #
 
 inherit configscript
@@ -22,6 +22,5 @@ PKG_HOMESITE="http://www.alsa-project.org/"
 
 PKG_DOC_FILES="COPYING"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc --disable-static"
 

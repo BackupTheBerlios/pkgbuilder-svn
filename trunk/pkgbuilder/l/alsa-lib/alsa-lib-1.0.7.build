@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-lib/alsa-lib-1.0.4.build,v 1.1 2004/04/08 17:09:04 tomby Exp $
 #
-# alsa-lib-1.0.3a pkgbuilder script
+# alsa-lib-1.0.7 pkgbuilder script
 #
 
 inherit configscript
@@ -17,7 +17,9 @@ PKG_LICENSE="GPLv2 LGPLv2.1"
 
 PKG_USE=""
 
-PKG_DEPENDS="l/glibc >=d/automake-1.7.2 >=d/autoconf-2.57 >=l/alsa-driver-1.0.0"
+PKG_DEPENDS="l/glibc 
+             >=d/automake-1.7.2 
+             >=d/autoconf-2.57"
 
 PKG_HOMESITE="http://www.alsa-project.org/"
 
