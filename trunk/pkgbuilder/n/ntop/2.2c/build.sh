@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/ntop/2.2c/Attic/build.sh,v 1.3 2003/11/01 12:22:25 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/ntop/2.2c/Attic/build.sh,v 1.4 2003/11/01 12:39:57 tomby Exp $
 #
 # ntop pkgbuilder script
 #
@@ -79,6 +79,9 @@ do_install() {
 
 do_postinstall() {
     cd $PKG_SRC/ntop
+    
+    chown -R root.root $PKG_DEST/etc/ntop
+    chown -R root.root $PKG_DEST/usr/share/ntop
     
     mkdir -p $PKG_DEST/var/lib/ntop
     
