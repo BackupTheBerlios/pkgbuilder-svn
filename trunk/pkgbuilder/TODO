@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.6 2003/11/30 23:20:03 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.7 2003/12/02 21:35:05 tomby Exp $
 
 * New tasks:
 
@@ -98,10 +98,10 @@ l)
     freetype2       X
     fontconfig      X
     qt              X
-    gtk+
-    gtk+2
-    pango
-    atk
+    gtk+            X
+    gtk+2           X
+    pango           X
+    atk             X
     lesstif
 
     libsoup         X
