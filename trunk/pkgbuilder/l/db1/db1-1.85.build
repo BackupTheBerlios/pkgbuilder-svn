@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/db1/db1-1.85.build,v 1.1 2003/12/08 16:00:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/db1/db1-1.85.build,v 1.2 2003/12/08 18:24:07 tomby Exp $
 #
 # db1-1.85 pkgbuilder script
 #
@@ -46,10 +46,6 @@ do_patch() {
     
     patch -p0 < $PKG_HOME/files/db.1.85.glibc.diff
     
-    cd PORT/linux/include
-    cp ndbm.h ndbm.h.orig
-    sed "s:<db.h>:<db1/db.h>:" ndbm.h.orig > ndbm.h
-    
     return $?
 }
 
@@ -77,6 +73,11 @@ do_install() {
     )
     
     cp include/db.h include/mpool.h include/ndbm.h $PKG_DEST$PKG_PREFIX/include/db1
+    
+    ( cd $PKG_DEST$PKG_PREFIX/include/db1
+      cp ndbm.h ndbm.h.orig
+      sed "s:<db.h>:<db1/db.h>:" ndbm.h.orig > ndbm.h 
+      rm ndbm.h.orig )
     
     cp db_dump185 $PKG_DEST$PKG_PREFIX/bin/db1_dump185
     
