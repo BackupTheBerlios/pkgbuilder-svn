@@ -1,17 +1,19 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/readline/readline-4.3.build,v 1.2 2003/11/23 20:01:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/readline/readline-4.3.build,v 1.3 2003/12/06 20:02:36 tomby Exp $
 #
-# readline pkgbuilder script
+# readline-4.3 pkgbuilder script
 #
 
 PKG_NAME="readline"
 PKG_VERSION="4.3"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
