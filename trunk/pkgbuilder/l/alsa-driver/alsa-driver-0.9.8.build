@@ -1,0 +1,53 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/alsa-driver/Attic/alsa-driver-0.9.8.build,v 1.1 2003/12/07 19:58:54 tomby Exp $
+#
+# alsa-driver-0.9.8 pkgbuilder script
+#
+
+PKG_NAME="alsa-driver"
+PKG_VERSION="0.9.8"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.alsa-project.org/pub/driver/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1 GPLv2"
+
+PKG_USE="oss"
+
+PKG_DEPENDS="d/autoconf
+             l/glibc
+             k/kernel-sources"
+
+PKG_HOMESITE="http://www.alsa-project.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="CARDS-STATUS COPYING FAQ INSTALL README WARNING TODO doc/*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-isapnp=yes \
+                       --with-sequencer=yes \
+                       `use oss && echo "--with-oss=yes"`"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_bzip2
+include do_patch
+include do_configure
+include do_build
+
+include do_postinstall
+
+do_install() {
+    mkdir -p $PKG_DEST$PKG_PREFIX/include/sound &&
+    pkg_install
+    
+    return $?
+}
