@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/cups/cups-1.1.20.build,v 1.1 2003/12/13 11:48:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/a/cups/cups-1.1.20.build,v 1.2 2003/12/13 13:38:40 tomby Exp $
 #
 # cups-1.1.20 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="cups"
 PKG_VERSION="1.1.20"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.easysw.com/pub/$PKG_NAME/$PKG_VERSION/$PKG_FILE_NAME"
@@ -32,14 +32,21 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="CHANGES.txt CREDITS.txt ENCRYPTION.txt LICENSE.txt README.txt"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--disable-pam"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var
+                       --with-logdir=/var/log/cups
+                       --disable-pam
+                       --with-cups-user=lp
+		               --with-cups-group=lp"
 PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="INITDIR=/etc
-                     DOCDIR=$PKG_DOC
-                     SERVERROOT=$PKG_DEST/etc/cups 
-                     LOGDIR=$PKG_DEST/var/log/cups
-                     REQUESTS=$PKG_DEST/var/spool/cups
-                     BUILDROOT=$PKG_DEST"
+#PKG_INSTALL_OPTIONS="INITDIR=/etc
+#                     DOCDIR=$PKG_DOC
+#                     SERVERROOT=$PKG_DEST/etc/cups 
+#                     LOGDIR=$PKG_DEST/var/log/cups
+#                     REQUESTS=$PKG_DEST/var/spool/cups
+#                     BUILDROOT=$PKG_DEST"
+
+PKG_INSTALL_OPTIONS="BUILDROOT=$PKG_DEST INITDIR=/etc"
 
 PKG_CONFIG_FILES="etc/cups/classes.conf
                   etc/cups/client.conf
@@ -70,9 +77,6 @@ do_postinstall() {
     cd $PKG_SRC
     
     pkg_installdoc
-    
-    ( cd $PKG_DEST/usr/doc
-        ln -s $PKG_NAME-$PKG_VERSION $PKG_NAME )
     
     ( cd $PKG_DEST/usr/man
         find . -type d -name "cat*" | xargs rm -rf )
