@@ -1,0 +1,26 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gtksourceview/gtksourceview-1.0.0.build,v 1.1 2004/04/10 16:39:09 tomby Exp $
+#
+# gtksourceview-1.0.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS=">=l/gtk+-2.3
+             >=l/libxml2-2.5
+             >=gnome/libgnomeprint-2.2
+             d/gettext
+             >=gnome/intltool-0.30
+             d/pkgconfig
+             `use_dep doc ">=gnome/gtk-doc-1.0"`"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING HACKING INSTALL MAINTAINERS NEWS README TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-build-tests
+                       `use_enable doc gtk-doc`"
