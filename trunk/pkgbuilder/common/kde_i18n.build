@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/common/kde_i18n.build,v 1.2 2004/02/05 20:57:29 tomby Exp $
 #
-# pkgbuilder script for kde-i18n-i18n packages
+# pkgbuilder script for kde_i18n packages
 #
 
 include kde
