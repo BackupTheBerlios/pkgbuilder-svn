@@ -1,10 +1,12 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.28 2003/12/31 15:31:48 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.29 2004/01/04 15:41:41 tomby Exp $
 
 * New tasks:
 
     check pkg deps
     create virtual pkgs support like 'virtual/mta' in gentoo
     use new 'use` variable values
+    cleanup code
+    fix gconf default configuration problems
 
 * Packages:
 
@@ -60,7 +62,7 @@ ap)
     ash
     at
     aumix
-    bash-completion
+    bash-completion        X
     bc                     X
     cdparanoia             X
     cdrdao                 X
@@ -68,6 +70,7 @@ ap)
     diffutils
     docbook-dsssl          X
     docbook-sgml-dtd       X
+    docbook-sgml-utils     X
     docbook-xml-dtd        X
     docbook-xsl            X
     emacs
@@ -82,6 +85,7 @@ ap)
     groff
     iptables               X
     ispell
+    jadetex                X
     jed
     joe
     lsof
@@ -102,9 +106,11 @@ ap)
     sane
     screen                 X
     sgml-common            X
+    sgmlspm                X
     slocate
     sudo
     tcsh                   X
+    tetex                  X
     texinfo
     vim
     vorbis-tools           X
@@ -150,10 +156,13 @@ l)
     liba52                 X
     libao                  X
     libart_gpl             X
+    libcroco               X
     libdv
     libdvdcss              X
+    libdvdnav
     libdvdread
     libfame                X
+    libgsf                 X
     libieee1284            X
     libjpeg                X
     libmad                 X
@@ -340,7 +349,6 @@ xap)
     ksetiwatch             X
     lincvs                 X
     lyx                    X
-    metacity
     mozilla
     mplayer                X
     nedit                  X
@@ -355,7 +363,7 @@ xap)
     xmms                   X
     xpdf                   X
     xsane
-    xscreensaver
+    xscreensaver           X
 
 
 kde)
@@ -383,40 +391,34 @@ kde)
 
 gnome)
 
-    acme
-    at-spi
+    acme                   X
+    at-spi                 X
     bug-buddy
-    control-center
+    control-center         X
     eel                    X
     eog
     epiphany
     file-roller
     gail                   X
-    gal
-    gal2
+    gal                    X
     galeon
     gcalctool
     gconf                  X
     gconf-editor
-    gdk-pixbuf
     gdm
     gedit
-    ggv
-    ghex
-    glade
     gnome2-user-docs
     gnome-applets
     gnome-audio
     gnome-desktop          X
     gnome-extra-themes
     gnome-games
-    gnome-icon-theme
-    gnome-libraries
+    gnome-icon-theme       X
     gnome-media
     gnome-mime-data        X
-    gnome-panel
+    gnome-panel            X
     gnome-print
-    gnome-session
+    gnome-session          X
     gnome-speech
     gnome-system-monitor
     gnome-terminal
@@ -425,48 +427,35 @@ gnome)
     gnome-vfs              X
     gnomeicu
     gnopernicus
-    gst-plugins
-    gstreamer
+    gst-plugins            X
+    gstreamer              X
     gthumb
     gtk-doc                X
-    gtk-engines
-    gtkhtml
-    gtk-thinice-engine
+    gtk-engines            X
+    gtkhtml                X
     gucharmap
-    guppi
     intltool               X
     libbonobo              X
     libbonoboui            X
-    libcapplet
-    libgail-gnome
-    libghtml
     libglade               X
     libgnome               X
     libgnomecanvas         X
     libgnomeprint          X
     libgnomeprintui        X
     libgnomeui             X
-    libgsf
-    libgtkhtml
-    libgtop
+    libgtkhtml             X
+    libgtop                X
     libidl                 X
-    librsvg
+    librsvg                X
     libwnck                X
     linc                   X
-    nautilus
-    nautilus-cd-burner
+    metacity               X
+    nautilus               X
     nautilus-media
-    oaf
-    orbit
     orbit2                 X
-    scrollkeeper           ?
-    soup
-    vte
+    scrollkeeper           X
+    vte                    X
     yelp
-
-t)
-
-    tetex
 
 And more...
 

@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/acme/acme-2.4.2.build,v 1.1 2004/01/04 01:08:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/acme/acme-2.4.2.build,v 1.2 2004/01/04 15:42:10 tomby Exp $
 #
 # acme-2.4.2 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE=""
 
@@ -20,8 +20,6 @@ PKG_DEPENDS=">=gnome/libgnomeui-2
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
-                       --with-gconf-schema-file-dir=/etc/gconf/schemas"
+                       --disable-schemas-install"
 
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
-                     GCONF_SCHEMA_CONFIG_SOURCE=xml::$PKG_DEST/etc/gconf/gconf.xml.defaults
-                     GCONF_SCHEMA_FILE_DIR=$PKG_DEST/etc/gconf/schemas"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
