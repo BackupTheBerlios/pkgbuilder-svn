@@ -55,6 +55,8 @@ if [ ! -e /etc/xml/docbook ]; then /usr/bin/xmlcatalog --noout --create \
 "http://www.oasis-open.org/docbook/" \
 "file:///etc/xml/docbook" /etc/xml/catalog
 
+isodir=/usr/share/xml/docbook/xml-dtd-4.1/ent
+
 xmlcatalog --noout --add "public" \
     "ISO 8879:1986//ENTITIES Publishing//EN" \
     "file://$isodir/iso-pub.ent" /etc/xml/docbook
@@ -115,7 +117,7 @@ xmlcatalog --noout --add "public" \
 
 xmlcatalog --noout --add "delegatePublic" \
     "ISO 8879:1986" \
-    "file:///etc/xml/docbook" $ROOTCATALOG
+    "file:///etc/xml/docbook" /etc/xml/catalog
 
 if [ ! -e /etc/xml/docbook ]; then /usr/bin/xmlcatalog --noout --create \
 /etc/xml/docbook; fi &&
