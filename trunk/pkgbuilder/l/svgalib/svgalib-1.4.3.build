@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/svgalib/svgalib-1.4.3.build,v 1.1 2003/12/13 23:45:46 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/svgalib/svgalib-1.4.3.build,v 1.2 2003/12/26 14:12:48 tomby Exp $
 #
 # svgalib-1.4.3 pkgbuilder script
 #
@@ -30,7 +30,10 @@ PKG_DOC_FILES="0-* LICENSE svgalib.lsm doc/README.* doc/CHANGES*
 PKG_PREFIX="/usr"
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
-PKG_CONFIG_FILES="/etc/example.conf"
+PKG_CONFIG_FILES="etc/vga/default.keymap
+                  etc/vga/dvorak-us.keymap
+				  etc/vga/et4000.regs
+				  etc/vga/libvga.config"
 
 include general
 
@@ -47,7 +50,18 @@ do_build() {
     make prefix=$PKG_PREFIX \
          datadir=/etc/vga \
          OPTIMIZE="$CFLAGS" \
-         static shared textutils lrmi utils &&
+         static shared &&
+	( cd sharedlib
+	  ln -sf libvgagl.so.1.4.3 libvgagl.so
+	  ln -sf libvgagl.so.1.4.3 libvgagl.so.1
+	  ln -sf libvga.so.1.4.3 libvga.so.1
+	  ln -sf libvga.so.1.4.3 libvga.so
+	) &&
+	make prefix=$PKG_PREFIX \
+         datadir=/etc/vga \
+         OPTIMIZE="$CFLAGS" \
+		 LDFLAGS="-L../sharedlib" \
+         textutils lrmi utils &&
     make prefix=$PKG_PREFIX \
          datadir=/etc/vga \
          OPTIMIZE="$CFLAGS" \
@@ -58,14 +72,18 @@ do_build() {
          -C gl libvgagl.so.$PKG_VERSION &&
     ( cd demos
       cp Makefile Makefile.orig
-      cat Makefile.orig | grep -v chown | grep -v chmod > Makefile ) &&
-    ( cd threeDKit/
-      cp Makefile Makefile.orig
-      cat Makefile.orig | grep -v chown | grep -v chmod > Makefile ) &&
-    make prefix=$PKG_PREFIX \
+      cat Makefile.orig | grep -v chown | grep -v chmod > Makefile 
+	  make prefix=$PKG_PREFIX \
          datadir=/etc/vga \
          OPTIMIZE="$CFLAGS" \
-         LDFLAGS='-L ../sharedlib' demoprogs
+         LDFLAGS="-L../sharedlib -lm" ) &&
+    ( cd threeDKit/
+      cp Makefile Makefile.orig
+      cat Makefile.orig | grep -v chown | grep -v chmod > Makefile 
+	  make prefix=$PKG_PREFIX \
+         datadir=/etc/vga \
+         OPTIMIZE="$CFLAGS" \
+         LDFLAGS="-L../sharedlib" )
     
     return $?
 }
