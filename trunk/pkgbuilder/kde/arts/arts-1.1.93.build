@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/arts/Attic/arts-1.1.93.build,v 1.1 2003/11/08 16:41:02 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/arts/Attic/arts-1.1.93.build,v 1.2 2003/11/08 17:39:06 tomby Exp $
 
 PKG_NAME="arts"
 PKG_VERSION="1.1.93"
@@ -18,7 +18,7 @@ PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
 PKG_PREFIX="/opt/kde-3.2"
-PKG_CONFIGURE_OPTIONS="--with-alsa --disable-debug --program-prefix=\"\" --program-suffix=\"\""
+PKG_CONFIGURE_OPTIONS="--with-alsa --disable-debug"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
