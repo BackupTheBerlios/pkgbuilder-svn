@@ -1,0 +1,26 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/vim/vim-6.2.408.build,v 1.1 2004/03/28 13:57:42 tomby Exp $
+#
+# vim-6.3.15 pkgbuilder script
+#
+
+inherit vim
+
+PKG_BUILD="am1"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --enable-gui=no
+                       --without-x"
+
+PKG_DOC_FILES="README*"
+
+do_postinstall() {
+    vim_do_postinstall
+    
+    rm -rf $PKG_DEST/usr/man/man1/{ex,rview,rvim,view}.1
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz ex.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz rview.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz rvim.1.gz )
+    ( cd $PKG_DEST/usr/man/man1 ; ln -sf vim.1.gz view.1.gz )
+}
