@@ -1,0 +1,50 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/fontconfig/fontconfig-2.2.1.build,v 1.1 2003/11/30 16:35:56 tomby Exp $
+#
+# fontconfig-2.2.1 pkgbuilder script
+#
+
+PKG_NAME="fontconfig"
+PKG_VERSION="2.2.1"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.us.sinuspl.net/pub/src/$PKG_FILE_NAME"
+
+PKG_LICENSE="fontconfig"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=a/sed-4
+             >=l/freetype-2.1.4
+             >=l/expat-1.95.3
+             a/bin"
+
+PKG_HOMESITE="http://freedesktop.org/Software/fontconfig"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc 
+                       --disable-docs --with-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
+                       --x-includes=/usr/X11R6/include \
+		               --x-libraries=/usr/X11R6/lib \
+		               --with-default-fonts=/usr/X11R6/lib/X11/fonts/Type1"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include general
+
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+include do_postinstall
+
