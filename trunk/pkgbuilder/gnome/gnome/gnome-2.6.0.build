@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome/gnome-2.6.0.build,v 1.1 2004/04/11 13:41:08 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/gnome/gnome-2.6.0.build,v 1.2 2004/04/11 15:32:37 tomby Exp $
 #
 # gnome-2.6.0 pkgbuilder script
 #
@@ -72,7 +72,8 @@ PKG_DEPENDS=">=l/glib2-2.4
              >=gnome/nautilus-media-0.8
              >=gnome/at-spi-1.4
              >=xap/epiphany-1.2
-             >=gnome/gnome-games-2.6"
+             >=gnome/gnome-games-2.6
+             >=gnome/gdm-2.6"
 
 PKG_HOMESITE="http://www.gnome.org/"
 
