@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="${PKG_NAME}_${PKG_VERSION}.${PKG_EXTENSION}"
-PKG_URL="http://juanjoalvarez.net/download?filename=$PKG_FILE_NAME"
+PKG_URL="http://juanjoalvarez.net/files/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
