@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.37 2004/01/11 15:08:55 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.38 2004/01/14 19:30:11 tomby Exp $
 
 #
 # Generic functions
@@ -229,19 +229,19 @@ unpack() {
         file="$FETCH_DIR/$1"
     fi
     
-    if echo $1 | grep -q "tar.gz$" ; then
+    if echo $1 | grep -q ".tar.gz$" ; then
         tar zxvf $file
         RETVAL="$?"
-    elif echo $1 | grep -q "tgz$" ; then
+    elif echo $1 | grep -q ".tgz$" ; then
+        tar zxvf $file
+        RETVAL="$?"
+    elif echo $1 | grep -q ".tar.bz2$" ; then
         tar jxvf $file
         RETVAL="$?"
-    elif echo $1 | grep -q "tar.bz2$" ; then
+    elif echo $1 | grep -q ".tbz2$" ; then
         tar jxvf $file
         RETVAL="$?"
-    elif echo $1 | grep -q "tbz2$" ; then
-        tar jxvf $file
-        RETVAL="$?"
-    elif echo $1 | grep -q "zip$" ; then
+    elif echo $1 | grep -q ".zip$" ; then
         unzip $file
         RETVAL="$?"
     else
