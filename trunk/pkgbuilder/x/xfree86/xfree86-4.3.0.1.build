@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.5 2003/11/30 19:26:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/xfree86/xfree86-4.3.0.1.build,v 1.6 2003/11/30 19:51:30 tomby Exp $
 #
 # xfree86-4.3.0.1 pkgbuilder script
 #
@@ -59,8 +59,6 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 include general
 
 include do_fetch
-
-include do_postinstall
 
 do_unpack() {
     cd $TMP
@@ -236,4 +234,22 @@ do_install() {
     make $PKG_INSTALL_OPTIONS install.man
     
     return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/usr/lib
+    mv $PKG_DEST$PKG_PREFIX/lib/pkgconfig $PKG_DEST/usr/lib
+    
+    for module in `find $PKG_DEST$PKG_PREFIX/lib/modules -type f -name '*.o'` \
+                  `find $PKG_DEST$PKG_PREFIX/lib/modules -type f -name '*.so'` ; do
+        chmod 755 $module
+    done
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+    
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
 }
