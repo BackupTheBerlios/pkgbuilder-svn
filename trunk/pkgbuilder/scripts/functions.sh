@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.4 2003/11/08 16:50:10 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.5 2003/11/15 16:15:39 tomby Exp $
 
 version() {
     echo "build.sh $VERSION"
@@ -10,7 +10,7 @@ usage() {
     echo
     echo "usage: build.sh [script] [action]"
     echo
-    echo "    general actions: [help|info|cleanup]"
+    echo "    general actions: [info|cleanup]"
     echo "    build actions:   [auto|fetch|unpack|patch|configure|build|install|postinstall]"
     echo "    pkg actions:     [buildpkg|installpkg|upgradepkg]"
     echo
@@ -18,7 +18,7 @@ usage() {
 }
 
 include() {
-    if [ "$1" = "" ] ; then
+    if [ "$1" == "" ] ; then
         return 1  
     fi
     
@@ -27,8 +27,93 @@ include() {
     return $?
 }
 
+use() {
+    if [ "$1" == "" ] ; then
+        return 1  
+    fi
+    
+    echo $USE | grep $1 &> /dev/null
+
+    return $?
+}
+
+execute_action() {
+    if [ "$1" == "" ] ; then
+        return 1  
+    fi
+    
+    RETVAL="0"
+
+    #execution
+    case "$1" in
+        'info')
+            do_info
+            RETVAL="$?"
+        ;;
+        'fetch')
+            do_fetch
+            RETVAL="$?"
+        ;;
+        'unpack')
+            do_unpack
+            RETVAL="$?"
+        ;;
+        'patch')
+            do_patch
+            RETVAL="$?"
+        ;;
+        'configure')
+            do_configure
+            RETVAL="$?"
+        ;;
+        'build')
+            do_build
+            RETVAL="$?"
+        ;;
+        'install')
+            do_install
+            RETVAL="$?"
+        ;;
+        'postinstall')
+            do_postinstall
+            RETVAL="$?"
+        ;;
+        'buildpkg')
+            do_buildpkg
+            RETVAL="$?"
+        ;;
+        'installpkg')
+            do_installpkg
+            RETVAL="$?"
+        ;;
+        'upgradepkg')
+            do_upgradepkg
+            RETVAL="$?"
+        ;;
+        'cleanup')
+            do_cleanup
+            RETVAL="$?"
+        ;;
+        'auto')
+            do_fetch && 
+            do_unpack &&
+            do_patch && 
+            do_configure &&
+            do_build &&
+            do_install &&  
+            do_postinstall && 
+            do_buildpkg
+            RETVAL="$?"
+        ;;
+        *)
+            RETVAL=1
+    esac
+    
+    return $RETVAL
+}
+
 fetch() {
-    if [ "$1" = "" ] ; then
+    if [ "$1" == "" ] ; then
         return 1  
     fi
     
@@ -46,7 +131,7 @@ fetch() {
 }
 
 gzip_man() {
-    if [ "$1" = "" ] ; then
+    if [ "$1" == "" ] ; then
         return 1
     fi
     
@@ -60,7 +145,7 @@ gzip_man() {
 }
 
 strip_all() {
-    if [ "$1" = "" ] ; then
+    if [ "$1" == "" ] ; then
         return 1
     fi
 

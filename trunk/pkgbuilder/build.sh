@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.5 2003/11/09 13:41:58 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.6 2003/11/15 16:14:58 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -30,117 +30,55 @@ source scripts/functions.sh
 #print version number
 version
 
-#script to execute
-if [ "$1" = "" ] ; then
+#package to build
+PKG="$1"
+
+#actions to execute
+shift
+ACTION="$@"
+
+#verify script to execute
+if [ "$PKG" == "" -o "$PKG" == "help" ] ; then
     usage
     exit 1
 fi
 
-#where is the package home
-PKG_HOME="$PKGBUILDER_HOME/`dirname $1`"
-
-#the build script
-source $1
-
-#action to execute
-ACTION="auto"
-
-if [ "$2" != "" ] ; then
-    ACTION=$2
+#verify actions to execute
+if [ "$ACTION" == "" ] ; then
+    ACTION="auto"
 fi
 
 #temporal directory defined?
 if [ "$TMP" = "" ]; then
-  TMP="/tmp"
+    TMP="/tmp"
 fi
 
 #create temporal directory if not exist
 if [ ! -d $TMP ]; then
-  mkdir -p $TMP
+    mkdir -p $TMP
 fi
 
-#create package directory if not exist
-if [ ! -d $PKG_DEST ]; then
-  mkdir -p $PKG_DEST
-fi
+#build script included
+source $PKG
 
-RETVAL="0"
+#where is the package home
+PKG_HOME="$PKGBUILDER_HOME/`dirname $PKG`"
 
-#execution
-case "$ACTION" in
-    'info')
-        do_info
-        RETVAL="$?"
-    ;;
-    'fetch')
-        do_fetch
-        RETVAL="$?"
-    ;;
-    'unpack')
-        do_unpack
-        RETVAL="$?"
-    ;;
-    'patch')
-        do_patch
-        RETVAL="$?"
-    ;;
-    'configure')
-        do_configure
-        RETVAL="$?"
-    ;;
-    'build')
-        do_build
-        RETVAL="$?"
-    ;;
-    'install')
-        do_install
-        RETVAL="$?"
-    ;;
-    'postinstall')
-        do_postinstall
-        RETVAL="$?"
-    ;;
-    'buildpkg')
-        do_buildpkg
-        RETVAL="$?"
-    ;;
-    'installpkg')
-        do_installpkg
-        RETVAL="$?"
-    ;;
-    'upgradepkg')
-        do_upgradepkg
-        RETVAL="$?"
-    ;;
-    'cleanup')
-        do_cleanup
-        RETVAL="$?"
-    ;;
-    'auto')
-        do_fetch && 
-        do_unpack &&
-        do_patch && 
-        do_configure &&
-        do_build &&
-        do_install &&  
-        do_postinstall && 
-        do_buildpkg
-        RETVAL="$?"
-    ;;
-    'help')
-        usage
-    ;;
-    *)
-        echo "pkgbuilder: unrecognized action"
-        exit 1
-esac
+#execute action
+for i in $ACTION ; do
+    execute_action $i
+    
+    RETVAL="$?"
+    
+    echo "pkgbuilder: $i action result: $RETVAL"
+    
+    [ $RETVAL -eq 0 ] || break
+done
 
 #print result
-echo
-
-if [ $RETVAL ] ; then
-    echo "pkgbuilder: $ACTION for $1 result: SUCCESS"
-else
-    echo "pkgbuilder: $ACTION for $1 result: ERROR"
+if [ $RETVAL -eq 0 ] ; then
+    echo "pkgbuilder: overall result for $PKG: SUCCESS"
+else    
+    echo "pkgbuilder: overall result for $PKG: ERROR"
 fi
 
