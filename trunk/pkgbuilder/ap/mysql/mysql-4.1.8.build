@@ -1,12 +1,12 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# mysql-4.1.7 pkgbuilder script
+# mysql-4.1.8 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -53,6 +53,14 @@ PKG_CONFIG_FILES="etc/rc.d/rc.mysqld
                   etc/my-large.cnf 
                   etc/my-medium.cnf 
                   etc/my-small.cnf"
+
+do_configure() {
+    configscript_do_configure
+
+    # stupid error fix
+    cd $PKG_SRC
+    sed -i -e "s|shrext_cmds|shrext|" libtool
+}
 
 do_install() {
     configscript_do_install
