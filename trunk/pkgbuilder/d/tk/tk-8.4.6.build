@@ -7,7 +7,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_FILE_NAME="$PKG_NAME$PKG_VERSION-src.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/tcl/$PKG_FILE_NAME"
@@ -16,9 +16,8 @@ PKG_LICENSE="BSD"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=a/sed-4.0.5
-	         x/xfree86
-	         =d/tcl-$PKG_VERSION"
+PKG_DEPENDS="x/x11
+             =d/tcl-$PKG_VERSION"
 
 PKG_HOMESITE="http://dev.scriptics.com/software/tcltk/"
 
@@ -71,20 +70,20 @@ do_postinstall() {
       ln -sf libtkstub8.4.a libtkstub.a )
 
     sed -e "s,^\(TK_BUILD_LIB_SPEC='-L\)$PKG_SRC/unix,\1/usr/lib," \
-		-e "s,^\(TK_SRC_DIR='\)$PKG_SRC',\1/usr/lib/tk8.4/include'," \
-		-e "s,^\(TK_BUILD_STUB_LIB_SPEC='-L\)$PKG_SRC/unix,\1/usr/lib," \
-		-e "s,^\(TK_BUILD_STUB_LIB_PATH='\)$PKG_SRC/unix,\1/usr/lib," \
-    	$PKG_DEST$PKG_PREFIX/lib/tkConfig.sh > $PKG_DEST$PKG_PREFIX/lib/tkConfig.sh.new
+        -e "s,^\(TK_SRC_DIR='\)$PKG_SRC',\1/usr/lib/tk8.4/include'," \
+        -e "s,^\(TK_BUILD_STUB_LIB_SPEC='-L\)$PKG_SRC/unix,\1/usr/lib," \
+        -e "s,^\(TK_BUILD_STUB_LIB_PATH='\)$PKG_SRC/unix,\1/usr/lib," \
+        $PKG_DEST$PKG_PREFIX/lib/tkConfig.sh > $PKG_DEST$PKG_PREFIX/lib/tkConfig.sh.new
 
-	mv $PKG_DEST$PKG_PREFIX/lib/tkConfig.sh.new $PKG_DEST$PKG_PREFIX/lib/tkConfig.sh
+    mv $PKG_DEST$PKG_PREFIX/lib/tkConfig.sh.new $PKG_DEST$PKG_PREFIX/lib/tkConfig.sh
     
     mkdir -p $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/unix
-	install -c -m0644 $PKG_SRC/unix/*.h $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/unix
-	mkdir -p $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic
-	install -c -m0644 $PKG_SRC/generic/*.h $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic
-	rm -f $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic/tk.h
-	rm -f $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic/tkDecls.h
-	rm -f $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic/tkPlatDecl
+    install -c -m0644 $PKG_SRC/unix/*.h $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/unix
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic
+    install -c -m0644 $PKG_SRC/generic/*.h $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic
+    rm -f $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic/tk.h
+    rm -f $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic/tkDecls.h
+    rm -f $PKG_DEST$PKG_PREFIX/lib/tk8.4/include/generic/tkPlatDecl
     
     pkg_installfiles
 }
