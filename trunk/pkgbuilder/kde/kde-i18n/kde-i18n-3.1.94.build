@@ -1,22 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.10 2004/01/11 15:05:15 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kde-i18n/Attic/kde-i18n-3.1.94.build,v 1.11 2004/01/14 19:46:12 tomby Exp $
 #
 # kde-i18n-3.1.94 pkgbuilder script
 #
 
-inherit kde
+inherit kde_i18n
 
-PKG_ARCH="noarch"
-PKG_BUILD="am1"
-
-for lang in $I18N ; do
-    PKG_FILE_NAME="$PKG_FILE_NAME $PKG_NAME-$lang-$PKG_VERSION.$PKG_EXTENSION"
-done
-
-for file in $PKG_FILE_NAME ; do
-    PKG_URL="$PKG_URL ftp://ftp.es.kde.org/pub/mirror/kde/unstable/$PKG_VERSION/src/$PKG_NAME/$file"
-done
+PKG_BUILD="am2"
 
 PKG_USE=""
 
@@ -25,48 +16,3 @@ PKG_DEPENDS=">=l/qt-3.2
              >=kde/kdebase-3.1.94"
 
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
-
-do_configure() {
-    cd $PKG_SRC
-    
-    local lang
-
-    for lang in $I18N ; do
-        ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
-          pkg_configure )
-    done
-
-    return $?
-}
-
-do_build() {
-    cd $PKG_SRC
-    
-    local lang
-
-    for lang in $I18N ; do
-        ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
-          pkg_build )
-    done
-
-    return $?
-}
-
-do_install() {
-    cd $PKG_SRC
-    
-    local lang
-
-    for lang in $I18N ; do
-        ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
-          pkg_install )
-    done
-
-    return $?
-}
-
-do_postinstall() {
-    pkg_installfiles
-
-    return $?
-}
