@@ -13,6 +13,21 @@
     <!--Content-->
     <div id="tmain">
         <div class="tbox">
+            <div class="ttitle">Día de la Hispanidad</div>
+            <div class="tleft"><b>Martes, 12 de Octubre de 2004</b></div>
+            <div class="tleft">
+                <p>Hoy en España celebramos el Día de la Hispanidad, fiesta nacional. Y para celebrarlo
+                ya hay disponible una nueva versión de PkgBuilder. Después de mucho tiempo algo parado
+                volvemos con fuerza.</p>
+                <p>Esta nueva versión incluye KDE 3.3.0, Gnome 2.8.0, XFree86 4.4.0 y nuevas versiones de otras
+                importantes aplicaciones como KDevelop 3.1.0 y Quanta 3.3.0 Abiword 2.0.12, Gnumeric 1.2.13,
+                Anjuta 1.2.2, Evolution 2.0.1, nuevas versiones de los drivers ALSA 1.0.6a y muchos más.</p>
+                <p><a href="http://download.berlios.de/pkgbuilder/pkgbuilder-20041012.tar.gz">pkgbuilder-20041012.tar.gz</a></p>
+            </div>
+        </div>
+    </div>
+    <div id="tmain">
+        <div class="tbox">
             <div class="ttitle">Nueva versión de PkgBuilder</div>
             <div class="tleft"><b>Domingo, 2 de Mayo de 2004</b></div>
             <div class="tleft">
