@@ -1,0 +1,29 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/examples/example.build,v 1.9 2004/01/04 23:50:35 tomby Exp $
+#
+# evolution-data-server-1.0.2 script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS="l/glib2
+             >=gnome/libbonobo-2.4
+             >=gnome/orbit2-2.9.8
+             >=gnome/gnome-vfs-2
+             >=gnome/libgnome-2
+             >=gnome/gconf-2
+             >=l/libxml2-2
+             >=l/libsoup-2.2
+             >=d/pkgconfig-0.12.0
+             >=gnome/intltool-0.30
+             `use_dep doc ">=gnome/gtk-doc-1"`"
+
+PKG_DOC_FILES=" AUTHORS ChangeLog COPYING HACKING INSTALL MAINTAINERS NEWS README TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use_enable doc gtk-doc`"
