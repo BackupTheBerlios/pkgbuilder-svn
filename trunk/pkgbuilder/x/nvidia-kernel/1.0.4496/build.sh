@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/nvidia-kernel/1.0.4496/Attic/build.sh,v 1.1 2003/10/21 18:19:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/x/nvidia-kernel/1.0.4496/Attic/build.sh,v 1.2 2003/10/22 22:03:22 tomby Exp $
 #
 # nvidia-kernel pkgbuilder script
 #
@@ -40,11 +40,11 @@ do_install() {
     
     gzip -9 $PKG_SRC/usr/src/nv/nvidia.o
     
-    cp -a $PKG_SRC/usr/src/nv/nvidia.o.gz $NV_DEST
+    cp $PKG_SRC/usr/src/nv/nvidia.o.gz $NV_DEST
     
     mkdir -p $PKG_DEST/sbin
     
-    cp -a $PKG_SRC/usr/src/nv/makedevices.sh $PKG_DEST/sbin/NVmakedevices.sh
+    cp $PKG_SRC/usr/src/nv/makedevices.sh $PKG_DEST/sbin/NVmakedevices.sh
 }
 
 do_postinstall() {
@@ -52,7 +52,7 @@ do_postinstall() {
     
     mkdir -p $PKG_DOC
     
-    cp -a README $PKG_DOC
+    cp README $PKG_DOC
     
     mkdir -p $PKG_DEST/install
     

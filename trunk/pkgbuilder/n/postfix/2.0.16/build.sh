@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/postfix/2.0.16/Attic/build.sh,v 1.1 2003/10/21 18:19:52 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/postfix/2.0.16/Attic/build.sh,v 1.2 2003/10/22 22:03:22 tomby Exp $
 #
 # postfix pkgbuilder script
 #
@@ -85,25 +85,25 @@ do_install() {
 do_postinstall() {
     cd $PKG_SRC
     
-    cp -a auxiliary/rmail/rmail $PKG_DEST/usr/bin/rmail
+    cp auxiliary/rmail/rmail $PKG_DEST/usr/bin/rmail
     
     mkdir -p $PKG_DEST/etc/postfix
     
-    cp -a $PKG_DOC/defaults/{*.cf,post*-*} $PKG_DEST/etc/postfix
+    cp $PKG_DOC/defaults/{*.cf,post*-*} $PKG_DEST/etc/postfix
         
     mkdir -p $PKG_DEST/etc/{sasl2,rc.d}
     mkdir -p $PKG_DEST/usr/lib/sasl2
     
-    cp -a $PKG_HOME/files/rc.postfix $PKG_DEST/etc/rc.d
+    cp $PKG_HOME/files/rc.postfix $PKG_DEST/etc/rc.d
     
-    cp -a $PKG_HOME/files/smtpd.conf $PKG_DEST/etc/sasl2
+    cp $PKG_HOME/files/smtpd.conf $PKG_DEST/etc/sasl2
     ( cd $PKG_DEST/usr/lib/sasl2 ; ln -s /etc/sasl2/smtpd.conf )
     
-    cp -a $PKG_HOME/files/saslpass $PKG_DEST/etc/postfix
+    cp $PKG_HOME/files/saslpass $PKG_DEST/etc/postfix
     
     mkdir -p $PKG_DOC
 
-    cp -a $PKG_DOC_FILES $PKG_DOC
+    cp $PKG_DOC_FILES $PKG_DOC
     cp -R html $PKG_DOC
     find $PKG_DOC -type f -exec chmod 644 {} \;
     find $PKG_DOC -type d -exec chmod 755 {} \;

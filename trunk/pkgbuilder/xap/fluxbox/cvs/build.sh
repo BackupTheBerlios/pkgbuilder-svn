@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/fluxbox/cvs/Attic/build.sh,v 1.1 2003/10/21 19:34:39 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/fluxbox/cvs/Attic/build.sh,v 1.2 2003/10/22 22:03:22 tomby Exp $
 #
 # fluxbox cvs version pkgbuilder script
 #
@@ -36,7 +36,7 @@ do_postinstall() {
     #Copiando documentacion
     mkdir -p $PKG_DOC
 
-    cp -a $PKG_DOC_FILES $PKG_DOC
+    cp $PKG_DOC_FILES $PKG_DOC
     find $PKG_DOC -type f -exec chmod 644 {} \;
     find $PKG_DOC -type d -exec chmod 755 {} \;
 

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/divx4linux/20030428/Attic/build.sh,v 1.2 2003/10/21 19:21:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/divx4linux/20030428/Attic/build.sh,v 1.3 2003/10/22 22:03:22 tomby Exp $
 #
 # divx4linux pkgbuilder script
 #
@@ -29,9 +29,9 @@ do_install() {
 
     mkdir -p $PKG_DEST$PKG_PREFIX/{lib,include}
     
-    cp -a *.h $PKG_DEST$PKG_PREFIX/include
+    cp *.h $PKG_DEST$PKG_PREFIX/include
 
-    cp -a *.so $PKG_DEST$PKG_PREFIX/lib
+    cp *.so $PKG_DEST$PKG_PREFIX/lib
     
     cd $PKG_DEST$PKG_PREFIX/lib 
     
@@ -40,6 +40,7 @@ do_install() {
     ln -s libdivxencore.so libdivxdecore.so.0 
     
     chmod 755 libdivx*
+    chown root.root *
 }
 
 do_postinstall() {
@@ -48,7 +49,7 @@ do_postinstall() {
     #Copiando documentacion
     mkdir -p $PKG_DOC
 
-    cp -a $PKG_DOC_FILES $PKG_DOC
+    cp $PKG_DOC_FILES $PKG_DOC
     find $PKG_DOC -type f -exec chmod 644 {} \;
 
     #Creando descripcion del paquete

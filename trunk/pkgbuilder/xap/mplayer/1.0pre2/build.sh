@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/1.0pre2/Attic/build.sh,v 1.1 2003/10/21 18:19:54 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/mplayer/1.0pre2/Attic/build.sh,v 1.2 2003/10/22 22:03:22 tomby Exp $
 #
 # mplayer pkgbuilder script
 #
@@ -54,11 +54,11 @@ do_postinstall() {
     #Copiando documentacion
     mkdir -p $PKG_DOC
 
-    cp -a $PKG_DOC_FILES $PKG_DOC
+    cp $PKG_DOC_FILES $PKG_DOC
     find $PKG_DOC -type f -exec chmod 644 {} \;
     
-    cp -a etc/codecs.conf $PKG_DEST/etc/mplayer
-    cp -a etc/input.conf $PKG_DEST/etc/mplayer
+    cp etc/codecs.conf $PKG_DEST/etc/mplayer
+    cp etc/input.conf $PKG_DEST/etc/mplayer
 
     #Eliminando simbolos en binarios
     strip_all $PKG_DEST

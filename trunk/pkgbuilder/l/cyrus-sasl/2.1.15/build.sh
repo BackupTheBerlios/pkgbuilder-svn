@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/cyrus-sasl/2.1.15/Attic/build.sh,v 1.1 2003/10/21 18:19:49 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/cyrus-sasl/2.1.15/Attic/build.sh,v 1.2 2003/10/22 22:03:22 tomby Exp $
 #
 # cyrus-sasl pkgbuilder script
 #
@@ -47,7 +47,7 @@ do_install() {
     
     mkdir -p $PKG_DEST/etc/{sasl2,rc.d}
     
-    cp -a $PKG_HOME/files/rc.saslauthd $PKG_DEST/etc/rc.d
+    cp $PKG_HOME/files/rc.saslauthd $PKG_DEST/etc/rc.d
     
     mkdir -p $PKG_DEST/var/lib/saslauthd
     

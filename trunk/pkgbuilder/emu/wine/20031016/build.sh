@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/wine/20031016/Attic/build.sh,v 1.1 2003/10/21 19:29:05 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/wine/20031016/Attic/build.sh,v 1.2 2003/10/22 22:03:22 tomby Exp $
 #
 # wine pkgbuilder script
 #
@@ -23,7 +23,7 @@ do_postinstall() {
     
     mkdir -p $PKG_DOC
 
-    cp -a $PKG_DOC_FILES $PKG_DOC
+    cp $PKG_DOC_FILES $PKG_DOC
     find $PKG_DOC -type f -exec chmod 644 {} \;
     
     rmdir $PKG_DEST/usr/man/man3w

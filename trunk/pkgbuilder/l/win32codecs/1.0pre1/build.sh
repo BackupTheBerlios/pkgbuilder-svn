@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/win32codecs/1.0pre1/Attic/build.sh,v 1.2 2003/10/21 19:21:23 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/win32codecs/1.0pre1/Attic/build.sh,v 1.3 2003/10/22 22:03:22 tomby Exp $
 #
 # win32codecs pkgbuilder script
 #
@@ -29,9 +29,12 @@ do_install() {
     
     mkdir -p $PKG_DEST$PKG_PREFIX/lib/win32
     
-    cp -a * $PKG_DEST$PKG_PREFIX/lib/win32
+    cp * $PKG_DEST$PKG_PREFIX/lib/win32
     
-    chmod 755 $PKG_DEST$PKG_PREFIX/lib/win32/*
+    cd $PKG_DEST$PKG_PREFIX/lib/win32/
+    
+    chmod 755 *
+    chown root.root *
 }
 
 do_postinstall() {
