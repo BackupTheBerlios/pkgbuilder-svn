@@ -7,10 +7,10 @@
 
 inherit main
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="essential-$PKG_VERSION.$PKG_EXTENSION"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/codecs/$PKG_FILE_NAME"
 
 PKG_LICENSE="AS-IS"
@@ -21,7 +21,7 @@ PKG_DEPENDS=""
 
 PKG_HOMESITE="http://www.mplayerhq.hu/"
 
-PKG_SRC="$TMP/essential-$PKG_VERSION"
+PKG_SRC="$TMP/$PKG_NAME"
 
 PKG_PREFIX="/usr"
 
