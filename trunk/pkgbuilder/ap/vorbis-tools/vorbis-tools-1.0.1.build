@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/vorbis-tools/vorbis-tools-1.0.1.build,v 1.3 2003/12/29 23:32:02 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/vorbis-tools/vorbis-tools-1.0.1.build,v 1.4 2003/12/30 00:41:11 tomby Exp $
 #
 # vorbis-tools-1.0.1 pkgbuilder script
 #
@@ -15,13 +15,13 @@ PKG_URL="http://www.vorbis.com/files/$PKG_VERSION/unix/$PKG_FILE_NAME"
 
 PKG_LICENSE="AS-IS"
 
-PKG_USE="nls flac"
+PKG_USE="nls speex flac"
 
 PKG_DEPENDS=">=l/libvorbis-1.0
         	 >=l/libao-0.8.2
-             >=l/speex-1.0
         	 >=n/curl-7.9
-             `use flac && echo "l/flac-1.0"`
+             `use speex && echo ">=l/speex-1.0"`
+             `use flac && echo ">=l/flac-1.0"`
 			 `use nls && echo "d/gettext"`"
 
 PKG_HOMESITE="http://www.xiph.org/ogg/vorbis/index.html"
