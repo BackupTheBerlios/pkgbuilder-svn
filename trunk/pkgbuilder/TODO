@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.3 2003/11/28 21:39:20 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.4 2003/11/30 11:22:00 tomby Exp $
 
 * New packages:
 
@@ -25,6 +25,53 @@ pure-ftpd
 wx-windows
 anjuta          X
 kde 3.2beta1    
+
+* Base Packages:
+
+iptables        
+gnupg
+tripwire
+
+reiserfs
+xfs
+
+vim
+emacs
+nano            X
+joe
+
+tcsh
+zsh
+
+openssl
+pcre            X
+popt            X
+slang           X
+libxml          X
+libxml2         X
+libxslt         X
+readline        X
+gmp             X
+gdbm            X
+glib            X
+glib2           X
+expat           X
+
+lcms            X
+libjpeg         X
+libpng          X
+libtiff         X
+libungif        X
+libmng          X
+imlib
+imlib2
+
+pkgconfig       X
+
+python
+ruby            X
+tcl
+tk
 
 * New tasks:
 
