@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.28 2003/12/24 16:33:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.29 2003/12/26 20:13:20 tomby Exp $
 
 #
 # Generic functions
@@ -209,6 +209,7 @@ strip_all() {
 #
 # @param $1 package name
 # @param $2 package version (optional)
+# @PARAM $3 package build (optional)
 #
 is_installed() {
     if [ "$1" == "" ] ; then
@@ -220,8 +221,11 @@ is_installed() {
     if [ "$2" == "" ] ; then
         ls $PACKAGES_LOGDIR/$1-*-*-* 2> /dev/null | grep "$1\-[0-9]" &> /dev/null
         retval="$?"
-    else
+    elif [ "$3" == "" ] ; then
         ls $PACKAGES_LOGDIR/$1-$2-*-* &> /dev/null
+        retval="$?"
+	else
+		ls $PACKAGES_LOGDIR/$1-$2-*-$3 &> /dev/null
         retval="$?"
     fi    
     
@@ -273,7 +277,7 @@ installed_version() {
     fi
     
     if ls $PACKAGES_LOGDIR/$1-*-*-* &> /dev/null ; then
-        local pkgfile=`cd $PACKAGES_LOGDIR ; ls -1 $1-*-*-* | grep "$1\-[0-9]"`
+        local pkgfile=`cd $PACKAGES_LOGDIR ; ls -1 $1-*-*-* | grep "^$1\-[0-9]"`
     else
         return 2
     fi
@@ -284,6 +288,31 @@ installed_version() {
         local pkgversion="`extract_version $pkgfile`"
         
         echo "$pkgversion"
+    else
+        return 1
+    fi
+}
+
+#
+# Print instaled build of package
+#
+# @param $1 package name
+#
+installed_build() {
+    if [ "$1" == "" ] ; then
+        return 1
+    fi
+    
+    if ls $PACKAGES_LOGDIR/$1-*-*-* &> /dev/null ; then
+        local pkgfile=`cd $PACKAGES_LOGDIR ; ls -1 $1-*-*-* | grep "^$1\-[0-9]"`
+    else
+        return 2
+    fi
+    
+    if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then
+		local pkgbuild="`expr match "$pkgfile" '.*\-\([a-z]*[0-9]\+[a-z]*\)'`"
+        
+        echo "$pkgbuild"
     else
         return 1
     fi

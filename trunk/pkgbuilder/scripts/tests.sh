@@ -100,6 +100,8 @@ is_installed skljdf ; do_assertFalse $?
 is_installed libjpeg ; do_assertTrue $?
 is_installed libjpeg 6b ; do_assertTrue $?
 is_installed glibc 2.3* ; do_assertTrue $?
+is_installed lilo 22.5.7.2 1 ; do_assertTrue $?
+is_installed lilo 22.5.7.2 4 ; do_assertFalse $?
 
 echo "=> latest_version tests"
 do_init
@@ -117,3 +119,10 @@ do_assertEquals "`installed_version bzip2`" "1.0.2"
 do_assertEquals "`installed_version glibc`" "2.3.2"
 do_assertEquals "`installed_version libjpeg`" "6b"
 do_assertEquals "`installed_version divx4linux`" "20030428"
+
+echo "=> installed_build tests"
+do_init
+do_assertEquals "`installed_build lincvs`" "am2"
+do_assertEquals "`installed_build lilo`" "1"
+do_assertNotEquals "`installed_build lilo`" "4"
+
