@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.20 2003/12/27 01:18:51 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.21 2003/12/27 13:30:22 tomby Exp $
 
 * New tasks:
 
@@ -45,6 +45,7 @@ ap)
 
     tcsh			X
     zsh             X
+	screen			X
 
     mysql
     postgresql
