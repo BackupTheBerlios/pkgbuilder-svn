@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/control-center/control-center-2.6.0.3.build,v 1.1 2004/04/10 16:04:59 tomby Exp $
 #
-# control-center-2.6.0.3 pkgbuilder script
+# control-center-2.6.1 pkgbuilder script
 #
 
 inherit gnome
@@ -24,7 +24,7 @@ PKG_DEPENDS=">=l/gtk+2-2.3
              l/libxml2
              l/esound
              >=gnome/metacity-2.4.5
-             >=l/libxklavier-1
+             >=l/libxklavier-1.02
              >=gnome/scrollkeeper-0.3.11
              >=d/pkgconfig-0.12.0
              >=gnome/intltool-0.29
