@@ -12,16 +12,17 @@ PKG_BUILD="am1"
 
 PKG_USE="python"
 
-PKG_DEPENDS="l/gtk+2
-             l/glib2
+PKG_DEPENDS=">=l/gtk+2-2.4
+             >=l/pango-1.4
+             >=l/glib2-2.4
              >=gnome/libgnome-2
              >=gnome/libgnomeui-2
-             >=gnome/libgnomeprint-2.4.2
-             >=gnome/libgnomeprintui-2.4.2
+             >=gnome/libgnomeprint-2.5.2
+             >=gnome/libgnomeprintui-2.5.2
              >=gnome/libgnomecanvas-2
-             >=gnome/libglade-2
+             >=gnome/libglade-2.3.6
              >=l/libxml2-2.4.12
-             >=gnome/libgsf-1.9
+             >=l/libgsf-1.10.0
              >=l/libart_lgpl-2.3.11
              >=gnome/libbonobo-2.2
              >=gnome/libbonoboui-2.2
