@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_FILE_NAME="$PKG_NAME$PKG_VERSION-src.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
@@ -24,6 +24,7 @@ PKG_SRC="$TMP/$PKG_NAME$PKG_VERSION"
 PKG_DOC_FILES="README changes license.terms"
 
 PKG_CONFIGURE_OPTIONS="--enable-shared 
+                       --enable-threads
                        --enable-man-symlinks 
                        --enable-man-compression=/bin/gzip"
 
