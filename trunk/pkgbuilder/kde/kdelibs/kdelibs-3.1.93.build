@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdelibs/Attic/kdelibs-3.1.93.build,v 1.1 2003/11/08 16:41:02 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/kde/kdelibs/Attic/kdelibs-3.1.93.build,v 1.2 2003/11/08 21:24:29 tomby Exp $
 
 PKG_NAME="kdelibs"
 PKG_VERSION="3.1.93"
@@ -15,10 +15,15 @@ PKG_HOMESITE="http://www.kde.org/"
 PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
 PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
 PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
-PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+PKG_DOC_FILES="AUTHORS COMPILING COMPILING.html COPYING COPYING.BSD COPYING.LIB DEBUG
+               INSTALL KDE2PORTING.html KDE3PORTING.html NAMING README  kdelibs.lsm"
 
 PKG_PREFIX="/opt/kde-3.2"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_CONFIGURE_OPTIONS="--with-ssl-dir=/usr
+                       --disable-debug
+                       --enable-fast-malloc=full
+                       --disable-libfam
+                       --enable-dnotify"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
