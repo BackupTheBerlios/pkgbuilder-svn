@@ -16,7 +16,7 @@ PKG_LICENSE="BSD"
 
 PKG_USE=""
 
-PKG_DEPENDS="n/apache d/ruby"
+PKG_DEPENDS="n/apache d/ruby d/eruby"
 
 PKG_HOMESITE="http://modruby.net/"
 
