@@ -173,7 +173,6 @@ gnome)
     gnome-vfs-extras
     gnopernicus
     gok
-    libgda
     zenity
 
 And more...
