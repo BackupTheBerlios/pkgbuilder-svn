@@ -60,9 +60,8 @@ use() {
         return 1  
     fi
     
-    echo $USE | grep -o "\b$1\b" &> /dev/null
-
-    return $?
+    ( echo $USE | grep -o "\-$1\b" &> /dev/null ) && return 1
+    ( echo $USE | grep -o "\b$1\b" &> /dev/null ) && return 0 || return 1
 }
 
 #
