@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.2 2003/10/30 21:55:40 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.3 2003/11/28 21:39:20 tomby Exp $
 
 * New packages:
 
@@ -23,11 +23,12 @@ dia
 frozen-bubble   X
 pure-ftpd
 wx-windows
-anjuta
+anjuta          X
+kde 3.2beta1    
 
-* New features:
+* New tasks:
 
-checksum verification
-action dependency check
-packages dependency check
+add checksum verification files to packages
+add dependies to build scripts and test dependency check
+
 

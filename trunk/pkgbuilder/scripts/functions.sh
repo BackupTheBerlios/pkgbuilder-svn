@@ -1,20 +1,9 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.13 2003/11/23 20:12:46 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/functions.sh,v 1.14 2003/11/28 21:36:18 tomby Exp $
 
 version() {
-    echo "build.sh $VERSION"
-}
-
-usage() {
-    echo
-    echo "usage: build.sh [script] [action]"
-    echo
-    echo "    general actions: [info|cleanup]"
-    echo "    build actions:   [auto|fetch|unpack|patch|configure|build|install|postinstall]"
-    echo "    pkg actions:     [buildpkg|installpkg|upgradepkg]"
-    echo
-    echo "    example: build.sh xap/aterm/aterm-0.4.2.build fetch"
+    echo "pkgbuilder $VERSION"
 }
 
 include() {
@@ -229,12 +218,20 @@ installed_version() {
         return 2
     fi
     
-    if [ -f "$PACKAGES_LOGDIR/$pkgfile" ] ; then
+    if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then
         local pkgmayorversion=`expr match $pkgfile '[a-zA-Z0-9_\-]\+\-\([0-9]\+\)'`
         local pkgminorversion=`expr match $pkgfile '[a-zA-Z0-9_\-]\+\-[0-9]\+\([0-9a-z\.]\+\)'`
         
         echo "$pkgmayorversion$pkgminorversion"
     else
         return 1
+    fi
+}
+
+result_msg() {
+    if [ "$1" -eq 0 ] ; then
+        echo "SUCCESS"
+    else    
+        echo "ERROR"
     fi
 }

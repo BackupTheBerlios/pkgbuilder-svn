@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.7 2003/11/15 18:22:38 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.8 2003/11/28 21:36:52 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -20,6 +20,17 @@
 #
 # General script to build and create new packages
 #
+
+usage() {
+    echo
+    echo "usage: ./build.sh [script] [action]"
+    echo
+    echo "    general actions: [info|cleanup]"
+    echo "    build actions:   [auto|fetch|verify|unpack|patch|configure|build|install|postinstall]"
+    echo "    pkg actions:     [buildpkg|installpkg|upgradepkg]"
+    echo
+    echo "    example: build.sh xap/aterm/aterm-0.4.2.build fetch"
+}
 
 #config file
 source build.rc
@@ -70,17 +81,13 @@ for i in $ACTION ; do
     
     RETVAL="$?"
     
-    echo "pkgbuilder: $i action result: $RETVAL"
+    echo "pkgbuilder: $i action result: `result_msg $RETVAL`"
     
     [ $RETVAL -eq 0 ] || break
 done
 
 #print result
-if [ $RETVAL -eq 0 ] ; then
-    echo "pkgbuilder: overall result for $PKG: SUCCESS"
-else    
-    echo "pkgbuilder: overall result for $PKG: ERROR"
-fi
+echo "pkgbuilder: overall result for $PKG: `result_msg $RETVAL`"
 
 exit $RETVAL
 
