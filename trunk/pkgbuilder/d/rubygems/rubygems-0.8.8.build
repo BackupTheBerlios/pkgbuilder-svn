@@ -1,0 +1,56 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# rubygems-0.8.8 pkgbuilder script
+#
+
+inherit main
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://rubyforge.org/frs/download.php/3463/$PKG_FILE_NAME"
+
+PKG_LICENSE="Ruby"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/ruby"
+
+PKG_HOMESITE="http://rubygems.rubyforge.org/wiki/wiki.pl?RubyGems"
+
+PKG_DOC_FILES="ChangeLog README Releases TODO"
+
+PKG_PREFIX="/usr"
+
+PKG_NOSTRIP="Y"
+
+RUBY_VERSION="1.8"
+RUBY_CMD="/usr/bin/ruby"
+
+do_patch() {
+    cd $PKG_SRC
+
+    sed -i -e "s|Gem.dir|\"$PKG_DEST\" + Gem.dir|" post-install.rb
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    $RUBY_CMD setup.rb config --prefix=$PKG_PREFIX &&
+    $RUBY_CMD setup.rb setup
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/ruby/gems/$RUBY_VERSION &&
+    $RUBY_CMD setup.rb install --prefix=$PKG_DEST
+
+    return $?
+}
