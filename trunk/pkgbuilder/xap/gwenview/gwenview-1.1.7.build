@@ -21,3 +21,11 @@ PKG_DEPENDS=">=l/kdelibs-3.2.1"
 PKG_HOMESITE="http://gwenview.sourceforge.net/"
 
 PKG_DOC_FILES="AUTHORS C* HACKING INSTALL NEWS README TODO"
+
+do_patch() {
+    cd $PKG_SRC
+
+    make -f admin/Makefile.common dist
+
+    return $?
+}
