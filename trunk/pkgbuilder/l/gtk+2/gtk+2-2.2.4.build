@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gtk+2/gtk+2-2.2.4.build,v 1.1 2003/12/01 22:50:35 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gtk+2/gtk+2-2.2.4.build,v 1.2 2003/12/01 22:53:27 tomby Exp $
 #
 # gtk+2-2.2.4 pkgbuilder script
 #
@@ -17,7 +17,7 @@ PKG_LICENSE="LGPLv2.1"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=x/xfree-4.3.0
+PKG_DEPENDS=">=x/xfree86-4.3.0
 	         >=l/glib2-2.2
 	         >=l/atk-1.2
 	         >=l/pango-1.2
