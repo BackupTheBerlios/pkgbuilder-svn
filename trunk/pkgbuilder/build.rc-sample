@@ -6,30 +6,31 @@ PKGBUILDER_HOME="/var/pkgbuilder"
 
 VERSION="20041114"
 
-# packages db directory
+# Packages db directory
 PACKAGES_LOGDIR="/var/log/packages"
 
-#pkgbuilder mirror
+# PkgBuilder mirror
 PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
 
-#local network source code mirror
+# Local network source code mirror
 #MIRROR_URL="ftp://localhost/pub/pkgbuilder"
 
-#cdrom with source code
+# CDROM with source code
 #CDROM_DIR="/mnt/cdrom"
 
-#FETCH OPTIONS
+# Fetch options
 FETCH_TRIES="5"
-FETCH_DIR="/tmp/distfiles"
+FETCH_DIR="/var/cache/pkgbuilder/sources"
 FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
 FETCH_FTP_OPTIONS="--passive-ftp"
 
-#BINARY PACKAGES DIRECTORY
-BINARIES_DIR="/home/tomby/tmp/binaries"
+# Binary packages directory
+BINARIES_DIR="/var/cache/pkgbuilder/binaries"
 
+# Temporal directory
 TMP="/tmp"
 
-#USE FLAGS
+# USE flags
 USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod nas gstreamer"
 USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl libcaca aalib svga fbcon directfb"
 USE_NET="samba ssl slp maildir apache"
@@ -43,16 +44,16 @@ USE_MISC="nls doc gpm javascript mysql xml sane crypto tetex unicode server"
 USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
      $USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
 
-#I18N CONFIGURATION
+# I18N configuration
 #I18N="es"
 
-#Parallel compilation. Use with care, some packages compilation fails.
+# Parallel compilation. Use with care, some packages compilation fails.
 #COMPILATION="parallel"
 #DISTCC_HOSTS="host1 host2 host3 hostn"
 #CCACHE_PREFIX="distcc"
 #MAKE_OPTIONS="-j8"
 
-#CPU AND ARCHITECTURE FLAGS CONFIGURATION
+# CPU and ARCHITECTURE flags configuration
 ARCH="i486"
 CPU="i686"
 CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
