@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.23 2004/03/14 15:18:00 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.24 2004/04/19 18:01:22 tomby Exp $
 #
 # Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
 #
@@ -46,6 +46,10 @@ while [ 0 ]; do
     if [ "$1" = "-v" ]; then
         VERBOSE="Y"
         OPTIONS="$OPTIONS -v"
+        shift 1
+    elif [ "$1" = "-p" ]; then
+        MODE="frompkg"
+        OPTIONS="$OPTIONS -p"
         shift 1
     elif [ "$1" = "-d" ]; then
         MODE="dummy"
@@ -212,7 +216,7 @@ for DEP in $PKG_DEPENDS ; do
         test "$RETVAL" -ne 0 && exit "$RETVAL"
         
         # update environment
-        if [ "$MODE" = "install" ] ; then
+        if [ "$MODE" = "install" -o "$MODE" = "frompkg" ] ; then
             source /etc/profile
         fi
     fi
@@ -224,12 +228,18 @@ if is_installed "$PKG_NAME" ; then
     if [ "$MODE" = "install" ] ; then
         ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup upgradepkg )
         RETVAL="$?"
+    elif [ "$MODE" = "frompkg" ] ; then
+        ( cd $PKGBUILDER_HOME ; ./build.sh $PKG upgradepkg )
+        RETVAL="$?"
     fi
 else
     echo "pkgbuilder: installing $PKG"
 
     if [ "$MODE" = "install" ] ; then
         ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup installpkg )
+        RETVAL="$?"
+    elif [ "$MODE" = "frompkg" ] ; then
+        ( cd $PKGBUILDER_HOME ; ./build.sh $PKG installpkg )
         RETVAL="$?"
     fi
 fi
