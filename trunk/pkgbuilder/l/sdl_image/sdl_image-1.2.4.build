@@ -1,0 +1,42 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# sdl_image-1.2.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am2"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL_image-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.libsdl.org/projects/SDL_image/release/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE="png gif tiff jpeg"
+
+PKG_DEPENDS="`use_dep png ">=l/libpng-1.2.1"`
+             `use_dep gif ">=l/libungif-4.1"`
+             `use_dep tiff ">=l/libtiff-3.6.0"`
+             `use_dep jpeg ">=l/libjpeg-6b"`
+             >=l/sdl-1.2.4
+             l/zlib"
+
+PKG_HOMESITE="http://www.libsdl.org/projects/SDL_image/index.html"
+
+PKG_SRC="$TMP/SDL_image-$PKG_VERSION"
+
+PKG_DOC_FILES="CHANGES COPYING README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--enable-tif 
+                       --enable-gif 
+                       --enable-jpg 
+                       --enable-png 
+                       --enable-xpm 
+                       --enable-pcx 
+                       --enable-pnm 
+                       --enable-bmp"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
