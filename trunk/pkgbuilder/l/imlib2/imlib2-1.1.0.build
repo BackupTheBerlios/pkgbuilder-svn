@@ -7,10 +7,8 @@
 
 inherit configscript
 
-PKG_NAME="imlib2"
-PKG_VERSION="1.1.0"
-PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/enlightenment/$PKG_FILE_NAME"
@@ -19,8 +17,7 @@ PKG_LICENSE="AS-IS"
 
 PKG_USE="mmx"
 
-PKG_DEPENDS="a/gettext
-             d/gettext-tools
+PKG_DEPENDS="d/gettext
              l/freetype2
              x/xfree86
              >=l/libungif-4.1.0
@@ -30,13 +27,7 @@ PKG_DEPENDS="a/gettext
 
 PKG_HOMESITE="http://www.enlightenment.org/pages/imlib2.html"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog README TODO"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/X11/imlib
-                      `use mmx && echo "--enable-mmx"`"
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+                      `use_enable mmx "--enable-mmx"`"
