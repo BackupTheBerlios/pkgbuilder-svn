@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/epiphany/epiphany-1.2.2.build,v 1.1 2004/04/10 17:56:36 tomby Exp $
 #
-# epiphany-1.2.8 pkgbuilder script
+# epiphany-1.4.0 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE="gnome"
 
@@ -34,3 +34,11 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use gnome && echo "--enable-nautilus-view=yes" || echo "--enable-nautilus-view=no"`"
 
 MAKE_OPTIONS="-j1"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch epiphany-1.4.0-mozilla-1.7.3.patch -Np1
+
+    return $?
+}
