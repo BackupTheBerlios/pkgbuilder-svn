@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/galeon/galeon-1.3.14.build,v 1.1 2004/03/21 15:27:07 tomby Exp $
 #
-# galeon-1.3.17 pkgbuilder script
+# galeon-1.3.18 pkgbuilder script
 #
 
 inherit gnome
