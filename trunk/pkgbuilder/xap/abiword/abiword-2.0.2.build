@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/abiword/Attic/abiword-2.0.2.build,v 1.1 2004/01/05 23:58:13 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/abiword/Attic/abiword-2.0.2.build,v 1.2 2004/01/06 01:27:32 tomby Exp $
 #
 # abiword-2.0.2 pkgbuilder script
 #
@@ -25,9 +25,11 @@ PKG_DEPENDS="x/xfree86
 	         >=app-text/wv-1
 	         >=l/fribidi-0.10.4
 	         >=l/libxml2-2.4.10
-             l/expat
+             >=ap/wv-1
              d/automake
              d/pkgconfig
+             d/perl
+             a/bzip2
              `use jpeg && echo "l/libjpeg"`
 	         `use gnome && echo ">=gnome/libgnomeui-2.2
 		                         >=gnome/libgnomeprint-2.2.1
@@ -36,7 +38,11 @@ PKG_DEPENDS="x/xfree86
 
 PKG_HOMESITE="http://www.abisource.com"
 
-PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+PKG_UNPACK_DIR="$PKG_SRC"
+PKG_PLUGIN_SRC="$PKG_SRC/abiword-plugins"
+PKG_SRC="$PKG_SRC/abi"
+
+PKG_DOC_FILES="COPY* CREDITS.TXT README.TXT"
 
 PKG_PREFIX="/usr"
 
@@ -50,9 +56,47 @@ PKG_CONFIGURE_OPTIONS="--enable-bidi
 PKG_BUILD_OPTIONS=""
 PKG_BUILD_TARGET="all-recursive"
 
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST PERLDEST=${D}"
 PKG_INSTALL_TARGET="install"
 
-PKG_NOSTRIP="Y"
+abiword_build_plugins() {
+    cd $PKG_PLUGIN_SRC
 
-PKG_CONFIG_FILES="etc/example.conf"
+    PKG_CONFIGURE_OPTIONS="--enable-all
+		                   --with-abiword=$PKG_SRC
+		                   --without-ImageMagick" 
+    
+    pkg_configure && make
+    
+    return $?
+}
+
+abiword_install_plugins() {
+    cd $PKG_PLUGIN_SRC
+    
+    PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+    pkg_install
+    
+    return $?
+}
+
+do_patch() {
+    cd $PKG_SRC
+    
+    cp configure configure.old
+	sed 's:-pedantic::g' configure.old > configure
+	rm -f configure.old
+    
+    return $?
+}
+
+do_build() {
+    configscript_do_build &&
+    abiword_build_plugins
+}
+
+do_install() {
+    configscript_do_install &&
+    abiword_install_plugins
+}
+
