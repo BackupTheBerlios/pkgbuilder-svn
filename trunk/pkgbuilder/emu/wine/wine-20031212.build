@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/wine/Attic/wine-20031212.build,v 1.1 2003/12/20 20:58:30 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/wine/Attic/wine-20031212.build,v 1.2 2003/12/20 21:01:54 tomby Exp $
 
 PKG_NAME="wine"
 PKG_VERSION="20031212"
@@ -15,7 +15,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="nas arts cups alsa tcltk opengl"
 
 PKG_DEPENDS="d/flex
-             d/yacc
+             d/byacc
 	         >=l/ncurses-5.2
 	         >=l/freetype2-2.0.0
              x/xfree86
