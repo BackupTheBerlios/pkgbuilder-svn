@@ -1,0 +1,30 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/dosbox/dosbox-0.61.build,v 1.1 2004/02/13 23:03:13 tomby Exp $
+#
+# dosbox-0.62 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="alsa"
+
+PKG_DEPENDS="l/libpng
+             l/zlib
+             >=l/sdl-1.2.0
+             l/sdl_net
+             `use_dep alsa "l/alsa-lib"`"
+
+PKG_HOMESITE="http://dosbox.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README THANKS"
+
+PKG_CONFIGURE_OPTIONS=""
