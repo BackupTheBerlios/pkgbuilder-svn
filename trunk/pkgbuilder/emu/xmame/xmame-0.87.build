@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/emu/xmame/xmame-0.80.1.build,v 1.1 2004/04/12 21:35:43 tomby Exp $
 #
-# xmame-0.83.1 pkgbuilder script
+# xmame-0.87 pkgbuilder script
 #
 
 inherit makeonly
@@ -24,7 +24,7 @@ PKG_DEPENDS="l/zlib
              `use_dep arts "kde/arts"`
              `use sdl && echo ">=l/sdl-1.2.0" || echo "x/xfree86"`"
 
-PKG_HOMEPAGE="http://x.mame.net/"
+PKG_HOMESITE="http://x.mame.net/"
 
 PKG_DOC_FILES="README todo doc/changes.unix doc/xmame-doc.txt doc/multiplayer-readme.txt"
 
