@@ -1,0 +1,19 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_unpack_bzip2,v 1.1 2003/11/08 16:36:27 tomby Exp $
+
+do_unpack() {
+    cd $TMP
+    
+    if [ "$PKG_EXTENSION" = "" ] ; then
+        PKG_EXTENSION="tar.bz2"
+    fi
+    
+    if [ "$PKG_FILE_NAME" = "" ] ; then
+        PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+    fi
+
+    tar jxvf $FETCH_DIR/$PKG_FILE_NAME
+    
+    return $?
+}

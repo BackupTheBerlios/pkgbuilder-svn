@@ -1,0 +1,61 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/d/anjuta/Attic/anjuta-1.1.98.build,v 1.1 2003/11/08 16:37:49 tomby Exp $
+
+PKG_NAME="anjuta"
+PKG_VERSION="1.1.98"
+PKG_ARCH="$ARCH"
+PKG_BUILD="am1"
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_HOMESITE="http://www.anjuta.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
+PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
+PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS C* FUTURE INSTALL NEWS README T* doc/ScintillaDoc.html"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+include do_info
+include do_fetch
+include do_unpack_gzip
+include do_patch
+include do_configure
+include do_build
+include do_install
+
+include do_buildpkg
+include do_installpkg
+include do_upgradepkg
+include do_cleanup
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    rm -rf $PKG_DEST/usr/share/doc/anjuta
+    rmdir $PKG_DEST/usr/share/doc
+    
+    mkdir -p $PKG_DOC
+
+    cp $PKG_DOC_FILES $PKG_DOC
+    find $PKG_DOC -type f -exec chmod 644 {} \;
+    find $PKG_DOC -type d -exec chmod 755 {} \;
+
+    strip_all $PKG_DEST
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+
+    mkdir -p $PKG_DEST/install
+
+    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    
+    if [ -f $PKG_HOME/files/doinst.sh ] ; then
+        cat $PKG_HOME/files/doinst.sh > $PKG_DEST/install/doinst.sh
+    fi
+}

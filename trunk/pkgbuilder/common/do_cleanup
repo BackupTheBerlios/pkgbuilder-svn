@@ -1,0 +1,13 @@
+# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/common/Attic/do_cleanup,v 1.1 2003/11/08 16:36:27 tomby Exp $
+
+do_cleanup() {
+    if [ -d $PKG_SRC ] ; then
+        rm -rf $PKG_SRC
+    fi
+    
+    if [ -d $PKG_DEST ] ; then
+        rm -rf $PKG_DEST
+    fi
+}
