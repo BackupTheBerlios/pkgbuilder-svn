@@ -25,7 +25,7 @@ a)
     hotplug             2003_08_05
     infozip             5.50
     kdb                 1.08
-    kernel-modules      2.4.22
+    kernel-modules      2.4.23
     less                381
     lilo                22.5.7.2
     module-init-tools   0.9.14
@@ -72,6 +72,7 @@ l)
     glibc               2.3.2
     glibc-i18n          2.3.2
     ncurses             5.3
+    openssl             0.9.7c
     zlib                1.1.4
 
 n)
