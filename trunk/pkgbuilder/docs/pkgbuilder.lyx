@@ -483,6 +483,10 @@ gcc-g++ 3.3.4
 \layout List
 \labelwidthstring 00.00.0000
 
+gdb 6.2.1
+\layout List
+\labelwidthstring 00.00.0000
+
 kernel-headers 2.4.27
 \layout List
 \labelwidthstring 00.00.0000
@@ -874,7 +878,11 @@ Instalación desde tar ball:
 
 
 \series medium 
-Simplemente será necesario descomprimir el tar ball en el lugar elejido.
+Simplemente será necesario descomprimir el 
+\series default 
+tarball
+\series medium 
+ en el lugar elejido.
 \layout Subsubsection
 
 Instalación desde Subversion:
