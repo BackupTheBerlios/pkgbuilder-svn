@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libglade/libglade-2.0.1.build,v 1.1 2003/12/28 00:19:30 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/gnome/libglade/libglade-2.0.1.build,v 1.2 2003/12/29 19:32:23 tomby Exp $
 #
 # libglade-2.0.1 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="libglade"
 PKG_VERSION="2.0.1"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/2.0/$PKG_FILE_NAME"
@@ -27,7 +27,7 @@ PKG_DEPENDS=">=l/glib2-2.0.6
              >=d/pkgconfig-0.12.0
              ap/docbook-xml-dtd
              `use doc && echo ">=gnome/gtk-doc-0.6"`
-             `use nls && echo "a/gettext d/gettext-tools"`"
+             `use nls && echo "d/gettext"`"
 
 PKG_HOMESITE="http://www.gnome.org/"
 

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gtk+/gtk+-1.2.10.build,v 1.1 2003/12/01 21:49:34 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/l/gtk+/gtk+-1.2.10.build,v 1.2 2003/12/29 19:32:23 tomby Exp $
 #
 # gtk+-1.2.10 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="gtk+"
 PKG_VERSION="1.2.10"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.gtk.org/pub/gtk/v1.2/$PKG_FILE_NAME"
@@ -17,7 +17,7 @@ PKG_LICENSE="LGPLv2.1"
 
 PKG_USE=""
 
-PKG_DEPENDS="x/xfree86 l/glib a/gettext d/gettext-tools"
+PKG_DEPENDS="x/xfree86 l/glib d/gettext"
 
 PKG_HOMESITE="http://www.gtk.org/"
 

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/slrn/slrn-0.9.8.0.build,v 1.1 2003/12/26 18:04:32 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/n/slrn/slrn-0.9.8.0.build,v 1.2 2003/12/29 19:32:23 tomby Exp $
 #
 # slrn-0.9.8.0 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="slrn"
 PKG_VERSION="0.9.8.0"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
@@ -21,7 +21,7 @@ PKG_DEPENDS="l/glibc
              n/postfix
              >=l/slang-1.4.4
              `use ssl && echo ">=l/openssl-0.9.6"`
-             `use nls && echo "a/gettext d/gettext-tools"`"
+             `use nls && echo "d/gettext"`"
 
 PKG_HOMESITE="http://slrn.sourceforge.net/"
 

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/gnupg/gnupg-1.2.4.build,v 1.1 2003/12/27 17:11:55 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/gnupg/gnupg-1.2.4.build,v 1.2 2003/12/29 19:32:23 tomby Exp $
 #
 # gnupg-1.2.4 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="gnupg"
 PKG_VERSION="1.2.4"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.gnupg.org/gcrypt/$PKG_NAME/$PKG_FILE_NAME"
@@ -20,7 +20,7 @@ PKG_USE="nls"
 PKG_DEPENDS="l/glibc
              d/perl
              l/zlib
-            `use nls && echo "a/gettext d/gettext-tools"`"
+            `use nls && echo "d/gettext"`"
 
 PKG_HOMESITE="http://www.gnupg.org/"
 

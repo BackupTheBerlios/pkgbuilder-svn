@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/xchat/xchat-2.0.6.build,v 1.1 2003/12/25 20:33:40 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/xap/xchat/xchat-2.0.6.build,v 1.2 2003/12/29 19:32:23 tomby Exp $
 #
 # xchat-2.0.6 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="xchat"
 PKG_VERSION="2.0.6"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.xchat.org/files/source/2.0/$PKG_FILE_NAME"
@@ -23,7 +23,7 @@ PKG_DEPENDS=">=l/glib-2.0.3
         	 `use perl && echo ">=d/perl-5.6.1"`
         	 `use python && echo "d/python"`
         	 `use tcltk && echo "dev-lang/tcl"`
-	         `use nls && echo "a/gettext d/gettext-tools"`"
+	         `use nls && echo "d/gettext"`"
 
 PKG_HOMESITE="http://www.xchat.org/"
 

@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/enscript/enscript-1.6.3.build,v 1.1 2003/12/22 20:00:56 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/enscript/enscript-1.6.3.build,v 1.2 2003/12/29 19:32:23 tomby Exp $
 #
 # enscript-1.6.3 pkgbuilder script
 #
@@ -8,7 +8,7 @@
 PKG_NAME="enscript"
 PKG_VERSION="1.6.3"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.iki.fi/mtr/genscript/$PKG_FILE_NAME"
@@ -18,7 +18,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="nls"
 
 PKG_DEPENDS="d/flex d/bison
-            `use nls && echo 'a/gettext d/gettext-tools'`"
+            `use nls && echo 'd/gettext'`"
 
 PKG_HOMESITE="http://www.gnu.org/software/enscript/enscript.html"
 

@@ -1,4 +1,4 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.26 2003/12/29 00:56:02 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.27 2003/12/29 19:32:23 tomby Exp $
 
 * New tasks:
 
@@ -24,7 +24,6 @@ a)
     e2fsprogs
     findutils
     gawk
-    gettext
     gpm                    X
     grep
     gzip
@@ -219,6 +218,7 @@ d)
     flex
     gcc
     gdb
+    gettext                X
     indent                 X
     j2sdk
     libtool
