@@ -7,10 +7,10 @@
 
 inherit main
 
-PKG_NAME="docbook-dsssl-stylesheets"
-PKG_VERSION="1.78"
 PKG_ARCH="noarch"
+
 PKG_BUILD="am1"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="docbook-dsssl-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/docbook/$PKG_FILE_NAME"
@@ -19,11 +19,9 @@ PKG_LICENSE="AS-IS"
 
 PKG_DEPENDS="ap/sgml-common"
 
-PKG_HOMESITE="http://www.sourceforge.net/docbook/"
+PKG_HOMESITE="http://www.sourceforge.net/projects/docbook/"
 
 PKG_SRC="$TMP/docbook-dsssl-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="BUGS ChangeLog README TODO VERSION WhatsNew"
 
 PKG_PREFIX="/usr"
