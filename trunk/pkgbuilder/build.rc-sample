@@ -1,10 +1,10 @@
-# Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.23 2004/04/19 18:00:27 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
-VERSION="20040424"
+VERSION="20041114"
 
 # packages db directory
 PACKAGES_LOGDIR="/var/log/packages"
@@ -28,7 +28,7 @@ TMP="/tmp"
 
 #USE FLAGS
 USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod nas gstreamer"
-USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl aalib svga fbcon directfb"
+USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl libcaca aalib svga fbcon directfb"
 USE_NET="samba ssl slp maildir apache"
 USE_PRINT="cups pnm2ppa"
 USE_XLIBS="motif gtk gtk2 qt kde gnome"

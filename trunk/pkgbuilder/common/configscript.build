@@ -5,7 +5,7 @@
 # pkgbuilder script for packages with configure script
 #
 
-include main
+inherit main
 
 configscript_init() {
     main_init
@@ -27,16 +27,4 @@ configscript_do_build() {
     pkg_build
 
     return $?
-}
-
-configscript_do_unpack() {
-    main_do_unpack
-}
-
-configscript_do_install() {
-    main_do_install
-}
-
-configscript_do_postinstall() {
-    main_do_postinstall
 }

@@ -5,7 +5,7 @@
 # pkgbuilder script for vim packages
 #
 
-include configscript
+inherit configscript
 
 vim_init() {
     configscript_init
@@ -86,20 +86,4 @@ vim_do_patch() {
     done
     
     return $?
-}
-
-vim_do_configure() {
-    configscript_do_configure
-}
-
-vim_do_build() {
-    configscript_do_build
-}
-
-vim_do_install() {
-    configscript_do_install
-}
-
-vim_do_postinstall() {
-    configscript_do_postinstall
 }

@@ -5,7 +5,7 @@
 # pkgbuilder script for tetex package
 #
 
-include configscript
+inherit configscript
 
 tetex_init() {
     configscript_init
@@ -84,18 +84,6 @@ tetex_do_unpack() {
       umask 022
       unpack $TETEX_TEXMF ; unpack $TETEX_TEXMF_SRC 
       chown -R root.root $PKG_DEST )
-}
-
-tetex_do_configure() {
-    configscript_do_configure
-}
-
-tetex_do_build() {
-    configscript_do_build
-}
-
-tetex_do_install() {
-    configscript_do_install
 }
 
 tetex_do_postinstall() {

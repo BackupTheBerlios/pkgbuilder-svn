@@ -5,7 +5,7 @@
 # pkgbuilder script for kde packages
 #
 
-include configscript
+inherit configscript
 
 kde_init() {
     configscript_init
@@ -44,24 +44,4 @@ kde_version() {
     else
         echo "$mayor_version.$minor_version"
     fi
-}
-
-kde_do_configure() {
-    configscript_do_configure
-}
-
-kde_do_build() {
-    configscript_do_build
-}
-
-kde_do_unpack() {
-    configscript_do_unpack
-}
-
-kde_do_install() {
-    configscript_do_install
-}
-
-kde_do_postinstall() {
-    configscript_do_postinstall
 }

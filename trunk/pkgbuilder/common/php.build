@@ -5,7 +5,7 @@
 # php script for php packages
 #
 
-include configscript
+inherit configscript
 
 php_init() {
     configscript_init
@@ -97,10 +97,6 @@ php_do_patch() {
     return $?
 }
 
-php_do_unpack() {
-    configscript_do_unpack
-}
-
 php_do_configure() {
     export EXTENSION_DIR="$PHP_EXTENSION_DIR"
 
@@ -111,16 +107,4 @@ php_do_configure() {
     unset EXTENSION_DIR
 
     return $retval
-}
-
-php_do_build() {
-    configscript_do_build
-}
-
-php_do_install() {
-    configscript_do_install
-}
-
-php_do_postinstall() {
-    configscript_do_postinstall
 }

@@ -5,7 +5,7 @@
 # pkgbuilder script for mozilla packages
 #
 
-include configscript
+inherit configscript
 
 mozilla_init() {
     configscript_init
@@ -126,10 +126,6 @@ mozilla_do_unpack() {
         unpack $ENIGMAIL_FILE_NAME
         unpack $IPC_FILE_NAME
     fi
-}
-
-mozilla_do_configure() {
-    configscript_do_configure
 }
 
 mozilla_do_build() {

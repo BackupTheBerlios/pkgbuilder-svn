@@ -5,7 +5,7 @@
 # pkgbuilder script for gnome packages
 #
 
-include configscript
+inherit configscript
 
 gnome_init() {
     configscript_init
@@ -51,18 +51,6 @@ gnome_gconf_install() {
 }
 
 #public functions
-gnome_do_configure() {
-    configscript_do_configure
-}
-
-gnome_do_build() {
-    configscript_do_build
-}
-
-gnome_do_unpack() {
-    configscript_do_unpack
-}
-
 gnome_do_install() {
     export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL="1"
     

@@ -40,11 +40,11 @@ inherit() {
     
     include $1
     
-    PKG_PARENT="$1"
+    PKG_PARENT="$1 $PKG_PARENT"
     
-    #call constructor
-    if declare ${PKG_PARENT}_init ; then
-        ${PKG_PARENT}_init
+    #call initializador
+    if declare -f $1_init &> /dev/null ; then
+        $1_init || return $?
     fi
     
     return $?
@@ -145,28 +145,52 @@ use_with() {
 #
 call_action() {
     if [ "$1" = "" ] ; then
-        return 1  
+        return 1
     fi
     
     if [ -d "$PKG_SRC" ] ; then
         cd $PKG_SRC
     fi
 
+    local retval="0"
+
     if declare -f $1 &> /dev/null ; then
+        echo "pkgbuilder: function \"$1\" declared in build script"
         $1
-        RETVAL="$?"
-    elif declare -f ${PKG_PARENT}_$1 &> /dev/null ; then
-        ${PKG_PARENT}_$1
-        RETVAL="$?"
-    elif declare -f pkg_$1 &> /dev/null ; then
-        pkg_$1
-        RETVAL="$?"
+        retval="$?"
     else
-        echo "pkgbuilder: $1 function not defined in build script"
-        RETVAL="$?"
+        local found="false"
+
+        local super
+        for super in $PKG_PARENT ; do
+            if declare -f ${super}_$1 &> /dev/null ; then
+                # we found the function declaration
+                found="true"
+                echo "pkgbuilder: function \"$1\" declared in \"$super\""
+
+                # call the function a remember retval
+                ${super}_$1
+                retval="$?"
+                
+                break
+            fi
+        done
+
+        # if we don't found the function declaration
+        if [ "$found" = "false" ] ; then
+            if declare -f pkg_$1 &> /dev/null ; then
+                # call the master implementation if is declared
+                echo "pkgbuilder: function \"$1\" declared in base"
+                pkg_$1
+                retval="$?"
+            else
+                echo "pkgbuilder: $1 function not defined in build script"
+                retval="$?"
+            fi
+        fi
     fi
-    
-    return $RETVAL
+
+    return $retval
 }
 
 #
@@ -179,61 +203,61 @@ execute_action() {
         return 1  
     fi
     
-    RETVAL="0"
+    local retval="0"
 
     #execution
     case "$1" in
         'info')
             call_action do_info
-            RETVAL="$?"
+            retval="$?"
         ;;
         'fetch')
             call_action do_fetch
-            RETVAL="$?"
+            retval="$?"
         ;;
         'verify')
             call_action do_verify
-            RETVAL="$?"
+            retval="$?"
         ;;
         'unpack')
             call_action do_unpack
-            RETVAL="$?"
+            retval="$?"
         ;;
         'patch')
             call_action do_patch
-            RETVAL="$?"
+            retval="$?"
         ;;
         'configure')
             call_action do_configure
-            RETVAL="$?"
+            retval="$?"
         ;;
         'build')
             call_action do_build
-            RETVAL="$?"
+            retval="$?"
         ;;
         'install')
             call_action do_install
-            RETVAL="$?"
+            retval="$?"
         ;;
         'postinstall')
             call_action do_postinstall
-            RETVAL="$?"
+            retval="$?"
         ;;
         'buildpkg')
             call_action do_buildpkg
-            RETVAL="$?"
+            retval="$?"
         ;;
         'installpkg')
             call_action do_installpkg
-            RETVAL="$?"
+            retval="$?"
         ;;
         'upgradepkg')
             call_action do_upgradepkg
-            RETVAL="$?"
+            retval="$?"
         ;;
         'cleanup')
             call_action do_cleanup
-            RETVAL="$?"
+            retval="$?"
         ;;
         'auto')
             call_action do_fetch && 
@@ -245,13 +269,13 @@ execute_action() {
             call_action do_install &&  
             call_action do_postinstall && 
             call_action do_buildpkg
-            RETVAL="$?"
+            retval="$?"
         ;;
         *)
-            RETVAL="1"
+            retval="1"
     esac
     
-    return $RETVAL
+    return $retval
 }
 
 #
@@ -299,6 +323,7 @@ unpack() {
     fi
     
     local file
+    local retval="0"
     
     if [ "$CDROM_DIR" != "" -a -r $CDROM_DIR/$1 ] ; then
         file="$CDROM_DIR/$1"
@@ -308,28 +333,28 @@ unpack() {
     
     if echo $1 | grep -q ".tar.gz$" ; then
         tar zxvf $file
-        RETVAL="$?"
+        retval="$?"
     elif echo $1 | grep -q ".tgz$" ; then
         tar zxvf $file
-        RETVAL="$?"
+        retval="$?"
     elif echo $1 | grep -q ".tar.bz2$" ; then
         tar jxvf $file
-        RETVAL="$?"
+        retval="$?"
     elif echo $1 | grep -q ".tar$" ; then
         tar xvf $file
-        RETVAL="$?"
+        retval="$?"
     elif echo $1 | grep -q ".tbz2$" ; then
         tar jxvf $file
-        RETVAL="$?"
+        retval="$?"
     elif echo $1 | grep -q ".zip$" ; then
         unzip $file
-        RETVAL="$?"
+        retval="$?"
     else
         tar zxvf $file
-        RETVAL="$?"
+        retval="$?"
     fi
         
-    return $RETVAL
+    return $retval
 }
 
 #
