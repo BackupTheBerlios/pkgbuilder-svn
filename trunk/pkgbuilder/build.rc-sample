@@ -1,6 +1,6 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.2 2003/12/24 13:05:05 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.3 2003/12/25 21:09:41 tomby Exp $
 
 PKGBUILDER_HOME="/var/pkgbuilder"
 
@@ -15,9 +15,18 @@ FETCH_OPTIONS="--tries=$FETCH_TRIES --limit-rate=$FETCH_RATE --directory-prefix=
 
 TMP="/tmp"
 
-USE="alsa oss arts esd nls doc oggvorbis lame samba mad 
-     mmx sse 3dnow opengl tcltk ncurses cups xml python motif
-     dvd sdl aalib gtk gtk2 kde"
+USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame"
+USE_VIDEO="X opengl dvd divx win32codecs sdl aalib svgalib fbcon"
+USE_NET="samba ssl slp"
+USE_PRINT="cups pnm2ppa"
+USE_XLIBS="motif gtk gtk2 qt kde"
+USE_LIBS="ncurses readline sasl bidi jpeg png tiff gif slang"
+USE_CPU="mmx sse 3dnow"
+USE_DEV="python tcltk perl java ruby"
+USE_MISC="nls doc gpm"
+
+USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
+     $USE_XLIBS $USE_CPU $USE_DEV $USE_MISC"
      
 LANG="es"
 LOCALE="es_ES"

@@ -1,9 +1,9 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.17 2003/12/24 17:50:27 tomby Exp $
+$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.18 2003/12/25 21:09:49 tomby Exp $
 
 * New tasks:
 
-    add checksum verification files to packages
-    add deps to build scripts and test dep check
+    check pkg deps
+	use new 'use` variable values
 
 * Packages:
 
@@ -54,7 +54,7 @@ ap)
     cdparanoia      X
     cdrtools
     cdrdao
-    vorbis-tools
+    vorbis-tools	X
 
 l)
     cyrus-sasl      X
@@ -183,7 +183,7 @@ n)
     dhcpd
     rp-pppoe
 
-    curl
+    curl			X
     wvstreams
     gnet
 
@@ -273,6 +273,8 @@ xap)
     imagemagick     X
 
     xpdf            X
+	
+	xchat			X
 
 kde)
 
