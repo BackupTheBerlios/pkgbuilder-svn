@@ -1,13 +1,13 @@
 # Copyright 2003 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/sgmlspm/sgmlspm-1.03.build,v 1.1 2004/01/03 17:56:42 tomby Exp $
+# $Header: /cvsroot/pkgbuilder/pkgbuilder/ap/sgmlspm/sgmlspm-1.03.build,v 1.2 2004/01/03 19:31:55 tomby Exp $
 #
-# example pkgbuilder script
+# sgmlspm-1.03 pkgbuilder script
 #
 
 inherit main
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_FILE_NAME="SGMLSpm-${PKG_VERSION}ii.$PKG_EXTENSION"
 PKG_URL="http://search.cpan.org/CPAN/authors/id/D/DM/DMEGG/$PKG_FILE_NAME"
@@ -62,4 +62,15 @@ do_install() {
                      SPECDIR=$PKG_DEST/usr/share/SGMLS
     
     return $?
+}
+
+do_postinstall() {
+    eval `perl '-V:package'`
+    eval `perl '-V:version'`
+    
+    cd $PKG_DEST/usr/lib/${package}/
+    
+    mv vendor_perl site_perl
+    
+    main_do_postinstall
 }
