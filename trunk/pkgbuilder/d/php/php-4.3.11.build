@@ -1,0 +1,23 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# php-4.3.11 pkgbuilder script
+#
+
+inherit php
+
+PKG_BUILD="am1"
+
+PKG_USE="$PKG_USE readline ncurses"
+
+PKG_DEPENDS="$PKG_DEPENDS
+             `use_dep readline "l/readline l/ncurses"`
+             `use_dep ncurses "l/ncurses"`"
+
+PKG_CONFIGURE_OPTIONS="--disable-cgi
+                       --enable-cli
+                       $PKG_CONFIGURE_OPTIONS"
+
+PKG_CONFIG_FILES="etc/pear.conf"
+
+PKG_NOSTRIP="Y"

@@ -1,0 +1,83 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# subversion-1.1.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://subversion.tigris.org/tarballs/$PKG_FILE_NAME"
+
+PKG_LICENSE="APLv1.1"
+
+PKG_USE="python perl java berkdb apache"
+
+PKG_DEPENDS=">=n/neon-0.24.7
+             `use_dep python ">=d/python-2.0 =d/swig-1.3.21"`
+             `use_dep perl ">=d/perl-5.8 =d/swig-1.3.21"`
+             `use_dep java "d/j2sdk"`
+             `use_dep berkdb "l/db4"`
+             `use_dep apache ">=n/apache-2.0.48"`"
+
+PKG_HOMESITE="http://subversion.tigris.org/"
+
+PKG_DOC_FILES="BUGS ChangeLog.CVS CHANGES COMMITTERS COPYING HACKING INSTALL README STATUS"
+
+PKG_CONFIGURE_OPTIONS="--with-neon=/usr
+                       --disable-experimental-libtool
+                       --disable-mod-activation
+                       `use_with ssl`
+                       `use apache && echo "--with-apxs=/usr/sbin/apxs
+                                            --with-apr=/usr
+                                            --with-apr-util=/usr"`
+                       `use python || use perl && echo "--with-swig" || echo "--without-swig"`
+                       `use python && echo "--with-python=/usr/bin/python" || echo "--without-python"`
+                       `use_enable java javahl`"
+
+PKG_BUILD_TARGET="all 
+                  `use_dep python "swig-py"`
+                  `use_dep perl "swig-pl"`
+                  `use_dep java "javahl"`"
+
+PKG_INSTALL_TARGET="install
+                   `use_dep python "install-swig-py"`
+                   `use_dep perl "install-swig-pl"`
+                   `use_dep java "install-javahl"`"
+
+do_patch() {
+    cd $PKG_SRC/ac-helpers
+ 
+    mv ltmain.sh ltmain.sh.orig &&
+    sed 's:relink=yes:relink=no:' ltmain.sh.orig > ltmain.sh
+
+    return $?
+}
+
+do_postinstall() {
+    rm -rf $PKG_DEST$PKG_PREFIX/info
+    rm -rf $PKG_DEST$PKG_PREFIX/build
+
+    if ! use apache ; then
+        chown root.root $PKG_DEST$PKG_PREFIX/apr-0/*
+    fi
+
+    if use python ; then
+        local python_mayor_version="`installed_version python | cut -d"." -f1,2`"
+        mkdir -p $PKG_DEST$PKG_PREFIX/lib/python$python_mayor_version
+        mv $PKG_DEST$PKG_PREFIX/lib/svn-python/ $PKG_DEST$PKG_PREFIX/lib/python$python_mayor_version/site-packages
+    fi
+
+    if use perl ; then
+        rm -r $PKG_DEST$PKG_PREFIX/lib/perl5/?.?.?
+    fi
+
+    if use java ; then
+        rm -rf $PKG_DEST$PKG_PREFIX/lib/svn-javahl/include
+    fi
+
+    configscript_do_postinstall
+}
