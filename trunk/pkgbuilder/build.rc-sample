@@ -44,6 +44,9 @@ USE_MISC="nls doc gpm javascript mysql xml sane crypto tetex unicode server"
 USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
      $USE_XLIBS $USE_LIBS $USE_CPU $USE_DEV $USE_MISC"
 
+# Blacklist of no upgradeable packages
+#NOUPGRADE="swig amule"
+
 # I18N configuration
 #I18N="es"
 
