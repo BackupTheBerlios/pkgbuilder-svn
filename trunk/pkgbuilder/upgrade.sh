@@ -63,7 +63,7 @@ for PKG in `find $PACKAGES_LOGDIR -type f | sort` ; do
                 if [ "$VERBOSE" = "Y" ] ; then
                     echo "$PKG_NAME in black list"
                 fi
-                continue
+                continue 2
             fi
         done
     fi
