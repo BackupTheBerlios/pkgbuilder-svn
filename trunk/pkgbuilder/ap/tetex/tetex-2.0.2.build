@@ -6,7 +6,7 @@
 
 inherit tetex
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 TETEX_BASE_URL="ftp://sunsite.informatik.rwth-aachen.de/pub/comp/tex/teTeX/2.0/distrib/"
 

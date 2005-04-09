@@ -108,6 +108,10 @@ tetex_do_postinstall() {
         rm -f `dirname $file`/`basename $file .dvi`.pdf
       done )
 
+    #remove readlink, override coreutils readlink
+    rm -f $PKG_DEST$PKG_PREFIX/bin/readlink
+    rm -f $PKG_DEST$PKG_PREFIX/man/man1/readlink.1
+
     pkg_installdoc
     pkg_stripall
     pkg_gzipmaninfo
