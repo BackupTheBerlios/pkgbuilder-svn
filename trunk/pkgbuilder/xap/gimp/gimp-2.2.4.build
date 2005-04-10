@@ -69,8 +69,8 @@ do_postinstall() {
     configscript_do_postinstall
 
     ( cd $PKG_DEST$PKG_PREFIX/man/man1
-      rm -f gimp-remote.1 ; ln -sf gimp-remote-$PKG_VERSION.gz gimp-remote.1.gz
-      rm -f gimp.1 ; ln -sf gimp-$PKG_VERSION.gz gimp.1.gz
-      rm -f gimptool.1 ; ln -sf gimptool-$PKG_VERSION.gz gimptool.1.gz
+      rm -f gimp-remote.1 ; ln -sf gimp-remote-2.2.1.gz gimp-remote.1.gz
+      rm -f gimp.1 ; ln -sf gimp-2.2.1.gz gimp.1.gz
+      rm -f gimptool.1 ; ln -sf gimptool-2.0.1.gz gimptool.1.gz
     )
 }
