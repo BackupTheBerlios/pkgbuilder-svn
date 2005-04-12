@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am3"
 
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
@@ -18,13 +18,21 @@ PKG_DEPENDS="l/glibc
              l/id3lib 
              >=l/libogg-1.0
              d/nasm 
-             a/gawk
              `use X && use xmms && echo "xap/xmms"`"
 
 PKG_HOMESITE="http://flac.sourceforge.net/"
 
 PKG_DOC_FILES="AUTHORS COPYING.* README"
 
-PKG_CONFIGURE_OPTIONS="`use_enable sse`"
+PKG_CONFIGURE_OPTIONS="--enable-shared 
+                       --disable-rpath
+                       --with-pic
+                       `use_enable sse`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION/html"
+
+do_install() {
+    configscript_do_install &&
+    ( cd $PKG_DEST$PKG_PREFIX/lib/
+      rm -f libFLAC.so.6 ; ln -s libFLAC.so.7.0.0 libFLAC.so.6 )
+}
