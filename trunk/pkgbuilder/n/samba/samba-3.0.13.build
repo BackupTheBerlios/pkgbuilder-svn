@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp://ftp.easynet.be/$PKG_NAME/$PKG_FILE_NAME"
+PKG_URL="ftp://ftp.easynet.be/$PKG_NAME/stable/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
