@@ -13,6 +13,7 @@ PKG_USE=""
 PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdebase-3.4.0
              >=kde/kdenetwork-3.4.0
+             >=kde/kdepim-3.4.0
              >=kde/kdemultimedia-3.4.0
              >=kde/kdegames-3.4.0
              >=l/sdl-1.2.1"
