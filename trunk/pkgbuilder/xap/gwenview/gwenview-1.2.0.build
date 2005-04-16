@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gwenview-1.1.7 pkgbuilder script
+# gwenview-1.2.0 pkgbuilder script
 #
 
 inherit kde
@@ -16,16 +16,9 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/kdelibs-3.2.1"
+PKG_DEPENDS=">=l/kdelibs-3.3.0"
 
 PKG_HOMESITE="http://gwenview.sourceforge.net/"
 
 PKG_DOC_FILES="AUTHORS C* HACKING INSTALL NEWS README TODO"
 
-do_patch() {
-    cd $PKG_SRC
-
-    make -f admin/Makefile.common dist
-
-    return $?
-}
