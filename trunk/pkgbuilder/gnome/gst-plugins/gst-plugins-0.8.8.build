@@ -1,0 +1,59 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gst-plugins-0.8.6 pkgbuilder script
+#
+# TODO: libdv libdvdnav libdvdread
+# 
+
+inherit gnome
+
+PKG_BUILD="am2"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE="aalib alsa arts dvd mpeg esd flac lame fame mad mikmod oggvorbis oss sdl
+         png jpeg xvid libcaca speex divx gnome"
+
+PKG_DEPENDS=">=gnome/gstreamer-0.8.9
+             >=gnome/gconf-1.2
+             >=d/gettext-0.11.5
+             >=d/pkgconfig-0.9
+             l/audiofile
+             ap/cdparanoia
+             `use_dep X "x/x11"`
+             `use_dep xmms "xap/xmms"`
+             `use_dep gnome "gnome/gnome-vfs"`
+             `use_dep dvd "l/liba52"`
+             `use_dep png "l/libpng"`
+             `use_dep jpeg "l/libjpeg"`
+             `use_dep aalib "l/aalib"`
+             `use_dep libcaca "l/libcaca"`
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep arts "kde/arts"`
+             `use_dep esd "l/esound"`
+             `use_dep flac "l/flac"`
+             `use_dep lame "l/lame"`
+             `use_dep fame "l/libfame"`
+             `use_dep mad "l/libmad"`
+             `use_dep speex "l/speex"`
+             `use_dep mikmod "l/libmikmod"`
+             `use_dep oggvorbis "l/libvorbis"`
+             `use_dep sdl "l/sdl"`
+             `use_dep divx "l/divx4linux"`
+             `use_dep xvid "l/xvid"`"
+             
+PKG_HOMESITE="http://gstreamer.sourceforge.net"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS RE* TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-static 
+                       --program-prefix= 
+                       --program-suffix=
+                       --disable-tests 
+                       --disable-examples
+                       `use_enable doc docs-build`"
+
+MAKE_OPTIONS="-j1"
+ 

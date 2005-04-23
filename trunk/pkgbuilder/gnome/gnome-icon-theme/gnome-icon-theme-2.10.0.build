@@ -1,0 +1,19 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gnome-icon-theme-2.8.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_ARCH="noarch"
+
+PKG_BUILD="am1"
+
+PKG_DOC_FILES="COPYING INSTALL NEWS TODO ChangeLog"
+
+PKG_DEPENDS="d/gettext
+             l/hicolor-icon-theme
+             >=gnome/intltool-0.29"
+
+PKG_NOSTRIP="Y"

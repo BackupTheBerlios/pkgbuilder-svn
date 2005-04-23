@@ -1,0 +1,28 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gpdf-2.8.1 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/gtk+2-2.3
+             >=gnome/gconf-2
+             >=gnome/libgnomeui-2
+             >=gnome/libbonobo-2.2.1
+             >=gnome/libbonoboui-2
+             >=gnome/gnome-vfs-2
+             >=gnome/libgnomeprint-2.6
+             >=gnome/libgnomeprintui-2.2
+             >=gnome/libglade-2
+             >=dev-util/intltool-0.29
+             >=dev-util/pkgconfig-0.12.0"
+
+PKG_DOC_FILES="AUTHORS CHANGES ChangeLog COPYING INSTALL NEWS README*"
+
