@@ -1,0 +1,12 @@
+--- ./lib/X11/Xlib.h.orig	Wed Jan 17 11:41:50 2001
++++ ./lib/X11/Xlib.h	Sun Jun  3 03:04:01 2001
+@@ -71,7 +71,8 @@
+ #include <stdlib.h>
+ #else
+ /* replace this with #include or typedef appropriate for your system */
+-typedef unsigned long wchar_t;
++/* typedef unsigned long wchar_t; */
++#include <stddef.h>
+ #endif
+ #endif
+ 
