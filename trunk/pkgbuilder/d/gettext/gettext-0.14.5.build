@@ -1,0 +1,36 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gettext-0.14.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+PKG_URL="ftp://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="nls"
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://www.gnu.org/software/gettext/gettext.html"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog* NEWS README* PACKAGING THANKS"
+
+PKG_CONFIGURE_OPTIONS="`use_enable nls`"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION/html"
+
+MAKE_OPTIONS="-j1"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mv $PKG_DEST$PKG_PREFIX/share/man $PKG_DEST$PKG_PREFIX
+    
+    configscript_do_postinstall
+    
+    return $?
+}
