@@ -1,0 +1,228 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# x11-6.8.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="X11R$PKG_VERSION-src.$PKG_EXTENSION"
+PKG_URL="http://ftp.skynet.be/pub/ftp.x.org/pub/X11R$PKG_VERSION/src-single/X11R$PKG_VERSION-src.$PKG_EXTENSION"
+
+PKG_LICENSE="XOrg"
+
+PKG_USE="mmx sse 3dnow"
+
+PKG_DEPENDS=">=l/ncurses-5.1
+             >=l/zlib-1.1.3
+             >=d/flex-2.5.4a
+             >=d/perl-5.8.4
+             >=l/expat-1.95.3
+             >=l/freetype2-2.1.5
+             >=l/fontconfig-2.1
+             l/libpng"
+
+PKG_HOMESITE="http://www.x.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION/xc"
+PKG_UNPACK_DIR="$TMP/$PKG_NAME-$PKG_VERSION"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr/X11R6"
+
+PKG_CONFIG_FILES="etc/X11/xdm/Xsession 
+                  etc/X11/xdm/xdm-config 
+                  etc/X11/xdm/Xservers"
+
+PKG_VIRTUAL="x11-$PKG_VERSION"
+
+
+do_patch() {
+    cd $PKG_SRC
+
+    local patch
+    for patch in $PKG_HOME/files/*.diff ; do
+        apply_patch $patch -p1 --backup --suffix=.orig -E || return $?
+    done
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+    
+    local mmxsupport="`use mmx && echo "YES" || echo "NO"`"
+    local ssesupport="`use sse && echo "YES" || echo "NO"`"
+    local threednowsupport="`use 3dnow && echo "YES" || echo "NO"`"
+    
+    cat > config/cf/host.def << "EOF"
+/* Begin XOrg host.def file */
+
+EOF
+ 
+    echo "#define DefaultGcc2i386Opt  $CFLAGS" >> config/cf/host.def
+    
+    echo "#define HasMMXSupport       $mmxsupport     /* Any i586 or above */" \
+        >> config/cf/host.def
+    echo "#define HasKatmaiSupport    $ssesupport     /* PIII SSE instructions */" \
+        >> config/cf/host.def
+    echo "#define Has3DNowSupport     $threednowsupport    /* AMD instructions */" \
+        >> config/cf/host.def
+
+    cat >> config/cf/host.def << "EOF"   
+    
+/* This setting reduces compile time a little by omitting rarely used input 
+ * devices.  You can find the complete list in config/cf/xorg.cf ********/
+ 
+#define XInputDrivers                 mouse keyboard void
+
+/* VIDEO DRIVERS ***********************************************************/
+
+/* If you are sure you only want the drivers for one or a few video cards,
+ * you can delete the drivers you do not want. *****************************/ 
+
+#define XF86CardDrivers         s3 nv apm ark ati mga nsc v4l sis tga vga \
+                                via i128 i740 i810 tdfx vesa chips cyrix \
+                                fbdev glint imstt tseng siliconmotion \
+                                cirrus newport trident s3virge neomagic savage \
+                                voodoo rendition
+
+
+/* FONT SERVER AND LIBRARY SETTINGS ****************************************/
+
+/* These settings ensure we use our libraries ******************************/
+#define HasFreetype2             YES
+#define HasFontconfig            YES
+#define HasExpat                 YES
+#define HasLibpng                YES
+#define HasZlib                  YES
+#define HasPam                   NO
+
+/* The font path can be redefined in the XF86Config file *******************/
+
+/* INTERNATIONAL FONTS.  Change to YES if you need any of them.  These  are
+ * the defaults. ***********************************************************/
+
+/* #define BuildCyrillicFonts            NO  */
+/* #define BuildArabicFonts              NO  */
+/* #define BuildISO8859_6Fonts           NO  */
+/* #define BuildGreekFonts               NO  */
+/* #define BuildISO8859_7Fonts           NO  */
+/* #define BuildHebrewFonts              NO  */
+/* #define BuildISO8859_8Fonts           NO  */
+/* #define BuildKOI8_RFonts              NO  */
+/* #define BuildJapaneseFonts            NO  */
+/* #define BuildJISX0201Fonts            NO  */
+/* #define BuildKoreanFonts              NO  */
+/* #define BuildChineseFonts             NO  */
+
+/* DOCUMENTATION SETTINGS **************************************************/
+
+/* These setting are the defaults. *****************************************/
+
+/* #define BuildLinuxDocHtml             NO  */  /* X Docs in Html format */
+/* #define BuildLinuxDocPS               NO  */  /* PostScript format */
+/* #define BuildAllSpecsDocs             NO  */  /* Various docs */
+/* #define BuildHtmlManPages             NO  */
+
+/*
+ * By default, the sample config files for xinit, xdm and xfs are installed
+ * only when there is no pre-existing version installed.  Uncommenting the
+ * following lines will force the sample versions to be installed even if
+ * it means over-writing existing versions.
+ */
+#define InstallXinitConfig     YES
+#define InstallXdmConfig       YES
+#define InstallFSConfig        YES
+
+/* Other Slackware defaults */
+#define FSUseSyslog            YES
+#define UseUtempter            YES
+#define SharedLibGlu           YES
+
+/* Xprint is not the way to go on Linux which already has */
+/* much better print facilities.  I'm especially */
+/* unimpressed with all the junk it drops in /etc/X11/... */
+/* I can't imagine anyone actually using this on Linux. */
+#define BuildXprint            NO
+#define BuildXprintClients     NO
+/* Support lagacy apps that link with libXp.so */
+#define BuildXprintLib         YES
+/* This won't build without the all the other Xprint */
+/* clutter, but was probably rather useless anyway. */
+/* I've noticed that since all the unwanted Xprint junk */
+/* was merged into X.Org that everyone else has also */
+/* dropped support for Xprt...  time to follow suit. */
+#define XprtServer             NO
+
+/* Build static libs, too */
+#define ForceNormalLib         YES
+
+/* End XOrg host.def file */
+EOF
+    
+}
+
+do_build() {
+    cd $PKG_SRC
+    
+    WORLDOPTS="" make $MAKE_OPTIONS World
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+    
+    make $PKG_INSTALL_OPTIONS install &&
+    make $PKG_INSTALL_OPTIONS install.man
+    
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/usr/lib
+    mv $PKG_DEST$PKG_PREFIX/lib/pkgconfig $PKG_DEST/usr/lib
+    
+    for module in `find $PKG_DEST$PKG_PREFIX/lib/modules -type f -name '*.o'` \
+                  `find $PKG_DEST$PKG_PREFIX/lib/modules -type f -name '*.so'` ; do
+        chmod 755 $module
+    done
+    
+    #fixed bug in gtkglarea
+    ( cd $PKG_DEST/usr/lib
+      ln -sf $PKG_PREFIX/lib/libGL.so libGL.so
+      ln -sf $PKG_PREFIX/lib/libGL.so.1 libGL.so.1
+      ln -sf $PKG_PREFIX/lib/libGLU.so libGLU.so
+      ln -sf $PKG_PREFIX/lib/libGLU.so.1 libGLU.so.1 )
+
+    #fixed bug in kdebase    
+    echo > $PKG_DEST$PKG_PREFIX/lib/X11/config/host.def
+    
+    mv $PKG_DEST/etc/X11/xinit/xinitrc $PKG_DEST/etc/X11/xinit/xinitrc.twm
+
+    # Some of these links are now made, but some are missing.
+    # It's not known if they are really needed, but they don't hurt anything.
+    ( cd $PKG_DEST
+      ( cd etc/X11/xkb/rules ; rm -rf xfree86.lst )
+      ( cd etc/X11/xkb/rules ; ln -sf xorg.lst xfree86.lst )
+      ( cd etc/X11/xkb/rules ; rm -rf xfree86.xml )
+      ( cd etc/X11/xkb/rules ; ln -sf xorg.xml xfree86.xml )
+      ( cd etc/X11/xkb/rules ; rm -rf xfree86-it.lst )
+      ( cd etc/X11/xkb/rules ; ln -sf xorg-it.lst xfree86-it.lst )
+      ( cd etc/X11/xkb/rules ; rm -rf xfree86 )
+      ( cd etc/X11/xkb/rules ; ln -sf xorg xfree86 )
+    )
+
+    gzip_man $PKG_DEST$PKG_PREFIX/man
+    
+    pkg_configfiles &&
+    pkg_virtual &&
+    pkg_installfiles
+}
