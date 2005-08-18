@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gtk+2-2.6.5 pkgbuilder script
+# gtk2-2.6.10 pkgbuilder script
 #
 
 inherit configscript
@@ -46,8 +46,8 @@ do_postinstall() {
     cd $PKG_SRC
     
     mkdir -p $PKG_DEST/etc/profile.d
-    cat $PKG_HOME/files/gtk+.csh > $PKG_DEST/etc/profile.d/gtk+.csh
-    cat $PKG_HOME/files/gtk+.sh > $PKG_DEST/etc/profile.d/gtk+.sh
+    cat $PKG_HOME/files/gtk2.csh > $PKG_DEST/etc/profile.d/gtk2.csh
+    cat $PKG_HOME/files/gtk2.sh > $PKG_DEST/etc/profile.d/gtk2.sh
     chmod 755 $PKG_DEST/etc/profile.d/*
     
     mkdir -p $PKG_DEST/etc/gtk-2.0
