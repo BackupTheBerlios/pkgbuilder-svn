@@ -1,0 +1,37 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# cpufreqd-1.2.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://sourceforge.net/projects/cpufreqd"
+
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README TODO examples/*"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+
+PKG_CONFIG_FILES="etc/cpufreqd.conf etc/rc.d/rc.cpufreqd"
+
+do_install() {
+    configscript_do_install || return $?
+    
+    mkdir -p $PKG_DEST/etc/rc.d/
+    cat $PKG_HOME/files/rc.cpufreqd > $PKG_DEST/etc/rc.d/rc.cpufreqd
+
+    return $?
+}
