@@ -6,7 +6,7 @@
 
 inherit db
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_USE="java tcltk"
 
@@ -25,6 +25,15 @@ PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        --enable-cxx
                        `use_enable java`
                        `use tcltk && echo "--enable-tcl --with-tcl=/usr/lib" || echo "--disable-tcl"`"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch patch.4.2.52.1 -p0 &&
+    apply_patch patch.4.2.52.2 -p0
+
+    return $?
+}
 
 do_install() {
     db_do_install
