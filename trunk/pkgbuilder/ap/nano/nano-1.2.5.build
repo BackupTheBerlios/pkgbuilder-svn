@@ -1,0 +1,40 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# nano-1.2.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.nano-editor.org/dist/v1.2/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/ncurses-5.2
+               d/gettext"
+
+PKG_HOMESITE="http://www.nano-editor.org/"
+
+PKG_DOC_FILES="AUTHORS BUGS C* INSTALL NEWS README T* UPGRADE faq.html"
+PKG_CONFIG_FILES="etc/nanorc"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc --enable-all"
+
+PKG_CONFIG_FILES="etc/nanorc"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc
+    cp $PKG_HOME/files/nanorc-sample $PKG_DEST/etc/nanorc
+    chmod 644 $PKG_DEST/etc/nanorc
+
+    pkg_postinstall
+}
