@@ -1,0 +1,47 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# whois-4.6.22 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="${PKG_NAME}_$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://ftp.debian.org/debian/pool/main/w/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=d/perl-5"
+
+PKG_HOMESITE="http://www.linux.it/~md/software/"
+
+PKG_DOC_FILES="COPYING README"
+
+PKG_INSTALL_OPTIONS="BASEDIR=$PKG_DEST prefix=$PKG_PREFIX"
+
+do_patch() {
+    cd $PKG_SRC
+
+    sed -i -e 's|/share/man/man1/|/man/man1/|' Makefile
+
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC
+
+    make OPTS="$CFLAGS"
+
+    return $?
+}
+
+do_install() {
+    mkdir -p $PKG_DEST/usr/bin $PKG_DEST/usr/man/man1
+
+    makeonly_do_install
+}
