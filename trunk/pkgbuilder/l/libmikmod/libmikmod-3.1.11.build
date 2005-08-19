@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -17,8 +17,8 @@ PKG_LICENSE="GPLv2 LGPLv2.1"
 PKG_USE="oss esd alsa"
 
 PKG_DEPENDS=">=l/audiofile-0.2.3
-        	 `use_dep alsa`
-        	 `use_dep esd`"
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep esd "l/esound"`"
 
 PKG_HOMESITE="http://mikmod.raphnet.net/"
 
@@ -26,6 +26,14 @@ PKG_DOC_FILES="AUTHORS COPYING* NEWS README TODO"
 
 
 PKG_CONFIGURE_OPTIONS="--enable-af
-					   `use_enable alsa`
-        	 		   `use_enable esd`
-					   `use_enable oss`"
+                       `use_enable alsa`
+                       `use_enable esd`
+                       `use_enable oss`"
+
+do_patch() {
+    cd $PKG_SRC
+    
+    apply_patch libmikmod-3.1.11-a.diff -Np1
+
+    return $?
+}
