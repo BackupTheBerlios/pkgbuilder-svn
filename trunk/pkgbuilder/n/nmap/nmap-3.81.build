@@ -16,7 +16,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="gtk"
 
-PKG_DEPENDS="l/glibc `use gtk && echo ">=l/gtk+-1.2"`"
+PKG_DEPENDS="l/glibc `use gtk && echo ">=l/gtk-1.2"`"
 
 PKG_HOMESITE="http://www.insecure.org/nmap/"
 
