@@ -1,12 +1,12 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# libidl-0.8.2 pkgbuilder script
+# libidl-0.8.6 pkgbuilder script
 #
 
 inherit gnome
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 PKG_FILE_NAME="libIDL-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="$GNOME_BASE_URL/libIDL/0.8/$PKG_FILE_NAME"
 
