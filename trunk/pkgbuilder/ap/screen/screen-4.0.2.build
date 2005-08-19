@@ -32,7 +32,8 @@ PKG_CONFIGURE_OPTIONS="--with-sys-screenrc=/etc/screenrc
                        --enable-colors256
                        --enable-rxvt_osc"
 
-PKG_CONFIG_FILES="etc/screenrc"
+PKG_CONFIG_FILES="etc/screenrc
+                  etc/skel/.screenrc"
 
 do_patch() {
     cd $PKG_SRC
