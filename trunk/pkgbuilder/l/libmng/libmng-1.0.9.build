@@ -1,0 +1,58 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# libmng-1.0.9 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/libjpeg-6b
+             >=l/zlib-1.1.4
+             >=l/lcms-1.0.8"
+
+PKG_HOMESITE="http://www.libmng.com/"
+
+PKG_DOC_FILES="Changes LICENSE README* doc/doc.readme doc/libmng.txt"
+
+PKG_CONFIGURE_OPTIONS="--with-zlib --with-jpeg --with-lcms"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch makefile.patch -Np1
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+    
+    cp makefiles/makefile.linux ./Makefile
+    sed -i -e "s/\-O3/$CFLAGS/g" Makefile
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/{lib,include} &&
+    pkg_install &&
+    mkdir -p $PKG_DEST$PKG_PREFIX/man/man{3,5} &&
+    cp doc/man/*.3 $PKG_DEST$PKG_PREFIX/man/man3 &&
+    cp doc/man/*.5 $PKG_DEST$PKG_PREFIX/man/man5
+    
+    return $?
+}
