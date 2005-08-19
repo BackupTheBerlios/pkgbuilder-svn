@@ -5,9 +5,11 @@
 # make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':'.
 
-       |-----handy-ruler------------------------------------------------------|
-example: example
-example:
-example: example
-example:
-
+        |-----handy-ruler------------------------------------------------------|
+libglade: libglade
+libglade:
+libglade: The GLADE library allows loading user interfaces which are stored
+libglade: externally into a program.  This allows the interface to be changed
+libglade: without recompiling the program.  The interfaces can also be edited
+libglade: with GLADE.
+libglade:
