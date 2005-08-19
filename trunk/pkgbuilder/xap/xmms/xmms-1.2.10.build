@@ -1,4 +1,4 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
 # xmms-1.2.10 pkgbuilder script
@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.xmms.org/files/1.2.x/$PKG_FILE_NAME"
@@ -15,14 +15,13 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="alsa esd mikmod oggvorbis opengl nls mmx 3dnow"
 
-PKG_DEPENDS="a/infozip
-	         l/gtk+
-			 >=l/libxml-1.8.15
-			 `use alsa && echo ">=l/alsa-lib-0.9"`
-             `use mikmod && echo ">=l/libmikmod-3.1.6"`
-        	 `use esd && echo ">=l/esound-0.2.22"`
-        	 `use oggvorbis && echo ">=l/libvorbis-1.0_beta4"`
-			 `use nls && echo "d/gettext"`"
+PKG_DEPENDS="l/gtk
+             >=l/libxml-1.8.15
+             `use_dep alsa ">=l/alsa-lib-0.9"`
+             `use_dep mikmod ">=l/libmikmod-3.1.6"`
+             `use_dep esd ">=l/esound-0.2.22"`
+             `use_dep oggvorbis ">=l/libvorbis-1.0_beta4"`
+             `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://www.xmms.org/"
 
