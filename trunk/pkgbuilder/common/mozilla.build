@@ -11,14 +11,14 @@ mozilla_init() {
     
     PKG_EXTENSION="tar.bz2"
 
-    PKG_FILE_NAME="$PKG_NAME-source-$PKG_VERSION.$PKG_EXTENSION"
+    PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
 
     ENIGMAIL_FILE_NAME="enigmail-$ENIGMAIL_VERSION.tar.gz"
     IPC_FILE_NAME="ipc-$IPC_VERSION.tar.gz"
 
     MOZILLA_BASE_URL="http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases"
 
-    PKG_URL="$MOZILLA_BASE_URL/$PKG_NAME$PKG_VERSION/src/$PKG_FILE_NAME
+    PKG_URL="$MOZILLA_BASE_URL/$PKG_NAME$PKG_VERSION/source/$PKG_FILE_NAME
              `use_dep crypt "http://downloads.mozdev.org/enigmail/src/$ENIGMAIL_FILE_NAME"`
              `use_dep crypt "http://downloads.mozdev.org/enigmail/src/$IPC_FILE_NAME"`"
     
@@ -34,7 +34,7 @@ mozilla_init() {
                  >=l/libpng-1.2.1
                  l/expat
                  a/infozip
-                 >=l/gtk+2-2.2.0
+                 >=l/gtk2-2.2.0
                  >=l/glib2-2.2.0
                  >=l/pango-1.2.1
                  d/pkgconfig
