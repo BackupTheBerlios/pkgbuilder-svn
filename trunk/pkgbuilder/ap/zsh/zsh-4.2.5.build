@@ -1,0 +1,47 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# zsh-4.2.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.zsh.org/pub/$PKG_FILE_NAME"
+
+PKG_LICENSE="ZSH"
+
+PKG_USE=""
+
+PKG_DEPENDS="ap/groff 
+            >=l/readline-5.0
+            >=l/pcre-3.9
+            >=l/ncurses-5.1"
+
+PKG_HOMESITE="http://www.zsh.org/"
+
+PKG_DOC_FILES="ChangeLog* META-FAQ README INSTALL LICENCE config.modules"
+
+PKG_CONFIGURE_OPTIONS="--enable-etcdir=/etc/zsh 
+                       --enable-zshenv=/etc/zsh/zshenv 
+                       --enable-zlogin=/etc/zsh/zlogin 
+                       --enable-zlogout=/etc/zsh/zlogout 
+                       --enable-zprofile=/etc/zsh/zprofile 
+                       --enable-zshrc=/etc/zsh/zshrc 
+                       --enable-maildir-support 
+                       --with-curses-terminfo 
+                       --enable-zsh-secure-free"
+
+PKG_CONFIG_FILES="etc/zsh/zprofile"
+
+do_postinstall() {
+
+    mkdir -p $PKG_DEST/etc/zsh
+    cp $PKG_HOME/files/zprofile $PKG_DEST/etc/zsh/zprofile
+    configscript_do_postinstall
+
+    return $?
+}
