@@ -1,0 +1,39 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# apr-util-0.9.6 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://apache.rediris.es/apr/$PKG_FILE_NAME"
+
+PKG_LICENSE="APLv2.0"
+
+PKG_USE="gdbm berkdb"
+
+PKG_DEPENDS="l/apr
+             l/expat
+             `use_dep berkdb "l/db4"`
+             `use_dep gdbm "l/gdbm"`"
+
+PKG_HOMESITE="http://apr.apache.org/"
+
+PKG_DOC_FILES="CHANGES LICENSE NOTICE README.dev"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-apr=/usr 
+                       --datadir=/usr/share/apr-util-0"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST installbuilddir=/usr/share/apr-util-0/build"
+
+do_postinstall() {
+    sed -i -e 's:APU_SOURCE_DIR=.*:APU_SOURCE_DIR=:g' $PKG_DEST/usr/bin/apu-config
+    sed -i -e 's:APU_BUILD_DIR=.*:APU_BUILD_DIR=/usr/share/apr-util-0/build:g' $PKG_DEST/usr/bin/apu-config
+
+    configscript_do_postinstall
+}

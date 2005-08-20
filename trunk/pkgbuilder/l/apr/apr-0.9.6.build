@@ -1,0 +1,44 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# apr-0.9.6 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://apache.rediris.es/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="APLv2.0"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://apr.apache.org/"
+
+PKG_DOC_FILES="CHANGES LICENSE NOTICE README.dev"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--datadir=/usr/share/apr-0
+                       --enable-threads
+                       --enable-nonportable-atomics"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST installbuilddir=/usr/share/apr-0/build"
+
+do_postinstall() {
+    sed -i -e 's:APR_SOURCE_DIR=.*:APR_SOURCE_DIR=/usr/share/apr-0:g' $PKG_DEST/usr/bin/apr-config
+    sed -i -e 's:APR_BUILD_DIR=.*:APR_BUILD_DIR=/usr/share/apr-0/build:g' $PKG_DEST/usr/bin/apr-config
+
+    sed -i -e 's:apr_builddir=.*:apr_builddir=/usr/share/apr-0/build:g' $PKG_DEST/usr/share/apr-0/build/apr_rules.mk
+    sed -i -e 's:apr_builders=.*:apr_builders=/usr/share/apr-0/build:g' $PKG_DEST/usr/share/apr-0/build/apr_rules.mk
+
+    cp -p $PKG_SRC/build/*.awk $PKG_DEST/usr/share/apr-0/build
+    cp -p $PKG_SRC/build/*.sh $PKG_DEST/usr/share/apr-0/build
+    cp -p $PKG_SRC/build/*.pl $PKG_DEST/usr/share/apr-0/build
+
+    configscript_do_postinstall
+}
