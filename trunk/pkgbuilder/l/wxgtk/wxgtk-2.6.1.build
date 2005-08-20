@@ -1,0 +1,76 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# wxgtk-2.6.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="wxGTK-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/wxwindows/$PKG_FILE_NAME"
+
+PKG_LICENSE="wxWin"
+
+PKG_USE="opengl unicode"
+
+PKG_DEPENDS="x/x11
+            l/libpng
+            l/libjpeg
+            l/libtiff
+            d/pkgconfig
+            >=l/glib2-2.0 
+            >=l/gtk2-2.0"
+
+PKG_HOMESITE="http://www.wxwindows.org/"
+
+PKG_SRC="$TMP/wxGTK-$PKG_VERSION"
+
+PKG_DOC_FILES="COPYING.LIB *.txt"
+
+PKG_CONFIGURE_OPTIONS="--with-gtk
+                       --enable-gtk2
+                       --enable-timedate
+                       --disable-debug
+                       `use_with opengl`
+                       `use_enable unicode`"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_build() {
+    configscript_do_build
+
+    cd $PKG_SRC/contrib/src
+
+    pkg_build
+
+    return $?
+}
+
+do_install() {
+    configscript_do_install
+
+    cd $PKG_SRC/contrib/src
+
+    pkg_install
+
+    return $?
+}
+
+do_postinstall() {
+    if use unicode ; then
+        ( cd $PKG_DEST$PKG_PREFIX/bin
+          rm -f wx-config ; ln -sf $PKG_PREFIX/lib/wx/config/gtk2-unicode-release-2.6 wx-config )
+    else
+        ( cd $PKG_DEST$PKG_PREFIX/bin
+          rm -f wx-config ; ln -sf $PKG_PREFIX/lib/wx/config/gtk2-ansi-release-2.6 wx-config )
+    fi
+
+    cp $PKG_SRC/include/wx/html/htmlproc.h $PKG_DEST/usr/include/wx-2.6/wx/html
+
+    configscript_do_postinstall
+
+    return $?
+}
