@@ -18,7 +18,7 @@ PKG_USE=""
 
 PKG_DEPENDS="l/glibc"
 
-PKG_HOMESITE="http://www.xiph.org/ogg/vorbis/index.html"
+PKG_HOMESITE="http://www.xiph.org/ogg/"
 
 PKG_DOC_FILES="AUTHORS CHANGES COPYING README"
 
