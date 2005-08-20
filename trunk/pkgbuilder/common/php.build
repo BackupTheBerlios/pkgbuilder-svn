@@ -15,11 +15,11 @@ php_init() {
 
     PKG_LICENSE="GPLv2"
 
-    PKG_USE="ssl gdbm berkdb exif gd jpeg png gmp mysql curl crypto xml"
+    PKG_USE="ssl gdbm berkdb exif gd jpeg png gmp mysql curl crypt xml"
 
     PKG_DEPENDS="`use_dep ssl "l/openssl"`
                  `use_dep gdbm "l/gdbm"`
-                 `use_dep berkdb "l/db3"`
+                 `use_dep berkdb "l/db4"`
                  `use_dep exif "l/libexif"`
                  `use_dep gd "l/libgd"`
                  `use_dep jpeg "l/libjpeg"`
@@ -28,7 +28,7 @@ php_init() {
                  `use_dep gmp "l/gmp"`
                  `use_dep mysql "ap/mysql"`
                  `use_dep curl "n/curl"`
-                 `use_dep crypto "l/mhash"`
+                 `use_dep crypt "l/mhash"`
                  `use_dep xml "l/libxml2 l/libxslt"`
                  l/libwww
                  l/expat"
@@ -70,7 +70,7 @@ php_init() {
                            `use_dep crypt "--with-mhash=/usr"`
                            `use_with ssl openssl`
                            `use_with gdbm`
-                           `use_with berkdb db3`
+                           `use_with berkdb db4`
                            `use_with exif`
                            `use_enable exif`
                            `use_dep gd "--with-gd --enable-gd-native-ttf"`
