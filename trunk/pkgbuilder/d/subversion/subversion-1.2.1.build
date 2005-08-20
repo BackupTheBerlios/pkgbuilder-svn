@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -14,14 +14,14 @@ PKG_URL="http://subversion.tigris.org/tarballs/$PKG_FILE_NAME"
 
 PKG_LICENSE="APLv1.1"
 
-PKG_USE="python perl java berkdb apache"
+PKG_USE="python perl java apache berkdb"
 
 PKG_DEPENDS=">=n/neon-0.24.7
+             `use_dep berkdb "l/db4"`
              `use_dep python ">=d/python-2.0 =d/swig-1.3.21"`
              `use_dep perl ">=d/perl-5.8 =d/swig-1.3.21"`
              `use_dep java "d/j2sdk"`
-             `use_dep berkdb "l/db4"`
-             `use_dep apache ">=n/apache-2.0.48"`"
+             `use_dep apache ">=n/apache-2.0.48" "l/apr-util"`"
 
 PKG_HOMESITE="http://subversion.tigris.org/"
 
@@ -30,13 +30,16 @@ PKG_DOC_FILES="BUGS ChangeLog.CVS CHANGES COMMITTERS COPYING HACKING INSTALL REA
 PKG_CONFIGURE_OPTIONS="--with-neon=/usr
                        --disable-experimental-libtool
                        --disable-mod-activation
+                       --with-zlib
                        `use_with ssl`
-                       `use apache && echo "--with-apxs=/usr/sbin/apxs
-                                            --with-apr=/usr
-                                            --with-apr-util=/usr"`
+                       `use_dep apache "--with-apxs=/usr/sbin/apxs"`
+                       --with-apr=/usr/bin/apr-config
+                       --with-apr-util=/usr/bin/apu-config
                        `use python || use perl && echo "--with-swig" || echo "--without-swig"`
-                       `use python && echo "--with-python=/usr/bin/python" || echo "--without-python"`
+                       `use_dep python "--with-python=/usr/bin/python" "--without-python"`
                        `use_enable java javahl`"
+
+echo $PKG_CONFIGURE_OPTIONS
 
 PKG_BUILD_TARGET="all 
                   `use_dep python "swig-py"`
@@ -60,10 +63,6 @@ do_patch() {
 do_postinstall() {
     rm -rf $PKG_DEST$PKG_PREFIX/info
     rm -rf $PKG_DEST$PKG_PREFIX/build
-
-    if ! use apache ; then
-        chown root.root $PKG_DEST$PKG_PREFIX/apr-0/*
-    fi
 
     if use python ; then
         local python_mayor_version="`installed_version python | cut -d"." -f1,2`"
