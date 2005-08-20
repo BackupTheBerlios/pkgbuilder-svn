@@ -39,8 +39,6 @@ PKG_CONFIGURE_OPTIONS="--with-neon=/usr
                        `use_dep python "--with-python=/usr/bin/python" "--without-python"`
                        `use_enable java javahl`"
 
-echo $PKG_CONFIGURE_OPTIONS
-
 PKG_BUILD_TARGET="all 
                   `use_dep python "swig-py"`
                   `use_dep perl "swig-pl"`
