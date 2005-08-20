@@ -1,0 +1,71 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# lesstif-0.94.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc
+             x/x11"
+
+PKG_HOMESITE="http://www.lesstif.org/"
+
+PKG_PREFIX="/usr/X11R6"
+PKG_CONFIGURE_OPTIONS="--enable-production
+                       --enable-nonstandard-conversions 
+                       --enable-editres
+                       --with-xdnd 
+                       --enable-build-21 
+                       --disable-debug
+                       --enable-shared  
+                       --enable-static"
+PKG_BUILD_OPTIONS=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    #link to doc
+    mkdir -p $PKG_DEST/usr/doc
+    
+    ( cd $PKG_DEST/usr/doc ; ln -sf /usr/X11R6/LessTif $PKG_NAME-$PKG_VERSION )
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/X11/config
+    
+    cp -a $PKG_DEST$PKG_PREFIX/lib/LessTif/config/* \
+          $PKG_DEST$PKG_PREFIX/lib/X11/config
+    
+    mv $PKG_DEST$PKG_PREFIX/lib/X11/config/host.def \
+       $PKG_DEST$PKG_PREFIX/lib/X11/config/host.def-lesstif
+       
+    mkdir -p $PKG_DEST/etc/X11
+    
+    cp -a $PKG_DEST$PKG_PREFIX/lib/X11/app-defaults \
+          $PKG_DEST/etc/X11
+    
+    cp -a $PKG_DEST$PKG_PREFIX/lib/X11/mwm \
+          $PKG_DEST/etc/X11
+    
+    rm -rf $PKG_DEST$PKG_PREFIX/lib/X11/mwm
+    
+    ( cd $PKG_DEST$PKG_PREFIX/lib/X11 ; ln -sf /etc/X11/mwm )
+    
+    pkg_stripall
+    
+    pkg_gzipmaninfo
+
+    pkg_installfiles
+
+    return $?
+}
