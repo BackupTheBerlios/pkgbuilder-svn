@@ -52,6 +52,7 @@ do_postinstall() {
     chmod +x $PKG_DEST/etc/profile.d/j2sdk.*
 
     pkg_configfiles
+    pkg_installfiles
 
     return $?
 }
