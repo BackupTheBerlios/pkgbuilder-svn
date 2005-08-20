@@ -1,10 +1,9 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) tomby.homemelinux.org
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.rc-sample,v 1.23 2004/04/19 18:00:27 tomby Exp $
 
-PKGBUILDER_HOME="/var/pkgbuilder"
+PKGBUILDER_HOME="/var/pkg"
 
-VERSION="20041114"
+VERSION="20050820"
 
 # Packages db directory
 PACKAGES_LOGDIR="/var/log/packages"
@@ -20,12 +19,12 @@ PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
 
 # Fetch options
 FETCH_TRIES="5"
-FETCH_DIR="/var/cache/pkgbuilder/sources"
+FETCH_DIR="/var/cache/pkg/sources"
 FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
 FETCH_FTP_OPTIONS="--passive-ftp"
 
 # Binary packages directory
-BINARIES_DIR="/var/cache/pkgbuilder/binaries"
+BINARIES_DIR="/var/cache/pkg/binaries"
 
 # Temporal directory
 TMP="/tmp"
