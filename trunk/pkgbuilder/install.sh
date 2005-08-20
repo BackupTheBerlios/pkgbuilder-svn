@@ -152,7 +152,15 @@ for DEP in $PKG_DEPENDS ; do
         if [ `echo $DEP | grep '^!'` ] ; then
             #pkg must not installed
 
-            is_installed $DEP_PKG_NAME $DEP_PKG_VERSION && exit 1 || continue
+            is_installed $DEP_PKG_NAME $DEP_PKG_VERSION 
+            RESULT="$?"
+
+            if [ "$RESULT" -eq "0" ] ; then 
+                echo "pkgbuilder: ERROR conflict with package $DEP_METAPKG/$DEP_PKG_NAME-$DEP_PKG_VERSION"
+                exit 1
+            else
+                continue
+            fi
         elif [ `echo $DEP | grep '^>='` ] ; then
             #pkg must installed greater or equal version
 
@@ -185,7 +193,15 @@ for DEP in $PKG_DEPENDS ; do
         if [ `echo $DEP | grep '^!'` ] ; then
             #pkg must not installed
 
-            is_installed $DEP_PKG_NAME && exit 1 || continue
+            is_installed $DEP_PKG_NAME
+            RESULT="$?"
+
+            if [ "$RESULT" -eq "0" ] ; then 
+                echo "pkgbuilder: ERROR conflict with package $DEP_METAPKG/$DEP_PKG_NAME"
+                exit 1
+            else
+                continue
+            fi
         else
             DEP_PKG_LATEST_VERSION="`latest_version $DEP_METAPKG $DEP_PKG_NAME`"
 

@@ -65,10 +65,11 @@ use() {
 }
 
 #
-# Print the dependency if use flag is activated
+# Print the dep if use flag is activated
 #
 # @param $1 use parameter
 # @param $2 dependency
+# @param $3 other dependency
 #
 use_dep() {
     if [ "$1" = "" ] ; then
@@ -81,6 +82,8 @@ use_dep() {
     
     if `use $1` ; then
         echo $2
+    elif [ "$3" != "" ] ; then
+        echo $3
     fi
 }
 
