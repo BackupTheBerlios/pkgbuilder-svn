@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_USE="python gnomedb"
 
-PKG_DEPENDS=">=l/gtk+2-2.4
+PKG_DEPENDS=">=l/gtk2-2.4
              >=l/pango-1.4
              >=l/glib2-2.4
              >=gnome/libgnome-2

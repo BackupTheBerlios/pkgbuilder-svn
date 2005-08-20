@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# anjuta-1.2.1 pkgbuilder script
+# anjuta-1.2.2 pkgbuilder script
 #
 
 inherit gnome
@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/glib2-2.0.6
-             >=l/gtk+2-2.0.8
+             >=l/gtk2-2.0.8
              >=gnome/orbit2-2.4
              >=gnome/libglade-2.0.1
              >=gnome/libgnome-2.0.2

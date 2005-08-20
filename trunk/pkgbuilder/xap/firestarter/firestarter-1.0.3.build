@@ -16,7 +16,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/gtk+2-2.4
+PKG_DEPENDS=">=l/gtk2-2.4
              >=gnome/intltool-0.21 
              >=gnome/gconf-2
              >=gnome/libgnome-2

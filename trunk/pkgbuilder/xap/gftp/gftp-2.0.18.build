@@ -15,7 +15,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="nls gtk"
 
 PKG_DEPENDS="x/x11
-             >=l/gtk+2
+             >=l/gtk2
              `use_dep ssl "l/openssl"`
              `use_dep nls "d/gettext"`"
 

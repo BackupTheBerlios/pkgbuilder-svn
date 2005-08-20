@@ -40,7 +40,7 @@ PKG_DEPENDS=">=l/xvid-0.9.0
              `use_dep gtk "l/libpng 
                            x/x11
                            >=l/glib-1.2 
-                           >=l/gtk+-1.2"`"
+                           >=l/gtk-1.2"`"
 
 PKG_HOMESITE="http://www.mplayerhq.hu/"
 

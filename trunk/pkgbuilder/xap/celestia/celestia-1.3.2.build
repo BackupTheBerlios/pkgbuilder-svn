@@ -21,7 +21,7 @@ PKG_DEPENDS=">=l/glut-3.7
              l/libpng
              `use_dep kde "l/kdelibs"`
              `use_dep gnome ">=gnome/libgnomeui-2.0"`
-             `use_dep gtk "l/gtk+2 >=l/gtkglext-1.0"`"
+             `use_dep gtk "l/gtk2 >=l/gtkglext-1.0"`"
 
 PKG_HOMESITE="http://www.shatters.net/celestia/"
 
