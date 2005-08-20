@@ -20,7 +20,7 @@ PKG_DEPENDS="d/perl
              >=l/zlib-1.1.4
              l/expat
              >=d/autoconf-2.13
-             `use ssl && echo ">=l/openssl-0.9.6"`"
+             `use_dep ssl ">=l/openssl-0.9.6"`"
 
 PKG_HOMESITE="http://www.w3.org/Library/"
 
@@ -32,6 +32,4 @@ PKG_CONFIGURE_OPTIONS="--enable-shared
                        --with-zlib
                        --with-md5
                        --with-expat
-                       `use ssl && echo "--with-ssl"`"
-
-PKG_CONFIG_FILES=""
+                       `use_with ssl`"
