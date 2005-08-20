@@ -1,0 +1,55 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+
+inherit makeonly
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-0-generic-src.$PKG_EXTENSION"
+PKG_URL="http://lincvs.com/download/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="kde"
+
+PKG_DEPENDS="l/qt
+             d/cvs
+             `use kde && echo "kde/kdelibs"`"
+
+PKG_HOMESITE="http://www.lincvs.com/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING LICENSE NEWS README THANKS VERSION"
+
+PKG_QTDIR="`whereis qt | cut -d ' ' -f 2`"
+
+do_configure() {
+    cd $PKG_SRC
+
+    QTDIR=$PKG_QTDIR qmake -o Makefile lincvs.pro
+
+    return $?
+}
+
+do_install() {
+    makeonly_do_install
+
+    mkdir -p $PKG_DEST$PKG_PREFIX/share
+    mkdir -p $PKG_DEST$PKG_PREFIX/bin
+
+    echo "#!/bin/sh" > $PKG_SRC/LinCVS/lincvs.sh
+    echo "exec $PKG_PREFIX/share/LinCVS/AppRun" >> $PKG_SRC/LinCVS/lincvs.sh
+
+    cp $PKG_SRC/LinCVS/lincvs.sh $PKG_DEST$PKG_PREFIX/bin/lincvs
+    chmod +x $PKG_DEST$PKG_PREFIX/bin/lincvs
+
+    cp -pR $PKG_SRC/LinCVS $PKG_DEST$PKG_PREFIX/share
+    rm -f $PKG_DEST$PKG_PREFIX/share/LinCVS/lincvs
+    chown -R root.root $PKG_DEST$PKG_PREFIX/share
+
+    #fix perms
+    find  $PKG_DEST$PKG_PREFIX/share/LinCVS/ -type f -exec chmod 444 {} \;
+    find  $PKG_DEST$PKG_PREFIX/share/LinCVS/ -type d -exec chmod 555 {} \;
+    chmod +x $PKG_DEST$PKG_PREFIX/share/LinCVS/{lincvs.bin,AppRun}
+    chmod +x $PKG_DEST$PKG_PREFIX/share/LinCVS/Tools/*
+}
