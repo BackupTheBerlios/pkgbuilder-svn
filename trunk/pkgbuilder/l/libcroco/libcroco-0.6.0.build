@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# libcroco-0.5.1 pkgbuilder script
+# libcroco-0.6.0 pkgbuilder script
 #
 
 inherit gnome
@@ -19,5 +19,6 @@ PKG_HOMESITE="http://www.freespiders.org/projects/libcroco/"
 
 PKG_DOC_FILES="ABOUT-NLS AUTHORS ChangeLog COPYING* HACKING INSTALL NEWS README TODO"
 
+PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_enable doc gtk-doc`"
