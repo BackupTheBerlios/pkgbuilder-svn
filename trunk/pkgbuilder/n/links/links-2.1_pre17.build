@@ -18,7 +18,7 @@ PKG_USE="gpm ssl svga X png jpeg tiff javascript directfb fbcon"
 
 PKG_DEPENDS="`use_dep javascript ">=d/flex-2.5.4a"`
              `use_dep ssl ">=l/openssl-0.9.6c"`
-             `use_dep gpm "a/gpm"`
+             `use_dep gpm "ap/gpm"`
              `use_dep png ">=l/libpng-1.2.1"`
              `use_dep jpeg ">=l/libjpeg-6b"`
              `use_dep tiff ">=l/libtiff-3.5.7"`
