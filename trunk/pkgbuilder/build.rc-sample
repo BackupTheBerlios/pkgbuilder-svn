@@ -20,8 +20,9 @@ PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
 # Fetch options
 FETCH_TRIES="5"
 FETCH_DIR="/var/cache/pkg/sources"
-FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
+FETCH_OPTIONS="--tries=$FETCH_TRIES --output-document=$FETCH_DIR/%o%"
 FETCH_FTP_OPTIONS="--passive-ftp"
+FETCH_HTTPS_OPTIONS="--no-check-certificate"
 
 # Binary packages directory
 BINARIES_DIR="/var/cache/pkg/binaries"
@@ -30,7 +31,7 @@ BINARIES_DIR="/var/cache/pkg/binaries"
 TMP="/tmp"
 
 # USE flags
-USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod nas gstreamer"
+USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod gstreamer"
 USE_VIDEO="X opengl dvd divx mpeg win32codecs sdl libcaca aalib svga fbcon directfb"
 USE_NET="samba ssl slp maildir apache"
 USE_PRINT="cups pnm2ppa"
