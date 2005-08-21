@@ -16,7 +16,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="cups nls"
 
-PKG_DEPENDS="`use_dep cups ">=a/cups-1.1.14"`
+PKG_DEPENDS="`use_dep cups ">=n/cups-1.1.14"`
              xap/imagemagick
              ap/esp-gs
              l/readline

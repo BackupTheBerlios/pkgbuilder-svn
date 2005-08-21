@@ -19,10 +19,10 @@ PKG_LICENSE="GPLv2 LGPLv2"
 PKG_USE="cups"
 
 PKG_DEPENDS="l/glibc
-            >=l/libjpeg-6b
-            >=l/libpng-1.2.1
-            >=l/zlib-1.1.4
-            `use_dep cups "a/cups"`"
+             >=l/libjpeg-6b
+             >=l/libpng-1.2.1
+             >=l/zlib-1.1.4
+             `use_dep cups "n/cups"`"
 
 PKG_HOMESITE="http://www.cups.org/ghostscript.php"
 

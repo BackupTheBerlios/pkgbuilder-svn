@@ -16,7 +16,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="X slang"
 
 PKG_DEPENDS=">=l/ncurses-5.1
-             a/gpm
+             ap/gpm
              `use_dep X "x/x11"`
              `use_dep slang ">=l/slang-1.4.2"`"
 

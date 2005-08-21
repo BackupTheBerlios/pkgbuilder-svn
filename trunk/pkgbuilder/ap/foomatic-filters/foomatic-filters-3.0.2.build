@@ -17,7 +17,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE="cups samba"
 
 PKG_DEPENDS="d/perl
-             `use_dep cups '>=a/cups-1.1.19'`
+             `use_dep cups '>=n/cups-1.1.19'`
              `use_dep samba 'n/samba'`"
 
 PKG_HOMESITE="http://www.linuxprinting.org/"

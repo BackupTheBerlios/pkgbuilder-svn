@@ -31,7 +31,7 @@ vim_init() {
     PKG_DEPENDS=">=l/ncurses-5.2
                  d/ctags
                  d/cscope
-                 `use gpm && echo "a/gpm"`
+                 `use gpm && echo "ap/gpm"`
                  `use ruby && echo "d/ruby"`
                  `use python && echo "d/python"`
                  `use perl && echo "d/perl"`

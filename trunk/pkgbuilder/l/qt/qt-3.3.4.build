@@ -23,7 +23,7 @@ PKG_DEPENDS="x/x11
              l/libmng
              l/freetype2
              `use_dep gif "l/libungif"`
-             `use_dep cups "a/cups"`
+             `use_dep cups "n/cups"`
              `use_dep mysql ">=ap/mysql-4.0.15a"`"
 
 PKG_HOMESITE="http://www.trolltech.com/"
