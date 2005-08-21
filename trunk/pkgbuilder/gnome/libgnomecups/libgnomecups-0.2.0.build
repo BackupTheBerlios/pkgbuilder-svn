@@ -14,6 +14,7 @@ PKG_DEPENDS="l/glib2
              d/gettext
              >=d/intltool-0.31
              >=d/pkgconfig-0.12.0
+             >=gnome/gnome-common-2.10
              `use_dep doc ">=d/gtk-doc-0.9"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README"

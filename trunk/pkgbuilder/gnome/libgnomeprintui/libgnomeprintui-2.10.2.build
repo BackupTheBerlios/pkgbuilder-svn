@@ -11,6 +11,7 @@ PKG_BUILD="am1"
 PKG_USE="doc"
 
 PKG_DEPENDS=">=l/gtk2-2.4
+             >=gnome/gnome-common-2.10
              =gnome/libgnomeprint-$PKG_VERSION
              >=gnome/libgnomecanvas-2
              >=gnome/gnome-icon-theme-2.10
