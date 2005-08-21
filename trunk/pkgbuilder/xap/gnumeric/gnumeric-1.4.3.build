@@ -28,7 +28,7 @@ PKG_DEPENDS=">=l/gtk2-2.4
              d/pkgconfig
              d/perl
              `use_dep gnomedb ">=gnome/libgnomedb-1.0.1"`
-             `use_dep python ">=d/pygtk-2"`"
+             `use_dep python ">=l/pygtk-2"`"
 
 PKG_HOMESITE="http://www.gnome.org/gnome-office/gnumeric.shtml"
 
