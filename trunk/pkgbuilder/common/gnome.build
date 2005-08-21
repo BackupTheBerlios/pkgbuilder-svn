@@ -19,7 +19,7 @@ gnome_init() {
 
     PKG_HOMESITE="http://www.gnome.org/"
 
-    PKG_PREFIX="/usr"
+    PKG_PREFIX="/opt/gnome"
     PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                            --localstatedir=/var/lib"
     PKG_BUILD_OPTIONS=""
