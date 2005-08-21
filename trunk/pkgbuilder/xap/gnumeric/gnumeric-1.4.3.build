@@ -19,14 +19,14 @@ PKG_DEPENDS="d/perl
              >=l/libgsf-1.10.0
              >=l/libart_lgpl-2.3.11
              >=l/libglade-2.3.6
+             >=d/intltool-0.30
              `use_dep gnome ">=gnome/libgnome-2
                              >=gnome/libgnomeui-2
                              >=gnome/libgnomeprint-2.6
                              >=gnome/libgnomeprintui-2.6
                              >=gnome/libgnomecanvas-2                             
                              >=gnome/libbonobo-2.2
-                             >=gnome/libbonoboui-2.2
-                             >=gnome/intltool-0.30"`
+                             >=gnome/libbonoboui-2.2"`
              `use gnome && use_dep gnomedb ">=gnome/libgnomedb-1.0.1"`
              `use_dep python ">=l/pygtk-2"`"
 

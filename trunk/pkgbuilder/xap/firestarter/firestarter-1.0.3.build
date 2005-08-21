@@ -18,7 +18,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/gtk2-2.4
              >=l/libglade-2.3.6
-             >=gnome/intltool-0.21 
+             >=d/intltool-0.21 
              >=gnome/gconf-2
              >=gnome/libgnome-2
              >=gnome/libgnomeui-2
