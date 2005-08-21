@@ -1,0 +1,42 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# win32codecs-20050412 pkgbuilder script
+#
+
+inherit main
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="all-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www2.mplayerhq.hu/MPlayer/releases/codecs/$PKG_FILE_NAME"
+
+PKG_LICENSE="AS-IS"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://www.mplayerhq.hu/"
+
+PKG_SRC="$TMP/all-$PKG_VERSION"
+
+PKG_PREFIX="/usr"
+
+do_install() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST$PKG_PREFIX/lib/win32
+    cp * $PKG_DEST$PKG_PREFIX/lib/win32
+    cd $PKG_DEST$PKG_PREFIX/lib/win32/
+    
+    chmod 755 *
+    chown root.root *
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    pkg_installfiles
+}
