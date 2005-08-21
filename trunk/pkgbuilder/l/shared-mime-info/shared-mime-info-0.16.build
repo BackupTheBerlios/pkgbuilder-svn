@@ -19,7 +19,7 @@ PKG_USE=""
 PKG_DEPENDS="l/glib2
              >=l/libxml2-2.4
              d/pkgconfig
-             >=gnome/intltool-0.29"
+             >=d/intltool-0.29"
 
 PKG_HOMESITE="http://www.freedesktop.org/software/shared-mime-info/"
 
