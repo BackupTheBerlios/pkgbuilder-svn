@@ -294,21 +294,26 @@ fetch() {
     if [ ! -d $FETCH_DIR ] ; then
         mkdir -p $FETCH_DIR
     fi
+
+    local file="`basename "$1"`"
     
     if [ `echo $1 | grep "^ftp"` ] ; then
-        FETCH_OPTIONS="$FETCH_FTP_OPTIONS $FETCH_OPTIONS"
+        FETCH_OPTIONS="$FETCH_OPTIONS $FETCH_FTP_OPTIONS"
+    elif [ `echo $1 | grep "^https"` ] ; then
+        FETCH_OPTIONS="$FETCH_OPTIONS $FETCH_HTTPS_OPTIONS"
     fi
+
+    FETCH_OPTIONS="`echo $FETCH_OPTIONS | sed -e "s|%o%|$file.part|"`"
     
     if [ "$MIRROR_URL" != "" ] ; then
-        if [ `echo $MIRROR_URL | grep "^ftp"` ] ; then
-            MIRROR_FETCH_OPTIONS="$FETCH_FTP_OPTIONS $FETCH_OPTIONS"
-        fi
+        MIRROR_FETCH_OPTIONS="$FETCH_OPTIONS $MIRROR_FETCH_OPTIONS"
 
-        local base="`basename "$1"`"
-
-        wget -c $MIRROR_FETCH_OPTIONS $MIRROR_URL/$base || wget -c $FETCH_OPTIONS $1
+        wget -c $MIRROR_FETCH_OPTIONS $MIRROR_URL/$file || 
+        wget -c $FETCH_OPTIONS $1 &&
+        mv $FETCH_DIR/$file.part $FETCH_DIR/$file
     else 
-        wget -c $FETCH_OPTIONS $1
+        wget -c $FETCH_OPTIONS $1 &&
+        mv $FETCH_DIR/$file.part $FETCH_DIR/$file
     fi
 
     return $?

@@ -4,34 +4,33 @@
 # gnumeric-1.4.3 pkgbuilder script
 #
 
-inherit gnome
+inherit configscript
 
 PKG_BUILD="am1"
 
-PKG_USE="python gnomedb"
+PKG_USE="python gnome gnomedb"
 
-PKG_DEPENDS=">=l/gtk2-2.4
-             >=l/pango-1.4
+PKG_DEPENDS="d/perl
+             d/pkgconfig
              >=l/glib2-2.4
-             >=gnome/libgnome-2
-             >=gnome/libgnomeui-2
-             >=gnome/libgnomeprint-2.6
-             >=gnome/libgnomeprintui-2.6
-             >=gnome/libgnomecanvas-2
-             >=gnome/libglade-2.3.6
+             >=l/pango-1.4
+             >=l/gtk2-2.4
              >=l/libxml2-2.4.12
              >=l/libgsf-1.10.0
              >=l/libart_lgpl-2.3.11
-             >=gnome/libbonobo-2.2
-             >=gnome/libbonoboui-2.2
-             >=gnome/intltool-0.30
-             d/pkgconfig
-             d/perl
-             `use_dep gnomedb ">=gnome/libgnomedb-1.0.1"`
+             >=l/libglade-2.3.6
+             `use_dep gnome ">=gnome/libgnome-2
+                             >=gnome/libgnomeui-2
+                             >=gnome/libgnomeprint-2.6
+                             >=gnome/libgnomeprintui-2.6
+                             >=gnome/libgnomecanvas-2                             
+                             >=gnome/libbonobo-2.2
+                             >=gnome/libbonoboui-2.2
+                             >=gnome/intltool-0.30"`
+             `use gnome && use_dep gnomedb ">=gnome/libgnomedb-1.0.1"`
              `use_dep python ">=l/pygtk-2"`"
 
 PKG_HOMESITE="http://www.gnome.org/gnome-office/gnumeric.shtml"
 
 PKG_DOC_FILES="AUTHORS BUGS COPYING* ChangeLog OChangeLog* HACKING 
                INSTALL MAINTAINERS NEWS README TODO"
-

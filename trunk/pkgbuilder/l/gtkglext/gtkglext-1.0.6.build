@@ -15,7 +15,7 @@ PKG_LICENSE="LGPLv2"
 PKG_USE="doc"
 
 PKG_DEPENDS="l/gtk2 
-             `use_dep doc ">=gnome/gtk-doc-1.0"`"
+             `use_dep doc ">=d/gtk-doc-1.0"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog* COPYING* INSTALL NEWS README* TODO"
 

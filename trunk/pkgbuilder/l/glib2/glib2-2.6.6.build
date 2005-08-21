@@ -18,7 +18,7 @@ PKG_USE="doc"
 
 PKG_DEPENDS=">=d/pkgconfig-0.14
              >=d/gettext-0.11
-             `use_dep doc ">=gnome/gtk-doc-1"`"
+             `use_dep doc ">=d/gtk-doc-1"`"
 
 PKG_HOMESITE="http://www.gtk.org/"
 

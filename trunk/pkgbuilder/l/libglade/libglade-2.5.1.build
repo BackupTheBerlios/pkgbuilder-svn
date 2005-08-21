@@ -15,7 +15,7 @@ PKG_DEPENDS=">=l/gtk2-2.4.0
              >=l/libxml2-2.4.24
              >=d/pkgconfig-0.12.0
              d/gettext
-             `use_dep doc ">=gnome/gtk-doc-1"`"
+             `use_dep doc ">=d/gtk-doc-1"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
 

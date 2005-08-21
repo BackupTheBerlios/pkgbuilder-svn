@@ -16,14 +16,14 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="gnome gtk"
 
-PKG_DEPENDS="a/shadow
-             l/popt
-            `use gnome && echo ">=l/gtk2-2.0.0
-                                >=gnome/libgnome-2.0.0
-                                >=gnome/libgnomeui-2.0.0.0
-                                >=gnome/libglade-2.0.0
-                                l/pango"`
-            `use gtk && echo ">=l/gtk2-2.0.0 l/pango"`"
+PKG_DEPENDS="l/popt
+            `use_dep gnome "l/pango
+                            >=l/gtk2-2.0.0
+                            >=l/libglade-2.0.0
+                            >=gnome/libgnome-2.0.0
+                            >=gnome/libgnomeui-2.0.0.0"`
+            `use_dep gtk "l/pango
+                          >=l/gtk2-2.0.0"`"
 
 PKG_HOMESITE="http://distcc.samba.org/"
 
@@ -38,8 +38,10 @@ PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST
                      docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
                      pkgdocdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
                      
-PKG_CONFIG_FILES="etc/rc.d/rc.distccd etc/profile.d/distcc.sh etc/profile.d/distcc.csh"
-                     
+PKG_CONFIG_FILES="etc/rc.d/rc.distccd 
+                  etc/profile.d/distcc.sh 
+                  etc/profile.d/distcc.csh"
+
 do_install() {
     configscript_do_install
     

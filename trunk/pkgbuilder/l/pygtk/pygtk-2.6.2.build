@@ -19,7 +19,7 @@ PKG_DEPENDS=">=d/python-2.3
              >=l/gtk2-2.4
              >=l/atk-1
              >=l/glib2-2.4
-             `use_dep gnome ">=gnome/libglade-2.3.6"`"
+             `use_dep gnome ">=l/libglade-2.3.6"`"
 
 PKG_HOMESITE="http://www.daa.com.au/~james/pygtk/"
 

@@ -17,11 +17,11 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/gtk2-2.4
+             >=l/libglade-2.3.6
              >=gnome/intltool-0.21 
              >=gnome/gconf-2
              >=gnome/libgnome-2
              >=gnome/libgnomeui-2
-             >=gnome/libglade-2.3.6
              >=gnome/gnome-vfs-2.6
              d/pkgconfig
              d/gettext
@@ -31,6 +31,7 @@ PKG_HOMESITE="http://www.fs-security.com/"
 
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
+PKG_PREFIX="/usr"
 PKG_CONFIG_FILES="etc/rc.d/rc.firestarter 
                   etc/firestarter/non-routables"
 
