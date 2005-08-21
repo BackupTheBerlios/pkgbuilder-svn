@@ -16,7 +16,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS="l/gtk+
+PKG_DEPENDS="l/gtk
             >=l/libtiff-3.5.5
             >=l/libungif-4.1.0
             >=l/libpng-1.2.1

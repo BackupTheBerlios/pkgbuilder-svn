@@ -17,7 +17,7 @@ PKG_USE="gtk"
 PKG_DEPENDS="l/glibc
              >=l/ncurses-5.2
              d/nasm
-             `use_dep gtk "l/gtk+"`"
+             `use_dep gtk "l/gtk"`"
 
 PKG_HOMESITE="http://lame.sourceforge.net/"
 

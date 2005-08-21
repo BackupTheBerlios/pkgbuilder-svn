@@ -20,7 +20,7 @@ PKG_DEPENDS="`use_dep cups ">=a/cups-1.1.14"`
              xap/imagemagick
              ap/esp-gs
              l/readline
-             `use_dep gtk ">=l/gtk+-1.2.5"`
+             `use_dep gtk ">=l/gtk-1.2.5"`
              d/perl
              `use_dep foomatic "ap/foomatic-db"`"
 
