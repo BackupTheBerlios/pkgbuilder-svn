@@ -4,9 +4,11 @@
 # libart_lgpl-2.3.17 pkgbuilder script
 #
 
-inherit gnome
+inherit configscript
 
 PKG_BUILD="am1"
+
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/2.3/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2 LGPLv2.1"
 
@@ -17,3 +19,6 @@ PKG_DEPENDS="d/pkgconfig"
 PKG_HOMESITE="http://www.levien.com/libart"
 
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"

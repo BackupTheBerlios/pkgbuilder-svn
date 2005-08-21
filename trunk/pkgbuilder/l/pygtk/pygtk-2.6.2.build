@@ -4,9 +4,11 @@
 # pygtk-2.6.2 pkgbuilder script
 #
 
-inherit gnome
+inherit configscript
 
 PKG_BUILD="am1"
+
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/2.6/$PKG_FILE_NAME"
 
 PKG_LICENSE="LGPLv2.1"
 
@@ -23,5 +25,6 @@ PKG_HOMESITE="http://www.daa.com.au/~james/pygtk/"
 
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL MAPPING NEWS README THREADS TODO"
 
-PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --enable-thread"
-
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --localstatedir=/var/lib 
+                       --enable-thread"

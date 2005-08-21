@@ -1,12 +1,14 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# atk-1.9.0 pkgbuilder script
+# atk-1.10.1 pkgbuilder script
 #
 
-inherit gnome
+inherit configscript
 
 PKG_BUILD="am1"
+
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.10/$PKG_FILE_NAME"
 
 PKG_LICENSE="LGPLv2.1"
 
@@ -20,5 +22,6 @@ PKG_HOMESITE="http://developer.gnome.org/projects/gap/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING README* INSTALL NEWS"
 
+PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        `use_enable doc gtk-doc`"

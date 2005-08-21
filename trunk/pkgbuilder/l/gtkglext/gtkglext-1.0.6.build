@@ -4,13 +4,17 @@
 # gtkglext-1.0.6 pkgbuilder script
 #
 
-inherit gnome
+inherit configscript
 
 PKG_BUILD="am1"
 
+PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.0/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
 PKG_USE="doc"
 
-PKG_DEPENDS="l/gtk+2 
+PKG_DEPENDS="l/gtk2 
              `use_dep doc ">=gnome/gtk-doc-1.0"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog* COPYING* INSTALL NEWS README* TODO"
