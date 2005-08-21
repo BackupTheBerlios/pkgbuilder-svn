@@ -27,7 +27,7 @@ mozilla_init() {
     PKG_USE="ssl gnome crypto"
     
     PKG_DEPENDS="x/x11
-                 >=gnome/libidl-0.8.0
+                 >=l/libidl-0.8.0
                  >=l/zlib-1.1.4
                  >=l/fontconfig-2.1
                  >=l/libjpeg-6b
