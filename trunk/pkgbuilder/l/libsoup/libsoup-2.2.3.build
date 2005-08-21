@@ -1,7 +1,7 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# libsoup-2.2.1 pkgbuilder script
+# libsoup-2.2.3 pkgbuilder script
 #
 
 inherit gnome
@@ -17,4 +17,5 @@ PKG_DEPENDS="l/glib2
              l/popt
              l/openssl"
 
+PKG_PREFIX="/usr"
 PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README TODO"
