@@ -1,7 +1,7 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# libgnomecups-0.1.12 pkgbuilder script
+# libgnomecups-0.2.0 pkgbuilder script
 #
 
 inherit gnome
@@ -12,9 +12,9 @@ PKG_USE="doc"
 
 PKG_DEPENDS="l/glib2
              d/gettext
-             >=gnome/intltool-0.31
+             >=d/intltool-0.31
              >=d/pkgconfig-0.12.0
-             `use_dep doc ">=gnome/gtk-doc-0.9"`"
+             `use_dep doc ">=d/gtk-doc-0.9"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README"
 
