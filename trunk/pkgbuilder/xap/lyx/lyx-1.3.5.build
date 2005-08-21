@@ -25,7 +25,7 @@ PKG_DEPENDS="x/x11
              xap/xpdf
              ap/latex2html
              xap/imagemagick
-             a/cups
+             n/cups
              `use_dep nls "d/gettext"`"
 # TODO:      ap/aiksaurus
 #            ap/sgmltools-lite
