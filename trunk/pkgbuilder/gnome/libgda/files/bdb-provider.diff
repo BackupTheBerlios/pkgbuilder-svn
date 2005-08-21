@@ -1,0 +1,11 @@
+--- gda-bdb.h.orig	2005-01-29 14:30:10.000000000 +0100
++++ gda-bdb.h	2005-01-29 14:30:26.000000000 +0100
+@@ -29,7 +29,7 @@
+ #include <libgda/gda-intl.h>
+ #include <libgda/gda-server-provider.h>
+ #include <libgda/gda-blob.h>
+-#include <db.h>
++#include <db4/db.h>
+ 
+ #include "gda-bdb-provider.h"
+ #include "gda-bdb-recordset.h"
