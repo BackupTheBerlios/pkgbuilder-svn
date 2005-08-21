@@ -1,0 +1,28 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# hicolor-icon-theme-0.8 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_ARCH="noarch"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://icon-theme.freedesktop.org/releases/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://icon-theme.freedesktop.org/wiki/HicolorTheme"
+
+PKG_DOC_FILES="ChangeLog COPYING README"
+
+PKG_NOSTRIP="Y"
+
