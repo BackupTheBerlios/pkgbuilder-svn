@@ -1,0 +1,26 @@
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# libdvdcss-1.2.9 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.videolan.org/pub/$PKG_NAME/$PKG_VERSION/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://developers.videolan.org/libdvdcss/"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
