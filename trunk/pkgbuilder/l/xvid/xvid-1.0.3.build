@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="${PKG_NAME}core-${PKG_VERSION/_/-}.$PKG_EXTENSION"
-PKG_URL="http://files.xvid.org/downloads/$PKG_FILE_NAME"
+PKG_URL="http://downloads.xvid.org/downloads/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
