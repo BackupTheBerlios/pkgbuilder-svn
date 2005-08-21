@@ -19,6 +19,7 @@ PKG_DEPENDS=">=l/gtk2-2.4.0
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
 
+PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_enable doc gtk-doc`"
 
