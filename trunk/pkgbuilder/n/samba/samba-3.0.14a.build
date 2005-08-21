@@ -21,7 +21,7 @@ PKG_DEPENDS="d/autoconf
              l/readline
              l/libxml2
             `use_dep mysql "ap/mysql l/zlib"`
-            `use_dep cups "a/cups"`
+            `use_dep cups " n/cups"`
             `use_dep python "d/python"`"
 
 PKG_HOMESITE="http://www.samba.org/"
