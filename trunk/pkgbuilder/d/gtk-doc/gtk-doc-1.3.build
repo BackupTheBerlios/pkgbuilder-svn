@@ -27,6 +27,7 @@ PKG_DEPENDS=">=d/pkgconfig-0.12.0
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README* NEWS doc/*.txt"
 
+PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--enable-debug=no"
 
 PKG_NOSTRIP="Y"
