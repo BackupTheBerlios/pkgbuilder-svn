@@ -17,26 +17,18 @@ PKG_USE="nls"
 
 PKG_DEPENDS=">=l/libxml2-2.4.19
              >=l/libxslt-1.0.14
-             >=l/zlib-1.1.3
              =ap/docbook-xml-dtd-4.1.2
              >=ap/docbook-sgml-utils-0.6.6
              >=d/intltool-0.28
-             `use nls && echo "d/gettext"`"
+             `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://scrollkeeper.sourceforge.net"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        --localstatedir=/var"
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
 
 PKG_CONFIG_FILES="etc/scrollkeeper.conf"
 
