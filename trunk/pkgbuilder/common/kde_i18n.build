@@ -45,8 +45,16 @@ kde_i18n_do_configure() {
 }
 
 kde_i18n_do_build() {
-    #nothing to do
-    true
+    cd $PKG_SRC
+    
+    local lang
+
+    for lang in $I18N ; do
+        ( cd $PKG_SRC/$PKG_NAME-$lang-$PKG_VERSION
+          pkg_build )
+    done
+
+    return $?
 }
 
 kde_i18n_do_install() {
