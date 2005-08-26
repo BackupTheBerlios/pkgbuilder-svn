@@ -1,0 +1,26 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# qca-1.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://delta.affinix.com/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/qt"
+
+PKG_HOMESITE="http://delta.affinix.com/qca/"
+
+PKG_DOC_FILES="COPYING INSTALL README TODO"
+
+PKG_CONFIGURE_OPTIONS=""
+PKG_INSTALL_OPTIONS="INSTALL_ROOT=$PKG_DEST"
