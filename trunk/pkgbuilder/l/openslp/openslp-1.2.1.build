@@ -1,12 +1,12 @@
 # Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# openslp-1.0.11 pkgbuilder script
+# openslp-1.2.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am4"
+PKG_BUILD="am1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
@@ -19,7 +19,7 @@ PKG_DEPENDS="l/glibc"
 
 PKG_HOMESITE="http://openslp.sourceforge.net"
 
-PKG_DOC_FILES="AUTHORS FAQ COPYING ChangeLog NEWS README* THANKS"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING FAQ INSTALL NEWS README* THANKS"
 
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS=""
@@ -50,4 +50,3 @@ do_postinstall() {
     
     return $?
 }
-
