@@ -295,28 +295,32 @@ fetch() {
         mkdir -p $FETCH_DIR
     fi
 
+    local retval=0
     local file="`basename "$1"`"
+    local fetch_options="$FETCH_OPTIONS"
     
     if [ `echo $1 | grep "^ftp"` ] ; then
-        FETCH_OPTIONS="$FETCH_OPTIONS $FETCH_FTP_OPTIONS"
+        fetch_options="$fetch_options $FETCH_FTP_OPTIONS"
     elif [ `echo $1 | grep "^https"` ] ; then
-        FETCH_OPTIONS="$FETCH_OPTIONS $FETCH_HTTPS_OPTIONS"
+        fetch_options="$fetch_options $FETCH_HTTPS_OPTIONS"
     fi
 
-    FETCH_OPTIONS="`echo $FETCH_OPTIONS | sed -e "s|%o%|$file.part|"`"
+    fetch_options="`echo $fetch_options | sed -e "s|%o%|$file.part|"`"
     
     if [ "$MIRROR_URL" != "" ] ; then
-        MIRROR_FETCH_OPTIONS="$FETCH_OPTIONS $MIRROR_FETCH_OPTIONS"
+        local mirror_fetch_options="$fetch_options $MIRROR_FETCH_OPTIONS"
 
-        wget -c $MIRROR_FETCH_OPTIONS $MIRROR_URL/$file || 
-        wget -c $FETCH_OPTIONS $1 &&
-        mv $FETCH_DIR/$file.part $FETCH_DIR/$file
+        wget -c $mirror_fetch_options $MIRROR_URL/$file || 
+        wget -c $fetch_options $1
+        retval="$?"
     else 
-        wget -c $FETCH_OPTIONS $1 &&
-        mv $FETCH_DIR/$file.part $FETCH_DIR/$file
+        wget -c $fetch_options $1
+        retval="$?"
     fi
 
-    return $?
+    test $retval -eq 0 && mv $FETCH_DIR/$file.part $FETCH_DIR/$file
+
+    return $retval
 }
 
 #
