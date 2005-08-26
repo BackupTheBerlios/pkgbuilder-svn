@@ -1,7 +1,7 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# aspell-0.60 pkgbuilder script
+# aspell-0.60.3 pkgbuilder script
 #
 
 inherit configscript
@@ -22,6 +22,5 @@ PKG_HOMESITE="http://aspell.net/"
 
 PKG_DOC_FILES="C* README TODO"
 
-PKG_CONFIGURE_OPTIONS="--disable-static 
-                       --sysconfdir=/etc/aspell 
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/aspell 
                        --enable-docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
