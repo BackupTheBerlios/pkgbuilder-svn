@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -41,7 +41,8 @@ PKG_CONFIGURE_OPTIONS="--localstatedir=/var
                        --with-swatdir=/usr/share/swat 
                        --with-sambabook=/usr/share/swat/using_samba 
                        --enable-static --enable-shared
-                       --without-pam --without-pam_smbpass
+                       --without-pam 
+                       --without-pam_smbpass
                        --without-spinlocks
                        --with-fhs 
                        --with-automount 
@@ -94,6 +95,11 @@ do_install() {
     chmod 1777 $PKG_DEST/var/spool/samba
     
     pkg_install
+
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      ln -s samba/libsmbclient.so libsmbclient.so )
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      ln -s samba/libsmbclient.a libsmbclient.a )
     
     return $?
 }
