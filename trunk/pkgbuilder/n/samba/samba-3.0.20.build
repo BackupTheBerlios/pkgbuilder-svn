@@ -1,7 +1,7 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003,2004,2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# samba-3.0.14a pkgbuilder script
+# samba-3.0.20 pkgbuilder script
 #
 
 inherit configscript
@@ -59,7 +59,7 @@ PKG_CONFIGURE_OPTIONS="--localstatedir=/var
                        --with-ssllib=/usr 
                        --with-expsam=$PKG_EXT_MODS
                        `use_enable cups`
-                       `use python && echo "--with-python=yes"`"
+                       `use_dep python "--with-python=yes"`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST MANDIR=$PKG_PREFIX/man"
 
