@@ -1,12 +1,12 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xpdf-3.00 pkgbuilder script
+# xpdf-3.01 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am4"
+PKG_BUILD="am1"
 
 PKG_URL="ftp://ftp.foolabs.com/pub/$PKG_NAME/$PKG_FILE_NAME"
 
@@ -36,11 +36,10 @@ PKG_CONFIGURE_OPTIONS="--enable-freetype2
                                        --with-Xm-includes=/usr/X11R6/include"`
                        --with-gzip"
 
+PKG_CONFIG_FILES="etc/xpdfrc"
+
 do_patch() {
     ( cd $PKG_SRC ; apply_patch $PKG_NAME-lesstif.patch -Np1 )
-    ( cd $PKG_SRC/xpdf ; apply_patch $PKG_NAME-${PKG_VERSION}pl1.patch -Np0 )
-    ( cd $PKG_SRC/xpdf ; apply_patch $PKG_NAME-${PKG_VERSION}pl2.patch -Np0 )
-    ( cd $PKG_SRC/xpdf ; apply_patch $PKG_NAME-${PKG_VERSION}pl3.patch -Np0 )
 
     ( cd $PKG_SRC/splash
       sed -i 's|#include <freetype/freetype.h>|#include <ft2build.h>\n#include FT_FREETYPE_H\n#include <freetype/freetype.h>|' SplashFTFont.h
