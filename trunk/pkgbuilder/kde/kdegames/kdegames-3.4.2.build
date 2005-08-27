@@ -1,0 +1,26 @@
+# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdegames-3.4.2 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/qt-3.3.3
+             >=kde/kdelibs-$PKG_VERSION
+             >=kde/kdebase-$PKG_VERSION"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL kdegames.lsm README"
+
+do_install() {
+    kde_do_install
+
+    # binaries with suid?
+    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/*
+
+    return $?
+}
