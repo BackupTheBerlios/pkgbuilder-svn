@@ -1,12 +1,14 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gstreamer-0.8.9 pkgbuilder script
+# gstreamer-0.8.10 pkgbuilder script
 #
 
-inherit gnome
+inherit configscript
 
 PKG_BUILD="am1"
+
+PKG_URL="http://gstreamer.freedesktop.org/src/gstreamer/$PKG_FILE_NAME"
 
 PKG_LICENSE="LGPLv2"
 
@@ -16,7 +18,8 @@ PKG_DEPENDS=">=l/glib2-2.2
              >=l/libxml2-2.4.9
              >=l/popt-1.6.3
              >=d/gettext-0.11.5
-             d/pkgconfig"
+             d/pkgconfig
+             `use_dep doc "d/gtk-doc"`"
 
 PKG_HOMESITE="http://gstreamer.sourceforge.net"
 
@@ -24,8 +27,8 @@ PKG_DOC_FILES="ABOUT-NLS AUTHORS COPYING DEVEL DOCBUILDING
                INSTALL NEWS README RELEASE REQUIREMENTS TODO"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
-                       --disable-static 
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc 
+                       --localstatedir=/var
                        --disable-tests 
                        --disable-examples
-                       --disable-docs-build"
+                       `use_enable doc docs-build`"
