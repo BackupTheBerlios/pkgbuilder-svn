@@ -1,7 +1,7 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# t1lib-5.0.2 pkgbuilder script
+# t1lib-5.1.0 pkgbuilder script
 #
 
 inherit configscript
@@ -28,12 +28,20 @@ PKG_CONFIGURE_OPTIONS="--datadir=/etc
 PKG_BUILD_OPTIONS="without_doc"
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
+PKG_CONFIG_FILES="etc/t1lib/t1lib.config"
+
 do_patch() {
     cd $PKG_SRC
 
-    apply_patch $PKG_NAME-$PKG_VERSION-gentoo.diff -Np1
+    ( cd type1afm ; apply_patch makefile.diff -Np0 )
 
     sed -i -e "s:\./\(t1lib\.config\):/etc/t1lib/\1:" xglyph/xglyph.c
 
     return $?
+}
+
+do_postinstall() {
+    configscript_do_postinstall &&
+    mv $PKG_DEST/etc/t1lib/doc/t1lib_doc.pdf $PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION &&
+    rmdir $PKG_DEST/etc/t1lib/doc
 }
