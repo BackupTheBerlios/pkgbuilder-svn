@@ -1,0 +1,26 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# libusb-0.1.10a pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://libusb.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL.libusb LICENSE NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--disable-build-docs"
