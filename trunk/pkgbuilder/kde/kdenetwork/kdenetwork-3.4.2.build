@@ -11,8 +11,8 @@ PKG_BUILD="am1"
 PKG_USE="slp wifi"
 
 PKG_DEPENDS=">=l/qt-3.3.3
-             >=kde/kdelibs-3.4.2
-             >=kde/kdebase-3.4.2
+             >=kde/kdelibs-$PKG_VERSION
+             >=kde/kdebase-$PKG_VERSION
              d/pkgconfig
              d/perl
              l/qca-tls
