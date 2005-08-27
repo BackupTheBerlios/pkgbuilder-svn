@@ -1,29 +1,28 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gst-plugins-0.8.6 pkgbuilder script
-#
-# TODO: libdv libdvdnav libdvdread
+# gst-plugins-0.8.10 pkgbuilder script
 # 
 
-inherit gnome
+inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
+
+PKG_URL="http://gstreamer.freedesktop.org/src/gst-plugins/$PKG_FILE_NAME"
 
 PKG_LICENSE="LGPLv2"
 
-PKG_USE="aalib alsa arts dvd mpeg esd flac lame fame mad mikmod oggvorbis oss sdl
-         png jpeg xvid libcaca speex divx gnome"
+PKG_USE="aalib alsa arts dvd mpeg esd flac lame fame mp3 mikmod oggvorbis oss sdl
+         png jpeg xvid libcaca speex theora divx gnome mpc mpeg faac faad"
 
-PKG_DEPENDS=">=l/gstreamer-0.8.9
+# TODO: libdv libdvdnav libdvdread
+PKG_DEPENDS=">=l/gstreamer-0.8.10
              >=d/gettext-0.11.5
              >=d/pkgconfig-0.9
              l/audiofile
              ap/cdparanoia
              `use_dep X "x/x11"`
-             `use_dep xmms "xap/xmms"`
-             `use_dep gnome "gnome/gnome-vfs 
-                             gnome/gconf"`
+             `use_dep gnome "gnome/gnome-vfs gnome/gconf"`
              `use_dep dvd "l/liba52"`
              `use_dep png "l/libpng"`
              `use_dep jpeg "l/libjpeg"`
@@ -35,21 +34,24 @@ PKG_DEPENDS=">=l/gstreamer-0.8.9
              `use_dep flac "l/flac"`
              `use_dep lame "l/lame"`
              `use_dep fame "l/libfame"`
-             `use_dep mad "l/libmad"`
+             `use_dep mp3 "l/libmad l/libid3tag"`
              `use_dep speex "l/speex"`
+             `use_dep theora "l/libtheora"`
              `use_dep mikmod "l/libmikmod"`
              `use_dep oggvorbis "l/libvorbis"`
+             `use_dep mpc "l/libmpcdec"`
+             `use_dep mpeg "l/libmpeg2"`
+             `use_dep faac "l/faac"`
+             `use_dep faad "l/faad2"`
              `use_dep sdl "l/sdl"`
              `use_dep divx "l/divx4linux"`
              `use_dep xvid "l/xvid"`"
              
 PKG_HOMESITE="http://gstreamer.sourceforge.net"
 
-PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS RE* TODO"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS RE*"
 
-PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
-                       --disable-static 
                        --program-prefix= 
                        --program-suffix=
                        --disable-tests 
