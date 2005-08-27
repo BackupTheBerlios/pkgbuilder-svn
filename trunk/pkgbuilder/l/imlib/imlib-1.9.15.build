@@ -22,7 +22,7 @@ PKG_DEPENDS="l/gtk
             >=l/libpng-1.2.1
             >=l/libjpeg-6b"
 
-PKG_HOMESITE="http://developer.gnome.org/arch/imaging/imlib.html"
+PKG_HOMESITE="http://www.enlightenment.org/Libraries/Imlib/index.html"
 
 PKG_DOC_FILES="AUTHORS COPYING* ChangeLog README NEWS"
 
@@ -30,3 +30,8 @@ PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc/imlib"
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+
+PKG_CONFIG_FILES="etc/imlib/imrc
+                  etc/imlib/im_palette-small.pal
+                  etc/imlib/im_palette.pal
+                  etc/imlib/im_palette-tiny.pal"
