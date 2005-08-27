@@ -1,0 +1,36 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# libtunepimp-0.3.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.musicbrainz.org/pub/musicbrainz/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="mp3 oggvorbis flac"
+
+PKG_DEPENDS=">=l/libmusicbrainz-2.1.0
+             l/readline
+            `use_dep mp3 "l/libmad"`
+            `use_dep oggvorbis "l/libvorbis"`
+            `use_dep flac "l/flac"`"
+
+PKG_HOMESITE="http://musicbrainz.org/products/tunepimp/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog INSTALL README TODO"
+
+do_patch() {
+    cd $PKG_SRC
+
+    sed -i -e 's,-ltermcap,-lncurses,' configure
+    sed -i -e 's:-lthr:-lpthread:g' lib/threads/posix/Makefile.in
+
+    return $?
+}
