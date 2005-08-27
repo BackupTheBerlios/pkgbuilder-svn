@@ -1,0 +1,51 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# faad2-2.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/faac/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/libsndfile l/id3lib"
+
+PKG_HOMESITE="http://www.audiocoding.com/"
+
+PKG_SRC="$TMP/$PKG_NAME"
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README* TODO"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch faad2-makefile.patch -Np1
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    sh bootstrap &&
+    configscript_do_configure
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST$PKG_PREFIX/include &&
+    cp common/{mp4ff,mp4av,mp4v2}/*.h $PKG_DEST$PKG_PREFIX/include && 
+    pkg_install
+
+    return $?
+}
