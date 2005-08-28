@@ -1,8 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/build.sh,v 1.13 2003/12/30 20:27:07 tomby Exp $
-#
-# Copyright (C) 2003,2004,2005 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
+# Copyright 2003-2005 Antonio G. Muñoz Conejo <tomby (AT) users.berlios.de>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,7 +27,7 @@ usage() {
     echo "    build actions:   [auto|fetch|verify|unpack|patch|configure|build|install|postinstall]"
     echo "    pkg actions:     [buildpkg|installpkg|upgradepkg]"
     echo
-    echo "    example: build.sh xap/aterm/aterm-0.4.2.build fetch"
+    echo "    example: ./build.sh xap/aterm/aterm-0.4.2.build fetch"
 }
 
 #config file

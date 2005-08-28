@@ -1,5 +1,10 @@
 #!/bin/sh
+#
+# Copyright 2003-2005 Antonio G. Muñoz Conejo <tomby (AT) users.berlios.de>
+# Distributed under the terms of the GNU General Public License v2
+#
 # Download slackware current base packages
+#
 
 SLACKWARE_MIRROR="http://www.slackware.at/data/slackware-current"
 

@@ -1,6 +1,5 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/scripts/pkgfunctions.sh,v 1.18 2004/02/28 13:07:39 tomby Exp $
 
 #
 # Package specific functions
@@ -156,7 +155,7 @@ pkg_virtual() {
         
         cat >> $PKG_DEST/install/doinst.sh << "EOF"
 virtual() {
-  ( cd /var/log/packages ; ln -sf $1 $2-virtual-am1 )
+  ( cd var/log/packages ; ln -sf $1 $2-virtual-am1 )
 }
 EOF
 

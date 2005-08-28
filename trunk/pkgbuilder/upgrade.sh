@@ -1,8 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/update.sh,v 1.4 2004/03/14 15:51:44 tomby Exp $
-#
-# Copyright (C) 2003 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
+# Copyright 2003-2005 Antonio G. Muñoz Conejo <tomby (AT) users.berlios.de>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -88,7 +86,5 @@ for PKG in `find $PACKAGES_LOGDIR -type f | sort` ; do
                 echo ./install.sh "$PKG_META/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
             fi
         fi
-        
-        
     fi
 done

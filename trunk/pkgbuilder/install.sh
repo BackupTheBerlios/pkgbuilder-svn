@@ -1,8 +1,6 @@
 #!/bin/sh
 #
-# $Header: /cvsroot/pkgbuilder/pkgbuilder/install.sh,v 1.24 2004/04/19 18:01:22 tomby Exp $
-#
-# Copyright (C) 2003,2004,2005 Antonio G. Muñoz Conejo <tomby (AT) tomby.homelinux.org>
+# Copyright 2003-2005 Antonio G. Muñoz Conejo <tomby (AT) users.berlios.de>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,6 +17,7 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 # Install a package resolving dependencies
+#
 
 usage() {
     echo
@@ -28,6 +27,7 @@ usage() {
     echo "        -v verbose mode"
     echo "        -p from precompiled packages mode"
     echo "        -d dummy mode"
+    echo "        -i print package info"
     echo
     echo "    example: ./install.sh xap/aterm"
     echo "    example: ./install.sh xap/aterm/aterm-0.4.2.build"
@@ -58,6 +58,7 @@ while [ 0 ]; do
         shift 1
     elif [ "$1" = "-i" ]; then
         MODE="info"
+        OPTIONS="$OPTIONS -i"
         shift 1
     else
         break
