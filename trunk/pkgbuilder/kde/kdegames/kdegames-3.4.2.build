@@ -16,11 +16,5 @@ PKG_DEPENDS=">=l/qt-3.3.3
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL kdegames.lsm README"
 
-do_install() {
-    kde_do_install
-
-    # binaries with suid?
-    chmod 0755 $PKG_DEST$PKG_PREFIX/bin/*
-
-    return $?
-}
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-setgid"
