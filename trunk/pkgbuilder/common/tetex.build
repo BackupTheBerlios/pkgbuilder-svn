@@ -15,13 +15,11 @@ tetex_init() {
 
     TETEX_SRC="$PKG_NAME-src-$PKG_VERSION.$PKG_EXTENSION"
     TETEX_TEXMF="$PKG_NAME-texmf-$PKG_VERSION.$PKG_EXTENSION"
-    TETEX_TEXMF_SRC="$PKG_NAME-texmfsrc-$PKG_VERSION.$PKG_EXTENSION"
     
     PKG_FILE_NAME="$TETEX_SRC $TETEX_TEXMF $TETEX_TEXMF_SRC"
 
-    PKG_URL="$TETEX_BASE_URL/$TETEX_SRC 
-             $TETEX_BASE_URL/$TETEX_TEXMF 
-             $TETEX_BASE_URL/$TETEX_TEXMF_SRC"
+    PKG_URL="$TETEX_BASE_URL$TETEX_SRC 
+             $TETEX_BASE_URL$TETEX_TEXMF"
     
     PKG_LICENSE="GPLv2"
     
@@ -43,33 +41,18 @@ tetex_init() {
 
     PKG_PREFIX="/usr"
     TEXMF_DIR="/usr/share/texmf"
-    CACHE_FONT_DIR="/var/cache/fonts"
     
-    PKG_CONFIGURE_OPTIONS="--bindir=/usr/bin
-                           --datadir=$PKG_DEST/usr/share
+    PKG_CONFIGURE_OPTIONS="--datadir=$PKG_DEST/usr/share
                            --disable-multiplatform 
-                           --without-dialog 
+                           --disable-multiplatform 
                            --without-texinfo 
-                           --with-system-ncurses 
-                           --with-system-pnglib 
-                           --with-system-t1lib 
-                           --with-system-tifflib 
+                           --without-dialog
                            --with-system-zlib 
-                           --with-system-wwwlib 
-                           --with-libwww-include=/usr/include/w3c-libwww 
-                           --with-epsfwin 
-                           --with-mftalkwin 
-                           --with-regiswin 
-                           --with-tektronixwin 
-                           --with-unitermwin 
-                           --with-ps=gs 
-                           --enable-ipc 
-                           --with-etex
-                           `use_with X x`"
-    PKG_BUILD_OPTIONS="texmf=$TEXMF_DIR vartexfonts=$CACHE_FONT_DIR"
-    PKG_BUILD_TARGET=""
+                           --with-system-pnglib 
+                           --with-system-ncurses"
+    PKG_BUILD_OPTIONS=""
+    PKG_BUILD_TARGET="all"
     PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX
-                         bindir=$PKG_DEST/usr/bin 
                          texmf=$PKG_DEST$TEXMF_DIR"
     PKG_INSTALL_TARGET="install"
 }
@@ -78,10 +61,10 @@ tetex_do_unpack() {
     mkdir -p $TMP
     ( cd $TMP ; unpack $TETEX_SRC )
     
-    mkdir -p $PKG_DEST$TEXMF_DIR
-    ( cd $PKG_DEST$TEXMF_DIR
+    mkdir -p $PKG_DEST$TEXMF_DIR-dist
+    ( cd $PKG_DEST$TEXMF_DIR-dist
       umask 022
-      unpack $TETEX_TEXMF ; unpack $TETEX_TEXMF_SRC 
+      unpack $TETEX_TEXMF 
       chown -R root.root $PKG_DEST )
 }
 
@@ -98,19 +81,11 @@ tetex_do_install() {
 }
 
 tetex_do_postinstall() {
-    #cache font directories
-    mkdir -p $PKG_DEST$CACHE_FONT_DIR/{pk,fonts,tfm}
-    chmod 1777 $PKG_DEST$CACHE_FONT_DIR/{pk,fonts,tfm}
-    
     #remove redundant docs
     ( cd $PKG_DEST$TEXMF_DIR/doc
       for file in `find . -name "*.dvi"` ; do
         rm -f `dirname $file`/`basename $file .dvi`.pdf
       done )
-
-    #remove readlink, override coreutils readlink
-    rm -f $PKG_DEST$PKG_PREFIX/bin/readlink
-    rm -f $PKG_DEST$PKG_PREFIX/man/man1/readlink.1
 
     pkg_installdoc
     pkg_stripall
