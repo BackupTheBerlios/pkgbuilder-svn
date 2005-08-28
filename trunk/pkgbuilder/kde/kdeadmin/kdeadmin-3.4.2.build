@@ -11,6 +11,7 @@ PKG_BUILD="am1"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/qt-3.3.3
-             >=kde/kdelibs-$PKG_VERSION"
+             >=kde/kdelibs-$PKG_VERSION
+             >=kde/kdebase-$PKG_VERSION"
 
 PKG_DOC_FILES="AUTHORS COPYING INSTALL kdeadmin.lsm README"
