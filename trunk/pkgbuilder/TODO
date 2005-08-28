@@ -1,14 +1,12 @@
-$Header: /cvsroot/pkgbuilder/pkgbuilder/TODO,v 1.43 2004/04/19 18:01:53 tomby Exp $
 
 * New tasks:
 
     check pkg deps
-    create virtual pkgs support like 'virtual/mta' in gentoo
-    use new 'use' variable flag values
-    cleanup code
     documentation
     
 * Packages to update:
+
+    update tree
     
 * High priority packages:
 
@@ -80,13 +78,10 @@ ap)
 
 l)
 
-    db2
     glibc
     libdv
     libdvdnav
     libdvdread
-    libtermcap
-    nas
     ncurses
     openssl
     utempter
@@ -142,7 +137,6 @@ n)
     tin
     traceroute
     trn
-    w3m
     wget
     wireless-tools
     wvdial
