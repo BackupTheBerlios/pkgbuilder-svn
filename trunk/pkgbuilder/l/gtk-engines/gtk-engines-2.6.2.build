@@ -1,4 +1,4 @@
-# Copyright 2003,2004 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
 # gtk-engines-2.2.0 pkgbuilder script
@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS="l/gtk+2"
+PKG_DEPENDS="l/gtk2"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
 
