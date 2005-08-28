@@ -8,11 +8,11 @@ inherit configscript
 
 PKG_AUTOMAKE_VERSION="`installed_version automake`"
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp://ftp.es.kde.org/sites/ftp.kde.org/pub/kde/devel/docbook/SOURCES/$PKG_FILE_NAME"
+PKG_URL="http://sunsite.rediris.es/mirror/kde/devel/docbook/SOURCES/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
