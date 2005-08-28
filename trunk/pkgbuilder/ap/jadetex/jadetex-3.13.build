@@ -1,12 +1,12 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# jadetex-3.12 pkgbuilder script
+# jadetex-3.13 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
@@ -23,6 +23,14 @@ PKG_DOC_FILES="ChangeLog*"
 
 PKG_NOSTRIP="Y"
 
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_HOME/files/makefile.diff -Np0 
+
+    return $?
+}
+
 do_install() {
     makeonly_do_install && jadetex_do_install
 }
@@ -34,8 +42,8 @@ jadetex_do_install() {
     cp *.1 $PKG_DEST$PKG_PREFIX/man/man1
     
     ( cd $PKG_DEST$PKG_PREFIX/bin 
-      ln -sf virtex jadetex 
-      ln -sf pdfvirtex pdfjadetex )
+      ln -sf tex jadetex 
+      ln -sf pdftex pdfjadetex )
       
     return $?
 }

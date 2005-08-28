@@ -1,0 +1,11 @@
+--- Makefile.orig	2005-08-28 22:23:28.000000000 +0200
++++ Makefile	2005-08-28 22:23:40.000000000 +0200
+@@ -4,7 +4,7 @@
+ 	tex jadetex.ins
+ 
+ jadetex.fmt: basic
+-	tex -ini -progname=jadetex "&latex" jadetex.ini
++	pdfetex -ini -progname=jadetex "&latex" jadetex.ini
+ 
+ pdfjadetex.fmt: basic
+ 	pdftex -ini -progname=pdfjadetex "&pdflatex" pdfjadetex.ini
