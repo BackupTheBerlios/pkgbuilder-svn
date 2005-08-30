@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -98,6 +98,8 @@ do_install() {
 
     ( cd $PKG_DEST$PKG_PREFIX/lib
       ln -s samba/libsmbclient.so libsmbclient.so )
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      ln -s samba/libsmbclient.so libsmbclient.so.0 )
     ( cd $PKG_DEST$PKG_PREFIX/lib
       ln -s samba/libsmbclient.a libsmbclient.a )
     
