@@ -6,12 +6,11 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="MPlayer-${PKG_VERSION/_/}.$PKG_EXTENSION"
 PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
-         http://www1.mplayerhq.hu/MPlayer/releases/fonts/font-arial-iso-8859-1.tar.bz2
          `use_dep gtk "http://www1.mplayerhq.hu/MPlayer/Skin/Blue-1.4.tar.bz2"`"
          
 PKG_LICENSE="GPLv2"
@@ -65,6 +64,14 @@ if [ -r $PKG_SRC/config.mak ] ; then
     PKG_ARCH="`echo $PKG_ARCH | sed -e 's:\-::'`"
 fi
 
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch -Np0 ad_pcm_fix_20050826.diff
+
+    return $?
+}
+
 do_configure() {
     cd $PKG_SRC
 
@@ -100,11 +107,10 @@ do_postinstall() {
       rm -f default/README
       chown -R root.root default )
     
-    ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/font
-      unpack font-arial-iso-8859-1.tar.bz2
-      find ./ -type f -exec chmod 644 {} \;
-      find ./ -type d -exec chmod 755 {} \;
-      chown -R root.root font-arial-iso-8859-1 )
+    ( cd $PKG_DEST$PKG_PREFIX/share/mplayer
+      ln -s /usr/X11R6/lib/fonts/TTF/Vera.ttf subfont.ttf )
+
+    rm -rf $PKG_DEST$PKG_PREFIX/share/mplayer/font
     
     pkg_configfiles
     
