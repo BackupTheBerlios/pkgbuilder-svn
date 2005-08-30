@@ -22,6 +22,8 @@ PKG_HOMESITE="www.nedit.org"
 PKG_DOC_FILES="README ReleaseNotes ChangeLog COPYRIGHT
                doc/*.txt doc/nedit.doc doc/README.FAQ doc/NEdit.ad"
 
+PKG_PREFIX="/usr/X11R6"
+
 do_patch() {
     cd $PKG_SRC
     
