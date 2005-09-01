@@ -1,0 +1,31 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# aterm-1.0.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="x/x11"
+             
+PKG_HOMESITE="http://aterm.sourceforge.net/"
+
+PKG_DOC_FILES="aterm.lsm ChangeLog INSTALL README* doc/BUGS doc/FAQ doc/README.* doc/TODO"
+
+PKG_PREFIX="/usr/X11R6"
+
+PKG_CONFIGURE_OPTIONS="--enable-transparency=yes
+                       --enable-background-image 
+                       --enable-fading 
+                       --enable-menubar
+                       --enable-graphics"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
