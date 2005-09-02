@@ -6,20 +6,22 @@
 # Download slackware current base packages
 #
 
-SLACKWARE_MIRROR="http://www.slackware.at/data/slackware-current"
+source build.rc
 
-FETCH_TRIES="5"
-FETCH_DIR="/home/tomby/tmp/current"
-FETCH_OPTIONS="--tries=$FETCH_TRIES --directory-prefix=$FETCH_DIR"
+source scripts/functions.sh
 
-if [ ! -d $FETCH_DIR ] ; then
-    mkdir -p $FETCH_DIR
+FETCH_OPTIONS="$CURRENT_FETCH_OPTIONS"
+
+if [ ! -d $CURRENT_DIR ] ; then
+    mkdir -p $CURRENT_DIR
 fi
 
 for i in `grep -v ^# BASEPKGS | grep -v ^$ | cut -d'#' -f 1` ; do
     url="$SLACKWARE_MIRROR/slackware/$i.tgz"
-    file="$FETCH_DIR/`basename $url`"
+    file="$CURRENT_DIR/`basename $url`"
     if [ ! -f $file ] ; then
-        wget -c $FETCH_OPTIONS $url
+        fetch $url || echo "$url download ERROR"
+    else
+        echo "$file already fetched"
     fi
 done

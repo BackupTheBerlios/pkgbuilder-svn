@@ -21,17 +21,17 @@ a/hdparm-6.1-i486-1
 a/hotplug-2004_09_23-noarch-4
 a/infozip-5.52-i486-1
 a/isapnptools-1.26-i386-1 #optional
-a/jfsutils-1.1.6-i486-1 #optional
+a/jfsutils-1.1.8-i486-1 #optional
 a/kbd-1.12-i486-2
 a/kernel-ide-2.4.31-i486-1
 a/kernel-modules-2.4.31-i486-1
 a/less-382-i486-1
 a/lilo-22.5.9-i486-2
 a/module-init-tools-3.1-i486-1
-a/pciutils-2.1.11-i486-5
+a/pciutils-2.1.11-i486-6
 a/pcmcia-cs-3.2.8-i486-1 #optional
 a/pkgtools-10.2.0-i486-4
-a/procps-3.2.3-i486-1
+a/procps-3.2.5-i486-1
 a/reiserfsprogs-3.6.18-i486-1 #optional
 a/sed-4.0.9-i486-2
 a/shadow-4.0.3-i486-11

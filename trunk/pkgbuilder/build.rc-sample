@@ -3,13 +3,16 @@
 
 PKGBUILDER_HOME="/var/pkg"
 
-VERSION="20050820"
+VERSION="20050902"
 
 # Packages db directory
 PACKAGES_LOGDIR="/var/log/packages"
 
 # PkgBuilder mirror
 PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
+
+# Slackware mirror
+SLACKWARE_MIRROR="ftp://ftp.slackware.no/pub/linux/slackware/slackware-current"
 
 # Local network source code mirror
 #MIRROR_URL="ftp://localhost/pub/pkgbuilder"
@@ -20,15 +23,19 @@ PKGBUILDER_MIRROR="ftp://ftp.berlios.de/pub/pkgbuilder"
 # Fetch options
 FETCH_TRIES="5"
 FETCH_DIR="/var/cache/pkg/sources"
-FETCH_OPTIONS="--tries=$FETCH_TRIES --output-document=$FETCH_DIR/%o%"
+FETCH_OPTIONS="--tries=$FETCH_TRIES --output-document=$FETCH_DIR/%o"
 FETCH_FTP_OPTIONS="--passive-ftp"
 FETCH_HTTPS_OPTIONS="--no-check-certificate"
 
 # Binary packages directory
 BINARIES_DIR="/var/cache/pkg/binaries"
 
+# Current packages directory
+CURRENT_DIR="/var/cache/pkg/current"
+CURRENT_FETCH_OPTIONS="--tries=$FETCH_TRIES --output-document=$CURRENT_DIR/%o"
+
 # Temporal directory
-TMP="/tmp"
+TMP="/var/tmp"
 
 # USE flags
 USE_AUDIO="alsa oss arts esd oggvorbis speex lame mad flac fame mikmod gstreamer"

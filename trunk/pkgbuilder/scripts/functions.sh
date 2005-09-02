@@ -304,7 +304,7 @@ fetch() {
         fetch_options="$fetch_options $FETCH_HTTPS_OPTIONS"
     fi
 
-    fetch_options="`echo $fetch_options | sed -e "s|%o%|$file.part|"`"
+    fetch_options="`echo $fetch_options | sed -e "s|%o|$file.part|"`"
     
     if [ "$MIRROR_URL" != "" ] ; then
         local mirror_fetch_options="$fetch_options $MIRROR_FETCH_OPTIONS"
