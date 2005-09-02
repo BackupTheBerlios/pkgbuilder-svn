@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# k3b-0.11.23 pkgbuilder script
+# k3b-0.12.3 pkgbuilder script
 #
 
 inherit kde
@@ -14,18 +14,24 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="kde flac mad oggvorbis arts"
+PKG_USE="kde flac mad oggvorbis arts mpc"
 
-PKG_DEPENDS="`use_dep kde ">=kde/kdebase-3.1"`
+PKG_DEPENDS="`use_dep kde ">=kde/kdebase-3.4.2"`
              `use_dep flac "l/flac"`
-             `use_dep mad ">=ap/madplay-0.14.2b"`
+             `use_dep mad "l/libmad"`
              `use_dep oggvorbis "l/libvorbis"`
              `use_dep arts "kde/arts"`
+             `use_dep mpc "l/libmpcdec"`
+             >=kde/kdelibs-3.4.2
              >=ap/cdparanoia-3.9.8
              >=l/id3lib-3.8.0
              ap/cdrtools
              >=ap/cdrdao-1.1.7
-             l/lame"
+             l/lame
+             l/libsamplerate
+             l/readline
+             l/libmusicbrainz
+             >=l/taglib-1.4"
 
 # TODO ap/dvd+rw-tools
 
@@ -33,5 +39,6 @@ PKG_HOMESITE="http://www.k3b.org/"
 
 PKG_DOC_FILES="AUTHORS C* FAQ INSTALL k3b.lsm README TODO"
 
-PKG_CONFIGURE_OPTIONS="`use_with kde k3bsetup`
+PKG_CONFIGURE_OPTIONS="--enable-mt
+                       `use_with kde k3bsetup`
                        `use_with arts`"
