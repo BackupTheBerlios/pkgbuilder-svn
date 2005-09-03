@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# mysql-4.1.11 pkgbuilder script
+# mysql-4.1.14 pkgbuilder script
 #
 
 inherit configscript
@@ -78,16 +78,14 @@ do_install() {
         ( cd $PKG_DEST/usr/lib
           rm -f libmysqlclient.so libmysqlclient.so.14
           ln -sf mysql/libmysqlclient.so .
-          ln -sf mysql/libmysqlclient.so.14 .
-        )
+          ln -sf mysql/libmysqlclient.so.14 . )
     fi
 
     if [ -r $PKG_DEST/usr/lib/mysql/libmysqlclient_r.so.14 ]; then
         ( cd $PKG_DEST/usr/lib
           rm -f libmysqlclient_r.so libmysqlclient_r.so.14
           ln -sf mysql/libmysqlclient_r.so .
-          ln -sf mysql/libmysqlclient_r.so.14 .
-        )
+          ln -sf mysql/libmysqlclient_r.so.14 . )
     fi
 
     return $?
