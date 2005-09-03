@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# libwmf-0.2.8.3 pkgbuilder script
+# libwmf-0.2.8.4 pkgbuilder script
 #
 
 inherit configscript
