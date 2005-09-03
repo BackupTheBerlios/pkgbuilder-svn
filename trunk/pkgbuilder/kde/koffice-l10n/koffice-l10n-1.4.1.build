@@ -1,0 +1,21 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# koffice-l10n-1.4.1 pkgbuilder script
+#
+
+inherit kde_i18n
+
+PKG_BUILD="am1"
+
+unset PKG_URL
+for file in $PKG_FILE_NAME ; do
+    PKG_URL="$PKG_URL $KDE_BASE_URL/koffice-$PKG_VERSION/src/$PKG_NAME/$file"
+done
+
+PKG_USE=""
+
+PKG_DEPENDS="=kde/koffice-1.4.1"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+

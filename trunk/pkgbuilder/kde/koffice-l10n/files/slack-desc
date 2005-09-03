@@ -6,7 +6,7 @@
 # customary to leave one space after the ':'.
 
             |-----handy-ruler------------------------------------------------------|
-koffice-i18n: koffice-i18n
-koffice-i18n:
-koffice-i18n: Language support for Koffice.
-koffice-i18n:
+koffice-l10n: koffice-l10
+koffice-l10n:
+koffice-l10n: Language support for Koffice.
+koffice-l10n:
