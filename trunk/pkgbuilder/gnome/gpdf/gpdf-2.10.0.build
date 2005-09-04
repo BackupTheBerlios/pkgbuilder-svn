@@ -20,9 +20,9 @@ PKG_DEPENDS=">=l/gtk2-2.3
              >=gnome/gnome-vfs-2
              >=gnome/libgnomeprint-2.6
              >=gnome/libgnomeprintui-2.2
-             >=gnome/libglade-2
-             >=dev-util/intltool-0.29
-             >=dev-util/pkgconfig-0.12.0"
+             >=l/libglade-2
+             >=d/intltool-0.29
+             >=d/pkgconfig-0.12.0"
 
 PKG_DOC_FILES="AUTHORS CHANGES ChangeLog COPYING INSTALL NEWS README*"
 

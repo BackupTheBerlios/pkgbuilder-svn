@@ -1,0 +1,25 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gnome-doc-utils-0.3.3 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/libxml2-2.6.12
+             >=l/libxslt-1.1.8
+             >=d/python-2
+             d/gettext
+             >=d/intltool-0.28
+             >=d/pkgconfig-0.9"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS 
+                       --disable-scrollkeeper"
+
+PKG_NOSTRIP="Y"

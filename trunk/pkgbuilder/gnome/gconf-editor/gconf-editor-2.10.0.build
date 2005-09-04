@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gconf-editor-2.8.2 pkgbuilder script
+# gconf-editor-2.10.0 pkgbuilder script
 #
 
 inherit gnome
@@ -10,10 +10,10 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=gnome/gconf-1.2
-             >=l/gtk+2-2.0.2
+PKG_DEPENDS=">=gnome/gconf-2
+             >=l/gtk2-2.4
              d/gettext
-             >=gnome/intltool-0.29
+             >=d/intltool-0.29
              >=d/pkgconfig-0.9"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING README INSTALL NEWS"

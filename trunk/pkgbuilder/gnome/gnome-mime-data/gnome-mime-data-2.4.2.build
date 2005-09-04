@@ -6,7 +6,7 @@
 
 inherit gnome
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_USE=""
 
@@ -16,5 +16,7 @@ PKG_DEPENDS=">=d/pkgconfig-0.12.0
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL NEWS README"
 
 PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+
+PKG_CONFIG_FILES="etc/gnome-vfs-mime-magic"
 
 PKG_NOSTRIP="Y"

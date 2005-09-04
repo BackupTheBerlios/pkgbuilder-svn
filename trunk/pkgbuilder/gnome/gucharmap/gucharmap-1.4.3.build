@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gucharmap-1.4.2 pkgbuilder script
+# gucharmap-1.4.3 pkgbuilder script
 #
 
 inherit gnome
@@ -14,13 +14,13 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/glib2-2.3
              >=l/pango-1.2.1
-             >=l/gtk+2-2.2
+             >=l/gtk2-2.2
              l/popt
              >=gnome/libgnome-2.2
              >=gnome/libgnomeui-2.2 
              d/pkgconfig
-             gnome/scrollkeeper
-             >=gnome/intltool-0.29"
+             ap/scrollkeeper
+             >=d/intltool-0.29"
 
 PKG_DOC_FILES="COPYING* ChangeLog INSTALL README TODO"
 

@@ -1,5 +1,3 @@
-#!/bin/csh
-# GNOME additions:
 if ( ! $?GNOMEDIR ) then
     setenv GNOMEDIR /opt/gnome
 endif
@@ -38,4 +36,16 @@ if ( $?ACLOCAL_FLAGS ) then
     setenv ACLOCAL_FLAGS "$ACLOCAL_FLAGS -I $GNOME2_PATH/share/aclocal"
 else
     setenv ACLOCAL_FLAGS "-I $GNOME2_PATH/share/aclocal"
+endif
+
+if ( $?XDG_DATA_DIRS ) then
+    setenv XDG_DATA_DIRS $XDG_DATA_DIRS:$GNOMEDIR/share
+else
+    setenv XDG_DATA_DIRS $GNOMEDIR/share
+endif
+
+if ( $?XDG_CONFIG_DIRS ) then
+    setenv XDG_CONFIG_DIRS $XDG_CONFIG_DIRS:$GNOMEDIR/etc/xdg
+else
+    setenv XDG_CONFIG_DIRS $GNOMEDIR/etc/xdg
 endif

@@ -16,6 +16,6 @@ PKG_DEPENDS=">=l/gtk2-2.3
              ap/esp-gs
              l/popt
              >=d/pkgconfig-0.12.0
-             >=gnome/intltool-0.30"
+             >=d/intltool-0.30"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL MAINTAINERS NEWS README TODO"
