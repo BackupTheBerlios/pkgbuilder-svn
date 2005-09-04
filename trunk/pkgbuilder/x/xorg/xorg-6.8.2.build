@@ -36,7 +36,9 @@ PKG_PREFIX="/usr/X11R6"
 
 PKG_CONFIG_FILES="etc/X11/xdm/Xsession 
                   etc/X11/xdm/xdm-config 
-                  etc/X11/xdm/Xservers"
+                  etc/X11/xdm/Xservers
+                  etc/profile.d/xorg.sh
+                  etc/profile.d/xorg.csh"
 
 PKG_VIRTUAL="x11-$PKG_VERSION"
 
@@ -219,6 +221,11 @@ do_postinstall() {
       ( cd etc/X11/xkb/rules ; rm -rf xfree86 )
       ( cd etc/X11/xkb/rules ; ln -sf xorg xfree86 )
     )
+
+    mkdir -p $PKG_DEST/etc/profile.d
+    cp $PKG_HOME/files/xorg.sh $PKG_DEST/etc/profile.d/
+    cp $PKG_HOME/files/xorg.csh $PKG_DEST/etc/profile.d/
+    chmod 755 $PKG_DEST/etc/profile.d/xorg.*
 
     gzip_man $PKG_DEST$PKG_PREFIX/man
     
