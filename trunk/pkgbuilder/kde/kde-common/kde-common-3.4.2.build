@@ -4,7 +4,7 @@
 # kde-commmon-3.4.2 pkgbuilder script
 #
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_ARCH="noarch"
 
