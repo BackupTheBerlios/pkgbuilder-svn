@@ -9,7 +9,6 @@ inherit configscript
 gnome_init() {
     configscript_init
     
-    PKG_ARCH="$ARCH"
     PKG_EXTENSION="tar.bz2"
     PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
     GNOME_BASE_URL="http://ftp.gnome.org/pub/GNOME/sources"
@@ -38,7 +37,15 @@ gnome_minor_version() {
 }
 
 gnome_scrollkeeper_fix() {
-    test "$1" != "" && sed -i 's|^.*\-scrollkeeper-update.*$||' $1
+    local scrollkeeper_update="`find $PKG_SRC -type f | xargs grep scrollkeeper-update | cut -d: -f1 | grep -v \.in$ | grep -v \.am$ | sort -u`"
+    if [ "$scrollkeeper_update" != "" ] ; then
+        echo "gnome: scrollkeeper update fix"
+        for makefile in $scrollkeeper_update ; do
+            if [ -f "$makefile" ] ; then
+                sed -i 's|^.*\-scrollkeeper-update.*$||g' "$makefile"
+            fi
+        done
+    fi
 }
 
 gnome_gconf_install() {
@@ -47,26 +54,52 @@ gnome_gconf_install() {
     SCHEMAS="`find $PKG_DEST -type f | grep "etc/gconf/schemas/.*.schemas$" | sed "s:$PKG_DEST/\(.*\):\1:g"`"
 
     if [ "$SCHEMAS" != "" ] ; then
-        echo "if [ -x opt/gnome/bin/gconftool-2 ] ; then "
+        echo "if [ -x opt/gnome/bin/gconftool-2 ] ; then " >> $PKG_DEST/install/doinst.sh
         echo '  export GCONF_CONFIG_SOURCE=`opt/gnome/bin/gconftool-2 --get-default-source`' >> $PKG_DEST/install/doinst.sh
         echo "  SCHEMAS=\"$SCHEMAS\"" >> $PKG_DEST/install/doinst.sh
-        echo "  echo \"Gnome Schemas Instalation\"" >> $PKG_DEST/install/doinst.sh
-        echo '  usr/bin/gconftool-2 --makefile-install-rule $SCHEMAS &> /dev/null' >> $PKG_DEST/install/doinst.sh
-        echo "fi"
+        echo "  echo \"gnome schemas instalation ...\"" >> $PKG_DEST/install/doinst.sh
+        echo '  opt/gnome/bin/gconftool-2 --makefile-install-rule $SCHEMAS &> /dev/null' >> $PKG_DEST/install/doinst.sh
+        echo "  killall -s HUP gconfd-2 &> /dev/null" >> $PKG_DEST/install/doinst.sh
+        echo "fi" >> $PKG_DEST/install/doinst.sh
     fi
 }
 
 gnome_scrollkeeper_update() {
     mkdir -p $PKG_DEST/install
 
-    OMFS="`find $PKG_DEST/usr/share/omf -type f -name '*.omf'`"
+    OMFS="`find $PKG_DEST -type f | grep "share/omf/.*.omf$" | sed "s:$PKG_DEST/\(.*\):\1:g"`"
 
     if [ "$OMFS" != "" ] ; then
-        echo "echo \"updating scrollkeeper catalogue ...\"" >> $PKG_DEST/install/doinst.sh
-        echo "if [ -x usr/bin/scrollkeeper-update ] ; then "
+        echo "if [ -x usr/bin/scrollkeeper-install ] ; then " >> $PKG_DEST/install/doinst.sh
+        echo "  OMFS=\"$OMFS\"" >> $PKG_DEST/install/doinst.sh
+        echo "  echo \"installing scrollkeeper docs ...\"" >> $PKG_DEST/install/doinst.sh
+        echo '  for omf in $OMFS ; do' >> $PKG_DEST/install/doinst.sh
+        echo '    usr/bin/scrollkeeper-install -p var/lib/scrollkeeper $omf &> /dev/null' >> $PKG_DEST/install/doinst.sh
+        echo "  done" >> $PKG_DEST/install/doinst.sh
+        echo "fi" >> $PKG_DEST/install/doinst.sh
+        echo "if [ -x usr/bin/scrollkeeper-update ] ; then " >> $PKG_DEST/install/doinst.sh
+        echo "  echo \"updating scrollkeeper catalogue ...\"" >> $PKG_DEST/install/doinst.sh
         echo "  usr/bin/scrollkeeper-update -p var/lib/scrollkeeper &> /dev/null" >> $PKG_DEST/install/doinst.sh
-        echo "fi"
+        echo "fi" >> $PKG_DEST/install/doinst.sh
     fi
+}
+
+gnome_update_desktop() {
+    mkdir -p $PKG_DEST/install
+    
+    echo "if [ -x usr/bin/update-desktop-database ] ; then " >> $PKG_DEST/install/doinst.sh
+    echo "  echo \"updating desktop database ...\"" >> $PKG_DEST/install/doinst.sh
+    echo "  usr/bin/update-desktop-database -q &> /dev/null" >> $PKG_DEST/install/doinst.sh
+    echo "fi" >> $PKG_DEST/install/doinst.sh
+}
+
+gnome_update_mime() {
+    mkdir -p $PKG_DEST/install
+    
+    echo "if [ -x usr/bin/update-mime-database ] ; then " >> $PKG_DEST/install/doinst.sh
+    echo "  echo \"updating mime database ...\"" >> $PKG_DEST/install/doinst.sh
+    echo "  usr/bin/update-mime-database usr/share/mime &> /dev/null" >> $PKG_DEST/install/doinst.sh
+    echo "fi" >> $PKG_DEST/install/doinst.sh
 }
 
 gnome_do_unpack() {
@@ -74,7 +107,8 @@ gnome_do_unpack() {
 }
 
 gnome_do_configure() {
-    configscript_do_configure
+    configscript_do_configure &&
+    gnome_scrollkeeper_fix
 }
 
 gnome_do_build() {
@@ -83,14 +117,14 @@ gnome_do_build() {
 
 gnome_do_install() {
     export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL="1"
-    
     configscript_do_install
-    
     unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 }
 
 gnome_do_postinstall() {
     configscript_do_postinstall &&
     gnome_gconf_install &&
-    gnome_scrollkeeper_update
+    gnome_scrollkeeper_update &&
+    gnome_update_desktop &&
+    gnome_update_mime
 }
