@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gtk-engines-2.2.0 pkgbuilder script
+# gtk-engines-2.6.5 pkgbuilder script
 #
 
 inherit gnome
