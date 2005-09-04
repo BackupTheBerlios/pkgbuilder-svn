@@ -1,0 +1,24 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# guile-1.6.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_URL="ftp://ftp.gnu.org/gnu/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/ncurses-5.1
+             >=l/readline-4.1"
+
+PKG_HOMESITE="http://www.gnu.org/software/guile/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog GUILE-VERSION HACKING NEWS README SNAPSHOTS THANKS"
+
+PKG_CONFIGURE_OPTIONS="--with-threads --with-modules"
