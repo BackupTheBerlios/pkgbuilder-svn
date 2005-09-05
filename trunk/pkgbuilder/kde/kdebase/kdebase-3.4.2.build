@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_USE="samba cups opengl"
 
@@ -33,6 +33,14 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_with opengl gl`"
 
 PKG_CONFIG_FILE="etc/X11/xinit/xinitrc.kde"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch post-3.4.2-kdebase-kcheckpass.diff -Np0
+
+    return $?
+}
 
 do_postinstall() {
     ( cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
