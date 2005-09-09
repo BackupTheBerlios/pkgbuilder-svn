@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# intltool-0.32.1 pkgbuilder script
+# intltool-0.34.1 pkgbuilder script
 #
 
 inherit gnome
@@ -9,7 +9,7 @@ inherit gnome
 PKG_BUILD="am1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="$GNOME_BASE_URL/$PKG_NAME/0.33/$PKG_FILE_NAME"
+PKG_URL="$GNOME_BASE_URL/$PKG_NAME/0.34/$PKG_FILE_NAME"
 
 PKG_USE=""
 
