@@ -4,14 +4,9 @@
 # example pkgbuilder script
 #
 
-inherit configscript
+inherit gnome
 
 PKG_BUILD="am1"
-
-PKG_ARCH="$ARCH"
-PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://download.example.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
