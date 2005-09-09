@@ -5,9 +5,9 @@
 # make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':'.
 
-      |-----handy-ruler------------------------------------------------------|
-zenity: zenity
-zenity:
-zenity: zenity
-zenity:
+            |-----handy-ruler------------------------------------------------------|
+gnome-python: gnome-python
+gnome-python:
+gnome-python: GNOME 2 bindings for Python
+gnome-python:
 

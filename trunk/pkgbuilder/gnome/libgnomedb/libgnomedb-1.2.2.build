@@ -1,0 +1,33 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# libgnomedb-1.2.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2 LGPLV2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/gtk+2
+             >=l/libgda-1.0.0
+             >=gnome/libglade-2.0
+             >=gnome/libgnomeui-2.0
+             >=gnome/libbonoboui-2.0
+             >=gnome/gconf-2
+             >=gnome/gtksourceview-1.0
+             >=d/pkgconfig-0.8
+             >=gnome/intltool-0.22
+             >=d/gettext-0.11
+             >=gnome/scrollkeeper-0.3.11
+             `use_dep doc ">=gnome/gtk-doc-1"`"
+
+PKG_HOMESITE="http://www.gnome-db.org/"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use_enable doc gtk-doc`"

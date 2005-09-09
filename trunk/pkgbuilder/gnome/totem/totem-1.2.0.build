@@ -1,0 +1,36 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# totem-1.2.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gstreamer gnome mozilla"
+
+PKG_DEPENDS=">=l/glib2-2.6.3
+             >=l/gtk2-2.6
+             >=l/libglade-2
+             >=gnome/gnome-vfs-2.9.92
+             >=gnome/gnome-desktop-2.2
+             >=gnome/libgnomeui-2.4
+             >=gnome/gnome-icon-theme-2.10
+             l/iso-codes
+             l/musicbrainz
+             `use_dep gnome ">=gnome/nautilus-2.10"`
+             `use_dep gstreamer ">=l/gstreamer-0.8.10 >=l/gst-plugins-0.8.10" ">=l/xine-lib-1 >=gnome/gconf-2"`
+             `use_dep mozilla ">=xap/mozilla-1.7.3"`
+             ap/scrollkeeper
+             >=d/intltool-0.29
+             >=d/pkgconfig-0.12.0"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use_enable gnome nautilus`
+                       `use_enable gstreamer`
+                       `use_enable mozilla`"

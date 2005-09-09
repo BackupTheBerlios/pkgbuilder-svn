@@ -57,11 +57,3 @@ do_configure() {
 
     return $?
 }
-
-do_install() {
-    cd $PKG_SRC
-
-    gnome_scrollkeeper_fix doc/Makefile
-
-    gnome_do_install
-}

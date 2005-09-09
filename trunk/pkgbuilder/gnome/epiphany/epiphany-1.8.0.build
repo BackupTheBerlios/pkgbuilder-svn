@@ -1,0 +1,42 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# epiphany-1.8.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_USE="python"
+
+PKG_DEPENDS=">=l/glib2-2.7
+             >=l/pango-1.8
+             >=l/gtk2-2.6.3
+             >=l/libxml2-2.6.12
+             >=l/libxslt-1.1.7
+             >=l/libglade-2.3.1
+             >=gnome/gnome-vfs-2.9.2
+             >=gnome/libgnomeui-2.6
+             >=gnome/gnome-desktop-2.9.91
+             >=l/startup-notification-0.5
+             >=gnome/libgnomeprint-2.4
+             >=gnome/libgnomeprintui-2.4
+             >=gnome/libbonobo-2
+             >=gnome/gconf-2
+             gnome/orbit2
+             gnome/gnome-icon-theme
+             >=l/iso-codes-0.35
+             >=xap/mozilla-1.7.3
+             `use_dep python ">=l/pygtk-2.7 >=gnome/gnome-python-2.12"`"
+
+
+PKG_HOMESITE="http://epiphany.mozdev.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-scrollkeeper
+                       `use_enable python`"
+
+MAKE_OPTIONS="-j1"

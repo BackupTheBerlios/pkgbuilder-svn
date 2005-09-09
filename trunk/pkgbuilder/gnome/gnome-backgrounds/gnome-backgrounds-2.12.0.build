@@ -1,0 +1,21 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gnome-backgrounds-2.12.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/perl
+             d/intltool
+             d/gettext"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_NOSTRIP="Y"

@@ -5,9 +5,8 @@
 # make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':'.
 
-       |-----handy-ruler------------------------------------------------------|
-example: example
-example:
-example: example
-example:
-
+            |-----handy-ruler------------------------------------------------------|
+sound-juicer: sound-juicer
+sound-juicer:
+sound-juicer: CD ripper for GNOME 2
+sound-juicer:
