@@ -1,0 +1,37 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# iso-codes-0.47 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="${PKG_NAME}_$PKG_VERSION.orig.$PKG_EXTENSION"
+PKG_URL="http://ftp.rediris.es/mirror/debian/pool/main/i/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/pyxml 
+             d/gettext"
+
+PKG_HOMESITE="http://alioth.debian.org/projects/pkg-isocodes/"
+
+PKG_DOC_FILES="ChangeLog README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS=""
+
+PKG_NOSTRIP="Y"
+
+do_patch() {
+    cd $PKG_SRC
+
+    sed -i -e 's:(datadir)/pkgconfig:(libdir)/pkgconfig:g' Makefile.in
+
+    return $?
+}
