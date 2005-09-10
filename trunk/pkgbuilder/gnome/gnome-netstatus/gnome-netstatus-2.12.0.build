@@ -10,11 +10,11 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/gtk+2-2.3.1
-             >=gnome/libglade-2
+PKG_DEPENDS=">=l/gtk2-2.3.1
+             >=l/libglade-2
              >=gnome/libgnomeui-2.5.2
              >=gnome/gnome-panel-2
-             >=gnome/intltool-0.29
+             >=d/intltool-0.29
              d/pkgconfig"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README"

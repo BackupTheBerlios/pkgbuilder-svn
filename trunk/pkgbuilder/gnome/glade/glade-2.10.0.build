@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# glade-2.6.8 pkgbuilder script
+# glade-2.10.0 pkgbuilder script
 #
 
 inherit gnome
@@ -12,15 +12,15 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/gtk+2-2.4
+PKG_DEPENDS=">=l/gtk2-2.4
              >=l/libxml2-2.4.1
-             >=gnome/scrollkeeper-0.3.10
+             >=ap/scrollkeeper-0.3.10
              >=gnome/libgnomeui-2.6.0
              >=gnome/libgnomecanvas-2.0.0
              >=gnome/libbonoboui-2.0.0
              d/pkgconfig
              d/gettext
-             >=gnome/intltool-0.30"
+             >=d/intltool-0.30"
 
 PKG_HOMESITE="http://glade.gnome.org/"
 

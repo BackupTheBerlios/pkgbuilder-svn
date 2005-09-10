@@ -15,7 +15,7 @@ PKG_DEPENDS="l/glib2
              >=l/pango-1.2
              >=d/pkgconfig-0.12.0 
              `use_dep python ">=d/pygtk-1.99 >=d/python-2.2"`
-             `use_dep doc ">=gnome/gtk-doc-0.6"`"
+             `use_dep doc ">=d/gtk-doc-0.6"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING HACKING INSTALL MESSAGE-OF-DOOM NEWS README"
 

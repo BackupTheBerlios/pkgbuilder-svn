@@ -13,8 +13,8 @@ PKG_LICENSE="GPLv2 LGPLv2.1"
 PKG_USE=""
 
 PKG_DEPENDS=">=l/glib-2.0.3
-	         >=l/gtk+-2.0.5
-	         >=l/libart_lgpl-2.3.9
+             >=l/gtk2.0.5
+             >=l/libart_lgpl-2.3.9
              >=d/pkgconfig-0.12.0"
 
 PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"

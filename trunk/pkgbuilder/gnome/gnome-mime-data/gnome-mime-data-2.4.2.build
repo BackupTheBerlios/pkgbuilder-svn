@@ -11,7 +11,7 @@ PKG_BUILD="am1"
 PKG_USE=""
 
 PKG_DEPENDS=">=d/pkgconfig-0.12.0
-             >=gnome/intltool-0.22"
+             >=d/intltool-0.22"
 
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL NEWS README"
 

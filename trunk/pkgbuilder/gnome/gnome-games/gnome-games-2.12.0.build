@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gnome-games-2.10.2 pkgbuilder script
+# gnome-games-2.12.0 pkgbuilder script
 #
 
 inherit gnome
@@ -15,11 +15,11 @@ PKG_DEPENDS=">=l/gtk2-2.3
              >=gnome/gnome-vfs-2
              >=gnome/libgnome-2
              >=gnome/libgnomeui-2
-             >=gnome/librsvg-2
+             >=l/librsvg-2
              >=d/pkgconfig-0.12.0
              >=d/intltool-0.29
              >=d/gettext-0.10.40
              >=ap/scrollkeeper-0.3.8
-             `use scheme && echo "d/guile"`"
+             `use_dep scheme "d/guile"`"
 
 PKG_DOC_FILES="AUTHORS COPYING* ChangeLog HACKING INSTALL MAINTAINERS NEWS README TODO"

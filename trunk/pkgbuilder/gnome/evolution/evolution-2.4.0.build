@@ -36,7 +36,7 @@ PKG_DEPENDS=">=gnome/gnome-icon-theme-1.2
              >=ap/scrollkeeper-0.3.10
              `use_dep crypt ">=ap/gnupg-1.2.2"`
              `use_dep ssl "xap/mozilla"`
-             `use_dep doc "gnome/gtk-doc"`"
+             `use_dep doc "d/gtk-doc"`"
 
 PKG_HOMESITE="http://www.novell.com/products/evolution/"
 

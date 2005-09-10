@@ -17,13 +17,13 @@ PKG_DEPENDS=">=l/glib2-2.3.2
              >=l/libxml2-2.4.20
              >=gnome/gconf-1.2
              >=gnome/libbonobo-2.3.3
-             >=gnome/libglade-2
+             >=l/libglade-2
              >=gnome/libgnome-2
              >=gnome/libgnomecanvas-2
-             >=gnome/intltool-0.29
+             >=d/intltool-0.29
              >=d/pkgconfig-0.12.0
              d/gettext
-             `use_dep doc ">=gnome/gtk-doc-1.0"`"
+             `use_dep doc ">=d/gtk-doc-1.0"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog changes.txt COPYING* INSTALL NEWS README"
 

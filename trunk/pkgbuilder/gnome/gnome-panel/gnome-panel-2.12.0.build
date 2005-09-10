@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gnome-panel-2.10.2 pkgbuilder script
+# gnome-panel-2.12.0 pkgbuilder script
 #
 
 inherit gnome
@@ -17,7 +17,7 @@ PKG_DEPENDS=">=l/gtk2-2.3.2
              >=gnome/gnome-desktop-2.3
              >=gnome/gnome-menus-2.3
              >=gnome/libbonoboui-2.1.1
-             >=gnome/libglade-2.3
+             >=l/libglade-2.3
              >=gnome/libgnome-2.1.1
              >=gnome/libgnomeui-2.5.4
              >=gnome/gconf-2.3.3
@@ -26,7 +26,7 @@ PKG_DEPENDS=">=l/gtk2-2.3.2
              >=ap/scrollkeeper-0.3.11
              >=gnome/intltool-0.29
              >=d/pkgconfig-0.12.0
-             `use_dep doc ">=gnome/gtk-doc-1"`"
+             `use_dep doc ">=d/gtk-doc-1"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* HACKING INSTALL NEWS README"
 

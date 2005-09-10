@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# system-tools-backends-1.2.0 pkgbuilder script
+# system-tools-backends-1.4.0 pkgbuilder script
 #
 
 inherit gnome

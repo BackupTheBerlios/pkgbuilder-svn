@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gconf-2.10.1 pkgbuilder script
+# gconf-2.12.0 pkgbuilder script
 #
 
 inherit gnome
@@ -19,8 +19,8 @@ PKG_DEPENDS=">=l/glib2-2.0.1
              >=l/libxml2-2.4.20
              l/popt
              >=d/pkgconfig-0.12.0
-             >=gnome/intltool-0.29
-             `use_dep doc "gnome/gtk-doc"`"
+             >=d/intltool-0.29
+             `use_dep doc "d/gtk-doc"`"
 
 PKG_SRC="$TMP/GConf-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"

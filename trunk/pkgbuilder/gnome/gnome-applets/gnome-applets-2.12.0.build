@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# gnome-applets-2.10.1 pkgbuilder script
+# gnome-applets-2.12.0 pkgbuilder script
 #
 
 inherit gnome
@@ -23,9 +23,9 @@ PKG_DEPENDS=">=l/gtk2-2.1
              >=l/libxklavier-0.96
              >=ap/scrollkeeper-0.3.11
              >=gnome/system-tools-backends-1.2.0
-             `use_dep gstreamer ">=gnome/gstreamer-0.8"`
-             `use_dep apm "a/apmd"`
-             `use_dep acpi "a/acpid"`
+             `use_dep gstreamer ">=l/gstreamer-0.8"`
+             `use_dep apm "ap/apmd"`
+             `use_dep acpi "ap/acpid"`
              `use_dep doc ">=d/gtk-doc-0.9"`"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS README"

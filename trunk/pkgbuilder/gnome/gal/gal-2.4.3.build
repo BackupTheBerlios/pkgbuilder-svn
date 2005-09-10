@@ -19,7 +19,7 @@ PKG_DEPENDS=">=gnome/libgnomeprint-2.2.0
              ap/scrollkeeper
              d/gettext
              d/pkgconfig
-             `use_dep doc "gnome/gtk-doc"`"
+             `use_dep doc "d/gtk-doc"`"
 
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
