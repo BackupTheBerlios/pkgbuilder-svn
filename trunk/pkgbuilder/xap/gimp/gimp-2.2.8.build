@@ -24,7 +24,6 @@ PKG_DEPENDS=">=l/glib2-2.4.5
              >=l/freetype2-2.1.7
              >=l/libart_lgpl-2.3.8
              >=ap/gimp-print-4.2.6
-             >=gnome/libgtkhtml-2
              >=l/libwmf-0.2.8
              >=d/pkgconfig-0.15.0
              d/intltool
