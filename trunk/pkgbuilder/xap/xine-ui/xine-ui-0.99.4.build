@@ -1,0 +1,48 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# xine-ui-0.99.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/xine/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/libpng
+             l/readline
+             d/pkgconfig
+             >=l/xine-lib-1_rc3
+             >=n/curl-7.10.2
+             `use_dep X "x/x11"`
+             `use_dep aalib ">=l/aalib-1.2"`
+             `use_dep libcaca ">=l/libcaca-0.3"`
+             `use_dep directfb "l/aalib >=l/directfb-0.9.9"`
+             `use_dep nls "d/gettext"`"
+
+PKG_HOMESITE="http://www.xinehq.de/"
+
+PKG_DOC_FILES="AUTHORS C* INSTALL NEWS README"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION
+                                       docsdir=/usr/doc/$PKG_NAME-$PKG_VERSION/docs"
+
+
+do_configure() {
+    cd $PKG_SRC
+
+    use directfb || sed -i -e "s:dfb::" src/Makefile.in
+    use aalib || sed -i -e 's:no_aalib="":no_aalib="yes":g' configure
+    use X || PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS --disable-x11 --disable-xv"
+
+    configscript_do_configure
+}
