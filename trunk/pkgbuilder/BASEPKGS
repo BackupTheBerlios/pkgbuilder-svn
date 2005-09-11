@@ -1,24 +1,24 @@
 # pkgbuilder slackware-current base packages
 
 # a)
-a/aaa_base-10.1.0-noarch-2
-a/aaa_elflibs-10.1.0-i486-1
+a/aaa_base-10.2.0-noarch-1
+a/aaa_elflibs-10.2.0-i486-1
 a/bash-3.0-i486-2
-a/bin-9.2.0-i486-2
+a/bin-10.2-i486-1
 a/bzip2-1.0.3-i486-1
 a/coreutils-5.2.1-i486-1
-a/cxxlibs-5.0.6-i486-1
+a/cxxlibs-5.0.7-i486-1
 a/dcron-2.3.3-i386-4
 a/devs-2.3.1-noarch-22
 a/e2fsprogs-1.38-i486-2
 a/elvis-2.2_0-i486-2
 a/etc-5.1-noarch-10
 a/findutils-4.1.7-i386-1
-a/gawk-3.1.4-i486-1
+a/gawk-3.1.5-i486-1
 a/grep-2.5-i386-2
 a/gzip-1.3.3-i386-2
 a/hdparm-6.1-i486-1
-a/hotplug-2004_09_23-noarch-4
+a/hotplug-2004_09_23-noarch-5
 a/infozip-5.52-i486-1
 a/isapnptools-1.26-i386-1 #optional
 a/jfsutils-1.1.8-i486-1 #optional
@@ -30,9 +30,9 @@ a/lilo-22.5.9-i486-2
 a/module-init-tools-3.1-i486-1
 a/pciutils-2.1.11-i486-6
 a/pcmcia-cs-3.2.8-i486-1 #optional
-a/pkgtools-10.2.0-i486-4
+a/pkgtools-10.2.0-i486-5
 a/procps-3.2.5-i486-1
-a/reiserfsprogs-3.6.18-i486-1 #optional
+a/reiserfsprogs-3.6.19-i486-1 #optional
 a/sed-4.0.9-i486-2
 a/shadow-4.0.3-i486-11
 a/sysklogd-1.4.1-i486-9
@@ -40,14 +40,14 @@ a/syslinux-2.13-i486-1
 a/sysvinit-2.84-i486-56
 a/tar-1.15.1-i486-1
 a/udev-064-i486-2 #optional
-a/usbutils-0.11-i486-2
-a/utempter-1.1.1-i486-1
+a/usbutils-0.11-i486-3
+a/utempter-1.1.3-i486-1
 a/util-linux-2.12p-i486-1
 a/xfsprogs-2.6.13-i486-1 #optional
 
 # ap)
 ap/diffutils-2.8.1-i386-1
-ap/groff-1.19.1-i486-2
+ap/groff-1.19.1-i486-3
 ap/man-1.5p-i486-1
 ap/man-pages-1.64-noarch-1
 ap/texinfo-4.8-i486-1
@@ -63,7 +63,7 @@ d/flex-2.5.4a-i486-3
 d/gcc-3.3.6-i486-1
 d/gcc-g++-3.3.6-i486-1
 d/kernel-headers-2.4.31-i386-1
-d/libtool-1.5.14-i486-1
+d/libtool-1.5.20-i486-1
 d/m4-1.4.2-i486-1
 d/make-3.80-i386-1
 
@@ -74,6 +74,6 @@ l/zlib-1.2.3-i486-1
 
 # n)
 n/openssl-0.9.7g-i486-1
-n/tcpip-0.17-i486-34
-n/wget-1.10-i486-1
+n/tcpip-0.17-i486-35
+n/wget-1.10.1-i486-1
 n/wireless-tools-27-i486-2 #optional
