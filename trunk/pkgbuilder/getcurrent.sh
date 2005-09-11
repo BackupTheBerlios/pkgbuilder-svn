@@ -10,6 +10,7 @@ source build.rc
 
 source scripts/functions.sh
 
+FETCH_DIR="$CURRENT_DIR"
 FETCH_OPTIONS="$CURRENT_FETCH_OPTIONS"
 
 if [ ! -d $CURRENT_DIR ] ; then
