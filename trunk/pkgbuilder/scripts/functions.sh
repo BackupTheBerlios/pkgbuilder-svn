@@ -309,15 +309,18 @@ fetch() {
     if [ "$MIRROR_URL" != "" ] ; then
         local mirror_fetch_options="$fetch_options $MIRROR_FETCH_OPTIONS"
 
-        wget -c $mirror_fetch_options $MIRROR_URL/$file || 
-        wget -c $fetch_options $1
+        wget -c $mirror_fetch_options $MIRROR_URL/$file || wget -c $fetch_options $1
         retval="$?"
     else 
         wget -c $fetch_options $1
         retval="$?"
     fi
 
-    test $retval -eq 0 && mv $FETCH_DIR/$file.part $FETCH_DIR/$file
+    if [ $retval -eq 0 ] ; then
+        mv $FETCH_DIR/$file.part $FETCH_DIR/$file
+    else
+        rm $FETCH_DIR/$file.part
+    fi
 
     return $retval
 }
