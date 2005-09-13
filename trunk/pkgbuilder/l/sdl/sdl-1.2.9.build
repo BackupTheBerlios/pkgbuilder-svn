@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# sdl-1.2.8 pkgbuilder script
+# sdl-1.2.9 pkgbuilder script
 #
 
 inherit configscript
@@ -14,12 +14,15 @@ PKG_URL="http://www.libsdl.org/release/$PKG_FILE_NAME"
 
 PKG_LICENSE="LGPLv2"
 
-PKG_USE="alsa arts esd opengl"
+PKG_USE="oss alsa arts esd opengl svga aalib libcaca"
 
 PKG_DEPENDS="x/x11
              >=l/audiofile-0.1.9
             `use_dep alsa "l/alsa-lib"`
             `use_dep arts "kde/arts"`
+            `use_dep svga "l/svga"`
+            `use_dep aalib "l/aalib"`
+            `use_dep libcaca "l/libcaca"`
             `use_dep esd ">=l/esound-0.2.19"`"
 
 PKG_HOMESITE="http://www.libsdl.org/"
@@ -29,7 +32,23 @@ PKG_DOC_FILES="BUGS COPYING CREDITS INSTALL README* TODO"
 
 PKG_CONFIGURE_OPTIONS="--disable-nasm
                        --disable-debug
-                      `use opengl && echo "--enable-video-opengl"`"
+                       --disable-dependency-tracking
+                       --disable-rpath
+                       --enable-events
+                       --enable-cdrom
+                       --enable-threads
+                       --enable-timers
+                       --enable-endian
+                       --enable-file
+                       --enable-cpuinfo
+                       `use_enable oss`
+                       `use_enable alsa`
+                       `use_enable esd`
+                       `use_enable arts`
+                       `use_enable svga video-svga`
+                       `use_enable aalib video-aalib`
+                       `use_enable libcaca video-caca`
+                       `use_enable opengl video-opengl`"
 
 do_postinstall() {
     cd $PKG_SRC
