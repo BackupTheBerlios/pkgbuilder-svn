@@ -6,11 +6,14 @@
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
+
+KERNEL_PATCH="patch-$PKG_VERSION.1.bz2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="linux-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp.rediris.es/mirror/kernel/linux/kernel/v2.6/$PKG_FILE_NAME"
+PKG_URL="ftp.rediris.es/mirror/kernel/linux/kernel/v2.6/$PKG_FILE_NAME
+         ftp.rediris.es/mirror/kernel/linux/kernel/v2.6/$KERNEL_PATCH"
 
 PKG_LICENSE="GPLv2"
 
@@ -23,6 +26,10 @@ do_install() {
       cd $PKG_DEST$PKG_PREFIX &&
       unpack $PKG_FILE_NAME &&
       ln -sf linux-$PKG_VERSION linux )
+
+    ( cd $PKG_DEST$PKG_PREFIX/linux &&
+      apply_patch $KERNEL_PATCH -Np1 &&
+      sed -i -e "s|EXTRAVERSION\s=\s.*|EXTRAVERSION =|" Makefile )
     
     ( cd $PKG_DEST$PKG_PREFIX/linux &&
       make mrproper &&
