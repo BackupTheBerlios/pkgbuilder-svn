@@ -6,7 +6,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -16,24 +16,27 @@ PKG_LICENSE="XMAME"
 
 PKG_USE=""
 
-PKG_DEPENDS="l/glibc
-            >=a/sed-4
-            >=d/perl-5.6.1
-            >=l/sdl_mixer-1.2.3
-            >=l/sdl_perl-1.19.0"
+PKG_DEPENDS=">=d/perl-5.6.1
+             >=l/sdl_mixer-1.2.3
+             >=l/sdl_perl-2.1"
 
 PKG_HOMESITE="http://www.frozen-bubble.org/"
 
 PKG_DOC_FILES="AUTHORS CHANGES COPYING README"
 
-PKG_CONFIGURE_OPTIONS="--disable-sdltest --disable-alsatest"
+PKG_CONFIGURE_OPTIONS="--disable-sdltest 
+                       --disable-alsatest"
+
 PKG_INSTALL_OPTIONS="PREFIX=$PKG_DEST$PKG_PREFIX MANDIR=$PKG_DEST$PKG_PREFIX/man"
 
 do_patch() {
     cd $PKG_SRC
     
-    cp c_stuff/Makefile c_stuff/Makefile.bak
-    sed -e "s:INSTALLDIRS=.*:PREFIX=$PKG_DEST/usr:" c_stuff/Makefile.bak > c_stuff/Makefile
+    sed -i -e "s:INSTALLDIRS=.*:PREFIX=$PKG_DEST/usr:" c_stuff/Makefile &&
+    apply_patch makefile.patch -Np0 &&
+    apply_patch no-chainreaction.patch -Np0 &&
+    apply_patch editor-sdl-perl-2.patch -Np0 &&
+    apply_patch sdl-perl-2.patch -Np0 
 
     return $?
 }
@@ -47,15 +50,7 @@ do_build() {
 }
 
 do_postinstall() {
-    cd $PKG_SRC
-    
-    pkg_installdoc
-    
-    chown -R root.root $PKG_DEST$PKG_PREFIX/share
-
-    strip_all $PKG_DEST
-
-    gzip_man $PKG_DEST$PKG_PREFIX/man
-
-    pkg_installfiles
+    chown -R root.root $PKG_DEST$PKG_PREFIX/share &&
+    rm -rf $PKG_DEST/usr/lib/perl5/`installed_version perl`/`arch`-*
+    pkg_postinstall
 }
