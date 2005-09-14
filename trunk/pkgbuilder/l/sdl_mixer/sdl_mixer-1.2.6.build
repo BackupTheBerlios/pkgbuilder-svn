@@ -17,7 +17,6 @@ PKG_LICENSE="LGPLv2"
 PKG_USE="mikmod oggvorbis"
 
 PKG_DEPENDS=">=l/sdl-1.2.5
-             >=l/smpeg-0.4.4
              `use_dep mikmod ">=l/libmikmod-3.1.10"`
              `use_dep oggvorbis ">=l/libvorbis-1.0"`"
 
@@ -27,8 +26,7 @@ PKG_SRC="$TMP/SDL_mixer-$PKG_VERSION"
 PKG_DOC_FILES="CHANGES COPYING README"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--with-smpeg-prefix=/usr 
-                       --disable-smpegtest 
-                       --disable-sdltest"
+PKG_CONFIGURE_OPTIONS="--disable-sdltest"
+
 PKG_BUILD_OPTIONS=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
