@@ -55,12 +55,12 @@ do_install() {
     ln -sf libdb_cxx-3.3.so libdb_cxx-3.so
     ln -sf libdb_cxx-3.3.a libdb_cxx-3.a
 
-    if `use java` ; then
+    if use java ; then
         ln -sf libdb_java-3.3.so libdb_java-3.so
         ln -sf libdb_java-3.3.a libdb_java-3.a
     fi
 
-    if `use tcltk` ; then
+    if use tcltk ; then
         ln -sf libdb_tcl-3.3.so libdb_tcl-3.so
         ln -sf libdb_tcl-3.3.a libdb_tcl-3.a
     fi
