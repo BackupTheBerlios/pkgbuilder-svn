@@ -20,7 +20,7 @@ PKG_DEPENDS="x/x11
              >=l/audiofile-0.1.9
             `use_dep alsa "l/alsa-lib"`
             `use_dep arts "kde/arts"`
-            `use_dep svga "l/svga"`
+            `use_dep svga "l/svgalib"`
             `use_dep aalib "l/aalib"`
             `use_dep libcaca "l/libcaca"`
             `use_dep esd ">=l/esound-0.2.19"`"
