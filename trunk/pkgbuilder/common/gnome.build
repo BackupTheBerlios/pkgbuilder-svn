@@ -125,6 +125,6 @@ gnome_do_postinstall() {
     configscript_do_postinstall &&
     gnome_gconf_install &&
     gnome_scrollkeeper_update &&
-    gnome_update_desktop &&
+#    gnome_update_desktop &&
     gnome_update_mime
 }
