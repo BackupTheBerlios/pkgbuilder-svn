@@ -28,4 +28,9 @@ if [ ! -d $PKGBUILDER_HOME/`dirname $1`/files ] ; then
     mkdir -p $PKGBUILDER_HOME/`dirname $1`/files
 fi
 
-md5sum $PKG_FILE_NAME > $PKGBUILDER_HOME/`dirname $1`/files/md5sum-$PKG_VERSION
+FILES=""
+for file in $PKG_URL ; do
+    FILES="$FILES `basename $file`"
+done
+
+md5sum $FILES > $PKGBUILDER_HOME/`dirname $1`/files/md5sum-$PKG_VERSION
