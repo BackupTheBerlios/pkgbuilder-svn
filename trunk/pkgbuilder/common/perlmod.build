@@ -1,0 +1,55 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# perl module pkgbuilder script
+#
+
+inherit main
+
+perlmod_init() {
+    main_init
+
+    PKG_DEPENDS=">=d/perl-5.8.0"
+
+    PKG_CONFIGURE_OPTIONS="destdir=$PKG_DEST"
+    PKG_BUILD_OPTIONS=""
+    PKG_BUILD_TARGET=""
+    PKG_INSTALL_OPTIONS=""
+    PKG_INSTALL_TARGET="install"
+
+    PKG_NOSTRIP="Y"
+}
+
+perl_version() {
+    installed_version perl
+}
+
+perlmod_do_configure() {
+    cd $PKG_SRC
+
+    perl Build.PL $PKG_CONFIGURE_OPTIONS
+
+    return $?
+}
+
+perlmod_do_build() {
+    cd $PKG_SRC
+
+    ./Build $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET
+
+    return $?
+}
+
+perlmod_do_install() {
+    cd $PKG_SRC
+
+    ./Build $PKG_INSTALL_OPTIONS $PKG_INSTALL_TARGET
+
+    return $?
+}
+
+perlmod_do_postinstall() {
+    main_do_postinstall &&
+    rm -f $PKG_DEST/usr/lib/perl5/`perl_version`/*/perllocal.pod &&
+    rm -f $PKG_DEST/usr/lib/perl5/site_perl/`perl_version`/*/auto/.packlist
+}
