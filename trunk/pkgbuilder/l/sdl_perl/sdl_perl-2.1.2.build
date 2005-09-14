@@ -1,0 +1,32 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# sdl_perl-2.1.2 pkgbuilder script
+#
+
+inherit perlmod
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="SDL_Perl-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://search.cpan.org/CPAN/authors/id/D/DG/DGOEHRIG/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=d/perl-5.8.0
+             >=d/perl-module-build-0.22
+             >=l/sdl-1.2.5
+             >=l/sdl_mixer-1.0.5
+             >=l/sdl_image-1.0.0
+             l/sdl_net
+             l/sdl_console
+             l/sdl_gfx
+             >=l/sdl_ttf-2.0.5"
+
+PKG_HOMESITE="http://sdl.perl.org/"
+
+PKG_SRC="$TMP/SDL_Perl-$PKG_VERSION"
+PKG_DOC_FILES="BUGS CHANGELOG COPYING README* TODO"
