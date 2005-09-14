@@ -111,7 +111,7 @@ db_fix_libraries() {
     done
 
     #jar file
-    if `use java` ; then
+    if use java ; then
         mv db.jar db${DB_VERSION}.jar
         ln -sf db${DB_VERSION}.jar db.jar
     fi
