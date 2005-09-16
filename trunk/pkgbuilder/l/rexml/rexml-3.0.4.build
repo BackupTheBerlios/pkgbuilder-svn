@@ -1,0 +1,35 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# rexml-3.0.4 pkgbuilder script
+#
+
+inherit main
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="${PKG_NAME}_$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.germane-software.com/archives/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/ruby"
+
+PKG_SRC="$TMP/${PKG_NAME}_$PKG_VERSION"
+
+PKG_HOMESITE="http://www.germane-software.com/software/rexml"
+
+PKG_DOC_FILES="*.html *.txt INSTALL README"
+
+PKG_NOSTRIP="Y"
+
+do_install() {
+    cd $PKG_SRC
+
+    ruby bin/install.rb --destdir=$PKG_DEST
+
+    return $?
+}

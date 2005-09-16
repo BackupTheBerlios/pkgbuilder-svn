@@ -1,0 +1,48 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# rudl-0.8 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/ruby
+             l/sdl
+             l/sdl_gfx
+             l/sdl_image
+             l/sdl_mixer
+             l/sdl_ttf
+             l/sdl_net
+             l/freetype2"
+
+PKG_HOMESITE="http://rudl.sourceforge.net/"
+
+PKG_DOC_FILES="*.txt"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+do_configure() {
+    cd $PKG_SRC
+
+    ruby extconf.rb
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    mkdir -p $PKG_DOC/
+    cp -a docs $PKG_DOC/
+    configscript_do_postinstall
+}
