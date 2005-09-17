@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# courier-imap-3.0.8 pkgbuilder script
+# courier-imap-4.0.5 pkgbuilder script
 #
 
 inherit configscript
@@ -9,8 +9,8 @@ inherit configscript
 PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.20041020.$PKG_EXTENSION"
-PKG_URL="http://www.courier-mta.org/beta/imap/$PKG_FILE_NAME"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/courier/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
@@ -25,7 +25,6 @@ PKG_DEPENDS="l/courier-authlib
 
 PKG_HOMESITE="http://www.courier-mta.org/imap/"
 
-PKG_SRC="$PKG_SRC.20041020"
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
 
 PKG_PREFIX="/usr"
@@ -41,10 +40,16 @@ PKG_BUILD_TARGET=""
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 PKG_INSTALL_TARGET="install"
 
-PKG_CONFIG_FILES="etc/courier-imap/imapd etc/courier-imap/imapd.cnf etc/courier-imap/imapd-ssl
-                  etc/courier-imap/pop3d etc/courier-imap/pop3d.cnf etc/courier-imap/pop3d-ssl
-                  etc/rc.d/rc.courier-imapd etc/rc.d/rc.courier-imapd-ssl
-                  etc/rc.d/rc.courier-pop3d etc/rc.d/rc.courier-pop3d-ssl"
+PKG_CONFIG_FILES="etc/courier-imap/imapd 
+                  etc/courier-imap/imapd.cnf 
+                  etc/courier-imap/imapd-ssl
+                  etc/courier-imap/pop3d 
+                  etc/courier-imap/pop3d.cnf 
+                  etc/courier-imap/pop3d-ssl
+                  etc/rc.d/rc.courier-imapd 
+                  etc/rc.d/rc.courier-imapd-ssl
+                  etc/rc.d/rc.courier-pop3d 
+                  etc/rc.d/rc.courier-pop3d-ssl"
 
 do_configure() {
     cd $PKG_SRC
