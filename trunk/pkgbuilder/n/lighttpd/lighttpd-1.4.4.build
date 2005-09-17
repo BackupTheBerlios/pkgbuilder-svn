@@ -1,0 +1,62 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# lighttpd-1.4.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.lighttpd.net/download/$PKG_FILE_NAME"
+
+PKG_LICENSE="BSD"
+
+PKG_USE="fam gdbm mysql ssl fcgi ipv6"
+
+PKG_DEPENDS=">=l/zlib-1.1
+             l/pcre
+            `use_dep fam "ap/fam"`
+            `use_dep fcgi "l/fcgi"`
+            `use_dep gdbm "l/gdbm"`
+            `use_dep mysql ">=ap/mysql-4.0.0"`
+            `use_dep ssl ">=l/openssl-0.9.7"`"
+
+PKG_HOMESITE="http://www.lighttpd.net/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--libdir=$PKG_PREFIX/lib/$PKG_NAME
+                       --enable-lfs
+                       --with-pcre
+                       --with-bzip2
+                       `use_enable ipv6`
+                       `use_with fam`
+                       `use_with gdbm`
+                       `use_with mysql`
+                       `use_with ssl openssl`"
+PKG_BUILD_OPTIONS=""
+PKG_BUILD_TARGET=""
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="install"
+
+PKG_CONFIG_FILES="etc/rc.d/rc.lighttpd 
+                  etc/lighttpd/lighttpd.conf"
+
+lighttpd_install() {
+    mkdir -p $PKG_DEST/etc/{rc.d,lighttpd}
+    mkdir -p $PKG_DEST/var/log/lighttpd
+    mkdir -p $PKG_DEST/var/www/pages
+
+    cp $PKG_HOME/files/rc.lighttpd $PKG_DEST/etc/rc.d/
+    cp $PKG_HOME/files/lighttpd.conf $PKG_DEST/etc/lighttpd/
+    cp $PKG_HOME/files/index.html $PKG_DEST/var/www/pages/
+}
+
+do_install() {
+    configscript_do_install &&
+    lighttpd_install
+}
