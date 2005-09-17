@@ -6,7 +6,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -55,7 +55,7 @@ do_configure() {
     fi
     
     if use ssl ; then
-        mycc="$mycc -DUSE_SSL"
+        mycc="$mycc -DUSE_TLS"
         mylibs="$mylibs -lssl -lcrypto"
     fi
     

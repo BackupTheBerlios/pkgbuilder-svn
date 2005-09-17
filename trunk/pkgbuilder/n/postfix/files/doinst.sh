@@ -21,4 +21,4 @@
         "alias_database=hash:/etc/mail/aliases" \
         "local_destination_concurrency_limit=2" \
         "default_destination_concurrency_limit=2" \
-        "home_mailbox=Maildir/" )
+        "home_mailbox=.maildir/" )
