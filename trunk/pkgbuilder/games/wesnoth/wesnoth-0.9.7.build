@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# wesnoth-0.8.11 pkgbuilder script
+# wesnoth-0.9.7 pkgbuilder script
 #
 
 inherit configscript
@@ -14,23 +14,26 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE=""
+PKG_USE="nls gnome kde"
 
-PKG_DEPENDS=">=l/sdl-1.2.7
+PKG_DEPENDS="x/x11
+             >=l/sdl-1.2.7
              >=l/sdl_image-1.2
              >=l/sdl_mixer-1.2
              >=l/sdl_ttf-2
              l/sdl_net
-             x/x11"
+             `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://www.wesnoth.org/"
 
 PKG_DOC_FILES="changelog COPYING copyright INSTALL MANUAL* README"
 
-PKG_CONFIGURE_OPTIONS="--disable-dependency-tracking
+PKG_CONFIGURE_OPTIONS="--localstatedir=/var
+                       --disable-dependency-tracking
                        --enable-tools 
                        --enable-editor 
                        --enable-server 
+                       --enable-campaign-server
                        `use_enable nls`
                        `use_with gnome`
                        `use_with kde`"
