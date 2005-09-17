@@ -1,0 +1,45 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# fcgi-2.4.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.fastcgi.com/dist/$PKG_FILE_NAME"
+
+PKG_LICENSE="FastCGI"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/glibc"
+
+PKG_HOMESITE="http://www.fastcgi.com/"
+
+PKG_DOC_FILES="LICENSE.TERMS README"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST LIBRARY_PATH=$PKG_DEST/usr/lib"
+
+fcgi_postinstall() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST$PKG_PREFIX/man/man{1,3}
+    mv doc/*.1 $PKG_DEST$PKG_PREFIX/man/man1
+    mv doc/*.3 $PKG_DEST$PKG_PREFIX/man/man3
+
+    mkdir -p $PKG_DOC/{docs,examples,images}
+    cp -r doc/* $PKG_DOC/docs
+    cp examples/*.c $PKG_DOC/examples
+    cp images/* $PKG_DOC/images
+    
+    return $?
+}
+
+do_postinstall() {
+    fcgi_postinstall &&
+    configscript_do_postinstall
+}
