@@ -36,6 +36,7 @@ PKG_PREFIX="/usr"
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 PKG_INSTALL_TARGET="install"
 
+MAKE_OPTIONS="-j1"
 
 perl_unpack_modules() {
     ( cd $PKG_SRC/ext ; rm -rf DB_File
