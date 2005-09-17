@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am3"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -14,7 +14,7 @@ PKG_URL="http://download.sourceforge.net/materm/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="truetype"
+PKG_USE="truetype xgetdefault"
 
 PKG_DEPENDS="x/x11
              l/libjpeg
@@ -26,9 +26,9 @@ PKG_DOC_FILES="AUTHORS ChangeLog COPYING CREDITS FAQ INSTALL NEWS README* TODO"
 
 PKG_PREFIX="/usr/X11R6"
 PKG_CONFIGURE_OPTIONS="--enable-everything
-                       --enable-xgetdefault
                        --enable-menubar
                        --disable-debug
+                       `use_enable xgetdefault`
                        `use_enable truetype xft`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION"
