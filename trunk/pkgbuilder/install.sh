@@ -72,8 +72,8 @@ recursive_install() {
         return 0
     fi
 
-    local DEP
-    local RETVAL
+    local DEP=""
+    local RETVAL=0
 
     #resolving dependencies
     for DEP in $PKG_DEPENDS ; do
@@ -103,7 +103,10 @@ recursive_install() {
         fi
     
         # superhipermega error
-        test "$DEP_METAPKG" = "" -o "$DEP_PKG_NAME" = "" && return 1
+        if [ "$DEP_METAPKG" = "" -o "$DEP_PKG_NAME" = "" ] ; then
+            echo "pkgbuilder: ERROR invalid values for DEP_METAPKG=\"$DEP_METAPKG\" DEP_PKG_NAME=\"$DEP_PKG_NAME\""
+            return 1
+        fi
     
         # reset variables
         DEP_PKG_LATEST_VERSION=""
@@ -194,7 +197,11 @@ recursive_install() {
                 echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
             fi
     
-            test "$RETVAL" -ne 0 && return "$RETVAL"
+            if [ "$RETVAL" -ne "0" ] ; then
+                echo
+                echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
+                return "$RETVAL"
+            fi
         
             # update environment
             if [ "$MODE" = "install" -o "$MODE" = "frompkg" ] ; then
@@ -229,6 +236,10 @@ recursive_install() {
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
             RETVAL="$?"
         fi
+    fi
+
+    if [ "$RETVAL" -ne "0" ] ; then
+        echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
     fi
 
     return $RETVAL
