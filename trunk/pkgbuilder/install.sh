@@ -194,12 +194,12 @@ recursive_install() {
         
             if [ "$VERBOSE" = "Y" ] ; then
                 echo
-                echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
+                echo "pkgbuilder: instalation for $DEP_PKG result: `result_msg $RETVAL`"
             fi
     
             if [ "$RETVAL" -ne "0" ] ; then
                 echo
-                echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
+                echo "pkgbuilder: instalation for $DEP_PKG result: `result_msg $RETVAL`"
                 return "$RETVAL"
             fi
         
@@ -239,7 +239,8 @@ recursive_install() {
     fi
 
     if [ "$RETVAL" -ne "0" ] ; then
-        echo "pkgbuilder: instalation for $DEP result: `result_msg $RETVAL`"
+        echo
+        echo "pkgbuilder: instalation for $PKG result: `result_msg $RETVAL`"
     fi
 
     return $RETVAL
