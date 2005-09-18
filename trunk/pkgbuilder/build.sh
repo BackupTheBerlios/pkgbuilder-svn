@@ -48,13 +48,13 @@ shift
 ACTION="$@"
 
 #verify script to execute
-if [ "$PKG" == "" -o "$PKG" == "help" ] ; then
+if [ "$PKG" = "" -o "$PKG" = "help" ] ; then
     usage
     exit 1
 fi
 
 #verify actions to execute
-if [ "$ACTION" == "" ] ; then
+if [ "$ACTION" = "" ] ; then
     ACTION="auto"
 fi
 
