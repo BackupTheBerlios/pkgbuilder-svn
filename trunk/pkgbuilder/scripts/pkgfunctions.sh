@@ -126,10 +126,10 @@ pkg_build() {
         DISTCC_HOSTS="$DISTCC_HOSTS" \
         CCACHE_PREFIX="$CCACHE_PREFIX" \
         make $MAKE_OPTIONS $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET $@
-        RETVAL="$?"
+        RETVAL=$?
     else
         make $PKG_BUILD_OPTIONS $PKG_BUILD_TARGET $@
-        RETVAL="$?"
+        RETVAL=$?
     fi
 
     return $RETVAL

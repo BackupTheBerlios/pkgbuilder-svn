@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2003-2005 Antonio G. Muñoz Conejo <tomby (AT) users.berlios.de>
 #
@@ -85,15 +85,13 @@ source $PKG
 #execute action
 for i in $ACTION ; do
     execute_action $i
-    
-    RETVAL="$?"
+    RETVAL=$?
     
     echo "pkgbuilder: $i action result: `result_msg $RETVAL`"
     
     [ $RETVAL -eq 0 ] || break
 done
 
-#print result
 echo "pkgbuilder: overall result for $PKG: `result_msg $RETVAL`"
 
 exit $RETVAL

@@ -153,12 +153,12 @@ call_action() {
         cd $PKG_SRC
     fi
 
-    local retval="0"
+    local retval=0
 
     if declare -f $1 &> /dev/null ; then
         echo "pkgbuilder: function \"$1\" declared in build script"
         $1
-        retval="$?"
+        retval=$?
     else
         local found="false"
 
@@ -171,7 +171,7 @@ call_action() {
 
                 # call the function a remember retval
                 ${super}_$1
-                retval="$?"
+                retval=$?
                 
                 break
             fi
@@ -183,10 +183,10 @@ call_action() {
                 # call the master implementation if is declared
                 echo "pkgbuilder: function \"$1\" declared in base"
                 pkg_$1
-                retval="$?"
+                retval=$?
             else
                 echo "pkgbuilder: $1 function not defined in build script"
-                retval="$?"
+                retval=$?
             fi
         fi
     fi
@@ -204,61 +204,61 @@ execute_action() {
         return 1  
     fi
     
-    local retval="0"
+    local retval=0
 
     #execution
     case "$1" in
         'info')
             call_action do_info
-            retval="$?"
+            retval=$?
         ;;
         'fetch')
             call_action do_fetch
-            retval="$?"
+            retval=$?
         ;;
         'verify')
             call_action do_verify
-            retval="$?"
+            retval=$?
         ;;
         'unpack')
             call_action do_unpack
-            retval="$?"
+            retval=$?
         ;;
         'patch')
             call_action do_patch
-            retval="$?"
+            retval=$?
         ;;
         'configure')
             call_action do_configure
-            retval="$?"
+            retval=$?
         ;;
         'build')
             call_action do_build
-            retval="$?"
+            retval=$?
         ;;
         'install')
             call_action do_install
-            retval="$?"
+            retval=$?
         ;;
         'postinstall')
             call_action do_postinstall
-            retval="$?"
+            retval=$?
         ;;
         'buildpkg')
             call_action do_buildpkg
-            retval="$?"
+            retval=$?
         ;;
         'installpkg')
             call_action do_installpkg
-            retval="$?"
+            retval=$?
         ;;
         'upgradepkg')
             call_action do_upgradepkg
-            retval="$?"
+            retval=$?
         ;;
         'cleanup')
             call_action do_cleanup
-            retval="$?"
+            retval=$?
         ;;
         'auto')
             call_action do_fetch && 
@@ -270,10 +270,10 @@ execute_action() {
             call_action do_install &&  
             call_action do_postinstall && 
             call_action do_buildpkg
-            retval="$?"
+            retval=$?
         ;;
         *)
-            retval="1"
+            retval=1
     esac
     
     return $retval
@@ -310,10 +310,10 @@ fetch() {
         local mirror_fetch_options="$fetch_options $MIRROR_FETCH_OPTIONS"
 
         wget -c $mirror_fetch_options $MIRROR_URL/$file || wget -c $fetch_options $1
-        retval="$?"
+        retval=$?
     else 
         wget -c $fetch_options $1
-        retval="$?"
+        retval=$?
     fi
 
     if [ $retval -eq 0 ] ; then
@@ -336,7 +336,7 @@ unpack() {
     fi
     
     local file
-    local retval="0"
+    local retval=0
     
     if [ "$CDROM_DIR" != "" -a -r $CDROM_DIR/$1 ] ; then
         file="$CDROM_DIR/$1"
@@ -346,25 +346,25 @@ unpack() {
     
     if echo $1 | grep -q ".tar.gz$" ; then
         tar zxvf $file
-        retval="$?"
+        retval=$?
     elif echo $1 | grep -q ".tgz$" ; then
         tar zxvf $file
-        retval="$?"
+        retval=$?
     elif echo $1 | grep -q ".tar.bz2$" ; then
         tar jxvf $file
-        retval="$?"
+        retval=$?
     elif echo $1 | grep -q ".tar$" ; then
         tar xvf $file
-        retval="$?"
+        retval=$?
     elif echo $1 | grep -q ".tbz2$" ; then
         tar jxvf $file
-        retval="$?"
+        retval=$?
     elif echo $1 | grep -q ".zip$" ; then
         unzip $file
-        retval="$?"
+        retval=$?
     else
         tar zxvf $file
-        retval="$?"
+        retval=$?
     fi
         
     return $retval
@@ -504,17 +504,17 @@ is_installed() {
         return 1
     fi
     
-    local retval=""
+    local retval=0
     
     if [ "$2" = "" ] ; then
         ls $PACKAGES_LOGDIR/$1-*-*-* 2> /dev/null | grep "$1\-[0-9]" &> /dev/null
-        retval="$?"
+        retval=$?
     elif [ "$3" = "" ] ; then
         ls $PACKAGES_LOGDIR/$1-$2-*-* &> /dev/null
-        retval="$?"
+        retval=$?
     else
         ls $PACKAGES_LOGDIR/$1-$2-*-$3 &> /dev/null
-        retval="$?"
+        retval=$?
     fi    
     
     return $retval
@@ -632,9 +632,9 @@ latest_version() {
             fi
             
             compare_versions `basename $latestbuildfile .build` `basename $i .build`
-            local RESULT="$?"
+            local RESULT=$?
             
-            if [ "$RESULT" -eq "2" ] ; then
+            if [ $RESULT -eq 2 ] ; then
                 latestbuildfile="$i"
             fi
         done
@@ -793,7 +793,7 @@ extract_extra_version() {
 # @param $1 result value
 #
 result_msg() {
-    if [ "$1" -eq 0 ] ; then
+    if [ $1 -eq 0 ] ; then
         echo "SUCCESS"
     else    
         echo "ERROR"

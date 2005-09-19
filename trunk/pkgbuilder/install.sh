@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2003-2005 Antonio G. Muñoz Conejo <tomby (AT) users.berlios.de>
 #
@@ -73,6 +73,7 @@ recursive_install() {
     fi
 
     local DEP=""
+    local DEP_PKG=""
     local RETVAL=0
 
     #resolving dependencies
@@ -117,9 +118,9 @@ recursive_install() {
                 #pkg must not installed
 
                 is_installed $DEP_PKG_NAME $DEP_PKG_VERSION 
-                RESULT="$?"
+                RESULT=$?
 
-                if [ "$RESULT" -eq "0" ] ; then 
+                if [ $RESULT -eq 0 ] ; then 
                     echo "pkgbuilder: ERROR conflict with package $DEP_METAPKG/$DEP_PKG_NAME-$DEP_PKG_VERSION"
                     return 1
                 else
@@ -142,9 +143,9 @@ recursive_install() {
                     fi
 
                     compare_versions $DEP_PKG_NAME-$DEP_PKG_INSTALLED_VERSION $DEP_PKG_NAME-$DEP_PKG_VERSION
-                    RESULT="$?"
+                    RESULT=$?
 
-                    if [ "$RESULT" -eq "2" ] ; then
+                    if [ $RESULT -eq 2 ] ; then
                         DEP_PKG_VERSION="$DEP_PKG_LATEST_VERSION"
                     else
                         DEP_PKG_VERSION="$DEP_PKG_INSTALLED_VERSION"
@@ -158,9 +159,9 @@ recursive_install() {
                 #pkg must not installed
 
                 is_installed $DEP_PKG_NAME
-                RESULT="$?"
+                RESULT=$?
 
-                if [ "$RESULT" -eq "0" ] ; then 
+                if [ $RESULT -eq 0 ] ; then 
                     echo "pkgbuilder: ERROR conflict with package $DEP_METAPKG/$DEP_PKG_NAME"
                     return 1
                 else
@@ -190,15 +191,13 @@ recursive_install() {
             fi
         else
             ( recursive_install $DEP_PKG )
-            RETVAL="$?"
+            RETVAL=$?
         
             if [ "$VERBOSE" = "Y" ] ; then
-                echo
-                echo "pkgbuilder: instalation for dep $DEP_PKG result: `result_msg $RETVAL`"
-            elif [ "$RETVAL" -ne "0" ] ; then
-                echo
-                echo "pkgbuilder: instalation for dep $DEP_PKG result: `result_msg $RETVAL`"
-                return "$RETVAL"
+                echo "pkgbuilder: instalation for dependency $DEP_PKG result: `result_msg $RETVAL`"
+            elif [ $RETVAL -ne 0 ] ; then
+                echo "pkgbuilder: instalation for dependency $DEP_PKG result: `result_msg $RETVAL`"
+                return $RETVAL
             fi
         
             # update environment
@@ -213,33 +212,30 @@ recursive_install() {
     
         if [ "$MODE" = "install" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup upgradepkg )
-            RETVAL="$?"
+            RETVAL=$?
         elif [ "$MODE" = "frompkg" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG upgradepkg )
-            RETVAL="$?"
+            RETVAL=$?
         elif [ "$MODE" = "info" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
-            RETVAL="$?"
+            RETVAL=$?
         fi
     else
         echo "pkgbuilder: installing $PKG"
 
         if [ "$MODE" = "install" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG auto cleanup installpkg )
-            RETVAL="$?"
+            RETVAL=$?
         elif [ "$MODE" = "frompkg" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG installpkg )
-            RETVAL="$?"
+            RETVAL=$?
         elif [ "$MODE" = "info" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
-            RETVAL="$?"
+            RETVAL=$?
         fi
     fi
 
-    if [ "$RETVAL" -ne "0" ] ; then
-        echo
-        echo "pkgbuilder: instalation for $PKG result: `result_msg $RETVAL`"
-    fi
+    echo "pkgbuilder: instalation for $PKG result: `result_msg $RETVAL`"
 
     return $RETVAL
 }
@@ -283,3 +279,5 @@ if [ "$1" = "" -o "$1" = "help" ] ; then
 fi
 
 recursive_install $1
+
+exit $?
