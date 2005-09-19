@@ -190,7 +190,7 @@ recursive_install() {
                 echo "pkgbuilder: $DEP allready installed"
             fi
         else
-            ( recursive_install $DEP_PKG )
+            recursive_install $DEP_PKG
             RETVAL=$?
         
             if [ "$VERBOSE" = "Y" ] ; then
