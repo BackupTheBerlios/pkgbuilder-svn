@@ -14,15 +14,12 @@ PKG_URL="http://www.cairographics.org/releases/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="svg gtk"
+PKG_USE="svg"
 
 PKG_DEPENDS=">=d/python-2.2
              >=l/cairo-0.9.0
-             `use_dep gtk ">=l/pygtk-2.2"`
              `use_dep svg ">=l/libsvg-cairo-0.1.4"`"
 
 PKG_HOMESITE="http://www.cairographics.org/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL NEWS NOTES README"
-
-PKG_CONFIGURE_OPTIONS="`use_with gtk pygtk`"
