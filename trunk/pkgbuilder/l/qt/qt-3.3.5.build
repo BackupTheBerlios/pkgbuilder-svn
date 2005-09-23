@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# qt-3.3.4 pkgbuilder script
+# qt-3.3.5 pkgbuilder script
 #
 
 inherit configscript
