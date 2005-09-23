@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-x11-free-$PKG_VERSION.$PKG_EXTENSION"
@@ -40,11 +40,13 @@ PKG_BUILD_TARGET="src-qmake src-moc sub-src sub-tools"
 do_patch() {
     cd $PKG_SRC
     
-    patch -p0 < $PKG_HOME/files/qt-x11.diff &&
-    patch -p0 < $PKG_HOME/files/qt-mysql.diff &&
+    apply_patch qt-x11.diff -Np0
+    apply_patch qt-mysql.diff -Np0
     ( cd mkspecs/linux-g++ &&
       cp qmake.conf qmake.conf.orig &&
       sed -e "s:-O2:$CFLAGS:" qmake.conf.orig > qmake.conf )
+    # fix a bug in uic
+    apply_patch qt-uic.patch -Np0
     
     return $?
 }
