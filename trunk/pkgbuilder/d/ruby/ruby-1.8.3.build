@@ -6,7 +6,8 @@
 
 inherit configscript
 
-PKG_BUILD="am3"
+PKG_BUILD="am1"
+
 PKG_URL="http://gd.tuwien.ac.at/languages/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_USE="tcltk ssl"
@@ -29,7 +30,7 @@ do_install() {
     configscript_do_install || return $?
 
     cd $PKG_SRC
-    LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH" DESTDIR=$PKG_DEST ./ruby -I./lib -I./ext/syck ./bin/rdoc --all --ri-system ./
+    LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH" DESTDIR=$PKG_DEST ./ruby -I./lib -I./ext -I./.ext/`arch`-linux/ ./bin/rdoc --all --ri-system ./
 
     return $?
 }
