@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am3"
+PKG_BUILD="am4"
 
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
@@ -30,6 +30,12 @@ PKG_CONFIGURE_OPTIONS="--enable-shared
                        `use_enable sse`"
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST docdir=/usr/doc/$PKG_NAME-$PKG_VERSION/html"
+
+do_patch() {
+    cd $PKG_SRC/src/plugin_xmms
+    apply_patch configure.diff -Np0
+    return $?
+}
 
 do_install() {
     configscript_do_install &&
