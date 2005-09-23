@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# stellarium-0.6.2 pkgbuilder script
+# stellarium-0.7.1 pkgbuilder script
 #
 
 inherit configscript
@@ -14,18 +14,16 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE=""
+PKG_USE="nls"
 
 PKG_DEPENDS="x/x11 
-             >=l/libsdl-1.2.0"
+             l/libpng
+             >=l/sdl-1.2.0
+             >=l/sdl_mixer-1.2.0
+             `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://stellarium.free.fr/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
 
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc"
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
+PKG_CONFIGURE_OPTIONS="`use_enable nls`"
