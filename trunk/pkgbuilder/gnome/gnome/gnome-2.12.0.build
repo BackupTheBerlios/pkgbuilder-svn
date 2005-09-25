@@ -36,7 +36,7 @@ PKG_DEPENDS=">=l/glib2-2.8.1
              >=gnome/gnome-backgrounds-2.12.0
              >=gnome/gnome-keyring-0.4.4
              >=gnome/libgnomeui-2.12.0
-             >=gnome/gtk-engines-2.6.5
+             >=l/gtk-engines-2.6.5
              >=gnome/gnome-themes-2.12.0
              >=gnome/libwnck-2.12.0
              >=ap/scrollkeeper-0.3.14
