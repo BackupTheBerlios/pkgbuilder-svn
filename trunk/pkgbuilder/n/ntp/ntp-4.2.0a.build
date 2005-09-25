@@ -1,9 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# ntp-4.1.2 pkgbuilder script
-#
-# TODO: man pages
+# ntp-4.2.0a pkgbuilder script
 #
 
 inherit configscript
@@ -12,19 +10,20 @@ PKG_BUILD="am1"
 
 PKG_ARCH="$ARCH"
 PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/$PKG_FILE_NAME"
+PKG_FILE_NAME="$PKG_NAME-stable-$PKG_VERSION-20050816.$PKG_EXTENSION"
+PKG_URL="http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/snapshots/ntp-stable/2005/08/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
 PKG_USE="openssl"
 
 PKG_DEPENDS=">=l/ncurses-5.2
-	         >=l/readline-4.1
-	         >=d/automake-1.7
-	         `use ssl && echo "l/openssl"`"
+             >=l/readline-4.1
+             `use_dep ssl "l/openssl"`"
 
 PKG_HOMESITE="http://www.ntp.org/"
+
+PKG_SRC="$TMP/$PKG_NAME-stable-$PKG_VERSION-20050816"
 
 PKG_DOC_FILES="COPYRIGHT ChangeLog* INSTALL NEWS README* TODO WHERE-TO-START"
 
@@ -33,17 +32,15 @@ PKG_CONFIGURE_OPTIONS="--localstatedir=/var
                        --bindir=/usr/sbin 
                        --program-prefix= 
                        --program-suffix=
-                       `use openssl && echo "--with-crypto --with-openssl-libdir=/usr/lib --with-openssl-incdir=/usr/include"`"
+                       `use_dep ssl "--with-crypto --with-openssl-libdir=/usr/lib --with-openssl-incdir=/usr/include"`"
 
 PKG_CONFIG_FILES="etc/ntp.conf etc/ntp/ntp.keys"
 
 do_patch() {
     cd $PKG_SRC
-    
-    aclocal -I . &&
-    automake &&
-    autoconf
-    
+
+    apply_patch ntpconfig-phone.patch -Np0
+
     return $?
 }
 
@@ -53,6 +50,12 @@ do_install() {
     mkdir -p $PKG_DEST/etc/ntp
     cat $PKG_HOME/files/ntp.conf > $PKG_DEST/etc/ntp.conf
     cat $PKG_HOME/files/ntp.keys > $PKG_DEST/etc/ntp/ntp.keys
-    
-    return $?
+
+    # example conf files
+    mkdir -p $PKG_DEST$PKG_PREFIX/share/ntp
+    cp $PKG_SRC/conf/* $PKG_DEST$PKG_PREFIX/share/ntp
+
+    # html documentation
+    mkdir -p $PKG_DOC
+    cp -a $PKG_SRC/html $PKG_DOC
 }

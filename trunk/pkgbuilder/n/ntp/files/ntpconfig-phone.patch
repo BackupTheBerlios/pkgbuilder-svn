@@ -1,0 +1,25 @@
+--- ntpd/ntp_config.c
++++ ntpd/ntp_config.c
+@@ -17,8 +17,6 @@
+ #include "ntp_refclock.h"
+ #include "ntp_filegen.h"
+ #include "ntp_stdlib.h"
+-#include "ntp_config.h"
+-#include "ntp_cmdargs.h"
+ 
+ #include <stdio.h>
+ #include <ctype.h>
+@@ -35,6 +33,13 @@
+ # endif
+ #endif /* VMS */
+ 
++/*
++ * Include these after the system headers since some Linux
++ * systems have '#undef CONFIG_PHONE' in them.
++ */
++#include "ntp_config.h"
++#include "ntp_cmdargs.h"
++
+ #ifdef SYS_WINNT
+ # include <io.h>
+ extern HANDLE ResolverThreadHandle;
