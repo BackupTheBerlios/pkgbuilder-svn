@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/gtk2-2.1.2
              >=gnome/gnome-common-2.8
+             >=gnome/gnome-doc-utils-0.4
              >=gnome/libgnomeui-2.1
              >=gnome/libgnomecanvas-2
              >=gnome/gnome-vfs-2
