@@ -10,7 +10,8 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS="gnome/gnome-vfs 
+PKG_DEPENDS=">=gnome/gnome-common-2.8
+             gnome/gnome-vfs 
              d/intltool"
 
 PKG_DOC_FILES="AUTHORS C* HACKING INSTALL NEWS README"

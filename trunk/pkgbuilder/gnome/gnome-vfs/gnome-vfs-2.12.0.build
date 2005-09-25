@@ -11,6 +11,7 @@ PKG_BUILD="am1"
 PKG_USE="doc ssl samba"
 
 PKG_DEPENDS="l/glib2
+             >=gnome/gnome-common-2.8
              >=d/pkgconfig-0.12.0
              >=gnome/gconf-1.2
              >=gnome/orbit2-2.9

@@ -13,6 +13,7 @@ PKG_LICENSE=""
 PKG_USE=""
 
 PKG_DEPENDS=">=d/python-2.2
+             >=gnome/gnome-common-2.8
              >=gnome/orbit2-2.4.4
              >=d/pkgconfig-0.12"
 

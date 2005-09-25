@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/glib2-2.3.1
              >=l/gtk2-2.3.1
+             >=gnome/gnome-common-2.8
              d/pkgconfig"
 
 PKG_DOC_FILES="AUTHORS ChangeLog INSTALL NEWS README TODO"

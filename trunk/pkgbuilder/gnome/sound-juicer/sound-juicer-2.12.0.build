@@ -13,6 +13,7 @@ PKG_LICENSE="GPLv2"
 PKG_USE=""
 
 PKG_DEPENDS="l/glib2
+             >=gnome/gnome-common-2.8
              >=gnome/nautilus-cd-burner-2.11.1
              >=l/gtk2-2.6
              >=l/libglade-2

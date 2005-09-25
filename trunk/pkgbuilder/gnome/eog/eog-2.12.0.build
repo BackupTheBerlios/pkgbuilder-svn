@@ -11,6 +11,7 @@ PKG_BUILD="am1"
 PKG_USE="jpeg"
 
 PKG_DEPENDS=">=l/gtk2-2.4
+             >=gnome/gnome-common-2.8
              >=l/libglade-2.3.6
              >=l/libart_lgpl-2.3.16
              >=gnome/gconf-2.5.90

@@ -13,6 +13,7 @@ PKG_USE=""
 PKG_DEPENDS=">=l/libxml2-2.6.12
              >=l/libxslt-1.1.8
              >=d/python-2
+             >=gnome/gnome-common-2.8
              d/gettext
              >=d/intltool-0.28
              >=d/pkgconfig-0.9"

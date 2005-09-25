@@ -14,6 +14,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/gtk2-2.3.1
              >=l/libglade-2
+             >=gnome/gnome-common-2.8
              >=gnome/libgnomecanvas-2
              >=l/glib2-2.7.3
              >=d/intltool-0.29

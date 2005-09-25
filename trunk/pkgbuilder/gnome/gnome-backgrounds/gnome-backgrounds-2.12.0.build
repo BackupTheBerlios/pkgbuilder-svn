@@ -14,6 +14,7 @@ PKG_USE=""
 
 PKG_DEPENDS="d/perl
              d/intltool
+             >=gnome/gnome-common-2.8
              d/gettext"
 
 PKG_DOC_FILES="ChangeLog COPYING INSTALL README"

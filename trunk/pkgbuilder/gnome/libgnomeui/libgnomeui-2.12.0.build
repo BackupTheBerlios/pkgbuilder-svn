@@ -15,6 +15,7 @@ PKG_DEPENDS=">=l/gtk2-2.3.5
              >=l/popt-1.5
              >=l/esound-0.2.26
              >=l/audiofile-0.2.3
+             >=gnome/gnome-common-2.8
              >=gnome/gconf-1.2
              >=gnome/libgnome-2
              >=gnome/libgnomecanvas-2

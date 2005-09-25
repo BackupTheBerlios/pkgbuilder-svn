@@ -11,6 +11,7 @@ PKG_BUILD="am1"
 PKG_USE="doc"
 
 PKG_DEPENDS=">=l/glib2-2.0.3
+             >=gnome/gnome-common-2.8
              >=gnome/gconf-2
              >=gnome/libbonobo-2
              >=gnome/gnome-vfs-2.5.3

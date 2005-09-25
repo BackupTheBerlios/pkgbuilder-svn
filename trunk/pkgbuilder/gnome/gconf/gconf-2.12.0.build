@@ -15,6 +15,7 @@ PKG_USE="doc"
 
 PKG_DEPENDS=">=l/glib2-2.0.1
              >=l/gtk2-2.2
+             >=gnome/gnome-common-2.8
              >=gnome/orbit2-2.8
              >=l/libxml2-2.4.20
              l/popt

@@ -12,6 +12,7 @@ PKG_USE="alsa gstreamer"
 
 PKG_DEPENDS=">=l/gtk2-2.3
              >=l/atk-1.2
+             >=gnome/gnome-common-2.8
              >=gnome/gconf-1.2
              >=gnome/libgnomeui-2.2
              >=l/libglade-2

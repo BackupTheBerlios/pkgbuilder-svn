@@ -14,6 +14,7 @@ PKG_DOC_FILES="COPYING INSTALL NEWS TODO ChangeLog"
 
 PKG_DEPENDS="d/gettext
              l/hicolor-icon-theme
+             >=gnome/gnome-common-2.8
              >=d/intltool-0.29"
 
 PKG_NOSTRIP="Y"

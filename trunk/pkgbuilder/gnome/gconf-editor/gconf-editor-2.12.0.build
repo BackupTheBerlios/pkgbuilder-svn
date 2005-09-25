@@ -10,8 +10,9 @@ PKG_BUILD="am1"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=gnome/gconf-2
-             >=l/gtk2-2.4
+PKG_DEPENDS=">=l/gtk2-2.4
+             >=gnome/gnome-common-2.8
+             >=gnome/gconf-2
              d/gettext
              >=d/intltool-0.29
              >=d/pkgconfig-0.9"

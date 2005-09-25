@@ -16,6 +16,7 @@ PKG_DEPENDS=">=l/glib2-2.7
              >=l/libxml2-2.6.12
              >=l/libxslt-1.1.7
              >=l/libglade-2.3.1
+             >=gnome/gnome-common-2.8
              >=gnome/gnome-vfs-2.9.2
              >=gnome/libgnomeui-2.6
              >=gnome/gnome-desktop-2.9.91

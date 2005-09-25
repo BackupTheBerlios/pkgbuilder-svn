@@ -15,6 +15,7 @@ PKG_USE="gstreamer gnome mozilla"
 PKG_DEPENDS=">=l/glib2-2.6.3
              >=l/gtk2-2.6
              >=l/libglade-2
+             >=gnome/gnome-common-2.8
              >=gnome/gnome-vfs-2.9.92
              >=gnome/gnome-desktop-2.2
              >=gnome/libgnomeui-2.4

@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS="n/openssh
              >=l/gtk2-2.4
+             >=gnome/gnome-common-2.8
              >=gnome/libgnomeui-1.109
              >=l/libglade-1.99.5
              >=gnome/gconf-2.2

@@ -14,9 +14,10 @@ PKG_USE="ssl doc"
 
 PKG_DEPENDS="l/glib2
              >=l/popt-1.5
-             >=gnome/libidl-0.7.4
+             >=l/libidl-0.7.4
              d/indent
              >=d/pkgconfig-0.14.0
+             >=gnome/gnome-common-2.8
              `use_dep doc ">=d/gtk-doc-1"`
              `use_dep ssl ">=l/openssl-0.9.6"`"
 

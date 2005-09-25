@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/glib2-2
              >=l/gtk2-2.3
+             >=gnome/gnome-common-2.8
              >=gnome/gconf-1.2
              >=l/libart_lgpl-2.3.8
              >=l/libxml2-2.4.7

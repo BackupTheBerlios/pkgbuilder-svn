@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/libglade-2
              >=l/popt-1.5
+             >=gnome/gnome-common-2.8
              >=gnome/eel-2.5
              >=gnome/gconf-2
              >=gnome/libgnomeui-2.5

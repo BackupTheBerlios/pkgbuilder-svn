@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/glib2-2.2
              >=l/gtk2-2.3
+             >=gnome/gnome-common-2.8
              >=gnome/gnome-vfs-2.2
              >=gnome/eel-2
              >=gnome/nautilus-2.5.5

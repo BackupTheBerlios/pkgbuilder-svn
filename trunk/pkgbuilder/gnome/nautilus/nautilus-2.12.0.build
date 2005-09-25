@@ -13,6 +13,7 @@ PKG_USE="gstreamer cups"
 PKG_DEPENDS=">=l/glib2-2.3
              >=l/pango-1.2
              >=l/gtk2-2.3
+             >=gnome/gnome-common-2.8
              >=gnome/eel-2.12.0
              >=l/libxml2-2.4.7
              >=gnome/gnome-vfs-2.5.1

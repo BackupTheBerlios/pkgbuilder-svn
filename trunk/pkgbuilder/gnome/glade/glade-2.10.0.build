@@ -14,6 +14,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=l/gtk2-2.4
              >=l/libxml2-2.4.1
+             >=gnome/gnome-common-2.8
              >=ap/scrollkeeper-0.3.10
              >=gnome/libgnomeui-2.6.0
              >=gnome/libgnomecanvas-2.0.0

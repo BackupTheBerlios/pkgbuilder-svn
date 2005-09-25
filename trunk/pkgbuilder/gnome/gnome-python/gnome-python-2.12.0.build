@@ -16,6 +16,7 @@ PKG_DEPENDS=">=d/python-2.2
              >=l/pygtk-2.6.2
              >=l/glib2-2.6
              >=l/gtk2-2.6
+             >=gnome/gnome-common-2.8
              >=gnome/pyorbit-2.0.1
              >=gnome/libgnome-2.8
              >=gnome/libgnomeui-2.8

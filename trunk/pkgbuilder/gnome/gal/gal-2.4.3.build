@@ -10,7 +10,8 @@ PKG_BUILD="am1"
 
 PKG_USE="doc"
 
-PKG_DEPENDS=">=gnome/libgnomeprint-2.2.0
+PKG_DEPENDS=">=gnome/gnome-common-2.8
+             >=gnome/libgnomeprint-2.2.0
              >=gnome/libgnomeprintui-2.2.1
              >=l/libglade-2.0
              >=gnome/libgnomeui-2.0

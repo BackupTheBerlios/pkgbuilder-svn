@@ -13,6 +13,7 @@ PKG_USE="png tiff jpeg"
 PKG_DEPENDS=">=l/glib2-2.4
              >=l/gtk2-2.4
              >=l/libxml2-2.4
+             >=gnome/gnome-common-2.8
              >=gnome/orbit2-2.3
              >=gnome/libgnome-2.6
              >=gnome/libgnomeui-2.6

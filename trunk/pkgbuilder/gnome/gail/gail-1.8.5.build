@@ -12,6 +12,7 @@ PKG_USE="doc"
 
 PKG_DEPENDS=">=l/gtk2-2.3.5
              >=l/atk-1.5
+             >=gnome/gnome-common-2.8
              >=gnome/libgnomecanvas-2
              >=d/pkgconfig-0.12.0
              `use_dep doc ">=d/gtk-doc-1"`"

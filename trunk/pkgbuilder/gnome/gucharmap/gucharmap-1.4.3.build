@@ -16,6 +16,7 @@ PKG_DEPENDS=">=l/glib2-2.3
              >=l/pango-1.2.1
              >=l/gtk2-2.2
              l/popt
+             >=gnome/gnome-common-2.8
              >=gnome/libgnome-2.2
              >=gnome/libgnomeui-2.2 
              d/pkgconfig

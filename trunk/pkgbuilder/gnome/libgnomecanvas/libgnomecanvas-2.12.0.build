@@ -10,10 +10,9 @@ PKG_BUILD="am1"
 
 PKG_USE="doc"
 
-PKG_DEPENDS=">=gnome/gnome-common-2.8
-             >=gnome/libglade-2
+PKG_DEPENDS=">=l/libglade-2
              >=l/gtk2-2.4
-             >=l/pango-1.2
+             >=gnome/gnome-common-2.8
              >=l/libart_lgpl-2.3.8
              >=d/pkgconfig-0.12.0
              `use_dep doc ">=d/gtk-doc-1"`"

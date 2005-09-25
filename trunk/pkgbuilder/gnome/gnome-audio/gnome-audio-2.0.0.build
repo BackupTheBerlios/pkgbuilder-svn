@@ -21,9 +21,9 @@ PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
 PKG_NOSTRIP="Y"
 
 do_configure() {
-    return
+    true
 }
 
 do_build() {
-    return
+    true
 }

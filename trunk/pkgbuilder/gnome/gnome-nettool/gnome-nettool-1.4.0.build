@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS="l/glib2
              >=l/gtk2-2.4
+             >=gnome/gnome-common-2.8
              >=gnome/gconf-1.2
              >=gnome/libgnome-2
              >=gnome/libgnomeui-2

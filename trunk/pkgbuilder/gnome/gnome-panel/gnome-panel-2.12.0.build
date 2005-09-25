@@ -11,6 +11,7 @@ PKG_BUILD="am1"
 PKG_USE="doc"
 
 PKG_DEPENDS=">=l/gtk2-2.3.2
+             >=gnome/gnome-common-2.8
              >=gnome/libwnck-2.3
              >=gnome/orbit2-2.4
              >=gnome/gnome-vfs-2.3

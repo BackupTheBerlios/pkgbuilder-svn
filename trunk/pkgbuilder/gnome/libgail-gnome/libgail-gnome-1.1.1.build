@@ -14,6 +14,7 @@ PKG_USE=""
 
 PKG_DEPENDS="l/atk
              l/gtk2
+             >=gnome/gnome-common-2.8
              gnome/gnome-panel
              gnome/libbonoboui
              gnome/libbonobo

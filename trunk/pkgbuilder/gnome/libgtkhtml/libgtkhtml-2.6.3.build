@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS="l/gtk2
              >=l/libxml2-2.4.16
+             >=gnome/gnome-common-2.8
              >=gnome/gnome-vfs-2
              >=gnome/gail-1.3
              >=d/pkgconfig-0.12.0"

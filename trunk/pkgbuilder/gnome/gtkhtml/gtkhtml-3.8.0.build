@@ -12,6 +12,7 @@ PKG_USE=""
 
 PKG_DEPENDS=">=gnome/gal-1.99.10
              >=l/libsoup-1.99.26
+             >=gnome/gnome-common-2.8
              >=gnome/libgnomeui-2.2
              >=gnome/libgnomeprint-2.2
              >=gnome/libgnomeprintui-2.2.1
