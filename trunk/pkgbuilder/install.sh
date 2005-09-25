@@ -220,8 +220,6 @@ recursive_install() {
         elif [ "$MODE" = "info" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
             RETVAL=$?
-        elif [ "$MODE" = "dummy" ] ; then
-            $PACKAGES_DB="$PACKAGES_DB $PKG_NAME-$PKG_VERSION"
         fi
     else
         echo "pkgbuilder: installing $PKG"
