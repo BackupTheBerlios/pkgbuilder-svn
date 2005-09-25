@@ -16,6 +16,7 @@ PKG_DEPENDS=">=l/gtk2-2.1.2
              >=gnome/libgnomeui-2.1
              >=gnome/libgnomecanvas-2
              >=gnome/gnome-vfs-2
+             >=gnome/gnome-icon-theme-2.10
              >=l/startup-notification-0.5
              ap/scrollkeeper
              d/gettext
