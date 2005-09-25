@@ -21,7 +21,7 @@ PKG_DEPENDS=">=l/glib2-2.6.3
              >=gnome/libgnomeui-2.4
              >=gnome/gnome-icon-theme-2.10
              l/iso-codes
-             l/musicbrainz
+             l/libmusicbrainz
              `use_dep gnome ">=gnome/nautilus-2.10"`
              `use_dep gstreamer ">=l/gstreamer-0.8.10 >=l/gst-plugins-0.8.10" ">=l/xine-lib-1 >=gnome/gconf-2"`
              `use_dep mozilla ">=xap/mozilla-1.7.3"`
