@@ -1,0 +1,50 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# hibernate-script pkgbuilder script
+#
+
+inherit main
+
+PKG_BUILD="am1"
+
+PKG_ARCH="noarch"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.suspend2.net/downloads/all/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://www.suspend2.net/"
+
+PKG_DOC_FILES="CHANGELOG README SCRIPTLET-API TODO"
+
+PKG_CONFIG_FILES="etc/hibernate/blacklisted-modules
+                  etc/hibernate/hibernate.conf
+                  etc/hibernate/ram.conf
+                  etc/rc.d/rc.hibernate-cleanup"
+
+PKG_NOSTRIP="Y"
+
+do_install() {
+    cd $PKG_SRC
+
+    BASE_DIR=$PKG_DEST PREFIX=$PKG_PREFIX \
+    MAN_DIR=$PKG_DEST$PKG_PREFIX/man \
+    install.sh
+
+    ( cd $PKG_DEST$PKG_PREFIX/sbin
+      ln -s hibernate hibernate-ram )
+
+    mkdir -p $PKG_DEST/etc/rc.d/
+    cat init.d/hibernate-cleanup.sh > $PKG_DEST/etc/rc.d/rc.hibernate-cleanup
+
+    rm -f $PKG_DEST$PKG_PREFIX/share/hibernate/scriptlets.d/swsusp2_15
+
+    return $?
+}
