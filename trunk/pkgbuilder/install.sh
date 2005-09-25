@@ -220,6 +220,8 @@ recursive_install() {
         elif [ "$MODE" = "info" ] ; then
             ( cd $PKGBUILDER_HOME ; ./build.sh $PKG info )
             RETVAL=$?
+        elif [ "$MODE" = "dummy" ] ; then
+            $PACKAGES_DB="$PACKAGES_DB $PKG_NAME-$PKG_VERSION"
         fi
     else
         echo "pkgbuilder: installing $PKG"
@@ -236,7 +238,13 @@ recursive_install() {
         fi
     fi
 
-    echo "pkgbuilder: instalation for $PKG result: `result_msg $RETVAL`"
+    if [ "$MODE" = "dummy" -o "$MODE" = "info" ] ; then
+        PACKAGES_DB="$PACKAGES_DB $PKG_NAME-$PKG_VERSION"
+    fi
+
+    if [ "$VERBOSE" = "Y" ] ; then
+        echo "pkgbuilder: instalation for $PKG result: `result_msg $RETVAL`"
+    fi
 
     return $RETVAL
 }

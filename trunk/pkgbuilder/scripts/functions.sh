@@ -515,7 +515,17 @@ is_installed() {
     else
         ls $PACKAGES_LOGDIR/$1-$2-*-$3 &> /dev/null
         retval=$?
-    fi    
+    fi
+
+    if [ $retval -ne 0 ] && [ "$MODE" = "dummy" -o "$MODE" = "info" ] ; then
+        if [ "$2" = "" ] ; then
+            echo $PACKAGES_DB | grep -q "$1-[0-9]"
+            retval=$?
+        else
+            echo $PACKAGES_DB | grep -q "$1-$2"
+            retval=$?
+        fi
+    fi
     
     return $retval
 }
