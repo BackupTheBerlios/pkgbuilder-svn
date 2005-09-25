@@ -37,7 +37,7 @@ PKG_DEPENDS=">=l/glib2-2.3
              >=d/pkgconfig-0.12.0
              `use_dep gstreamer ">=l/gstreamer-0.6.3 
                                  >=l/gst-plugins-0.6.3"`
-             `use_dep cups "l/libgnomecups"`"
+             `use_dep cups "gnome/libgnomecups"`"
 
 PKG_DOC_FILES="AUTHORS COPYIN* ChangeLo* HACKING INSTALL MAINTAINERS NEWS README THANKS TODO"
 
