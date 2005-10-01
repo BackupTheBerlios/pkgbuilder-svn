@@ -504,7 +504,7 @@ is_installed() {
         return 1
     fi
     
-    local retval=0
+    local retval=1
     
     if [ "$2" = "" ] ; then
         ls $PACKAGES_LOGDIR/$1-*-*-* 2> /dev/null | grep "$1\-[0-9]" &> /dev/null
