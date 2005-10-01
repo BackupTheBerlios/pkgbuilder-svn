@@ -39,9 +39,7 @@ PKG_INSTALL_OPTIONS="PREFIX=$PKG_DEST$PKG_PREFIX
 do_patch() {
     cd $PKG_SRC
     
-    cp Makefile Makefile.orig
-    sed -e "s:^CFLAGS = -O:CFLAGS = $CFLAGS:" Makefile.orig > Makefile
-    rm Makefile.orig
+    sed -i -e "s:^CFLAGS = -O2:CFLAGS = $CFLAGS:" Makefile
     
     return $?
 }
@@ -50,27 +48,19 @@ do_configure() {
     cd $PKG_SRC
     
     if use esd ; then
-        cp Makefile Makefile.orig
-        sed -e '/SOUND_ESOUND/s:#::' Makefile.orig > Makefile
-        rm Makefile.orig
+        sed -i -e '/SOUND_ESOUND/s:#::' Makefile
     fi
 
     if use alsa ; then
-        cp Makefile Makefile.orig
-        sed -e '/SOUND_ALSA/s:#::' Makefile.orig > Makefile
-        rm Makefile.orig
+        sed -i -e '/SOUND_ALSA/s:#::' Makefile
     fi
 
     if use arts ; then
-        cp Makefile Makefile.orig
-        sed -e '/SOUND_ARTS/s:#::' Makefile.orig > Makefile
-        rm Makefile.orig
+        sed -i -e '/SOUND_ARTS/s:#::' Makefile
     fi
 
     if use sdl ; then
-        cp Makefile Makefile.orig
-        sed -e '/SOUND_SDL/s:#::' Makefile.orig > Makefile
-        rm Makefile.orig
+        sed -i -e '/SOUND_SDL/s:#::' Makefile
     fi
     
     return $?
