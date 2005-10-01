@@ -1,12 +1,12 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# lyx-1.3.5 pkgbuilder script
+# lyx-1.3.6 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
