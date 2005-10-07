@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_URL="http://www.jwz.org/xscreensaver/$PKG_FILE_NAME"
 
@@ -34,6 +34,14 @@ PKG_CONFIGURE_OPTIONS="--with-shadow
                        `use_with gtk2 gtk`"
 
 PKG_INSTALL_OPTIONS="install_prefix=$PKG_DEST"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_NAME.setuid.diff -Np0
+
+    return $?
+}
 
 
 do_install() {
