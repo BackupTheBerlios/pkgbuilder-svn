@@ -1,29 +1,29 @@
 #!/bin/sh
 # Start/stop/restart authdaemon:
 
-imap_start() {
-  /usr/libexec/courier-authlib/authdaemond start
+authdaemond_start() {
+  /usr/sbin/authdaemond start
 }
 
-imap_stop() {
-  /usr/libexec/courier-authlib/authdaemond stop
+authdaemond_stop() {
+  /usr/sbin/authdaemond stop
 }
 
-imap_restart() {
-  /usr/libexec/courier-authlib/authdaemond stop
+authdaemond_restart() {
+  /usr/sbin/authdaemond stop
   sleep 2
-  /usr/libexec/courier-authlib/authdaemond start
+  /usr/sbin/authdaemond start
 }
 
 case "$1" in
 'start')
-  imap_start
+  authdaemond_start
   ;;
 'stop')
-  imap_stop
+  authdaemond_stop
   ;;
 'restart')
-  imap_restart
+  authdaemond_restart
   ;;
 *)
   echo "usage $0 start|stop|restart"
