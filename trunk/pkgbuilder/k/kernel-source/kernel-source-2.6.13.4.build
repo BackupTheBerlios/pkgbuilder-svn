@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# kernel-source-2.6.13.3 pkgbuilder script
+# kernel-source-2.6.13.4 pkgbuilder script
 #
 
 PKG_ARCH="noarch"
