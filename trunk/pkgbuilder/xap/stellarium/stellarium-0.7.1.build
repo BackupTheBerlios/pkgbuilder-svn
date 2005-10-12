@@ -26,4 +26,5 @@ PKG_HOMESITE="http://stellarium.free.fr/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
 
-PKG_CONFIGURE_OPTIONS="`use_enable nls`"
+PKG_CONFIGURE_OPTIONS="`use_enable nls`
+                       --with-x"
