@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# librsvg-2.9.5 pkgbuilder script
+# librsvg-2.12.7 pkgbuilder script
 #
 
 inherit gnome
