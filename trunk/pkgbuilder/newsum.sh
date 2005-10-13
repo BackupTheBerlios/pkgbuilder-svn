@@ -24,10 +24,6 @@ source $PKG
 
 cd $FETCH_DIR
 
-if [ ! -d $PKGBUILDER_HOME/`dirname $1`/files ] ; then
-    mkdir -p $PKGBUILDER_HOME/`dirname $1`/files
-fi
-
 FILES=""
 
 for file in $PKG_URL ; do
@@ -41,5 +37,9 @@ if [ "$FILES" = "" ] ; then
 fi
 
 if [ "$FILES" != "" ] ; then
-    md5sum $FILES > $PKGBUILDER_HOME/`dirname $1`/files/md5sum-$PKG_VERSION
+    if [ ! -d $PKGBUILDER_HOME/`dirname $PKG`/files ] ; then
+        mkdir -p $PKGBUILDER_HOME/`dirname $1`/files
+    fi
+
+    md5sum $FILES > $PKGBUILDER_HOME/`dirname $PKG`/files/md5sum-$PKG_VERSION
 fi
