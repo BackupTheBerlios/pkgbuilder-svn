@@ -19,7 +19,7 @@ PKG_USE=""
 PKG_DEPENDS=">=l/ncurses-5.1
              >=l/zlib-1.1.4"
 
-PKG_HOMESITE="http://www.cvshome.org/"
+PKG_HOMESITE="http://www.nongnu.org/cvs/"
 
 PKG_DOC_FILES="AUTHORS BUGS ChangeLog COPYING* DEVEL-CVS FAQ HACKING 
                INSTALL MINOR-BUGS NEWS PROJECTS README* TESTS TODO"
