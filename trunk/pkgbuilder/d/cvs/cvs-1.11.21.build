@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# cvs-1.11.20 pkgbuilder script
+# cvs-1.11.21 pkgbuilder script
 #
 
 inherit configscript
@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="https://ccvs.cvshome.org/files/documents/19/861/$PKG_FILE_NAME"
+PKG_URL="http://savannah.nongnu.org/download/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
