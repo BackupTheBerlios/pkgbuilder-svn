@@ -6,7 +6,7 @@
 
 inherit mozilla
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 ENIGMAIL_VERSION="0.92.1"
 IPC_VERSION="1.1.3"
@@ -24,7 +24,8 @@ PKG_DOC_FILES="LEGAL LICENSE README.txt"
 do_patch() {
     cd $PKG_SRC
 
-    apply_patch mozilla-1.7.3-ft2.patch -Np0 &&
+    apply_patch mozdrawingarea.patch -Np1 &&
+    apply_patch nss-fixrandom.patch -Np1 &&
     apply_patch launcher.patch -Np0
 
     return $?
