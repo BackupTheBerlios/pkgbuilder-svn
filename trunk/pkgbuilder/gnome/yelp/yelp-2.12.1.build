@@ -6,9 +6,9 @@
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="am3"
 
-PKG_USE="mozilla"
+PKG_USE=""
 
 PKG_DEPENDS=">=l/gtk2-2.5.3
              >=gnome/gnome-common-2.8
@@ -27,6 +27,20 @@ PKG_DEPENDS=">=l/gtk2-2.5.3
              d/gettext
              >=d/intltool-0.29
              >=d/pkgconfig-0.12.0
-             `use_dep mozilla "xap/mozilla"`"
+             xap/mozilla"
 
 PKG_DOC_FILES="AUTHORS COPYING ChangeLog INSTALL NEWS README TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-debug
+                       --with-mozilla=mozilla
+                       --enable-man 
+                       --enable-info"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch yelp-double-free.diff -Np0
+
+    return $?
+}

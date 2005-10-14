@@ -1,0 +1,14 @@
+--- src/yelp-toc-pager.c.orig	2005-10-14 20:35:05.000000000 +0200
++++ src/yelp-toc-pager.c	2005-10-14 20:36:05.000000000 +0200
+@@ -971,11 +971,9 @@
+ 
+     text = (gchar *) yelp_doc_info_get_title (doc_info);
+     xmlNewTextChild (new, NULL, "title", text);
+-    g_free (text);
+ 
+     text = (gchar *) yelp_doc_info_get_description (doc_info);
+     xmlNewTextChild (new, NULL, "description", text);
+-    g_free (text);
+ }
+ 
+ static void
