@@ -24,7 +24,7 @@ mozilla_init() {
     
     PKG_LICENSE="MPL-1.1 NPL-1.1"
     
-    PKG_USE="ssl gnome crypto"
+    PKG_USE="ssl crypt"
     
     PKG_DEPENDS="x/x11
                  >=l/libidl-0.8.0
@@ -63,12 +63,19 @@ mozilla_init() {
                            --enable-xft
                            --with-default-mozilla-five-home=$MOZILLA_FIVE_HOME
                            --disable-pedantic
-                           --disable-short-wchar
+                           --disable-debug
+                           --disable-tests
+                           --disable-logging
+                           --disable-installer
+                           --disable-gnomevfs
                            --disable-xprint
+                           --enable-oji
                            --enable-mathml
                            --without-system-nspr
                            --enable-nspr-autoconf
                            --with-system-zlib
+                           --with-system-jpeg
+                           --with-system-png
                            --enable-xsl
                            --enable-crypto
                            --enable-calendar
@@ -152,14 +159,11 @@ mozilla_do_postinstall() {
     ( cd $PKG_DEST$PKG_PREFIX/include
       ln -sf mozilla-$PKG_VERSION mozilla )
       
-    # Install icon and .desktop for menu entry
-    if use gnome ; then
-        mkdir -p $PKG_DEST/usr/share/pixmaps
-        cp build/package/rpm/SOURCES/mozilla-icon.png $PKG_DEST/usr/share/pixmaps
+    mkdir -p $PKG_DEST/usr/share/pixmaps
+    cp build/package/rpm/SOURCES/mozilla-icon.png $PKG_DEST/usr/share/pixmaps
 
-        mkdir -p $PKG_DEST/usr/share/gnome/apps/Internet
-        cp build/package/rpm/SOURCES/mozilla.desktop $PKG_DEST/usr/share/gnome/apps/Internet
-    fi
+    mkdir -p $PKG_DEST/usr/share/gnome/apps/Internet
+    cp build/package/rpm/SOURCES/mozilla.desktop $PKG_DEST/usr/share/gnome/apps/Internet
     
     configscript_do_postinstall
 }
