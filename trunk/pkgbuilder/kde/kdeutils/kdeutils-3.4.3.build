@@ -1,0 +1,17 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdeutils-3.4.3 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/qt-3.3.3
+             >=kde/kdelibs-$PKG_VERSION
+             >=kde/kdebase-$PKG_VERSION"
+
+PKG_DOC_FILES="AUTHORS COPYING INSTALL kdeutils.lsm README"

@@ -1,0 +1,36 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# koffice-1.4.2 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_URL="$KDE_BASE_URL/$PKG_NAME-$PKG_VERSION/src/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2"
+
+PKG_HOMESITE="http://www.koffice.org/"
+
+PKG_USE="mysql javascript"
+
+PKG_DEPENDS=">=l/qt-3.3.3
+             >=kde/kdelibs-3.4
+             l/freetype2
+             l/fontconfig
+             d/perl
+             d/python
+             l/libart_lgpl
+             l/readline
+             l/libxml2
+             l/libxslt
+             >=l/lcms-1.12
+             >=xap/imagemagick-5.5.2
+             >=l/wv2-0.1.9
+             d/pkgconfig
+             `use_dep javascript ">=kde/kdebindings-3.4"`
+             `use_dep mysql "ap/mysql"`"
+
+PKG_DOC_FILES="AUTHORS COPYING* INSTALL README"

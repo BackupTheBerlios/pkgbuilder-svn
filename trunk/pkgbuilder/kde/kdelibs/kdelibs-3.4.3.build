@@ -1,0 +1,54 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdelibs-3.4.3 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="alsa cups fam tiff aspell"
+
+PKG_DEPENDS=">=kde/kde-common-$PKG_VERSION
+             >=l/qt-3.3.3
+             >=kde/arts-1.4.2            
+             >=l/pcre-4.2
+             >=l/openssl-0.9.7d
+             >=l/libxml2-2.6.6
+             >=l/libxslt-1.1.4
+             l/fontconfig
+             l/freetype2
+             d/perl
+             ap/esp-gs
+             l/libart_lgpl
+             l/libidn
+             d/gettext
+             d/pkgconfig
+             `use_dep spell "l/aspell"`
+             `use_dep tiff "l/libtiff"`
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep fam "ap/fam"`
+             `use_dep cups ">=n/cups-1.1.19"`"
+
+PKG_DOC_FILES="AUTHORS COMPILING COMPILING.html COPYING COPYING.BSD COPYING.LIB DEBUG
+               INSTALL KDE2PORTING.html KDE3PORTING.html NAMING README  kdelibs.lsm"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --with-ssl-dir=/usr
+                       --enable-fast-malloc=full
+                       --enable-dnotify
+                       --with-libart 
+                       --with-libidn
+                       --with-utempter
+                       `use_with aspell`
+                       `use_enable fam libfam`
+                       `use_with alsa`
+                       `use_with cups`"
+
+do_postinstall() {
+    cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
+    ln -sf applications.menu kde-applications.menu
+
+    kde_do_postinstall
+}

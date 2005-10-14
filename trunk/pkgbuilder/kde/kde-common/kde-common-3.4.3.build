@@ -1,0 +1,32 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kde-commmon-3.4.3 pkgbuilder script
+#
+
+PKG_BUILD="am1"
+
+PKG_ARCH="noarch"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://www.kde.org/"
+
+PKG_CONFIG_FILES="etc/profile.d/kde.sh
+                  etc/profile.d/kde.csh"
+
+do_install() {
+    mkdir -p $PKG_DEST/etc/profile.d
+    cp $PKG_HOME/files/kde.sh $PKG_DEST/etc/profile.d/
+    cp $PKG_HOME/files/kde.csh $PKG_DEST/etc/profile.d/
+    chmod 755 $PKG_DEST/etc/profile.d/kde.*
+}
+
+do_postinstall() {
+    pkg_configfiles
+    pkg_installfiles
+}

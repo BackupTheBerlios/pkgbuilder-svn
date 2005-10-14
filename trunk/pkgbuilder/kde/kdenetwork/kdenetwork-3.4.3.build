@@ -1,0 +1,22 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdenetwork-3.4.3 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="slp wifi"
+
+PKG_DEPENDS=">=l/qt-3.3.3
+             >=kde/kdelibs-$PKG_VERSION
+             >=kde/kdebase-$PKG_VERSION
+             d/pkgconfig
+             d/perl
+             l/qca-tls
+             `use_dep wifi "n/wireless-tools"`
+             `use_dep slp "l/openslp"`"
+
+PKG_DOC_FILES="AUTHORS COPYING INSTALL kdenetwork.lsm README"

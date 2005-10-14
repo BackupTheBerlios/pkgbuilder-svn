@@ -1,0 +1,45 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdemultimedia-3.4.3 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_USE="mp3 oggvorbis alsa gstreamer flac lame speex theora"
+
+PKG_DEPENDS=">=l/qt-3.3
+             >=kde/kdelibs-$PKG_VERSION
+             >=kde/kdebase-$PKG_VERSION
+             ap/cdparanoia
+             l/libmusicbrainz
+             l/libtunepimp
+             l/taglib
+             l/audiofile
+             l/libsamplerate
+             l/xine-lib
+             ap/cdparanoia
+             `use_dep flac "l/flac"`
+             `use_dep lame "l/lame"`
+             `use_dep speex "l/speex"`
+             `use_dep theora "l/libtheora"`
+             `use_dep oggvorbis "ap/vorbis-tools"`
+             `use_dep mp3 "l/libmad"`
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep gstreamer "l/gstreamer l/gst-plugins"`"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README*"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use_with flac`
+                       `use_with lame`
+                       `use_with speex`
+                       `use_with mp3 libmad`
+                       `use_with alsa`
+                       `use_with alsa arts-alsa`
+                       `use_with oggvorbis vorbis`
+                       `use_dep speex "--with-extra-includes=/usr/include/speex"`
+                       --with-xine
+                       --disable-strict"
