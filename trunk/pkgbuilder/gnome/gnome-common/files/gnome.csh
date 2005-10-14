@@ -9,43 +9,43 @@ else
 endif
 
 if ( $?PATH ) then
-    setenv PATH $PATH:$GNOMEDIR/bin
+    setenv PATH ${PATH}:${GNOMEDIR}/bin
 else
-    setenv PATH $GNOMEDIR/bin
+    setenv PATH ${GNOMEDIR}/bin
 endif
 
 if ( $?MANPATH ) then
-    setenv MANPATH $MANPATH:$GNOMEDIR/man
+    setenv MANPATH ${MANPATH}:${GNOMEDIR}/man
 else
-    setenv MANPATH $GNOMEDIR/man
+    setenv MANPATH ${GNOMEDIR}/man
 endif
 
 if ( $?PKG_CONFIG_PATH ) then
-    setenv PKG_CONFIG_PATH $PKG_CONFIG_PATH:$GNOMEDIR/lib/pkgconfig
+    setenv PKG_CONFIG_PATH ${PKG_CONFIG_PATH}:${GNOMEDIR}/lib/pkgconfig
 else
-    setenv PKG_CONFIG_PATH $GNOMEDIR/lib/pkgconfig
+    setenv PKG_CONFIG_PATH ${GNOMEDIR}/lib/pkgconfig
 endif
 
 if ( $?LIBGLADE_MODULE_PATH ) then
-    setenv LIBGLADE_MODULE_PATH $LIBGLADE_MODULE_PATH:$GNOMEDIR/lib/libglade/2.0
+    setenv LIBGLADE_MODULE_PATH ${LIBGLADE_MODULE_PATH}:${GNOMEDIR}/lib/libglade/2.0
 else
-    setenv LIBGLADE_MODULE_PATH $GNOMEDIR/lib/libglade/2.0
+    setenv LIBGLADE_MODULE_PATH ${GNOMEDIR}/lib/libglade/2.0
 endif
 
 if ( $?ACLOCAL_FLAGS ) then
-    setenv ACLOCAL_FLAGS "$ACLOCAL_FLAGS -I $GNOME2_PATH/share/aclocal"
+    setenv ACLOCAL_FLAGS "${ACLOCAL_FLAGS} -I ${GNOME2_PATH}/share/aclocal"
 else
-    setenv ACLOCAL_FLAGS "-I $GNOME2_PATH/share/aclocal"
+    setenv ACLOCAL_FLAGS "-I ${GNOME2_PATH}/share/aclocal"
 endif
 
 if ( $?XDG_DATA_DIRS ) then
-    setenv XDG_DATA_DIRS $XDG_DATA_DIRS:$GNOMEDIR/share
+    setenv XDG_DATA_DIRS ${XDG_DATA_DIRS}:${GNOMEDIR}/share
 else
-    setenv XDG_DATA_DIRS $GNOMEDIR/share
+    setenv XDG_DATA_DIRS ${GNOMEDIR}/share
 endif
 
 if ( $?XDG_CONFIG_DIRS ) then
-    setenv XDG_CONFIG_DIRS $XDG_CONFIG_DIRS:$GNOMEDIR/etc/xdg
+    setenv XDG_CONFIG_DIRS ${XDG_CONFIG_DIRS}:${GNOMEDIR}/etc/xdg
 else
-    setenv XDG_CONFIG_DIRS $GNOMEDIR/etc/xdg
+    setenv XDG_CONFIG_DIRS ${GNOMEDIR}/etc/xdg
 endif
