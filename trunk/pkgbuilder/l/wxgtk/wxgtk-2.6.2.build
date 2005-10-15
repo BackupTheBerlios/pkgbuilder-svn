@@ -1,12 +1,12 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# wxgtk-2.6.1 pkgbuilder script
+# wxgtk-2.6.2 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="wxGTK-$PKG_VERSION.$PKG_EXTENSION"
@@ -38,6 +38,14 @@ PKG_CONFIGURE_OPTIONS="--with-gtk
                        `use_enable unicode`"
 
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch intl.cpp.diff -Np0
+
+    return $?
+}
 
 do_build() {
     configscript_do_build
