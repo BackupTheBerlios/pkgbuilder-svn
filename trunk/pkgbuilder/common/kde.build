@@ -11,7 +11,7 @@ kde_init() {
     
     PKG_EXTENSION="tar.bz2"
     PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-    KDE_BASE_URL="ftp://ftp.rediris.es/mirror/kde/stable"
+    KDE_BASE_URL="http://ftp.rediris.es/mirror/kde/pub/kde/stable"
     PKG_URL="$KDE_BASE_URL/`kde_version`/src/$PKG_FILE_NAME"
     
     PKG_LICENSE="GPLv2 LGPLv2"
