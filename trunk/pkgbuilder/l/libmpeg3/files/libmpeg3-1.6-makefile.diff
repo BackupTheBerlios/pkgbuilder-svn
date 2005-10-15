@@ -1,0 +1,102 @@
+--- Makefile.orig	2005-10-15 20:48:09.000000000 +0200
++++ Makefile	2005-10-15 20:53:01.000000000 +0200
+@@ -72,6 +72,29 @@
+ CFLAGS += -g
+ 
+ 
++INSTALL_HEADERS = \
++    bitstream.h \
++    libmpeg3.h \
++    mpeg3atrack.h \
++    mpeg3css.h \
++    mpeg3demux.h \
++    mpeg3io.h \
++    mpeg3private.h \
++    mpeg3private.inc \
++    mpeg3protos.h \
++    mpeg3title.h \
++    mpeg3vtrack.h \
++    timecode.h \
++
++INSTALL_AHEADERS = \
++    audio/ac3.h \
++    audio/mpeg3audio.h \
++
++INSTALL_VHEADERS = \
++    video/idct.h \
++    video/slice.h \
++    video/mpeg3video.h
++
+ 
+ 
+ 
+@@ -139,9 +162,8 @@
+ 
+ 
+ OUTPUT = $(OBJDIR)/libmpeg3.a
+-UTILS = $(OBJDIR)/mpeg3dump $(OBJDIR)/mpeg3peek $(OBJDIR)/mpeg3toc  $(OBJDIR)/mpeg3cat
+-
+-#$(OBJDIR)/mpeg3split
++SHAREDOUTPUT = $(OBJDIR)/libmpeg3.so
++UTILS = $(OBJDIR)/mpeg3dump $(OBJDIR)/mpeg3toc  $(OBJDIR)/mpeg3cat $(OBJDIR)/mpeg3split
+ 
+ 
+ LIBS = -lm -lpthread
+@@ -153,12 +175,14 @@
+ $(shell echo $(OBJS) $(ASMOBJS) $(A52OBJS) $(NASMOBJS) > $(OBJDIR)/objs)
+ $(shell mkdir -p $(DIRS) )
+ 
+-all: $(OUTPUT) $(UTILS)
++all: $(OUTPUT) $(SHAREDOUTPUT) $(UTILS)
+ 
+ 
+ $(OUTPUT): $(OBJS) $(ASMOBJS) $(NASMOBJS) $(A52OBJS)
+ 	ar rcs $(OUTPUT) `cat $(OBJDIR)/objs`
+ 
++$(SHAREDOUTPUT): $(OBJS) $(ASMOBJS) $(NASMOBJS)
++	gcc -shared -o $(SHAREDOUTPUT) $(OBJS) $(ASMOBJS) $(NASMOBJS) $(LIBS)
+ 
+ 
+ $(OBJDIR)/mpeg3dump: $(OUTPUT) mpeg3dump.c
+@@ -173,8 +197,8 @@
+ $(OBJDIR)/mpeg3cat: $(OUTPUT) mpeg3cat.c
+ 	$(CC) `cat $(OBJDIR)/c_flags` -o $(OBJDIR)/mpeg3cat mpeg3cat.c $(OUTPUT) $(LIBS)
+ 
+-#$(OBJDIR)/mpeg3split: $(OUTPUT)
+-#	$(CC) `cat $(OBJDIR)/c_flags` -o $(OBJDIR)/mpeg3split mpeg3split.c $(OUTPUT) $(LIBS)
++$(OBJDIR)/mpeg3split: $(OUTPUT)
++	$(CC) `cat $(OBJDIR)/c_flags` -o $(OBJDIR)/mpeg3split mpeg3split.c $(OUTPUT) $(LIBS)
+ 
+ $(OBJDIR)/mpeg2qt: $(OUTPUT)
+ 	$(CC) `cat $(OBJDIR)/c_flags` -o $(OBJDIR)/mpeg2qt mpeg2qt.c \
+@@ -188,10 +212,18 @@
+ 		-ldl
+ 
+ install: 
+-	cp $(UTILS) $(PREFIX)/bin
+-#	cp $(OUTPUT) $(PREFIX)/lib
+-#	cp libmpeg3.h mpeg3private.h $(PREFIX)/include
+-
++	install -d $(DESTDIR)/bin
++	install -d $(DESTDIR)/include/libmpeg3
++	install -d $(DESTDIR)/include/libmpeg3/audio
++	install -d $(DESTDIR)/include/libmpeg3/video
++	install -d $(DESTDIR)/lib
++	install $(UTILS) $(DESTDIR)/bin
++	install -m 644 $(INSTALL_HEADERS) $(DESTDIR)/include/libmpeg3
++	install -m 644 $(INSTALL_AHEADERS) $(DESTDIR)/include/libmpeg3/audio
++	install -m 644 $(INSTALL_VHEADERS) $(DESTDIR)/include/libmpeg3/video
++	install -m 644 $(OUTPUT) $(DESTDIR)/lib
++	install -m 644 $(SHAREDOUTPUT) $(DESTDIR)/lib
++	
+ clean:
+ 	rm -rf $(OBJDIR)
+ 
+@@ -219,6 +251,7 @@
+ $(OBJDIR)/mpeg3dump.o: 				    mpeg3dump.c
+ $(OBJDIR)/mpeg3ifo.o: 				    mpeg3ifo.c
+ $(OBJDIR)/mpeg3io.o: 				    mpeg3io.c
++$(OBJDIR)/mpeg3split.o:                             mpeg3split.c
+ $(OBJDIR)/mpeg3title.o: 			    mpeg3title.c
+ $(OBJDIR)/mpeg3toc3.o:  			    mpeg3toc3.c
+ $(OBJDIR)/mpeg3toc.o: 				    mpeg3toc.c
