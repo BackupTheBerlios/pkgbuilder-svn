@@ -74,7 +74,7 @@ l/ncurses-5.4-i486-2
 l/zlib-1.2.3-i486-1
 
 # n)
-n/openssl-0.9.7g-i486-1
+n/openssl-0.9.7g-i486-2
 n/tcpip-0.17-i486-35
 n/wget-1.10.1-i486-3
 n/wireless-tools-27-i486-2 #optional
