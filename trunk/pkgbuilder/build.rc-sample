@@ -32,6 +32,7 @@ BINARIES_DIR="/var/cache/pkg/binaries"
 
 # Current packages directory
 CURRENT_DIR="/var/cache/pkg/current"
+#CURRENT_MIRROR_URL="ftp://localhost/pub/slackware"
 CURRENT_FETCH_OPTIONS="--tries=$FETCH_TRIES --output-document=$CURRENT_DIR/%o"
 
 # Temporal directory
