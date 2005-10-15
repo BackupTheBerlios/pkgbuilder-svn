@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-x11-free-$PKG_VERSION.$PKG_EXTENSION"

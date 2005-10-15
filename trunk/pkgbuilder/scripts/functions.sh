@@ -531,6 +531,25 @@ is_installed() {
 }
 
 #
+# Returns if a package is marcked as unstable
+#
+# @param $1 package name
+#
+is_masked() {
+    if [ "$1" = "" ] ; then
+        return 1
+    fi
+
+    eval "`grep "PKG_MASKED=" $PKGBUILDER_HOME/$1`"
+
+    test "$PKG_MASKED" = "Y"
+    local result=$?
+
+    unset PKG_MASKED
+    return $result
+}
+
+#
 # Compare version numbers. Returns 0 if equals, 1 if b < a and 2 if b > a
 #
 # @param $1 package a
@@ -642,9 +661,9 @@ latest_version() {
             fi
             
             compare_versions `basename $latestbuildfile .build` `basename $i .build`
-            local RESULT=$?
+            local result=$?
             
-            if [ $RESULT -eq 2 ] ; then
+            if [ $result -eq 2 ] && ! is_masked $1/$2/$i ; then
                 latestbuildfile="$i"
             fi
         done

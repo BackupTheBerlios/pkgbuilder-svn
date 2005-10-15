@@ -16,6 +16,8 @@ PKG_LICENSE="QPLv1.0 | GPLv2"
 
 PKG_USE="mysql gif cups"
 
+PKG_MASKED="Y"
+
 PKG_DEPENDS="x/x11
              l/libpng
              l/lcms
