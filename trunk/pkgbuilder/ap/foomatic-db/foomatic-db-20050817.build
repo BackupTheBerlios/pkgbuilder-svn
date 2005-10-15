@@ -1,0 +1,62 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# foomatic-db-20050817 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.linuxprinting.org/download/foomatic/$PKG_FILE_NAME
+         http://www.linuxprinting.org/download/foomatic/foomatic-filters-ppds-$PKG_VERSION.$PKG_EXTENSION"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="cups pnm2ppa"
+
+PKG_DEPENDS="l/libxml2
+             ap/foomatic-filters
+             ap/foomatic-db-engine
+             `use_dep pnm2ppa "ap/pnm2ppa"`"
+
+PKG_HOMESITE="http://www.linuxprinting.org/"
+
+PKG_DOC_FILES="ChangeLog COPYING README TODO USAGE"
+
+PKG_CONFIGURE_OPTIONS=""
+
+PKG_NOSTRIP="Y"
+
+do_install_ppds() {
+    cd $PKG_SRC
+
+    unpack foomatic-filters-ppds-$PKG_VERSION.$PKG_EXTENSION
+
+    cd foomatic-filters-ppds-$PKG_VERSION &&
+    ./install -d $PKG_DEST -p $PKG_PREFIX -z &&
+    find $PKG_DEST$PKG_PREFIX/share/ppd -name '*hpijs*' -exec rm -rf {} \;
+
+    chown -R root.root $PKG_DEST$PKG_PREFIX/share
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    pkg_install &&
+    do_install_ppds
+
+    mv $PKG_DEST$PKG_PREFIX/share/man $PKG_DEST$PKG_PREFIX
+
+    chown -R root.root $PKG_DEST$PKG_PREFIX
+
+    use cups && ( mkdir -p $PKG_DEST$PKG_PREFIX/share/cups/model
+                  cd $PKG_DEST$PKG_PREFIX/share/cups/model
+                  ln -sf $PKG_PREFIX/share/ppd foomatic-ppds )
+
+    return $?
+}
