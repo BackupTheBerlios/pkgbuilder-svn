@@ -79,11 +79,11 @@ for PKG in `find $PACKAGES_LOGDIR -type f | sort` ; do
         
         if ! is_installed $PKG_NAME $PKG_VERSION $PKG_BUILD ; then
             if [ "$MODE" = "install" ] ; then
-                ( cd $PKGBUILDER_HOME ; ./install.sh $OPTIONS $PKG )
+                ( cd $PKGBUILDER_HOME ; ./install.sh $PKG )
 
                 test "$?" -ne 0 && exit "$?"
             else
-                echo ./install.sh "$PKG_META/$PKG_NAME/$PKG_NAME-$PKG_VERSION.build"
+                echo ./install.sh $PKG
             fi
         fi
     fi
