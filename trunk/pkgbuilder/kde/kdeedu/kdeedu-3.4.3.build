@@ -15,11 +15,3 @@ PKG_DEPENDS=">=l/qt-3.3.3
              >=kde/kdebase-$PKG_VERSION"
 
 PKG_DOC_FILES="COPYING INSTALL README kdeedu.lsm"
-
-do_patch() {
-    cd $PKG_SRC
-
-    apply_patch post-3.4.2-kdeedu.diff -Np0
-
-    return $?
-}
