@@ -16,13 +16,21 @@ vim_init() {
 
     PKG_FILE_NAME="vim-$VIM_VERSION.$PKG_EXTENSION"
     PKG_LANG_FILE_NAME="vim-$VIM_VERSION-lang.tar.gz"
-    PKG_PATCHES_FILE_NAME="vim-$VIM_VERSION.$VIM_EXTRA_VERSION-patches.tar.gz"
+
+    if [ "$VIM_EXTRA_VERSION" != "" ] ; then
+        PKG_PATCHES_FILE_NAME="vim-$VIM_VERSION.$VIM_EXTRA_VERSION-patches.tar.gz"
+    fi
 
     VIM_BASE_URL="ftp://ftp.vim.org/pub/vim"
 
-    PKG_URL="$VIM_BASE_URL/unix/$PKG_FILE_NAME
-             $PKGBUILDER_MIRROR/$PKG_PATCHES_FILE_NAME
-            `use nls && echo "$VIM_BASE_URL/extra/$PKG_LANG_FILE_NAME"`"
+    if [ "$VIM_EXTRA_VERSION" != "" ] ; then
+        PKG_URL="$VIM_BASE_URL/unix/$PKG_FILE_NAME
+                 $PKGBUILDER_MIRROR/$PKG_PATCHES_FILE_NAME
+                 `use nls && echo "$VIM_BASE_URL/extra/$PKG_LANG_FILE_NAME"`"
+    else
+        PKG_URL="$VIM_BASE_URL/unix/$PKG_FILE_NAME
+                 `use nls && echo "$VIM_BASE_URL/extra/$PKG_LANG_FILE_NAME"`"
+    fi
             
     PKG_LICENSE="VIM"
     
@@ -56,23 +64,23 @@ vim_init() {
 }
 
 vim_mayor_version() {
-    expr match $PKG_VERSION '\([0-9]*\.[0-9]*\)\.'
+    echo $PKG_VERSION | cut -d"." -f1,2
 }
 
 vim_minor_version() {
-    expr match $PKG_VERSION '[0-9]*\.[0-9]*\.\([0-9]*\)'
+    echo $PKG_VERSION | cut -d"." -f3
 }
 
 vim_do_unpack() {
     cd $TMP
     
     unpack $PKG_FILE_NAME
-    
     use nls && unpack $PKG_LANG_FILE_NAME
     
-    cd $PKG_SRC
-    
-    unpack $PKG_PATCHES_FILE_NAME
+    if [ "$VIM_EXTRA_VERSION" != "" ] ; then
+        ( cd $PKG_SRC
+          unpack $PKG_PATCHES_FILE_NAME )
+    fi
     
     return $?
 }
@@ -80,9 +88,11 @@ vim_do_unpack() {
 vim_do_patch() {
     cd $PKG_SRC
     
-    for file in `find $PKG_SRC/patches | sort` ; do
-        patch -p0 --batch < $file
-    done
+    if [ "$VIM_EXTRA_VERSION" != "" ] ; then
+        for file in `find $PKG_SRC/patches | sort` ; do
+            patch -p0 --batch < $file
+        done
+    fi
     
     return 0
 }
