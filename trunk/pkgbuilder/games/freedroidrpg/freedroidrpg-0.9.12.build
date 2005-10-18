@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://download.sourcefoge.net/freedroid/$PKG_FILE_NAME"
+PKG_URL="http://download.sourceforge.net/freedroid/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
