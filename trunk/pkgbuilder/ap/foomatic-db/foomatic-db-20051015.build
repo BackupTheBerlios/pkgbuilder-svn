@@ -9,7 +9,7 @@ inherit configscript
 PKG_BUILD="am1"
 
 PKG_EXTENSION="tar.gz"
-PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_FILE_NAME="$PKG_NAME-3.0-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.linuxprinting.org/download/foomatic/$PKG_FILE_NAME
          http://www.linuxprinting.org/download/foomatic/foomatic-filters-ppds-$PKG_VERSION.$PKG_EXTENSION"
 
