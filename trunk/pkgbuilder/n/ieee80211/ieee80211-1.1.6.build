@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# ieee80211-1.1.4 pkgbuilder script
+# ieee80211-1.1.6 pkgbuilder script
 #
 
 inherit makeonly
@@ -10,7 +10,7 @@ PKG_BUILD="am1"
 
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://ketrenos.com/patches/$PKG_FILE_NAME"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
