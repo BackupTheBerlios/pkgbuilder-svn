@@ -8,8 +8,6 @@ inherit vim
 
 PKG_BUILD="am1"
 
-PKG_MASKED="Y"
-
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --enable-gui=no
                        --without-x"

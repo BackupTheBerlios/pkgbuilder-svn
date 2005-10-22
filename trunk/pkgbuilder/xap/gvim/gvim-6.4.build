@@ -10,8 +10,6 @@ PKG_BUILD="am1"
 
 PKG_USE="$PKG_USE gtk gtk2"
 
-PKG_MASKED="Y"
-
 PKG_DEPENDS="$PKG_DEPENDS
              `use gtk2 && echo "l/gtk2"`
              `use gtk && ! use gtk2 && echo "l/gtk"`
