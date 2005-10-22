@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# ethereal-0.10.12 pkgbuilder script
+# ethereal-0.10.13 pkgbuilder script
 #
 
 inherit configscript
@@ -40,5 +40,6 @@ PKG_CONFIGURE_OPTIONS="--enable-pcap
                        --enable-dftest 
                        --enable-randpkt 
                        --sysconfdir=/etc/ethereal 
-                       --enable-gtk2"
+                       --enable-gtk2
+                       `use_with ssl`"
 
