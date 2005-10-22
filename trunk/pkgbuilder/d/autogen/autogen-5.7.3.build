@@ -1,0 +1,32 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# autogen-5.7.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=d/guile-1.6.6
+             l/libxml2"
+
+PKG_HOMESITE="http://autogen.sourceforge.net/"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+
+do_postinstall() {
+    rm -f $PKG_DEST$PKG_PREFIX/share/autogen/libopts-*.tar.gz
+
+    configscript_do_postinstall
+}

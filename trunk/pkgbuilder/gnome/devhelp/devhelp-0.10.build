@@ -1,0 +1,29 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# devhelp-0.10 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/gtk2-2.6
+             >=gnome/gnome-vfs-2.2
+             >=l/libglade-2
+             xap/mozilla
+             l/zlib
+             d/intltool
+             d/pkgconfig"
+
+PKG_HOMESITE="http://www.imendio.com/projects/devhelp"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeLog README NEWS TODO"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --with-mozilla=mozilla
+                       --with-zlib"

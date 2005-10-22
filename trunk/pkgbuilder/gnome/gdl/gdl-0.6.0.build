@@ -1,0 +1,24 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gdl-0.6.0 pkgbuilder script
+#
+
+inherit gnome
+
+PKG_BUILD="am1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="d/pkgconfig
+             d/gettext
+             d/intltool
+             >=l/libxml2-2.2.8
+             >=l/gtk2-2.3
+             >=l/libglade-2.0
+             >=gnome/libgnomeui-2.5
+             >=gnome/libbonoboui-2.2"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL MAINTAINERS NEWS README"
