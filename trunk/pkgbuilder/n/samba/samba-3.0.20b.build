@@ -1,0 +1,123 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# samba-3.0.20 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am3"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.easynet.be/$PKG_NAME/stable/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="mysql xml cups python"
+
+PKG_DEPENDS="d/autoconf
+             l/popt
+             l/readline
+             l/libxml2
+            `use_dep mysql "ap/mysql l/zlib"`
+            `use_dep cups " n/cups"`
+            `use_dep python "d/python"`"
+
+PKG_HOMESITE="http://www.samba.org/"
+
+MAKE_OPTIONS="-j1"
+
+PKG_DOC_FILES="COPYING Manifest README Read-Manifest-Now Roadmap WHATSNEW.txt"
+
+PKG_EXT_MODS="`use_dep mysql "mysql,"``use_dep xml "xml,"`"
+PKG_CONFIGURE_OPTIONS="--localstatedir=/var 
+                       --bindir=/usr/bin 
+                       --sbindir=/usr/sbin 
+                       --with-lockdir=/var/cache/samba 
+                       --sysconfdir=/etc 
+                       --with-configdir=/etc/samba 
+                       --with-privatedir=/etc/samba/private 
+                       --with-swatdir=/usr/share/swat 
+                       --with-sambabook=/usr/share/swat/using_samba 
+                       --enable-static --enable-shared
+                       --without-pam 
+                       --without-pam_smbpass
+                       --without-spinlocks
+                       --with-fhs 
+                       --with-automount 
+                       --with-smbmount 
+                       --with-quotas 
+                       --with-syslog 
+                       --with-utmp 
+                       --with-msdfs 
+                       --with-vfs 
+                       --with-libsmbclient
+                       --with-winbind
+                       --with-idmap
+                       --with-ssl 
+                       --with-sslinc=/usr/include/openssl 
+                       --with-ssllib=/usr 
+                       --with-expsam=$PKG_EXT_MODS
+                       `use_enable cups`
+                       `use_dep python "--with-python=yes"`"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST MANDIR=$PKG_PREFIX/man"
+
+PKG_CONFIG_FILES="etc/rc.d/rc.samba etc/samba/smb.conf"
+
+do_configure() {
+    cd $PKG_SRC/source
+    
+    pkg_configure
+    
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC/source
+    
+    pkg_build
+    
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC/source
+    
+    mkdir -p \
+         $PKG_DEST/usr/doc/samba-$PKG_VERSION/swat \
+         $PKG_DEST/var/spool/samba \
+         $PKG_DEST/var/log/samba \
+         $PKG_DEST/etc/samba/private \
+         $PKG_DEST/var/cache/samba
+    chmod 700 $PKG_DEST/etc/samba/private
+    chmod 1777 $PKG_DEST/var/spool/samba
+    
+    pkg_install
+
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      ln -s samba/libsmbclient.so libsmbclient.so )
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      ln -s samba/libsmbclient.so libsmbclient.so.0 )
+    ( cd $PKG_DEST$PKG_PREFIX/lib
+      ln -s samba/libsmbclient.a libsmbclient.a )
+    
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+    
+    mkdir -p $PKG_DEST/etc/rc.d
+    cat $PKG_HOME/files/rc.samba > $PKG_DEST/etc/rc.d/rc.samba
+    cat $PKG_HOME/files/smb.conf > $PKG_DEST/etc/samba/smb.conf
+    
+    pkg_installdoc &&
+    pkg_stripall &&
+    pkg_gzipmaninfo &&
+    pkg_configfiles &&
+    pkg_installfiles
+    
+    return $?
+}
