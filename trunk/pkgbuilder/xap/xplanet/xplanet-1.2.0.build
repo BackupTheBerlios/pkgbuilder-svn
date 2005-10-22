@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xplanet-1.1.2 pkgbuilder script
+# xplanet-1.2.0 pkgbuilder script
 #
 
 inherit configscript
@@ -17,20 +17,13 @@ PKG_LICENSE="GPLv2"
 PKG_USE="jpeg png pnm tiff gif"
 
 PKG_DEPENDS="x/x11 
-            >=l/pango-1.2
-            `use_dep jpeg "l/libjpeg"`
-            `use_dep png "l/libpng"`
-            `use_dep pnm "l/netpbm"`
-            `use_dep tiff "l/libtiff"`
-            `use_dep gif "l/libungif"`"
+             >=l/pango-1.2
+             `use_dep jpeg "l/libjpeg"`
+             `use_dep png "l/libpng"`
+             `use_dep pnm "l/netpbm"`
+             `use_dep tiff "l/libtiff"`
+             `use_dep gif "l/libungif"`"
 
 PKG_HOMESITE="http://xplanet.sourceforge.net/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
-
-PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
-PKG_BUILD_TARGET=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
-PKG_INSTALL_TARGET="install"
