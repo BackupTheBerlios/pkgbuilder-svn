@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# anjuta-1.2.2 pkgbuilder script
+# anjuta-1.2.4 pkgbuilder script
 #
 
 inherit gnome
@@ -50,13 +50,5 @@ do_postinstall() {
     rm -rf $PKG_DEST/usr/share/doc/anjuta
     rmdir $PKG_DEST/usr/share/doc
 
-    pkg_installdoc
-
-    strip_all $PKG_DEST
-
-    gzip_man $PKG_DEST$PKG_PREFIX/man
-
-    mkdir -p $PKG_DEST/install
-
-    cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
+    gnome_do_postinstall
 }
