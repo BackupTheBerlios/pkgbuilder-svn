@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xinetd-2.3.13 pkgbuilder script
+# xinetd-2.3.14 pkgbuilder script
 #
 
 inherit configscript
