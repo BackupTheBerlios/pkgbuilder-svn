@@ -1,0 +1,53 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# mpd-0.11.5 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://mercury.chem.pitt.edu/~shank/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="oggvorbis flac mikmod alsa"
+
+PKG_DEPENDS="l/libao 
+             l/zlib 
+             l/libid3tag 
+             l/libmad
+             l/audiofile
+             l/faad2
+             `use_dep mikmod "l/libmikmod"`
+             `use_dep flac ">=l/flac-1.1.2"`
+             `use_dep oggvorbis "l/libogg l/libvorbis"`"
+
+PKG_HOMESITE="http://musicpd.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README TODO UPGRADING 
+               doc/COMMANDS doc/mpdconf.example"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       `use_enable alsa`
+                       `use_enable flac`
+                       `use_enable mikmod mod`
+                       `use_enable oggvorbis ogg`"
+
+PKG_CONFIG_FILES="etc/mpd.conf
+                  etc/rc.d/rc.mpd"
+
+do_postinstall() {
+    mkdir -p $PKG_DEST/etc/rc.d/
+    cat $PKG_SRC/doc/mpdconf.example > $PKG_DEST/etc/mpd.conf
+    cat $PKG_HOME/files/rc.mpd > $PKG_DEST/etc/rc.d/rc.mpd
+
+    # no needed
+    rm -rf $PKG_DEST$PKG_PREFIX/share
+
+    configscript_do_postinstall
+}

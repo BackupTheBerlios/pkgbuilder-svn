@@ -1,0 +1,34 @@
+#!/bin/sh
+# Start/stop/restart mpd.
+
+# Start mpd:
+mpd_start() {
+    echo "Starting mpd daemon: /usr/bin/mpd /etc/mpd.conf"
+    /usr/bin/mpd /etc/mpd.conf
+}
+
+# Stop mpd:
+mpd_stop() {
+    killall mpd
+}
+
+# Restart mpd:
+mpd_restart() {
+    mpd_stop
+    sleep 1
+    mpd_start
+}
+
+case "$1" in
+    'start')
+        mpd_start
+        ;;
+    'stop')
+        mpd_stop
+        ;;
+    'restart')
+        mpd_restart
+        ;;
+    *)
+        echo "usage $0 start|stop|restart"
+esac
