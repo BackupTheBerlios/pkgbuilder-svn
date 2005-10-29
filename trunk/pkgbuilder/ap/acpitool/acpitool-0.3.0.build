@@ -25,7 +25,7 @@ PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
 do_patch() {
     cd $PKG_SRC
 
-    apply_patch $PKG_NAME-$PKG_VERSION-gentoo.patch -Np1 &&
+    apply_patch $PKG_NAME-0.2.7-gentoo.patch -Np1 &&
     aclocal && autoconf && autoheader && automake
 
     return $?
