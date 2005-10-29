@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="am2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -14,9 +14,9 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE=""
+PKG_USE="mpd mldonkey seti X"
 
-PKG_DEPENDS="x/x11"
+PKG_DEPENDS="`use_dep X "x/x11"`"
 
 PKG_HOMESITE="http://conky.sourceforge.net/"
 
@@ -25,4 +25,9 @@ PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO doc/conkyrc.sa
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--enable-xft 
                        --enable-double-buffer 
-                       --enable-proc-uptime"
+                       --enable-proc-uptime
+                       `use_enable mpd`
+                       `use_enable mldonkey`
+                       `use_enable seti`
+                       `use_enable X x11`
+                       `use_with X x`"
