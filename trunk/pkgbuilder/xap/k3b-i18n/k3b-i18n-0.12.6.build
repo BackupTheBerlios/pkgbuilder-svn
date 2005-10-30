@@ -1,0 +1,25 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# k3b-i18n-0.12.6 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="am1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/k3b/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="xap/k3b"
+
+PKG_HOMESITE="http://www.k3b.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
+
+PKG_NOSTRIP="Y"
