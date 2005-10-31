@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# wv-1.0.3 pkgbuilder script
+# wv-1.2.0 pkgbuilder script
 #
 
 inherit configscript
@@ -16,6 +16,7 @@ PKG_USE=""
 
 PKG_DEPENDS="l/zlib
              l/libpng
+             l/libgsf
              >=l/libwmf-0.2.2
              l/glib2
              l/libxml2"
