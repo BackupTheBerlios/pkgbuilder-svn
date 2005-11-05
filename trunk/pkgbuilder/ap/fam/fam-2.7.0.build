@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -27,14 +27,19 @@ PKG_CONFIG_FILES="etc/fam.conf etc/rc.d/rc.famd"
 do_patch() {
     cd $PKG_SRC
 
+    apply_patch fam-2.7.0-dnotify.patch -Np1 &&
+    apply_patch fam-2.7.0-largefiles.patch -Np1
+
     chmod u+w configure*
 
-    cd conf
+    ( cd conf ; chmod u+w fam.conf
+      sed -i -e "s:local_only = false:local_only = true:g" fam.conf )
 
-    chmod u+w fam.conf
-
-    cp fam.conf fam.conf.orig
-    sed -e "s:local_only = false:local_only = true:g" fam.conf.orig > fam.conf
+    autoheader &&
+    aclocal &&
+    automake -a -c &&
+    autoconf &&
+    libtoolize --copy --force
 
     return $?
 }
