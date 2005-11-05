@@ -123,29 +123,29 @@ is_installed skljdf ; do_assertFalse $?
 is_installed libjpeg ; do_assertTrue $?
 is_installed libjpeg 6b ; do_assertTrue $?
 is_installed glibc 2.3* ; do_assertTrue $?
-is_installed lilo 22.5.7.2 1 ; do_assertTrue $?
+is_installed lilo 22.5.9 2 ; do_assertTrue $?
 is_installed lilo 22.5.7.2 4 ; do_assertFalse $?
 
 echo "=> latest_version tests"
 do_init
-do_assertEquals "`latest_version xap nedit`" "5.4"
-do_assertEquals "`latest_version xap gaim`" "0.77"
+do_assertEquals "`latest_version xap nedit`" "5.5"
+do_assertEquals "`latest_version xap gaim`" "1.5.0"
 do_assertEquals "`latest_version l divx4linux`" "20030428"
-do_assertEquals "`latest_version xap mplayer`" "1.0_pre4"
+do_assertEquals "`latest_version xap mplayer`" "1.0_pre7"
 do_assertEquals "`latest_version ap docbook-xml-dtd`" "4.1.2"
 
 echo "=> installed_version tests"
 do_init
-do_assertEquals "`installed_version gettext`" "0.14.1"
-do_assertEquals "`installed_version bzip2`" "1.0.2"
-do_assertEquals "`installed_version glibc`" "2.3.2"
+do_assertEquals "`installed_version gettext`" "0.14.5"
+do_assertEquals "`installed_version bzip2`" "1.0.3"
+do_assertEquals "`installed_version glibc`" "2.3.5"
 do_assertEquals "`installed_version libjpeg`" "6b"
 do_assertEquals "`installed_version divx4linux`" "20030428"
 
 echo "=> installed_build tests"
 do_init
-do_assertEquals "`installed_build lincvs`" "am1"
-do_assertEquals "`installed_build lilo`" "1"
+do_assertEquals "`installed_build lilo`" "2"
+do_assertEquals "`installed_build mrxvt`" "3"
 do_assertNotEquals "`installed_build lilo`" "4"
 
 echo "=> extract_extra_version tests"

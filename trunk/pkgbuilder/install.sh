@@ -76,8 +76,14 @@ recursive_install() {
     local DEP_PKG=""
     local RETVAL=0
 
+    if [ "$MODE" = "frompkg" ] ; then
+        $DEPS="$PKG_DEPENDS"
+    else
+        $DEPS="$PKG_DEPENDS $PKG_BUILD_DEPENDS"
+    fi
+
     #resolving dependencies
-    for DEP in $PKG_DEPENDS ; do
+    for DEP in $DEPS ; do
         if [ "$VERBOSE" = "Y" ] ; then
             echo
             echo "DEP=\"$DEP\""

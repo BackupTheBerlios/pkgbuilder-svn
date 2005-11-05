@@ -9,7 +9,7 @@
 # Print pkgbuilder version number
 #
 version() {
-    echo "pkgbuilder $VERSION"
+    echo "pkgbuilder 20051105"
 }
 
 #
@@ -513,7 +513,7 @@ is_installed() {
         ls $PACKAGES_LOGDIR/$1-$2-*-* &> /dev/null
         retval=$?
     else
-        ls $PACKAGES_LOGDIR/$1-$2-*-$3 &> /dev/null
+        ls $PACKAGES_LOGDIR/$1-$2-*-*$3* &> /dev/null
         retval=$?
     fi
 
@@ -724,7 +724,7 @@ installed_build() {
     fi
     
     if [ -r "$PACKAGES_LOGDIR/$pkgfile" ] ; then
-        local pkgbuild="`expr match "$pkgfile" '.*\-\([a-z]*[0-9]\+[a-z]*\)'`"
+        local pkgbuild="`expr match "$pkgfile" '.*\-[a-z]*\([0-9]\+\)[a-z]*'`"
         
         echo "$pkgbuild"
     else

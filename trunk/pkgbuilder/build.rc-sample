@@ -3,8 +3,6 @@
 
 PKGBUILDER_HOME="/var/pkg"
 
-VERSION="20050902"
-
 # Packages db directory
 PACKAGES_LOGDIR="/var/log/packages"
 
@@ -70,3 +68,8 @@ CPU="i686"
 CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
 CXXFLAGS="$CFLAGS"
 CPPFLAGS="$CFLAGS"
+
+# Packager info
+#PACKAGER_NAME="John Smith"
+#PACKAGER_EMAIL="jsmith AT example.net"
+#PACKAGER_INITIALS="js"

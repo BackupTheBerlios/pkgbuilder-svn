@@ -63,11 +63,44 @@ pkg_installfiles() {
 
     cat $PKG_HOME/files/slack-desc > $PKG_DEST/install/slack-desc
 
+    if [ "$PACKAGER_NAME" != "" ] ; then
+        echo "$PKG_NAME: " >> $PKG_DEST/install/slack-desc
+        if [ "$PACKAGER_EMAIL" != "" ] ; then
+            echo "$PKG_NAME: Package Created By: $PACKAGER_NAME ($PACKAGER_EMAIL)" >> $PKG_DEST/install/slack-desc
+        else
+            echo "$PKG_NAME: Package Created By: $PACKAGER_NAME" >> $PKG_DEST/install/slack-desc
+        fi
+    fi
+
     if [ -f $PKG_HOME/files/doinst.sh-$PKG_VERSION ] ; then
         cat $PKG_HOME/files/doinst.sh-$PKG_VERSION | grep -v '^#' >> $PKG_DEST/install/doinst.sh
     elif [ -f $PKG_HOME/files/doinst.sh ] ; then
         cat $PKG_HOME/files/doinst.sh | grep -v '^#' >> $PKG_DEST/install/doinst.sh
     fi
+}
+
+pkg_installmorefiles() {
+    mkdir -p $PKG_DEST/install
+
+    if [ "$PKG_DEPENDS" != "" ] ; then
+        local pkg
+        for pkg in $PKG_DEPENDS ; do
+            dep_basename="`basename $pkg`"
+            dep_pkg_name="`extract_name $dep_basename`"
+            dep_pkg_version="`extract_version $dep_basename`"
+            if [ `echo $pkg | grep '^!'` ] ; then
+                echo "$dep_pkg_name" >> $PKG_DEST/install/slack-conflicts
+            elif [ `echo $pkg | grep '^='` ] ; then
+                echo "$dep_pkg_name = $dep_pkg_version" >> $PKG_DEST/install/slack-required
+            elif [ `echo $pkg | grep '^>='` ] ; then
+                echo "$dep_pkg_name >= $dep_pkg_version" >> $PKG_DEST/install/slack-required
+            else
+                echo "$dep_pkg_name" >> $PKG_DEST/install/slack-required
+            fi
+        done
+    fi
+
+    unset dep_basename dep_pkg_name dep_pkg_version
 }
 
 pkg_fetchfiles() {
@@ -160,7 +193,11 @@ virtual() {
 EOF
 
         for virtual in $PKG_VIRTUAL ; do
-            echo "virtual $PKG_NAME-$PKG_VERSION-$PKG_ARCH-$PKG_BUILD $virtual" >> $PKG_DEST/install/doinst.sh
+            if [ "$PACKAGER_INITIALS" = "" ] ; then
+                echo "virtual $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD $virtual" >> $PKG_DEST/install/doinst.sh
+            else
+                echo "virtual $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD$PACKAGER_INITIALS $virtual" >> $PKG_DEST/install/doinst.sh
+            fi
         done
     fi
 }
@@ -177,5 +214,6 @@ pkg_postinstall() {
     pkg_gzipmaninfo &&
     pkg_localeclean &&
     pkg_configfiles &&
-    pkg_installfiles
+    pkg_installfiles &&
+    pkg_installmorefiles
 }
