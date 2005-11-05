@@ -18,12 +18,13 @@ PKG_USE="perl python tcltk nls"
 
 PKG_DEPENDS=">=l/glib2-2.4.0
              >=l/gtk2-2.4.0
-             >=d/pkgconfig-0.7
              `use_dep ssl ">=l/openssl-0.9.6d"`
              `use_dep perl ">=d/perl-5.8.0"`
              `use_dep python "d/python"`
-             `use_dep tcltk "d/tcl"`
-             `use_dep nls "d/gettext"`"
+             `use_dep tcltk "d/tcl"`"
+
+PKG_BUILD_DEPENDS=">=d/pkgconfig-0.7
+                   `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://www.xchat.org/"
 
