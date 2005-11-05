@@ -1,23 +1,25 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xchat-2.4.5 pkgbuilder script
+# xchat-2.6.0 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="2"
+PKG_BUILD="1"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://www.xchat.org/files/source/2.4/$PKG_FILE_NAME"
+PKG_URL="http://www.xchat.org/files/source/2.6/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
 PKG_USE="perl python tcltk nls"
 
-PKG_DEPENDS=">=l/glib2-2.4.0
-             >=l/gtk2-2.4.0
+PKG_MASKED="Y"
+
+PKG_DEPENDS=">=l/glib2-2.6.0
+             >=l/gtk2-2.6.0
              >=d/pkgconfig-0.7
              `use_dep ssl ">=l/openssl-0.9.6d"`
              `use_dep perl ">=d/perl-5.8.0"`
@@ -42,7 +44,7 @@ do_patch() {
     cd $PKG_SRC
 
     # fix for textfe
-    apply_patch xchat-2.4.5-fix.patch -Np1
+    apply_patch xchat-2.6.0-textfe.patch -Np1
 
     return $?
 }
