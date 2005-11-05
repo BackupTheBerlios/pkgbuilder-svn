@@ -78,7 +78,11 @@ pkg_do_installpkg() {
         $PKG_ARCH="${ARCH/-/}"
     fi
     
-    installpkg $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    if [ "$PACKAGER_INITIALS" = "" ] ; then
+        installpkg $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    else
+        installpkg $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD$PACKAGER_INITIALS.tgz
+    fi
     
     return $?
 }
@@ -90,7 +94,11 @@ pkg_do_upgradepkg() {
         $PKG_ARCH="${ARCH/-/}"
     fi
     
-    upgradepkg --install-new $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    if [ "$PACKAGER_INITIALS" = "" ] ; then
+        upgradepkg --install-new $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    else
+        upgradepkg --install-new $PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD$PACKAGER_INITIALS.tgz
+    fi
     
     return $?
 }
