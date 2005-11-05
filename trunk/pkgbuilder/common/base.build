@@ -20,11 +20,18 @@ pkg_do_info() {
     echo
     echo "$PKG_NAME-$PKG_VERSION-$PKG_BUILD"
     echo
-    echo "HOME..... $PKG_HOMESITE"
-    echo "URL...... $PKG_URL"
-    echo "LICENSE.. $PKG_LICENSE"
-    echo "USE...... $PKG_USE"
-    echo "DEPS..... $PKG_DEPENDS"
+    echo "HOME......... $PKG_HOMESITE"
+    echo "URL.......... $PKG_URL"
+    echo "LICENSE...... $PKG_LICENSE"
+    if [ "$PKG_USE" != "" ] ; then
+        echo "USE.......... $PKG_USE"
+    fi
+    if [ "$PKG_DEPENDS" != "" ] ; then
+        echo "DEPS......... $PKG_DEPENDS"
+    fi
+    if [ "$PKG_BUILD_DEPENDS" != "" ] ; then
+        echo "BUILD DEPS... $PKG_BUILD_DEPENDS"
+    fi
     echo
     echo "DESCRIPTION:"
     echo
