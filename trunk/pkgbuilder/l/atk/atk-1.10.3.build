@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_URL="http://ftp.gnome.org/pub/GNOME/sources/$PKG_NAME/1.10/$PKG_FILE_NAME"
 

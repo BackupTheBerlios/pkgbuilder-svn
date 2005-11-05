@@ -9,7 +9,7 @@ inherit configscript
 PKG_NAME="libjpeg"
 PKG_VERSION="6b"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="jpegsrc.v$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.uu.net/graphics/jpeg/$PKG_FILE_NAME"

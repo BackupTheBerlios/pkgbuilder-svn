@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="am2"
+PKG_BUILD="2"
 
 PKG_USE="samba cups opengl"
 

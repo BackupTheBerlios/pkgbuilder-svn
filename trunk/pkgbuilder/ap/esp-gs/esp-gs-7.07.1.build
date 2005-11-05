@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am3"
+PKG_BUILD="3"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="espgs-$PKG_VERSION-source.$PKG_EXTENSION"

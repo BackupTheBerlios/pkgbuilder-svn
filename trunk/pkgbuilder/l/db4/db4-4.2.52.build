@@ -6,7 +6,7 @@
 
 inherit db
 
-PKG_BUILD="am5"
+PKG_BUILD="5"
 
 PKG_USE="java tcltk"
 

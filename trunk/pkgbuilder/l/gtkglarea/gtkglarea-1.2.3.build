@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_URL="http://freeware.sgi.com/source/$PKG_NAME/$PKG_FILE_NAME"
 

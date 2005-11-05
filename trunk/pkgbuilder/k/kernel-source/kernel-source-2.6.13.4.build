@@ -6,7 +6,7 @@
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 KERNEL_VERSION="2.6.13"
 KERNEL_PATCH="patch-$PKG_VERSION.bz2"

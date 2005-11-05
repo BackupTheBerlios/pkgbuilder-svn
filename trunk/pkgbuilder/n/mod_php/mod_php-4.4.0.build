@@ -6,7 +6,7 @@
 
 inherit php
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_DEPENDS="$PKG_DEPENDS
              n/apache

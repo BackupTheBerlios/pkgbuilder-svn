@@ -6,7 +6,7 @@
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="linux-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp.rediris.es/mirror/kernel/linux/kernel/v2.4/$PKG_FILE_NAME"

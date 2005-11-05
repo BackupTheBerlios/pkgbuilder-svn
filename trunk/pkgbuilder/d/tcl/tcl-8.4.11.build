@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am2"
+PKG_BUILD="2"
 
 PKG_FILE_NAME="$PKG_NAME$PKG_VERSION-src.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"

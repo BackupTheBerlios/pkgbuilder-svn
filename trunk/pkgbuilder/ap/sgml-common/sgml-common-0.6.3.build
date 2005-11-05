@@ -8,7 +8,7 @@ inherit configscript
 
 PKG_AUTOMAKE_VERSION="`installed_version automake`"
 
-PKG_BUILD="am3"
+PKG_BUILD="3"
 
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"

@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_FILE_NAME="docbook-utils-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/$PKG_FILE_NAME"

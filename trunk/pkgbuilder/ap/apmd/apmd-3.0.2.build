@@ -6,7 +6,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am4"
+PKG_BUILD="4"
 
 PKG_URL="http://www.worldvisions.ca/~apenwarr/apmd/$PKG_FILE_NAME"
 

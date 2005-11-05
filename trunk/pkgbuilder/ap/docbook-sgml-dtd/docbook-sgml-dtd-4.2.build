@@ -8,7 +8,7 @@ inherit main
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="zip"
 PKG_FILE_NAME="docbk30.$PKG_EXTENSION
                docbk31.$PKG_EXTENSION

@@ -6,7 +6,7 @@
 
 inherit kde_i18n
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_USE=""
 

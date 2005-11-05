@@ -6,7 +6,7 @@
 
 inherit vim
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --enable-gui=no

@@ -6,7 +6,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_FILE_NAME="PyXML-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 

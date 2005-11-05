@@ -8,7 +8,7 @@ inherit main
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="docbook-dsssl-$PKG_VERSION.$PKG_EXTENSION"

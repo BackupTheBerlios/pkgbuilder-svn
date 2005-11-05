@@ -8,7 +8,7 @@ inherit main
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am3"
+PKG_BUILD="3"
 PKG_EXTENSION="zip"
 PKG_FILE_NAME="docbkx412.$PKG_EXTENSION"
 PKG_URL="http://www.oasis-open.org/docbook/xml/$PKG_VERSION/$PKG_FILE_NAME"

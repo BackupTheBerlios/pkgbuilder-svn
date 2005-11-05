@@ -9,7 +9,7 @@ inherit configscript
 PKG_NAME="slang"
 PKG_VERSION="1.4.9"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.plig.org/pub/$PKG_NAME/v1.4/$PKG_FILE_NAME"

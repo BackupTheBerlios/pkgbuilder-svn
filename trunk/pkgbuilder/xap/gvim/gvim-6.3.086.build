@@ -6,7 +6,7 @@
 
 inherit vim
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_USE="$PKG_USE gtk gtk2"
 

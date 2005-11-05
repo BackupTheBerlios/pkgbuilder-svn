@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_FILE_NAME="SDL_ttf-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.libsdl.org/projects/SDL_ttf/release/$PKG_FILE_NAME"

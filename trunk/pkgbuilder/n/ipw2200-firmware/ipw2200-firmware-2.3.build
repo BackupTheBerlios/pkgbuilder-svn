@@ -6,7 +6,7 @@
 
 inherit main
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="ipw2200-fw-$PKG_VERSION.$PKG_EXTENSION"

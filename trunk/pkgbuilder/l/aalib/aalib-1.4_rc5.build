@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am4"
+PKG_BUILD="4"
 
 PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_/}.$PKG_EXTENSION"
 PKG_URL="http://download.sourceforge.net/aa-project/$PKG_FILE_NAME"

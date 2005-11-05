@@ -6,7 +6,7 @@
 
 inherit main
 
-PKG_BUILD="am3"
+PKG_BUILD="3"
 
 PKG_FILE_NAME="SGMLSpm-${PKG_VERSION}ii.$PKG_EXTENSION"
 PKG_URL="http://search.cpan.org/CPAN/authors/id/D/DM/DMEGG/$PKG_FILE_NAME"

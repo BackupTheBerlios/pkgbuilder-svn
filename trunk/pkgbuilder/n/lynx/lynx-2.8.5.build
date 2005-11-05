@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tar.bz2"
 PKG_BASE_NAME="${PKG_NAME}2.8.5rel.1"
 PKG_FILE_NAME="$PKG_BASE_NAME.$PKG_EXTENSION"

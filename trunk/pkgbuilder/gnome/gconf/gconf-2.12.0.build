@@ -6,7 +6,7 @@
 
 inherit gnome
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_FILE_NAME="GConf-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="$GNOME_BASE_URL/GConf/`gnome_mayor_version`/$PKG_FILE_NAME"

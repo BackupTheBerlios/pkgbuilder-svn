@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="ircii-pana-1.1-final.$PKG_EXTENSION"

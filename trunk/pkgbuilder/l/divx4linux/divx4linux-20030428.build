@@ -9,7 +9,7 @@ inherit main
 PKG_NAME="divx4linux"
 PKG_VERSION="20030428"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-std-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://download.divx.com/divx/$PKG_FILE_NAME"

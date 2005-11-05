@@ -6,7 +6,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-src.$PKG_EXTENSION"
 PKG_URL="http://www.nedit.org/ftp/v5_5/$PKG_FILE_NAME"

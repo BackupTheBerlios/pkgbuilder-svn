@@ -6,7 +6,7 @@
 
 inherit mozilla
 
-PKG_BUILD="am2"
+PKG_BUILD="2"
 
 ENIGMAIL_VERSION="0.92.1"
 IPC_VERSION="1.1.3"

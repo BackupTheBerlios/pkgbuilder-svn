@@ -3,7 +3,7 @@
 
 inherit makeonly
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-0-generic-src.$PKG_EXTENSION"

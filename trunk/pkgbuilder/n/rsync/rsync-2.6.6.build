@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_URL="http://rsync.samba.org/ftp/$PKG_NAME/$PKG_FILE_NAME"
 

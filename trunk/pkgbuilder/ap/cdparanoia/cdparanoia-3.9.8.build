@@ -9,7 +9,7 @@ inherit configscript
 PKG_NAME="cdparanoia"
 PKG_VERSION="3.9.8"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-III-alpha9.8.src.$PKG_EXTENSION"
 PKG_URL="http://www.xiph.org/paranoia/download/$PKG_FILE_NAME"

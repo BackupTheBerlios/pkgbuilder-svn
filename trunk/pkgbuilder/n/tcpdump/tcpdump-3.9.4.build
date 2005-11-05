@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_URL="http://www.tcpdump.org/releases/$PKG_FILE_NAME"
 

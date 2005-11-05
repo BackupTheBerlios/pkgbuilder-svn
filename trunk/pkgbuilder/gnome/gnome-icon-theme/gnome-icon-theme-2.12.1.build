@@ -8,7 +8,7 @@ inherit gnome
 
 PKG_ARCH="noarch"
 
-PKG_BUILD="am2"
+PKG_BUILD="2"
 
 PKG_DOC_FILES="COPYING INSTALL NEWS TODO ChangeLog"
 

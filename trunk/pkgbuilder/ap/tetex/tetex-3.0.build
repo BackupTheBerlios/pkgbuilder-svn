@@ -6,6 +6,6 @@
 
 inherit tetex
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_HOMESITE="http://tug.org/teTeX/"

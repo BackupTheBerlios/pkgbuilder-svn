@@ -6,7 +6,7 @@
 
 inherit gnome
 
-PKG_BUILD="am3"
+PKG_BUILD="3"
 
 PKG_USE=""
 

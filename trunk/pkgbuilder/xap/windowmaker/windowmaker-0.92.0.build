@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="am1"
+PKG_BUILD="1"
 
 PKG_FILE_NAME="WindowMaker-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://windowmaker.org/pub/source/release/$PKG_FILE_NAME

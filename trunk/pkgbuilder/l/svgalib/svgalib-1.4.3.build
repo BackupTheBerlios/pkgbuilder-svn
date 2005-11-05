@@ -9,7 +9,7 @@ inherit makeonly
 PKG_NAME="svgalib"
 PKG_VERSION="1.4.3"
 PKG_ARCH="$ARCH"
-PKG_BUILD="am1"
+PKG_BUILD="1"
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="http://www.svgalib.org/$PKG_FILE_NAME"
