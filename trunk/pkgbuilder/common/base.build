@@ -62,7 +62,11 @@ pkg_do_buildpkg() {
         mkdir -p $BINARIES_DIR
     fi
     
-    makepkg -l y -c n $BINARIES_DIR/$PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    if [ "$PACKAGER_INITIALS" = "" ] ; then
+        makepkg -l y -c n $BINARIES_DIR/$PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD.tgz
+    else
+        makepkg -l y -c n $BINARIES_DIR/$PKG_NAME-$PKG_VERSION-${PKG_ARCH/-/}-$PKG_BUILD$PACKAGER_INITIALS.tgz
+    fi
     
     return $?
 }
