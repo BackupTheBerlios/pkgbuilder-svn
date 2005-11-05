@@ -77,9 +77,9 @@ recursive_install() {
     local RETVAL=0
 
     if [ "$MODE" = "frompkg" ] ; then
-        $DEPS="$PKG_DEPENDS"
+        DEPS="$PKG_DEPENDS"
     else
-        $DEPS="$PKG_DEPENDS $PKG_BUILD_DEPENDS"
+        DEPS="$PKG_DEPENDS $PKG_BUILD_DEPENDS"
     fi
 
     #resolving dependencies
