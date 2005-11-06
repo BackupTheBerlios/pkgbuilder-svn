@@ -166,6 +166,9 @@ EOF
 /* Build static libs, too */
 #define ForceNormalLib         YES
 
+/* Build xterm */
+#define BuildXterm YES
+
 /* End XOrg host.def file */
 EOF
     
