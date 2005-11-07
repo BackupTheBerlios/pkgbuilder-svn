@@ -1,0 +1,37 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# mod_php-4.4.0 pkgbuilder script
+#
+
+inherit php
+
+PKG_BUILD="1"
+
+PKG_DEPENDS="$PKG_DEPENDS
+             n/apache
+             =d/php-$PKG_VERSION"
+
+PKG_DOC_FILES="$PKG_DOC_FILES sapi/cgi/README.FastCGI"
+
+PKG_CONFIGURE_OPTIONS="--disable-static 
+                       --with-apxs2=/usr/sbin/apxs
+                       $PKG_CONFIGURE_OPTIONS"
+
+PKG_BUILD_TARGET="libphp4.la"
+
+PKG_CONFIG_FILES="etc/apache2/conf.d/mod_php.conf etc/apache2/php.ini"
+
+PKG_NOSTRIP="Y"
+
+do_install() {
+    mkdir -p $PKG_DEST/etc/apache2/conf.d
+    mkdir -p $PKG_DEST/usr/lib/apache2
+
+    cat $PKG_HOME/files/mod_php.conf > $PKG_DEST/etc/apache2/conf.d/mod_php.conf
+    cat $PKG_HOME/files/php.ini > $PKG_DEST/etc/apache2/php.ini
+    cat $PKG_SRC/.libs/libphp4.so > $PKG_DEST/usr/lib/apache2/libphp4.so
+    chmod 755 $PKG_DEST/usr/lib/apache2/libphp4.so
+
+    return $?
+}
