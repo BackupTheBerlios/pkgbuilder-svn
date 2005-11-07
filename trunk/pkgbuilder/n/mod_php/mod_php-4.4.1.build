@@ -8,6 +8,8 @@ inherit php
 
 PKG_BUILD="1"
 
+PKG_MASKED="Y"
+
 PKG_DEPENDS="$PKG_DEPENDS
              n/apache
              =d/php-$PKG_VERSION"
