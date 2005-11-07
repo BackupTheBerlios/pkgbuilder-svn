@@ -18,6 +18,8 @@ PKG_LICENSE="GPLv2"
 
 PKG_HOMESITE="http://www.kernel.org/"
 
+PKG_MASKED="Y"
+
 PKG_PREFIX="/usr/src"
 
 do_install() {
