@@ -10,7 +10,7 @@ PKG_BUILD="1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="freetype-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://download.sourceforge.net/freetype/$PKG_FILE_NAME"
+PKG_URL="http://savannah.nongnu.org/download/freetype/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
