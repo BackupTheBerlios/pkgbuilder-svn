@@ -10,7 +10,7 @@ PKG_BUILD="3"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="X11R$PKG_VERSION-src.$PKG_EXTENSION"
-PKG_URL="http://ftp.skynet.be/pub/ftp.x.org/pub/X11R$PKG_VERSION/src-single/X11R$PKG_VERSION-src.$PKG_EXTENSION"
+PKG_URL="http://xorg.freedesktop.org/X11R$PKG_VERSION/src-single/X11R$PKG_VERSION-src.$PKG_EXTENSION"
 
 PKG_LICENSE="XOrg"
 
