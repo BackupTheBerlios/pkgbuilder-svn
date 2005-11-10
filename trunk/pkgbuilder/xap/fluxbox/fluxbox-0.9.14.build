@@ -36,7 +36,7 @@ PKG_CONFIGURE_OPTIONS="--enable-xft
                        `use_enable png imlib2`
                        `use_enable jpeg imlib2`"
 
-do_postinstall() {e
+do_postinstall() {
     cd $PKG_SRC
     
     mkdir -p $PKG_DEST/etc/X11/xinit
