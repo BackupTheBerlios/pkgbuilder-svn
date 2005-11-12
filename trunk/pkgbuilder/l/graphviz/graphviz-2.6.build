@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -22,10 +22,13 @@ PKG_DEPENDS=">=l/libpng-1.2
              l/fontconfig
              l/expat
              l/zlib
-             d/gettext
-             d/pkgconfig
+             n/curl
+             x/x11
              `use_dep tcltk ">=d/tk-8.3"`
              `use_dep cairo ">=l/libsvg-cairo-0.1.3"`"
+
+PKG_BUILD_DEPENDS="d/gettext
+                   d/pkgconfig"
 
 PKG_HOMESITE="http://www.graphviz.org/"
 
@@ -38,3 +41,11 @@ PKG_CONFIGURE_OPTIONS="--with-mylibgd
                        `use_with tcltk tcl`
                        `use_with tcltk tk`
                        --disable-dependency-tracking"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_NAME-$PKG_VERSION-render.patch -Np0
+
+    return $?
+}
