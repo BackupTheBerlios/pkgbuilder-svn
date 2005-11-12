@@ -1,0 +1,38 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# ipw2200-firmware-2.3 pkgbuilder script
+#
+
+inherit main
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="ipw2200-fw-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL=""
+
+PKG_LICENSE="ipw2200-fw"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://ipw2200.sourceforge.net/"
+
+PKG_UNPACK_DIR="$PKG_SRC"
+
+PKG_DOC_FILES="LICENSE"
+
+PKG_NOSTRIP="Y"
+
+do_install() {
+    cd $PKG_SRC
+
+    mkdir -p $PKG_DEST/lib/firmware
+    for firmware in *.fw ; do
+        cat $firmware > $PKG_DEST/lib/firmware/$firmware
+    done
+
+    return $?
+}
