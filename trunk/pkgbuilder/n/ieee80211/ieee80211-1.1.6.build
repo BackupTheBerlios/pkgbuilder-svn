@@ -18,7 +18,7 @@ PKG_USE=""
 
 PKG_MASKED="Y"
 
-PKG_DEPENDS="=k/kernel-source-`uname -r`"
+PKG_BUILD_DEPENDS="=k/kernel-source-`uname -r`*"
 
 PKG_HOMESITE="http://ieee80211.sourceforge.net/"
 

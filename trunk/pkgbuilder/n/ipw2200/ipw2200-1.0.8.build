@@ -18,8 +18,9 @@ PKG_USE=""
 
 PKG_MASKED="Y"
 
-PKG_DEPENDS="=k/kernel-source-`uname -r`
-             n/ieee80211"
+PKG_DEPENDS="n/ieee80211"
+
+PKG_BUILD_DEPENDS="=k/kernel-source-`uname -r`*"
 
 PKG_HOMESITE="http://ipw2200.sourceforge.net/"
 
