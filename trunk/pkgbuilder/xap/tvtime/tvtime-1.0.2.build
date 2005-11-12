@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# tvtime-0.99 pkgbuilder script
+# tvtime-1.0.2 pkgbuilder script
 #
 
 inherit configscript
