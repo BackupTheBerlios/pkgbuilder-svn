@@ -9,8 +9,8 @@ inherit configscript
 PKG_BUILD="1"
 
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-6.8.99.901.$PKG_EXTENSION"
-PKG_URL="http://xorg.freedesktop.org/releases/X11R6.9-RC1/$PKG_FILE_NAME"
+PKG_FILE_NAME="$PKG_NAME-6.8.99.902.$PKG_EXTENSION"
+PKG_URL="http://xorg.freedesktop.org/releases/X11R6.9-RC2/$PKG_FILE_NAME"
 
 PKG_LICENSE="XOrg"
 

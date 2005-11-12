@@ -5,8 +5,8 @@
 # make exactly 11 lines for the formatting to be correct.  It's also
 # customary to leave one space after the ':'.
 
-    |-----handy-ruler------------------------------------------------------|
-xorg: xorg
-xorg:
-xorg: X11R6.8.2 is an Open Source version of the X Window System
-xorg:
+        |-----handy-ruler------------------------------------------------------|
+xorg-x11: xorg-x11
+xorg-x11:
+xorg-x11: XOrg-X11 is an Open Source version of the X Window System
+xorg-x11:
