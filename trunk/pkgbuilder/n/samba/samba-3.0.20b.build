@@ -106,7 +106,7 @@ do_install() {
       ln -s samba/libsmbclient.a libsmbclient.a )
 
     ( cd $PKG_DEST/sbin
-      rm -f mount.smbfs ; ln -s /usr/sbin/smbmount mount.smbfs )
+      rm -f mount.smbfs ; ln -s /usr/bin/smbmount mount.smbfs )
     
     return $?
 }
