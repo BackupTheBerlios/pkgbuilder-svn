@@ -6,10 +6,8 @@
 
 inherit makeonly
 
-PKG_NAME="portmap"
-PKG_VERSION="5.0"
-PKG_ARCH="$ARCH"
-PKG_BUILD="1"
+PKG_BUILD="2"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="${PKG_NAME}_5beta.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.porcupine.org/pub/security/$PKG_FILE_NAME"
@@ -29,7 +27,8 @@ PKG_DOC_FILES="BLURB CHANGES README"
 
 PKG_PREFIX="/usr"
 
-PKG_CONFIG_FILES="etc/rpc etc/rc.d/rc.portmap"
+PKG_CONFIG_FILES="etc/rpc 
+                  etc/rc.d/rc.portmap"
 
 do_patch() {
     cd $PKG_SRC
@@ -50,19 +49,19 @@ do_install() {
     mkdir -p $PKG_DEST/sbin
     cat portmap > $PKG_DEST/sbin/rpc.portmap
     chmod 755 $PKG_DEST/sbin/rpc.portmap
+    chgrp bin $PKG_DEST/sbin/rpc.portmap
 
     mkdir -p $PKG_DEST/usr/sbin
     cat pmap_dump > $PKG_DEST/usr/sbin/pmap_dump
     cat pmap_set > $PKG_DEST/usr/sbin/pmap_set
     chmod 755 $PKG_DEST/usr/sbin/*
+    chgrp bin $PKG_DEST/usr/sbin/*
 
     mkdir -p $PKG_DEST/usr/man/man8
 
     for file in *.8 ; do
         cat ${file} > $PKG_DEST/usr/man/man8/${file}
     done
-
-
 
     mkdir -p $PKG_DEST/etc/rc.d
 
