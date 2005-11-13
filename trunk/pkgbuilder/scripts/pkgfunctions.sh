@@ -208,7 +208,20 @@ pkg_localeclean() {
     fi
 }
 
+pkg_fixperms() {
+    # fix binaries perms
+    if [ -d "$PKG_DEST$PKG_PREFIX/bin" ] ; then
+        chgrp bin $PKG_DEST$PKG_PREFIX/bin
+        find $PKG_DEST$PKG_PREFIX/bin -type f -group root | xargs chgrp bin
+    fi
+    if [ -d "$PKG_DEST$PKG_PREFIX/sbin" ] ; then
+        chgrp bin $PKG_DEST$PKG_PREFIX/sbin
+        find $PKG_DEST$PKG_PREFIX/sbin -type f -group root | xargs chgrp sbin
+    fi
+}
+
 pkg_postinstall() {
+    pkg_fixperms &&
     pkg_installdoc &&
     pkg_stripall &&
     pkg_gzipmaninfo &&
