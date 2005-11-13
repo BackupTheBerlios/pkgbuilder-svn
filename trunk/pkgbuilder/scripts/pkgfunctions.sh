@@ -209,15 +209,10 @@ pkg_localeclean() {
 }
 
 pkg_fixperms() {
-    # fix binaries perms
-    if [ -d "$PKG_DEST$PKG_PREFIX/bin" ] ; then
-        chgrp bin $PKG_DEST$PKG_PREFIX/bin
-        find $PKG_DEST$PKG_PREFIX/bin -type f -group root | xargs chgrp bin
-    fi
-    if [ -d "$PKG_DEST$PKG_PREFIX/sbin" ] ; then
-        chgrp bin $PKG_DEST$PKG_PREFIX/sbin
-        find $PKG_DEST$PKG_PREFIX/sbin -type f -group root | xargs chgrp bin
-    fi
+    fix_bin_perms $PKG_DEST/bin
+    fix_bin_perms $PKG_DEST/sbin
+    fix_bin_perms $PKG_DEST$PKG_PREFIX/bin
+    fix_bin_perms $PKG_DEST$PKG_PREFIX/sbin
 }
 
 pkg_postinstall() {

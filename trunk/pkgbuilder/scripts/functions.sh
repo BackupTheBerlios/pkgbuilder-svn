@@ -478,6 +478,22 @@ gzip_info() {
 }
 
 #
+# fix binary file permisions
+#
+# @param $1 base directory
+#
+fix_bin_perms() {
+    if [ "$1" = "" ] ; then
+        return 1
+    fi
+
+    if [ -d "$1" ] ; then
+        chgrp bin $1
+        find $1 -type f -group root | xargs chgrp bin
+    fi
+}
+
+#
 # Strip all the files under the given directory
 #
 # @param $1 base directory
