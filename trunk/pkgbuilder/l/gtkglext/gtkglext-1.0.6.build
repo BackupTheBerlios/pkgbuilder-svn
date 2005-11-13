@@ -14,8 +14,11 @@ PKG_LICENSE="LGPLv2"
 
 PKG_USE="doc"
 
-PKG_DEPENDS="l/gtk2 
-             `use_dep doc ">=d/gtk-doc-1.0"`"
+PKG_DEPENDS="l/gtk2"
+
+PKG_BUILD_DEPENDS="`use_dep doc ">=d/gtk-doc-1.0"`"
+
+PKG_HOMESITE="http://gtkglext.sourceforge.net/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog* COPYING* INSTALL NEWS README* TODO"
 

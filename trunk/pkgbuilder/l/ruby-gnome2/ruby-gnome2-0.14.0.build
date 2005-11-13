@@ -1,0 +1,69 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# ruby-gnome2-0.14.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-all-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gnome gnomedb opengl"
+
+PKG_DEPENDS=">=d/ruby-1.8.0
+             >=l/glib2-2.2
+             >=l/pango-1.4
+             >=l/atk-1.6
+             >=l/gtk2-2.2
+             >=l/libart_lgpl-2.3
+             >=l/librsvg-2.2
+             >=l/gstreamer-0.6
+             >=l/libglade-2.2
+             >=gnome/libgnomecanvas-2.2
+             >=gnome/libgnomeprint-2.2
+             >=gnome/libgnomeprintui-2.2
+             `use_dep opengl ">=l/gtkglext-1.0"`
+             `use_dep gnome ">=gnome/libgtkhtml-2.2
+                             >=gnome/libgnome-2.2
+                             >=gnome/libgnomeui-2.2
+                             >=gnome/gtksourceview-1.0
+                             >=gnome/gnome-vfs-2.2
+                             >=gnome/gconf-2.2"`
+             `use gnome && use_dep gnomedb ">=gnome/libgda-1.0"`"
+
+PKG_HOMESITE="http://ruby-gnome2.sourceforge.jp/"
+
+PKG_SRC="$TMP/$PKG_NAME-all-$PKG_VERSION"
+PKG_DOC_FILES="AUTHORS ChangeLog NEWS README"
+
+do_configure() {
+    cd $PKG_SRC
+    
+    ruby extconf.rb
+    
+    return $?
+}
+
+do_postinstall() {
+    find $PKG_DEST -exec chown root.root {} \;
+    
+    cd $PKG_SRC
+
+    pkg_postinstall
+
+    for ii in atk gtk glib gstreamer gconf gnome pango gnomecanvas gtkhtml2 libart gdkpixbuf gnomevfs libglade; do
+        cd $PKG_SRC/$ii
+        
+        for jj in ChangeLog README ; do
+            if [ -e $jj ] ; then
+                cp $jj $PKG_DOC/$jj.$ii
+            fi
+        done
+    done
+}
