@@ -1,12 +1,12 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# samba-3.0.20 pkgbuilder script
+# samba-3.0.20b pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="3"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -16,13 +16,14 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="mysql xml cups python"
 
-PKG_DEPENDS="d/autoconf
-             l/popt
+PKG_DEPENDS="l/popt
              l/readline
              l/libxml2
             `use_dep mysql "ap/mysql l/zlib"`
             `use_dep cups " n/cups"`
             `use_dep python "d/python"`"
+
+PKG_BUILD_DEPENDS="d/autoconf"
 
 PKG_HOMESITE="http://www.samba.org/"
 
@@ -64,7 +65,8 @@ PKG_CONFIGURE_OPTIONS="--localstatedir=/var
 
 PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST MANDIR=$PKG_PREFIX/man"
 
-PKG_CONFIG_FILES="etc/rc.d/rc.samba etc/samba/smb.conf"
+PKG_CONFIG_FILES="etc/rc.d/rc.samba 
+                  etc/samba/smb.conf"
 
 do_configure() {
     cd $PKG_SRC/source
@@ -102,6 +104,9 @@ do_install() {
       ln -s samba/libsmbclient.so libsmbclient.so.0 )
     ( cd $PKG_DEST$PKG_PREFIX/lib
       ln -s samba/libsmbclient.a libsmbclient.a )
+
+    ( cd $PKG_DEST/sbin
+      rm -f mount.smbfs ; ln -s /usr/sbin/smbmount mount.smbfs )
     
     return $?
 }
@@ -113,11 +118,7 @@ do_postinstall() {
     cat $PKG_HOME/files/rc.samba > $PKG_DEST/etc/rc.d/rc.samba
     cat $PKG_HOME/files/smb.conf > $PKG_DEST/etc/samba/smb.conf
     
-    pkg_installdoc &&
-    pkg_stripall &&
-    pkg_gzipmaninfo &&
-    pkg_configfiles &&
-    pkg_installfiles
+    configscript_do_postinstall
     
     return $?
 }
