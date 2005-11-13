@@ -216,7 +216,7 @@ pkg_fixperms() {
     fi
     if [ -d "$PKG_DEST$PKG_PREFIX/sbin" ] ; then
         chgrp bin $PKG_DEST$PKG_PREFIX/sbin
-        find $PKG_DEST$PKG_PREFIX/sbin -type f -group root | xargs chgrp sbin
+        find $PKG_DEST$PKG_PREFIX/sbin -type f -group root | xargs chgrp bin
     fi
 }
 
