@@ -16,8 +16,6 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_MASKED="Y"
-
 PKG_DEPENDS="n/ieee80211"
 
 PKG_BUILD_DEPENDS="=k/kernel-source-`uname -r`*"

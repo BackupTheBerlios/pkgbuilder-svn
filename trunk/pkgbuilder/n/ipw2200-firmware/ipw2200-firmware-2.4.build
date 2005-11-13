@@ -16,8 +16,6 @@ PKG_LICENSE="ipw2200-fw"
 
 PKG_USE=""
 
-PKG_MASKED="Y"
-
 PKG_DEPENDS=""
 
 PKG_HOMESITE="http://ipw2200.sourceforge.net/"
