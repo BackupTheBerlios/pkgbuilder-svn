@@ -489,7 +489,10 @@ fix_bin_perms() {
 
     if [ -d "$1" ] ; then
         chgrp bin $1
-        find $1 -type f -group root | xargs chgrp bin
+        local file
+        for file in `find $1 -type f -group root` ; do
+            chgrp bin $file
+        done
     fi
 }
 
