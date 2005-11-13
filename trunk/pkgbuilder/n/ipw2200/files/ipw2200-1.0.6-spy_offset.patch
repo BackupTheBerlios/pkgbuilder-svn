@@ -1,0 +1,14 @@
+diff -urN ipw2200-1.0.6.orig/ipw2200.c ipw2200-1.0.6/ipw2200.c
+--- ipw2200-1.0.6.orig/ipw2200.c	2005-07-13 21:00:28.000000000 +0200
++++ ipw2200-1.0.6/ipw2200.c	2005-11-13 23:51:39.000000000 +0100
+@@ -10745,8 +10745,10 @@
+ 	net_dev->set_multicast_list = ipw_net_set_multicast_list;
+ 	net_dev->set_mac_address = ipw_net_set_mac_address;
+ 	net_dev->get_wireless_stats = ipw_get_wireless_stats;
++#if WIRELESS_EXT == 16
+ 	ipw_wx_handler_def.spy_offset = offsetof(struct ieee80211_device,
+ 						 spy_data);
++#endif
+ 	net_dev->wireless_handlers = &ipw_wx_handler_def;
+ 	net_dev->ethtool_ops = &ipw_ethtool_ops;
+ 	net_dev->irq = pdev->irq;

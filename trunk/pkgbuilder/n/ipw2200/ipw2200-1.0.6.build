@@ -6,7 +6,7 @@
 
 inherit makeonly
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -31,6 +31,32 @@ PKG_BUILD_OPTIONS="KSRC=$KERNEL_DIR/build
                    IEEE80211_INC=/usr/include"
 
 PKG_NOSTRIP="Y"
+
+do_patch() {
+    cd $PKG_SRC
+
+    #gentoo patches
+    apply_patch $PKG_NAME-$PKG_VERSION-a_txpow.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-channel_change_fw_err.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-dup-without-retry.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-hwcrypt-wpa-fix4.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-ibss-wep.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-init_scan.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-irq_override.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-monitor_wep_fix.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-pci_link-fix.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-reset-mode-fix.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-broadcast.patch -Np1 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-spy_offset.patch -Np1 || return 1
+
+    local kernel_version="`installed_version kernel-source`"
+    compare_versions k-2.6.12 k-$kernel_version
+    if [ $? -eq 2 ] ; then
+        apply_patch $PKG_NAME-$PKG_VERSION-suspend2.patch -Np1 || return 1
+    fi
+
+    return $?
+}
 
 do_install() {
     cd $PKG_SRC
