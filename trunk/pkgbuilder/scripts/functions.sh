@@ -9,7 +9,7 @@
 # Print pkgbuilder version number
 #
 version() {
-    echo "pkgbuilder 20051105"
+    echo "pkgbuilder 20051114"
 }
 
 #
@@ -491,7 +491,18 @@ fix_bin_perms() {
         chgrp bin $1
         local file
         for file in `find $1 -type f -group root` ; do
-            chgrp bin $file
+            if [ -u $file -a -g $file ] ; then
+                chgrp bin $file
+                chmod +s $file
+            elif [ -u $file ] ; then
+                chgrp bin $file
+                chmod u+s $file
+            elif [ -g $file ] ; then
+                chgrp bin $file
+                chmod g+s $file
+            else
+                chgrp bin $file
+            fi
         done
     fi
 }
