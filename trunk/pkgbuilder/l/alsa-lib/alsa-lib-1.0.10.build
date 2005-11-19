@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# alsa-lib-1.0.10_rc3 pkgbuilder script
+# alsa-lib-1.0.10 pkgbuilder script
 #
 
 inherit configscript
@@ -9,12 +9,10 @@ inherit configscript
 PKG_BUILD="1"
 
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-${PKG_VERSION/_/}.$PKG_EXTENSION"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.alsa-project.org/pub/lib/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2 LGPLv2.1"
-
-PKG_MASKED="Y"
 
 PKG_USE=""
 
@@ -25,7 +23,4 @@ PKG_HOMESITE="http://www.alsa-project.org/"
 
 PKG_DOC_FILES="INSTALL TODO COPYING"
 
-PKG_SRC="$TMP/$PKG_NAME-${PKG_VERSION/_/}"
-
 PKG_CONFIGURE_OPTIONS=""
-
