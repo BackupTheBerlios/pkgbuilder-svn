@@ -1,0 +1,33 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# mozillaplug-in-3.15 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="xap/mplayer 
+             xap/mozilla
+             l/gtk2"
+
+PKG_HOMESITE="http://mplayerplug-in.sourceforge.net/"
+
+PKG_DOC_FILES="ChangeLog INSTALL LICENSE README TODO DOCS/tech/*.txt"
+
+PKG_SRC="$TMP/$PKG_NAME"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--enable-gtk2"
+
+PKG_CONFIG_FILES="etc/mplayerplug-in.conf 
+                  etc/mplayerplug-in.types"
