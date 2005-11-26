@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# fuse-2.4.1 pkgbuilder script
+# fuse-2.4.2 pkgbuilder script
 #
 
 inherit configscript
@@ -14,7 +14,7 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE=""
+PKG_USE="udev"
 
 PKG_DEPENDS="k/kernel-source"
 
@@ -26,4 +26,14 @@ do_patch() {
     cd $PKG_SRC
 
     sed -i -e "s|.*depmod.*||g" kernel/Makefile.in
+}
+
+do_install() {
+    cd $PKG_SRC
+
+    configscript_do_install || return 1
+
+    if use udev ; then
+        rm -rf $PKG_DEST/dev
+    fi
 }
