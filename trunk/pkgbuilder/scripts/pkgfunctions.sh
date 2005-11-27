@@ -105,9 +105,9 @@ pkg_installmorefiles() {
 
 pkg_fetchfiles() {
     for pkg in $PKG_URL ; do
-        local sum="$PKG_HOME/files/md5sum-$PKG_VERSION"
+        local file="`basename $pkg`"
         
-        verify $pkg $sum || fetch $pkg || return 1
+        test -f $FETCH_DIR/$file || fetch $pkg || return 1
 
     done
 
