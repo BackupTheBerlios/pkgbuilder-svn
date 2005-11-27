@@ -1,0 +1,104 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# timidity-2.13.2 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="2"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="TiMidity++-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="oss esd motif X gtk gtk2 vorbis tcltk slang alsa arts ao speex flac ncurses"
+
+PKG_DEPENDS="`use_dep ncurses ">=l/ncurses-5.0"`
+             `use gtk && use_dep gtk2 "l/gtk2" "l/gtk"`
+             `use_dep tcltk ">=d/tk-8.1"`
+             `use_dep motif "l/lesstif"`
+             `use_dep esd ">=l/esound-0.2.22"`
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep slang ">=l/slang-1.4"`
+             `use_dep arts "kde/arts"`
+             `use_dep vorbis ">=l/libvorbis-1.0_beta4"`
+             `use_dep flac ">=l/flac-1.1.0"`
+             `use_dep speex ">=l/speex-1.1.5"`
+             `use_dep ao ">=l/libao-0.8.5"`"
+
+PKG_BUILD_DEPENDS="d/autoconf"
+
+PKG_HOMESITE="http://timidity.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog* COPYING INSTALL* README* TODO"
+
+PKG_SRC="$TMP/TiMidity++-$PKG_VERSION"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-default-path=/etc/timidity
+                       --with-elf
+                       --enable-server
+                       --enable-network
+                       --enable-dynamic
+                       --enable-vt100
+                       --enable-spline=cubic
+                       `use_enable slang`
+                       `use_enable ncurses`
+                       `use_with X x`
+                       `use_enable X spectrogram`
+                       `use_enable X wrd`
+                       `use_enable X xskin`
+                       `use_enable X xaw`
+                       `use_enable gtk`
+                       `use_enable motif`
+                       `use_enable tcltk`"
+
+PKG_CONFIG_FILES="etc/rc.d/rc.timidity etc/timidity/timidity.cfg"
+
+do_patch() {
+    cd $PKG_SRC
+
+    # gentoo patches
+    apply_patch $PKG_NAME-$PKG_VERSION-gtk26.patch -Np0 &&
+    apply_patch $PKG_NAME-$PKG_VERSION-exiterror.patch -Np1
+
+    # fix header location of speex
+    sed -i -e "s:#include <speex:#include <speex/speex:g" \
+        configure* timidity/speex_a.c || return 1
+
+    return $?
+}
+
+do_configure() {
+    local myconf
+    local audios
+
+    use flac && audios="$audios,flac"
+    use speex && audios="$audios,speex"
+    use vorbis && audios="$audios,vorbis"
+
+    use oss && audios="$audios,oss"
+    use esd && audios="$audios,esd"
+    use arts && audios="$audios,arts"
+    use ao && audios="$audios,ao"
+
+    if use alsa; then
+        audios="$audios,alsa"
+        myconf="$myconf --with-default-output=alsa --enable-alsaseq"
+    fi
+
+    PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS $myconf --enable-audio=$audios"
+
+    configscript_do_configure
+}
+
+do_install() {
+    configscript_do_install || return 1
+
+    mkdir -p $PKG_DEST/etc/{rc.d,timidity}
+    cat $PKG_HOME/files/timidity.cfg > $PKG_DEST/etc/timidity/timidity.cfg
+    cat $PKG_HOME/files/rc.timidity > $PKG_DEST/etc/rc.d/rc.timidity
+}

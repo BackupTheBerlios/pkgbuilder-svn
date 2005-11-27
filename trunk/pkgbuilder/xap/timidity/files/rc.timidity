@@ -1,0 +1,34 @@
+#!/bin/sh
+# Start/stop/restart timidity.
+
+# Start timidity:
+timidity_start() {
+  echo "Starting timidity daemon: /usr/bin/timidity"
+  /usr/bin/timidity -iA &> /dev/null &
+}
+
+# Stop timidity:
+timidity_stop() {
+  killall timidity
+}
+
+# Restart timidity:
+timidity_restart() {
+  timidity_stop
+  sleep 1
+  timidity_start
+}
+
+case "$1" in
+'start')
+  timidity_start
+  ;;
+'stop')
+  timidity_stop
+  ;;
+'restart')
+  timidity_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
