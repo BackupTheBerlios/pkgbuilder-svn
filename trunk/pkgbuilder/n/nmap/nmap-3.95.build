@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# nmap-3.81 pkgbuilder script
+# nmap-3.95 pkgbuilder script
 #
 
 inherit configscript
@@ -16,12 +16,12 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="gtk"
 
-PKG_DEPENDS="l/glibc `use gtk && echo ">=l/gtk-1.2"`"
+PKG_DEPENDS="l/glibc `use_dep gtk ">=l/gtk-1.2"`"
 
 PKG_HOMESITE="http://www.insecure.org/nmap/"
 
 PKG_DOC_FILES="CHANGELOG COPYING HACKING INSTALL docs/README docs/*.txt"
 
-PKG_CONFIGURE_OPTIONS="`use gtk && echo "--with-nmapfe"`"
+PKG_CONFIGURE_OPTIONS="`use_with gtk nmapfe`"
 
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX nmapdatadir=$PKG_DEST$PKG_PREFIX/share/nmap"
