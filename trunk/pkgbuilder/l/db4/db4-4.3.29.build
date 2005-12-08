@@ -1,12 +1,14 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# db4-4.2.52 pkgbuilder script
+# db4-4.3.29 pkgbuilder script
 #
 
 inherit db
 
-PKG_BUILD="5"
+PKG_BUILD="1"
+
+PKG_MASKED="Y"
 
 PKG_USE="java tcltk"
 
@@ -24,18 +26,9 @@ PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
                        --enable-static
                        --enable-cxx
                        `use_enable java`
-                       `use tcltk && echo "--enable-tcl --with-tcl=/usr/lib" || echo "--disable-tcl"`"
+                       `use_dep tcltk "--enable-tcl --with-tcl=/usr/lib" "--disable-tcl"`"
 
 PKG_BUILD_OPTIONS="LIBSO_LIBS=-lpthread"
-
-do_patch() {
-    cd $PKG_SRC
-
-    apply_patch patch.4.2.52.1 -p0 &&
-    apply_patch patch.4.2.52.2 -p0
-
-    return $?
-}
 
 do_install() {
     db_do_install
@@ -43,27 +36,27 @@ do_install() {
     cd $PKG_DEST$PKG_PREFIX/lib
 
     if [ -f libdb.a ] ; then
-        mv libdb.a libdb-4.2.a
+        mv libdb.a libdb-4.3.a
     fi
 
     if [ -f libdb_cxx.a ] ; then
-        mv libdb_cxx.a libdb_cxx-4.2.a
+        mv libdb_cxx.a libdb_cxx-4.3.a
     fi
 
-    ln -sf libdb-4.2.so libdb-4.so
-    ln -sf libdb-4.2.a libdb-4.a
+    ln -sf libdb-4.3.so libdb-4.so
+    ln -sf libdb-4.3.a libdb-4.a
 
-    ln -sf libdb_cxx-4.2.so libdb_cxx-4.so
-    ln -sf libdb_cxx-4.2.a libdb_cxx-4.a
+    ln -sf libdb_cxx-4.3.so libdb_cxx-4.so
+    ln -sf libdb_cxx-4.3.a libdb_cxx-4.a
 
     if use java ; then
-        ln -sf libdb_java-4.2.so libdb_java-4.so
-        ln -sf libdb_java-4.2.a libdb_java-4.a
+        ln -sf libdb_java-4.3.so libdb_java-4.so
+        ln -sf libdb_java-4.3.a libdb_java-4.a
     fi
 
     if use tcltk ; then
-        ln -sf libdb_tcl-4.2.so libdb_tcl-4.so
-        ln -sf libdb_tcl-4.2.a libdb_tcl-4.a
+        ln -sf libdb_tcl-4.3.so libdb_tcl-4.so
+        ln -sf libdb_tcl-4.3.a libdb_tcl-4.a
     fi
 
     chmod 755 *.so
