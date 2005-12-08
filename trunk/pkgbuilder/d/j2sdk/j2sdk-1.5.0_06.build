@@ -1,15 +1,15 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# j2sdk-1.5.0_05 pkgbuilder script
+# j2sdk-1.5.0_06 pkgbuilder script
 #
 
 PKG_BUILD="1"
 
 PKG_ARCH="i586"
 
-PKG_FILE_NAME="jdk-1_5_0_05-linux-i586.bin"
-PKG_URL="http://public.www.planetmirror.com/pub/java-sun/J2SE/5.0_05/linux32/$PKG_FILE_NAME"
+PKG_FILE_NAME="jdk-1_5_0_06-linux-i586.bin"
+PKG_URL="http://public.www.planetmirror.com/pub/java-sun/J2SE/5.0_06/linux32/$PKG_FILE_NAME"
 
 PKG_LICENSE="SBCL"
 
