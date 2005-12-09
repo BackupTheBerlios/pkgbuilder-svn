@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# libvorbis-1.1.1 pkgbuilder script
+# libvorbis-1.1.2 pkgbuilder script
 #
 
 inherit configscript
