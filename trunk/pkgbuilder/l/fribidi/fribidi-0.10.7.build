@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# fribidi-0.10.5 pkgbuilder script
+# fribidi-0.10.7 pkgbuilder script
 #
 
 inherit configscript
