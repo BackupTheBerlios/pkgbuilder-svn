@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# mozillaplug-in-3.15 pkgbuilder script
+# mozillaplug-in-3.17 pkgbuilder script
 #
 
 inherit configscript
