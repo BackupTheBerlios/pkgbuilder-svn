@@ -1,27 +1,30 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# vorbis-tools-1.0.1 pkgbuilder script
+# vorbis-tools-1.1.1 pkgbuilder script
 #
 
 inherit configscript
 
-PKG_BUILD="3"
+PKG_BUILD="1"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
-PKG_URL="http://www.vorbis.com/files/$PKG_VERSION/unix/$PKG_FILE_NAME"
+PKG_URL="http://downloads.xiph.org/releases/vorbis/$PKG_FILE_NAME"
 
 PKG_LICENSE="AS-IS"
 
 PKG_USE="nls speex flac"
 
-PKG_DEPENDS=">=l/libvorbis-1.0
+PKG_DEPENDS=">=l/libogg-1.0
+             >=l/libvorbis-1.0.1
              >=l/libao-0.8.2
              >=n/curl-7.9
              `use_dep speex ">=l/speex-1.0"`
-             `use_dep flac ">=l/flac-1.0"`
-             `use_dep nls "d/gettext"`"
+             `use_dep flac ">=l/flac-1.0"`"
+
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   `use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://www.xiph.org/ogg/vorbis/index.html"
 
