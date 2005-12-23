@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xorg-x11-6.9.0_rc3 pkgbuilder script
+# xorg-x11-6.9.0_rc4 pkgbuilder script
 #
 
 inherit configscript
@@ -9,8 +9,8 @@ inherit configscript
 PKG_BUILD="1"
 
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-6.8.99.903.$PKG_EXTENSION"
-PKG_URL="http://xorg.freedesktop.org/releases/X11R6.9-RC3/$PKG_FILE_NAME"
+PKG_FILE_NAME="$PKG_NAME-6.8.99.904.$PKG_EXTENSION"
+PKG_URL="http://xorg.freedesktop.org/releases/X11R6.9-RC4/$PKG_FILE_NAME"
 
 PKG_LICENSE="XOrg"
 
