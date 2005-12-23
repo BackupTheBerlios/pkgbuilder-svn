@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xorg-x11-6.9.0_rc4 pkgbuilder script
+# xorg-x11-6.9.0 pkgbuilder script
 #
 
 inherit configscript
@@ -9,8 +9,8 @@ inherit configscript
 PKG_BUILD="1"
 
 PKG_EXTENSION="tar.bz2"
-PKG_FILE_NAME="$PKG_NAME-6.8.99.904.$PKG_EXTENSION"
-PKG_URL="http://xorg.freedesktop.org/releases/X11R6.9-RC4/$PKG_FILE_NAME"
+PKG_FILE_NAME="X11R${PKG_VERSION}-src.$PKG_EXTENSION"
+PKG_URL="http://xorg.freedesktop.org/releases/X11R${PKG_VERSION}/src-single/$PKG_FILE_NAME"
 
 PKG_LICENSE="XOrg"
 
@@ -28,7 +28,7 @@ PKG_DEPENDS=">=l/ncurses-5.1
 PKG_BUILD_DEPENDS=">=d/flex-2.5.4a
                    >=d/perl-5.8.4"
 
-PKG_HOMESITE="http://www.x.org/"
+PKG_HOMESITE="http://xorg.freedesktop.org/"
 
 PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION/xc"
 PKG_UNPACK_DIR="$TMP/$PKG_NAME-$PKG_VERSION"
@@ -45,14 +45,8 @@ PKG_CONFIG_FILES="etc/X11/xdm/Xsession
 
 PKG_VIRTUAL="x11-$PKG_VERSION"
 
-
 do_patch() {
     cd $PKG_SRC
-
-#    local patch
-#    for patch in $PKG_HOME/files/*.diff ; do
-#        apply_patch $patch -p1 --backup --suffix=.orig -E || return $?
-#    done
 
     apply_patch x11.startwithblackscreen.diff -Np1
 
@@ -237,7 +231,5 @@ do_postinstall() {
 
     gzip_man $PKG_DEST$PKG_PREFIX/man
     
-    pkg_configfiles &&
-    pkg_virtual &&
-    pkg_installfiles
+    pkg_postinstall
 }
