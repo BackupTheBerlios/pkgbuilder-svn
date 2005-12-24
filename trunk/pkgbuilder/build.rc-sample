@@ -65,7 +65,7 @@ USE="$USE_AUDIO $USE_VIDEO $USE_NET $USE_PRINT
 # CPU and ARCHITECTURE flags configuration
 ARCH="i486"
 CPU="i686"
-CFLAGS="-O2 -march=$ARCH -mcpu=$CPU"
+CFLAGS="-O2 -march=$ARCH -mtune=$CPU"
 CXXFLAGS="$CFLAGS"
 CPPFLAGS="$CFLAGS"
 
