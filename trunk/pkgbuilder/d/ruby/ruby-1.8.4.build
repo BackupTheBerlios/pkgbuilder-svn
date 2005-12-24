@@ -1,0 +1,46 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# ruby-1.8.4 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_URL="http://gd.tuwien.ac.at/languages/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_USE="tcltk ssl gdbm berkdb"
+
+PKG_DEPENDS=">=l/readline-4.1
+             >=l/ncurses-5.2
+             `use_dep gdbm "l/gdbm"`
+             `use_dep berkdb "l/db4"`
+             `use_dep ssl "l/openssl"`
+             `use_dep tcltk "d/tcl d/tk"`"
+
+PKG_HOMESITE="http://www.ruby-lang.org/"
+
+PKG_DOC_FILES="ChangeLog COPYING* GPL LEGAL LGPL README* ToDo"
+
+PKG_CONFIGURE_OPTIONS="--enable-shared
+                       --enable-pthread"
+
+do_install() {
+    configscript_do_install || return $?
+
+    cd $PKG_SRC
+    LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH" DESTDIR=$PKG_DEST ./ruby -I./lib -I./ext -I./.ext/`arch`-linux/ ./bin/rdoc --all --ri-system ./
+
+    return $?
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    #fix permisions        
+    find $PKG_DEST -exec chown root.root {} \;        
+    
+    pkg_postinstall
+}
+
