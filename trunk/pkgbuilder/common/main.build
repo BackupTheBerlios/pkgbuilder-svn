@@ -18,7 +18,7 @@ main_init() {
 }
 
 main_do_unpack() {
-    cd $TMP
+    cd $TMP || return 1
     
     pkg_unpack
     
