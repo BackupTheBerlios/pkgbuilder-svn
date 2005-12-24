@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# qemu-0.7.2 pkgbuilder script
+# qemu-0.8.0 pkgbuilder script
 #
 
 inherit configscript
@@ -14,9 +14,10 @@ PKG_URL="http://fabrice.bellard.free.fr/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2 LGPLv2.1"
 
-PKG_USE="sdl"
+PKG_USE="sdl alsa"
 
-PKG_DEPENDS="`use_dep sdl "l/sdl"`"
+PKG_DEPENDS="`use_dep sdl "l/sdl"`
+             `use_dep alsa "l/alsa-lib"`"
 
 PKG_HOMESITE="http://fabrice.bellard.free.fr/qemu/"
 
@@ -24,7 +25,9 @@ PKG_DOC_FILES="C* README* TODO VERSION"
 
 PKG_PREFIX="/usr"
 PKG_CONFIGURE_OPTIONS="--enable-slirp
-                       `use_enable sdl`"
+                       --enable-adlib
+                       `use_enable sdl`
+                       `use_enable alsa`"
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST/usr
                      bindir=$PKG_DEST/usr/bin
                      datadir=$PKG_DEST/usr/share/qemu
