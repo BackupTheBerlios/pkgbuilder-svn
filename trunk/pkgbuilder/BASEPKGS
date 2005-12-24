@@ -3,9 +3,9 @@
 # a)
 a/aaa_base-10.2.0-noarch-2
 a/aaa_elflibs-10.2.0-i486-3
-a/bash-3.0-i486-3
+a/bash-3.0-i486-4
 a/bin-10.2-i486-1
-a/bzip2-1.0.3-i486-1
+a/bzip2-1.0.3-i486-2
 a/coreutils-5.2.1-i486-1
 a/cxxlibs-5.0.7-i486-1
 a/dcron-2.3.3-i486-5
@@ -23,12 +23,13 @@ a/infozip-5.52-i486-1
 a/isapnptools-1.26-i386-1 #optional
 a/jfsutils-1.1.8-i486-1 #optional
 a/kbd-1.12-i486-2
-a/kernel-ide-2.4.31-i486-1
-a/kernel-modules-2.4.31-i486-1
+a/kernel-ide-2.4.32-i486-1
+a/kernel-modules-2.4.32-i486-2
 a/less-382-i486-1
 a/lilo-22.5.9-i486-2
-a/module-init-tools-3.1-i486-1
+a/logrotate-3.6.8-i486-1
 a/mkinitrd-1.0.1-i486-3
+a/module-init-tools-3.1-i486-1
 a/pciutils-2.1.11-i486-6
 a/pcmcia-cs-3.2.8-i486-1 #optional
 a/pkgtools-10.2.0-i486-5
@@ -61,15 +62,15 @@ d/binutils-2.15.92.0.2-i486-3
 d/bison-1.35-i386-1
 d/byacc-1.9-i386-1
 d/flex-2.5.4a-i486-3
-d/gcc-3.3.6-i486-1
-d/gcc-g++-3.3.6-i486-1
-d/kernel-headers-2.4.31-i386-1
+d/gcc-3.4.5-i486-1
+d/gcc-g++-3.4.5-i486-1
+d/kernel-headers-2.4.32-i386-1
 d/libtool-1.5.20-i486-1
 d/m4-1.4.2-i486-1
 d/make-3.80-i386-1
 
 # l)
-l/glibc-2.3.5-i486-5
+l/glibc-2.3.6-i486-1
 l/ncurses-5.4-i486-2
 l/zlib-1.2.3-i486-1
 
