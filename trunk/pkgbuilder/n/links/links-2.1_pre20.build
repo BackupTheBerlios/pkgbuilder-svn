@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# links-2.1_pre19 pkgbuilder script
+# links-2.1_pre20 pkgbuilder script
 #
 
 inherit configscript
@@ -16,8 +16,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE="gpm ssl svga X png jpeg tiff javascript directfb sdl fbcon"
 
-PKG_DEPENDS="`use_dep javascript ">=d/flex-2.5.4a"`
-             `use_dep ssl ">=l/openssl-0.9.6c"`
+PKG_DEPENDS="`use_dep ssl ">=l/openssl-0.9.6c"`
              `use_dep gpm "ap/gpm"`
              `use_dep png ">=l/libpng-1.2.1"`
              `use_dep jpeg ">=l/libjpeg-6b"`
@@ -27,6 +26,8 @@ PKG_DEPENDS="`use_dep javascript ">=d/flex-2.5.4a"`
              `use_dep directfb "l/directfb"`
              `use_dep sdl "l/sdl"`
              `use_dep fbcon "a/gpm >=l/libpng-1.2.1"`"
+
+PKG_BUILD_DEPENDS="`use_dep javascript ">=d/flex-2.5.4a"`"
 
 PKG_HOMESITE="http://links.twibright.com/"
 
