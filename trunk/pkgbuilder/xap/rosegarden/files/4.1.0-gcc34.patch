@@ -1,0 +1,11 @@
+--- rosegarden-4-1.0/base/Colour.C~	2005-02-08 06:55:22.000000000 -0800
++++ rosegarden-4-1.0/base/Colour.C	2005-07-13 10:48:17.065557256 -0700
+@@ -163,7 +163,7 @@
+ // Generic Colour routines:
+ 
+ Colour
+-Rosegarden::getCombinationColour(const Colour &input1, const Colour &input2)
++getCombinationColour(const Colour &input1, const Colour &input2)
+ {
+     Colour ret((input1.getRed()+input2.getRed())/2,
+                 (input1.getGreen()+input2.getGreen())/2,

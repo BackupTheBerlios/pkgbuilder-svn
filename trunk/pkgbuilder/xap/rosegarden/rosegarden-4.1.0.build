@@ -1,0 +1,48 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# rosegarden-4.1.0 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="2"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-4-1.0.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="arts jack"
+
+PKG_DEPENDS="`use_dep arts "kde/kdemultimedia" "l/alsa-lib"`
+             `use arts || use_dep jack "ap/jack-audio-connection-kit"`
+             kde/kdelibs
+             l/ladspa"
+
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   d/gettext"
+
+PKG_HOMESITE="http://www.rosegardenmusic.com/"
+
+PKG_SRC="$TMP/$PKG_NAME-4-1.0"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO TRANSLATORS 
+               docs/howtos/*.txt docs/howtos/*-notes"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       `use_with arts`
+                       `use_with alsa`
+                       `use_with jack`
+                       --with-ladspa"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch $PKG_VERSION-dssi.patch -Np1 &&
+    apply_patch $PKG_VERSION-gcc34.patch -Np1
+
+    return $?
+
+}
