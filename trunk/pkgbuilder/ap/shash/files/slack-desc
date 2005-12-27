@@ -1,0 +1,15 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+     |-----handy-ruler------------------------------------------------------|
+shash: shash (Generate or check digests or MACs of files)
+shash:
+shash: shash is a program intended to produce message digests for files, or 
+shash: it can check with the output of a former run whether the message 
+shash: digests are still the same (i.e. whether the files changed). Shash 
+shash: uses several hash algorithms.
+shash:

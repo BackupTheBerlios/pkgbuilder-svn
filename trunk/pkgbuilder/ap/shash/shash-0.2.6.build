@@ -1,0 +1,25 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# shash-0.2.6 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://mcrypt.hellug.gr/pub/mcrypt/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS=">=l/mhash-0.8.18"
+
+PKG_HOMESITE="http://mcrypt.hellug.gr/shash/index.html"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL doc/sample.shashrc doc/FORMAT"
+
+PKG_PREFIX="/usr"
