@@ -1,0 +1,45 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# jack-audio-connection-kit 0.100.7 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="2"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/jackit/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2 LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/libsndfile 
+             l/readline
+             `use_dep alsa "l/alsa-lib"`"
+
+PKG_BUILD_DEPENDS="d/pkgconfig"
+
+PKG_HOMESITE="http://jackit.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS COPYING* README TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="`use_enable alsa`
+                       `use_enable oss`
+                       `use_enable mmx`
+                       `use_enable sse`
+                       --disable-html-docs
+                       --with-pic"
+
+PKG_CONFIG_FILES="etc/rc.d/rc.jack-audio-connection-kit"
+
+do_install() {
+    configscript_do_install || return 1
+
+    mkdir -p $PKG_DEST/etc/rc.d
+    cat $PKG_HOME/files/rc.jack-audio-connection-kit > $PKG_DEST/etc/rc.d/rc.jack-audio-connection-kit
+    chmod 644 $PKG_DEST/etc/rc.d/rc.jack-audio-connection-kit
+}

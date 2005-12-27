@@ -1,0 +1,16 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+                         |-----handy-ruler------------------------------------------------------|
+jack-audio-connection-kit: jack-audio-connection-kit (A low-latency audio server)
+jack-audio-connection-kit:
+jack-audio-connection-kit: It can connect a number of different applications to an audio 
+jack-audio-connection-kit: device, as well as allowing them to share audio between 
+jack-audio-connection-kit: themselves. Its clients can run in their own processes,
+jack-audio-connection-kit: or can they can run within the JACK server
+jack-audio-connection-kit:
+

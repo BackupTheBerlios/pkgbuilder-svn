@@ -1,0 +1,34 @@
+#!/bin/sh
+# Start/stop/restart jack-audio-connection-kit.
+
+# Start jack-audio-connection-kit:
+jackd_start() {
+  echo "Starting jack-audio-connection-kit daemon: /usr/bin/jackd"
+  /usr/bin/jackd -s -d alsa -d hw:0 -p 1024 &> /dev/null &
+}
+
+# Stop jack-audio-connection-kit:
+jackd_stop() {
+  killall jackd
+}
+
+# Restart jack-audio-connection-kit:
+jackd_restart() {
+  jackd_stop
+  sleep 1
+  jackd_start
+}
+
+case "$1" in
+'start')
+  jackd_start
+  ;;
+'stop')
+  jackd_stop
+  ;;
+'restart')
+  jackd_restart
+  ;;
+*)
+  echo "usage $0 start|stop|restart"
+esac
