@@ -1,0 +1,32 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# raptor-1.4.7 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.librdf.org/source/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2 APLv2.0"
+
+PKG_USE="ssl curl"
+
+PKG_DEPENDS="l/glib2
+             `use_dep curl "n/curl"`
+             `use_dep ssl "l/openssl"`
+             `is_installed libxml2 && echo "l/libxml2" || echo "l/expat"`"
+
+PKG_BUILD_DEPENDS="d/pkgconfig"
+
+PKG_HOMESITE="http://librdf.org/raptor/"
+
+PKG_DOC_FILES=" AUTHORS ChangeLog* COPYING* *.html README NOTICE"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-xml-parser=`is_installed libxml2 && echo "libxml" || echo "expat"`
+                       --with-www=`use_dep curl "curl" "none"`"

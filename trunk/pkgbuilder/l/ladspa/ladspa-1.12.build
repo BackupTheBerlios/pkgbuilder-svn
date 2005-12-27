@@ -1,0 +1,67 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# ladspa-1.12 pkgbuilder script
+#
+
+inherit makeonly
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tgz"
+PKG_FILE_NAME="${PKG_NAME}_sdk_${PKG_VERSION}.$PKG_EXTENSION"
+PKG_URL="http://www.ladspa.org/download/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_HOMESITE="http://www.ladspa.org/"
+
+PKG_SRC="$TMP/${PKG_NAME}_sdk"
+
+PKG_DOC_FILES="doc/*"
+
+PKG_PREFIX="/usr"
+
+PKG_CONFIG_FILES="etc/profile.d/ladspa.sh
+                  etc/profile.d/ladspa.csh"
+
+do_patch() {
+    cd $PKG_SRC/src
+
+    sed -i '50,59d' makefile &&
+    sed -i '59,73d' makefile &&
+    sed -i "/^CFLAGS/ s:-O3:${CFLAGS}:" makefile
+
+    return $?
+}
+
+do_build() {
+    cd $PKG_SRC/src
+
+    make -j1 targets CXXFLAGS="$CXXFLAGS -I. -fPIC"
+
+    return $?
+}
+
+do_install() {
+    cd $PKG_SRC/src
+
+    make INSTALL_PLUGINS_DIR=$PKG_DEST$PKG_PREFIX/lib/ladspa/ \
+         INSTALL_INCLUDE_DIR=$PKG_DEST$PKG_PREFIX/include/ \
+         INSTALL_BINARY_DIR=$PKG_DEST$PKG_PREFIX/bin/
+
+    return $?
+}
+
+do_postinstall() {
+    mkdir -p $PKG_DEST/etc/profile.d
+    echo "export LADSPA_PATH=$PKG_PREFIX/lib/ladspa" > $PKG_DEST/etc/profile.d/ladspa.sh
+    echo "setenv LADSPA_PATH $PKG_PREFIX/lib/ladspa" > $PKG_DEST/etc/profile.d/ladspa.csh
+    chmod +x $PKG_DEST/etc/profile.d/ladspa.{sh,csh}
+
+    makeonly_do_postinstall
+}
