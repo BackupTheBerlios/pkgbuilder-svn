@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -25,7 +25,7 @@ PKG_DOC_FILES="AUTHORS INSTALL NEWS README TODO THANKS ChangeLog"
 PKG_CONFIGURE_OPTIONS="--enable-static --enable-shared"
 
 do_install() {
-    mkdir -p $PKG_DEST$PKG_PREFIX/{bin,lib,include}
+    mkdir -p $PKG_DEST$PKG_PREFIX/{lib,include}
 
     configscript_do_install
 }
