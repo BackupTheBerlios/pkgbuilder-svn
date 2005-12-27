@@ -1,0 +1,50 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# audacity-1.2.4b pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-src-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="flac vorbis mad lame"
+
+PKG_DEPENDS=">=l/wxgtk-2.6
+             >=l/id3lib-3.8.0
+             l/libid3tag
+             >=l/libsndfile-1.0.0
+             >=l/libsamplerate-0.0.14
+             >=l/ladspa-1.12
+             `use_dep flac "l/flac"`
+             `use_dep vorbis ">=l/libvorbis-1.0"`
+             `use_dep mad ">=ap/madplay-0.14"`
+             `use_dep lame ">=l/lame-3.92"`"
+
+PKG_HOMESITE="http://audacity.sourceforge.net/"
+
+PKG_SRC="$TMP/$PKG_NAME-src-$PKG_VERSION"
+
+PKG_DOC_FILES="LICENSE.txt README.txt"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-portaudio=v18
+                       --with-libsndfile=system 
+                       --with-id3tag=system
+                       `use_dep mad "--with-libmad=system" "--with-libmad=none"`
+                       `use_dep flac "--with-libflac=system" "--with-libflac=none"`
+                       `use_dep vorbis "--with-vorbis=system" "--with-vorbis=none"`"
+
+MAKE_OPTIONS="-j1"
+
+do_postinstall() {
+    rm -rf $PKG_DEST$PKG_PREFIX/share/doc
+
+    configscript_do_postinstall
+}
