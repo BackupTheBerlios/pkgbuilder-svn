@@ -18,7 +18,7 @@ PKG_LICENSE="GPLv2 LGPLv2"
 
 PKG_USE="cups"
 
-PKG_DEPENDS="l/glibc
+PKG_DEPENDS="l/glib
              >=l/libjpeg-6b
              >=l/libpng-1.2.1
              >=l/zlib-1.1.4
