@@ -1,0 +1,30 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# libidn-0.6.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://alpha.gnu.org/pub/gnu/libidn/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="java nls"
+
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   `use_dep nls "d/gettext"`
+                   `use_dep java "d/j2sdk"`"
+
+PKG_HOMESITE="http://www.gnu.org/software/libidn/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog FAQ NEWS README THANKS TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--disable-rpath 
+                       `use_enable nls` 
+                       `use_enable java`"
