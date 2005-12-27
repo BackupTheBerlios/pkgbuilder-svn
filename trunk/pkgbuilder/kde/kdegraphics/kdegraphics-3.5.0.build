@@ -1,0 +1,35 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kdegraphics-3.5.0 pkgbuilder script
+#
+
+inherit kde
+
+PKG_BUILD="1"
+
+PKG_USE=""
+
+# TODO: libghoto2 sane
+PKG_DEPENDS=">=l/qt-3.3.3
+             >=kde/kdelibs-$PKG_VERSION
+             >=kde/kdebase-$PKG_VERSION
+             xap/xpdf
+             l/glut
+             l/fontconfig
+             l/lcms
+             l/imlib
+             l/libtiff
+             l/fribidi
+             d/pkgconfig
+             >=ap/esp-gs-7.05.6"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL kdegraphics.lsm README"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --disable-kpdf-drm"
+
+do_patch() {
+    cd $PKG_SRC/kpdf/xpdf/xpdf
+    apply_patch post-$PKG_VERSION-$PKG_NAME-CAN-2005-3193.diff -Np0
+}

@@ -1,0 +1,38 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# kde-3.5.0 pkgbuilder script
+#
+
+inherit meta
+
+PKG_BUILD="1"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="devel nls accessibility"
+
+PKG_DEPENDS=">=l/qt-3.3.3
+             =kde/kde-common-$PKG_VERSION
+             =kde/arts-1.5.0
+             =kde/kdelibs-$PKG_VERSION
+             =kde/kdebase-$PKG_VERSION
+             =kde/kdegraphics-$PKG_VERSION
+             =kde/kdemultimedia-$PKG_VERSION
+             =kde/kdenetwork-$PKG_VERSION
+             =kde/kdepim-$PKG_VERSION
+             =kde/kdeedu-$PKG_VERSION
+             =kde/kdegames-$PKG_VERSION
+             =kde/kdeutils-$PKG_VERSION
+             =kde/kdeadmin-$PKG_VERSION
+             =kde/kdetoys-$PKG_VERSION
+             =kde/kdeartwork-$PKG_VERSION
+             =kde/kdeaddons-$PKG_VERSION
+             `use_dep accessibility "=kde/kdeaccessibility-$PKG_VERSION"`
+             `use_dep nls "=kde/kde-i18n-$PKG_VERSION"`
+             `use_dep devel "=kde/kdebindings-$PKG_VERSION
+                             =kde/kdesdk-$PKG_VERSION
+                             =kde/kdevelop-3.3.0
+                             =kde/kdewebdev-$PKG_VERSION"`"
+
+PKG_HOMESITE="http://www.kde.org/"
