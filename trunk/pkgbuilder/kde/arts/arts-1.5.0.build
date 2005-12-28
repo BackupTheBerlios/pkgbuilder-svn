@@ -7,21 +7,24 @@
 inherit kde
 
 PKG_BUILD="1"
+
 PKG_URL="$KDE_BASE_URL/3.5/src/$PKG_FILE_NAME"
 
-PKG_USE="alsa oggvorbis mad"
+PKG_USE="alsa jack oggvorbis mad"
 
 PKG_DEPENDS="l/audiofile
              l/glib2
              >=l/qt-3.3.3
-             d/pkgconfig
              =kde/kde-common-3.5.0
              `use_dep alsa "l/alsa-lib"`
+             `use_dep jack "ap/jack-audio-connection-kit"`
              `use_dep oggvorbis "l/libvorbis l/libogg"`
              `use_dep mad "l/libmad"`"
 
+PKG_BUILD_DEPENDS="d/pkgconfig"
+
 PKG_DOC_FILES="COPYING COPYING.LIB INSTALL doc/NEWS doc/README doc/TODO"
 
-
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
-                      `use_enable alsa`"
+                      `use_enable alsa`
+                      `use_enable jack`"
