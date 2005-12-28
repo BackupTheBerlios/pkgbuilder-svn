@@ -30,6 +30,8 @@ PKG_DEPENDS=">=l/qt-3.3
              `use_dep alsa "l/alsa-lib"`
              `use_dep gstreamer "l/gstreamer l/gst-plugins"`"
 
+PKG_BUILD_DEPENDS="d/pkgconfig"
+
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README*"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS

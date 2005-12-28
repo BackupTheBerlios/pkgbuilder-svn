@@ -14,9 +14,10 @@ PKG_DEPENDS=">=l/qt-3.3.3
              >=kde/kdelibs-$PKG_VERSION
              >=kde/kdebase-$PKG_VERSION
              d/cvs
-             d/flex
              `use_dep subversion "d/subversion"`
              `use_dep berkdb ">=l/db4-4.2"`"
+
+PKG_BUILD_DEPENDS="d/flex"
 
 PKG_DOC_FILES="COPYING README kdesdk.lsm"
 

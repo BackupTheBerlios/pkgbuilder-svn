@@ -13,7 +13,6 @@ PKG_USE="samba cups opengl"
 PKG_DEPENDS="l/fontconfig
              l/freetype2
              >=l/qt-3.3.3
-             d/pkgconfig
              l/openssl
              l/libusb
              l/libraw1394
@@ -22,6 +21,8 @@ PKG_DEPENDS="l/fontconfig
              >=kde/kdelibs-$PKG_VERSION
              `use_dep samba "n/samba"`
              `use_dep cups "n/cups"`"
+
+PKG_BUILD_DEPENDS="d/pkgconfig"
 
 PKG_DOC_FILES="AUTHORS COPYING INSTALL README kdebase.lsm"
 
@@ -44,7 +45,7 @@ do_postinstall() {
       ln -sf settings.menu kde-settings.menu )
 
     mkdir -p $PKG_DEST/etc/X11/xinit
-    cp $PKG_HOME/files/xinitrc.kde34 $PKG_DEST/etc/X11/xinit/xinitrc.kde
+    cp $PKG_HOME/files/xinitrc.kde35 $PKG_DEST/etc/X11/xinit/xinitrc.kde
     chmod +x $PKG_DEST/etc/X11/xinit/xinitrc.kde
 
     kde_do_postinstall

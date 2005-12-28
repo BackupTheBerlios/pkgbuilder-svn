@@ -21,8 +21,9 @@ PKG_DEPENDS=">=l/qt-3.3.3
              l/imlib
              l/libtiff
              l/fribidi
-             d/pkgconfig
              >=ap/esp-gs-7.05.6"
+
+PKG_BUILD_DEPENDS="d/pkgconfig"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL kdegraphics.lsm README"
 

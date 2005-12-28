@@ -19,17 +19,18 @@ PKG_DEPENDS=">=kde/kde-common-$PKG_VERSION
              >=l/libxslt-1.1.4
              l/fontconfig
              l/freetype2
-             d/perl
              ap/esp-gs
              l/libart_lgpl
              l/libidn
-             d/gettext
-             d/pkgconfig
              `use_dep spell "l/aspell"`
              `use_dep tiff "l/libtiff"`
              `use_dep alsa "l/alsa-lib"`
              `use_dep fam "ap/fam"`
              `use_dep cups ">=n/cups-1.1.19"`"
+
+PKG_BUILD_DEPENDS="d/gettext
+                   d/pkgconfig
+                   d/perl"
 
 PKG_DOC_FILES="AUTHORS COMPILING COMPILING.html COPYING COPYING.BSD COPYING.LIB DEBUG
                INSTALL KDE2PORTING.html KDE3PORTING.html NAMING README  kdelibs.lsm"
