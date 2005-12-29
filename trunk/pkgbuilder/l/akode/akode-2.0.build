@@ -1,0 +1,42 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# akode-2.0 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="30375-$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://www.kde-look.org/content/files/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2"
+
+PKG_USE="oss alsa jack flac mp3 vorbis speex"
+
+PKG_DEPENDS="l/libsamplerate
+            `use_dep alsa "l/alsa-lib"`
+            `use_dep jack "ap/jack-audio-connection-kit"`
+            `use_dep flac "l/flac"`
+            `use_dep mp3 "l/libmad"`
+            `use_dep vorbis "l/libvorbis"`
+            `use_dep speex "l/speex"`"
+
+PKG_BUILD_DEPENDS="d/perl"
+
+PKG_HOMESITE="http://www.carewolf.com/akode/"
+
+PKG_DOC_FILES="AUTHORS COPYING INSTALL NEWS README"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--with-libsamplerate
+                       --without-polypaudio
+                       `use_with oss` 
+                       `use_with alsa`
+                       `use_with jack`
+                       `use_with flac`
+                       `use_with mp3 libmad`
+                       `use_with vorbis`
+                       `use_with speex`"
