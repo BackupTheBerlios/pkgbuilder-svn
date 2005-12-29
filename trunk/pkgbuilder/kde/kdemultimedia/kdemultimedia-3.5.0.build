@@ -8,7 +8,7 @@ inherit kde
 
 PKG_BUILD="1"
 
-PKG_USE="mp3 oggvorbis alsa gstreamer flac lame speex theora"
+PKG_USE="mp3 vorbis alsa gstreamer flac lame speex theora"
 
 PKG_DEPENDS=">=l/qt-3.3
              >=kde/kdelibs-$PKG_VERSION
@@ -20,17 +20,19 @@ PKG_DEPENDS=">=l/qt-3.3
              l/audiofile
              l/libsamplerate
              l/xine-lib
+             l/akode
              ap/cdparanoia
              `use_dep flac "l/flac"`
              `use_dep lame "l/lame"`
              `use_dep speex "l/speex"`
              `use_dep theora "l/libtheora"`
-             `use_dep oggvorbis "ap/vorbis-tools"`
+             `use_dep vorbis "ap/vorbis-tools"`
              `use_dep mp3 "l/libmad"`
              `use_dep alsa "l/alsa-lib"`
              `use_dep gstreamer "l/gstreamer l/gst-plugins"`"
 
-PKG_BUILD_DEPENDS="d/pkgconfig"
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   d/perl"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL README*"
 
@@ -41,7 +43,9 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_with mp3 libmad`
                        `use_with alsa`
                        `use_with alsa arts-alsa`
-                       `use_with oggvorbis vorbis`
+                       `use_with vorbis vorbis`
+                       `use_with theora theora`
                        `use_dep speex "--with-extra-includes=/usr/include/speex"`
                        --with-xine
+                       --with-akode
                        --disable-strict"
