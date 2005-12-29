@@ -1,0 +1,28 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# poppler-0.4.3 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://poppler.freedesktop.org/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="gtk2 qt"
+
+PKG_DEPENDS=">=l/cairo-1.0 
+            `use_dep gtk2 "l/gtk2"`
+            `use_dep qt "l/qt"`"
+
+PKG_HOMESITE="http://poppler.freedesktop.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README* TODO"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--enable-zlib"
