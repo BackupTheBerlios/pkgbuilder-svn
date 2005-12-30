@@ -14,6 +14,9 @@ PKG_DEPENDS=">=l/qt-3.3.3
              >=kde/kdelibs-$PKG_VERSION
              >=kde/kdebase-$PKG_VERSION"
 
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   d/perl"
+
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* INSTALL kdegames.lsm README"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS

@@ -8,12 +8,20 @@ inherit kde
 
 PKG_BUILD="1"
 
-PKG_USE=""
+PKG_USE="sasl"
 
 PKG_DEPENDS=">=l/qt-3.3.3
-             l/gpgme
              >=kde/kdelibs-$PKG_VERSION
              >=kde/kdebase-$PKG_VERSION
-             >=kde/kdenetwork-$PKG_VERSION"
+             >=kde/kdenetwork-$PKG_VERSION
+             l/gpgme
+             `use_dep sasl "l/cyrus-sasl"`"
+
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   d/perl"
 
 PKG_DOC_FILES="kdepim.lsm MAINTAINERS README*"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --enable-indexlib
+                       `use_with sasl`"

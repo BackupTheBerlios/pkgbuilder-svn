@@ -15,6 +15,9 @@ PKG_DEPENDS=">=l/qt-3.3.3
              >=kde/kdebase-$PKG_VERSION
              xap/xscreensaver"
 
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   d/perl"
+
 PKG_DOC_FILES="README"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS

@@ -19,4 +19,7 @@ PKG_DEPENDS=">=l/qt-3.3.3
              >=kde/kdegames-$PKG_VERSION
              >=l/sdl-1.2.1"
 
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   d/perl"
+
 PKG_DOC_FILES="kdeaddons.lsm README"

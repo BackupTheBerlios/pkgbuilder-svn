@@ -22,7 +22,8 @@ PKG_DEPENDS="l/fontconfig
              `use_dep samba "n/samba"`
              `use_dep cups "n/cups"`"
 
-PKG_BUILD_DEPENDS="d/pkgconfig"
+PKG_BUILD_DEPENDS="d/pkgconfig
+                   d/perl"
 
 PKG_DOC_FILES="AUTHORS COPYING INSTALL README kdebase.lsm"
 
