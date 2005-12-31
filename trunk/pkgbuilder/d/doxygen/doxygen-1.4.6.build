@@ -1,0 +1,46 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# doxygen-1.4.6 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.src.$PKG_EXTENSION"
+PKG_URL="http://ftp.stack.nl/pub/users/dimitri/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/graphviz
+             ap/esp-gs"
+
+PKG_BUILD_DEPENDS="d/perl"
+
+PKG_HOMESITE="http://www.stack.nl/~dimitri/doxygen/"
+
+PKG_DOC_FILES="INSTALL LANGUAGE.HOWTO LICENSE README VERSION"
+
+PKG_INSTALL_OPTIONS="INSTALL=$PKG_DEST$PKG_PREFIX"
+
+do_patch() {
+    cd $PKG_SRC
+
+    sed -i.orig -e "s:^\(TMAKE_CFLAGS_RELEASE\t*\)= .*$:\1= ${CFLAGS}:" \
+        -e "s:^\(TMAKE_CXXFLAGS_RELEASE\t*\)= .*$:\1= ${CXXFLAGS}:" \
+        tmake/lib/linux-g++/tmake.conf
+
+    return $?
+}
+
+do_configure() {
+    cd $PKG_SRC
+
+    ./configure --prefix $PKG_PREFIX
+
+    return $?
+}
