@@ -6,7 +6,8 @@
 
 inherit configscript
 
-PKG_BUILD="2"
+PKG_BUILD="3"
+
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://arcana.linux.it/pub/$PKG_NAME/$PKG_FILE_NAME"
@@ -68,13 +69,7 @@ do_postinstall() {
     cat gpm-syn.conf > $PKG_DEST/etc/gpm/gpm-syn.conf
     cat gpm-twiddler.conf > $PKG_DEST/etc/gpm/gpm-twiddler.conf
 
-    pkg_installdoc
-
-    pkg_gzipmaninfo
-
-    pkg_configfiles
-
-    pkg_installfiles
+    pkg_postinstall
 
     return $?
 }

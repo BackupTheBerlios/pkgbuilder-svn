@@ -6,7 +6,8 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
+
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
 PKG_URL="ftp://ftp3.easysw.com/pub/$PKG_NAME/$PKG_VERSION/$PKG_FILE_NAME"
@@ -58,21 +59,13 @@ do_install() {
 do_postinstall() {
     cd $PKG_SRC
 
-    pkg_installdoc
-
     ( cd $PKG_DEST/usr/man
         find . -type d -name "cat*" | xargs rm -rf )
-
-    pkg_gzipmaninfo
 
     ( mkdir -p $PKG_DEST/etc/rc.d ; cd $PKG_DEST/etc/rc.d
         mv ../init.d/cups rc.cups
         rm -rf ../init.d ../rc?.d
         chmod 644 rc.cups )
-
-    pkg_configfiles
-
-    pkg_installfiles
-
-    return $?
+    
+    pkg_postinstall || return 1
 }
