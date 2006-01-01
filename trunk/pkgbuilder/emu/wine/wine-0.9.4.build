@@ -1,0 +1,47 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# wine-0.9 pkgbuilder script
+# 
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="arts cups alsa tcltk opengl"
+
+PKG_DEPENDS="d/flex
+             d/byacc
+             >=l/ncurses-5.2
+             >=l/freetype2-2.0.0
+             x/x11
+             `use_dep tcltk "d/tcl d/tk"`
+             `use_dep arts "kde/arts"`
+             `use_dep alsa "l/alsa-lib"`
+             `use_dep cups "n/cups"`"
+
+PKG_HOMESITE="http://www.winehq.org/"
+
+PKG_DOC_FILES="A* BUGS C* DEVELOPERS-HINTS LICENSE* README VERSION"
+
+PKG_CONFIGURE_OPTIONS="--disable-debug 
+                       --disable-trace
+                      `use_enable opengl`"
+
+PKG_BUILD_TARGET="depend all"
+
+PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    rmdir $PKG_DEST/usr/man/man3w
+
+    pkg_postinstall
+}
