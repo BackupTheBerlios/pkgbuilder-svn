@@ -18,6 +18,8 @@ PKG_USE=""
 
 PKG_DEPENDS="n/portmap"
 
+PKG_BUILD_DEPENDS="d/perl"
+
 PKG_HOMESITE="http://oss.sgi.com/projects/fam/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README TODO"
