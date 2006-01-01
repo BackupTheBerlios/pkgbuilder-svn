@@ -21,10 +21,13 @@ pkg_do_info() {
     echo "$PKG_NAME-$PKG_VERSION-$PKG_BUILD"
     echo
     echo "HOME......... $PKG_HOMESITE"
-    echo "URL.......... $PKG_URL"
+    if [ "$PKG_URL" != "" ] ; then
+        echo "URL.......... $PKG_URL"
+    fi
     echo "LICENSE...... $PKG_LICENSE"
     if [ "$PKG_USE" != "" ] ; then
-        echo "USE.......... $PKG_USE"
+        local activedflags="`pkg_activedflags`"
+        echo "USE..........$activedflags"
     fi
     if [ "$PKG_DEPENDS" != "" ] ; then
         echo "DEPS......... $PKG_DEPENDS"
@@ -32,10 +35,12 @@ pkg_do_info() {
     if [ "$PKG_BUILD_DEPENDS" != "" ] ; then
         echo "BUILD DEPS... $PKG_BUILD_DEPENDS"
     fi
-    echo
-    echo "DESCRIPTION:"
-    echo
-    cat $PKG_HOME/files/slack-desc | grep "^$PKG_NAME" | cut -d: -f2,3,4,5 | uniq
+    if [ -f $PKG_HOME/files/slack-desc ] ; then
+        echo
+        echo "DESCRIPTION:"
+        echo
+        cat $PKG_HOME/files/slack-desc | grep "^$PKG_NAME" | cut -d: -f2,3,4,5 | uniq
+    fi
 }
 
 pkg_do_fetch() {
@@ -44,18 +49,12 @@ pkg_do_fetch() {
     return $?
 }
 
-pkg_do_verify() {    
-    local sum="$PKG_HOME/files/md5sum-$PKG_VERSION"
+pkg_do_verify() {
+    local md5sum="md5sum-$PKG_VERSION"
+    local sha1sum="sha1sum-$PKG_VERSION"
     
-    if [ -r $sum ] ; then
-        for pkg in $PKG_URL ; do
-            verify $pkg $sum || return 1
-        done
-    else 
-        echo "pkgbuilder: WARNING no md5sum-$PKG_VERSION file found"
-    fi
-    
-    return $?
+    pkg_verify $md5sum || return $?
+    pkg_verify $sha1sum || return $?
 }
 
 pkg_do_buildpkg() {

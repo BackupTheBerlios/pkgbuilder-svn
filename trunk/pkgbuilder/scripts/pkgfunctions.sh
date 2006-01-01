@@ -123,6 +123,24 @@ pkg_fetchcvs() {
     return $?
 }
 
+pkg_verify() {
+    if [ "$1" = "" ] ; then
+        return 1  
+    fi
+
+    local sum="$PKG_HOME/files/$1"
+    
+    if [ -f $sum ] ; then
+        for pkg in $PKG_URL ; do
+            verify $pkg $sum || return 1
+        done
+    else 
+        echo "pkgbuilder: WARNING no $1 file found"
+    fi
+    
+    return $?
+}
+
 pkg_unpack() {
     cd $TMP
     
@@ -207,6 +225,16 @@ pkg_localeclean() {
         rm -f $PKG_DEST$PKG_PREFIX/share/locale/locale.alias
     fi
 }
+
+pkg_activedflags() {
+    if [ "$PKG_USE" != "" ] ; then
+        for u in $PKG_USE ; do
+            use $u && echo -n " +$u" || echo -n " -$u"
+        done
+        echo
+    fi
+}
+
 
 pkg_fixperms() {
     fix_bin_perms $PKG_DEST/bin

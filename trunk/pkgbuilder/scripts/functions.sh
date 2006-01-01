@@ -423,15 +423,20 @@ verify() {
     fi
     
     local base="`basename "$1"`"
+
+    local sumprogram="md5sum"
+    if echo `basename $2` | grep -q "^sha1sum" ; then
+        sumprogram="sha1sum"
+    fi
     
     if [ -r "$FETCH_DIR/$base" ] ; then
-        if ! grep -q "`md5sum $FETCH_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
-            echo "pkgbuilder: ERROR, checksum verification error at file $FETCH_DIR/$base"
+        if ! grep -q "`$sumprogram $FETCH_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
+            echo "pkgbuilder: ERROR, $sumprogram verification error at file $FETCH_DIR/$base"
             return 2
         fi
     elif [ -r "$CDROM_DIR/$base" ] ; then
-        if ! grep -q "`md5sum $CDROM_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
-            echo "pkgbuilder: ERROR, checksum verification error at file $CDROM_DIR/$base"
+        if ! grep -q "`$sumprogram $CDROM_DIR/$base | cut -d" " -f1`  `basename "$1"`" $2  ; then
+            echo "pkgbuilder: ERROR, $sumprogram verification error at file $CDROM_DIR/$base"
             return 2
         fi
     else
