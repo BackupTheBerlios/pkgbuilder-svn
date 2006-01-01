@@ -6,10 +6,8 @@
 
 inherit configscript
 
-PKG_NAME="cdparanoia"
-PKG_VERSION="3.9.8"
-PKG_ARCH="$ARCH"
-PKG_BUILD="1"
+PKG_BUILD="2"
+
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-III-alpha9.8.src.$PKG_EXTENSION"
 PKG_URL="http://www.xiph.org/paranoia/download/$PKG_FILE_NAME"
@@ -23,14 +21,20 @@ PKG_DEPENDS="l/glibc"
 PKG_HOMESITE="http://www.xiph.org/paranoia/"
 
 PKG_SRC="$TMP/$PKG_NAME-III-alpha9.8"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
+
 PKG_DOC_FILES="FAQ.txt GPL README"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
+
 PKG_INSTALL_OPTIONS="prefix=$PKG_DEST$PKG_PREFIX"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch gcc34.patch -Np1
+
+    return $?
+}
 
 do_build() {
     cd $PKG_SRC
