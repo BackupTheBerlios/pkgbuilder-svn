@@ -14,7 +14,7 @@ PKG_URL="http://icculus.org/SDL_sound/downloads/$PKG_FILE_NAME"
 
 PKG_LICENSE="LGPLv2.1"
 
-PKG_USE="flac mikmod oggvorvis speex"
+PKG_USE="flac mikmod oggvorbis speex"
 
 PKG_DEPENDS=">=l/sdl-1.2
              `use_dep flac "l/flac"`
