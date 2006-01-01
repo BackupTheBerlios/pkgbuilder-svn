@@ -1,0 +1,76 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# gimp-2.2.8 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.gimp.org/pub/$PKG_NAME/v2.2/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE="mmx sse png svg jpeg tiff mng aalib perl python doc"
+
+PKG_DEPENDS=">=l/glib2-2.4.5
+             >=l/pango-1.4
+             >=l/atk-1.6.1
+             >=l/gtk2-2.4.4
+             >=l/fontconfig-2.2.2
+             >=l/freetype2-2.1.7
+             >=l/libart_lgpl-2.3.8
+             >=ap/gimp-print-4.2.6
+             >=l/libwmf-0.2.8
+             >=d/pkgconfig-0.15.0
+             d/intltool
+             `use_dep svg ">=l/librsvg-2.2"`
+             `use_dep png ">=l/libpng-1.2.5"`
+             `use_dep jpeg ">=l/libjpeg-6b >=l/libexif-0.5.12"`
+             `use_dep tiff ">=l/libtiff-3.5.7"`
+             `use_dep mng ">=l/libmng-1.0.5"`
+             `use_dep aalib "l/aalib"`
+             `use_dep perl ">=d/perl-5.8"`
+             `use_dep python ">=l/pygtk-2"`
+             `use_dep doc ">=g/gtk-doc-1"`"
+
+PKG_HOMESITE="http://www.gimp.org/"
+
+PKG_DOC_FILES="AUTHORS COPYING ChangeL* HACKING INSTALL
+               MAINTAINERS NEWS PLUGIN_MAINTAINERS README* TODO*
+               docs/Wilber* docs/keybindings.txt docs/quick_reference*"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       --disable-debug
+                       --disable-static
+                       `use_enable mmx` 
+                       `use_enable sse` 
+                       `use_enable doc gtk-doc` 
+                       `use_enable python`
+                       `use_with png libpng`
+                       `use_with jpeg libjpeg`
+                       `use_with jpeg libexif` 
+                       `use_with tiff libtiff` 
+                       `use_with mng libmng` 
+                       `use_with aalib aa`"
+
+do_install() {
+    mkdir -p $PKG_DEST$PKG_PREFIX/share/applications \
+             $PKG_DEST$PKG_PREFIX/share/application-registry
+             
+    configscript_do_install
+}
+
+do_postinstall() {
+    configscript_do_postinstall
+
+    ( cd $PKG_DEST$PKG_PREFIX/man/man1
+      rm -f gimp-remote.1 ; ln -sf gimp-remote-2.2.1.gz gimp-remote.1.gz
+      rm -f gimp.1 ; ln -sf gimp-2.2.1.gz gimp.1.gz
+      rm -f gimptool.1 ; ln -sf gimptool-2.0.1.gz gimptool.1.gz )
+    ( cd $PKG_DEST$PKG_PREFIX/man/man5
+      rm -f gimprc.5 ; ln -sf gimprc-2.2.5.gz gimprc.1.gz )
+}
