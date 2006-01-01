@@ -6,10 +6,8 @@
 
 inherit configscript
 
-PKG_NAME="glib"
-PKG_VERSION="1.2.10"
-PKG_ARCH="$ARCH"
-PKG_BUILD="1"
+PKG_BUILD="2"
+
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
 PKG_URL="ftp://ftp.gtk.org/pub/gtk/v1.2/$PKG_FILE_NAME"
@@ -22,13 +20,15 @@ PKG_DEPENDS="l/glibc"
 
 PKG_HOMESITE="http://www.gtk.org/"
 
-PKG_SRC="$TMP/$PKG_NAME-$PKG_VERSION"
-PKG_DEST="$TMP/$PKG_NAME-$PKG_VERSION-pkg"
-PKG_DOC="$PKG_DEST/usr/doc/$PKG_NAME-$PKG_VERSION"
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING README* INSTALL NEWS"
 
 PKG_PREFIX="/usr"
-PKG_CONFIGURE_OPTIONS=""
-PKG_BUILD_OPTIONS=""
-PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
 
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch gcc340.patch -Np1
+
+    return $?
+}
