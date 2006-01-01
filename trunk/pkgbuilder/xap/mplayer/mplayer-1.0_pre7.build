@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="2"
+PKG_BUILD="3"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="MPlayer-${PKG_VERSION/_/}.$PKG_EXTENSION"
@@ -80,25 +80,15 @@ do_configure() {
     return $?
 }
 
-do_postinstall() {
+do_install() {
     cd $PKG_SRC
+
+    pkg_install || return 1
     
     cat etc/codecs.conf > $PKG_DEST/etc/mplayer/codecs.conf
     cat etc/input.conf > $PKG_DEST/etc/mplayer/input.conf
     cat etc/menu.conf > $PKG_DEST/etc/mplayer/menu.conf
 
-    pkg_installdoc
-
-    pkg_stripall
-
-    pkg_gzipmaninfo
-
-    ( for dir in `find $PKG_DEST$PKG_PREFIX/man -type d -name 'man1'` ; do
-        cd $dir
-        rm $dir/mencoder.1
-        ln -s mplayer.1.gz mencoder.1.gz
-      done )
-    
     use gtk && ( cd $PKG_DEST$PKG_PREFIX/share/mplayer/Skin
       unpack Blue-1.4.tar.bz2
       mv Blue default
@@ -111,8 +101,18 @@ do_postinstall() {
       ln -s /usr/X11R6/lib/fonts/TTF/Vera.ttf subfont.ttf )
 
     rm -rf $PKG_DEST$PKG_PREFIX/share/mplayer/font
+}
+
+do_postinstall() {
+    cd $PKG_SRC
+
+    pkg_postinstall || return 1
     
-    pkg_configfiles
-    
-    pkg_installfiles
+    ( for dir in `find $PKG_DEST$PKG_PREFIX/man -type d -name 'man1'` ; do
+        cd $dir
+        rm $dir/mencoder.1
+        ln -s mplayer.1.gz mencoder.1.gz
+      done )
+
+    return $?
 }
