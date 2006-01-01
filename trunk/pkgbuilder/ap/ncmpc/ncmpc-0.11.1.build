@@ -1,0 +1,34 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# ncmpc-0.11.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://hem.bredband.net/kaw/ncmpc/files/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/ncurses >=l/glib2-2.2"
+
+PKG_HOMESITE="http://hem.bredband.net/kaw/ncmpc"
+
+PKG_DOC_FILES="AUTHORS COPYING NEWS README TODO doc/*.sample"
+
+PKG_PREFIX="/usr"
+PKG_CONFIGURE_OPTIONS="--disable-debug
+                       --enable-mouse"
+
+do_install() {
+    configscript_do_install || return 1
+
+    rm -rf $PKG_DEST$PKG_PREFIX/share/doc
+    rm -rf $PKG_DEST$PKG_PREFIX/share/ncmpc
+}
