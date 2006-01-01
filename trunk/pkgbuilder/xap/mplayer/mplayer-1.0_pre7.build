@@ -16,7 +16,7 @@ PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
 PKG_LICENSE="GPLv2"
 
 PKG_USE="divx win32codecs gtk jpeg gif esd sdl alsa arts 
-         aalib libcaca svga lame oggvorbis nls samba svga"
+         aalib libcaca svga lame oggvorbis nls samba jack"
 
 PKG_DEPENDS=">=l/xvid-0.9.0
              >=l/freetype2-2.1
@@ -28,6 +28,7 @@ PKG_DEPENDS=">=l/xvid-0.9.0
              `use_dep esd "l/esound"`
              `use_dep sdl "l/sdl"`
              `use_dep alsa "l/alsa-lib"`
+             `use_dep jack "ap/jack-audio-connection-kit"`
              `use_dep arts "kde/arts"`
              `use_dep aalib "l/aalib"`
              `use_dep libcaca "l/libcaca"`
@@ -67,7 +68,7 @@ fi
 do_patch() {
     cd $PKG_SRC
 
-    apply_patch -Np0 ad_pcm_fix_20050826.diff
+    apply_patch ad_pcm_fix_20050826.diff -Np0
 
     return $?
 }
