@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -14,13 +14,17 @@ PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
-PKG_USE="udev"
+PKG_USE="udev kernel"
 
-PKG_DEPENDS="k/kernel-source"
+PKG_DEPENDS="`use_dep kernel "k/kernel-source"`"
 
 PKG_HOMESITE="http://fuse.sourceforge.net/"
 
 PKG_DOC_FILES="AUTHORS ChangeLog COPYING* FAQ Filesystems INSTALL NEWS README*"
+
+PKG_CONFIGURE_OPTIONS="--enable-lib
+                       --enable-util
+                       `use_enable kernel kernel-module`"
 
 do_patch() {
     cd $PKG_SRC
