@@ -1,0 +1,29 @@
+--- libao2/ao_jack.c.orig	2006-01-02 23:18:44.000000000 +0100
++++ libao2/ao_jack.c	2006-01-02 23:19:37.000000000 +0100
+@@ -35,7 +35,7 @@
+ int  JACK_Close(int deviceID); /* return 0 for success */
+ void JACK_Reset(int deviceID); /* free all buffered data and reset several values in the device */
+ long JACK_Write(int deviceID, char *data, unsigned long bytes); /* returns the number of bytes written */
+-long JACK_GetJackLatency(int deviceID); /* return the latency in milliseconds of jack */
++long JACK_GetJackOutputLatency(int deviceID); /* return the latency in milliseconds of jack */
+ int  JACK_SetState(int deviceID, enum status_enum state); /* playing, paused, stopped */
+ int  JACK_SetAllVolume(int deviceID, unsigned int volume);
+ int  JACK_SetVolumeForChannel(int deviceID, unsigned int channel, unsigned int volume);
+@@ -188,7 +188,7 @@
+ 			"AO: [Jack] JACK_SetAllVolume() failed, error %d\n", err);
+ 	}
+ 
+-	latency = JACK_GetJackLatency(driver);
++	latency = JACK_GetJackOutputLatency(driver);
+ 
+ 	ao_data.format = format;
+ 	ao_data.channels = channels;
+@@ -237,7 +237,7 @@
+ static void reset()
+ {
+ 	JACK_Reset(driver);
+-	latency = JACK_GetJackLatency(driver);
++	latency = JACK_GetJackOutputLatency(driver);
+ 	// Rather rough way to find out the rough number of bytes buffered
+ 	approx_bytes_in_jackd = JACK_GetJackBufferedBytes(driver) * 2;
+ }

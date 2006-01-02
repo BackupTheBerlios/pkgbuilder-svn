@@ -15,32 +15,37 @@ PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
          
 PKG_LICENSE="GPLv2"
 
-PKG_USE="divx win32codecs gtk jpeg gif esd sdl alsa arts 
-         aalib libcaca svga lame oggvorbis nls samba jack"
+PKG_USE="divx win32codecs gtk jpeg gif png esd sdl alsa arts aac
+         aalib libcaca svga theora vorbis nls samba ladspa"
 
-PKG_DEPENDS=">=l/xvid-0.9.0
-             >=l/freetype2-2.1
+PKG_DEPENDS=">=l/freetype2-2.1
              ap/cdparanoia
+             `use_dep xvid ">=l/xvid-0.9.0"`
              `use_dep divx "l/divx4linux"`
              `use_dep win32codecs "l/win32codecs"`
              `use_dep jpeg "l/libjpeg"`
              `use_dep gif "l/libungif"`
+             `use_dep png "l/libpng"`
              `use_dep esd "l/esound"`
              `use_dep sdl "l/sdl"`
              `use_dep alsa "l/alsa-lib"`
-             `use_dep jack "ap/jack-audio-connection-kit"`
+             `use_dep jack "l/bio2jack"`
+             `use_dep ladspa "l/ladspa"`
              `use_dep arts "kde/arts"`
              `use_dep aalib "l/aalib"`
              `use_dep libcaca "l/libcaca"`
+             `use_dep mad "l/libmad"`
              `use_dep lame "l/lame"`
-             `use_dep oggvorbis "l/libvorbis"`
-             `use_dep nls "d/gettext"`
+             `use_dep vorbis "l/libvorbis"`
+             `use_dep theora "l/libtheora"`
              `use_dep samba ">=n/samba-2.2.8a"`
              `use_dep svga ">=l/svgalib-1.4.3"`
-             `use_dep gtk "l/libpng 
+             `use_dep gtk "l/libpng
                            x/x11
                            >=l/glib-1.2 
                            >=l/gtk-1.2"`"
+
+PKG_BUILD_DEPENDS="`use_dep nls "d/gettext"`"
 
 PKG_HOMESITE="http://www.mplayerhq.hu/"
 
@@ -53,9 +58,32 @@ PKG_CONFIGURE_OPTIONS="--confdir=/etc/mplayer
                        --disable-runtime-cpudetection
                        --enable-menu
                        --enable-largefiles
+                       --enable-network 
+                       --enable-ftp
+                       --disable-debug
                        --language=all
+                       `use_enable divx divx4linux`
+                       `use_enable jpeg`
+                       `use_enable gif`
+                       `use_enable ladspa`
+                       `use_enable alsa`
+                       `use_enable esd`
+                       `use_enable arts`
+                       `use_enable jack`
+                       `use_enable oss ossaudio`
+                       `use_enable aalib aa`
+                       `use_enable libcaca caca`
+                       `use_enable mad`
+                       `use_enable vorbis`
+                       `use_enable theora`
+                       `use_enable aac internal-faad`
+                       `use_enable samba smb`
+                       `use_enable sdl`
+                       `use_enable svga`
+                       `use_enable nls i18n`
                        `use_enable win32codecs win32`
-                       `use gtk && echo "--enable-gui --enable-x11"`"
+                       `use_dep png "--enable-png"`
+                       `use_dep gtk "--enable-png --enable-gui --enable-x11"`"
 
 PKG_CONFIG_FILES="etc/mplayer/codecs.conf etc/mplayer/input.conf etc/mplayer/menu.conf"
 
@@ -68,7 +96,8 @@ fi
 do_patch() {
     cd $PKG_SRC
 
-    apply_patch ad_pcm_fix_20050826.diff -Np0
+    apply_patch ad_pcm_fix_20050826.diff -Np0 &&
+    apply_patch ao_jack.diff -Np0
 
     return $?
 }
