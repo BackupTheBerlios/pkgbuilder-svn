@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="3"
+PKG_BUILD="4"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -16,8 +16,7 @@ PKG_LICENSE="GPLv2"
 
 PKG_USE=""
 
-PKG_DEPENDS=">=l/ncurses-5.2
-             d/autoconf"
+PKG_DEPENDS=">=l/ncurses-5.2"
 
 PKG_HOMESITE="ftp://arcana.linux.it/pub/gpm/"
 
@@ -64,10 +63,10 @@ do_postinstall() {
 
     chmod +x $PKG_DEST/etc/rc.d/rc.gpm
 
-    cd conf
-    cat gpm-root.conf > $PKG_DEST/etc/gpm/gpm-root.conf
-    cat gpm-syn.conf > $PKG_DEST/etc/gpm/gpm-syn.conf
-    cat gpm-twiddler.conf > $PKG_DEST/etc/gpm/gpm-twiddler.conf
+    ( cd conf
+      cat gpm-root.conf > $PKG_DEST/etc/gpm/gpm-root.conf
+      cat gpm-syn.conf > $PKG_DEST/etc/gpm/gpm-syn.conf
+      cat gpm-twiddler.conf > $PKG_DEST/etc/gpm/gpm-twiddler.conf )
 
     pkg_postinstall
 
