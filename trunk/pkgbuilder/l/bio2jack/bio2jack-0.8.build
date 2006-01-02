@@ -1,0 +1,31 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# bio2jack pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
+
+PKG_LICENSE="GPLv2"
+
+PKG_USE=""
+
+PKG_DEPENDS="l/libsamplerate
+             ap/jack-audio-connection-kit"
+
+PKG_BUILD_DEPENDS="d/pkgconfig"
+
+PKG_HOMESITE="http://bio2jack.sourceforge.net/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL NEWS README"
+
+PKG_SRC="$TMP/$PKG_NAME"
+
+PKG_PREFIX="/usr"
+

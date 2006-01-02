@@ -1,0 +1,14 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+       |-----handy-ruler------------------------------------------------------|
+bio2jack: bio2jack (a library for porting blocked IO to Jack)
+bio2jack:
+bio2jack: A library for porting blocked I/O OSS/ALSA audio applications 
+bio2jack: to JACK
+bio2jack:
+
