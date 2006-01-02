@@ -1,12 +1,12 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# hibernate-script pkgbuilder script
+# hibernate-script-1.12 pkgbuilder script
 #
 
 inherit main
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_ARCH="noarch"
 
