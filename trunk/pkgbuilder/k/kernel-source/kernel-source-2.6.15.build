@@ -1,20 +1,18 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# kernel-source-2.6.13.4 pkgbuilder script
+# kernel-source-2.6.15 pkgbuilder script
 #
 
 PKG_ARCH="noarch"
 
 PKG_BUILD="1"
 
-KERNEL_VERSION="2.6.13"
-KERNEL_PATCH="patch-$PKG_VERSION.bz2"
+KERNEL_VERSION="2.6.15"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="linux-$KERNEL_VERSION.$PKG_EXTENSION"
-PKG_URL="ftp.rediris.es/mirror/kernel/linux/kernel/v2.6/$PKG_FILE_NAME
-         ftp.rediris.es/mirror/kernel/linux/kernel/v2.6/$KERNEL_PATCH"
+PKG_URL="ftp.rediris.es/mirror/kernel/linux/kernel/v2.6/$PKG_FILE_NAME"
 
 PKG_LICENSE="GPLv2"
 
@@ -27,10 +25,6 @@ do_install() {
       cd $PKG_DEST$PKG_PREFIX &&
       unpack $PKG_FILE_NAME &&
       ln -sf linux-$KERNEL_VERSION linux )
-
-    ( cd $PKG_DEST$PKG_PREFIX/linux &&
-      apply_patch $KERNEL_PATCH -Np1 &&
-      sed -i -e "s|EXTRAVERSION\s=\s.*|EXTRAVERSION =|" Makefile )
     
     ( cd $PKG_DEST$PKG_PREFIX/linux &&
       make mrproper &&
@@ -40,8 +34,9 @@ do_install() {
       make clean &&
       rm .config.old )
     
-    ( cd $PKG_DEST$PKG_PREFIX
-      chown -R root.root linux-$KERNEL_VERSION )
+    ( cd $PKG_DEST$PKG_PREFIX &&
+      chown -R root.root linux-$KERNEL_VERSION &&
+      find -exec chmod go-w {} \; )
     
     return $?
 }
