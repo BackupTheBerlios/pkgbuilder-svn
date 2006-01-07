@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_USE=""
 
@@ -28,3 +28,8 @@ PKG_DOC_FILES="AUTHORS ChangeLog COPYING INSTALL kdegraphics.lsm README"
 
 PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        --disable-kpdf-drm"
+
+do_patch() {
+    cd $PKG_SRC/kpdf/xpdf/xpdf
+    apply_patch post-$PKG_VERSION-$PKG_NAME-CAN-2005-3193.diff -Np0
+}

@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="2"
+PKG_BUILD="3"
 
 PKG_USE="tetex"
 
