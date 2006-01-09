@@ -1,12 +1,12 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# ipw2200-1.0.8 pkgbuilder script
+# ipw2200-1.0.10 pkgbuilder script
 #
 
 inherit makeonly
 
-PKG_BUILD="2"
+PKG_BUILD="1"
 
 PKG_EXTENSION="tgz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -33,16 +33,6 @@ PKG_BUILD_OPTIONS="KSRC=$KERNEL_DIR/build
                    IEEE80211_INC=/usr/include"
 
 PKG_NOSTRIP="Y"
-
-do_patch() {
-    cd $PKG_SRC
-
-    apply_patch $PKG_NAME-$PKG_VERSION-txbusy.patch -Np1 &&
-    apply_patch $PKG_NAME-$PKG_VERSION-broadcast.patch -Np1 &&
-    apply_patch $PKG_NAME-$PKG_VERSION-slabcorrupt.patch -Np1
-
-    return $?
-}
 
 do_install() {
     cd $PKG_SRC
