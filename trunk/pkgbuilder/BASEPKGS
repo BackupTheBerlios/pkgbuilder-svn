@@ -23,8 +23,8 @@ a/infozip-5.52-i486-1
 a/isapnptools-1.26-i386-1 #optional
 a/jfsutils-1.1.8-i486-1 #optional
 a/kbd-1.12-i486-2
-a/kernel-ide-2.4.32-i486-1
-a/kernel-modules-2.4.32-i486-2
+a/kernel-ide-2.4.32-i486-2
+a/kernel-modules-2.4.32-i486-3
 a/less-382-i486-1
 a/lilo-22.5.9-i486-2
 a/logrotate-3.6.8-i486-1
