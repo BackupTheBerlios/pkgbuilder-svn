@@ -6,7 +6,7 @@
 
 inherit kde
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_USE="alsa cups fam tiff aspell"
 
@@ -45,6 +45,14 @@ PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
                        `use_enable fam libfam`
                        `use_with alsa`
                        `use_with cups`"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch post-3.4.3-kdelibs-kjs.diff -Np0
+
+    return $?
+}
 
 do_postinstall() {
     cd $PKG_DEST$PKG_PREFIX/etc/xdg/menus
