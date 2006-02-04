@@ -1,0 +1,67 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# nspr-4.6.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.gz"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.mozilla.org/pub/mozilla.org/$PKG_NAME/releases/v$PKG_VERSION/src/$PKG_FILE_NAME"
+
+PKG_LICENSE="MPL GPL"
+
+PKG_USE=""
+
+PKG_DEPENDS=""
+
+PKG_BUILD_DEPENDS="ap/unzip"
+
+PKG_HOMESITE="http://www.mozilla.org/projects/nspr/"
+
+PKG_DOC_FILES="ChangeLog COPYING INSTALL README"
+
+PKG_PREFIX="/usr"
+
+PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
+PKG_INSTALL_TARGET="real_install"
+
+do_configure() {
+    cd $PKG_SRC
+
+    ./mozilla/nsprpub/configure \
+                  --prefix=$PKG_PREFIX \
+                  --libdir=$PKG_PREFIX/lib \
+                  --includedir=$PKG_PREFIX/include/nspr \
+                  --enable-optimize="$CFLAGS" \
+                  --disable-debug
+
+    return $?
+}
+
+do_install() {
+    configscript_do_install || return 1
+
+    NSPR_LIBS=`./config/nspr-config --libs`
+    NSPR_CFLAGS=`./config/nspr-config --cflags`
+    NSPR_VERSION=`./config/nspr-config --version`
+    mkdir -p $PKG_DEST/usr/lib/pkgconfig
+    sed $PKG_HOME/files/nspr.pc.in \
+        -e "s,%libdir%,$PKG_PREFIX/lib," \
+        -e "s,%prefix%,$PKG_PREFIX," \
+        -e "s,%exec_prefix%,$PKG_PREFIX/bin," \
+        -e "s,%includedir%,$PKG_PREFIX/include/nspr," \
+        -e "s,%NSPR_VERSION%,${NSPR_VERSION}," \
+        -e "s,%FULL_NSPR_LIBS%,${NSPR_LIBS}," \
+        -e "s,%FULL_NSPR_CFLAGS%,${NSPR_CFLAGS}," > $PKG_DEST/usr/lib/pkgconfig/nspr.pc
+
+    ( cd $PKG_DEST/usr/lib/pkgconfig ; ln -sf nspr.pc mozilla-nspr.pc )
+
+    rm -rf $PKG_DEST$PKG_PREFIX/bin/compile-et.pl \
+           $PKG_DEST$PKG_PREFIX/bin/prerr.properties \
+           $PKG_DEST$PKG_PREFIX/share \
+           $PKG_DEST$PKG_PREFIX/include/nspr/md
+}
