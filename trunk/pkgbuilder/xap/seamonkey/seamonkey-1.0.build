@@ -1,0 +1,50 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# seamonkey-1.0 pkgbuilder script
+#
+
+inherit mozilla
+
+PKG_BUILD="1"
+
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.source.tar.bz2"
+
+PKG_URL="$SEAMONKEY_BASE_URL/$PKG_VERSION/$PKG_FILE_NAME"
+
+PKG_DOC_FILES="LEGAL LICENSE README.txt"
+
+PKG_CONFIGURE_OPTIONS="$PKG_CONFIGURE_OPTIONS
+                       --enable-calendar
+                       --enable-application=suite"
+
+do_patch() {
+    cd $PKG_SRC
+
+    apply_patch launcher.patch -Np0 &&
+    apply_patch firefox-1.5-with-system-nss.patch -Np1 &&
+    apply_patch moz252436.patch -Np0 &&
+    apply_patch moz312241.patch -Np0 &&
+    apply_patch moz310924.patch -Np0 
+
+    return $?
+}
+
+do_postinstall() {
+    rm -f $PKG_DEST/usr/lib/pkgconfig/seamonkey-nspr.pc
+    rm -f $PKG_DEST/usr/lib/pkgconfig/seamonkey-nss.pc
+
+    mkdir -p $PKG_DEST/usr/share/applications
+    mkdir -p $PKG_DEST/usr/share/pixmaps
+    install -m644 $PKG_SRC/suite/branding/icons/gtk/seamonkey.png \
+                  $PKG_DEST/usr/share/pixmaps/
+    install -m644 $PKG_HOME/files/seamonkey.desktop \
+                  $PKG_DEST/usr/share/applications/
+
+    mkdir -p $PKG_DEST/usr/lib/seamonkey-$PKG_VERSION/chrome/icons/default
+    install -m644 $PKG_SRC/suite/branding/icons/gtk/default.xpm \
+    $PKG_DEST/usr/lib/seamonkey-$PKG_VERSION/chrome/icons/default/
+
+
+    mozilla_do_postinstall || return 1
+}

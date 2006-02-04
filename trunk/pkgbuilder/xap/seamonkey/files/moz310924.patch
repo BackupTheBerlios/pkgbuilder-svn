@@ -1,0 +1,109 @@
+Index: widget/src/gtk2/nsWindow.cpp
+===================================================================
+RCS file: /cvsroot/mozilla/widget/src/gtk2/nsWindow.cpp,v
+retrieving revision 1.149
+diff -p -u -u -p -U10 -r1.149 nsWindow.cpp
+--- widget/src/gtk2/nsWindow.cpp	31 Aug 2005 22:56:37 -0000	1.149
++++ widget/src/gtk2/nsWindow.cpp	3 Oct 2005 14:13:29 -0000
+@@ -3504,86 +3540,100 @@ get_gtk_cursor(nsCursor aCursor)
+     case eCursor_sw_resize:
+         gdkcursor = gdk_cursor_new(GDK_BOTTOM_LEFT_CORNER);
+         break;
+     case eCursor_crosshair:
+         gdkcursor = gdk_cursor_new(GDK_CROSSHAIR);
+         break;
+     case eCursor_move:
+         gdkcursor = gdk_cursor_new(GDK_FLEUR);
+         break;
+     case eCursor_help:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "help");
+         newType = MOZ_CURSOR_QUESTION_ARROW;
+         break;
+     case eCursor_copy: // CSS3
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "copy");
+         newType = MOZ_CURSOR_COPY;
+         break;
+     case eCursor_alias:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "alias");
+         newType = MOZ_CURSOR_ALIAS;
+         break;
+     case eCursor_context_menu:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "context-menu");
+         newType = MOZ_CURSOR_CONTEXT_MENU;
+         break;
+     case eCursor_cell:
+         gdkcursor = gdk_cursor_new(GDK_PLUS);
+         break;
+     case eCursor_grab:
+         newType = MOZ_CURSOR_HAND_GRAB;
+         break;
+     case eCursor_grabbing:
+         newType = MOZ_CURSOR_HAND_GRABBING;
+         break;
+     case eCursor_spinning:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "wait"); // or maybe "progress" ?
+         newType = MOZ_CURSOR_SPINNING;
+         break;
+     case eCursor_zoom_in:
+         newType = MOZ_CURSOR_ZOOM_IN;
+         break;
+     case eCursor_zoom_out:
+         newType = MOZ_CURSOR_ZOOM_OUT;
+         break;
+     case eCursor_not_allowed:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "not-allowed");
++        newType = MOZ_CURSOR_NOT_ALLOWED;
++        break;
+     case eCursor_no_drop:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "no-drop");
+         newType = MOZ_CURSOR_NOT_ALLOWED;
+         break;
+     case eCursor_col_resize:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "col-resize");
+         newType = MOZ_CURSOR_COL_RESIZE;
+         break;
+     case eCursor_row_resize:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "row-resize");
+         newType = MOZ_CURSOR_ROW_RESIZE;
+         break;
+     case eCursor_vertical_text:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "vertical-text");
+         newType = MOZ_CURSOR_VERTICAL_TEXT;
+         break;
+     case eCursor_all_scroll:
+         gdkcursor = gdk_cursor_new(GDK_FLEUR);
+         break;
+     case eCursor_nesw_resize:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "nesw-resize");
+         newType = MOZ_CURSOR_NESW_RESIZE;
+         break;
+     case eCursor_nwse_resize:
++        gdkcursor = gdk_cursor_new_from_name(gdk_display_get_default(), "nwse-resize");
+         newType = MOZ_CURSOR_NWSE_RESIZE;
+         break;
+     case eCursor_ns_resize:
+         gdkcursor = gdk_cursor_new(GDK_SB_V_DOUBLE_ARROW);
+         break;
+     case eCursor_ew_resize:
+         gdkcursor = gdk_cursor_new(GDK_SB_H_DOUBLE_ARROW);
+         break;
+     default:
+         NS_ASSERTION(aCursor, "Invalid cursor type");
+         gdkcursor = gdk_cursor_new(GDK_LEFT_PTR);
+         break;
+     }
+ 
+     // if by now we dont have a xcursor, this means we have to make a
+     // custom one
+-    if (newType != 0xff) {
++    if (!gdkcursor && newType != 0xff) {
+         gdk_color_parse("#000000", &fg);
+         gdk_color_parse("#ffffff", &bg);
+ 
+         cursor = gdk_bitmap_create_from_data(NULL,
+                                              (char *)GtkCursors[newType].bits,
+                                              32, 32);
+         mask =
+             gdk_bitmap_create_from_data(NULL,
+                                         (char *)GtkCursors[newType].mask_bits,
+                                         32, 32);
