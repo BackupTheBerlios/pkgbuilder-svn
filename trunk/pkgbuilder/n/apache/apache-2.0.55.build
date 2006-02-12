@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="httpd-$PKG_VERSION.$PKG_EXTENSION"
@@ -14,7 +14,7 @@ PKG_URL="http://www.apache.org/dist/httpd/$PKG_FILE_NAME"
 
 PKG_LICENSE="APLv2.0"
 
-PKG_USE=""
+PKG_USE="ssl"
 
 PKG_DEPENDS="!l/apr 
              !l/apr-util
@@ -34,9 +34,11 @@ PKG_SRC="$TMP/httpd-$PKG_VERSION"
 PKG_DOC_FILES="ABOUT_APACHE CHANGES INSTALL LAYOUT LICENSE NOTICE README* VERSIONING"
 
 PKG_CONFIGURE_OPTIONS="--enable-layout=Slackware
-                       --enable-modules=most
-                       --enable-mods-shared=most
+                       --enable-modules=all
+                       --enable-mods-shared=all
                        --enable-suexec=shared
+                       --enable-proxy
+                       --enable-proxy-http
                        --with-suexec-safepath="/usr/local/bin:/usr/bin:/bin"
                        --with-suexec-userdir=public_html
                        --with-suexec-caller=apache
@@ -76,4 +78,11 @@ do_configure() {
     ./configure $PKG_CONFIGURE_OPTIONS
 
     return $?
+}
+
+do_install() {
+    configscript_do_install || return 1
+
+    cd $PKG_DEST
+    chown -R root.root *
 }
