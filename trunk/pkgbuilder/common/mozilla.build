@@ -13,24 +13,23 @@ mozilla_init() {
 
     PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION-source.$PKG_EXTENSION"
 
-    ENIGMAIL_FILE_NAME="enigmail-$ENIGMAIL_VERSION.tar.gz"
-    IPC_FILE_NAME="ipc-$IPC_VERSION.tar.gz"
-
     MOZILLA_BASE_URL="http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases"
+    SEAMONKEY_BASE_URL="http://releases.mozilla.org/pub/mozilla.org/seamonkey/releases"
 
-    PKG_URL="$MOZILLA_BASE_URL/$PKG_NAME$PKG_VERSION/source/$PKG_FILE_NAME
-             `use_dep crypt "http://downloads.mozdev.org/enigmail/src/$ENIGMAIL_FILE_NAME"`
-             `use_dep crypt "http://downloads.mozdev.org/enigmail/src/$IPC_FILE_NAME"`"
+    PKG_URL="$MOZILLA_BASE_URL/$PKG_NAME$PKG_VERSION/source/$PKG_FILE_NAME"
     
     PKG_LICENSE="MPL-1.1 NPL-1.1"
     
     PKG_USE="ssl crypt"
     
     PKG_DEPENDS="x/x11
+                 l/nspr
+                 l/nss
                  >=l/libidl-0.8.0
                  >=l/zlib-1.1.4
                  >=l/fontconfig-2.1
                  >=l/libjpeg-6b
+                 l/libmng
                  >=l/libpng-1.2.1
                  l/expat
                  a/infozip
@@ -38,82 +37,56 @@ mozilla_init() {
                  >=l/glib2-2.2.0
                  >=l/pango-1.2.1
                  d/pkgconfig
-                 d/perl
-                 `use_dep crypt "ap/gnupg ap/tcsh"`"
+                 d/perl"
     
     PKG_HOMESITE="http://www.mozilla.org/"
     
-    PKG_SRC="$TMP/$PKG_NAME"
+    PKG_SRC="$TMP/mozilla"
     
     PKG_PREFIX="/usr"
-    MOZILLA_FIVE_HOME="$PKG_PREFIX/lib/mozilla-$PKG_VERSION"
+    MOZILLA_FIVE_HOME="$PKG_PREFIX/lib/$PKG_NAME-$PKG_VERSION"
 
     PKG_CONFIGURE_OPTIONS="--enable-toolkit-gtk2
                            --enable-default-toolkit=gtk2
                            --disable-toolkit-qt
                            --disable-toolkit-xlib
                            --disable-toolkit-gtk
-                           --enable-optimize
-                           --enable-strip-libs
-                           --disable-debug
-                           --disable-tests
-                           --enable-reorder
-                           --enable-strip
-                           --disable-freetype2
-                           --enable-xft
                            --with-default-mozilla-five-home=$MOZILLA_FIVE_HOME
-                           --disable-pedantic
+                           --enable-optimize
                            --disable-debug
                            --disable-tests
+                           --disable-pedantic
                            --disable-logging
                            --disable-installer
+                           --enable-reorder
+                           --enable-strip
+                           --enable-strip-libs
                            --disable-gnomevfs
                            --disable-xprint
-                           --enable-oji
-                           --enable-mathml
-                           --without-system-nspr
-                           --enable-nspr-autoconf
+                           --with-system-nspr
+                           --with-system-nss
                            --with-system-zlib
                            --with-system-jpeg
                            --with-system-png
+                           --with-system-mng
+                           --with-pthreads
+                           --enable-xft
+                           --enable-svg
+                           --enable-canvas
                            --enable-xsl
+                           --enable-oji
+                           --enable-mathml
                            --enable-crypto
-                           --enable-calendar
-                           --enable-extensions=default,irc"
+                           --enable-system-cairo"
                            
     MAKE_OPTIONS="-j1"
-    PKG_BUILD_TARGET="export libs"
+
     PKG_INSTALL_OPTIONS="DESTDIR=$PKG_DEST"
     PKG_INSTALL_TARGET="install"
-    
-    export MOZILLA_OFFICIAL="1"
-    export BUILD_OFFICIAL="1"
-    
-    if ! use ssl ; then
-        export MOZ_PSM="1"
-    fi
-}
-
-mozilla_build_enigmail() {
-    ( cd $PKG_SRC/extensions/ipc && csh makemake && make ) &&
-    ( cd $PKG_SRC/extensions/enigmail && csh makemake && make )      
-    return $?
-}
-
-mozilla_install_enigmail() {
-    ( cd $PKG_SRC/extensions/ipc && pkg_install ) &&
-    ( cd $PKG_SRC/extensions/enigmail && pkg_install )
-    return $?    
 }
 
 mozilla_do_unpack() {
     configscript_do_unpack
-    
-    if use crypt ; then
-        cd $PKG_SRC/extensions
-        unpack $ENIGMAIL_FILE_NAME
-        unpack $IPC_FILE_NAME
-    fi
 }
 
 mozilla_do_configure() {
@@ -122,48 +95,19 @@ mozilla_do_configure() {
 
 mozilla_do_build() {
     configscript_do_build
-    
-    if use crypt ; then
-        mozilla_build_enigmail
-    fi
 }
 
 mozilla_do_install() {
     configscript_do_install
-    
-    if use crypt ; then
-        mozilla_install_enigmail
-    fi
 }
 
 mozilla_do_postinstall() {
     cd $PKG_SRC
-    
-    # Install nss headers.
-    mkdir -p $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss
-    find security/nss/lib -name "*.h" -type f -exec cp {} $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss \;
-    chown -R root.root $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss
-    chmod 644 $PKG_DEST$PKG_PREFIX/include/mozilla-$PKG_VERSION/nss/*
-    
-    # Move nss libraries into /usr/lib.
-    ( cd $PKG_DEST$MOZILLA_FIVE_HOME
-      for nsslib in libnspr4.so libnss3.so libplc4.so libplds4.so libsmime3.so libsoftokn3.so libssl3.so ; do
-        # Move library:
-        mv $nsslib ..
-        # Link to it... you don't just go messing with stuff without leaving it "clean"
-        ln -sf ../$nsslib .
-      done )
       
     ( cd $PKG_DEST$PKG_PREFIX/lib
-      ln -sf mozilla-$PKG_VERSION mozilla )
+      ln -sf $PKG_NAME-$PKG_VERSION $PKG_NAME )
     ( cd $PKG_DEST$PKG_PREFIX/include
-      ln -sf mozilla-$PKG_VERSION mozilla )
-      
-    mkdir -p $PKG_DEST/usr/share/pixmaps
-    cp build/package/rpm/SOURCES/mozilla-icon.png $PKG_DEST/usr/share/pixmaps
-
-    mkdir -p $PKG_DEST/usr/share/gnome/apps/Internet
-    cp build/package/rpm/SOURCES/mozilla.desktop $PKG_DEST/usr/share/gnome/apps/Internet
+      ln -sf $PKG_NAME-$PKG_VERSION $PKG_NAME )    
     
     configscript_do_postinstall
 }
