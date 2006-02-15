@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_EXTENSION="tar.gz"
 PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
@@ -50,6 +50,7 @@ do_install() {
     
     mkdir -p $PKG_DEST$PKG_PREFIX/{lib,include} &&
     pkg_install &&
+    cat $PKG_HOME/files/libmng.la > $PKG_DEST/usr/lib/libmng.la &&
     mkdir -p $PKG_DEST$PKG_PREFIX/man/man{3,5} &&
     cp doc/man/*.3 $PKG_DEST$PKG_PREFIX/man/man3 &&
     cp doc/man/*.5 $PKG_DEST$PKG_PREFIX/man/man5
