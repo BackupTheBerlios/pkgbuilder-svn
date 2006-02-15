@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="3"
+PKG_BUILD="4"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="$PKG_NAME-x11-free-$PKG_VERSION.$PKG_EXTENSION"
@@ -118,6 +118,7 @@ do_install() {
     #libs
     cp lib/libqt-mt.so.$PKG_VERSION lib/libqui.so.1.0.0 \
        lib/lib{editor,qassistantclient,designercore}.a \
+       lib/libqt-mt.la \
        $PKG_DEST$PKG_PREFIX/lib
     
     #includes   
