@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="1"
+PKG_BUILD="2"
 
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_FILE_NAME"
 
@@ -17,7 +17,7 @@ PKG_DEPENDS="l/gtk2
              d/gettext
              l/libao
              >=l/audiofile-0.2.0
-             >=xap/mozilla-1.4
+             l/nss-1.4
              >=l/startup-notification-0.5
              d/pkgconfig
              `use_dep nls "d/gettext"`
