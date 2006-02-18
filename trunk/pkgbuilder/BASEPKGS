@@ -3,10 +3,10 @@
 # a)
 a/aaa_base-10.2.0-noarch-2
 a/aaa_elflibs-10.2.0-i486-4
-a/bash-3.1-i486-1
+a/bash-3.1-i486-2
 a/bin-10.2-i486-1
 a/bzip2-1.0.3-i486-2
-a/coreutils-5.93-i486-1
+a/coreutils-5.94-i486-1
 a/cxxlibs-6.0.3-i486-1
 a/dcron-2.3.3-i486-5
 a/devs-2.3.1-noarch-22
@@ -35,7 +35,7 @@ a/pcmcia-cs-3.2.8-i486-1 #optional
 a/pkgtools-10.2.0-i486-6
 a/procps-3.2.6-i486-1
 a/reiserfsprogs-3.6.19-i486-1 #optional
-a/sed-4.0.9-i486-2
+a/sed-4.1.5-i486-1
 a/shadow-4.0.3-i486-11
 a/sysklogd-1.4.1-i486-9
 a/syslinux-2.13-i486-1
