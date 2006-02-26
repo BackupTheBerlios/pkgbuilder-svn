@@ -1,7 +1,7 @@
 # Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
 # Distributed under the terms of the GNU General Public License v2
 #
-# xchat-2.6.0 pkgbuilder script
+# xchat-2.6.1 pkgbuilder script
 #
 
 inherit configscript
@@ -39,16 +39,7 @@ PKG_CONFIGURE_OPTIONS="`use_enable ssl openssl`
                        `use_enable nls`
                        `use_enable mmx`
                        --enable-shm
-                       --enable-textfe"
-
-do_patch() {
-    cd $PKG_SRC
-
-    # fix for textfe
-    apply_patch xchat-2.6.0-textfe.patch -Np1
-
-    return $?
-}
+                       --disable-textfe" # fail build with textfe enabled
 
 do_install() {
     cd $PKG_SRC
