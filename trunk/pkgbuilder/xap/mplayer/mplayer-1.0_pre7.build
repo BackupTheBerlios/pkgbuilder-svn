@@ -6,7 +6,7 @@
 
 inherit configscript
 
-PKG_BUILD="3"
+PKG_BUILD="4"
 
 PKG_EXTENSION="tar.bz2"
 PKG_FILE_NAME="MPlayer-${PKG_VERSION/_/}.$PKG_EXTENSION"
@@ -16,7 +16,7 @@ PKG_URL="http://www1.mplayerhq.hu/MPlayer/releases/$PKG_FILE_NAME
 PKG_LICENSE="GPLv2"
 
 PKG_USE="divx win32codecs gtk jpeg gif png esd sdl alsa arts aac
-         aalib libcaca svga theora vorbis nls samba ladspa"
+         aalib libcaca svga theora vorbis nls samba ladspa xvid"
 
 PKG_DEPENDS=">=l/freetype2-2.1
              ap/cdparanoia
@@ -97,7 +97,8 @@ do_patch() {
     cd $PKG_SRC
 
     apply_patch ad_pcm_fix_20050826.diff -Np0 &&
-    apply_patch ao_jack.diff -Np0
+    apply_patch ao_jack.diff -Np0 &&
+    apply_patch demuxer_h_fix_20060212.diff -Np0
 
     return $?
 }
