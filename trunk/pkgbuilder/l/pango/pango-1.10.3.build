@@ -1,0 +1,41 @@
+# Copyright 2003-2005 Antonio G. Muñoz, tomby (AT) users.berlios.de
+# Distributed under the terms of the GNU General Public License v2
+#
+# pango-1.10.1 pkgbuilder script
+#
+
+inherit configscript
+
+PKG_BUILD="1"
+
+PKG_EXTENSION="tar.bz2"
+PKG_FILE_NAME="$PKG_NAME-$PKG_VERSION.$PKG_EXTENSION"
+PKG_URL="ftp://ftp.gtk.org/pub/gtk/v2.8/$PKG_FILE_NAME"
+
+PKG_LICENSE="LGPLv2.1"
+
+PKG_USE="doc"
+
+PKG_DEPENDS="x/x11
+             >=l/glib2-2.8
+             >=l/cairo-0.9
+             l/fontconfig
+             l/freetype2
+             d/pkgconfig
+             `use_dep doc ">=d/gtk-doc-1"`"
+
+PKG_HOMESITE="http://www.gtk.org/"
+
+PKG_DOC_FILES="AUTHORS ChangeLog COPYING README INSTALL NEWS TODO*"
+
+PKG_CONFIGURE_OPTIONS="--sysconfdir=/etc
+                       `use_enable doc gtk-doc`"
+                       
+
+do_postinstall() {
+    rm -f $PKG_DESTDIR/etc/pango/pango.modules
+
+    configscript_do_postinstall
+
+    return $?
+}
